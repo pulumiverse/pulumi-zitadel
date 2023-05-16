@@ -109,6 +109,7 @@ func NewOrgIdpAzureAd(ctx *pulumi.Context,
 	if args.OrgId == nil {
 		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource OrgIdpAzureAd
 	err := ctx.RegisterResource("zitadel:index/orgIdpAzureAd:OrgIdpAzureAd", name, args, &resource, opts...)
 	if err != nil {

@@ -163,6 +163,7 @@ func NewIdpLdap(ctx *pulumi.Context,
 	if args.UserObjectClasses == nil {
 		return nil, errors.New("invalid value for required argument 'UserObjectClasses'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource IdpLdap
 	err := ctx.RegisterResource("zitadel:index/idpLdap:IdpLdap", name, args, &resource, opts...)
 	if err != nil {

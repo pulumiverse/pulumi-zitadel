@@ -38,6 +38,7 @@ import (
 // }
 // ```
 func LookupHumanUser(ctx *pulumi.Context, args *LookupHumanUserArgs, opts ...pulumi.InvokeOption) (*LookupHumanUserResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupHumanUserResult
 	err := ctx.Invoke("zitadel:index/getHumanUser:getHumanUser", args, &rv, opts...)
 	if err != nil {

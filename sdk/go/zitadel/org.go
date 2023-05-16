@@ -46,6 +46,7 @@ func NewOrg(ctx *pulumi.Context,
 		args = &OrgArgs{}
 	}
 
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Org
 	err := ctx.RegisterResource("zitadel:index/org:Org", name, args, &resource, opts...)
 	if err != nil {

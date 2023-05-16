@@ -97,6 +97,7 @@ func NewIdpGitlabSelfHosted(ctx *pulumi.Context,
 	if args.Issuer == nil {
 		return nil, errors.New("invalid value for required argument 'Issuer'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource IdpGitlabSelfHosted
 	err := ctx.RegisterResource("zitadel:index/idpGitlabSelfHosted:IdpGitlabSelfHosted", name, args, &resource, opts...)
 	if err != nil {

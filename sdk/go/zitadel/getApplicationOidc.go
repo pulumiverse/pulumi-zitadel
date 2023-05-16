@@ -39,6 +39,7 @@ import (
 // }
 // ```
 func LookupApplicationOidc(ctx *pulumi.Context, args *LookupApplicationOidcArgs, opts ...pulumi.InvokeOption) (*LookupApplicationOidcResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupApplicationOidcResult
 	err := ctx.Invoke("zitadel:index/getApplicationOidc:getApplicationOidc", args, &rv, opts...)
 	if err != nil {

@@ -37,6 +37,7 @@ import (
 // }
 // ```
 func LookupOrg(ctx *pulumi.Context, args *LookupOrgArgs, opts ...pulumi.InvokeOption) (*LookupOrgResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupOrgResult
 	err := ctx.Invoke("zitadel:index/getOrg:getOrg", args, &rv, opts...)
 	if err != nil {

@@ -91,6 +91,7 @@ func NewIdpGoogle(ctx *pulumi.Context,
 	if args.IsLinkingAllowed == nil {
 		return nil, errors.New("invalid value for required argument 'IsLinkingAllowed'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource IdpGoogle
 	err := ctx.RegisterResource("zitadel:index/idpGoogle:IdpGoogle", name, args, &resource, opts...)
 	if err != nil {

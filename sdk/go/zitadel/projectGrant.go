@@ -69,6 +69,7 @@ func NewProjectGrant(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ProjectGrant
 	err := ctx.RegisterResource("zitadel:index/projectGrant:ProjectGrant", name, args, &resource, opts...)
 	if err != nil {

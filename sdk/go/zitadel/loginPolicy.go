@@ -151,6 +151,7 @@ func NewLoginPolicy(ctx *pulumi.Context,
 	if args.UserLogin == nil {
 		return nil, errors.New("invalid value for required argument 'UserLogin'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource LoginPolicy
 	err := ctx.RegisterResource("zitadel:index/loginPolicy:LoginPolicy", name, args, &resource, opts...)
 	if err != nil {

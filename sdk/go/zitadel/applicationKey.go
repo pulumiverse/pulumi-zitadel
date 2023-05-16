@@ -78,6 +78,7 @@ func NewApplicationKey(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ApplicationKey
 	err := ctx.RegisterResource("zitadel:index/applicationKey:ApplicationKey", name, args, &resource, opts...)
 	if err != nil {

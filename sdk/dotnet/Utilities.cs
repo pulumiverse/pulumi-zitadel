@@ -53,6 +53,7 @@ namespace Vavsab.Zitadel
         {
             var dst = src ?? new global::Pulumi.InvokeOptions{};
             dst.Version = src?.Version ?? Version;
+            dst.PluginDownloadURL = src?.PluginDownloadURL ?? "github://api.github.com/vavsab";
             return dst;
         }
 

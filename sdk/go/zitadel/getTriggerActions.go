@@ -39,6 +39,7 @@ import (
 // }
 // ```
 func LookupTriggerActions(ctx *pulumi.Context, args *LookupTriggerActionsArgs, opts ...pulumi.InvokeOption) (*LookupTriggerActionsResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupTriggerActionsResult
 	err := ctx.Invoke("zitadel:index/getTriggerActions:getTriggerActions", args, &rv, opts...)
 	if err != nil {

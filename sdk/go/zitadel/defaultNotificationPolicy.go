@@ -52,6 +52,7 @@ func NewDefaultNotificationPolicy(ctx *pulumi.Context,
 	if args.PasswordChange == nil {
 		return nil, errors.New("invalid value for required argument 'PasswordChange'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DefaultNotificationPolicy
 	err := ctx.RegisterResource("zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy", name, args, &resource, opts...)
 	if err != nil {

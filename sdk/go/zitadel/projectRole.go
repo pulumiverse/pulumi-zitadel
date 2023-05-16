@@ -73,6 +73,7 @@ func NewProjectRole(ctx *pulumi.Context,
 	if args.RoleKey == nil {
 		return nil, errors.New("invalid value for required argument 'RoleKey'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ProjectRole
 	err := ctx.RegisterResource("zitadel:index/projectRole:ProjectRole", name, args, &resource, opts...)
 	if err != nil {

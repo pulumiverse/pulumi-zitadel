@@ -109,6 +109,7 @@ func NewIdpGithubEs(ctx *pulumi.Context,
 	if args.UserEndpoint == nil {
 		return nil, errors.New("invalid value for required argument 'UserEndpoint'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource IdpGithubEs
 	err := ctx.RegisterResource("zitadel:index/idpGithubEs:IdpGithubEs", name, args, &resource, opts...)
 	if err != nil {

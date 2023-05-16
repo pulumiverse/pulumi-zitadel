@@ -63,6 +63,7 @@ func NewDefaultDomainPolicy(ctx *pulumi.Context,
 	if args.ValidateOrgDomains == nil {
 		return nil, errors.New("invalid value for required argument 'ValidateOrgDomains'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DefaultDomainPolicy
 	err := ctx.RegisterResource("zitadel:index/defaultDomainPolicy:DefaultDomainPolicy", name, args, &resource, opts...)
 	if err != nil {

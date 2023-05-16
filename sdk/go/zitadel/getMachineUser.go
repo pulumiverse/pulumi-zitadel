@@ -38,6 +38,7 @@ import (
 // }
 // ```
 func LookupMachineUser(ctx *pulumi.Context, args *LookupMachineUserArgs, opts ...pulumi.InvokeOption) (*LookupMachineUserResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupMachineUserResult
 	err := ctx.Invoke("zitadel:index/getMachineUser:getMachineUser", args, &rv, opts...)
 	if err != nil {

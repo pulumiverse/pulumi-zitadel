@@ -67,6 +67,7 @@ func NewApplicationApi(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ApplicationApi
 	err := ctx.RegisterResource("zitadel:index/applicationApi:ApplicationApi", name, args, &resource, opts...)
 	if err != nil {

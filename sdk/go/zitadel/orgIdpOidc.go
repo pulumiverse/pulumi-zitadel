@@ -106,6 +106,7 @@ func NewOrgIdpOidc(ctx *pulumi.Context,
 	if args.UsernameMapping == nil {
 		return nil, errors.New("invalid value for required argument 'UsernameMapping'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource OrgIdpOidc
 	err := ctx.RegisterResource("zitadel:index/orgIdpOidc:OrgIdpOidc", name, args, &resource, opts...)
 	if err != nil {

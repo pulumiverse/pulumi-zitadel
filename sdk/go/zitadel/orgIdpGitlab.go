@@ -97,6 +97,7 @@ func NewOrgIdpGitlab(ctx *pulumi.Context,
 	if args.OrgId == nil {
 		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource OrgIdpGitlab
 	err := ctx.RegisterResource("zitadel:index/orgIdpGitlab:OrgIdpGitlab", name, args, &resource, opts...)
 	if err != nil {

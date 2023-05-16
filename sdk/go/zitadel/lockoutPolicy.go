@@ -55,6 +55,7 @@ func NewLockoutPolicy(ctx *pulumi.Context,
 	if args.MaxPasswordAttempts == nil {
 		return nil, errors.New("invalid value for required argument 'MaxPasswordAttempts'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource LockoutPolicy
 	err := ctx.RegisterResource("zitadel:index/lockoutPolicy:LockoutPolicy", name, args, &resource, opts...)
 	if err != nil {

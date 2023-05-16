@@ -39,6 +39,7 @@ import (
 // }
 // ```
 func LookupProjectRole(ctx *pulumi.Context, args *LookupProjectRoleArgs, opts ...pulumi.InvokeOption) (*LookupProjectRoleResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupProjectRoleResult
 	err := ctx.Invoke("zitadel:index/getProjectRole:getProjectRole", args, &rv, opts...)
 	if err != nil {

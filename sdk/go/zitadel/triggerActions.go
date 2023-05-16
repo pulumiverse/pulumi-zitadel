@@ -72,6 +72,7 @@ func NewTriggerActions(ctx *pulumi.Context,
 	if args.TriggerType == nil {
 		return nil, errors.New("invalid value for required argument 'TriggerType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource TriggerActions
 	err := ctx.RegisterResource("zitadel:index/triggerActions:TriggerActions", name, args, &resource, opts...)
 	if err != nil {

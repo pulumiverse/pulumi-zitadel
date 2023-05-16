@@ -38,6 +38,7 @@ import (
 // }
 // ```
 func GetOrgJwtIdp(ctx *pulumi.Context, args *GetOrgJwtIdpArgs, opts ...pulumi.InvokeOption) (*GetOrgJwtIdpResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetOrgJwtIdpResult
 	err := ctx.Invoke("zitadel:index/getOrgJwtIdp:getOrgJwtIdp", args, &rv, opts...)
 	if err != nil {

@@ -24,6 +24,7 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "zitadel"
+        "name": "zitadel",
+        "server": "github://api.github.com/vavsab"
     }
 }

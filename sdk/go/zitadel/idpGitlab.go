@@ -91,6 +91,7 @@ func NewIdpGitlab(ctx *pulumi.Context,
 	if args.IsLinkingAllowed == nil {
 		return nil, errors.New("invalid value for required argument 'IsLinkingAllowed'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource IdpGitlab
 	err := ctx.RegisterResource("zitadel:index/idpGitlab:IdpGitlab", name, args, &resource, opts...)
 	if err != nil {

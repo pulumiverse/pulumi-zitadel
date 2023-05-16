@@ -76,6 +76,7 @@ func NewDefaultPasswordComplexityPolicy(ctx *pulumi.Context,
 	if args.MinLength == nil {
 		return nil, errors.New("invalid value for required argument 'MinLength'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DefaultPasswordComplexityPolicy
 	err := ctx.RegisterResource("zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy", name, args, &resource, opts...)
 	if err != nil {

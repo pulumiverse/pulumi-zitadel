@@ -41,6 +41,7 @@ func NewProvider(ctx *pulumi.Context,
 	if args.Domain == nil {
 		return nil, errors.New("invalid value for required argument 'Domain'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Provider
 	err := ctx.RegisterResource("pulumi:providers:zitadel", name, args, &resource, opts...)
 	if err != nil {

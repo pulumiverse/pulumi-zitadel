@@ -108,6 +108,7 @@ func NewHumanUser(ctx *pulumi.Context,
 	if args.UserName == nil {
 		return nil, errors.New("invalid value for required argument 'UserName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource HumanUser
 	err := ctx.RegisterResource("zitadel:index/humanUser:HumanUser", name, args, &resource, opts...)
 	if err != nil {

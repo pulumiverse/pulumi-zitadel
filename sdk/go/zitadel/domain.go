@@ -61,6 +61,7 @@ func NewDomain(ctx *pulumi.Context,
 	if args.OrgId == nil {
 		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Domain
 	err := ctx.RegisterResource("zitadel:index/domain:Domain", name, args, &resource, opts...)
 	if err != nil {

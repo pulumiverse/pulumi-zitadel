@@ -103,6 +103,7 @@ func NewIdpAzureAd(ctx *pulumi.Context,
 	if args.IsLinkingAllowed == nil {
 		return nil, errors.New("invalid value for required argument 'IsLinkingAllowed'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource IdpAzureAd
 	err := ctx.RegisterResource("zitadel:index/idpAzureAd:IdpAzureAd", name, args, &resource, opts...)
 	if err != nil {

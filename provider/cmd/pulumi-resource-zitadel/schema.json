@@ -10,6 +10,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`zitadel` Terraform Provider](https://github.com/zitadel/terraform-provider-zitadel).",
     "repository": "https://github.com/pulumi/pulumi-zitadel",
+    "pluginDownloadURL": "github://api.github.com/vavsab",
     "publisher": "vavsab",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"

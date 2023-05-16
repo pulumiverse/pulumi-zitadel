@@ -103,6 +103,7 @@ func NewOrgIdpGitlabSelfHosted(ctx *pulumi.Context,
 	if args.OrgId == nil {
 		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource OrgIdpGitlabSelfHosted
 	err := ctx.RegisterResource("zitadel:index/orgIdpGitlabSelfHosted:OrgIdpGitlabSelfHosted", name, args, &resource, opts...)
 	if err != nil {

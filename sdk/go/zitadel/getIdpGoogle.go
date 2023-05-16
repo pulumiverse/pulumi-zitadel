@@ -36,6 +36,7 @@ import (
 // }
 // ```
 func LookupIdpGoogle(ctx *pulumi.Context, args *LookupIdpGoogleArgs, opts ...pulumi.InvokeOption) (*LookupIdpGoogleResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupIdpGoogleResult
 	err := ctx.Invoke("zitadel:index/getIdpGoogle:getIdpGoogle", args, &rv, opts...)
 	if err != nil {

@@ -123,6 +123,7 @@ func NewApplicationOidc(ctx *pulumi.Context,
 	if args.ResponseTypes == nil {
 		return nil, errors.New("invalid value for required argument 'ResponseTypes'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource ApplicationOidc
 	err := ctx.RegisterResource("zitadel:index/applicationOidc:ApplicationOidc", name, args, &resource, opts...)
 	if err != nil {

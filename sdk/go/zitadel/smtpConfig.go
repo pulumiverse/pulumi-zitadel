@@ -73,6 +73,7 @@ func NewSmtpConfig(ctx *pulumi.Context,
 	if args.SenderName == nil {
 		return nil, errors.New("invalid value for required argument 'SenderName'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource SmtpConfig
 	err := ctx.RegisterResource("zitadel:index/smtpConfig:SmtpConfig", name, args, &resource, opts...)
 	if err != nil {

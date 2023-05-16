@@ -97,6 +97,7 @@ func NewOrgIdpGoogle(ctx *pulumi.Context,
 	if args.OrgId == nil {
 		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource OrgIdpGoogle
 	err := ctx.RegisterResource("zitadel:index/orgIdpGoogle:OrgIdpGoogle", name, args, &resource, opts...)
 	if err != nil {

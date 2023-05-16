@@ -90,6 +90,7 @@ func NewOrgIdpJwt(ctx *pulumi.Context,
 	if args.StylingType == nil {
 		return nil, errors.New("invalid value for required argument 'StylingType'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource OrgIdpJwt
 	err := ctx.RegisterResource("zitadel:index/orgIdpJwt:OrgIdpJwt", name, args, &resource, opts...)
 	if err != nil {

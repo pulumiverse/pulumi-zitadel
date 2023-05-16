@@ -96,6 +96,7 @@ func NewLabelPolicy(ctx *pulumi.Context,
 	if args.WarnColorDark == nil {
 		return nil, errors.New("invalid value for required argument 'WarnColorDark'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource LabelPolicy
 	err := ctx.RegisterResource("zitadel:index/labelPolicy:LabelPolicy", name, args, &resource, opts...)
 	if err != nil {

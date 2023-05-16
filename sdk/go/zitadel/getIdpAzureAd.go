@@ -36,6 +36,7 @@ import (
 // }
 // ```
 func LookupIdpAzureAd(ctx *pulumi.Context, args *LookupIdpAzureAdArgs, opts ...pulumi.InvokeOption) (*LookupIdpAzureAdResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupIdpAzureAdResult
 	err := ctx.Invoke("zitadel:index/getIdpAzureAd:getIdpAzureAd", args, &rv, opts...)
 	if err != nil {

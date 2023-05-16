@@ -36,6 +36,7 @@ import (
 // }
 // ```
 func LookupIdpGitlabSelfHosted(ctx *pulumi.Context, args *LookupIdpGitlabSelfHostedArgs, opts ...pulumi.InvokeOption) (*LookupIdpGitlabSelfHostedResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupIdpGitlabSelfHostedResult
 	err := ctx.Invoke("zitadel:index/getIdpGitlabSelfHosted:getIdpGitlabSelfHosted", args, &rv, opts...)
 	if err != nil {

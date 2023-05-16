@@ -72,6 +72,7 @@ func NewAction(ctx *pulumi.Context,
 	if args.Timeout == nil {
 		return nil, errors.New("invalid value for required argument 'Timeout'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Action
 	err := ctx.RegisterResource("zitadel:index/action:Action", name, args, &resource, opts...)
 	if err != nil {

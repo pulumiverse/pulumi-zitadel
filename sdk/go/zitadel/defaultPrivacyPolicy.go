@@ -61,6 +61,7 @@ func NewDefaultPrivacyPolicy(ctx *pulumi.Context,
 	if args.TosLink == nil {
 		return nil, errors.New("invalid value for required argument 'TosLink'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DefaultPrivacyPolicy
 	err := ctx.RegisterResource("zitadel:index/defaultPrivacyPolicy:DefaultPrivacyPolicy", name, args, &resource, opts...)
 	if err != nil {
