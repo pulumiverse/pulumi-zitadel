@@ -17,8 +17,7 @@ builds:
       - windows
       - linux
     ldflags:
-      # The line below MUST align with the module in current provider/go.mod
-      - -X github.com/your-org-name/pulumi-zitadel/provider/pkg/version.Version={{.Tag }}
+      - -X github.com/vavsab/pulumi-zitadel/provider/pkg/version.Version={{.Tag }}
     main: ./cmd/pulumi-resource-zitadel/
 changelog:
   skip: true
