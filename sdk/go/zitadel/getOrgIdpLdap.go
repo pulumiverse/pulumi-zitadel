@@ -20,6 +20,7 @@ import (
 // import (
 // 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/vavsab/pulumi-zitadel/sdk/go/zitadel"
 // )
 //
 // func main() {

@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Zitadel
+namespace Vavsab.Zitadel
 {
     /// <summary>
     /// Resource representing the membership of a user on an organization, defined with the given role.
@@ -17,7 +18,7 @@ namespace Pulumi.Zitadel
     /// ```csharp
     /// using System.Collections.Generic;
     /// using Pulumi;
-    /// using Zitadel = Pulumi.Zitadel;
+    /// using Zitadel = Vavsab.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {

@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Zitadel
+namespace Vavsab.Zitadel
 {
     /// <summary>
     /// **Caution: Email can only be set verified if a password is set for the user, either with initial_password or during runtime**
@@ -19,7 +20,7 @@ namespace Pulumi.Zitadel
     /// ```csharp
     /// using System.Collections.Generic;
     /// using Pulumi;
-    /// using Zitadel = Pulumi.Zitadel;
+    /// using Zitadel = Vavsab.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {

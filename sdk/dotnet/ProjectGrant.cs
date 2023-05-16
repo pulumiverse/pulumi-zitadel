@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Zitadel
+namespace Vavsab.Zitadel
 {
     /// <summary>
     /// Resource representing the grant of a project to a different organization, also containing the available roles which can be given to the members of the projectgrant.
@@ -17,7 +18,7 @@ namespace Pulumi.Zitadel
     /// ```csharp
     /// using System.Collections.Generic;
     /// using Pulumi;
-    /// using Zitadel = Pulumi.Zitadel;
+    /// using Zitadel = Vavsab.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {

@@ -37,7 +37,7 @@ def readme():
         return "zitadel Pulumi Package - Development Version"
 
 
-setup(name='pulumi_zitadel',
+setup(name='vavsab_astra',
       version=VERSION,
       description="A Pulumi package for creating and managing zitadel cloud resources.",
       long_description=readme(),
@@ -53,7 +53,7 @@ setup(name='pulumi_zitadel',
       license='Apache-2.0',
       packages=find_packages(),
       package_data={
-          'pulumi_zitadel': [
+          'vavsab_astra': [
               'py.typed',
               'pulumi-plugin.json',
           ]

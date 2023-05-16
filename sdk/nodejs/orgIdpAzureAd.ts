@@ -11,7 +11,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@vavsab/zitadel";
  *
  * const azureAd = new zitadel.OrgIdpAzureAd("azureAd", {
  *     orgId: zitadel_org.org.id,
