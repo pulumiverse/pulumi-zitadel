@@ -21,9 +21,9 @@ import (
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
-	"github.com/pulumi/pulumi-zitadel/provider/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	"github.com/terraform-providers/terraform-provider-zitadel/zitadel"
+	"github.com/vavsab/pulumi-zitadel/provider/pkg/version"
+	"github.com/zitadel/terraform-provider-zitadel/zitadel"
 )
 
 // all of the token components used below.
