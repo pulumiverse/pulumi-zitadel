@@ -48,8 +48,12 @@ dotnet add package Pulumi.Zitadel
 
 The following configuration points are available for the `zitadel` provider:
 
-- `zitadel:apiKey` (environment: `FOO_API_KEY`) - the API key for `zitadel`
-- `zitadel:region` (environment: `FOO_REGION`) - the region in which to deploy resources
+- `zitadel:domain` - domain used to connect to the ZITADEL instance
+- `zitadel:insecure` - use insecure connection
+- `zitadel:jwtProfileFile` - path to the file containing credentials to connect to ZITADEL. Either `jwtProfileFile` or `jwtProfileJson`
+- `zitadel:jwtProfileJson` - JSON value of credentials to connect to ZITADEL. Either `jwtProfileFile` or `jwtProfileJson` is required
+- `zitadel:port` - used port if not the default ports 80 or 443 are configured
+- `zitadel:token` - path to the file containing credentials to connect to ZITADEL
 
 ## Reference
 
