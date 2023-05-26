@@ -1,3 +1,3 @@
-module github.com/vavsab/pulumi-zitadel/examples
+module github.com/pulumiverse/pulumi-zitadel/examples
 
 go 1.16

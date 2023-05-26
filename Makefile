@@ -2,7 +2,7 @@ PROJECT_NAME := zitadel Package
 
 SHELL            := /bin/bash
 PACK             := zitadel
-ORG              := vavsab
+ORG              := pulumiverse
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
 NODE_MODULE_NAME := @pulumi/${PACK}
 TF_NAME          := ${PACK}

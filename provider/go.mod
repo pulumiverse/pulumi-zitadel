@@ -1,4 +1,4 @@
-module github.com/vavsab/pulumi-zitadel/provider
+module github.com/pulumiverse/pulumi-zitadel/provider
 
 go 1.18
 

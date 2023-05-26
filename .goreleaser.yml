@@ -17,7 +17,7 @@ builds:
       - windows
       - linux
     ldflags:
-      - -X github.com/vavsab/pulumi-zitadel/provider/pkg/version.Version={{.Tag }}
+      - -X github.com/pulumiverse/pulumi-zitadel/provider/pkg/version.Version={{.Tag }}
     main: ./cmd/pulumi-resource-zitadel/
 changelog:
   skip: true
