@@ -1,0 +1,16 @@
+name: main
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  prerequisites:
+    uses: pulumiverse/infra/.github/workflows/provider-prerequisites.yaml@actions-workflows-v0.0.1
+    with:
+      provider: zitadel
+  build:
+    needs: prerequisites
+    uses: pulumiverse/infra/.github/workflows/provider-build-sdk.yaml@actions-workflows-v0.0.1
+    with:
+      provider: zitadel
