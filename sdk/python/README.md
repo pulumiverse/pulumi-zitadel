@@ -11,13 +11,13 @@ This package is available for several languages/platforms:
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
 ```bash
-npm install @vavsab/pulumi-zitadel
+npm install @pulumiverse/pulumi-zitadel
 ```
 
 or `yarn`:
 
 ```bash
-yarn add @vavsab/pulumi-zitadel
+yarn add @pulumiverse/pulumi-zitadel
 ```
 
 ### Python
@@ -33,7 +33,7 @@ pip install pulumi_zitadel
 To use from Go, use `go get` to grab the latest version of the library:
 
 ```bash
-go get github.com/vavsab/pulumi-zitadel/sdk/go/...
+go get github.com/pulumiverse/pulumi-zitadel/sdk/go/...
 ```
 
 ### .NET
@@ -41,15 +41,19 @@ go get github.com/vavsab/pulumi-zitadel/sdk/go/...
 To use from .NET, install using `dotnet add package`:
 
 ```bash
-dotnet add package Pulumi.Zitadel
+dotnet add package Pulumiverse.Zitadel
 ```
 
 ## Configuration
 
 The following configuration points are available for the `zitadel` provider:
 
-- `zitadel:apiKey` (environment: `FOO_API_KEY`) - the API key for `zitadel`
-- `zitadel:region` (environment: `FOO_REGION`) - the region in which to deploy resources
+- `zitadel:domain` - domain used to connect to the ZITADEL instance
+- `zitadel:insecure` - use insecure connection
+- `zitadel:jwtProfileFile` - path to the file containing credentials to connect to ZITADEL. Either `jwtProfileFile` or `jwtProfileJson`
+- `zitadel:jwtProfileJson` - JSON value of credentials to connect to ZITADEL. Either `jwtProfileFile` or `jwtProfileJson` is required
+- `zitadel:port` - used port if not the default ports 80 or 443 are configured
+- `zitadel:token` - path to the file containing credentials to connect to ZITADEL
 
 ## Reference
 

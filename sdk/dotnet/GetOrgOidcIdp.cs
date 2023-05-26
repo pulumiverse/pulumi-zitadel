@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace Vavsab.Zitadel
+namespace Pulumiverse.Zitadel
 {
     public static class GetOrgOidcIdp
     {

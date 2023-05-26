@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace Vavsab.Zitadel
+namespace Pulumiverse.Zitadel
 {
     /// <summary>
     /// Resource representing the default label policy.
@@ -150,7 +150,7 @@ namespace Vavsab.Zitadel
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "github://api.github.com/vavsab",
+                PluginDownloadURL = "github://api.github.com/pulumiverse",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.

@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>vavsab</Authors>
-    <Company>vavsab</Company>
+    <Authors>pulumiverse</Authors>
+    <Company>pulumiverse</Company>
     <Description>A Pulumi package for creating and managing zitadel cloud resources.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://www.pulumi.com</PackageProjectUrl>

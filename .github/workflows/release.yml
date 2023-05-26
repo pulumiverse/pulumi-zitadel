@@ -128,9 +128,9 @@ jobs:
           - 1.18.x
         language:
           - nodejs
-          #- python
-          #- dotnet
-          #- go
+          - python
+          - dotnet
+          - go
         nodeversion:
           - 14.x
         pythonversion:

@@ -15,7 +15,7 @@ class InstallPluginCommand(install):
     def run(self):
         install.run(self)
         try:
-            check_call(['pulumi', 'plugin', 'install', 'resource', 'zitadel', PLUGIN_VERSION, '--server', 'github://api.github.com/vavsab'])
+            check_call(['pulumi', 'plugin', 'install', 'resource', 'zitadel', PLUGIN_VERSION, '--server', 'github://api.github.com/pulumiverse'])
         except OSError as error:
             if error.errno == errno.ENOENT:
                 print(f"""
@@ -37,7 +37,7 @@ def readme():
         return "zitadel Pulumi Package - Development Version"
 
 
-setup(name='vavsab_astra',
+setup(name='pulumiverse_zitadel',
       version=VERSION,
       description="A Pulumi package for creating and managing zitadel cloud resources.",
       long_description=readme(),
@@ -53,7 +53,7 @@ setup(name='vavsab_astra',
       license='Apache-2.0',
       packages=find_packages(),
       package_data={
-          'vavsab_astra': [
+          'pulumiverse_zitadel': [
               'py.typed',
               'pulumi-plugin.json',
           ]

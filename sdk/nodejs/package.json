@@ -1,5 +1,5 @@
 {
-    "name": "@vavsab/zitadel",
+    "name": "@pulumiverse/zitadel",
     "version": "${VERSION}",
     "description": "A Pulumi package for creating and managing zitadel cloud resources.",
     "keywords": [
@@ -25,6 +25,6 @@
     "pulumi": {
         "resource": true,
         "name": "zitadel",
-        "server": "github://api.github.com/vavsab"
+        "server": "github://api.github.com/pulumiverse"
     }
 }
