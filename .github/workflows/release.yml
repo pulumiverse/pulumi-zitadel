@@ -1,8 +1,8 @@
 name: release
 on:
   push:
-    tags:
-      - v*.*.*
+    #tags:
+    #  - v*.*.*
 env:
   # THIS GITHUB_TOKEN IS A REQUIREMENT TO BE ABLE TO WRITE TO GH RELEASES
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
