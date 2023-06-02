@@ -44,7 +44,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: ${{ env.PYPI_USERNAME }}
-          password: ${{ secrets.PYPI_API_TOKEN }}
+          password: "sdfsdfsdf"
           packages_dir: ${{github.workspace}}/sdk/python/bin/dist
   # publish_binary:
   #   name: publish
