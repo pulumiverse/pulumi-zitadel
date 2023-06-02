@@ -34,18 +34,11 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-      - name: Setup Python
-        uses: actions/setup-python@v1
-        with:
-          python-version: "3.9"
-      - name: Publish package to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: ${{ env.PYPI_USERNAME }}
-          password: "sdfsdfsdf"
-          packages_dir: ${{github.workspace}}/sdk/python/bin/dist
+      - run: |
+          if [ -z "${{ env.PYPI_PASSWORD }}" ]; then
+            echo "PYPI_PASSWORD is not set"
+            exit 0
+          fi
   # publish_binary:
   #   name: publish
   #   runs-on: ubuntu-latest
