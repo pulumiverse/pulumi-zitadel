@@ -36,7 +36,12 @@ jobs:
     steps:
       - run: |
           if [ -z "${{ env.PYPI_PASSWORD }}" ]; then
-            echo "PYPI_PASSWORD is not set"
+            echo "env.PYPI_PASSWORD is not set"
+            exit 0
+          fi
+
+          if [ -z "${{ secrets.PYPI_API_TOKEN }}" ]; then
+            echo "secrets.PYPI_PASSWORD is not set"
             exit 0
           fi
   # publish_binary:
