@@ -11,7 +11,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@vavsab/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const instanceMember = new zitadel.InstanceMember("instanceMember", {
  *     userId: zitadel_human_user.human_user.id,

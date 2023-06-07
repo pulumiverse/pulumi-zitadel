@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace Vavsab.Zitadel
+namespace Pulumiverse.Zitadel
 {
     /// <summary>
     /// Resource representing the grant of a project to a different organization, also containing the available roles which can be given to the members of the projectgrant.
@@ -18,7 +18,7 @@ namespace Vavsab.Zitadel
     /// ```csharp
     /// using System.Collections.Generic;
     /// using Pulumi;
-    /// using Zitadel = Vavsab.Zitadel;
+    /// using Zitadel = Pulumiverse.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
@@ -86,7 +86,7 @@ namespace Vavsab.Zitadel
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "github://api.github.com/vavsab",
+                PluginDownloadURL = "github://api.github.com/pulumiverse",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.

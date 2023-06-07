@@ -11,13 +11,13 @@ This package is available for several languages/platforms:
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
 ```bash
-npm install @vavsab/pulumi-zitadel
+npm install @pulumiverse/zitadel
 ```
 
 or `yarn`:
 
 ```bash
-yarn add @vavsab/pulumi-zitadel
+yarn add @pulumiverse/zitadel
 ```
 
 ### Python
@@ -33,7 +33,7 @@ pip install pulumi_zitadel
 To use from Go, use `go get` to grab the latest version of the library:
 
 ```bash
-go get github.com/vavsab/pulumi-zitadel/sdk/go/...
+go get github.com/pulumiverse/pulumi-zitadel/sdk/go/...
 ```
 
 ### .NET
@@ -41,7 +41,7 @@ go get github.com/vavsab/pulumi-zitadel/sdk/go/...
 To use from .NET, install using `dotnet add package`:
 
 ```bash
-dotnet add package Pulumi.Zitadel
+dotnet add package Pulumiverse.Zitadel
 ```
 
 ## Configuration
