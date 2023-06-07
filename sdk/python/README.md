@@ -11,13 +11,13 @@ This package is available for several languages/platforms:
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
 ```bash
-npm install @pulumiverse/pulumi-zitadel
+npm install @pulumiverse/zitadel
 ```
 
 or `yarn`:
 
 ```bash
-yarn add @pulumiverse/pulumi-zitadel
+yarn add @pulumiverse/zitadel
 ```
 
 ### Python
