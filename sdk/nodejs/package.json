@@ -8,7 +8,7 @@
         "category/cloud"
     ],
     "homepage": "https://www.pulumi.com",
-    "repository": "https://github.com/pulumi/pulumi-zitadel",
+    "repository": "https://github.com/pulumiverse/pulumi-zitadel",
     "license": "Apache-2.0",
     "scripts": {
         "build": "tsc",

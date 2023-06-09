@@ -7,7 +7,7 @@
     <Description>A Pulumi package for creating and managing zitadel cloud resources.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://www.pulumi.com</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/pulumi/pulumi-zitadel</RepositoryUrl>
+    <RepositoryUrl>https://github.com/pulumiverse/pulumi-zitadel</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>
 
     <TargetFramework>netcoreapp3.1</TargetFramework>
