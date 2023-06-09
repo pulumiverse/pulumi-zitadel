@@ -9,7 +9,7 @@
     "homepage": "https://www.pulumi.com",
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`zitadel` Terraform Provider](https://github.com/zitadel/terraform-provider-zitadel).",
-    "repository": "https://github.com/pulumi/pulumi-zitadel",
+    "repository": "https://github.com/pulumiverse/pulumi-zitadel",
     "pluginDownloadURL": "github://api.github.com/pulumiverse",
     "publisher": "pulumiverse",
     "meta": {
@@ -41,13 +41,13 @@
             "disableUnionOutputTypes": true,
             "packageDescription": "A Pulumi package for creating and managing zitadel cloud resources.",
             "packageName": "@pulumiverse/zitadel",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/zitadel/terraform-provider-zitadel)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-zitadel` repo](https://github.com/pulumi/pulumi-zitadel/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-zitadel` repo](https://github.com/zitadel/terraform-provider-zitadel/issues).",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/zitadel/terraform-provider-zitadel)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-zitadel` repo](https://github.com/pulumiverse/pulumi-zitadel/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-zitadel` repo](https://github.com/zitadel/terraform-provider-zitadel/issues).",
             "typescriptVersion": ""
         },
         "python": {
             "compatibility": "tfbridge20",
             "packageName": "pulumiverse_zitadel",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/zitadel/terraform-provider-zitadel)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-zitadel` repo](https://github.com/pulumi/pulumi-zitadel/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-zitadel` repo](https://github.com/zitadel/terraform-provider-zitadel/issues).",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/zitadel/terraform-provider-zitadel)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-zitadel` repo](https://github.com/pulumiverse/pulumi-zitadel/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-zitadel` repo](https://github.com/zitadel/terraform-provider-zitadel/issues).",
             "requires": {
                 "pulumi": "\u003e=3.0.0,\u003c4.0.0"
             }

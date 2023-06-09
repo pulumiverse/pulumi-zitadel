@@ -48,7 +48,7 @@ setup(name='pulumiverse_zitadel',
       keywords='pulumi zitadel category/cloud',
       url='https://www.pulumi.com',
       project_urls={
-          'Repository': 'https://github.com/pulumi/pulumi-zitadel'
+          'Repository': 'https://github.com/pulumiverse/pulumi-zitadel'
       },
       license='Apache-2.0',
       packages=find_packages(),
