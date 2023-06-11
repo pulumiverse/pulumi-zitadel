@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-zitadel/sdk
+module github.com/pulumiverse/pulumi-zitadel/sdk
 
 go 1.17
 
