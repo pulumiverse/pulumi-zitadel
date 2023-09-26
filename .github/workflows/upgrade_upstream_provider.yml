@@ -1,0 +1,14 @@
+name: Upgrade upstream provider
+on:
+  workflow_dispatch:
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call upgrade provider action
+        uses: pulumi/pulumi-upgrade-provider-action@v0.0.6
+        with:
+          kind: bridge
+
+
