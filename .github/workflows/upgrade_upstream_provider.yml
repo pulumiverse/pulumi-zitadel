@@ -2,6 +2,9 @@ name: Upgrade upstream provider
 on:
   workflow_dispatch:
 
+  # TODO: remove this
+  pull_request:
+
 jobs:
   upgrade:
     runs-on: ubuntu-latest
