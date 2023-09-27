@@ -8,6 +8,9 @@ on:
 jobs:
   upgrade:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - name: Install Go
         uses: actions/setup-go@v3
