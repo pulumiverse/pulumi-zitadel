@@ -9,10 +9,6 @@ jobs:
   upgrade:
     runs-on: ubuntu-latest
     steps:
-      - run: gh release list --repo=zitadel/terraform-provider-zitadel --limit=1 --exclude-drafts --exclude-pre-releases
-        env:
-          GH_TOKEN: ${{ github.token }}
-          
       - name: Install Go
         uses: actions/setup-go@v3
         with:
@@ -44,10 +40,12 @@ jobs:
 
       - name: Set up git identity
         run: git config --global user.name 'vavsab'
+
+      - run: gh release list --repo=zitadel/terraform-provider-zitadel --limit=1 --exclude-drafts --exclude-pre-releases
         
       - name: Run upgrade-provider
         run: upgrade-provider ${{ github.repository }} --kind provider --upstream-provider-name terraform-provider-zitadel --pr-reviewers vavsab
         env:
-          GH_TOKEN: ${{ env.GH_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
 
 
