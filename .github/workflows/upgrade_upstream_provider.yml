@@ -42,7 +42,7 @@ jobs:
         run: git config --global user.name 'vavsab'
         
       - name: Run upgrade-provider
-        run: upgrade-provider ${{ github.repository }} --kind bridge --upstream-provider-name terraform-provider-zitadel --pr-reviewers vavsab
+        run: upgrade-provider ${{ github.repository }} --kind provider --upstream-provider-name terraform-provider-zitadel --pr-reviewers vavsab
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
 
