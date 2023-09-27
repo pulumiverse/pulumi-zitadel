@@ -5,6 +5,9 @@ on:
   # TODO: remove this
   pull_request:
 
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   upgrade_provider:
     name: upgrade-provider
@@ -48,7 +51,5 @@ jobs:
 
       - name: Run upgrade-provider
         run: upgrade-provider ${{ github.repository }} --kind provider --upstream-provider-name terraform-provider-zitadel --pr-assign vavsab
-        env:
-          GH_TOKEN: ${{ github.token }}
 
 
