@@ -17,29 +17,37 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: 1.21.x
+
       - name: Install pulumictl
         uses: jaxxstorm/action-install-gh-release@v1.10.0
         with:
           repo: pulumi/pulumictl
+
       - name: Install Pulumi CLI
         uses: pulumi/actions@v4
+
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.ref_name }}
+          ref: main
+
       - name: Unshallow clone for tags
         run: git fetch --prune --unshallow --tags
         shell: bash
+
       - name: Install upgrade-provider
         run: go install github.com/pulumi/upgrade-provider@main
         shell: bash
+
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: "7.6"
+
       - name: Set up git identity
         run: git config --global user.name 'vavsab'
         shell: bash
+        
       - name: Run upgrade-provider
         run: upgrade-provider ${{ github.repository }} --kind=bridge
         shell: bash
