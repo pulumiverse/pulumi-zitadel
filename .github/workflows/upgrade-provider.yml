@@ -1,0 +1,64 @@
+name: Upgrade provider
+on:
+  workflow_dispatch:
+
+  # TODO: remove this
+  pull_request:
+
+jobs:
+  upgrade_provider:
+    name: upgrade-provider
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Call upgrade provider action
+        uses: pulumi/pulumi-upgrade-provider-action@main
+        with:
+          kind: provider
+  # upgrade:
+  #   runs-on: ubuntu-latest
+    # permissions:
+    #   contents: write
+    #   pull-requests: write
+    # steps:
+    #   - name: Install Go
+    #     uses: actions/setup-go@v3
+    #     with:
+    #       go-version: 1.21.x
+
+    #   - name: Install pulumictl
+    #     uses: jaxxstorm/action-install-gh-release@v1.10.0
+    #     with:
+    #       repo: pulumi/pulumictl
+
+    #   - name: Install Pulumi CLI
+    #     uses: pulumi/actions@v4
+
+    #   - name: Checkout repo
+    #     uses: actions/checkout@v3
+    #     with:
+    #       ref: main
+
+    #   - name: Unshallow clone for tags
+    #     run: git fetch --prune --unshallow --tags
+
+    #   - name: Install upgrade-provider
+    #     run: go install github.com/pulumi/upgrade-provider@main
+
+    #   - name: Setup Gradle
+    #     uses: gradle/gradle-build-action@v2
+    #     with:
+    #       gradle-version: "7.6"
+
+    #   - name: Set up git identity
+    #     run: git config --global user.name 'vavsab'
+
+    #   - name: Run upgrade-provider
+    #     run: upgrade-provider ${{ github.repository }} --kind provider --upstream-provider-name terraform-provider-zitadel --pr-assign vavsab
+    #     env:
+    #       GH_TOKEN: ${{ github.token }}
+
+
