@@ -9,6 +9,8 @@ jobs:
   upgrade:
     runs-on: ubuntu-latest
     steps:
+      - run: gh release list --repo=zitadel/terraform-provider-zitadel --limit=1 --exclude-drafts --exclude-pre-releases
+      
       - name: Install Go
         uses: actions/setup-go@v3
         with:
