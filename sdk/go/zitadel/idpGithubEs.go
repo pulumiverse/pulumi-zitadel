@@ -25,7 +25,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewIdpGithubEs(ctx, "githubEs", &zitadel.IdpGithubEsArgs{
+// 		_, err := zitadel.NewIdpGithubEs(ctx, "default", &zitadel.IdpGithubEsArgs{
 // 			AuthorizationEndpoint: pulumi.String("https://auth.endpoint"),
 // 			ClientId:              pulumi.String("86a165..."),
 // 			ClientSecret:          pulumi.String("*****afdbac18"),
@@ -47,6 +47,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/idpGithubEs:IdpGithubEs imported '123456789012345678:1234567890123456781234567890123456787890'
 // ```
 type IdpGithubEs struct {
 	pulumi.CustomResourceState

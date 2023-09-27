@@ -26,9 +26,10 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var gitlabSelfHosted = Zitadel.GetOrgIdpGitlabSelfHosted.Invoke(new()
+        ///     var @default = Zitadel.GetOrgIdpGitlabSelfHosted.Invoke(new()
         ///     {
-        ///         Id = "177073614158299139",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         /// });
@@ -53,9 +54,10 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var gitlabSelfHosted = Zitadel.GetOrgIdpGitlabSelfHosted.Invoke(new()
+        ///     var @default = Zitadel.GetOrgIdpGitlabSelfHosted.Invoke(new()
         ///     {
-        ///         Id = "177073614158299139",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         /// });
@@ -79,8 +81,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public string OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public string? OrgId { get; set; }
 
         public GetOrgIdpGitlabSelfHostedArgs()
         {
@@ -99,8 +101,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         public GetOrgIdpGitlabSelfHostedInvokeArgs()
         {
@@ -151,7 +153,7 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        public readonly string OrgId;
+        public readonly string? OrgId;
         /// <summary>
         /// the scopes requested by ZITADEL during the request on the identity provider
         /// </summary>
@@ -177,7 +179,7 @@ namespace Pulumiverse.Zitadel
 
             string name,
 
-            string orgId,
+            string? orgId,
 
             ImmutableArray<string> scopes)
         {

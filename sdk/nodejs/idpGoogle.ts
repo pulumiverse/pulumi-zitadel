@@ -13,7 +13,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const google = new zitadel.IdpGoogle("google", {
+ * const defaultIdpGoogle = new zitadel.IdpGoogle("default", {
  *     clientId: "182902...",
  *     clientSecret: "GOCSPX-*****",
  *     isAutoCreation: false,
@@ -26,6 +26,14 @@ import * as utilities from "./utilities";
  *         "email",
  *     ],
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/idpGoogle:IdpGoogle imported '123456789012345678:G1234567890123'
  * ```
  */
 export class IdpGoogle extends pulumi.CustomResource {

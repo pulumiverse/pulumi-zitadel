@@ -22,7 +22,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var passwordComplexityPolicy = new Zitadel.DefaultPasswordComplexityPolicy("passwordComplexityPolicy", new()
+    ///     var @default = new Zitadel.DefaultPasswordComplexityPolicy("default", new()
     ///     {
     ///         HasLowercase = true,
     ///         HasNumber = true,
@@ -32,6 +32,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy imported ''
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy")]

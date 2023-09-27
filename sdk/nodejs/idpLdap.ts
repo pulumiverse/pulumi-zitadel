@@ -13,7 +13,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const ldap = new zitadel.IdpLdap("ldap", {
+ * const defaultIdpLdap = new zitadel.IdpLdap("default", {
  *     baseDn: "dc=example,dc=com",
  *     bindDn: "cn=admin,dc=example,dc=com",
  *     bindPassword: "Password1!",
@@ -37,6 +37,14 @@ import * as utilities from "./utilities";
  *     ],
  *     userObjectClasses: ["inetOrgPerson"],
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/idpLdap:IdpLdap imported '123456789012345678:b1nd_p4ssw0rd'
  * ```
  */
 export class IdpLdap extends pulumi.CustomResource {

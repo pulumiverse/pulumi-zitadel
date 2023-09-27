@@ -74,7 +74,15 @@ class DefaultNotificationPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        notification_policy = zitadel.DefaultNotificationPolicy("notificationPolicy", password_change=False)
+        default = zitadel.DefaultNotificationPolicy("default", password_change=False)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy imported ''
         ```
 
         :param str resource_name: The name of the resource.
@@ -96,7 +104,15 @@ class DefaultNotificationPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        notification_policy = zitadel.DefaultNotificationPolicy("notificationPolicy", password_change=False)
+        default = zitadel.DefaultNotificationPolicy("default", password_change=False)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy imported ''
         ```
 
         :param str resource_name: The name of the resource.

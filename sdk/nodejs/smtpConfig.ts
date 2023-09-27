@@ -13,14 +13,22 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const smtp = new zitadel.SmtpConfig("smtp", {
+ * const defaultSmtpConfig = new zitadel.SmtpConfig("default", {
  *     host: "localhost:25",
- *     password: "password",
- *     senderAddress: "address",
+ *     password: "secret_password",
+ *     senderAddress: "sender@example.com",
  *     senderName: "no-reply",
  *     tls: true,
  *     user: "user",
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<[password]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
  * ```
  */
 export class SmtpConfig extends pulumi.CustomResource {

@@ -13,11 +13,19 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const orgMember = new zitadel.OrgMember("orgMember", {
- *     orgId: zitadel_org.org.id,
- *     userId: zitadel_human_user.human_user.id,
+ * const _default = new zitadel.OrgMember("default", {
+ *     orgId: data.zitadel_org["default"].id,
+ *     userId: data.zitadel_human_user["default"].id,
  *     roles: ["ORG_OWNER"],
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<user_id[:org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/orgMember:OrgMember imported '123456789012345678:123456789012345678'
  * ```
  */
 export class OrgMember extends pulumi.CustomResource {
@@ -51,7 +59,7 @@ export class OrgMember extends pulumi.CustomResource {
     /**
      * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * List of roles granted
      */
@@ -79,9 +87,6 @@ export class OrgMember extends pulumi.CustomResource {
             resourceInputs["userId"] = state ? state.userId : undefined;
         } else {
             const args = argsOrState as OrgMemberArgs | undefined;
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             if ((!args || args.roles === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'roles'");
             }
@@ -122,7 +127,7 @@ export interface OrgMemberArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * List of roles granted
      */

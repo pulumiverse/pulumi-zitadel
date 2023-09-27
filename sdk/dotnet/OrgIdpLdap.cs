@@ -22,9 +22,9 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var ldap = new Zitadel.OrgIdpLdap("ldap", new()
+    ///     var @default = new Zitadel.OrgIdpLdap("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         Servers = new[]
     ///         {
     ///             "ldaps://my.primary.server:389",
@@ -55,6 +55,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id[:org_id][:bind_password]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/orgIdpLdap:OrgIdpLdap imported '123456789012345678:123456789012345678:b1nd_p4ssw0rd'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/orgIdpLdap:OrgIdpLdap")]
@@ -160,7 +168,7 @@ namespace Pulumiverse.Zitadel
         /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// User attribute for the phone
@@ -374,8 +382,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// User attribute for the phone

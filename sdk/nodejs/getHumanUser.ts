@@ -13,11 +13,11 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const humanUserHumanUser = zitadel.getHumanUser({
- *     orgId: data.zitadel_org.org.id,
- *     userId: "177073614158299139",
+ * const default = zitadel.getHumanUser({
+ *     orgId: data.zitadel_org["default"].id,
+ *     userId: "123456789012345678",
  * });
- * export const humanUser = humanUserHumanUser;
+ * export const humanUser = _default;
  * ```
  */
 export function getHumanUser(args: GetHumanUserArgs, opts?: pulumi.InvokeOptions): Promise<GetHumanUserResult> {

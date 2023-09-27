@@ -26,16 +26,16 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var apiApplicationApplicationApi = Zitadel.GetApplicationApi.Invoke(new()
+        ///     var @default = Zitadel.GetApplicationApi.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = data.Zitadel_project.Project.Id,
-        ///         AppId = "177073625566806019",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         AppId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["apiApplication"] = apiApplicationApplicationApi.Apply(getApplicationApiResult =&gt; getApplicationApiResult),
+        ///         ["applicationApi"] = @default.Apply(getApplicationApiResult =&gt; getApplicationApiResult),
         ///     };
         /// });
         /// ```
@@ -59,16 +59,16 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var apiApplicationApplicationApi = Zitadel.GetApplicationApi.Invoke(new()
+        ///     var @default = Zitadel.GetApplicationApi.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = data.Zitadel_project.Project.Id,
-        ///         AppId = "177073625566806019",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         AppId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["apiApplication"] = apiApplicationApplicationApi.Apply(getApplicationApiResult =&gt; getApplicationApiResult),
+        ///         ["applicationApi"] = @default.Apply(getApplicationApiResult =&gt; getApplicationApiResult),
         ///     };
         /// });
         /// ```
@@ -89,10 +89,10 @@ namespace Pulumiverse.Zitadel
         public string AppId { get; set; } = null!;
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public string OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public string? OrgId { get; set; }
 
         /// <summary>
         /// ID of the project
@@ -115,10 +115,10 @@ namespace Pulumiverse.Zitadel
         public Input<string> AppId { get; set; } = null!;
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// ID of the project
@@ -153,9 +153,9 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        public readonly string OrgId;
+        public readonly string? OrgId;
         /// <summary>
         /// ID of the project
         /// </summary>
@@ -171,7 +171,7 @@ namespace Pulumiverse.Zitadel
 
             string name,
 
-            string orgId,
+            string? orgId,
 
             string projectId)
         {

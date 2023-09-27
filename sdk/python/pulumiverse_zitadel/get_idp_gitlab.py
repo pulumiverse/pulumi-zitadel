@@ -151,7 +151,7 @@ def get_idp_gitlab(id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    gitlab = zitadel.get_idp_gitlab(id="177073614158299139")
+    default = zitadel.get_idp_gitlab(id="123456789012345678")
     ```
 
 
@@ -186,7 +186,7 @@ def get_idp_gitlab_output(id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    gitlab = zitadel.get_idp_gitlab(id="177073614158299139")
+    default = zitadel.get_idp_gitlab(id="123456789012345678")
     ```
 
 

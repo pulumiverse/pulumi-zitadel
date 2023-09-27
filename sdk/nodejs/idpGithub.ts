@@ -13,7 +13,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const github = new zitadel.IdpGithub("github", {
+ * const defaultIdpGithub = new zitadel.IdpGithub("default", {
  *     clientId: "86a165...",
  *     clientSecret: "*****afdbac18",
  *     isAutoCreation: false,
@@ -26,6 +26,14 @@ import * as utilities from "./utilities";
  *         "email",
  *     ],
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/idpGithub:IdpGithub imported '123456789012345678:1234567890123456781234567890123456787890'
  * ```
  */
 export class IdpGithub extends pulumi.CustomResource {

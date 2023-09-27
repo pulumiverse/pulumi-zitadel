@@ -22,9 +22,9 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var project = new Zitadel.Project("project", new()
+    ///     var @default = new Zitadel.Project("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         ProjectRoleAssertion = true,
     ///         ProjectRoleCheck = true,
     ///         HasProjectCheck = true,
@@ -32,6 +32,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id[:org_id]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/project:Project imported '123456789012345678:123456789012345678'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/project:Project")]
@@ -50,10 +58,10 @@ namespace Pulumiverse.Zitadel
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Organization in which the project is located
+        /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY
@@ -87,7 +95,7 @@ namespace Pulumiverse.Zitadel
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Project(string name, ProjectArgs args, CustomResourceOptions? options = null)
+        public Project(string name, ProjectArgs? args = null, CustomResourceOptions? options = null)
             : base("zitadel:index/project:Project", name, args ?? new ProjectArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -139,10 +147,10 @@ namespace Pulumiverse.Zitadel
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Organization in which the project is located
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY
@@ -183,7 +191,7 @@ namespace Pulumiverse.Zitadel
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Organization in which the project is located
+        /// ID of the organization
         /// </summary>
         [Input("orgId")]
         public Input<string>? OrgId { get; set; }

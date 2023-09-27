@@ -25,10 +25,10 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewMachineUser(ctx, "machineUser", &zitadel.MachineUserArgs{
-// 			OrgId:       pulumi.Any(zitadel_org.Org.Id),
-// 			UserName:    pulumi.String("machine@localhost.com"),
-// 			Description: pulumi.String("description"),
+// 		_, err := zitadel.NewMachineUser(ctx, "default", &zitadel.MachineUserArgs{
+// 			OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
+// 			UserName:    pulumi.String("machine@example.com"),
+// 			Description: pulumi.String("a machine user"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -36,6 +36,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
 // ```
 type MachineUser struct {
 	pulumi.CustomResourceState
@@ -49,7 +57,7 @@ type MachineUser struct {
 	// Name of the machine user
 	Name pulumi.StringOutput `pulumi:"name"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// Preferred login name
 	PreferredLoginName pulumi.StringOutput `pulumi:"preferredLoginName"`
 	// State of the user
@@ -65,9 +73,6 @@ func NewMachineUser(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	if args.UserName == nil {
 		return nil, errors.New("invalid value for required argument 'UserName'")
 	}
@@ -143,7 +148,7 @@ type machineUserArgs struct {
 	// Name of the machine user
 	Name *string `pulumi:"name"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// Username
 	UserName string `pulumi:"userName"`
 }
@@ -157,7 +162,7 @@ type MachineUserArgs struct {
 	// Name of the machine user
 	Name pulumi.StringPtrInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// Username
 	UserName pulumi.StringInput
 }
@@ -270,8 +275,8 @@ func (o MachineUserOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o MachineUserOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *MachineUser) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o MachineUserOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MachineUser) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Preferred login name

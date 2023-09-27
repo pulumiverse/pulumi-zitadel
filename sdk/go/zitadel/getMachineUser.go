@@ -25,14 +25,14 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		machineUserMachineUser, err := zitadel.LookupMachineUser(ctx, &GetMachineUserArgs{
-// 			OrgId:  data.Zitadel_org.Org.Id,
-// 			UserId: "177073617463410691",
+// 		_default, err := zitadel.LookupMachineUser(ctx, &GetMachineUserArgs{
+// 			OrgId:  pulumi.StringRef(data.Zitadel_org.Default.Id),
+// 			UserId: "123456789012345678",
 // 		}, nil)
 // 		if err != nil {
 // 			return err
 // 		}
-// 		ctx.Export("machineUser", machineUserMachineUser)
+// 		ctx.Export("machineUser", _default)
 // 		return nil
 // 	})
 // }
@@ -50,7 +50,7 @@ func LookupMachineUser(ctx *pulumi.Context, args *LookupMachineUserArgs, opts ..
 // A collection of arguments for invoking getMachineUser.
 type LookupMachineUserArgs struct {
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// The ID of this resource.
 	UserId string `pulumi:"userId"`
 }
@@ -68,7 +68,7 @@ type LookupMachineUserResult struct {
 	// Name of the machine user
 	Name string `pulumi:"name"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// Preferred login name
 	PreferredLoginName string `pulumi:"preferredLoginName"`
 	// State of the user
@@ -95,7 +95,7 @@ func LookupMachineUserOutput(ctx *pulumi.Context, args LookupMachineUserOutputAr
 // A collection of arguments for invoking getMachineUser.
 type LookupMachineUserOutputArgs struct {
 	// ID of the organization
-	OrgId pulumi.StringInput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrInput `pulumi:"orgId"`
 	// The ID of this resource.
 	UserId pulumi.StringInput `pulumi:"userId"`
 }
@@ -145,8 +145,8 @@ func (o LookupMachineUserResultOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o LookupMachineUserResultOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupMachineUserResult) string { return v.OrgId }).(pulumi.StringOutput)
+func (o LookupMachineUserResultOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupMachineUserResult) *string { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Preferred login name

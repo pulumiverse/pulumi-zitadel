@@ -25,9 +25,9 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewApplicationOidc(ctx, "applicationOidc", &zitadel.ApplicationOidcArgs{
-// 			ProjectId: pulumi.Any(zitadel_project.Project.Id),
-// 			OrgId:     pulumi.Any(zitadel_org.Org.Id),
+// 		_, err := zitadel.NewApplicationOidc(ctx, "default", &zitadel.ApplicationOidcArgs{
+// 			ProjectId: pulumi.Any(data.Zitadel_project.Default.Id),
+// 			OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
 // 			RedirectUris: pulumi.StringArray{
 // 				pulumi.String("https://localhost.com"),
 // 			},
@@ -58,6 +58,14 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/applicationOidc:ApplicationOidc imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
+// ```
 type ApplicationOidc struct {
 	pulumi.CustomResourceState
 
@@ -79,7 +87,7 @@ type ApplicationOidc struct {
 	ClockSkew pulumi.StringPtrOutput `pulumi:"clockSkew"`
 	// Dev mode
 	DevMode pulumi.BoolPtrOutput `pulumi:"devMode"`
-	// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+	// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
 	GrantTypes pulumi.StringArrayOutput `pulumi:"grantTypes"`
 	// ID token role assertion
 	IdTokenRoleAssertion pulumi.BoolPtrOutput `pulumi:"idTokenRoleAssertion"`
@@ -87,8 +95,8 @@ type ApplicationOidc struct {
 	IdTokenUserinfoAssertion pulumi.BoolPtrOutput `pulumi:"idTokenUserinfoAssertion"`
 	// Name of the application
 	Name pulumi.StringOutput `pulumi:"name"`
-	// orgID of the application
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// Post logout redirect URIs
 	PostLogoutRedirectUris pulumi.StringArrayOutput `pulumi:"postLogoutRedirectUris"`
 	// ID of the project
@@ -110,9 +118,6 @@ func NewApplicationOidc(ctx *pulumi.Context,
 
 	if args.GrantTypes == nil {
 		return nil, errors.New("invalid value for required argument 'GrantTypes'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
@@ -164,7 +169,7 @@ type applicationOidcState struct {
 	ClockSkew *string `pulumi:"clockSkew"`
 	// Dev mode
 	DevMode *bool `pulumi:"devMode"`
-	// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+	// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
 	GrantTypes []string `pulumi:"grantTypes"`
 	// ID token role assertion
 	IdTokenRoleAssertion *bool `pulumi:"idTokenRoleAssertion"`
@@ -172,7 +177,7 @@ type applicationOidcState struct {
 	IdTokenUserinfoAssertion *bool `pulumi:"idTokenUserinfoAssertion"`
 	// Name of the application
 	Name *string `pulumi:"name"`
-	// orgID of the application
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 	// Post logout redirect URIs
 	PostLogoutRedirectUris []string `pulumi:"postLogoutRedirectUris"`
@@ -205,7 +210,7 @@ type ApplicationOidcState struct {
 	ClockSkew pulumi.StringPtrInput
 	// Dev mode
 	DevMode pulumi.BoolPtrInput
-	// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+	// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
 	GrantTypes pulumi.StringArrayInput
 	// ID token role assertion
 	IdTokenRoleAssertion pulumi.BoolPtrInput
@@ -213,7 +218,7 @@ type ApplicationOidcState struct {
 	IdTokenUserinfoAssertion pulumi.BoolPtrInput
 	// Name of the application
 	Name pulumi.StringPtrInput
-	// orgID of the application
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 	// Post logout redirect URIs
 	PostLogoutRedirectUris pulumi.StringArrayInput
@@ -246,7 +251,7 @@ type applicationOidcArgs struct {
 	ClockSkew *string `pulumi:"clockSkew"`
 	// Dev mode
 	DevMode *bool `pulumi:"devMode"`
-	// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+	// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
 	GrantTypes []string `pulumi:"grantTypes"`
 	// ID token role assertion
 	IdTokenRoleAssertion *bool `pulumi:"idTokenRoleAssertion"`
@@ -254,8 +259,8 @@ type applicationOidcArgs struct {
 	IdTokenUserinfoAssertion *bool `pulumi:"idTokenUserinfoAssertion"`
 	// Name of the application
 	Name *string `pulumi:"name"`
-	// orgID of the application
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// Post logout redirect URIs
 	PostLogoutRedirectUris []string `pulumi:"postLogoutRedirectUris"`
 	// ID of the project
@@ -284,7 +289,7 @@ type ApplicationOidcArgs struct {
 	ClockSkew pulumi.StringPtrInput
 	// Dev mode
 	DevMode pulumi.BoolPtrInput
-	// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+	// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
 	GrantTypes pulumi.StringArrayInput
 	// ID token role assertion
 	IdTokenRoleAssertion pulumi.BoolPtrInput
@@ -292,8 +297,8 @@ type ApplicationOidcArgs struct {
 	IdTokenUserinfoAssertion pulumi.BoolPtrInput
 	// Name of the application
 	Name pulumi.StringPtrInput
-	// orgID of the application
-	OrgId pulumi.StringInput
+	// ID of the organization
+	OrgId pulumi.StringPtrInput
 	// Post logout redirect URIs
 	PostLogoutRedirectUris pulumi.StringArrayInput
 	// ID of the project
@@ -438,7 +443,7 @@ func (o ApplicationOidcOutput) DevMode() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ApplicationOidc) pulumi.BoolPtrOutput { return v.DevMode }).(pulumi.BoolPtrOutput)
 }
 
-// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
 func (o ApplicationOidcOutput) GrantTypes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ApplicationOidc) pulumi.StringArrayOutput { return v.GrantTypes }).(pulumi.StringArrayOutput)
 }
@@ -458,9 +463,9 @@ func (o ApplicationOidcOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationOidc) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// orgID of the application
-func (o ApplicationOidcOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *ApplicationOidc) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o ApplicationOidcOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ApplicationOidc) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Post logout redirect URIs

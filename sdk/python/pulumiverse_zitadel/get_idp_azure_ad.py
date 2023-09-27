@@ -187,7 +187,7 @@ def get_idp_azure_ad(id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    azure_ad = zitadel.get_idp_azure_ad(id="177073614158299139")
+    default = zitadel.get_idp_azure_ad(id="123456789012345678")
     ```
 
 
@@ -225,7 +225,7 @@ def get_idp_azure_ad_output(id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    azure_ad = zitadel.get_idp_azure_ad(id="177073614158299139")
+    default = zitadel.get_idp_azure_ad(id="123456789012345678")
     ```
 
 

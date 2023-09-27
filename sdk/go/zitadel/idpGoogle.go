@@ -25,7 +25,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewIdpGoogle(ctx, "google", &zitadel.IdpGoogleArgs{
+// 		_, err := zitadel.NewIdpGoogle(ctx, "default", &zitadel.IdpGoogleArgs{
 // 			ClientId:          pulumi.String("182902..."),
 // 			ClientSecret:      pulumi.String("GOCSPX-*****"),
 // 			IsAutoCreation:    pulumi.Bool(false),
@@ -44,6 +44,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/idpGoogle:IdpGoogle imported '123456789012345678:G1234567890123'
 // ```
 type IdpGoogle struct {
 	pulumi.CustomResourceState

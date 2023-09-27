@@ -25,14 +25,14 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		actionAction, err := zitadel.LookupAction(ctx, &GetActionArgs{
-// 			OrgId:    data.Zitadel_org.Org.Id,
-// 			ActionId: "177073621691269123",
+// 		_default, err := zitadel.LookupAction(ctx, &GetActionArgs{
+// 			OrgId:    pulumi.StringRef(data.Zitadel_org.Default.Id),
+// 			ActionId: "123456789012345678",
 // 		}, nil)
 // 		if err != nil {
 // 			return err
 // 		}
-// 		ctx.Export("action", actionAction)
+// 		ctx.Export("action", _default)
 // 		return nil
 // 	})
 // }
@@ -52,7 +52,7 @@ type LookupActionArgs struct {
 	// The ID of this resource.
 	ActionId string `pulumi:"actionId"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 }
 
 // A collection of values returned by getAction.
@@ -65,8 +65,8 @@ type LookupActionResult struct {
 	Id   string `pulumi:"id"`
 	Name string `pulumi:"name"`
 	// ID of the organization
-	OrgId  string `pulumi:"orgId"`
-	Script string `pulumi:"script"`
+	OrgId  *string `pulumi:"orgId"`
+	Script string  `pulumi:"script"`
 	// the state of the action
 	State int `pulumi:"state"`
 	// after which time the action will be terminated if not finished
@@ -91,7 +91,7 @@ type LookupActionOutputArgs struct {
 	// The ID of this resource.
 	ActionId pulumi.StringInput `pulumi:"actionId"`
 	// ID of the organization
-	OrgId pulumi.StringInput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrInput `pulumi:"orgId"`
 }
 
 func (LookupActionOutputArgs) ElementType() reflect.Type {
@@ -133,8 +133,8 @@ func (o LookupActionResultOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o LookupActionResultOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupActionResult) string { return v.OrgId }).(pulumi.StringOutput)
+func (o LookupActionResultOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupActionResult) *string { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 func (o LookupActionResultOutput) Script() pulumi.StringOutput {

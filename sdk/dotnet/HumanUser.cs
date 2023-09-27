@@ -24,9 +24,9 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var humanUser = new Zitadel.HumanUser("humanUser", new()
+    ///     var @default = new Zitadel.HumanUser("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         UserName = "humanfull@localhost.com",
     ///         FirstName = "firstname",
     ///         LastName = "lastname",
@@ -42,6 +42,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `id[:org_id][:initial_password]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/humanUser:HumanUser imported '123456789012345678:123456789012345678:Password1!'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/humanUser:HumanUser")]
@@ -111,7 +119,7 @@ namespace Pulumiverse.Zitadel
         /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// Phone of the user
@@ -247,8 +255,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// Phone of the user

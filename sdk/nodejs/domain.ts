@@ -13,10 +13,18 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const domain = new zitadel.Domain("domain", {
- *     orgId: zitadel_org.org.id,
- *     isPrimary: true,
+ * const _default = new zitadel.Domain("default", {
+ *     orgId: data.zitadel_org["default"].id,
+ *     isPrimary: false,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `name[:org_id]`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/domain:Domain imported 'example.com:123456789012345678'
  * ```
  */
 export class Domain extends pulumi.CustomResource {
@@ -62,7 +70,7 @@ export class Domain extends pulumi.CustomResource {
     /**
      * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * Validation type
      */
@@ -75,7 +83,7 @@ export class Domain extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: DomainArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: DomainArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: DomainArgs | DomainState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -88,9 +96,6 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["validationType"] = state ? state.validationType : undefined;
         } else {
             const args = argsOrState as DomainArgs | undefined;
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             resourceInputs["isPrimary"] = args ? args.isPrimary : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["orgId"] = args ? args.orgId : undefined;
@@ -143,5 +148,5 @@ export interface DomainArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
 }

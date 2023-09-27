@@ -22,13 +22,14 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var loginPolicy = new Zitadel.LoginPolicy("loginPolicy", new()
+    ///     var @default = new Zitadel.LoginPolicy("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         UserLogin = true,
     ///         AllowRegister = true,
     ///         AllowExternalIdp = true,
     ///         ForceMfa = false,
+    ///         ForceMfaLocalOnly = false,
     ///         PasswordlessType = "PASSWORDLESS_TYPE_ALLOWED",
     ///         HidePasswordReset = false,
     ///         PasswordCheckLifetime = "240h0m0s",
@@ -49,8 +50,8 @@ namespace Pulumiverse.Zitadel
     ///         },
     ///         Idps = new[]
     ///         {
-    ///             zitadel_org_idp_oidc.Oidc_idp.Id,
-    ///             zitadel_org_idp_jwt.Jwt_idp.Id,
+    ///             data.Zitadel_idp_google.Default.Id,
+    ///             data.Zitadel_idp_azure_ad.Default.Id,
     ///         },
     ///         AllowDomainDiscovery = true,
     ///         DisableLoginWithEmail = true,
@@ -58,6 +59,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;[org_id]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/loginPolicy:LoginPolicy imported '123456789012345678'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/loginPolicy:LoginPolicy")]
@@ -109,6 +118,12 @@ namespace Pulumiverse.Zitadel
         public Output<bool> ForceMfa { get; private set; } = null!;
 
         /// <summary>
+        /// if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+        /// </summary>
+        [Output("forceMfaLocalOnly")]
+        public Output<bool> ForceMfaLocalOnly { get; private set; } = null!;
+
+        /// <summary>
         /// defines if password reset link should be shown in the login screen
         /// </summary>
         [Output("hidePasswordReset")]
@@ -139,10 +154,10 @@ namespace Pulumiverse.Zitadel
         public Output<ImmutableArray<string>> MultiFactors { get; private set; } = null!;
 
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         [Output("passwordCheckLifetime")]
         public Output<string> PasswordCheckLifetime { get; private set; } = null!;
@@ -261,6 +276,12 @@ namespace Pulumiverse.Zitadel
         public Input<bool> ForceMfa { get; set; } = null!;
 
         /// <summary>
+        /// if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+        /// </summary>
+        [Input("forceMfaLocalOnly", required: true)]
+        public Input<bool> ForceMfaLocalOnly { get; set; } = null!;
+
+        /// <summary>
         /// defines if password reset link should be shown in the login screen
         /// </summary>
         [Input("hidePasswordReset", required: true)]
@@ -303,10 +324,10 @@ namespace Pulumiverse.Zitadel
         }
 
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         [Input("passwordCheckLifetime", required: true)]
         public Input<string> PasswordCheckLifetime { get; set; } = null!;
@@ -392,6 +413,12 @@ namespace Pulumiverse.Zitadel
         public Input<bool>? ForceMfa { get; set; }
 
         /// <summary>
+        /// if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+        /// </summary>
+        [Input("forceMfaLocalOnly")]
+        public Input<bool>? ForceMfaLocalOnly { get; set; }
+
+        /// <summary>
         /// defines if password reset link should be shown in the login screen
         /// </summary>
         [Input("hidePasswordReset")]
@@ -434,7 +461,7 @@ namespace Pulumiverse.Zitadel
         }
 
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
         [Input("orgId")]
         public Input<string>? OrgId { get; set; }

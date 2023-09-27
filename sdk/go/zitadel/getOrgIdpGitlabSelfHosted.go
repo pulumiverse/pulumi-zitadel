@@ -26,7 +26,8 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := zitadel.LookupOrgIdpGitlabSelfHosted(ctx, &GetOrgIdpGitlabSelfHostedArgs{
-// 			Id: "177073614158299139",
+// 			OrgId: pulumi.StringRef(data.Zitadel_org.Default.Id),
+// 			Id:    "123456789012345678",
 // 		}, nil)
 // 		if err != nil {
 // 			return err
@@ -50,7 +51,7 @@ type LookupOrgIdpGitlabSelfHostedArgs struct {
 	// The ID of this resource.
 	Id string `pulumi:"id"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 }
 
 // A collection of values returned by getOrgIdpGitlabSelfHosted.
@@ -74,7 +75,7 @@ type LookupOrgIdpGitlabSelfHostedResult struct {
 	// Name of the IDP
 	Name string `pulumi:"name"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes []string `pulumi:"scopes"`
 }
@@ -97,7 +98,7 @@ type LookupOrgIdpGitlabSelfHostedOutputArgs struct {
 	// The ID of this resource.
 	Id pulumi.StringInput `pulumi:"id"`
 	// ID of the organization
-	OrgId pulumi.StringInput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrInput `pulumi:"orgId"`
 }
 
 func (LookupOrgIdpGitlabSelfHostedOutputArgs) ElementType() reflect.Type {
@@ -165,8 +166,8 @@ func (o LookupOrgIdpGitlabSelfHostedResultOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o LookupOrgIdpGitlabSelfHostedResultOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupOrgIdpGitlabSelfHostedResult) string { return v.OrgId }).(pulumi.StringOutput)
+func (o LookupOrgIdpGitlabSelfHostedResultOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupOrgIdpGitlabSelfHostedResult) *string { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // the scopes requested by ZITADEL during the request on the identity provider

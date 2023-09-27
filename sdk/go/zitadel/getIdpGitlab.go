@@ -26,7 +26,7 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := zitadel.LookupIdpGitlab(ctx, &GetIdpGitlabArgs{
-// 			Id: "177073614158299139",
+// 			Id: "123456789012345678",
 // 		}, nil)
 // 		if err != nil {
 // 			return err

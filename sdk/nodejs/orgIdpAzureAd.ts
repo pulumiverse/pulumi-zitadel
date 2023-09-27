@@ -13,8 +13,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const azureAd = new zitadel.OrgIdpAzureAd("azureAd", {
- *     orgId: zitadel_org.org.id,
+ * const _default = new zitadel.OrgIdpAzureAd("default", {
+ *     orgId: data.zitadel_org["default"].id,
  *     clientId: "9065bfc8-a08a...",
  *     clientSecret: "H2n***",
  *     scopes: [
@@ -30,6 +30,14 @@ import * as utilities from "./utilities";
  *     isAutoCreation: false,
  *     isAutoUpdate: true,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/orgIdpAzureAd:OrgIdpAzureAd imported '123456789012345678:123456789012345678:12345678-1234-1234-1234-123456789012'
  * ```
  */
 export class OrgIdpAzureAd extends pulumi.CustomResource {
@@ -95,7 +103,7 @@ export class OrgIdpAzureAd extends pulumi.CustomResource {
     /**
      * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * the scopes requested by ZITADEL during the request on the identity provider
      */
@@ -156,9 +164,6 @@ export class OrgIdpAzureAd extends pulumi.CustomResource {
             }
             if ((!args || args.isLinkingAllowed === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'isLinkingAllowed'");
-            }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
             }
             resourceInputs["clientId"] = args ? args.clientId : undefined;
             resourceInputs["clientSecret"] = args ? args.clientSecret : undefined;
@@ -271,7 +276,7 @@ export interface OrgIdpAzureAdArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * the scopes requested by ZITADEL during the request on the identity provider
      */

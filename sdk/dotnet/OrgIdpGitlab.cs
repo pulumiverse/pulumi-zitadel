@@ -22,9 +22,9 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var gitlab = new Zitadel.OrgIdpGitlab("gitlab", new()
+    ///     var @default = new Zitadel.OrgIdpGitlab("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         ClientId = "15765e...",
     ///         ClientSecret = "*****abcxyz",
     ///         Scopes = new[]
@@ -40,6 +40,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id[:org_id][:client_secret]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/orgIdpGitlab:OrgIdpGitlab imported '123456789012345678:123456789012345678:1234567890abcdef'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/orgIdpGitlab:OrgIdpGitlab")]
@@ -91,7 +99,7 @@ namespace Pulumiverse.Zitadel
         /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// the scopes requested by ZITADEL during the request on the identity provider
@@ -191,8 +199,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         [Input("scopes")]
         private InputList<string>? _scopes;

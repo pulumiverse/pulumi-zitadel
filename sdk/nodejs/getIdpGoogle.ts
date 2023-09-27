@@ -13,8 +13,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const google = pulumi.output(zitadel.getIdpGoogle({
- *     id: "177073614158299139",
+ * const defaultIdpGoogle = pulumi.output(zitadel.getIdpGoogle({
+ *     id: "123456789012345678",
  * }));
  * ```
  */

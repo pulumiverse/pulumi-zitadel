@@ -13,9 +13,17 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const notificationPolicy = new zitadel.DefaultNotificationPolicy("notification_policy", {
+ * const defaultDefaultNotificationPolicy = new zitadel.DefaultNotificationPolicy("default", {
  *     passwordChange: false,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy imported ''
  * ```
  */
 export class DefaultNotificationPolicy extends pulumi.CustomResource {

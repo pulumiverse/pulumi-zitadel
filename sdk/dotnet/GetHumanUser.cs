@@ -26,15 +26,15 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var humanUserHumanUser = Zitadel.GetHumanUser.Invoke(new()
+        ///     var @default = Zitadel.GetHumanUser.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         UserId = "177073614158299139",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         UserId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["humanUser"] = humanUserHumanUser.Apply(getHumanUserResult =&gt; getHumanUserResult),
+        ///         ["humanUser"] = @default.Apply(getHumanUserResult =&gt; getHumanUserResult),
         ///     };
         /// });
         /// ```
@@ -58,15 +58,15 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var humanUserHumanUser = Zitadel.GetHumanUser.Invoke(new()
+        ///     var @default = Zitadel.GetHumanUser.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         UserId = "177073614158299139",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         UserId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["humanUser"] = humanUserHumanUser.Apply(getHumanUserResult =&gt; getHumanUserResult),
+        ///         ["humanUser"] = @default.Apply(getHumanUserResult =&gt; getHumanUserResult),
         ///     };
         /// });
         /// ```

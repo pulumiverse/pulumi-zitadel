@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -25,8 +24,8 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewProject(ctx, "project", &zitadel.ProjectArgs{
-// 			OrgId:                  pulumi.Any(zitadel_org.Org.Id),
+// 		_, err := zitadel.NewProject(ctx, "default", &zitadel.ProjectArgs{
+// 			OrgId:                  pulumi.Any(data.Zitadel_org.Default.Id),
 // 			ProjectRoleAssertion:   pulumi.Bool(true),
 // 			ProjectRoleCheck:       pulumi.Bool(true),
 // 			HasProjectCheck:        pulumi.Bool(true),
@@ -39,6 +38,14 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/project:Project imported '123456789012345678:123456789012345678'
+// ```
 type Project struct {
 	pulumi.CustomResourceState
 
@@ -46,8 +53,8 @@ type Project struct {
 	HasProjectCheck pulumi.BoolPtrOutput `pulumi:"hasProjectCheck"`
 	// Name of the project
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Organization in which the project is located
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY
 	PrivateLabelingSetting pulumi.StringPtrOutput `pulumi:"privateLabelingSetting"`
 	// describes if roles of user should be added in token
@@ -62,12 +69,9 @@ type Project struct {
 func NewProject(ctx *pulumi.Context,
 	name string, args *ProjectArgs, opts ...pulumi.ResourceOption) (*Project, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &ProjectArgs{}
 	}
 
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource Project
 	err := ctx.RegisterResource("zitadel:index/project:Project", name, args, &resource, opts...)
@@ -95,7 +99,7 @@ type projectState struct {
 	HasProjectCheck *bool `pulumi:"hasProjectCheck"`
 	// Name of the project
 	Name *string `pulumi:"name"`
-	// Organization in which the project is located
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 	// Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY
 	PrivateLabelingSetting *string `pulumi:"privateLabelingSetting"`
@@ -112,7 +116,7 @@ type ProjectState struct {
 	HasProjectCheck pulumi.BoolPtrInput
 	// Name of the project
 	Name pulumi.StringPtrInput
-	// Organization in which the project is located
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 	// Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY
 	PrivateLabelingSetting pulumi.StringPtrInput
@@ -133,8 +137,8 @@ type projectArgs struct {
 	HasProjectCheck *bool `pulumi:"hasProjectCheck"`
 	// Name of the project
 	Name *string `pulumi:"name"`
-	// Organization in which the project is located
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY
 	PrivateLabelingSetting *string `pulumi:"privateLabelingSetting"`
 	// describes if roles of user should be added in token
@@ -149,8 +153,8 @@ type ProjectArgs struct {
 	HasProjectCheck pulumi.BoolPtrInput
 	// Name of the project
 	Name pulumi.StringPtrInput
-	// Organization in which the project is located
-	OrgId pulumi.StringInput
+	// ID of the organization
+	OrgId pulumi.StringPtrInput
 	// Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY
 	PrivateLabelingSetting pulumi.StringPtrInput
 	// describes if roles of user should be added in token
@@ -256,9 +260,9 @@ func (o ProjectOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Project) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Organization in which the project is located
-func (o ProjectOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *Project) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o ProjectOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Project) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY

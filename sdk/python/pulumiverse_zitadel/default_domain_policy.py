@@ -130,10 +130,18 @@ class DefaultDomainPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        domain_policy = zitadel.DefaultDomainPolicy("domainPolicy",
-            smtp_sender_address_matches_instance_domain=False,
+        default = zitadel.DefaultDomainPolicy("default",
+            smtp_sender_address_matches_instance_domain=True,
             user_login_must_be_domain=False,
-            validate_org_domains=False)
+            validate_org_domains=True)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/defaultDomainPolicy:DefaultDomainPolicy imported ''
         ```
 
         :param str resource_name: The name of the resource.
@@ -156,10 +164,18 @@ class DefaultDomainPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        domain_policy = zitadel.DefaultDomainPolicy("domainPolicy",
-            smtp_sender_address_matches_instance_domain=False,
+        default = zitadel.DefaultDomainPolicy("default",
+            smtp_sender_address_matches_instance_domain=True,
             user_login_must_be_domain=False,
-            validate_org_domains=False)
+            validate_org_domains=True)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/defaultDomainPolicy:DefaultDomainPolicy imported ''
         ```
 
         :param str resource_name: The name of the resource.

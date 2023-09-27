@@ -332,7 +332,7 @@ class IdpGitlabSelfHosted(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        gitlab_self_hosted = zitadel.IdpGitlabSelfHosted("gitlabSelfHosted",
+        default = zitadel.IdpGitlabSelfHosted("default",
             client_id="15765e...",
             client_secret="*****abcxyz",
             is_auto_creation=False,
@@ -345,6 +345,14 @@ class IdpGitlabSelfHosted(pulumi.CustomResource):
                 "profile",
                 "email",
             ])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpGitlabSelfHosted:IdpGitlabSelfHosted imported '123456789012345678:1234567890abcdef'
         ```
 
         :param str resource_name: The name of the resource.
@@ -374,7 +382,7 @@ class IdpGitlabSelfHosted(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        gitlab_self_hosted = zitadel.IdpGitlabSelfHosted("gitlabSelfHosted",
+        default = zitadel.IdpGitlabSelfHosted("default",
             client_id="15765e...",
             client_secret="*****abcxyz",
             is_auto_creation=False,
@@ -387,6 +395,14 @@ class IdpGitlabSelfHosted(pulumi.CustomResource):
                 "profile",
                 "email",
             ])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpGitlabSelfHosted:IdpGitlabSelfHosted imported '123456789012345678:1234567890abcdef'
         ```
 
         :param str resource_name: The name of the resource.

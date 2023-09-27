@@ -15,24 +15,25 @@ __all__ = ['ProjectRoleArgs', 'ProjectRole']
 class ProjectRoleArgs:
     def __init__(__self__, *,
                  display_name: pulumi.Input[str],
-                 org_id: pulumi.Input[str],
                  project_id: pulumi.Input[str],
                  role_key: pulumi.Input[str],
-                 group: Optional[pulumi.Input[str]] = None):
+                 group: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ProjectRole resource.
         :param pulumi.Input[str] display_name: Name used for project role
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[str] role_key: Key used for project role
         :param pulumi.Input[str] group: Group used for project role
+        :param pulumi.Input[str] org_id: ID of the organization
         """
         pulumi.set(__self__, "display_name", display_name)
-        pulumi.set(__self__, "org_id", org_id)
         pulumi.set(__self__, "project_id", project_id)
         pulumi.set(__self__, "role_key", role_key)
         if group is not None:
             pulumi.set(__self__, "group", group)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
 
     @property
     @pulumi.getter(name="displayName")
@@ -45,18 +46,6 @@ class ProjectRoleArgs:
     @display_name.setter
     def display_name(self, value: pulumi.Input[str]):
         pulumi.set(self, "display_name", value)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter(name="projectId")
@@ -93,6 +82,18 @@ class ProjectRoleArgs:
     @group.setter
     def group(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "group", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
 
 @pulumi.input_type
@@ -203,12 +204,20 @@ class ProjectRole(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        project_role = zitadel.ProjectRole("projectRole",
-            org_id=zitadel_org["org"]["id"],
-            project_id=zitadel_project["project"]["id"],
-            role_key="key",
+        default = zitadel.ProjectRole("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=data["zitadel_project"]["default"]["id"],
+            role_key="super-user",
             display_name="display_name2",
             group="role_group")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<project_id:role_key[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/projectRole:ProjectRole imported '123456789012345678:my-role-key:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -234,12 +243,20 @@ class ProjectRole(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        project_role = zitadel.ProjectRole("projectRole",
-            org_id=zitadel_org["org"]["id"],
-            project_id=zitadel_project["project"]["id"],
-            role_key="key",
+        default = zitadel.ProjectRole("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=data["zitadel_project"]["default"]["id"],
+            role_key="super-user",
             display_name="display_name2",
             group="role_group")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<project_id:role_key[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/projectRole:ProjectRole imported '123456789012345678:my-role-key:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -275,8 +292,6 @@ class ProjectRole(pulumi.CustomResource):
                 raise TypeError("Missing required property 'display_name'")
             __props__.__dict__["display_name"] = display_name
             __props__.__dict__["group"] = group
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
@@ -341,7 +356,7 @@ class ProjectRole(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

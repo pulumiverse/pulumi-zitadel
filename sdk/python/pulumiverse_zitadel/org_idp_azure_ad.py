@@ -21,8 +21,8 @@ class OrgIdpAzureAdArgs:
                  is_auto_update: pulumi.Input[bool],
                  is_creation_allowed: pulumi.Input[bool],
                  is_linking_allowed: pulumi.Input[bool],
-                 org_id: pulumi.Input[str],
                  name: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None,
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  tenant_id: Optional[pulumi.Input[str]] = None,
                  tenant_type: Optional[pulumi.Input[str]] = None):
@@ -35,8 +35,8 @@ class OrgIdpAzureAdArgs:
         :param pulumi.Input[bool] is_auto_update: enable if a the ZITADEL account fields should be updated automatically on each login
         :param pulumi.Input[bool] is_creation_allowed: enable if users should be able to create a new account in ZITADEL when using an external account
         :param pulumi.Input[bool] is_linking_allowed: enable if users should be able to link an existing ZITADEL user with an external account
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] name: Name of the IDP
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: the scopes requested by ZITADEL during the request on the identity provider
         :param pulumi.Input[str] tenant_id: if tenant*id is not set, the tenant*type is used
         :param pulumi.Input[str] tenant_type: the azure ad tenant type
@@ -48,9 +48,10 @@ class OrgIdpAzureAdArgs:
         pulumi.set(__self__, "is_auto_update", is_auto_update)
         pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
         pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
-        pulumi.set(__self__, "org_id", org_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
         if scopes is not None:
             pulumi.set(__self__, "scopes", scopes)
         if tenant_id is not None:
@@ -143,18 +144,6 @@ class OrgIdpAzureAdArgs:
         pulumi.set(self, "is_linking_allowed", value)
 
     @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
-
-    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -165,6 +154,18 @@ class OrgIdpAzureAdArgs:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter
@@ -430,8 +431,8 @@ class OrgIdpAzureAd(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        azure_ad = zitadel.OrgIdpAzureAd("azureAd",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.OrgIdpAzureAd("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             client_id="9065bfc8-a08a...",
             client_secret="H2n***",
             scopes=[
@@ -446,6 +447,14 @@ class OrgIdpAzureAd(pulumi.CustomResource):
             is_creation_allowed=True,
             is_auto_creation=False,
             is_auto_update=True)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/orgIdpAzureAd:OrgIdpAzureAd imported '123456789012345678:123456789012345678:12345678-1234-1234-1234-123456789012'
         ```
 
         :param str resource_name: The name of the resource.
@@ -478,8 +487,8 @@ class OrgIdpAzureAd(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        azure_ad = zitadel.OrgIdpAzureAd("azureAd",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.OrgIdpAzureAd("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             client_id="9065bfc8-a08a...",
             client_secret="H2n***",
             scopes=[
@@ -494,6 +503,14 @@ class OrgIdpAzureAd(pulumi.CustomResource):
             is_creation_allowed=True,
             is_auto_creation=False,
             is_auto_update=True)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/orgIdpAzureAd:OrgIdpAzureAd imported '123456789012345678:123456789012345678:12345678-1234-1234-1234-123456789012'
         ```
 
         :param str resource_name: The name of the resource.
@@ -554,8 +571,6 @@ class OrgIdpAzureAd(pulumi.CustomResource):
                 raise TypeError("Missing required property 'is_linking_allowed'")
             __props__.__dict__["is_linking_allowed"] = is_linking_allowed
             __props__.__dict__["name"] = name
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             __props__.__dict__["scopes"] = scopes
             __props__.__dict__["tenant_id"] = tenant_id
@@ -686,7 +701,7 @@ class OrgIdpAzureAd(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

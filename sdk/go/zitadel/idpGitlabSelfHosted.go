@@ -25,7 +25,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewIdpGitlabSelfHosted(ctx, "gitlabSelfHosted", &zitadel.IdpGitlabSelfHostedArgs{
+// 		_, err := zitadel.NewIdpGitlabSelfHosted(ctx, "default", &zitadel.IdpGitlabSelfHostedArgs{
 // 			ClientId:          pulumi.String("15765e..."),
 // 			ClientSecret:      pulumi.String("*****abcxyz"),
 // 			IsAutoCreation:    pulumi.Bool(false),
@@ -45,6 +45,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/idpGitlabSelfHosted:IdpGitlabSelfHosted imported '123456789012345678:1234567890abcdef'
 // ```
 type IdpGitlabSelfHosted struct {
 	pulumi.CustomResourceState

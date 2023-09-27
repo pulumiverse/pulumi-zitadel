@@ -25,8 +25,8 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpAzureAd(ctx, "azureAd", &zitadel.OrgIdpAzureAdArgs{
-// 			OrgId:        pulumi.Any(zitadel_org.Org.Id),
+// 		_, err := zitadel.NewOrgIdpAzureAd(ctx, "default", &zitadel.OrgIdpAzureAdArgs{
+// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
 // 			ClientId:     pulumi.String("9065bfc8-a08a..."),
 // 			ClientSecret: pulumi.String("H2n***"),
 // 			Scopes: pulumi.StringArray{
@@ -49,6 +49,14 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/orgIdpAzureAd:OrgIdpAzureAd imported '123456789012345678:123456789012345678:12345678-1234-1234-1234-123456789012'
+// ```
 type OrgIdpAzureAd struct {
 	pulumi.CustomResourceState
 
@@ -69,7 +77,7 @@ type OrgIdpAzureAd struct {
 	// Name of the IDP
 	Name pulumi.StringOutput `pulumi:"name"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes pulumi.StringArrayOutput `pulumi:"scopes"`
 	// if tenant*id is not set, the tenant*type is used
@@ -105,9 +113,6 @@ func NewOrgIdpAzureAd(ctx *pulumi.Context,
 	}
 	if args.IsLinkingAllowed == nil {
 		return nil, errors.New("invalid value for required argument 'IsLinkingAllowed'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource OrgIdpAzureAd
@@ -207,7 +212,7 @@ type orgIdpAzureAdArgs struct {
 	// Name of the IDP
 	Name *string `pulumi:"name"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes []string `pulumi:"scopes"`
 	// if tenant*id is not set, the tenant*type is used
@@ -235,7 +240,7 @@ type OrgIdpAzureAdArgs struct {
 	// Name of the IDP
 	Name pulumi.StringPtrInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes pulumi.StringArrayInput
 	// if tenant*id is not set, the tenant*type is used
@@ -372,8 +377,8 @@ func (o OrgIdpAzureAdOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o OrgIdpAzureAdOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *OrgIdpAzureAd) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o OrgIdpAzureAdOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *OrgIdpAzureAd) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // the scopes requested by ZITADEL during the request on the identity provider

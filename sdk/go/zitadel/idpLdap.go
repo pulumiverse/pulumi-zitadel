@@ -25,7 +25,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewIdpLdap(ctx, "ldap", &zitadel.IdpLdapArgs{
+// 		_, err := zitadel.NewIdpLdap(ctx, "default", &zitadel.IdpLdapArgs{
 // 			BaseDn:             pulumi.String("dc=example,dc=com"),
 // 			BindDn:             pulumi.String("cn=admin,dc=example,dc=com"),
 // 			BindPassword:       pulumi.String("Password1!"),
@@ -57,6 +57,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/idpLdap:IdpLdap imported '123456789012345678:b1nd_p4ssw0rd'
 // ```
 type IdpLdap struct {
 	pulumi.CustomResourceState

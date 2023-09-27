@@ -158,17 +158,6 @@ def get_org_jwt_idp(idp_id: Optional[str] = None,
     """
     Datasource representing a generic JWT IdP on the organization.
 
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_zitadel as zitadel
-
-    org_jwt_idp_org_jwt_idp = zitadel.get_org_jwt_idp(org_id=data["zitadel_org"]["org"]["id"],
-        idp_id="177073612581240835")
-    pulumi.export("orgJwtIdp", org_jwt_idp_org_jwt_idp)
-    ```
-
 
     :param str idp_id: The ID of this resource.
     :param str org_id: ID of the organization
@@ -198,17 +187,6 @@ def get_org_jwt_idp_output(idp_id: Optional[pulumi.Input[str]] = None,
                            opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetOrgJwtIdpResult]:
     """
     Datasource representing a generic JWT IdP on the organization.
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_zitadel as zitadel
-
-    org_jwt_idp_org_jwt_idp = zitadel.get_org_jwt_idp(org_id=data["zitadel_org"]["org"]["id"],
-        idp_id="177073612581240835")
-    pulumi.export("orgJwtIdp", org_jwt_idp_org_jwt_idp)
-    ```
 
 
     :param str idp_id: The ID of this resource.

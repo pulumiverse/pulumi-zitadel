@@ -13,12 +13,12 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const apiApplicationApplicationApi = zitadel.getApplicationApi({
- *     orgId: data.zitadel_org.org.id,
- *     projectId: data.zitadel_project.project.id,
- *     appId: "177073625566806019",
+ * const default = zitadel.getApplicationApi({
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: data.zitadel_project["default"].id,
+ *     appId: "123456789012345678",
  * });
- * export const apiApplication = apiApplicationApplicationApi;
+ * export const applicationApi = _default;
  * ```
  */
 export function getApplicationApi(args: GetApplicationApiArgs, opts?: pulumi.InvokeOptions): Promise<GetApplicationApiResult> {
@@ -43,9 +43,9 @@ export interface GetApplicationApiArgs {
      */
     appId: string;
     /**
-     * orgID of the application
+     * ID of the organization
      */
-    orgId: string;
+    orgId?: string;
     /**
      * ID of the project
      */
@@ -73,9 +73,9 @@ export interface GetApplicationApiResult {
      */
     readonly name: string;
     /**
-     * orgID of the application
+     * ID of the organization
      */
-    readonly orgId: string;
+    readonly orgId?: string;
     /**
      * ID of the project
      */
@@ -95,9 +95,9 @@ export interface GetApplicationApiOutputArgs {
      */
     appId: pulumi.Input<string>;
     /**
-     * orgID of the application
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * ID of the project
      */

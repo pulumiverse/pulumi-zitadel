@@ -26,16 +26,16 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var projectRoleProjectRole = Zitadel.GetProjectRole.Invoke(new()
+        ///     var @default = Zitadel.GetProjectRole.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = data.Zitadel_project.Project.Id,
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = data.Zitadel_project.Default.Id,
         ///         RoleKey = "key",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["projectRole"] = projectRoleProjectRole.Apply(getProjectRoleResult =&gt; getProjectRoleResult),
+        ///         ["projectRole"] = @default.Apply(getProjectRoleResult =&gt; getProjectRoleResult),
         ///     };
         /// });
         /// ```
@@ -59,16 +59,16 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var projectRoleProjectRole = Zitadel.GetProjectRole.Invoke(new()
+        ///     var @default = Zitadel.GetProjectRole.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = data.Zitadel_project.Project.Id,
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = data.Zitadel_project.Default.Id,
         ///         RoleKey = "key",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["projectRole"] = projectRoleProjectRole.Apply(getProjectRoleResult =&gt; getProjectRoleResult),
+        ///         ["projectRole"] = @default.Apply(getProjectRoleResult =&gt; getProjectRoleResult),
         ///     };
         /// });
         /// ```

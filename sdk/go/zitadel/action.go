@@ -25,8 +25,8 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewAction(ctx, "action", &zitadel.ActionArgs{
-// 			OrgId:         pulumi.Any(zitadel_org.Org.Id),
+// 		_, err := zitadel.NewAction(ctx, "default", &zitadel.ActionArgs{
+// 			OrgId:         pulumi.Any(data.Zitadel_org.Default.Id),
 // 			Script:        pulumi.String("testscript"),
 // 			Timeout:       pulumi.String("10s"),
 // 			AllowedToFail: pulumi.Bool(true),
@@ -38,6 +38,14 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/action:Action imported '123456789012345678:123456789012345678'
+// ```
 type Action struct {
 	pulumi.CustomResourceState
 
@@ -45,8 +53,8 @@ type Action struct {
 	AllowedToFail pulumi.BoolOutput   `pulumi:"allowedToFail"`
 	Name          pulumi.StringOutput `pulumi:"name"`
 	// ID of the organization
-	OrgId  pulumi.StringOutput `pulumi:"orgId"`
-	Script pulumi.StringOutput `pulumi:"script"`
+	OrgId  pulumi.StringPtrOutput `pulumi:"orgId"`
+	Script pulumi.StringOutput    `pulumi:"script"`
 	// the state of the action
 	State pulumi.IntOutput `pulumi:"state"`
 	// after which time the action will be terminated if not finished
@@ -62,9 +70,6 @@ func NewAction(ctx *pulumi.Context,
 
 	if args.AllowedToFail == nil {
 		return nil, errors.New("invalid value for required argument 'AllowedToFail'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	if args.Script == nil {
 		return nil, errors.New("invalid value for required argument 'Script'")
@@ -129,8 +134,8 @@ type actionArgs struct {
 	AllowedToFail bool    `pulumi:"allowedToFail"`
 	Name          *string `pulumi:"name"`
 	// ID of the organization
-	OrgId  string `pulumi:"orgId"`
-	Script string `pulumi:"script"`
+	OrgId  *string `pulumi:"orgId"`
+	Script string  `pulumi:"script"`
 	// after which time the action will be terminated if not finished
 	Timeout string `pulumi:"timeout"`
 }
@@ -141,7 +146,7 @@ type ActionArgs struct {
 	AllowedToFail pulumi.BoolInput
 	Name          pulumi.StringPtrInput
 	// ID of the organization
-	OrgId  pulumi.StringInput
+	OrgId  pulumi.StringPtrInput
 	Script pulumi.StringInput
 	// after which time the action will be terminated if not finished
 	Timeout pulumi.StringInput
@@ -244,8 +249,8 @@ func (o ActionOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o ActionOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *Action) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o ActionOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Action) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 func (o ActionOutput) Script() pulumi.StringOutput {

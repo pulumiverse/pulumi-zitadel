@@ -13,11 +13,19 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const twilio = new zitadel.SmsProviderTwilio("twilio", {
+ * const defaultSmsProviderTwilio = new zitadel.SmsProviderTwilio("default", {
  *     senderNumber: "019920892",
  *     sid: "sid",
- *     token: "token",
+ *     token: "twilio_token",
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<id[:token]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/smsProviderTwilio:SmsProviderTwilio imported '123456789012345678:12345678901234567890123456abcdef'
  * ```
  */
 export class SmsProviderTwilio extends pulumi.CustomResource {

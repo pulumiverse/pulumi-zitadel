@@ -22,15 +22,23 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var action = new Zitadel.Action("action", new()
+    ///     var @default = new Zitadel.Action("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         Script = "testscript",
     ///         Timeout = "10s",
     ///         AllowedToFail = true,
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id[:org_id]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/action:Action imported '123456789012345678:123456789012345678'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/action:Action")]
@@ -49,7 +57,7 @@ namespace Pulumiverse.Zitadel
         /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         [Output("script")]
         public Output<string> Script { get; private set; } = null!;
@@ -125,8 +133,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         [Input("script", required: true)]
         public Input<string> Script { get; set; } = null!;

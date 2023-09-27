@@ -13,9 +13,10 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const ldap = pulumi.output(zitadel.getOrgIdpLdap({
- *     id: "177073614158299139",
- * }));
+ * const default = zitadel.getOrgIdpLdap({
+ *     orgId: data.zitadel_org["default"].id,
+ *     id: "123456789012345678",
+ * });
  * ```
  */
 export function getOrgIdpLdap(args: GetOrgIdpLdapArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgIdpLdapResult> {
@@ -41,7 +42,7 @@ export interface GetOrgIdpLdapArgs {
     /**
      * ID of the organization
      */
-    orgId: string;
+    orgId?: string;
 }
 
 /**
@@ -119,7 +120,7 @@ export interface GetOrgIdpLdapResult {
     /**
      * ID of the organization
      */
-    readonly orgId: string;
+    readonly orgId?: string;
     /**
      * User attribute for the phone
      */
@@ -181,5 +182,5 @@ export interface GetOrgIdpLdapOutputArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
 }

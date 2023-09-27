@@ -13,9 +13,10 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const gitlabSelfHosted = pulumi.output(zitadel.getOrgIdpGitlabSelfHosted({
- *     id: "177073614158299139",
- * }));
+ * const default = zitadel.getOrgIdpGitlabSelfHosted({
+ *     orgId: data.zitadel_org["default"].id,
+ *     id: "123456789012345678",
+ * });
  * ```
  */
 export function getOrgIdpGitlabSelfHosted(args: GetOrgIdpGitlabSelfHostedArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgIdpGitlabSelfHostedResult> {
@@ -41,7 +42,7 @@ export interface GetOrgIdpGitlabSelfHostedArgs {
     /**
      * ID of the organization
      */
-    orgId: string;
+    orgId?: string;
 }
 
 /**
@@ -87,7 +88,7 @@ export interface GetOrgIdpGitlabSelfHostedResult {
     /**
      * ID of the organization
      */
-    readonly orgId: string;
+    readonly orgId?: string;
     /**
      * the scopes requested by ZITADEL during the request on the identity provider
      */
@@ -109,5 +110,5 @@ export interface GetOrgIdpGitlabSelfHostedOutputArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
 }

@@ -75,9 +75,9 @@ class GetApplicationApiResult:
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> str:
+    def org_id(self) -> Optional[str]:
         """
-        orgID of the application
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -117,15 +117,15 @@ def get_application_api(app_id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    api_application_application_api = zitadel.get_application_api(org_id=data["zitadel_org"]["org"]["id"],
-        project_id=data["zitadel_project"]["project"]["id"],
-        app_id="177073625566806019")
-    pulumi.export("apiApplication", api_application_application_api)
+    default = zitadel.get_application_api(org_id=data["zitadel_org"]["default"]["id"],
+        project_id=data["zitadel_project"]["default"]["id"],
+        app_id="123456789012345678")
+    pulumi.export("applicationApi", default)
     ```
 
 
     :param str app_id: The ID of this resource.
-    :param str org_id: orgID of the application
+    :param str org_id: ID of the organization
     :param str project_id: ID of the project
     """
     __args__ = dict()
@@ -146,7 +146,7 @@ def get_application_api(app_id: Optional[str] = None,
 
 @_utilities.lift_output_func(get_application_api)
 def get_application_api_output(app_id: Optional[pulumi.Input[str]] = None,
-                               org_id: Optional[pulumi.Input[str]] = None,
+                               org_id: Optional[pulumi.Input[Optional[str]]] = None,
                                project_id: Optional[pulumi.Input[str]] = None,
                                opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetApplicationApiResult]:
     """
@@ -158,15 +158,15 @@ def get_application_api_output(app_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    api_application_application_api = zitadel.get_application_api(org_id=data["zitadel_org"]["org"]["id"],
-        project_id=data["zitadel_project"]["project"]["id"],
-        app_id="177073625566806019")
-    pulumi.export("apiApplication", api_application_application_api)
+    default = zitadel.get_application_api(org_id=data["zitadel_org"]["default"]["id"],
+        project_id=data["zitadel_project"]["default"]["id"],
+        app_id="123456789012345678")
+    pulumi.export("applicationApi", default)
     ```
 
 
     :param str app_id: The ID of this resource.
-    :param str org_id: orgID of the application
+    :param str org_id: ID of the organization
     :param str project_id: ID of the project
     """
     ...

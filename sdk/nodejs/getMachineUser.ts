@@ -13,11 +13,11 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const machineUserMachineUser = zitadel.getMachineUser({
- *     orgId: data.zitadel_org.org.id,
- *     userId: "177073617463410691",
+ * const default = zitadel.getMachineUser({
+ *     orgId: data.zitadel_org["default"].id,
+ *     userId: "123456789012345678",
  * });
- * export const machineUser = machineUserMachineUser;
+ * export const machineUser = _default;
  * ```
  */
 export function getMachineUser(args: GetMachineUserArgs, opts?: pulumi.InvokeOptions): Promise<GetMachineUserResult> {
@@ -39,7 +39,7 @@ export interface GetMachineUserArgs {
     /**
      * ID of the organization
      */
-    orgId: string;
+    orgId?: string;
     /**
      * The ID of this resource.
      */
@@ -73,7 +73,7 @@ export interface GetMachineUserResult {
     /**
      * ID of the organization
      */
-    readonly orgId: string;
+    readonly orgId?: string;
     /**
      * Preferred login name
      */
@@ -103,7 +103,7 @@ export interface GetMachineUserOutputArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * The ID of this resource.
      */

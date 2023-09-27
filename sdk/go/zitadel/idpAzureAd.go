@@ -25,7 +25,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewIdpAzureAd(ctx, "azureAd", &zitadel.IdpAzureAdArgs{
+// 		_, err := zitadel.NewIdpAzureAd(ctx, "default", &zitadel.IdpAzureAdArgs{
 // 			ClientId:          pulumi.String("9065bfc8-a08a..."),
 // 			ClientSecret:      pulumi.String("H2n***"),
 // 			EmailVerified:     pulumi.Bool(true),
@@ -47,6 +47,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/idpAzureAd:IdpAzureAd imported '123456789012345678:12345678-1234-1234-1234-123456789012'
 // ```
 type IdpAzureAd struct {
 	pulumi.CustomResourceState

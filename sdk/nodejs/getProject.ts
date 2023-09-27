@@ -13,11 +13,11 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const projectProject = zitadel.getProject({
- *     orgId: data.zitadel_org.org.id,
- *     projectId: "177073620768522243",
+ * const default = zitadel.getProject({
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: "123456789012345678",
  * });
- * export const project = projectProject;
+ * export const project = _default;
  * ```
  */
 export function getProject(args: GetProjectArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectResult> {
@@ -37,9 +37,9 @@ export function getProject(args: GetProjectArgs, opts?: pulumi.InvokeOptions): P
  */
 export interface GetProjectArgs {
     /**
-     * Organization in which the project is located
+     * ID of the organization
      */
-    orgId: string;
+    orgId?: string;
     /**
      * The ID of this resource.
      */
@@ -63,9 +63,9 @@ export interface GetProjectResult {
      */
     readonly name: string;
     /**
-     * Organization in which the project is located
+     * ID of the organization
      */
-    readonly orgId: string;
+    readonly orgId?: string;
     /**
      * Defines from where the private labeling should be triggered
      */
@@ -97,9 +97,9 @@ export function getProjectOutput(args: GetProjectOutputArgs, opts?: pulumi.Invok
  */
 export interface GetProjectOutputArgs {
     /**
-     * Organization in which the project is located
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * The ID of this resource.
      */

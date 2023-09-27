@@ -25,10 +25,10 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpJwt(ctx, "jwtIdp", &zitadel.OrgIdpJwtArgs{
-// 			OrgId:        pulumi.Any(zitadel_org.Org.Id),
+// 		_, err := zitadel.NewOrgIdpJwt(ctx, "default", &zitadel.OrgIdpJwtArgs{
+// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
 // 			StylingType:  pulumi.String("STYLING_TYPE_UNSPECIFIED"),
-// 			JwtEndpoint:  pulumi.String("https://jwtendpoint.com"),
+// 			JwtEndpoint:  pulumi.String("https://jwtendpoint.com/jwt"),
 // 			Issuer:       pulumi.String("https://google.com"),
 // 			KeysEndpoint: pulumi.String("https://jwtendpoint.com/keys"),
 // 			HeaderName:   pulumi.String("x-auth-token"),
@@ -40,6 +40,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/orgIdpJwt:OrgIdpJwt imported '123456789012345678:123456789012345678'
 // ```
 type OrgIdpJwt struct {
 	pulumi.CustomResourceState
@@ -57,7 +65,7 @@ type OrgIdpJwt struct {
 	// Name of the IDP
 	Name pulumi.StringOutput `pulumi:"name"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// Some identity providers specify the styling of the button to their login, supported values: STYLING*TYPE*UNSPECIFIED, STYLING*TYPE*GOOGLE
 	StylingType pulumi.StringOutput `pulumi:"stylingType"`
 }
@@ -83,9 +91,6 @@ func NewOrgIdpJwt(ctx *pulumi.Context,
 	}
 	if args.KeysEndpoint == nil {
 		return nil, errors.New("invalid value for required argument 'KeysEndpoint'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	if args.StylingType == nil {
 		return nil, errors.New("invalid value for required argument 'StylingType'")
@@ -168,7 +173,7 @@ type orgIdpJwtArgs struct {
 	// Name of the IDP
 	Name *string `pulumi:"name"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// Some identity providers specify the styling of the button to their login, supported values: STYLING*TYPE*UNSPECIFIED, STYLING*TYPE*GOOGLE
 	StylingType string `pulumi:"stylingType"`
 }
@@ -188,7 +193,7 @@ type OrgIdpJwtArgs struct {
 	// Name of the IDP
 	Name pulumi.StringPtrInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// Some identity providers specify the styling of the button to their login, supported values: STYLING*TYPE*UNSPECIFIED, STYLING*TYPE*GOOGLE
 	StylingType pulumi.StringInput
 }
@@ -311,8 +316,8 @@ func (o OrgIdpJwtOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o OrgIdpJwtOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *OrgIdpJwt) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o OrgIdpJwtOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *OrgIdpJwt) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Some identity providers specify the styling of the button to their login, supported values: STYLING*TYPE*UNSPECIFIED, STYLING*TYPE*GOOGLE

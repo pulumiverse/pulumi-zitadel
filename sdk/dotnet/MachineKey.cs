@@ -22,15 +22,23 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var machineKey = new Zitadel.MachineKey("machineKey", new()
+    ///     var @default = new Zitadel.MachineKey("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
-    ///         UserId = zitadel_machine_user.Machine_user.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         UserId = data.Zitadel_machine_user.Default.Id,
     ///         KeyType = "KEY_TYPE_JSON",
     ///         ExpirationDate = "2519-04-01T08:45:00Z",
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id:user_id[:org_id][:key_details]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/machineKey:MachineKey imported '123456789012345678:123456789012345678:123456789012345678:{"type":"serviceaccount","keyId":"123456789012345678","key":"-----BEGIN RSA PRIVATE KEY-----\nMIIEpQ...-----END RSA PRIVATE KEY-----\n","userId":"123456789012345678"}'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/machineKey:MachineKey")]
@@ -58,7 +66,7 @@ namespace Pulumiverse.Zitadel
         /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// ID of the user
@@ -128,8 +136,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// ID of the user

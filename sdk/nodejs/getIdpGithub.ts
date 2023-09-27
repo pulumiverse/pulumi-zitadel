@@ -13,8 +13,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const github = pulumi.output(zitadel.getIdpGithub({
- *     id: "177073614158299139",
+ * const defaultIdpGithub = pulumi.output(zitadel.getIdpGithub({
+ *     id: "123456789012345678",
  * }));
  * ```
  */

@@ -106,9 +106,17 @@ class InstanceMember(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        instance_member = zitadel.InstanceMember("instanceMember",
-            user_id=zitadel_human_user["human_user"]["id"],
+        default = zitadel.InstanceMember("default",
+            user_id=data["zitadel_human_user"]["default"]["id"],
             roles=["IAM_OWNER"])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<user_id>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/instanceMember:InstanceMember imported '123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -131,9 +139,17 @@ class InstanceMember(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        instance_member = zitadel.InstanceMember("instanceMember",
-            user_id=zitadel_human_user["human_user"]["id"],
+        default = zitadel.InstanceMember("default",
+            user_id=data["zitadel_human_user"]["default"]["id"],
             roles=["IAM_OWNER"])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<user_id>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/instanceMember:InstanceMember imported '123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.

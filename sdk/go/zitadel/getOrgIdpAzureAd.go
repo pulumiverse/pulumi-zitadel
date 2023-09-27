@@ -26,7 +26,8 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := zitadel.LookupOrgIdpAzureAd(ctx, &GetOrgIdpAzureAdArgs{
-// 			Id: "177073614158299139",
+// 			OrgId: pulumi.StringRef(data.Zitadel_org.Default.Id),
+// 			Id:    "123456789012345678",
 // 		}, nil)
 // 		if err != nil {
 // 			return err
@@ -50,7 +51,7 @@ type LookupOrgIdpAzureAdArgs struct {
 	// The ID of this resource.
 	Id string `pulumi:"id"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 }
 
 // A collection of values returned by getOrgIdpAzureAd.
@@ -74,7 +75,7 @@ type LookupOrgIdpAzureAdResult struct {
 	// Name of the IDP
 	Name string `pulumi:"name"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes []string `pulumi:"scopes"`
 	// the azure ad tenant id
@@ -101,7 +102,7 @@ type LookupOrgIdpAzureAdOutputArgs struct {
 	// The ID of this resource.
 	Id pulumi.StringInput `pulumi:"id"`
 	// ID of the organization
-	OrgId pulumi.StringInput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrInput `pulumi:"orgId"`
 }
 
 func (LookupOrgIdpAzureAdOutputArgs) ElementType() reflect.Type {
@@ -169,8 +170,8 @@ func (o LookupOrgIdpAzureAdResultOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o LookupOrgIdpAzureAdResultOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupOrgIdpAzureAdResult) string { return v.OrgId }).(pulumi.StringOutput)
+func (o LookupOrgIdpAzureAdResultOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupOrgIdpAzureAdResult) *string { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // the scopes requested by ZITADEL during the request on the identity provider

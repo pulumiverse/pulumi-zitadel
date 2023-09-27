@@ -17,7 +17,6 @@ class HumanUserArgs:
                  email: pulumi.Input[str],
                  first_name: pulumi.Input[str],
                  last_name: pulumi.Input[str],
-                 org_id: pulumi.Input[str],
                  user_name: pulumi.Input[str],
                  display_name: Optional[pulumi.Input[str]] = None,
                  gender: Optional[pulumi.Input[str]] = None,
@@ -25,6 +24,7 @@ class HumanUserArgs:
                  is_email_verified: Optional[pulumi.Input[bool]] = None,
                  is_phone_verified: Optional[pulumi.Input[bool]] = None,
                  nick_name: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None,
                  phone: Optional[pulumi.Input[str]] = None,
                  preferred_language: Optional[pulumi.Input[str]] = None):
         """
@@ -32,7 +32,6 @@ class HumanUserArgs:
         :param pulumi.Input[str] email: Email of the user
         :param pulumi.Input[str] first_name: First name of the user
         :param pulumi.Input[str] last_name: Last name of the user
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] user_name: Username
         :param pulumi.Input[str] display_name: Display name of the user
         :param pulumi.Input[str] gender: Gender of the user, supported values: GENDER*UNSPECIFIED, GENDER*FEMALE, GENDER*MALE, GENDER*DIVERSE
@@ -40,13 +39,13 @@ class HumanUserArgs:
         :param pulumi.Input[bool] is_email_verified: Is the email verified of the user, can only be true if password of the user is set
         :param pulumi.Input[bool] is_phone_verified: Is the phone verified of the user
         :param pulumi.Input[str] nick_name: Nick name of the user
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] phone: Phone of the user
         :param pulumi.Input[str] preferred_language: Preferred language of the user
         """
         pulumi.set(__self__, "email", email)
         pulumi.set(__self__, "first_name", first_name)
         pulumi.set(__self__, "last_name", last_name)
-        pulumi.set(__self__, "org_id", org_id)
         pulumi.set(__self__, "user_name", user_name)
         if display_name is not None:
             pulumi.set(__self__, "display_name", display_name)
@@ -60,6 +59,8 @@ class HumanUserArgs:
             pulumi.set(__self__, "is_phone_verified", is_phone_verified)
         if nick_name is not None:
             pulumi.set(__self__, "nick_name", nick_name)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
         if phone is not None:
             pulumi.set(__self__, "phone", phone)
         if preferred_language is not None:
@@ -100,18 +101,6 @@ class HumanUserArgs:
     @last_name.setter
     def last_name(self, value: pulumi.Input[str]):
         pulumi.set(self, "last_name", value)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter(name="userName")
@@ -196,6 +185,18 @@ class HumanUserArgs:
     @nick_name.setter
     def nick_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "nick_name", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter
@@ -516,8 +517,8 @@ class HumanUser(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        human_user = zitadel.HumanUser("humanUser",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.HumanUser("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             user_name="humanfull@localhost.com",
             first_name="firstname",
             last_name="lastname",
@@ -530,6 +531,14 @@ class HumanUser(pulumi.CustomResource):
             email="test@zitadel.com",
             is_email_verified=True,
             initial_password="Password1!")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `id[:org_id][:initial_password]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/humanUser:HumanUser imported '123456789012345678:123456789012345678:Password1!'
         ```
 
         :param str resource_name: The name of the resource.
@@ -565,8 +574,8 @@ class HumanUser(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        human_user = zitadel.HumanUser("humanUser",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.HumanUser("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             user_name="humanfull@localhost.com",
             first_name="firstname",
             last_name="lastname",
@@ -579,6 +588,14 @@ class HumanUser(pulumi.CustomResource):
             email="test@zitadel.com",
             is_email_verified=True,
             initial_password="Password1!")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `id[:org_id][:initial_password]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/humanUser:HumanUser imported '123456789012345678:123456789012345678:Password1!'
         ```
 
         :param str resource_name: The name of the resource.
@@ -633,8 +650,6 @@ class HumanUser(pulumi.CustomResource):
                 raise TypeError("Missing required property 'last_name'")
             __props__.__dict__["last_name"] = last_name
             __props__.__dict__["nick_name"] = nick_name
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             __props__.__dict__["phone"] = phone
             __props__.__dict__["preferred_language"] = preferred_language
@@ -798,7 +813,7 @@ class HumanUser(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

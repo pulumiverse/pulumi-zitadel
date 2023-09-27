@@ -13,8 +13,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const gitlabSelfHosted = pulumi.output(zitadel.getIdpGitlabSelfHosted({
- *     id: "177073614158299139",
+ * const defaultIdpGitlabSelfHosted = pulumi.output(zitadel.getIdpGitlabSelfHosted({
+ *     id: "123456789012345678",
  * }));
  * ```
  */

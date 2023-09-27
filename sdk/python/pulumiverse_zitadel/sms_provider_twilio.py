@@ -138,10 +138,18 @@ class SmsProviderTwilio(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        twilio = zitadel.SmsProviderTwilio("twilio",
+        default = zitadel.SmsProviderTwilio("default",
             sender_number="019920892",
             sid="sid",
-            token="token")
+            token="twilio_token")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:token]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/smsProviderTwilio:SmsProviderTwilio imported '123456789012345678:12345678901234567890123456abcdef'
         ```
 
         :param str resource_name: The name of the resource.
@@ -165,10 +173,18 @@ class SmsProviderTwilio(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        twilio = zitadel.SmsProviderTwilio("twilio",
+        default = zitadel.SmsProviderTwilio("default",
             sender_number="019920892",
             sid="sid",
-            token="token")
+            token="twilio_token")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:token]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/smsProviderTwilio:SmsProviderTwilio imported '123456789012345678:12345678901234567890123456abcdef'
         ```
 
         :param str resource_name: The name of the resource.

@@ -26,9 +26,9 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var ldap = Zitadel.GetIdpLdap.Invoke(new()
+        ///     var @default = Zitadel.GetIdpLdap.Invoke(new()
         ///     {
-        ///         Id = "177073614158299139",
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         /// });
@@ -53,9 +53,9 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var ldap = Zitadel.GetIdpLdap.Invoke(new()
+        ///     var @default = Zitadel.GetIdpLdap.Invoke(new()
         ///     {
-        ///         Id = "177073614158299139",
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         /// });

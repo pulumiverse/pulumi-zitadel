@@ -25,11 +25,12 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewPrivacyPolicy(ctx, "privacyPolicy", &zitadel.PrivacyPolicyArgs{
-// 			OrgId:       pulumi.Any(zitadel_org.Org.Id),
-// 			TosLink:     pulumi.String("https://google.com"),
-// 			PrivacyLink: pulumi.String("https://google.com"),
-// 			HelpLink:    pulumi.String("https://google.com"),
+// 		_, err := zitadel.NewPrivacyPolicy(ctx, "default", &zitadel.PrivacyPolicyArgs{
+// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+// 			TosLink:      pulumi.String("https://example.com/tos"),
+// 			PrivacyLink:  pulumi.String("https://example.com/privacy"),
+// 			HelpLink:     pulumi.String("https://example.com/help"),
+// 			SupportEmail: pulumi.String("support@example.com"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -38,14 +39,23 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/privacyPolicy:PrivacyPolicy imported '123456789012345678'
+// ```
 type PrivacyPolicy struct {
 	pulumi.CustomResourceState
 
 	HelpLink pulumi.StringOutput `pulumi:"helpLink"`
-	// Id for the organization
-	OrgId       pulumi.StringOutput `pulumi:"orgId"`
-	PrivacyLink pulumi.StringOutput `pulumi:"privacyLink"`
-	TosLink     pulumi.StringOutput `pulumi:"tosLink"`
+	// ID of the organization
+	OrgId        pulumi.StringPtrOutput `pulumi:"orgId"`
+	PrivacyLink  pulumi.StringOutput    `pulumi:"privacyLink"`
+	SupportEmail pulumi.StringOutput    `pulumi:"supportEmail"`
+	TosLink      pulumi.StringOutput    `pulumi:"tosLink"`
 }
 
 // NewPrivacyPolicy registers a new resource with the given unique name, arguments, and options.
@@ -58,11 +68,11 @@ func NewPrivacyPolicy(ctx *pulumi.Context,
 	if args.HelpLink == nil {
 		return nil, errors.New("invalid value for required argument 'HelpLink'")
 	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	if args.PrivacyLink == nil {
 		return nil, errors.New("invalid value for required argument 'PrivacyLink'")
+	}
+	if args.SupportEmail == nil {
+		return nil, errors.New("invalid value for required argument 'SupportEmail'")
 	}
 	if args.TosLink == nil {
 		return nil, errors.New("invalid value for required argument 'TosLink'")
@@ -91,18 +101,20 @@ func GetPrivacyPolicy(ctx *pulumi.Context,
 // Input properties used for looking up and filtering PrivacyPolicy resources.
 type privacyPolicyState struct {
 	HelpLink *string `pulumi:"helpLink"`
-	// Id for the organization
-	OrgId       *string `pulumi:"orgId"`
-	PrivacyLink *string `pulumi:"privacyLink"`
-	TosLink     *string `pulumi:"tosLink"`
+	// ID of the organization
+	OrgId        *string `pulumi:"orgId"`
+	PrivacyLink  *string `pulumi:"privacyLink"`
+	SupportEmail *string `pulumi:"supportEmail"`
+	TosLink      *string `pulumi:"tosLink"`
 }
 
 type PrivacyPolicyState struct {
 	HelpLink pulumi.StringPtrInput
-	// Id for the organization
-	OrgId       pulumi.StringPtrInput
-	PrivacyLink pulumi.StringPtrInput
-	TosLink     pulumi.StringPtrInput
+	// ID of the organization
+	OrgId        pulumi.StringPtrInput
+	PrivacyLink  pulumi.StringPtrInput
+	SupportEmail pulumi.StringPtrInput
+	TosLink      pulumi.StringPtrInput
 }
 
 func (PrivacyPolicyState) ElementType() reflect.Type {
@@ -111,19 +123,21 @@ func (PrivacyPolicyState) ElementType() reflect.Type {
 
 type privacyPolicyArgs struct {
 	HelpLink string `pulumi:"helpLink"`
-	// Id for the organization
-	OrgId       string `pulumi:"orgId"`
-	PrivacyLink string `pulumi:"privacyLink"`
-	TosLink     string `pulumi:"tosLink"`
+	// ID of the organization
+	OrgId        *string `pulumi:"orgId"`
+	PrivacyLink  string  `pulumi:"privacyLink"`
+	SupportEmail string  `pulumi:"supportEmail"`
+	TosLink      string  `pulumi:"tosLink"`
 }
 
 // The set of arguments for constructing a PrivacyPolicy resource.
 type PrivacyPolicyArgs struct {
 	HelpLink pulumi.StringInput
-	// Id for the organization
-	OrgId       pulumi.StringInput
-	PrivacyLink pulumi.StringInput
-	TosLink     pulumi.StringInput
+	// ID of the organization
+	OrgId        pulumi.StringPtrInput
+	PrivacyLink  pulumi.StringInput
+	SupportEmail pulumi.StringInput
+	TosLink      pulumi.StringInput
 }
 
 func (PrivacyPolicyArgs) ElementType() reflect.Type {
@@ -217,13 +231,17 @@ func (o PrivacyPolicyOutput) HelpLink() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringOutput { return v.HelpLink }).(pulumi.StringOutput)
 }
 
-// Id for the organization
-func (o PrivacyPolicyOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o PrivacyPolicyOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 func (o PrivacyPolicyOutput) PrivacyLink() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringOutput { return v.PrivacyLink }).(pulumi.StringOutput)
+}
+
+func (o PrivacyPolicyOutput) SupportEmail() pulumi.StringOutput {
+	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringOutput { return v.SupportEmail }).(pulumi.StringOutput)
 }
 
 func (o PrivacyPolicyOutput) TosLink() pulumi.StringOutput {

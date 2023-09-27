@@ -22,14 +22,22 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var domainPolicy = new Zitadel.DefaultDomainPolicy("domainPolicy", new()
+    ///     var @default = new Zitadel.DefaultDomainPolicy("default", new()
     ///     {
-    ///         SmtpSenderAddressMatchesInstanceDomain = false,
+    ///         SmtpSenderAddressMatchesInstanceDomain = true,
     ///         UserLoginMustBeDomain = false,
-    ///         ValidateOrgDomains = false,
+    ///         ValidateOrgDomains = true,
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/defaultDomainPolicy:DefaultDomainPolicy imported ''
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/defaultDomainPolicy:DefaultDomainPolicy")]

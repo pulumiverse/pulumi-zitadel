@@ -25,7 +25,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewDefaultLockoutPolicy(ctx, "lockoutPolicy", &zitadel.DefaultLockoutPolicyArgs{
+// 		_, err := zitadel.NewDefaultLockoutPolicy(ctx, "default", &zitadel.DefaultLockoutPolicyArgs{
 // 			MaxPasswordAttempts: pulumi.Int(5),
 // 		})
 // 		if err != nil {
@@ -34,6 +34,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/defaultLockoutPolicy:DefaultLockoutPolicy imported ''
 // ```
 type DefaultLockoutPolicy struct {
 	pulumi.CustomResourceState

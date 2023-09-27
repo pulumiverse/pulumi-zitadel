@@ -22,14 +22,22 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var twilio = new Zitadel.SmsProviderTwilio("twilio", new()
+    ///     var @default = new Zitadel.SmsProviderTwilio("default", new()
     ///     {
     ///         SenderNumber = "019920892",
     ///         Sid = "sid",
-    ///         Token = "token",
+    ///         Token = "twilio_token",
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id[:token]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/smsProviderTwilio:SmsProviderTwilio imported '123456789012345678:12345678901234567890123456abcdef'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/smsProviderTwilio:SmsProviderTwilio")]

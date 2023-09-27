@@ -22,16 +22,24 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var appKey = new Zitadel.ApplicationKey("appKey", new()
+    ///     var @default = new Zitadel.ApplicationKey("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
-    ///         ProjectId = zitadel_project.Project.Id,
-    ///         AppId = zitadel_application_api.Application_api.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         ProjectId = data.Zitadel_project.Default.Id,
+    ///         AppId = data.Zitadel_application_api.Default.Id,
     ///         KeyType = "KEY_TYPE_JSON",
     ///         ExpirationDate = "2519-04-01T08:45:00Z",
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id:project_id:app_id[:org_id][:key_details]&gt;`. # You can use __SEMICOLON__ to escape :, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/applicationKey:ApplicationKey imported "123456789012345678:123456789012345678:123456789012345678:123456789012345678:$(cat ~/Downloads/123456789012345678.json | sed -e 's/:/__SEMICOLON__/g')"
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/applicationKey:ApplicationKey")]
@@ -65,7 +73,7 @@ namespace Pulumiverse.Zitadel
         /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// ID of the project
@@ -141,8 +149,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// ID of the project

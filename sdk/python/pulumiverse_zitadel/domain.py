@@ -14,32 +14,21 @@ __all__ = ['DomainArgs', 'Domain']
 @pulumi.input_type
 class DomainArgs:
     def __init__(__self__, *,
-                 org_id: pulumi.Input[str],
                  is_primary: Optional[pulumi.Input[bool]] = None,
-                 name: Optional[pulumi.Input[str]] = None):
+                 name: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Domain resource.
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[bool] is_primary: Is domain primary
         :param pulumi.Input[str] name: Name of the domain
+        :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "org_id", org_id)
         if is_primary is not None:
             pulumi.set(__self__, "is_primary", is_primary)
         if name is not None:
             pulumi.set(__self__, "name", name)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
 
     @property
     @pulumi.getter(name="isPrimary")
@@ -64,6 +53,18 @@ class DomainArgs:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
 
 @pulumi.input_type
@@ -172,9 +173,17 @@ class Domain(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        domain = zitadel.Domain("domain",
-            org_id=zitadel_org["org"]["id"],
-            is_primary=True)
+        default = zitadel.Domain("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            is_primary=False)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `name[:org_id]`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/domain:Domain imported 'example.com:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -187,7 +196,7 @@ class Domain(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: DomainArgs,
+                 args: Optional[DomainArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Resource representing a domain of the organization.
@@ -198,9 +207,17 @@ class Domain(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        domain = zitadel.Domain("domain",
-            org_id=zitadel_org["org"]["id"],
-            is_primary=True)
+        default = zitadel.Domain("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            is_primary=False)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `name[:org_id]`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/domain:Domain imported 'example.com:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -232,8 +249,6 @@ class Domain(pulumi.CustomResource):
 
             __props__.__dict__["is_primary"] = is_primary
             __props__.__dict__["name"] = name
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             __props__.__dict__["is_verified"] = None
             __props__.__dict__["validation_type"] = None
@@ -302,7 +317,7 @@ class Domain(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

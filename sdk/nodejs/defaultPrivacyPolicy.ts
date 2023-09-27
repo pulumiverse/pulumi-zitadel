@@ -13,11 +13,20 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const privacyPolicy = new zitadel.DefaultPrivacyPolicy("privacy_policy", {
- *     helpLink: "https://google.com",
- *     privacyLink: "https://google.com",
- *     tosLink: "https://google.com",
+ * const defaultDefaultPrivacyPolicy = new zitadel.DefaultPrivacyPolicy("default", {
+ *     helpLink: "https://example.com/help",
+ *     privacyLink: "https://example.com/privacy",
+ *     supportEmail: "support@example.com",
+ *     tosLink: "https://example.com/tos",
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/defaultPrivacyPolicy:DefaultPrivacyPolicy imported ''
  * ```
  */
 export class DefaultPrivacyPolicy extends pulumi.CustomResource {
@@ -50,6 +59,7 @@ export class DefaultPrivacyPolicy extends pulumi.CustomResource {
 
     public readonly helpLink!: pulumi.Output<string>;
     public readonly privacyLink!: pulumi.Output<string>;
+    public readonly supportEmail!: pulumi.Output<string>;
     public readonly tosLink!: pulumi.Output<string>;
 
     /**
@@ -67,6 +77,7 @@ export class DefaultPrivacyPolicy extends pulumi.CustomResource {
             const state = argsOrState as DefaultPrivacyPolicyState | undefined;
             resourceInputs["helpLink"] = state ? state.helpLink : undefined;
             resourceInputs["privacyLink"] = state ? state.privacyLink : undefined;
+            resourceInputs["supportEmail"] = state ? state.supportEmail : undefined;
             resourceInputs["tosLink"] = state ? state.tosLink : undefined;
         } else {
             const args = argsOrState as DefaultPrivacyPolicyArgs | undefined;
@@ -76,11 +87,15 @@ export class DefaultPrivacyPolicy extends pulumi.CustomResource {
             if ((!args || args.privacyLink === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'privacyLink'");
             }
+            if ((!args || args.supportEmail === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'supportEmail'");
+            }
             if ((!args || args.tosLink === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'tosLink'");
             }
             resourceInputs["helpLink"] = args ? args.helpLink : undefined;
             resourceInputs["privacyLink"] = args ? args.privacyLink : undefined;
+            resourceInputs["supportEmail"] = args ? args.supportEmail : undefined;
             resourceInputs["tosLink"] = args ? args.tosLink : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -94,6 +109,7 @@ export class DefaultPrivacyPolicy extends pulumi.CustomResource {
 export interface DefaultPrivacyPolicyState {
     helpLink?: pulumi.Input<string>;
     privacyLink?: pulumi.Input<string>;
+    supportEmail?: pulumi.Input<string>;
     tosLink?: pulumi.Input<string>;
 }
 
@@ -103,5 +119,6 @@ export interface DefaultPrivacyPolicyState {
 export interface DefaultPrivacyPolicyArgs {
     helpLink: pulumi.Input<string>;
     privacyLink: pulumi.Input<string>;
+    supportEmail: pulumi.Input<string>;
     tosLink: pulumi.Input<string>;
 }

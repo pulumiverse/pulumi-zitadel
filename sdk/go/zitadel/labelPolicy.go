@@ -12,6 +12,14 @@ import (
 )
 
 // Resource representing the custom label policy of an organization.
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
+// ```
 type LabelPolicy struct {
 	pulumi.CustomResourceState
 
@@ -42,8 +50,8 @@ type LabelPolicy struct {
 	LogoPath            pulumi.StringPtrOutput `pulumi:"logoPath"`
 	LogoUrl             pulumi.StringOutput    `pulumi:"logoUrl"`
 	LogoUrlDark         pulumi.StringOutput    `pulumi:"logoUrlDark"`
-	// Id for the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// hex value for primary color
 	PrimaryColor pulumi.StringOutput `pulumi:"primaryColor"`
 	// hex value for primary color dark theme
@@ -80,9 +88,6 @@ func NewLabelPolicy(ctx *pulumi.Context,
 	}
 	if args.HideLoginNameSuffix == nil {
 		return nil, errors.New("invalid value for required argument 'HideLoginNameSuffix'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	if args.PrimaryColor == nil {
 		return nil, errors.New("invalid value for required argument 'PrimaryColor'")
@@ -146,7 +151,7 @@ type labelPolicyState struct {
 	LogoPath            *string `pulumi:"logoPath"`
 	LogoUrl             *string `pulumi:"logoUrl"`
 	LogoUrlDark         *string `pulumi:"logoUrlDark"`
-	// Id for the organization
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 	// hex value for primary color
 	PrimaryColor *string `pulumi:"primaryColor"`
@@ -188,7 +193,7 @@ type LabelPolicyState struct {
 	LogoPath            pulumi.StringPtrInput
 	LogoUrl             pulumi.StringPtrInput
 	LogoUrlDark         pulumi.StringPtrInput
-	// Id for the organization
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 	// hex value for primary color
 	PrimaryColor pulumi.StringPtrInput
@@ -229,8 +234,8 @@ type labelPolicyArgs struct {
 	LogoDarkPath        *string `pulumi:"logoDarkPath"`
 	LogoHash            *string `pulumi:"logoHash"`
 	LogoPath            *string `pulumi:"logoPath"`
-	// Id for the organization
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// hex value for primary color
 	PrimaryColor string `pulumi:"primaryColor"`
 	// hex value for primary color dark theme
@@ -267,8 +272,8 @@ type LabelPolicyArgs struct {
 	LogoDarkPath        pulumi.StringPtrInput
 	LogoHash            pulumi.StringPtrInput
 	LogoPath            pulumi.StringPtrInput
-	// Id for the organization
-	OrgId pulumi.StringInput
+	// ID of the organization
+	OrgId pulumi.StringPtrInput
 	// hex value for primary color
 	PrimaryColor pulumi.StringInput
 	// hex value for primary color dark theme
@@ -458,9 +463,9 @@ func (o LabelPolicyOutput) LogoUrlDark() pulumi.StringOutput {
 	return o.ApplyT(func(v *LabelPolicy) pulumi.StringOutput { return v.LogoUrlDark }).(pulumi.StringOutput)
 }
 
-// Id for the organization
-func (o LabelPolicyOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *LabelPolicy) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o LabelPolicyOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LabelPolicy) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // hex value for primary color

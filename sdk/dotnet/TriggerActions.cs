@@ -22,18 +22,26 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var triggerActions = new Zitadel.TriggerActions("triggerActions", new()
+    ///     var @default = new Zitadel.TriggerActions("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
-    ///         FlowType = "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
-    ///         TriggerType = "TRIGGER_TYPE_POST_AUTHENTICATION",
+    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         FlowType = "FLOW_TYPE_CUSTOMISE_TOKEN",
+    ///         TriggerType = "TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION",
     ///         ActionIds = new[]
     ///         {
-    ///             zitadel_action.Action.Id,
+    ///             data.Zitadel_action.Default.Id,
     ///         },
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;flow_type:trigger_type[:org_id]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/triggerActions:TriggerActions imported 'FLOW_TYPE_EXTERNAL_AUTHENTICATION:TRIGGER_TYPE_POST_CREATION:123456789012345678'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/triggerActions:TriggerActions")]
@@ -55,7 +63,7 @@ namespace Pulumiverse.Zitadel
         /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
@@ -131,8 +139,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION

@@ -398,7 +398,7 @@ class IdpAzureAd(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        azure_ad = zitadel.IdpAzureAd("azureAd",
+        default = zitadel.IdpAzureAd("default",
             client_id="9065bfc8-a08a...",
             client_secret="H2n***",
             email_verified=True,
@@ -413,6 +413,14 @@ class IdpAzureAd(pulumi.CustomResource):
                 "User.Read",
             ],
             tenant_type="AZURE_AD_TENANT_TYPE_ORGANISATIONS")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpAzureAd:IdpAzureAd imported '123456789012345678:12345678-1234-1234-1234-123456789012'
         ```
 
         :param str resource_name: The name of the resource.
@@ -444,7 +452,7 @@ class IdpAzureAd(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        azure_ad = zitadel.IdpAzureAd("azureAd",
+        default = zitadel.IdpAzureAd("default",
             client_id="9065bfc8-a08a...",
             client_secret="H2n***",
             email_verified=True,
@@ -459,6 +467,14 @@ class IdpAzureAd(pulumi.CustomResource):
                 "User.Read",
             ],
             tenant_type="AZURE_AD_TENANT_TYPE_ORGANISATIONS")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpAzureAd:IdpAzureAd imported '123456789012345678:12345678-1234-1234-1234-123456789012'
         ```
 
         :param str resource_name: The name of the resource.

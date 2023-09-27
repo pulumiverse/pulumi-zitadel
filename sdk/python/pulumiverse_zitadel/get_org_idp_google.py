@@ -119,7 +119,7 @@ class GetOrgIdpGoogleResult:
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> str:
+    def org_id(self) -> Optional[str]:
         """
         ID of the organization
         """
@@ -164,7 +164,8 @@ def get_org_idp_google(id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    google = zitadel.get_org_idp_google(id="177073614158299139")
+    default = zitadel.get_org_idp_google(org_id=data["zitadel_org"]["default"]["id"],
+        id="123456789012345678")
     ```
 
 
@@ -192,7 +193,7 @@ def get_org_idp_google(id: Optional[str] = None,
 
 @_utilities.lift_output_func(get_org_idp_google)
 def get_org_idp_google_output(id: Optional[pulumi.Input[str]] = None,
-                              org_id: Optional[pulumi.Input[str]] = None,
+                              org_id: Optional[pulumi.Input[Optional[str]]] = None,
                               opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetOrgIdpGoogleResult]:
     """
     Datasource representing a Google IdP of the organization.
@@ -203,7 +204,8 @@ def get_org_idp_google_output(id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    google = zitadel.get_org_idp_google(id="177073614158299139")
+    default = zitadel.get_org_idp_google(org_id=data["zitadel_org"]["default"]["id"],
+        id="123456789012345678")
     ```
 
 

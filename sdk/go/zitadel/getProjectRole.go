@@ -25,15 +25,15 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		projectRoleProjectRole, err := zitadel.LookupProjectRole(ctx, &GetProjectRoleArgs{
-// 			OrgId:     data.Zitadel_org.Org.Id,
-// 			ProjectId: data.Zitadel_project.Project.Id,
+// 		_default, err := zitadel.LookupProjectRole(ctx, &GetProjectRoleArgs{
+// 			OrgId:     data.Zitadel_org.Default.Id,
+// 			ProjectId: data.Zitadel_project.Default.Id,
 // 			RoleKey:   "key",
 // 		}, nil)
 // 		if err != nil {
 // 			return err
 // 		}
-// 		ctx.Export("projectRole", projectRoleProjectRole)
+// 		ctx.Export("projectRole", _default)
 // 		return nil
 // 	})
 // }

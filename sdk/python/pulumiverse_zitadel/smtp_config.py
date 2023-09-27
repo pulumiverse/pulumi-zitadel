@@ -237,13 +237,21 @@ class SmtpConfig(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        smtp = zitadel.SmtpConfig("smtp",
+        default = zitadel.SmtpConfig("default",
             host="localhost:25",
-            password="password",
-            sender_address="address",
+            password="secret_password",
+            sender_address="sender@example.com",
             sender_name="no-reply",
             tls=True,
             user="user")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<[password]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
         ```
 
         :param str resource_name: The name of the resource.
@@ -270,13 +278,21 @@ class SmtpConfig(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        smtp = zitadel.SmtpConfig("smtp",
+        default = zitadel.SmtpConfig("default",
             host="localhost:25",
-            password="password",
-            sender_address="address",
+            password="secret_password",
+            sender_address="sender@example.com",
             sender_name="no-reply",
             tls=True,
             user="user")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<[password]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
         ```
 
         :param str resource_name: The name of the resource.

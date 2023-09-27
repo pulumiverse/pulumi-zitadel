@@ -25,8 +25,8 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewInstanceMember(ctx, "instanceMember", &zitadel.InstanceMemberArgs{
-// 			UserId: pulumi.Any(zitadel_human_user.Human_user.Id),
+// 		_, err := zitadel.NewInstanceMember(ctx, "default", &zitadel.InstanceMemberArgs{
+// 			UserId: pulumi.Any(data.Zitadel_human_user.Default.Id),
 // 			Roles: pulumi.StringArray{
 // 				pulumi.String("IAM_OWNER"),
 // 			},
@@ -37,6 +37,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<user_id>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/instanceMember:InstanceMember imported '123456789012345678'
 // ```
 type InstanceMember struct {
 	pulumi.CustomResourceState

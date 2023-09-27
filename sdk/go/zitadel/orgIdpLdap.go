@@ -25,8 +25,8 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpLdap(ctx, "ldap", &zitadel.OrgIdpLdapArgs{
-// 			OrgId: pulumi.Any(zitadel_org.Org.Id),
+// 		_, err := zitadel.NewOrgIdpLdap(ctx, "default", &zitadel.OrgIdpLdapArgs{
+// 			OrgId: pulumi.Any(data.Zitadel_org.Default.Id),
 // 			Servers: pulumi.StringArray{
 // 				pulumi.String("ldaps://my.primary.server:389"),
 // 				pulumi.String("ldaps://my.secondary.server:389"),
@@ -58,6 +58,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:org_id][:bind_password]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/orgIdpLdap:OrgIdpLdap imported '123456789012345678:123456789012345678:b1nd_p4ssw0rd'
 // ```
 type OrgIdpLdap struct {
 	pulumi.CustomResourceState
@@ -95,7 +103,7 @@ type OrgIdpLdap struct {
 	// User attribute for the nick name
 	NickNameAttribute pulumi.StringPtrOutput `pulumi:"nickNameAttribute"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// User attribute for the phone
 	PhoneAttribute pulumi.StringPtrOutput `pulumi:"phoneAttribute"`
 	// User attribute for the phone verified state
@@ -147,9 +155,6 @@ func NewOrgIdpLdap(ctx *pulumi.Context,
 	}
 	if args.IsLinkingAllowed == nil {
 		return nil, errors.New("invalid value for required argument 'IsLinkingAllowed'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	if args.Servers == nil {
 		return nil, errors.New("invalid value for required argument 'Servers'")
@@ -347,7 +352,7 @@ type orgIdpLdapArgs struct {
 	// User attribute for the nick name
 	NickNameAttribute *string `pulumi:"nickNameAttribute"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// User attribute for the phone
 	PhoneAttribute *string `pulumi:"phoneAttribute"`
 	// User attribute for the phone verified state
@@ -407,7 +412,7 @@ type OrgIdpLdapArgs struct {
 	// User attribute for the nick name
 	NickNameAttribute pulumi.StringPtrInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// User attribute for the phone
 	PhoneAttribute pulumi.StringPtrInput
 	// User attribute for the phone verified state
@@ -600,8 +605,8 @@ func (o OrgIdpLdapOutput) NickNameAttribute() pulumi.StringPtrOutput {
 }
 
 // ID of the organization
-func (o OrgIdpLdapOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *OrgIdpLdap) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o OrgIdpLdapOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *OrgIdpLdap) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // User attribute for the phone

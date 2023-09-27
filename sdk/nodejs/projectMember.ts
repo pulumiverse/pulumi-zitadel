@@ -13,12 +13,20 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const projectMember = new zitadel.ProjectMember("projectMember", {
- *     orgId: zitadel_org.org.id,
- *     projectId: zitadel_project.project.id,
- *     userId: zitadel_human_user.human_user.id,
+ * const _default = new zitadel.ProjectMember("default", {
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: data.zitadel_project["default"].id,
+ *     userId: data.zitadel_human_user["default"].id,
  *     roles: ["PROJECT_OWNER"],
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<project_id:user_id[:org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/projectMember:ProjectMember imported '123456789012345678:123456789012345678:123456789012345678'
  * ```
  */
 export class ProjectMember extends pulumi.CustomResource {
@@ -50,9 +58,9 @@ export class ProjectMember extends pulumi.CustomResource {
     }
 
     /**
-     * ID of the organization which owns the resource
+     * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * ID of the project
      */
@@ -85,9 +93,6 @@ export class ProjectMember extends pulumi.CustomResource {
             resourceInputs["userId"] = state ? state.userId : undefined;
         } else {
             const args = argsOrState as ProjectMemberArgs | undefined;
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             if ((!args || args.projectId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'projectId'");
             }
@@ -112,7 +117,7 @@ export class ProjectMember extends pulumi.CustomResource {
  */
 export interface ProjectMemberState {
     /**
-     * ID of the organization which owns the resource
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
     /**
@@ -134,9 +139,9 @@ export interface ProjectMemberState {
  */
 export interface ProjectMemberArgs {
     /**
-     * ID of the organization which owns the resource
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * ID of the project
      */

@@ -22,13 +22,21 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var lockoutPolicy = new Zitadel.LockoutPolicy("lockoutPolicy", new()
+    ///     var @default = new Zitadel.LockoutPolicy("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         MaxPasswordAttempts = 5,
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;[org_id]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/lockoutPolicy:LockoutPolicy imported '123456789012345678'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/lockoutPolicy:LockoutPolicy")]
@@ -41,10 +49,10 @@ namespace Pulumiverse.Zitadel
         public Output<int> MaxPasswordAttempts { get; private set; } = null!;
 
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
 
         /// <summary>
@@ -100,7 +108,7 @@ namespace Pulumiverse.Zitadel
         public Input<int> MaxPasswordAttempts { get; set; } = null!;
 
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
         [Input("orgId")]
         public Input<string>? OrgId { get; set; }
@@ -120,7 +128,7 @@ namespace Pulumiverse.Zitadel
         public Input<int>? MaxPasswordAttempts { get; set; }
 
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
         [Input("orgId")]
         public Input<string>? OrgId { get; set; }

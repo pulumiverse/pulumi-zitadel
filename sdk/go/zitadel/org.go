@@ -24,7 +24,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrg(ctx, "org", nil)
+// 		_, err := zitadel.NewOrg(ctx, "default", nil)
 // 		if err != nil {
 // 			return err
 // 		}
@@ -32,11 +32,23 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/org:Org imported '123456789012345678'
+// ```
 type Org struct {
 	pulumi.CustomResourceState
 
 	// Name of the org
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Primary domain of the org
+	PrimaryDomain pulumi.StringOutput `pulumi:"primaryDomain"`
+	// State of the org
+	State pulumi.StringOutput `pulumi:"state"`
 }
 
 // NewOrg registers a new resource with the given unique name, arguments, and options.
@@ -71,11 +83,19 @@ func GetOrg(ctx *pulumi.Context,
 type orgState struct {
 	// Name of the org
 	Name *string `pulumi:"name"`
+	// Primary domain of the org
+	PrimaryDomain *string `pulumi:"primaryDomain"`
+	// State of the org
+	State *string `pulumi:"state"`
 }
 
 type OrgState struct {
 	// Name of the org
 	Name pulumi.StringPtrInput
+	// Primary domain of the org
+	PrimaryDomain pulumi.StringPtrInput
+	// State of the org
+	State pulumi.StringPtrInput
 }
 
 func (OrgState) ElementType() reflect.Type {
@@ -183,6 +203,16 @@ func (o OrgOutput) ToOrgOutputWithContext(ctx context.Context) OrgOutput {
 // Name of the org
 func (o OrgOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Org) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Primary domain of the org
+func (o OrgOutput) PrimaryDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v *Org) pulumi.StringOutput { return v.PrimaryDomain }).(pulumi.StringOutput)
+}
+
+// State of the org
+func (o OrgOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v *Org) pulumi.StringOutput { return v.State }).(pulumi.StringOutput)
 }
 
 type OrgArrayOutput struct{ *pulumi.OutputState }

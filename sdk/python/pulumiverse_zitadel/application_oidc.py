@@ -15,7 +15,6 @@ __all__ = ['ApplicationOidcArgs', 'ApplicationOidc']
 class ApplicationOidcArgs:
     def __init__(__self__, *,
                  grant_types: pulumi.Input[Sequence[pulumi.Input[str]]],
-                 org_id: pulumi.Input[str],
                  project_id: pulumi.Input[str],
                  redirect_uris: pulumi.Input[Sequence[pulumi.Input[str]]],
                  response_types: pulumi.Input[Sequence[pulumi.Input[str]]],
@@ -29,12 +28,12 @@ class ApplicationOidcArgs:
                  id_token_role_assertion: Optional[pulumi.Input[bool]] = None,
                  id_token_userinfo_assertion: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None,
                  post_logout_redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  version: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ApplicationOidc resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] grant_types: Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
-        :param pulumi.Input[str] org_id: orgID of the application
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] grant_types: Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[Sequence[pulumi.Input[str]]] redirect_uris: RedirectURIs
         :param pulumi.Input[Sequence[pulumi.Input[str]]] response_types: Response type, supported values: OIDC*RESPONSE*TYPE*CODE, OIDC*RESPONSE*TYPE*ID*TOKEN, OIDC*RESPONSE*TYPE*ID*TOKEN*TOKEN
@@ -48,11 +47,11 @@ class ApplicationOidcArgs:
         :param pulumi.Input[bool] id_token_role_assertion: ID token role assertion
         :param pulumi.Input[bool] id_token_userinfo_assertion: Token userinfo assertion
         :param pulumi.Input[str] name: Name of the application
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] post_logout_redirect_uris: Post logout redirect URIs
         :param pulumi.Input[str] version: Version, supported values: OIDC*VERSION*1_0
         """
         pulumi.set(__self__, "grant_types", grant_types)
-        pulumi.set(__self__, "org_id", org_id)
         pulumi.set(__self__, "project_id", project_id)
         pulumi.set(__self__, "redirect_uris", redirect_uris)
         pulumi.set(__self__, "response_types", response_types)
@@ -76,6 +75,8 @@ class ApplicationOidcArgs:
             pulumi.set(__self__, "id_token_userinfo_assertion", id_token_userinfo_assertion)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
         if post_logout_redirect_uris is not None:
             pulumi.set(__self__, "post_logout_redirect_uris", post_logout_redirect_uris)
         if version is not None:
@@ -85,25 +86,13 @@ class ApplicationOidcArgs:
     @pulumi.getter(name="grantTypes")
     def grant_types(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
         """
-        Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+        Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
         """
         return pulumi.get(self, "grant_types")
 
     @grant_types.setter
     def grant_types(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
         pulumi.set(self, "grant_types", value)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        orgID of the application
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter(name="projectId")
@@ -262,6 +251,18 @@ class ApplicationOidcArgs:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
+
+    @property
     @pulumi.getter(name="postLogoutRedirectUris")
     def post_logout_redirect_uris(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -319,11 +320,11 @@ class _ApplicationOidcState:
         :param pulumi.Input[str] client_secret: generated secret for this config
         :param pulumi.Input[str] clock_skew: Clockskew
         :param pulumi.Input[bool] dev_mode: Dev mode
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] grant_types: Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] grant_types: Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
         :param pulumi.Input[bool] id_token_role_assertion: ID token role assertion
         :param pulumi.Input[bool] id_token_userinfo_assertion: Token userinfo assertion
         :param pulumi.Input[str] name: Name of the application
-        :param pulumi.Input[str] org_id: orgID of the application
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] post_logout_redirect_uris: Post logout redirect URIs
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[Sequence[pulumi.Input[str]]] redirect_uris: RedirectURIs
@@ -481,7 +482,7 @@ class _ApplicationOidcState:
     @pulumi.getter(name="grantTypes")
     def grant_types(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+        Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
         """
         return pulumi.get(self, "grant_types")
 
@@ -529,7 +530,7 @@ class _ApplicationOidcState:
     @pulumi.getter(name="orgId")
     def org_id(self) -> Optional[pulumi.Input[str]]:
         """
-        orgID of the application
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -630,9 +631,9 @@ class ApplicationOidc(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        application_oidc = zitadel.ApplicationOidc("applicationOidc",
-            project_id=zitadel_project["project"]["id"],
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.ApplicationOidc("default",
+            project_id=data["zitadel_project"]["default"]["id"],
+            org_id=data["zitadel_org"]["default"]["id"],
             redirect_uris=["https://localhost.com"],
             response_types=["OIDC_RESPONSE_TYPE_CODE"],
             grant_types=["OIDC_GRANT_TYPE_AUTHORIZATION_CODE"],
@@ -649,6 +650,14 @@ class ApplicationOidc(pulumi.CustomResource):
             additional_origins=[])
         ```
 
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/applicationOidc:ApplicationOidc imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] access_token_role_assertion: Access token role assertion
@@ -658,11 +667,11 @@ class ApplicationOidc(pulumi.CustomResource):
         :param pulumi.Input[str] auth_method_type: Auth method type, supported values: OIDC*AUTH*METHOD*TYPE*BASIC, OIDC*AUTH*METHOD*TYPE*POST, OIDC*AUTH*METHOD*TYPE*NONE, OIDC*AUTH*METHOD*TYPE*PRIVATE*KEY*JWT
         :param pulumi.Input[str] clock_skew: Clockskew
         :param pulumi.Input[bool] dev_mode: Dev mode
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] grant_types: Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] grant_types: Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
         :param pulumi.Input[bool] id_token_role_assertion: ID token role assertion
         :param pulumi.Input[bool] id_token_userinfo_assertion: Token userinfo assertion
         :param pulumi.Input[str] name: Name of the application
-        :param pulumi.Input[str] org_id: orgID of the application
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] post_logout_redirect_uris: Post logout redirect URIs
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[Sequence[pulumi.Input[str]]] redirect_uris: RedirectURIs
@@ -684,9 +693,9 @@ class ApplicationOidc(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        application_oidc = zitadel.ApplicationOidc("applicationOidc",
-            project_id=zitadel_project["project"]["id"],
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.ApplicationOidc("default",
+            project_id=data["zitadel_project"]["default"]["id"],
+            org_id=data["zitadel_org"]["default"]["id"],
             redirect_uris=["https://localhost.com"],
             response_types=["OIDC_RESPONSE_TYPE_CODE"],
             grant_types=["OIDC_GRANT_TYPE_AUTHORIZATION_CODE"],
@@ -701,6 +710,14 @@ class ApplicationOidc(pulumi.CustomResource):
             id_token_role_assertion=False,
             id_token_userinfo_assertion=False,
             additional_origins=[])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/applicationOidc:ApplicationOidc imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
         ```
 
         :param str resource_name: The name of the resource.
@@ -757,8 +774,6 @@ class ApplicationOidc(pulumi.CustomResource):
             __props__.__dict__["id_token_role_assertion"] = id_token_role_assertion
             __props__.__dict__["id_token_userinfo_assertion"] = id_token_userinfo_assertion
             __props__.__dict__["name"] = name
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             __props__.__dict__["post_logout_redirect_uris"] = post_logout_redirect_uris
             if project_id is None and not opts.urn:
@@ -818,11 +833,11 @@ class ApplicationOidc(pulumi.CustomResource):
         :param pulumi.Input[str] client_secret: generated secret for this config
         :param pulumi.Input[str] clock_skew: Clockskew
         :param pulumi.Input[bool] dev_mode: Dev mode
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] grant_types: Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] grant_types: Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
         :param pulumi.Input[bool] id_token_role_assertion: ID token role assertion
         :param pulumi.Input[bool] id_token_userinfo_assertion: Token userinfo assertion
         :param pulumi.Input[str] name: Name of the application
-        :param pulumi.Input[str] org_id: orgID of the application
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] post_logout_redirect_uris: Post logout redirect URIs
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[Sequence[pulumi.Input[str]]] redirect_uris: RedirectURIs
@@ -930,7 +945,7 @@ class ApplicationOidc(pulumi.CustomResource):
     @pulumi.getter(name="grantTypes")
     def grant_types(self) -> pulumi.Output[Sequence[str]]:
         """
-        Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+        Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
         """
         return pulumi.get(self, "grant_types")
 
@@ -960,9 +975,9 @@ class ApplicationOidc(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
-        orgID of the application
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 

@@ -6,6 +6,14 @@ import * as utilities from "./utilities";
 
 /**
  * Resource representing the custom label policy of an organization.
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
+ * ```
  */
 export class LabelPolicy extends pulumi.CustomResource {
     /**
@@ -75,9 +83,9 @@ export class LabelPolicy extends pulumi.CustomResource {
     public /*out*/ readonly logoUrl!: pulumi.Output<string>;
     public /*out*/ readonly logoUrlDark!: pulumi.Output<string>;
     /**
-     * Id for the organization
+     * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * hex value for primary color
      */
@@ -158,9 +166,6 @@ export class LabelPolicy extends pulumi.CustomResource {
             }
             if ((!args || args.hideLoginNameSuffix === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'hideLoginNameSuffix'");
-            }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
             }
             if ((!args || args.primaryColor === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'primaryColor'");
@@ -251,7 +256,7 @@ export interface LabelPolicyState {
     logoUrl?: pulumi.Input<string>;
     logoUrlDark?: pulumi.Input<string>;
     /**
-     * Id for the organization
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
     /**
@@ -315,9 +320,9 @@ export interface LabelPolicyArgs {
     logoHash?: pulumi.Input<string>;
     logoPath?: pulumi.Input<string>;
     /**
-     * Id for the organization
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * hex value for primary color
      */

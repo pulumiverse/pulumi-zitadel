@@ -13,9 +13,9 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const applicationOidc = new zitadel.ApplicationOidc("applicationOidc", {
- *     projectId: zitadel_project.project.id,
- *     orgId: zitadel_org.org.id,
+ * const _default = new zitadel.ApplicationOidc("default", {
+ *     projectId: data.zitadel_project["default"].id,
+ *     orgId: data.zitadel_org["default"].id,
  *     redirectUris: ["https://localhost.com"],
  *     responseTypes: ["OIDC_RESPONSE_TYPE_CODE"],
  *     grantTypes: ["OIDC_GRANT_TYPE_AUTHORIZATION_CODE"],
@@ -31,6 +31,14 @@ import * as utilities from "./utilities";
  *     idTokenUserinfoAssertion: false,
  *     additionalOrigins: [],
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/applicationOidc:ApplicationOidc imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
  * ```
  */
 export class ApplicationOidc extends pulumi.CustomResource {
@@ -98,7 +106,7 @@ export class ApplicationOidc extends pulumi.CustomResource {
      */
     public readonly devMode!: pulumi.Output<boolean | undefined>;
     /**
-     * Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+     * Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
      */
     public readonly grantTypes!: pulumi.Output<string[]>;
     /**
@@ -114,9 +122,9 @@ export class ApplicationOidc extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * orgID of the application
+     * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * Post logout redirect URIs
      */
@@ -174,9 +182,6 @@ export class ApplicationOidc extends pulumi.CustomResource {
             const args = argsOrState as ApplicationOidcArgs | undefined;
             if ((!args || args.grantTypes === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'grantTypes'");
-            }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
             }
             if ((!args || args.projectId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'projectId'");
@@ -253,7 +258,7 @@ export interface ApplicationOidcState {
      */
     devMode?: pulumi.Input<boolean>;
     /**
-     * Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+     * Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
      */
     grantTypes?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -269,7 +274,7 @@ export interface ApplicationOidcState {
      */
     name?: pulumi.Input<string>;
     /**
-     * orgID of the application
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
     /**
@@ -327,7 +332,7 @@ export interface ApplicationOidcArgs {
      */
     devMode?: pulumi.Input<boolean>;
     /**
-     * Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+     * Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
      */
     grantTypes: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -343,9 +348,9 @@ export interface ApplicationOidcArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * orgID of the application
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * Post logout redirect URIs
      */

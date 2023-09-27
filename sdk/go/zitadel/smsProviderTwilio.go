@@ -25,10 +25,10 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewSmsProviderTwilio(ctx, "twilio", &zitadel.SmsProviderTwilioArgs{
+// 		_, err := zitadel.NewSmsProviderTwilio(ctx, "default", &zitadel.SmsProviderTwilioArgs{
 // 			SenderNumber: pulumi.String("019920892"),
 // 			Sid:          pulumi.String("sid"),
-// 			Token:        pulumi.String("token"),
+// 			Token:        pulumi.String("twilio_token"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -36,6 +36,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:token]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/smsProviderTwilio:SmsProviderTwilio imported '123456789012345678:12345678901234567890123456abcdef'
 // ```
 type SmsProviderTwilio struct {
 	pulumi.CustomResourceState

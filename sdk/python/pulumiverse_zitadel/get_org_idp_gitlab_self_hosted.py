@@ -130,7 +130,7 @@ class GetOrgIdpGitlabSelfHostedResult:
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> str:
+    def org_id(self) -> Optional[str]:
         """
         ID of the organization
         """
@@ -176,7 +176,8 @@ def get_org_idp_gitlab_self_hosted(id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    gitlab_self_hosted = zitadel.get_org_idp_gitlab_self_hosted(id="177073614158299139")
+    default = zitadel.get_org_idp_gitlab_self_hosted(org_id=data["zitadel_org"]["default"]["id"],
+        id="123456789012345678")
     ```
 
 
@@ -205,7 +206,7 @@ def get_org_idp_gitlab_self_hosted(id: Optional[str] = None,
 
 @_utilities.lift_output_func(get_org_idp_gitlab_self_hosted)
 def get_org_idp_gitlab_self_hosted_output(id: Optional[pulumi.Input[str]] = None,
-                                          org_id: Optional[pulumi.Input[str]] = None,
+                                          org_id: Optional[pulumi.Input[Optional[str]]] = None,
                                           opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetOrgIdpGitlabSelfHostedResult]:
     """
     Datasource representing a GitLab Self Hosted IdP of the organization.
@@ -216,7 +217,8 @@ def get_org_idp_gitlab_self_hosted_output(id: Optional[pulumi.Input[str]] = None
     import pulumi
     import pulumi_zitadel as zitadel
 
-    gitlab_self_hosted = zitadel.get_org_idp_gitlab_self_hosted(id="177073614158299139")
+    default = zitadel.get_org_idp_gitlab_self_hosted(org_id=data["zitadel_org"]["default"]["id"],
+        id="123456789012345678")
     ```
 
 

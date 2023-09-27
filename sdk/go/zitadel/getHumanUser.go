@@ -25,14 +25,14 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		humanUserHumanUser, err := zitadel.LookupHumanUser(ctx, &GetHumanUserArgs{
-// 			OrgId:  data.Zitadel_org.Org.Id,
-// 			UserId: "177073614158299139",
+// 		_default, err := zitadel.LookupHumanUser(ctx, &GetHumanUserArgs{
+// 			OrgId:  data.Zitadel_org.Default.Id,
+// 			UserId: "123456789012345678",
 // 		}, nil)
 // 		if err != nil {
 // 			return err
 // 		}
-// 		ctx.Export("humanUser", humanUserHumanUser)
+// 		ctx.Export("humanUser", _default)
 // 		return nil
 // 	})
 // }

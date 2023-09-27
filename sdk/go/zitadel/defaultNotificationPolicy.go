@@ -25,7 +25,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewDefaultNotificationPolicy(ctx, "notificationPolicy", &zitadel.DefaultNotificationPolicyArgs{
+// 		_, err := zitadel.NewDefaultNotificationPolicy(ctx, "default", &zitadel.DefaultNotificationPolicyArgs{
 // 			PasswordChange: pulumi.Bool(false),
 // 		})
 // 		if err != nil {
@@ -34,6 +34,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy imported ''
 // ```
 type DefaultNotificationPolicy struct {
 	pulumi.CustomResourceState
