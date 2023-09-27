@@ -11,32 +11,6 @@ import (
 )
 
 // Datasource representing a generic JWT IdP on the organization.
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		orgJwtIdpOrgJwtIdp, err := zitadel.GetOrgJwtIdp(ctx, &GetOrgJwtIdpArgs{
-// 			OrgId: data.Zitadel_org.Org.Id,
-// 			IdpId: "177073612581240835",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("orgJwtIdp", orgJwtIdpOrgJwtIdp)
-// 		return nil
-// 	})
-// }
-// ```
 func GetOrgJwtIdp(ctx *pulumi.Context, args *GetOrgJwtIdpArgs, opts ...pulumi.InvokeOption) (*GetOrgJwtIdpResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetOrgJwtIdpResult

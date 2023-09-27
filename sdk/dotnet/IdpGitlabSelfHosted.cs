@@ -22,7 +22,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var gitlabSelfHosted = new Zitadel.IdpGitlabSelfHosted("gitlabSelfHosted", new()
+    ///     var @default = new Zitadel.IdpGitlabSelfHosted("default", new()
     ///     {
     ///         ClientId = "15765e...",
     ///         ClientSecret = "*****abcxyz",
@@ -40,6 +40,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id[:client_secret]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/idpGitlabSelfHosted:IdpGitlabSelfHosted imported '123456789012345678:1234567890abcdef'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/idpGitlabSelfHosted:IdpGitlabSelfHosted")]

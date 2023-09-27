@@ -22,10 +22,10 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var applicationOidc = new Zitadel.ApplicationOidc("applicationOidc", new()
+    ///     var @default = new Zitadel.ApplicationOidc("default", new()
     ///     {
-    ///         ProjectId = zitadel_project.Project.Id,
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         ProjectId = data.Zitadel_project.Default.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         RedirectUris = new[]
     ///         {
     ///             "https://localhost.com",
@@ -55,6 +55,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id:project_id[:org_id][:client_id][:client_secret]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/applicationOidc:ApplicationOidc imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/applicationOidc:ApplicationOidc")]
@@ -115,7 +123,7 @@ namespace Pulumiverse.Zitadel
         public Output<bool?> DevMode { get; private set; } = null!;
 
         /// <summary>
-        /// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+        /// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
         /// </summary>
         [Output("grantTypes")]
         public Output<ImmutableArray<string>> GrantTypes { get; private set; } = null!;
@@ -139,10 +147,10 @@ namespace Pulumiverse.Zitadel
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// Post logout redirect URIs
@@ -273,7 +281,7 @@ namespace Pulumiverse.Zitadel
         private InputList<string>? _grantTypes;
 
         /// <summary>
-        /// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+        /// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
         /// </summary>
         public InputList<string> GrantTypes
         {
@@ -300,10 +308,10 @@ namespace Pulumiverse.Zitadel
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         [Input("postLogoutRedirectUris")]
         private InputList<string>? _postLogoutRedirectUris;
@@ -425,7 +433,7 @@ namespace Pulumiverse.Zitadel
         private InputList<string>? _grantTypes;
 
         /// <summary>
-        /// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH_TOKEN
+        /// Grant types, supported values: OIDC*GRANT*TYPE*AUTHORIZATION*CODE, OIDC*GRANT*TYPE*IMPLICIT, OIDC*GRANT*TYPE*REFRESH*TOKEN, OIDC*GRANT*TYPE*DEVICE_CODE
         /// </summary>
         public InputList<string> GrantTypes
         {
@@ -452,7 +460,7 @@ namespace Pulumiverse.Zitadel
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
         [Input("orgId")]
         public Input<string>? OrgId { get; set; }

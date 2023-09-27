@@ -13,8 +13,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const ldap = new zitadel.OrgIdpLdap("ldap", {
- *     orgId: zitadel_org.org.id,
+ * const _default = new zitadel.OrgIdpLdap("default", {
+ *     orgId: data.zitadel_org["default"].id,
  *     servers: [
  *         "ldaps://my.primary.server:389",
  *         "ldaps://my.secondary.server:389",
@@ -38,6 +38,14 @@ import * as utilities from "./utilities";
  *     isAutoCreation: false,
  *     isAutoUpdate: true,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<id[:org_id][:bind_password]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/orgIdpLdap:OrgIdpLdap imported '123456789012345678:123456789012345678:b1nd_p4ssw0rd'
  * ```
  */
 export class OrgIdpLdap extends pulumi.CustomResource {
@@ -135,7 +143,7 @@ export class OrgIdpLdap extends pulumi.CustomResource {
     /**
      * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * User attribute for the phone
      */
@@ -244,9 +252,6 @@ export class OrgIdpLdap extends pulumi.CustomResource {
             }
             if ((!args || args.isLinkingAllowed === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'isLinkingAllowed'");
-            }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
             }
             if ((!args || args.servers === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'servers'");
@@ -489,7 +494,7 @@ export interface OrgIdpLdapArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * User attribute for the phone
      */

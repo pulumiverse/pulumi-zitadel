@@ -13,12 +13,13 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const loginPolicy = new zitadel.LoginPolicy("loginPolicy", {
- *     orgId: zitadel_org.org.id,
+ * const _default = new zitadel.LoginPolicy("default", {
+ *     orgId: data.zitadel_org["default"].id,
  *     userLogin: true,
  *     allowRegister: true,
  *     allowExternalIdp: true,
  *     forceMfa: false,
+ *     forceMfaLocalOnly: false,
  *     passwordlessType: "PASSWORDLESS_TYPE_ALLOWED",
  *     hidePasswordReset: false,
  *     passwordCheckLifetime: "240h0m0s",
@@ -34,13 +35,21 @@ import * as utilities from "./utilities";
  *     ],
  *     multiFactors: ["MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"],
  *     idps: [
- *         zitadel_org_idp_oidc.oidc_idp.id,
- *         zitadel_org_idp_jwt.jwt_idp.id,
+ *         data.zitadel_idp_google["default"].id,
+ *         data.zitadel_idp_azure_ad["default"].id,
  *     ],
  *     allowDomainDiscovery: true,
  *     disableLoginWithEmail: true,
  *     disableLoginWithPhone: true,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/loginPolicy:LoginPolicy imported '123456789012345678'
  * ```
  */
 export class LoginPolicy extends pulumi.CustomResource {
@@ -101,6 +110,10 @@ export class LoginPolicy extends pulumi.CustomResource {
      */
     public readonly forceMfa!: pulumi.Output<boolean>;
     /**
+     * if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+     */
+    public readonly forceMfaLocalOnly!: pulumi.Output<boolean>;
+    /**
      * defines if password reset link should be shown in the login screen
      */
     public readonly hidePasswordReset!: pulumi.Output<boolean>;
@@ -119,9 +132,9 @@ export class LoginPolicy extends pulumi.CustomResource {
      */
     public readonly multiFactors!: pulumi.Output<string[] | undefined>;
     /**
-     * Id for the organization
+     * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     public readonly passwordCheckLifetime!: pulumi.Output<string>;
     /**
      * defines if passwordless is allowed for users
@@ -158,6 +171,7 @@ export class LoginPolicy extends pulumi.CustomResource {
             resourceInputs["disableLoginWithPhone"] = state ? state.disableLoginWithPhone : undefined;
             resourceInputs["externalLoginCheckLifetime"] = state ? state.externalLoginCheckLifetime : undefined;
             resourceInputs["forceMfa"] = state ? state.forceMfa : undefined;
+            resourceInputs["forceMfaLocalOnly"] = state ? state.forceMfaLocalOnly : undefined;
             resourceInputs["hidePasswordReset"] = state ? state.hidePasswordReset : undefined;
             resourceInputs["idps"] = state ? state.idps : undefined;
             resourceInputs["ignoreUnknownUsernames"] = state ? state.ignoreUnknownUsernames : undefined;
@@ -187,6 +201,9 @@ export class LoginPolicy extends pulumi.CustomResource {
             if ((!args || args.forceMfa === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'forceMfa'");
             }
+            if ((!args || args.forceMfaLocalOnly === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'forceMfaLocalOnly'");
+            }
             if ((!args || args.hidePasswordReset === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'hidePasswordReset'");
             }
@@ -198,9 +215,6 @@ export class LoginPolicy extends pulumi.CustomResource {
             }
             if ((!args || args.multiFactorCheckLifetime === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'multiFactorCheckLifetime'");
-            }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
             }
             if ((!args || args.passwordCheckLifetime === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'passwordCheckLifetime'");
@@ -222,6 +236,7 @@ export class LoginPolicy extends pulumi.CustomResource {
             resourceInputs["disableLoginWithPhone"] = args ? args.disableLoginWithPhone : undefined;
             resourceInputs["externalLoginCheckLifetime"] = args ? args.externalLoginCheckLifetime : undefined;
             resourceInputs["forceMfa"] = args ? args.forceMfa : undefined;
+            resourceInputs["forceMfaLocalOnly"] = args ? args.forceMfaLocalOnly : undefined;
             resourceInputs["hidePasswordReset"] = args ? args.hidePasswordReset : undefined;
             resourceInputs["idps"] = args ? args.idps : undefined;
             resourceInputs["ignoreUnknownUsernames"] = args ? args.ignoreUnknownUsernames : undefined;
@@ -274,6 +289,10 @@ export interface LoginPolicyState {
      */
     forceMfa?: pulumi.Input<boolean>;
     /**
+     * if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+     */
+    forceMfaLocalOnly?: pulumi.Input<boolean>;
+    /**
      * defines if password reset link should be shown in the login screen
      */
     hidePasswordReset?: pulumi.Input<boolean>;
@@ -292,7 +311,7 @@ export interface LoginPolicyState {
      */
     multiFactors?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Id for the organization
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
     passwordCheckLifetime?: pulumi.Input<string>;
@@ -345,6 +364,10 @@ export interface LoginPolicyArgs {
      */
     forceMfa: pulumi.Input<boolean>;
     /**
+     * if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+     */
+    forceMfaLocalOnly: pulumi.Input<boolean>;
+    /**
      * defines if password reset link should be shown in the login screen
      */
     hidePasswordReset: pulumi.Input<boolean>;
@@ -363,9 +386,9 @@ export interface LoginPolicyArgs {
      */
     multiFactors?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Id for the organization
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     passwordCheckLifetime: pulumi.Input<string>;
     /**
      * defines if passwordless is allowed for users

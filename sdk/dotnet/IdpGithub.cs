@@ -22,7 +22,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var github = new Zitadel.IdpGithub("github", new()
+    ///     var @default = new Zitadel.IdpGithub("default", new()
     ///     {
     ///         ClientId = "86a165...",
     ///         ClientSecret = "*****afdbac18",
@@ -39,6 +39,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id[:client_secret]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/idpGithub:IdpGithub imported '123456789012345678:1234567890123456781234567890123456787890'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/idpGithub:IdpGithub")]

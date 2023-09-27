@@ -300,7 +300,7 @@ class IdpGithub(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        github = zitadel.IdpGithub("github",
+        default = zitadel.IdpGithub("default",
             client_id="86a165...",
             client_secret="*****afdbac18",
             is_auto_creation=False,
@@ -312,6 +312,14 @@ class IdpGithub(pulumi.CustomResource):
                 "profile",
                 "email",
             ])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpGithub:IdpGithub imported '123456789012345678:1234567890123456781234567890123456787890'
         ```
 
         :param str resource_name: The name of the resource.
@@ -340,7 +348,7 @@ class IdpGithub(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        github = zitadel.IdpGithub("github",
+        default = zitadel.IdpGithub("default",
             client_id="86a165...",
             client_secret="*****afdbac18",
             is_auto_creation=False,
@@ -352,6 +360,14 @@ class IdpGithub(pulumi.CustomResource):
                 "profile",
                 "email",
             ])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpGithub:IdpGithub imported '123456789012345678:1234567890123456781234567890123456787890'
         ```
 
         :param str resource_name: The name of the resource.

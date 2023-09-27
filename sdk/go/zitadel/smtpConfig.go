@@ -25,10 +25,10 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewSmtpConfig(ctx, "smtp", &zitadel.SmtpConfigArgs{
+// 		_, err := zitadel.NewSmtpConfig(ctx, "default", &zitadel.SmtpConfigArgs{
 // 			Host:          pulumi.String("localhost:25"),
-// 			Password:      pulumi.String("password"),
-// 			SenderAddress: pulumi.String("address"),
+// 			Password:      pulumi.String("secret_password"),
+// 			SenderAddress: pulumi.String("sender@example.com"),
 // 			SenderName:    pulumi.String("no-reply"),
 // 			Tls:           pulumi.Bool(true),
 // 			User:          pulumi.String("user"),
@@ -39,6 +39,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<[password]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
 // ```
 type SmtpConfig struct {
 	pulumi.CustomResourceState

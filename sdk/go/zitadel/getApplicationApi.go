@@ -25,15 +25,15 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		apiApplicationApplicationApi, err := zitadel.LookupApplicationApi(ctx, &GetApplicationApiArgs{
-// 			OrgId:     data.Zitadel_org.Org.Id,
-// 			ProjectId: data.Zitadel_project.Project.Id,
-// 			AppId:     "177073625566806019",
+// 		_default, err := zitadel.LookupApplicationApi(ctx, &GetApplicationApiArgs{
+// 			OrgId:     pulumi.StringRef(data.Zitadel_org.Default.Id),
+// 			ProjectId: data.Zitadel_project.Default.Id,
+// 			AppId:     "123456789012345678",
 // 		}, nil)
 // 		if err != nil {
 // 			return err
 // 		}
-// 		ctx.Export("apiApplication", apiApplicationApplicationApi)
+// 		ctx.Export("applicationApi", _default)
 // 		return nil
 // 	})
 // }
@@ -52,8 +52,8 @@ func LookupApplicationApi(ctx *pulumi.Context, args *LookupApplicationApiArgs, o
 type LookupApplicationApiArgs struct {
 	// The ID of this resource.
 	AppId string `pulumi:"appId"`
-	// orgID of the application
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// ID of the project
 	ProjectId string `pulumi:"projectId"`
 }
@@ -68,8 +68,8 @@ type LookupApplicationApiResult struct {
 	Id string `pulumi:"id"`
 	// Name of the application
 	Name string `pulumi:"name"`
-	// orgID of the application
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// ID of the project
 	ProjectId string `pulumi:"projectId"`
 }
@@ -91,8 +91,8 @@ func LookupApplicationApiOutput(ctx *pulumi.Context, args LookupApplicationApiOu
 type LookupApplicationApiOutputArgs struct {
 	// The ID of this resource.
 	AppId pulumi.StringInput `pulumi:"appId"`
-	// orgID of the application
-	OrgId pulumi.StringInput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrInput `pulumi:"orgId"`
 	// ID of the project
 	ProjectId pulumi.StringInput `pulumi:"projectId"`
 }
@@ -136,9 +136,9 @@ func (o LookupApplicationApiResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupApplicationApiResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// orgID of the application
-func (o LookupApplicationApiResultOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupApplicationApiResult) string { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o LookupApplicationApiResultOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupApplicationApiResult) *string { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // ID of the project

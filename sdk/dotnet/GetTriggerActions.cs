@@ -26,16 +26,16 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var triggerActionsTriggerActions = Zitadel.GetTriggerActions.Invoke(new()
+        ///     var @default = Zitadel.GetTriggerActions.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
+        ///         OrgId = data.Zitadel_org.Default.Id,
         ///         FlowType = "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
         ///         TriggerType = "TRIGGER_TYPE_POST_AUTHENTICATION",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["triggerActions"] = triggerActionsTriggerActions.Apply(getTriggerActionsResult =&gt; getTriggerActionsResult),
+        ///         ["triggerActions"] = @default.Apply(getTriggerActionsResult =&gt; getTriggerActionsResult),
         ///     };
         /// });
         /// ```
@@ -59,16 +59,16 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var triggerActionsTriggerActions = Zitadel.GetTriggerActions.Invoke(new()
+        ///     var @default = Zitadel.GetTriggerActions.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
+        ///         OrgId = data.Zitadel_org.Default.Id,
         ///         FlowType = "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
         ///         TriggerType = "TRIGGER_TYPE_POST_AUTHENTICATION",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["triggerActions"] = triggerActionsTriggerActions.Apply(getTriggerActionsResult =&gt; getTriggerActionsResult),
+        ///         ["triggerActions"] = @default.Apply(getTriggerActionsResult =&gt; getTriggerActionsResult),
         ///     };
         /// });
         /// ```
@@ -91,8 +91,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public string OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public string? OrgId { get; set; }
 
         /// <summary>
         /// Trigger type on when the actions get triggered
@@ -117,8 +117,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// Trigger type on when the actions get triggered
@@ -151,7 +151,7 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        public readonly string OrgId;
+        public readonly string? OrgId;
         /// <summary>
         /// Trigger type on when the actions get triggered
         /// </summary>
@@ -165,7 +165,7 @@ namespace Pulumiverse.Zitadel
 
             string id,
 
-            string orgId,
+            string? orgId,
 
             string triggerType)
         {

@@ -22,7 +22,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var azureAd = new Zitadel.IdpAzureAd("azureAd", new()
+    ///     var @default = new Zitadel.IdpAzureAd("default", new()
     ///     {
     ///         ClientId = "9065bfc8-a08a...",
     ///         ClientSecret = "H2n***",
@@ -42,6 +42,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id[:client_secret]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/idpAzureAd:IdpAzureAd imported '123456789012345678:12345678-1234-1234-1234-123456789012'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/idpAzureAd:IdpAzureAd")]

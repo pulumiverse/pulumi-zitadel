@@ -12,6 +12,14 @@ import (
 )
 
 // Resource representing the default label policy.
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/defaultLabelPolicy:DefaultLabelPolicy imported ''
+// ```
 type DefaultLabelPolicy struct {
 	pulumi.CustomResourceState
 

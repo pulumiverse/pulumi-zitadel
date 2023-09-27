@@ -95,7 +95,7 @@ class GetMachineUserResult:
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> str:
+    def org_id(self) -> Optional[str]:
         """
         ID of the organization
         """
@@ -164,9 +164,9 @@ def get_machine_user(org_id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    machine_user_machine_user = zitadel.get_machine_user(org_id=data["zitadel_org"]["org"]["id"],
-        user_id="177073617463410691")
-    pulumi.export("machineUser", machine_user_machine_user)
+    default = zitadel.get_machine_user(org_id=data["zitadel_org"]["default"]["id"],
+        user_id="123456789012345678")
+    pulumi.export("machineUser", default)
     ```
 
 
@@ -193,7 +193,7 @@ def get_machine_user(org_id: Optional[str] = None,
 
 
 @_utilities.lift_output_func(get_machine_user)
-def get_machine_user_output(org_id: Optional[pulumi.Input[str]] = None,
+def get_machine_user_output(org_id: Optional[pulumi.Input[Optional[str]]] = None,
                             user_id: Optional[pulumi.Input[str]] = None,
                             opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetMachineUserResult]:
     """
@@ -205,9 +205,9 @@ def get_machine_user_output(org_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    machine_user_machine_user = zitadel.get_machine_user(org_id=data["zitadel_org"]["org"]["id"],
-        user_id="177073617463410691")
-    pulumi.export("machineUser", machine_user_machine_user)
+    default = zitadel.get_machine_user(org_id=data["zitadel_org"]["default"]["id"],
+        user_id="123456789012345678")
+    pulumi.export("machineUser", default)
     ```
 
 

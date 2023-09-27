@@ -27,8 +27,8 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewHumanUser(ctx, "humanUser", &zitadel.HumanUserArgs{
-// 			OrgId:             pulumi.Any(zitadel_org.Org.Id),
+// 		_, err := zitadel.NewHumanUser(ctx, "default", &zitadel.HumanUserArgs{
+// 			OrgId:             pulumi.Any(data.Zitadel_org.Default.Id),
 // 			UserName:          pulumi.String("humanfull@localhost.com"),
 // 			FirstName:         pulumi.String("firstname"),
 // 			LastName:          pulumi.String("lastname"),
@@ -48,6 +48,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `id[:org_id][:initial_password]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/humanUser:HumanUser imported '123456789012345678:123456789012345678:Password1!'
 // ```
 type HumanUser struct {
 	pulumi.CustomResourceState
@@ -73,7 +81,7 @@ type HumanUser struct {
 	// Nick name of the user
 	NickName pulumi.StringPtrOutput `pulumi:"nickName"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// Phone of the user
 	Phone pulumi.StringPtrOutput `pulumi:"phone"`
 	// Preferred language of the user
@@ -101,9 +109,6 @@ func NewHumanUser(ctx *pulumi.Context,
 	}
 	if args.LastName == nil {
 		return nil, errors.New("invalid value for required argument 'LastName'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	if args.UserName == nil {
 		return nil, errors.New("invalid value for required argument 'UserName'")
@@ -224,7 +229,7 @@ type humanUserArgs struct {
 	// Nick name of the user
 	NickName *string `pulumi:"nickName"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// Phone of the user
 	Phone *string `pulumi:"phone"`
 	// Preferred language of the user
@@ -254,7 +259,7 @@ type HumanUserArgs struct {
 	// Nick name of the user
 	NickName pulumi.StringPtrInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// Phone of the user
 	Phone pulumi.StringPtrInput
 	// Preferred language of the user
@@ -401,8 +406,8 @@ func (o HumanUserOutput) NickName() pulumi.StringPtrOutput {
 }
 
 // ID of the organization
-func (o HumanUserOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *HumanUser) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o HumanUserOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *HumanUser) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Phone of the user

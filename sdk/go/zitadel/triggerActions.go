@@ -25,12 +25,12 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewTriggerActions(ctx, "triggerActions", &zitadel.TriggerActionsArgs{
-// 			OrgId:       pulumi.Any(zitadel_org.Org.Id),
-// 			FlowType:    pulumi.String("FLOW_TYPE_EXTERNAL_AUTHENTICATION"),
-// 			TriggerType: pulumi.String("TRIGGER_TYPE_POST_AUTHENTICATION"),
+// 		_, err := zitadel.NewTriggerActions(ctx, "default", &zitadel.TriggerActionsArgs{
+// 			OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
+// 			FlowType:    pulumi.String("FLOW_TYPE_CUSTOMISE_TOKEN"),
+// 			TriggerType: pulumi.String("TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION"),
 // 			ActionIds: pulumi.StringArray{
-// 				pulumi.Any(zitadel_action.Action.Id),
+// 				pulumi.Any(data.Zitadel_action.Default.Id),
 // 			},
 // 		})
 // 		if err != nil {
@@ -40,6 +40,14 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<flow_type:trigger_type[:org_id]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/triggerActions:TriggerActions imported 'FLOW_TYPE_EXTERNAL_AUTHENTICATION:TRIGGER_TYPE_POST_CREATION:123456789012345678'
+// ```
 type TriggerActions struct {
 	pulumi.CustomResourceState
 
@@ -48,7 +56,7 @@ type TriggerActions struct {
 	// Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
 	FlowType pulumi.StringOutput `pulumi:"flowType"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
 	TriggerType pulumi.StringOutput `pulumi:"triggerType"`
 }
@@ -65,9 +73,6 @@ func NewTriggerActions(ctx *pulumi.Context,
 	}
 	if args.FlowType == nil {
 		return nil, errors.New("invalid value for required argument 'FlowType'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	if args.TriggerType == nil {
 		return nil, errors.New("invalid value for required argument 'TriggerType'")
@@ -126,7 +131,7 @@ type triggerActionsArgs struct {
 	// Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
 	FlowType string `pulumi:"flowType"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
 	TriggerType string `pulumi:"triggerType"`
 }
@@ -138,7 +143,7 @@ type TriggerActionsArgs struct {
 	// Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
 	FlowType pulumi.StringInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
 	TriggerType pulumi.StringInput
 }
@@ -241,8 +246,8 @@ func (o TriggerActionsOutput) FlowType() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o TriggerActionsOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *TriggerActions) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o TriggerActionsOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerActions) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION

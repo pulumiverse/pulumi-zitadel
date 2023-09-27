@@ -13,7 +13,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const azureAd = new zitadel.IdpAzureAd("azure_ad", {
+ * const defaultIdpAzureAd = new zitadel.IdpAzureAd("default", {
  *     clientId: "9065bfc8-a08a...",
  *     clientSecret: "H2n***",
  *     emailVerified: true,
@@ -29,6 +29,14 @@ import * as utilities from "./utilities";
  *     ],
  *     tenantType: "AZURE_AD_TENANT_TYPE_ORGANISATIONS",
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/idpAzureAd:IdpAzureAd imported '123456789012345678:12345678-1234-1234-1234-123456789012'
  * ```
  */
 export class IdpAzureAd extends pulumi.CustomResource {

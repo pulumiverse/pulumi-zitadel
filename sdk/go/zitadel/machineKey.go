@@ -25,9 +25,9 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewMachineKey(ctx, "machineKey", &zitadel.MachineKeyArgs{
-// 			OrgId:          pulumi.Any(zitadel_org.Org.Id),
-// 			UserId:         pulumi.Any(zitadel_machine_user.Machine_user.Id),
+// 		_, err := zitadel.NewMachineKey(ctx, "default", &zitadel.MachineKeyArgs{
+// 			OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
+// 			UserId:         pulumi.Any(data.Zitadel_machine_user.Default.Id),
 // 			KeyType:        pulumi.String("KEY_TYPE_JSON"),
 // 			ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
 // 		})
@@ -37,6 +37,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id:user_id[:org_id][:key_details]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/machineKey:MachineKey imported '123456789012345678:123456789012345678:123456789012345678:{"type":"serviceaccount","keyId":"123456789012345678","key":"-----BEGIN RSA PRIVATE KEY-----\nMIIEpQ...-----END RSA PRIVATE KEY-----\n","userId":"123456789012345678"}'
 // ```
 type MachineKey struct {
 	pulumi.CustomResourceState
@@ -48,7 +56,7 @@ type MachineKey struct {
 	// Type of the machine key, supported values: KEY*TYPE*UNSPECIFIED, KEY*TYPE*JSON
 	KeyType pulumi.StringOutput `pulumi:"keyType"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// ID of the user
 	UserId pulumi.StringOutput `pulumi:"userId"`
 }
@@ -62,9 +70,6 @@ func NewMachineKey(ctx *pulumi.Context,
 
 	if args.KeyType == nil {
 		return nil, errors.New("invalid value for required argument 'KeyType'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	if args.UserId == nil {
 		return nil, errors.New("invalid value for required argument 'UserId'")
@@ -127,7 +132,7 @@ type machineKeyArgs struct {
 	// Type of the machine key, supported values: KEY*TYPE*UNSPECIFIED, KEY*TYPE*JSON
 	KeyType string `pulumi:"keyType"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// ID of the user
 	UserId string `pulumi:"userId"`
 }
@@ -139,7 +144,7 @@ type MachineKeyArgs struct {
 	// Type of the machine key, supported values: KEY*TYPE*UNSPECIFIED, KEY*TYPE*JSON
 	KeyType pulumi.StringInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// ID of the user
 	UserId pulumi.StringInput
 }
@@ -247,8 +252,8 @@ func (o MachineKeyOutput) KeyType() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o MachineKeyOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *MachineKey) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o MachineKeyOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MachineKey) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // ID of the user

@@ -14,20 +14,19 @@ __all__ = ['MachineUserArgs', 'MachineUser']
 @pulumi.input_type
 class MachineUserArgs:
     def __init__(__self__, *,
-                 org_id: pulumi.Input[str],
                  user_name: pulumi.Input[str],
                  access_token_type: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
-                 name: Optional[pulumi.Input[str]] = None):
+                 name: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a MachineUser resource.
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] user_name: Username
         :param pulumi.Input[str] access_token_type: Access token type, supported values: ACCESS*TOKEN*TYPE*BEARER, ACCESS*TOKEN*TYPE*JWT
         :param pulumi.Input[str] description: Description of the user
         :param pulumi.Input[str] name: Name of the machine user
+        :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "org_id", org_id)
         pulumi.set(__self__, "user_name", user_name)
         if access_token_type is not None:
             pulumi.set(__self__, "access_token_type", access_token_type)
@@ -35,18 +34,8 @@ class MachineUserArgs:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
 
     @property
     @pulumi.getter(name="userName")
@@ -95,6 +84,18 @@ class MachineUserArgs:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
 
 @pulumi.input_type
@@ -253,10 +254,18 @@ class MachineUser(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        machine_user = zitadel.MachineUser("machineUser",
-            org_id=zitadel_org["org"]["id"],
-            user_name="machine@localhost.com",
-            description="description")
+        default = zitadel.MachineUser("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            user_name="machine@example.com",
+            description="a machine user")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -282,10 +291,18 @@ class MachineUser(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        machine_user = zitadel.MachineUser("machineUser",
-            org_id=zitadel_org["org"]["id"],
-            user_name="machine@localhost.com",
-            description="description")
+        default = zitadel.MachineUser("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            user_name="machine@example.com",
+            description="a machine user")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -320,8 +337,6 @@ class MachineUser(pulumi.CustomResource):
             __props__.__dict__["access_token_type"] = access_token_type
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if user_name is None and not opts.urn:
                 raise TypeError("Missing required property 'user_name'")
@@ -411,7 +426,7 @@ class MachineUser(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

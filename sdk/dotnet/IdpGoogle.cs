@@ -22,7 +22,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var google = new Zitadel.IdpGoogle("google", new()
+    ///     var @default = new Zitadel.IdpGoogle("default", new()
     ///     {
     ///         ClientId = "182902...",
     ///         ClientSecret = "GOCSPX-*****",
@@ -39,6 +39,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id[:client_secret]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/idpGoogle:IdpGoogle imported '123456789012345678:G1234567890123'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/idpGoogle:IdpGoogle")]

@@ -300,7 +300,7 @@ class IdpGoogle(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        google = zitadel.IdpGoogle("google",
+        default = zitadel.IdpGoogle("default",
             client_id="182902...",
             client_secret="GOCSPX-*****",
             is_auto_creation=False,
@@ -312,6 +312,14 @@ class IdpGoogle(pulumi.CustomResource):
                 "profile",
                 "email",
             ])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpGoogle:IdpGoogle imported '123456789012345678:G1234567890123'
         ```
 
         :param str resource_name: The name of the resource.
@@ -340,7 +348,7 @@ class IdpGoogle(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        google = zitadel.IdpGoogle("google",
+        default = zitadel.IdpGoogle("default",
             client_id="182902...",
             client_secret="GOCSPX-*****",
             is_auto_creation=False,
@@ -352,6 +360,14 @@ class IdpGoogle(pulumi.CustomResource):
                 "profile",
                 "email",
             ])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpGoogle:IdpGoogle imported '123456789012345678:G1234567890123'
         ```
 
         :param str resource_name: The name of the resource.

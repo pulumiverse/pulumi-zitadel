@@ -22,7 +22,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var ldap = new Zitadel.IdpLdap("ldap", new()
+    ///     var @default = new Zitadel.IdpLdap("default", new()
     ///     {
     ///         BaseDn = "dc=example,dc=com",
     ///         BindDn = "cn=admin,dc=example,dc=com",
@@ -54,6 +54,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id[:bind_password]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/idpLdap:IdpLdap imported '123456789012345678:b1nd_p4ssw0rd'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/idpLdap:IdpLdap")]

@@ -21,8 +21,8 @@ class OrgIdpGitlabSelfHostedArgs:
                  is_creation_allowed: pulumi.Input[bool],
                  is_linking_allowed: pulumi.Input[bool],
                  issuer: pulumi.Input[str],
-                 org_id: pulumi.Input[str],
                  name: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None,
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a OrgIdpGitlabSelfHosted resource.
@@ -33,8 +33,8 @@ class OrgIdpGitlabSelfHostedArgs:
         :param pulumi.Input[bool] is_creation_allowed: enable if users should be able to create a new account in ZITADEL when using an external account
         :param pulumi.Input[bool] is_linking_allowed: enable if users should be able to link an existing ZITADEL user with an external account
         :param pulumi.Input[str] issuer: the providers issuer
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] name: Name of the IDP
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: the scopes requested by ZITADEL during the request on the identity provider
         """
         pulumi.set(__self__, "client_id", client_id)
@@ -44,9 +44,10 @@ class OrgIdpGitlabSelfHostedArgs:
         pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
         pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
         pulumi.set(__self__, "issuer", issuer)
-        pulumi.set(__self__, "org_id", org_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
         if scopes is not None:
             pulumi.set(__self__, "scopes", scopes)
 
@@ -135,18 +136,6 @@ class OrgIdpGitlabSelfHostedArgs:
         pulumi.set(self, "issuer", value)
 
     @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
-
-    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -157,6 +146,18 @@ class OrgIdpGitlabSelfHostedArgs:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter
@@ -364,8 +365,8 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        gitlab_self_hosted = zitadel.OrgIdpGitlabSelfHosted("gitlabSelfHosted",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.OrgIdpGitlabSelfHosted("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             client_id="15765e...",
             client_secret="*****abcxyz",
             scopes=[
@@ -378,6 +379,14 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
             is_creation_allowed=True,
             is_auto_creation=False,
             is_auto_update=True)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/orgIdpGitlabSelfHosted:OrgIdpGitlabSelfHosted imported '123456789012345678:123456789012345678:1234567890abcdef'
         ```
 
         :param str resource_name: The name of the resource.
@@ -408,8 +417,8 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        gitlab_self_hosted = zitadel.OrgIdpGitlabSelfHosted("gitlabSelfHosted",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.OrgIdpGitlabSelfHosted("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             client_id="15765e...",
             client_secret="*****abcxyz",
             scopes=[
@@ -422,6 +431,14 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
             is_creation_allowed=True,
             is_auto_creation=False,
             is_auto_update=True)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/orgIdpGitlabSelfHosted:OrgIdpGitlabSelfHosted imported '123456789012345678:123456789012345678:1234567890abcdef'
         ```
 
         :param str resource_name: The name of the resource.
@@ -480,8 +497,6 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
                 raise TypeError("Missing required property 'issuer'")
             __props__.__dict__["issuer"] = issuer
             __props__.__dict__["name"] = name
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             __props__.__dict__["scopes"] = scopes
         super(OrgIdpGitlabSelfHosted, __self__).__init__(
@@ -604,7 +619,7 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

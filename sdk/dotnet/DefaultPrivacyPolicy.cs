@@ -22,14 +22,23 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var privacyPolicy = new Zitadel.DefaultPrivacyPolicy("privacyPolicy", new()
+    ///     var @default = new Zitadel.DefaultPrivacyPolicy("default", new()
     ///     {
-    ///         HelpLink = "https://google.com",
-    ///         PrivacyLink = "https://google.com",
-    ///         TosLink = "https://google.com",
+    ///         HelpLink = "https://example.com/help",
+    ///         PrivacyLink = "https://example.com/privacy",
+    ///         SupportEmail = "support@example.com",
+    ///         TosLink = "https://example.com/tos",
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/defaultPrivacyPolicy:DefaultPrivacyPolicy imported ''
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/defaultPrivacyPolicy:DefaultPrivacyPolicy")]
@@ -40,6 +49,9 @@ namespace Pulumiverse.Zitadel
 
         [Output("privacyLink")]
         public Output<string> PrivacyLink { get; private set; } = null!;
+
+        [Output("supportEmail")]
+        public Output<string> SupportEmail { get; private set; } = null!;
 
         [Output("tosLink")]
         public Output<string> TosLink { get; private set; } = null!;
@@ -97,6 +109,9 @@ namespace Pulumiverse.Zitadel
         [Input("privacyLink", required: true)]
         public Input<string> PrivacyLink { get; set; } = null!;
 
+        [Input("supportEmail", required: true)]
+        public Input<string> SupportEmail { get; set; } = null!;
+
         [Input("tosLink", required: true)]
         public Input<string> TosLink { get; set; } = null!;
 
@@ -113,6 +128,9 @@ namespace Pulumiverse.Zitadel
 
         [Input("privacyLink")]
         public Input<string>? PrivacyLink { get; set; }
+
+        [Input("supportEmail")]
+        public Input<string>? SupportEmail { get; set; }
 
         [Input("tosLink")]
         public Input<string>? TosLink { get; set; }

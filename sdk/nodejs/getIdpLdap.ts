@@ -13,8 +13,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const ldap = pulumi.output(zitadel.getIdpLdap({
- *     id: "177073614158299139",
+ * const defaultIdpLdap = pulumi.output(zitadel.getIdpLdap({
+ *     id: "123456789012345678",
  * }));
  * ```
  */

@@ -13,12 +13,20 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const triggerActions = new zitadel.TriggerActions("triggerActions", {
- *     orgId: zitadel_org.org.id,
- *     flowType: "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
- *     triggerType: "TRIGGER_TYPE_POST_AUTHENTICATION",
- *     actionIds: [zitadel_action.action.id],
+ * const _default = new zitadel.TriggerActions("default", {
+ *     orgId: data.zitadel_org["default"].id,
+ *     flowType: "FLOW_TYPE_CUSTOMISE_TOKEN",
+ *     triggerType: "TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION",
+ *     actionIds: [data.zitadel_action["default"].id],
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<flow_type:trigger_type[:org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/triggerActions:TriggerActions imported 'FLOW_TYPE_EXTERNAL_AUTHENTICATION:TRIGGER_TYPE_POST_CREATION:123456789012345678'
  * ```
  */
 export class TriggerActions extends pulumi.CustomResource {
@@ -60,7 +68,7 @@ export class TriggerActions extends pulumi.CustomResource {
     /**
      * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
      */
@@ -90,9 +98,6 @@ export class TriggerActions extends pulumi.CustomResource {
             }
             if ((!args || args.flowType === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'flowType'");
-            }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
             }
             if ((!args || args.triggerType === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'triggerType'");
@@ -144,7 +149,7 @@ export interface TriggerActionsArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
      */

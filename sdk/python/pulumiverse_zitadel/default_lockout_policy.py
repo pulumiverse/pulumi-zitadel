@@ -74,7 +74,15 @@ class DefaultLockoutPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        lockout_policy = zitadel.DefaultLockoutPolicy("lockoutPolicy", max_password_attempts=5)
+        default = zitadel.DefaultLockoutPolicy("default", max_password_attempts=5)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/defaultLockoutPolicy:DefaultLockoutPolicy imported ''
         ```
 
         :param str resource_name: The name of the resource.
@@ -96,7 +104,15 @@ class DefaultLockoutPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        lockout_policy = zitadel.DefaultLockoutPolicy("lockoutPolicy", max_password_attempts=5)
+        default = zitadel.DefaultLockoutPolicy("default", max_password_attempts=5)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/defaultLockoutPolicy:DefaultLockoutPolicy imported ''
         ```
 
         :param str resource_name: The name of the resource.

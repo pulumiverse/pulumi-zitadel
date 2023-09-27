@@ -25,10 +25,10 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewDefaultDomainPolicy(ctx, "domainPolicy", &zitadel.DefaultDomainPolicyArgs{
-// 			SmtpSenderAddressMatchesInstanceDomain: pulumi.Bool(false),
+// 		_, err := zitadel.NewDefaultDomainPolicy(ctx, "default", &zitadel.DefaultDomainPolicyArgs{
+// 			SmtpSenderAddressMatchesInstanceDomain: pulumi.Bool(true),
 // 			UserLoginMustBeDomain:                  pulumi.Bool(false),
-// 			ValidateOrgDomains:                     pulumi.Bool(false),
+// 			ValidateOrgDomains:                     pulumi.Bool(true),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -36,6 +36,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/defaultDomainPolicy:DefaultDomainPolicy imported ''
 // ```
 type DefaultDomainPolicy struct {
 	pulumi.CustomResourceState

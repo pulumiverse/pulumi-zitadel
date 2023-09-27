@@ -14,30 +14,19 @@ __all__ = ['OrgMemberArgs', 'OrgMember']
 @pulumi.input_type
 class OrgMemberArgs:
     def __init__(__self__, *,
-                 org_id: pulumi.Input[str],
                  roles: pulumi.Input[Sequence[pulumi.Input[str]]],
-                 user_id: pulumi.Input[str]):
+                 user_id: pulumi.Input[str],
+                 org_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a OrgMember resource.
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] roles: List of roles granted
         :param pulumi.Input[str] user_id: ID of the user
+        :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "org_id", org_id)
         pulumi.set(__self__, "roles", roles)
         pulumi.set(__self__, "user_id", user_id)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
 
     @property
     @pulumi.getter
@@ -62,6 +51,18 @@ class OrgMemberArgs:
     @user_id.setter
     def user_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "user_id", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
 
 @pulumi.input_type
@@ -138,10 +139,18 @@ class OrgMember(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        org_member = zitadel.OrgMember("orgMember",
-            org_id=zitadel_org["org"]["id"],
-            user_id=zitadel_human_user["human_user"]["id"],
+        default = zitadel.OrgMember("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            user_id=data["zitadel_human_user"]["default"]["id"],
             roles=["ORG_OWNER"])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<user_id[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/orgMember:OrgMember imported '123456789012345678:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -165,10 +174,18 @@ class OrgMember(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        org_member = zitadel.OrgMember("orgMember",
-            org_id=zitadel_org["org"]["id"],
-            user_id=zitadel_human_user["human_user"]["id"],
+        default = zitadel.OrgMember("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            user_id=data["zitadel_human_user"]["default"]["id"],
             roles=["ORG_OWNER"])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<user_id[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/orgMember:OrgMember imported '123456789012345678:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -198,8 +215,6 @@ class OrgMember(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = OrgMemberArgs.__new__(OrgMemberArgs)
 
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if roles is None and not opts.urn:
                 raise TypeError("Missing required property 'roles'")
@@ -242,7 +257,7 @@ class OrgMember(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

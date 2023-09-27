@@ -6,19 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * Datasource representing a generic JWT IdP on the organization.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
- *
- * const orgJwtIdpOrgJwtIdp = zitadel.getOrgJwtIdp({
- *     orgId: data.zitadel_org.org.id,
- *     idpId: "177073612581240835",
- * });
- * export const orgJwtIdp = orgJwtIdpOrgJwtIdp;
- * ```
  */
 export function getOrgJwtIdp(args: GetOrgJwtIdpArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgJwtIdpResult> {
     if (!opts) {

@@ -13,12 +13,12 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const triggerActionsTriggerActions = zitadel.getTriggerActions({
- *     orgId: data.zitadel_org.org.id,
+ * const default = zitadel.getTriggerActions({
+ *     orgId: data.zitadel_org["default"].id,
  *     flowType: "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
  *     triggerType: "TRIGGER_TYPE_POST_AUTHENTICATION",
  * });
- * export const triggerActions = triggerActionsTriggerActions;
+ * export const triggerActions = _default;
  * ```
  */
 export function getTriggerActions(args: GetTriggerActionsArgs, opts?: pulumi.InvokeOptions): Promise<GetTriggerActionsResult> {
@@ -45,7 +45,7 @@ export interface GetTriggerActionsArgs {
     /**
      * ID of the organization
      */
-    orgId: string;
+    orgId?: string;
     /**
      * Trigger type on when the actions get triggered
      */
@@ -71,7 +71,7 @@ export interface GetTriggerActionsResult {
     /**
      * ID of the organization
      */
-    readonly orgId: string;
+    readonly orgId?: string;
     /**
      * Trigger type on when the actions get triggered
      */
@@ -93,7 +93,7 @@ export interface GetTriggerActionsOutputArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * Trigger type on when the actions get triggered
      */

@@ -22,16 +22,24 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var projectRole = new Zitadel.ProjectRole("projectRole", new()
+    ///     var @default = new Zitadel.ProjectRole("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
-    ///         ProjectId = zitadel_project.Project.Id,
-    ///         RoleKey = "key",
+    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         ProjectId = data.Zitadel_project.Default.Id,
+    ///         RoleKey = "super-user",
     ///         DisplayName = "display_name2",
     ///         Group = "role_group",
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;project_id:role_key[:org_id]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/projectRole:ProjectRole imported '123456789012345678:my-role-key:123456789012345678'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/projectRole:ProjectRole")]
@@ -53,7 +61,7 @@ namespace Pulumiverse.Zitadel
         /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// ID of the project
@@ -129,8 +137,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// ID of the project

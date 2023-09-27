@@ -13,10 +13,18 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const notificationPolicy = new zitadel.NotificationPolicy("notificationPolicy", {
- *     orgId: zitadel_org.org.id,
+ * const _default = new zitadel.NotificationPolicy("default", {
+ *     orgId: data.zitadel_org["default"].id,
  *     passwordChange: false,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/notificationPolicy:NotificationPolicy imported '123456789012345678'
  * ```
  */
 export class NotificationPolicy extends pulumi.CustomResource {
@@ -48,9 +56,9 @@ export class NotificationPolicy extends pulumi.CustomResource {
     }
 
     /**
-     * Id for the organization
+     * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * Send notification if a user changes his password
      */
@@ -73,9 +81,6 @@ export class NotificationPolicy extends pulumi.CustomResource {
             resourceInputs["passwordChange"] = state ? state.passwordChange : undefined;
         } else {
             const args = argsOrState as NotificationPolicyArgs | undefined;
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             if ((!args || args.passwordChange === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'passwordChange'");
             }
@@ -92,7 +97,7 @@ export class NotificationPolicy extends pulumi.CustomResource {
  */
 export interface NotificationPolicyState {
     /**
-     * Id for the organization
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
     /**
@@ -106,9 +111,9 @@ export interface NotificationPolicyState {
  */
 export interface NotificationPolicyArgs {
     /**
-     * Id for the organization
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * Send notification if a user changes his password
      */

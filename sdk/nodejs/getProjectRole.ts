@@ -13,12 +13,12 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const projectRoleProjectRole = zitadel.getProjectRole({
- *     orgId: data.zitadel_org.org.id,
- *     projectId: data.zitadel_project.project.id,
+ * const default = zitadel.getProjectRole({
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: data.zitadel_project["default"].id,
  *     roleKey: "key",
  * });
- * export const projectRole = projectRoleProjectRole;
+ * export const projectRole = _default;
  * ```
  */
 export function getProjectRole(args: GetProjectRoleArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectRoleResult> {

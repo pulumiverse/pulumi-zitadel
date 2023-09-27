@@ -15,8 +15,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const humanUser = new zitadel.HumanUser("humanUser", {
- *     orgId: zitadel_org.org.id,
+ * const _default = new zitadel.HumanUser("default", {
+ *     orgId: data.zitadel_org["default"].id,
  *     userName: "humanfull@localhost.com",
  *     firstName: "firstname",
  *     lastName: "lastname",
@@ -30,6 +30,14 @@ import * as utilities from "./utilities";
  *     isEmailVerified: true,
  *     initialPassword: "Password1!",
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `id[:org_id][:initial_password]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/humanUser:HumanUser imported '123456789012345678:123456789012345678:Password1!'
  * ```
  */
 export class HumanUser extends pulumi.CustomResource {
@@ -103,7 +111,7 @@ export class HumanUser extends pulumi.CustomResource {
     /**
      * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * Phone of the user
      */
@@ -164,9 +172,6 @@ export class HumanUser extends pulumi.CustomResource {
             }
             if ((!args || args.lastName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'lastName'");
-            }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
             }
             if ((!args || args.userName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'userName'");
@@ -306,7 +311,7 @@ export interface HumanUserArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * Phone of the user
      */

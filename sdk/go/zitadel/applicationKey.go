@@ -25,10 +25,10 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewApplicationKey(ctx, "appKey", &zitadel.ApplicationKeyArgs{
-// 			OrgId:          pulumi.Any(zitadel_org.Org.Id),
-// 			ProjectId:      pulumi.Any(zitadel_project.Project.Id),
-// 			AppId:          pulumi.Any(zitadel_application_api.Application_api.Id),
+// 		_, err := zitadel.NewApplicationKey(ctx, "default", &zitadel.ApplicationKeyArgs{
+// 			OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
+// 			ProjectId:      pulumi.Any(data.Zitadel_project.Default.Id),
+// 			AppId:          pulumi.Any(data.Zitadel_application_api.Default.Id),
 // 			KeyType:        pulumi.String("KEY_TYPE_JSON"),
 // 			ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
 // 		})
@@ -38,6 +38,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id:project_id:app_id[:org_id][:key_details]>`. # You can use __SEMICOLON__ to escape :, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/applicationKey:ApplicationKey imported "123456789012345678:123456789012345678:123456789012345678:123456789012345678:$(cat ~/Downloads/123456789012345678.json | sed -e 's/:/__SEMICOLON__/g')"
 // ```
 type ApplicationKey struct {
 	pulumi.CustomResourceState
@@ -51,7 +59,7 @@ type ApplicationKey struct {
 	// Type of the app key, supported values: KEY*TYPE*UNSPECIFIED, KEY*TYPE*JSON
 	KeyType pulumi.StringOutput `pulumi:"keyType"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// ID of the project
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
 }
@@ -71,9 +79,6 @@ func NewApplicationKey(ctx *pulumi.Context,
 	}
 	if args.KeyType == nil {
 		return nil, errors.New("invalid value for required argument 'KeyType'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
@@ -142,7 +147,7 @@ type applicationKeyArgs struct {
 	// Type of the app key, supported values: KEY*TYPE*UNSPECIFIED, KEY*TYPE*JSON
 	KeyType string `pulumi:"keyType"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// ID of the project
 	ProjectId string `pulumi:"projectId"`
 }
@@ -156,7 +161,7 @@ type ApplicationKeyArgs struct {
 	// Type of the app key, supported values: KEY*TYPE*UNSPECIFIED, KEY*TYPE*JSON
 	KeyType pulumi.StringInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// ID of the project
 	ProjectId pulumi.StringInput
 }
@@ -269,8 +274,8 @@ func (o ApplicationKeyOutput) KeyType() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o ApplicationKeyOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *ApplicationKey) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o ApplicationKeyOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ApplicationKey) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // ID of the project

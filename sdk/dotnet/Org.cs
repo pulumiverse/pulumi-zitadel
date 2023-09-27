@@ -22,9 +22,17 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var org = new Zitadel.Org("org");
+    ///     var @default = new Zitadel.Org("default");
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;id&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/org:Org imported '123456789012345678'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/org:Org")]
@@ -35,6 +43,18 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// Primary domain of the org
+        /// </summary>
+        [Output("primaryDomain")]
+        public Output<string> PrimaryDomain { get; private set; } = null!;
+
+        /// <summary>
+        /// State of the org
+        /// </summary>
+        [Output("state")]
+        public Output<string> State { get; private set; } = null!;
 
 
         /// <summary>
@@ -102,6 +122,18 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Primary domain of the org
+        /// </summary>
+        [Input("primaryDomain")]
+        public Input<string>? PrimaryDomain { get; set; }
+
+        /// <summary>
+        /// State of the org
+        /// </summary>
+        [Input("state")]
+        public Input<string>? State { get; set; }
 
         public OrgState()
         {

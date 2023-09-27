@@ -15,19 +15,20 @@ __all__ = ['ProjectGrantArgs', 'ProjectGrant']
 class ProjectGrantArgs:
     def __init__(__self__, *,
                  granted_org_id: pulumi.Input[str],
-                 org_id: pulumi.Input[str],
                  project_id: pulumi.Input[str],
+                 org_id: Optional[pulumi.Input[str]] = None,
                  role_keys: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a ProjectGrant resource.
         :param pulumi.Input[str] granted_org_id: ID of the organization granted the project
-        :param pulumi.Input[str] org_id: ID of the organization which owns the resource
         :param pulumi.Input[str] project_id: ID of the project
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] role_keys: List of roles granted
         """
         pulumi.set(__self__, "granted_org_id", granted_org_id)
-        pulumi.set(__self__, "org_id", org_id)
         pulumi.set(__self__, "project_id", project_id)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
         if role_keys is not None:
             pulumi.set(__self__, "role_keys", role_keys)
 
@@ -44,18 +45,6 @@ class ProjectGrantArgs:
         pulumi.set(self, "granted_org_id", value)
 
     @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization which owns the resource
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
-
-    @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> pulumi.Input[str]:
         """
@@ -66,6 +55,18 @@ class ProjectGrantArgs:
     @project_id.setter
     def project_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "project_id", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter(name="roleKeys")
@@ -90,7 +91,7 @@ class _ProjectGrantState:
         """
         Input properties used for looking up and filtering ProjectGrant resources.
         :param pulumi.Input[str] granted_org_id: ID of the organization granted the project
-        :param pulumi.Input[str] org_id: ID of the organization which owns the resource
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[Sequence[pulumi.Input[str]]] role_keys: List of roles granted
         """
@@ -119,7 +120,7 @@ class _ProjectGrantState:
     @pulumi.getter(name="orgId")
     def org_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the organization which owns the resource
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -171,17 +172,25 @@ class ProjectGrant(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        project_grant = zitadel.ProjectGrant("projectGrant",
-            org_id=zitadel_org["org"]["id"],
-            project_id=zitadel_project["project"]["id"],
-            granted_org_id=zitadel_org["grantedorg"]["id"],
-            role_keys=[zitadel_project_role["project_role"]["role_key"]])
+        default = zitadel.ProjectGrant("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=data["zitadel_project"]["default"]["id"],
+            granted_org_id=data["zitadel_org"]["granted_org"]["id"],
+            role_keys=["super-user"])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/projectGrant:ProjectGrant imported '123456789012345678:123456789012345678:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] granted_org_id: ID of the organization granted the project
-        :param pulumi.Input[str] org_id: ID of the organization which owns the resource
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[Sequence[pulumi.Input[str]]] role_keys: List of roles granted
         """
@@ -200,11 +209,19 @@ class ProjectGrant(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        project_grant = zitadel.ProjectGrant("projectGrant",
-            org_id=zitadel_org["org"]["id"],
-            project_id=zitadel_project["project"]["id"],
-            granted_org_id=zitadel_org["grantedorg"]["id"],
-            role_keys=[zitadel_project_role["project_role"]["role_key"]])
+        default = zitadel.ProjectGrant("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=data["zitadel_project"]["default"]["id"],
+            granted_org_id=data["zitadel_org"]["granted_org"]["id"],
+            role_keys=["super-user"])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/projectGrant:ProjectGrant imported '123456789012345678:123456789012345678:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -238,8 +255,6 @@ class ProjectGrant(pulumi.CustomResource):
             if granted_org_id is None and not opts.urn:
                 raise TypeError("Missing required property 'granted_org_id'")
             __props__.__dict__["granted_org_id"] = granted_org_id
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
@@ -267,7 +282,7 @@ class ProjectGrant(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] granted_org_id: ID of the organization granted the project
-        :param pulumi.Input[str] org_id: ID of the organization which owns the resource
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[Sequence[pulumi.Input[str]]] role_keys: List of roles granted
         """
@@ -291,9 +306,9 @@ class ProjectGrant(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
-        ID of the organization which owns the resource
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 

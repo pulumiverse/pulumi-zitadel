@@ -25,7 +25,7 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewDefaultPasswordComplexityPolicy(ctx, "passwordComplexityPolicy", &zitadel.DefaultPasswordComplexityPolicyArgs{
+// 		_, err := zitadel.NewDefaultPasswordComplexityPolicy(ctx, "default", &zitadel.DefaultPasswordComplexityPolicyArgs{
 // 			HasLowercase: pulumi.Bool(true),
 // 			HasNumber:    pulumi.Bool(true),
 // 			HasSymbol:    pulumi.Bool(true),
@@ -38,6 +38,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy imported ''
 // ```
 type DefaultPasswordComplexityPolicy struct {
 	pulumi.CustomResourceState

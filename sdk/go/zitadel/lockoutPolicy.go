@@ -25,8 +25,8 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewLockoutPolicy(ctx, "lockoutPolicy", &zitadel.LockoutPolicyArgs{
-// 			OrgId:               pulumi.Any(zitadel_org.Org.Id),
+// 		_, err := zitadel.NewLockoutPolicy(ctx, "default", &zitadel.LockoutPolicyArgs{
+// 			OrgId:               pulumi.Any(data.Zitadel_org.Default.Id),
 // 			MaxPasswordAttempts: pulumi.Int(5),
 // 		})
 // 		if err != nil {
@@ -36,13 +36,21 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/lockoutPolicy:LockoutPolicy imported '123456789012345678'
+// ```
 type LockoutPolicy struct {
 	pulumi.CustomResourceState
 
 	// Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
 	MaxPasswordAttempts pulumi.IntOutput `pulumi:"maxPasswordAttempts"`
-	// Id for the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 }
 
 // NewLockoutPolicy registers a new resource with the given unique name, arguments, and options.
@@ -80,14 +88,14 @@ func GetLockoutPolicy(ctx *pulumi.Context,
 type lockoutPolicyState struct {
 	// Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
 	MaxPasswordAttempts *int `pulumi:"maxPasswordAttempts"`
-	// Id for the organization
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 }
 
 type LockoutPolicyState struct {
 	// Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
 	MaxPasswordAttempts pulumi.IntPtrInput
-	// Id for the organization
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 }
 
@@ -98,7 +106,7 @@ func (LockoutPolicyState) ElementType() reflect.Type {
 type lockoutPolicyArgs struct {
 	// Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
 	MaxPasswordAttempts int `pulumi:"maxPasswordAttempts"`
-	// Id for the organization
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 }
 
@@ -106,7 +114,7 @@ type lockoutPolicyArgs struct {
 type LockoutPolicyArgs struct {
 	// Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
 	MaxPasswordAttempts pulumi.IntInput
-	// Id for the organization
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 }
 
@@ -202,9 +210,9 @@ func (o LockoutPolicyOutput) MaxPasswordAttempts() pulumi.IntOutput {
 	return o.ApplyT(func(v *LockoutPolicy) pulumi.IntOutput { return v.MaxPasswordAttempts }).(pulumi.IntOutput)
 }
 
-// Id for the organization
-func (o LockoutPolicyOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *LockoutPolicy) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o LockoutPolicyOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LockoutPolicy) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 type LockoutPolicyArrayOutput struct{ *pulumi.OutputState }

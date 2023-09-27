@@ -13,11 +13,11 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const actionAction = zitadel.getAction({
- *     orgId: data.zitadel_org.org.id,
- *     actionId: "177073621691269123",
+ * const default = zitadel.getAction({
+ *     orgId: data.zitadel_org["default"].id,
+ *     actionId: "123456789012345678",
  * });
- * export const action = actionAction;
+ * export const action = _default;
  * ```
  */
 export function getAction(args: GetActionArgs, opts?: pulumi.InvokeOptions): Promise<GetActionResult> {
@@ -43,7 +43,7 @@ export interface GetActionArgs {
     /**
      * ID of the organization
      */
-    orgId: string;
+    orgId?: string;
 }
 
 /**
@@ -66,7 +66,7 @@ export interface GetActionResult {
     /**
      * ID of the organization
      */
-    readonly orgId: string;
+    readonly orgId?: string;
     readonly script: string;
     /**
      * the state of the action
@@ -93,5 +93,5 @@ export interface GetActionOutputArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
 }

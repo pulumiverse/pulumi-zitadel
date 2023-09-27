@@ -17,21 +17,22 @@ class ApplicationKeyArgs:
                  app_id: pulumi.Input[str],
                  expiration_date: pulumi.Input[str],
                  key_type: pulumi.Input[str],
-                 org_id: pulumi.Input[str],
-                 project_id: pulumi.Input[str]):
+                 project_id: pulumi.Input[str],
+                 org_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ApplicationKey resource.
         :param pulumi.Input[str] app_id: ID of the application
         :param pulumi.Input[str] expiration_date: Expiration date of the app key in the RFC3339 format
         :param pulumi.Input[str] key_type: Type of the app key, supported values: KEY*TYPE*UNSPECIFIED, KEY*TYPE*JSON
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] project_id: ID of the project
+        :param pulumi.Input[str] org_id: ID of the organization
         """
         pulumi.set(__self__, "app_id", app_id)
         pulumi.set(__self__, "expiration_date", expiration_date)
         pulumi.set(__self__, "key_type", key_type)
-        pulumi.set(__self__, "org_id", org_id)
         pulumi.set(__self__, "project_id", project_id)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
 
     @property
     @pulumi.getter(name="appId")
@@ -70,18 +71,6 @@ class ApplicationKeyArgs:
         pulumi.set(self, "key_type", value)
 
     @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
-
-    @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> pulumi.Input[str]:
         """
@@ -92,6 +81,18 @@ class ApplicationKeyArgs:
     @project_id.setter
     def project_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "project_id", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
 
 @pulumi.input_type
@@ -218,12 +219,20 @@ class ApplicationKey(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        app_key = zitadel.ApplicationKey("appKey",
-            org_id=zitadel_org["org"]["id"],
-            project_id=zitadel_project["project"]["id"],
-            app_id=zitadel_application_api["application_api"]["id"],
+        default = zitadel.ApplicationKey("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=data["zitadel_project"]["default"]["id"],
+            app_id=data["zitadel_application_api"]["default"]["id"],
             key_type="KEY_TYPE_JSON",
             expiration_date="2519-04-01T08:45:00Z")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id:project_id:app_id[:org_id][:key_details]>`. # You can use __SEMICOLON__ to escape :, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/applicationKey:ApplicationKey imported "123456789012345678:123456789012345678:123456789012345678:123456789012345678:$(cat ~/Downloads/123456789012345678.json | sed -e 's/:/__SEMICOLON__/g')"
         ```
 
         :param str resource_name: The name of the resource.
@@ -249,12 +258,20 @@ class ApplicationKey(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        app_key = zitadel.ApplicationKey("appKey",
-            org_id=zitadel_org["org"]["id"],
-            project_id=zitadel_project["project"]["id"],
-            app_id=zitadel_application_api["application_api"]["id"],
+        default = zitadel.ApplicationKey("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=data["zitadel_project"]["default"]["id"],
+            app_id=data["zitadel_application_api"]["default"]["id"],
             key_type="KEY_TYPE_JSON",
             expiration_date="2519-04-01T08:45:00Z")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id:project_id:app_id[:org_id][:key_details]>`. # You can use __SEMICOLON__ to escape :, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/applicationKey:ApplicationKey imported "123456789012345678:123456789012345678:123456789012345678:123456789012345678:$(cat ~/Downloads/123456789012345678.json | sed -e 's/:/__SEMICOLON__/g')"
         ```
 
         :param str resource_name: The name of the resource.
@@ -295,8 +312,6 @@ class ApplicationKey(pulumi.CustomResource):
             if key_type is None and not opts.urn:
                 raise TypeError("Missing required property 'key_type'")
             __props__.__dict__["key_type"] = key_type
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
@@ -378,7 +393,7 @@ class ApplicationKey(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

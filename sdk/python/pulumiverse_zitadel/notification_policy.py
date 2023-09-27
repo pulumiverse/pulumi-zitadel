@@ -14,27 +14,16 @@ __all__ = ['NotificationPolicyArgs', 'NotificationPolicy']
 @pulumi.input_type
 class NotificationPolicyArgs:
     def __init__(__self__, *,
-                 org_id: pulumi.Input[str],
-                 password_change: pulumi.Input[bool]):
+                 password_change: pulumi.Input[bool],
+                 org_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a NotificationPolicy resource.
-        :param pulumi.Input[str] org_id: Id for the organization
         :param pulumi.Input[bool] password_change: Send notification if a user changes his password
+        :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "org_id", org_id)
         pulumi.set(__self__, "password_change", password_change)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        Id for the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
 
     @property
     @pulumi.getter(name="passwordChange")
@@ -48,6 +37,18 @@ class NotificationPolicyArgs:
     def password_change(self, value: pulumi.Input[bool]):
         pulumi.set(self, "password_change", value)
 
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
+
 
 @pulumi.input_type
 class _NotificationPolicyState:
@@ -56,7 +57,7 @@ class _NotificationPolicyState:
                  password_change: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering NotificationPolicy resources.
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[bool] password_change: Send notification if a user changes his password
         """
         if org_id is not None:
@@ -68,7 +69,7 @@ class _NotificationPolicyState:
     @pulumi.getter(name="orgId")
     def org_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -106,14 +107,22 @@ class NotificationPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        notification_policy = zitadel.NotificationPolicy("notificationPolicy",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.NotificationPolicy("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             password_change=False)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/notificationPolicy:NotificationPolicy imported '123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[bool] password_change: Send notification if a user changes his password
         """
         ...
@@ -131,9 +140,17 @@ class NotificationPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        notification_policy = zitadel.NotificationPolicy("notificationPolicy",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.NotificationPolicy("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             password_change=False)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/notificationPolicy:NotificationPolicy imported '123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -162,8 +179,6 @@ class NotificationPolicy(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = NotificationPolicyArgs.__new__(NotificationPolicyArgs)
 
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if password_change is None and not opts.urn:
                 raise TypeError("Missing required property 'password_change'")
@@ -187,7 +202,7 @@ class NotificationPolicy(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[bool] password_change: Send notification if a user changes his password
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -200,9 +215,9 @@ class NotificationPolicy(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 

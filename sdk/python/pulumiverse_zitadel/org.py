@@ -38,13 +38,21 @@ class OrgArgs:
 @pulumi.input_type
 class _OrgState:
     def __init__(__self__, *,
-                 name: Optional[pulumi.Input[str]] = None):
+                 name: Optional[pulumi.Input[str]] = None,
+                 primary_domain: Optional[pulumi.Input[str]] = None,
+                 state: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Org resources.
         :param pulumi.Input[str] name: Name of the org
+        :param pulumi.Input[str] primary_domain: Primary domain of the org
+        :param pulumi.Input[str] state: State of the org
         """
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if primary_domain is not None:
+            pulumi.set(__self__, "primary_domain", primary_domain)
+        if state is not None:
+            pulumi.set(__self__, "state", state)
 
     @property
     @pulumi.getter
@@ -57,6 +65,30 @@ class _OrgState:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="primaryDomain")
+    def primary_domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        Primary domain of the org
+        """
+        return pulumi.get(self, "primary_domain")
+
+    @primary_domain.setter
+    def primary_domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "primary_domain", value)
+
+    @property
+    @pulumi.getter
+    def state(self) -> Optional[pulumi.Input[str]]:
+        """
+        State of the org
+        """
+        return pulumi.get(self, "state")
+
+    @state.setter
+    def state(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "state", value)
 
 
 class Org(pulumi.CustomResource):
@@ -75,7 +107,15 @@ class Org(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        org = zitadel.Org("org")
+        default = zitadel.Org("default")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/org:Org imported '123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -97,7 +137,15 @@ class Org(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        org = zitadel.Org("org")
+        default = zitadel.Org("default")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/org:Org imported '123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -126,6 +174,8 @@ class Org(pulumi.CustomResource):
             __props__ = OrgArgs.__new__(OrgArgs)
 
             __props__.__dict__["name"] = name
+            __props__.__dict__["primary_domain"] = None
+            __props__.__dict__["state"] = None
         super(Org, __self__).__init__(
             'zitadel:index/org:Org',
             resource_name,
@@ -136,7 +186,9 @@ class Org(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            name: Optional[pulumi.Input[str]] = None) -> 'Org':
+            name: Optional[pulumi.Input[str]] = None,
+            primary_domain: Optional[pulumi.Input[str]] = None,
+            state: Optional[pulumi.Input[str]] = None) -> 'Org':
         """
         Get an existing Org resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -145,12 +197,16 @@ class Org(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Name of the org
+        :param pulumi.Input[str] primary_domain: Primary domain of the org
+        :param pulumi.Input[str] state: State of the org
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _OrgState.__new__(_OrgState)
 
         __props__.__dict__["name"] = name
+        __props__.__dict__["primary_domain"] = primary_domain
+        __props__.__dict__["state"] = state
         return Org(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -160,4 +216,20 @@ class Org(pulumi.CustomResource):
         Name of the org
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="primaryDomain")
+    def primary_domain(self) -> pulumi.Output[str]:
+        """
+        Primary domain of the org
+        """
+        return pulumi.get(self, "primary_domain")
+
+    @property
+    @pulumi.getter
+    def state(self) -> pulumi.Output[str]:
+        """
+        State of the org
+        """
+        return pulumi.get(self, "state")
 

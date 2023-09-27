@@ -25,8 +25,8 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewNotificationPolicy(ctx, "notificationPolicy", &zitadel.NotificationPolicyArgs{
-// 			OrgId:          pulumi.Any(zitadel_org.Org.Id),
+// 		_, err := zitadel.NewNotificationPolicy(ctx, "default", &zitadel.NotificationPolicyArgs{
+// 			OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
 // 			PasswordChange: pulumi.Bool(false),
 // 		})
 // 		if err != nil {
@@ -36,11 +36,19 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/notificationPolicy:NotificationPolicy imported '123456789012345678'
+// ```
 type NotificationPolicy struct {
 	pulumi.CustomResourceState
 
-	// Id for the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// Send notification if a user changes his password
 	PasswordChange pulumi.BoolOutput `pulumi:"passwordChange"`
 }
@@ -52,9 +60,6 @@ func NewNotificationPolicy(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	if args.PasswordChange == nil {
 		return nil, errors.New("invalid value for required argument 'PasswordChange'")
 	}
@@ -81,14 +86,14 @@ func GetNotificationPolicy(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering NotificationPolicy resources.
 type notificationPolicyState struct {
-	// Id for the organization
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 	// Send notification if a user changes his password
 	PasswordChange *bool `pulumi:"passwordChange"`
 }
 
 type NotificationPolicyState struct {
-	// Id for the organization
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 	// Send notification if a user changes his password
 	PasswordChange pulumi.BoolPtrInput
@@ -99,16 +104,16 @@ func (NotificationPolicyState) ElementType() reflect.Type {
 }
 
 type notificationPolicyArgs struct {
-	// Id for the organization
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// Send notification if a user changes his password
 	PasswordChange bool `pulumi:"passwordChange"`
 }
 
 // The set of arguments for constructing a NotificationPolicy resource.
 type NotificationPolicyArgs struct {
-	// Id for the organization
-	OrgId pulumi.StringInput
+	// ID of the organization
+	OrgId pulumi.StringPtrInput
 	// Send notification if a user changes his password
 	PasswordChange pulumi.BoolInput
 }
@@ -200,9 +205,9 @@ func (o NotificationPolicyOutput) ToNotificationPolicyOutputWithContext(ctx cont
 	return o
 }
 
-// Id for the organization
-func (o NotificationPolicyOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *NotificationPolicy) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o NotificationPolicyOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NotificationPolicy) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Send notification if a user changes his password

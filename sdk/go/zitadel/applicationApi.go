@@ -25,10 +25,10 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewApplicationApi(ctx, "applicationApi", &zitadel.ApplicationApiArgs{
-// 			OrgId:          pulumi.Any(zitadel_org.Org.Id),
-// 			ProjectId:      pulumi.Any(zitadel_project.Project.Id),
-// 			AuthMethodType: pulumi.String("API_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT"),
+// 		_, err := zitadel.NewApplicationApi(ctx, "default", &zitadel.ApplicationApiArgs{
+// 			OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
+// 			ProjectId:      pulumi.Any(data.Zitadel_project.Default.Id),
+// 			AuthMethodType: pulumi.String("API_AUTH_METHOD_TYPE_BASIC"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -36,6 +36,14 @@ import (
 // 		return nil
 // 	})
 // }
+// ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/applicationApi:ApplicationApi imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
 // ```
 type ApplicationApi struct {
 	pulumi.CustomResourceState
@@ -48,8 +56,8 @@ type ApplicationApi struct {
 	ClientSecret pulumi.StringOutput `pulumi:"clientSecret"`
 	// Name of the application
 	Name pulumi.StringOutput `pulumi:"name"`
-	// orgID of the application
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// ID of the project
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
 }
@@ -61,9 +69,6 @@ func NewApplicationApi(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
@@ -98,7 +103,7 @@ type applicationApiState struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// Name of the application
 	Name *string `pulumi:"name"`
-	// orgID of the application
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 	// ID of the project
 	ProjectId *string `pulumi:"projectId"`
@@ -113,7 +118,7 @@ type ApplicationApiState struct {
 	ClientSecret pulumi.StringPtrInput
 	// Name of the application
 	Name pulumi.StringPtrInput
-	// orgID of the application
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 	// ID of the project
 	ProjectId pulumi.StringPtrInput
@@ -128,8 +133,8 @@ type applicationApiArgs struct {
 	AuthMethodType *string `pulumi:"authMethodType"`
 	// Name of the application
 	Name *string `pulumi:"name"`
-	// orgID of the application
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// ID of the project
 	ProjectId string `pulumi:"projectId"`
 }
@@ -140,8 +145,8 @@ type ApplicationApiArgs struct {
 	AuthMethodType pulumi.StringPtrInput
 	// Name of the application
 	Name pulumi.StringPtrInput
-	// orgID of the application
-	OrgId pulumi.StringInput
+	// ID of the organization
+	OrgId pulumi.StringPtrInput
 	// ID of the project
 	ProjectId pulumi.StringInput
 }
@@ -253,9 +258,9 @@ func (o ApplicationApiOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationApi) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// orgID of the application
-func (o ApplicationApiOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *ApplicationApi) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o ApplicationApiOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ApplicationApi) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // ID of the project

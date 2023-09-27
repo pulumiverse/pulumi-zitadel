@@ -25,15 +25,15 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		triggerActionsTriggerActions, err := zitadel.LookupTriggerActions(ctx, &GetTriggerActionsArgs{
-// 			OrgId:       data.Zitadel_org.Org.Id,
+// 		_default, err := zitadel.LookupTriggerActions(ctx, &GetTriggerActionsArgs{
+// 			OrgId:       pulumi.StringRef(data.Zitadel_org.Default.Id),
 // 			FlowType:    "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
 // 			TriggerType: "TRIGGER_TYPE_POST_AUTHENTICATION",
 // 		}, nil)
 // 		if err != nil {
 // 			return err
 // 		}
-// 		ctx.Export("triggerActions", triggerActionsTriggerActions)
+// 		ctx.Export("triggerActions", _default)
 // 		return nil
 // 	})
 // }
@@ -53,7 +53,7 @@ type LookupTriggerActionsArgs struct {
 	// Type of the flow to which the action triggers belong
 	FlowType string `pulumi:"flowType"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// Trigger type on when the actions get triggered
 	TriggerType string `pulumi:"triggerType"`
 }
@@ -67,7 +67,7 @@ type LookupTriggerActionsResult struct {
 	// The provider-assigned unique ID for this managed resource.
 	Id string `pulumi:"id"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// Trigger type on when the actions get triggered
 	TriggerType string `pulumi:"triggerType"`
 }
@@ -90,7 +90,7 @@ type LookupTriggerActionsOutputArgs struct {
 	// Type of the flow to which the action triggers belong
 	FlowType pulumi.StringInput `pulumi:"flowType"`
 	// ID of the organization
-	OrgId pulumi.StringInput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrInput `pulumi:"orgId"`
 	// Trigger type on when the actions get triggered
 	TriggerType pulumi.StringInput `pulumi:"triggerType"`
 }
@@ -130,8 +130,8 @@ func (o LookupTriggerActionsResultOutput) Id() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o LookupTriggerActionsResultOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupTriggerActionsResult) string { return v.OrgId }).(pulumi.StringOutput)
+func (o LookupTriggerActionsResultOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupTriggerActionsResult) *string { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Trigger type on when the actions get triggered

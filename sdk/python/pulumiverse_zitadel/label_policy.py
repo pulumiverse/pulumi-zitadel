@@ -20,7 +20,6 @@ class LabelPolicyArgs:
                  font_color: pulumi.Input[str],
                  font_color_dark: pulumi.Input[str],
                  hide_login_name_suffix: pulumi.Input[bool],
-                 org_id: pulumi.Input[str],
                  primary_color: pulumi.Input[str],
                  primary_color_dark: pulumi.Input[str],
                  warn_color: pulumi.Input[str],
@@ -35,6 +34,7 @@ class LabelPolicyArgs:
                  logo_dark_path: Optional[pulumi.Input[str]] = None,
                  logo_hash: Optional[pulumi.Input[str]] = None,
                  logo_path: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None,
                  set_active: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a LabelPolicy resource.
@@ -44,11 +44,11 @@ class LabelPolicyArgs:
         :param pulumi.Input[str] font_color: hex value for font color
         :param pulumi.Input[str] font_color_dark: hex value for font color dark theme
         :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.com/docs/apis/openidoauth/scopes#reserved-scopes
-        :param pulumi.Input[str] org_id: Id for the organization
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[str] warn_color: hex value for warn color
         :param pulumi.Input[str] warn_color_dark: hex value for warn color dark theme
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
         """
         pulumi.set(__self__, "background_color", background_color)
@@ -57,7 +57,6 @@ class LabelPolicyArgs:
         pulumi.set(__self__, "font_color", font_color)
         pulumi.set(__self__, "font_color_dark", font_color_dark)
         pulumi.set(__self__, "hide_login_name_suffix", hide_login_name_suffix)
-        pulumi.set(__self__, "org_id", org_id)
         pulumi.set(__self__, "primary_color", primary_color)
         pulumi.set(__self__, "primary_color_dark", primary_color_dark)
         pulumi.set(__self__, "warn_color", warn_color)
@@ -82,6 +81,8 @@ class LabelPolicyArgs:
             pulumi.set(__self__, "logo_hash", logo_hash)
         if logo_path is not None:
             pulumi.set(__self__, "logo_path", logo_path)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
         if set_active is not None:
             pulumi.set(__self__, "set_active", set_active)
 
@@ -156,18 +157,6 @@ class LabelPolicyArgs:
     @hide_login_name_suffix.setter
     def hide_login_name_suffix(self, value: pulumi.Input[bool]):
         pulumi.set(self, "hide_login_name_suffix", value)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        Id for the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter(name="primaryColor")
@@ -308,6 +297,18 @@ class LabelPolicyArgs:
         pulumi.set(self, "logo_path", value)
 
     @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
+
+    @property
     @pulumi.getter(name="setActive")
     def set_active(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -358,7 +359,7 @@ class _LabelPolicyState:
         :param pulumi.Input[str] font_color: hex value for font color
         :param pulumi.Input[str] font_color_dark: hex value for font color dark theme
         :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.com/docs/apis/openidoauth/scopes#reserved-scopes
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
@@ -631,7 +632,7 @@ class _LabelPolicyState:
     @pulumi.getter(name="orgId")
     def org_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -731,6 +732,14 @@ class LabelPolicy(pulumi.CustomResource):
         """
         Resource representing the custom label policy of an organization.
 
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] background_color: hex value for background color
@@ -739,7 +748,7 @@ class LabelPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] font_color: hex value for font color
         :param pulumi.Input[str] font_color_dark: hex value for font color dark theme
         :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.com/docs/apis/openidoauth/scopes#reserved-scopes
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
@@ -754,6 +763,14 @@ class LabelPolicy(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Resource representing the custom label policy of an organization.
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
+        ```
 
         :param str resource_name: The name of the resource.
         :param LabelPolicyArgs args: The arguments to use to populate this resource's properties.
@@ -829,8 +846,6 @@ class LabelPolicy(pulumi.CustomResource):
             __props__.__dict__["logo_dark_path"] = logo_dark_path
             __props__.__dict__["logo_hash"] = logo_hash
             __props__.__dict__["logo_path"] = logo_path
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if primary_color is None and not opts.urn:
                 raise TypeError("Missing required property 'primary_color'")
@@ -900,7 +915,7 @@ class LabelPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] font_color: hex value for font color
         :param pulumi.Input[str] font_color_dark: hex value for font color dark theme
         :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.com/docs/apis/openidoauth/scopes#reserved-scopes
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
@@ -1065,9 +1080,9 @@ class LabelPolicy(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 

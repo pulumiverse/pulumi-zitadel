@@ -16,19 +16,20 @@ class TriggerActionsArgs:
     def __init__(__self__, *,
                  action_ids: pulumi.Input[Sequence[pulumi.Input[str]]],
                  flow_type: pulumi.Input[str],
-                 org_id: pulumi.Input[str],
-                 trigger_type: pulumi.Input[str]):
+                 trigger_type: pulumi.Input[str],
+                 org_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a TriggerActions resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] action_ids: IDs of the triggered actions
         :param pulumi.Input[str] flow_type: Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] trigger_type: Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+        :param pulumi.Input[str] org_id: ID of the organization
         """
         pulumi.set(__self__, "action_ids", action_ids)
         pulumi.set(__self__, "flow_type", flow_type)
-        pulumi.set(__self__, "org_id", org_id)
         pulumi.set(__self__, "trigger_type", trigger_type)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
 
     @property
     @pulumi.getter(name="actionIds")
@@ -55,18 +56,6 @@ class TriggerActionsArgs:
         pulumi.set(self, "flow_type", value)
 
     @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
-
-    @property
     @pulumi.getter(name="triggerType")
     def trigger_type(self) -> pulumi.Input[str]:
         """
@@ -77,6 +66,18 @@ class TriggerActionsArgs:
     @trigger_type.setter
     def trigger_type(self, value: pulumi.Input[str]):
         pulumi.set(self, "trigger_type", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
 
 @pulumi.input_type
@@ -170,11 +171,19 @@ class TriggerActions(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        trigger_actions = zitadel.TriggerActions("triggerActions",
-            org_id=zitadel_org["org"]["id"],
-            flow_type="FLOW_TYPE_EXTERNAL_AUTHENTICATION",
-            trigger_type="TRIGGER_TYPE_POST_AUTHENTICATION",
-            action_ids=[zitadel_action["action"]["id"]])
+        default = zitadel.TriggerActions("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            flow_type="FLOW_TYPE_CUSTOMISE_TOKEN",
+            trigger_type="TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION",
+            action_ids=[data["zitadel_action"]["default"]["id"]])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<flow_type:trigger_type[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/triggerActions:TriggerActions imported 'FLOW_TYPE_EXTERNAL_AUTHENTICATION:TRIGGER_TYPE_POST_CREATION:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -199,11 +208,19 @@ class TriggerActions(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        trigger_actions = zitadel.TriggerActions("triggerActions",
-            org_id=zitadel_org["org"]["id"],
-            flow_type="FLOW_TYPE_EXTERNAL_AUTHENTICATION",
-            trigger_type="TRIGGER_TYPE_POST_AUTHENTICATION",
-            action_ids=[zitadel_action["action"]["id"]])
+        default = zitadel.TriggerActions("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            flow_type="FLOW_TYPE_CUSTOMISE_TOKEN",
+            trigger_type="TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION",
+            action_ids=[data["zitadel_action"]["default"]["id"]])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<flow_type:trigger_type[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/triggerActions:TriggerActions imported 'FLOW_TYPE_EXTERNAL_AUTHENTICATION:TRIGGER_TYPE_POST_CREATION:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -240,8 +257,6 @@ class TriggerActions(pulumi.CustomResource):
             if flow_type is None and not opts.urn:
                 raise TypeError("Missing required property 'flow_type'")
             __props__.__dict__["flow_type"] = flow_type
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if trigger_type is None and not opts.urn:
                 raise TypeError("Missing required property 'trigger_type'")
@@ -300,7 +315,7 @@ class TriggerActions(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

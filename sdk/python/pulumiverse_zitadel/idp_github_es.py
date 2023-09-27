@@ -396,7 +396,7 @@ class IdpGithubEs(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        github_es = zitadel.IdpGithubEs("githubEs",
+        default = zitadel.IdpGithubEs("default",
             authorization_endpoint="https://auth.endpoint",
             client_id="86a165...",
             client_secret="*****afdbac18",
@@ -411,6 +411,14 @@ class IdpGithubEs(pulumi.CustomResource):
             ],
             token_endpoint="https://token.endpoint",
             user_endpoint="https://user.endpoint")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpGithubEs:IdpGithubEs imported '123456789012345678:1234567890123456781234567890123456787890'
         ```
 
         :param str resource_name: The name of the resource.
@@ -442,7 +450,7 @@ class IdpGithubEs(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        github_es = zitadel.IdpGithubEs("githubEs",
+        default = zitadel.IdpGithubEs("default",
             authorization_endpoint="https://auth.endpoint",
             client_id="86a165...",
             client_secret="*****afdbac18",
@@ -457,6 +465,14 @@ class IdpGithubEs(pulumi.CustomResource):
             ],
             token_endpoint="https://token.endpoint",
             user_endpoint="https://user.endpoint")
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpGithubEs:IdpGithubEs imported '123456789012345678:1234567890123456781234567890123456787890'
         ```
 
         :param str resource_name: The name of the resource.

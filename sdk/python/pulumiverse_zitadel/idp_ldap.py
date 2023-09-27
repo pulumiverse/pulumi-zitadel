@@ -920,7 +920,7 @@ class IdpLdap(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        ldap = zitadel.IdpLdap("ldap",
+        default = zitadel.IdpLdap("default",
             base_dn="dc=example,dc=com",
             bind_dn="cn=admin,dc=example,dc=com",
             bind_password="Password1!",
@@ -943,6 +943,14 @@ class IdpLdap(pulumi.CustomResource):
                 "email",
             ],
             user_object_classes=["inetOrgPerson"])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpLdap:IdpLdap imported '123456789012345678:b1nd_p4ssw0rd'
         ```
 
         :param str resource_name: The name of the resource.
@@ -990,7 +998,7 @@ class IdpLdap(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        ldap = zitadel.IdpLdap("ldap",
+        default = zitadel.IdpLdap("default",
             base_dn="dc=example,dc=com",
             bind_dn="cn=admin,dc=example,dc=com",
             bind_password="Password1!",
@@ -1013,6 +1021,14 @@ class IdpLdap(pulumi.CustomResource):
                 "email",
             ],
             user_object_classes=["inetOrgPerson"])
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpLdap:IdpLdap imported '123456789012345678:b1nd_p4ssw0rd'
         ```
 
         :param str resource_name: The name of the resource.

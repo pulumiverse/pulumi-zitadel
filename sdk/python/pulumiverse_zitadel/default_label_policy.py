@@ -699,6 +699,14 @@ class DefaultLabelPolicy(pulumi.CustomResource):
         """
         Resource representing the default label policy.
 
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/defaultLabelPolicy:DefaultLabelPolicy imported ''
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] background_color: hex value for background color
@@ -721,6 +729,14 @@ class DefaultLabelPolicy(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Resource representing the default label policy.
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/defaultLabelPolicy:DefaultLabelPolicy imported ''
+        ```
 
         :param str resource_name: The name of the resource.
         :param DefaultLabelPolicyArgs args: The arguments to use to populate this resource's properties.

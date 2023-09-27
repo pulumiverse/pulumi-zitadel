@@ -21,7 +21,6 @@ class OrgIdpLdapArgs:
                  is_auto_update: pulumi.Input[bool],
                  is_creation_allowed: pulumi.Input[bool],
                  is_linking_allowed: pulumi.Input[bool],
-                 org_id: pulumi.Input[str],
                  servers: pulumi.Input[Sequence[pulumi.Input[str]]],
                  start_tls: pulumi.Input[bool],
                  timeout: pulumi.Input[str],
@@ -37,6 +36,7 @@ class OrgIdpLdapArgs:
                  last_name_attribute: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  nick_name_attribute: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None,
                  phone_attribute: Optional[pulumi.Input[str]] = None,
                  phone_verified_attribute: Optional[pulumi.Input[str]] = None,
                  preferred_language_attribute: Optional[pulumi.Input[str]] = None,
@@ -51,7 +51,6 @@ class OrgIdpLdapArgs:
         :param pulumi.Input[bool] is_auto_update: enable if a the ZITADEL account fields should be updated automatically on each login
         :param pulumi.Input[bool] is_creation_allowed: enable if users should be able to create a new account in ZITADEL when using an external account
         :param pulumi.Input[bool] is_linking_allowed: enable if users should be able to link an existing ZITADEL user with an external account
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] servers: Servers to try in order for establishing LDAP connections
         :param pulumi.Input[bool] start_tls: Wether to use StartTLS for LDAP connections
         :param pulumi.Input[str] timeout: Timeout for LDAP connections
@@ -67,6 +66,7 @@ class OrgIdpLdapArgs:
         :param pulumi.Input[str] last_name_attribute: User attribute for the last name
         :param pulumi.Input[str] name: Name of the IDP
         :param pulumi.Input[str] nick_name_attribute: User attribute for the nick name
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] phone_attribute: User attribute for the phone
         :param pulumi.Input[str] phone_verified_attribute: User attribute for the phone verified state
         :param pulumi.Input[str] preferred_language_attribute: User attribute for the preferred language
@@ -80,7 +80,6 @@ class OrgIdpLdapArgs:
         pulumi.set(__self__, "is_auto_update", is_auto_update)
         pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
         pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
-        pulumi.set(__self__, "org_id", org_id)
         pulumi.set(__self__, "servers", servers)
         pulumi.set(__self__, "start_tls", start_tls)
         pulumi.set(__self__, "timeout", timeout)
@@ -105,6 +104,8 @@ class OrgIdpLdapArgs:
             pulumi.set(__self__, "name", name)
         if nick_name_attribute is not None:
             pulumi.set(__self__, "nick_name_attribute", nick_name_attribute)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
         if phone_attribute is not None:
             pulumi.set(__self__, "phone_attribute", phone_attribute)
         if phone_verified_attribute is not None:
@@ -199,18 +200,6 @@ class OrgIdpLdapArgs:
     @is_linking_allowed.setter
     def is_linking_allowed(self, value: pulumi.Input[bool]):
         pulumi.set(self, "is_linking_allowed", value)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter
@@ -391,6 +380,18 @@ class OrgIdpLdapArgs:
     @nick_name_attribute.setter
     def nick_name_attribute(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "nick_name_attribute", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter(name="phoneAttribute")
@@ -952,8 +953,8 @@ class OrgIdpLdap(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        ldap = zitadel.OrgIdpLdap("ldap",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.OrgIdpLdap("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             servers=[
                 "ldaps://my.primary.server:389",
                 "ldaps://my.secondary.server:389",
@@ -976,6 +977,14 @@ class OrgIdpLdap(pulumi.CustomResource):
             is_creation_allowed=True,
             is_auto_creation=False,
             is_auto_update=True)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:org_id][:bind_password]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/orgIdpLdap:OrgIdpLdap imported '123456789012345678:123456789012345678:b1nd_p4ssw0rd'
         ```
 
         :param str resource_name: The name of the resource.
@@ -1024,8 +1033,8 @@ class OrgIdpLdap(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        ldap = zitadel.OrgIdpLdap("ldap",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.OrgIdpLdap("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             servers=[
                 "ldaps://my.primary.server:389",
                 "ldaps://my.secondary.server:389",
@@ -1048,6 +1057,14 @@ class OrgIdpLdap(pulumi.CustomResource):
             is_creation_allowed=True,
             is_auto_creation=False,
             is_auto_update=True)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<id[:org_id][:bind_password]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/orgIdpLdap:OrgIdpLdap imported '123456789012345678:123456789012345678:b1nd_p4ssw0rd'
         ```
 
         :param str resource_name: The name of the resource.
@@ -1132,8 +1149,6 @@ class OrgIdpLdap(pulumi.CustomResource):
             __props__.__dict__["last_name_attribute"] = last_name_attribute
             __props__.__dict__["name"] = name
             __props__.__dict__["nick_name_attribute"] = nick_name_attribute
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             __props__.__dict__["phone_attribute"] = phone_attribute
             __props__.__dict__["phone_verified_attribute"] = phone_verified_attribute
@@ -1396,7 +1411,7 @@ class OrgIdpLdap(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

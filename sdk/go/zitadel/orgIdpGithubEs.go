@@ -25,8 +25,8 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpGithubEs(ctx, "githubEs", &zitadel.OrgIdpGithubEsArgs{
-// 			OrgId:        pulumi.Any(zitadel_org.Org.Id),
+// 		_, err := zitadel.NewOrgIdpGithubEs(ctx, "default", &zitadel.OrgIdpGithubEsArgs{
+// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
 // 			ClientId:     pulumi.String("86a165..."),
 // 			ClientSecret: pulumi.String("*****afdbac18"),
 // 			Scopes: pulumi.StringArray{
@@ -49,6 +49,14 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/orgIdpGithubEs:OrgIdpGithubEs imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678'
+// ```
 type OrgIdpGithubEs struct {
 	pulumi.CustomResourceState
 
@@ -69,7 +77,7 @@ type OrgIdpGithubEs struct {
 	// Name of the IDP
 	Name pulumi.StringOutput `pulumi:"name"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes pulumi.StringArrayOutput `pulumi:"scopes"`
 	// the providers token endpoint
@@ -105,9 +113,6 @@ func NewOrgIdpGithubEs(ctx *pulumi.Context,
 	}
 	if args.IsLinkingAllowed == nil {
 		return nil, errors.New("invalid value for required argument 'IsLinkingAllowed'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	if args.TokenEndpoint == nil {
 		return nil, errors.New("invalid value for required argument 'TokenEndpoint'")
@@ -213,7 +218,7 @@ type orgIdpGithubEsArgs struct {
 	// Name of the IDP
 	Name *string `pulumi:"name"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes []string `pulumi:"scopes"`
 	// the providers token endpoint
@@ -241,7 +246,7 @@ type OrgIdpGithubEsArgs struct {
 	// Name of the IDP
 	Name pulumi.StringPtrInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes pulumi.StringArrayInput
 	// the providers token endpoint
@@ -378,8 +383,8 @@ func (o OrgIdpGithubEsOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o OrgIdpGithubEsOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *OrgIdpGithubEs) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o OrgIdpGithubEsOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *OrgIdpGithubEs) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // the scopes requested by ZITADEL during the request on the identity provider

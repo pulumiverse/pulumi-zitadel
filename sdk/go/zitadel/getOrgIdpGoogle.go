@@ -26,7 +26,8 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := zitadel.LookupOrgIdpGoogle(ctx, &GetOrgIdpGoogleArgs{
-// 			Id: "177073614158299139",
+// 			OrgId: pulumi.StringRef(data.Zitadel_org.Default.Id),
+// 			Id:    "123456789012345678",
 // 		}, nil)
 // 		if err != nil {
 // 			return err
@@ -50,7 +51,7 @@ type LookupOrgIdpGoogleArgs struct {
 	// The ID of this resource.
 	Id string `pulumi:"id"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 }
 
 // A collection of values returned by getOrgIdpGoogle.
@@ -72,7 +73,7 @@ type LookupOrgIdpGoogleResult struct {
 	// Name of the IDP
 	Name string `pulumi:"name"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes []string `pulumi:"scopes"`
 }
@@ -95,7 +96,7 @@ type LookupOrgIdpGoogleOutputArgs struct {
 	// The ID of this resource.
 	Id pulumi.StringInput `pulumi:"id"`
 	// ID of the organization
-	OrgId pulumi.StringInput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrInput `pulumi:"orgId"`
 }
 
 func (LookupOrgIdpGoogleOutputArgs) ElementType() reflect.Type {
@@ -158,8 +159,8 @@ func (o LookupOrgIdpGoogleResultOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o LookupOrgIdpGoogleResultOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupOrgIdpGoogleResult) string { return v.OrgId }).(pulumi.StringOutput)
+func (o LookupOrgIdpGoogleResultOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupOrgIdpGoogleResult) *string { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // the scopes requested by ZITADEL during the request on the identity provider

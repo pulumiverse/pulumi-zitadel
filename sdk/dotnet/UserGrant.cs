@@ -22,28 +22,36 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var userGrant = new Zitadel.UserGrant("userGrant", new()
+    ///     var @default = new Zitadel.UserGrant("default", new()
     ///     {
-    ///         ProjectId = zitadel_project.Project.Id,
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         ProjectId = data.Zitadel_project.Default.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         RoleKeys = new[]
     ///         {
-    ///             "key",
+    ///             "super-user",
     ///         },
-    ///         UserId = zitadel_human_user.Granted_human_user.Id,
+    ///         UserId = data.Zitadel_human_user.Default.Id,
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;flow_type:trigger_type[:org_id]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/userGrant:UserGrant imported '123456789012345678:123456789012345678:123456789012345678'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/userGrant:UserGrant")]
     public partial class UserGrant : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// ID of the organization which owns the resource
+        /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// ID of the granted project
@@ -117,10 +125,10 @@ namespace Pulumiverse.Zitadel
     public sealed class UserGrantArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// ID of the organization which owns the resource
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// ID of the granted project
@@ -161,7 +169,7 @@ namespace Pulumiverse.Zitadel
     public sealed class UserGrantState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// ID of the organization which owns the resource
+        /// ID of the organization
         /// </summary>
         [Input("orgId")]
         public Input<string>? OrgId { get; set; }

@@ -19,11 +19,11 @@ class LoginPolicyArgs:
                  default_redirect_uri: pulumi.Input[str],
                  external_login_check_lifetime: pulumi.Input[str],
                  force_mfa: pulumi.Input[bool],
+                 force_mfa_local_only: pulumi.Input[bool],
                  hide_password_reset: pulumi.Input[bool],
                  ignore_unknown_usernames: pulumi.Input[bool],
                  mfa_init_skip_lifetime: pulumi.Input[str],
                  multi_factor_check_lifetime: pulumi.Input[str],
-                 org_id: pulumi.Input[str],
                  password_check_lifetime: pulumi.Input[str],
                  passwordless_type: pulumi.Input[str],
                  second_factor_check_lifetime: pulumi.Input[str],
@@ -33,6 +33,7 @@ class LoginPolicyArgs:
                  disable_login_with_phone: Optional[pulumi.Input[bool]] = None,
                  idps: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  multi_factors: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None,
                  second_factors: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a LoginPolicy resource.
@@ -40,9 +41,9 @@ class LoginPolicyArgs:
         :param pulumi.Input[bool] allow_register: defines if a person is allowed to register a user on this organisation
         :param pulumi.Input[str] default_redirect_uri: defines where the user will be redirected to if the login is started without app context (e.g. from mail)
         :param pulumi.Input[bool] force_mfa: defines if a user MUST use a multi factor to log in
+        :param pulumi.Input[bool] force_mfa_local_only: if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
         :param pulumi.Input[bool] hide_password_reset: defines if password reset link should be shown in the login screen
         :param pulumi.Input[bool] ignore_unknown_usernames: defines if unknown username on login screen directly return an error or always display the password screen
-        :param pulumi.Input[str] org_id: Id for the organization
         :param pulumi.Input[str] passwordless_type: defines if passwordless is allowed for users
         :param pulumi.Input[bool] user_login: defines if a user is allowed to login with his username and password
         :param pulumi.Input[bool] allow_domain_discovery: if set to true, the suffix (@domain.com) of an unknown username input on the login screen will be matched against the org domains and will redirect to the registration of that organisation on success.
@@ -50,6 +51,7 @@ class LoginPolicyArgs:
         :param pulumi.Input[bool] disable_login_with_phone: defines if user can additionally (to the loginname) be identified by their verified phone number
         :param pulumi.Input[Sequence[pulumi.Input[str]]] idps: allowed idps to login or register
         :param pulumi.Input[Sequence[pulumi.Input[str]]] multi_factors: allowed multi factors
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] second_factors: allowed second factors
         """
         pulumi.set(__self__, "allow_external_idp", allow_external_idp)
@@ -57,11 +59,11 @@ class LoginPolicyArgs:
         pulumi.set(__self__, "default_redirect_uri", default_redirect_uri)
         pulumi.set(__self__, "external_login_check_lifetime", external_login_check_lifetime)
         pulumi.set(__self__, "force_mfa", force_mfa)
+        pulumi.set(__self__, "force_mfa_local_only", force_mfa_local_only)
         pulumi.set(__self__, "hide_password_reset", hide_password_reset)
         pulumi.set(__self__, "ignore_unknown_usernames", ignore_unknown_usernames)
         pulumi.set(__self__, "mfa_init_skip_lifetime", mfa_init_skip_lifetime)
         pulumi.set(__self__, "multi_factor_check_lifetime", multi_factor_check_lifetime)
-        pulumi.set(__self__, "org_id", org_id)
         pulumi.set(__self__, "password_check_lifetime", password_check_lifetime)
         pulumi.set(__self__, "passwordless_type", passwordless_type)
         pulumi.set(__self__, "second_factor_check_lifetime", second_factor_check_lifetime)
@@ -76,6 +78,8 @@ class LoginPolicyArgs:
             pulumi.set(__self__, "idps", idps)
         if multi_factors is not None:
             pulumi.set(__self__, "multi_factors", multi_factors)
+        if org_id is not None:
+            pulumi.set(__self__, "org_id", org_id)
         if second_factors is not None:
             pulumi.set(__self__, "second_factors", second_factors)
 
@@ -137,6 +141,18 @@ class LoginPolicyArgs:
         pulumi.set(self, "force_mfa", value)
 
     @property
+    @pulumi.getter(name="forceMfaLocalOnly")
+    def force_mfa_local_only(self) -> pulumi.Input[bool]:
+        """
+        if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+        """
+        return pulumi.get(self, "force_mfa_local_only")
+
+    @force_mfa_local_only.setter
+    def force_mfa_local_only(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "force_mfa_local_only", value)
+
+    @property
     @pulumi.getter(name="hidePasswordReset")
     def hide_password_reset(self) -> pulumi.Input[bool]:
         """
@@ -177,18 +193,6 @@ class LoginPolicyArgs:
     @multi_factor_check_lifetime.setter
     def multi_factor_check_lifetime(self, value: pulumi.Input[str]):
         pulumi.set(self, "multi_factor_check_lifetime", value)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        Id for the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter(name="passwordCheckLifetime")
@@ -293,6 +297,18 @@ class LoginPolicyArgs:
         pulumi.set(self, "multi_factors", value)
 
     @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
+
+    @property
     @pulumi.getter(name="secondFactors")
     def second_factors(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -316,6 +332,7 @@ class _LoginPolicyState:
                  disable_login_with_phone: Optional[pulumi.Input[bool]] = None,
                  external_login_check_lifetime: Optional[pulumi.Input[str]] = None,
                  force_mfa: Optional[pulumi.Input[bool]] = None,
+                 force_mfa_local_only: Optional[pulumi.Input[bool]] = None,
                  hide_password_reset: Optional[pulumi.Input[bool]] = None,
                  idps: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ignore_unknown_usernames: Optional[pulumi.Input[bool]] = None,
@@ -337,11 +354,12 @@ class _LoginPolicyState:
         :param pulumi.Input[bool] disable_login_with_email: defines if user can additionally (to the loginname) be identified by their verified email address
         :param pulumi.Input[bool] disable_login_with_phone: defines if user can additionally (to the loginname) be identified by their verified phone number
         :param pulumi.Input[bool] force_mfa: defines if a user MUST use a multi factor to log in
+        :param pulumi.Input[bool] force_mfa_local_only: if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
         :param pulumi.Input[bool] hide_password_reset: defines if password reset link should be shown in the login screen
         :param pulumi.Input[Sequence[pulumi.Input[str]]] idps: allowed idps to login or register
         :param pulumi.Input[bool] ignore_unknown_usernames: defines if unknown username on login screen directly return an error or always display the password screen
         :param pulumi.Input[Sequence[pulumi.Input[str]]] multi_factors: allowed multi factors
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] passwordless_type: defines if passwordless is allowed for users
         :param pulumi.Input[Sequence[pulumi.Input[str]]] second_factors: allowed second factors
         :param pulumi.Input[bool] user_login: defines if a user is allowed to login with his username and password
@@ -362,6 +380,8 @@ class _LoginPolicyState:
             pulumi.set(__self__, "external_login_check_lifetime", external_login_check_lifetime)
         if force_mfa is not None:
             pulumi.set(__self__, "force_mfa", force_mfa)
+        if force_mfa_local_only is not None:
+            pulumi.set(__self__, "force_mfa_local_only", force_mfa_local_only)
         if hide_password_reset is not None:
             pulumi.set(__self__, "hide_password_reset", hide_password_reset)
         if idps is not None:
@@ -481,6 +501,18 @@ class _LoginPolicyState:
         pulumi.set(self, "force_mfa", value)
 
     @property
+    @pulumi.getter(name="forceMfaLocalOnly")
+    def force_mfa_local_only(self) -> Optional[pulumi.Input[bool]]:
+        """
+        if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+        """
+        return pulumi.get(self, "force_mfa_local_only")
+
+    @force_mfa_local_only.setter
+    def force_mfa_local_only(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "force_mfa_local_only", value)
+
+    @property
     @pulumi.getter(name="hidePasswordReset")
     def hide_password_reset(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -550,7 +582,7 @@ class _LoginPolicyState:
     @pulumi.getter(name="orgId")
     def org_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -626,6 +658,7 @@ class LoginPolicy(pulumi.CustomResource):
                  disable_login_with_phone: Optional[pulumi.Input[bool]] = None,
                  external_login_check_lifetime: Optional[pulumi.Input[str]] = None,
                  force_mfa: Optional[pulumi.Input[bool]] = None,
+                 force_mfa_local_only: Optional[pulumi.Input[bool]] = None,
                  hide_password_reset: Optional[pulumi.Input[bool]] = None,
                  idps: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ignore_unknown_usernames: Optional[pulumi.Input[bool]] = None,
@@ -648,12 +681,13 @@ class LoginPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        login_policy = zitadel.LoginPolicy("loginPolicy",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.LoginPolicy("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             user_login=True,
             allow_register=True,
             allow_external_idp=True,
             force_mfa=False,
+            force_mfa_local_only=False,
             passwordless_type="PASSWORDLESS_TYPE_ALLOWED",
             hide_password_reset=False,
             password_check_lifetime="240h0m0s",
@@ -669,12 +703,20 @@ class LoginPolicy(pulumi.CustomResource):
             ],
             multi_factors=["MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"],
             idps=[
-                zitadel_org_idp_oidc["oidc_idp"]["id"],
-                zitadel_org_idp_jwt["jwt_idp"]["id"],
+                data["zitadel_idp_google"]["default"]["id"],
+                data["zitadel_idp_azure_ad"]["default"]["id"],
             ],
             allow_domain_discovery=True,
             disable_login_with_email=True,
             disable_login_with_phone=True)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/loginPolicy:LoginPolicy imported '123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -686,11 +728,12 @@ class LoginPolicy(pulumi.CustomResource):
         :param pulumi.Input[bool] disable_login_with_email: defines if user can additionally (to the loginname) be identified by their verified email address
         :param pulumi.Input[bool] disable_login_with_phone: defines if user can additionally (to the loginname) be identified by their verified phone number
         :param pulumi.Input[bool] force_mfa: defines if a user MUST use a multi factor to log in
+        :param pulumi.Input[bool] force_mfa_local_only: if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
         :param pulumi.Input[bool] hide_password_reset: defines if password reset link should be shown in the login screen
         :param pulumi.Input[Sequence[pulumi.Input[str]]] idps: allowed idps to login or register
         :param pulumi.Input[bool] ignore_unknown_usernames: defines if unknown username on login screen directly return an error or always display the password screen
         :param pulumi.Input[Sequence[pulumi.Input[str]]] multi_factors: allowed multi factors
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] passwordless_type: defines if passwordless is allowed for users
         :param pulumi.Input[Sequence[pulumi.Input[str]]] second_factors: allowed second factors
         :param pulumi.Input[bool] user_login: defines if a user is allowed to login with his username and password
@@ -710,12 +753,13 @@ class LoginPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        login_policy = zitadel.LoginPolicy("loginPolicy",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.LoginPolicy("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             user_login=True,
             allow_register=True,
             allow_external_idp=True,
             force_mfa=False,
+            force_mfa_local_only=False,
             passwordless_type="PASSWORDLESS_TYPE_ALLOWED",
             hide_password_reset=False,
             password_check_lifetime="240h0m0s",
@@ -731,12 +775,20 @@ class LoginPolicy(pulumi.CustomResource):
             ],
             multi_factors=["MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"],
             idps=[
-                zitadel_org_idp_oidc["oidc_idp"]["id"],
-                zitadel_org_idp_jwt["jwt_idp"]["id"],
+                data["zitadel_idp_google"]["default"]["id"],
+                data["zitadel_idp_azure_ad"]["default"]["id"],
             ],
             allow_domain_discovery=True,
             disable_login_with_email=True,
             disable_login_with_phone=True)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/loginPolicy:LoginPolicy imported '123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -762,6 +814,7 @@ class LoginPolicy(pulumi.CustomResource):
                  disable_login_with_phone: Optional[pulumi.Input[bool]] = None,
                  external_login_check_lifetime: Optional[pulumi.Input[str]] = None,
                  force_mfa: Optional[pulumi.Input[bool]] = None,
+                 force_mfa_local_only: Optional[pulumi.Input[bool]] = None,
                  hide_password_reset: Optional[pulumi.Input[bool]] = None,
                  idps: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ignore_unknown_usernames: Optional[pulumi.Input[bool]] = None,
@@ -801,6 +854,9 @@ class LoginPolicy(pulumi.CustomResource):
             if force_mfa is None and not opts.urn:
                 raise TypeError("Missing required property 'force_mfa'")
             __props__.__dict__["force_mfa"] = force_mfa
+            if force_mfa_local_only is None and not opts.urn:
+                raise TypeError("Missing required property 'force_mfa_local_only'")
+            __props__.__dict__["force_mfa_local_only"] = force_mfa_local_only
             if hide_password_reset is None and not opts.urn:
                 raise TypeError("Missing required property 'hide_password_reset'")
             __props__.__dict__["hide_password_reset"] = hide_password_reset
@@ -815,8 +871,6 @@ class LoginPolicy(pulumi.CustomResource):
                 raise TypeError("Missing required property 'multi_factor_check_lifetime'")
             __props__.__dict__["multi_factor_check_lifetime"] = multi_factor_check_lifetime
             __props__.__dict__["multi_factors"] = multi_factors
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if password_check_lifetime is None and not opts.urn:
                 raise TypeError("Missing required property 'password_check_lifetime'")
@@ -849,6 +903,7 @@ class LoginPolicy(pulumi.CustomResource):
             disable_login_with_phone: Optional[pulumi.Input[bool]] = None,
             external_login_check_lifetime: Optional[pulumi.Input[str]] = None,
             force_mfa: Optional[pulumi.Input[bool]] = None,
+            force_mfa_local_only: Optional[pulumi.Input[bool]] = None,
             hide_password_reset: Optional[pulumi.Input[bool]] = None,
             idps: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             ignore_unknown_usernames: Optional[pulumi.Input[bool]] = None,
@@ -875,11 +930,12 @@ class LoginPolicy(pulumi.CustomResource):
         :param pulumi.Input[bool] disable_login_with_email: defines if user can additionally (to the loginname) be identified by their verified email address
         :param pulumi.Input[bool] disable_login_with_phone: defines if user can additionally (to the loginname) be identified by their verified phone number
         :param pulumi.Input[bool] force_mfa: defines if a user MUST use a multi factor to log in
+        :param pulumi.Input[bool] force_mfa_local_only: if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
         :param pulumi.Input[bool] hide_password_reset: defines if password reset link should be shown in the login screen
         :param pulumi.Input[Sequence[pulumi.Input[str]]] idps: allowed idps to login or register
         :param pulumi.Input[bool] ignore_unknown_usernames: defines if unknown username on login screen directly return an error or always display the password screen
         :param pulumi.Input[Sequence[pulumi.Input[str]]] multi_factors: allowed multi factors
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] passwordless_type: defines if passwordless is allowed for users
         :param pulumi.Input[Sequence[pulumi.Input[str]]] second_factors: allowed second factors
         :param pulumi.Input[bool] user_login: defines if a user is allowed to login with his username and password
@@ -896,6 +952,7 @@ class LoginPolicy(pulumi.CustomResource):
         __props__.__dict__["disable_login_with_phone"] = disable_login_with_phone
         __props__.__dict__["external_login_check_lifetime"] = external_login_check_lifetime
         __props__.__dict__["force_mfa"] = force_mfa
+        __props__.__dict__["force_mfa_local_only"] = force_mfa_local_only
         __props__.__dict__["hide_password_reset"] = hide_password_reset
         __props__.__dict__["idps"] = idps
         __props__.__dict__["ignore_unknown_usernames"] = ignore_unknown_usernames
@@ -972,6 +1029,14 @@ class LoginPolicy(pulumi.CustomResource):
         return pulumi.get(self, "force_mfa")
 
     @property
+    @pulumi.getter(name="forceMfaLocalOnly")
+    def force_mfa_local_only(self) -> pulumi.Output[bool]:
+        """
+        if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+        """
+        return pulumi.get(self, "force_mfa_local_only")
+
+    @property
     @pulumi.getter(name="hidePasswordReset")
     def hide_password_reset(self) -> pulumi.Output[bool]:
         """
@@ -1015,9 +1080,9 @@ class LoginPolicy(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 

@@ -26,15 +26,15 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var actionAction = Zitadel.GetAction.Invoke(new()
+        ///     var @default = Zitadel.GetAction.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ActionId = "177073621691269123",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ActionId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["action"] = actionAction.Apply(getActionResult =&gt; getActionResult),
+        ///         ["action"] = @default.Apply(getActionResult =&gt; getActionResult),
         ///     };
         /// });
         /// ```
@@ -58,15 +58,15 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var actionAction = Zitadel.GetAction.Invoke(new()
+        ///     var @default = Zitadel.GetAction.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ActionId = "177073621691269123",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ActionId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["action"] = actionAction.Apply(getActionResult =&gt; getActionResult),
+        ///         ["action"] = @default.Apply(getActionResult =&gt; getActionResult),
         ///     };
         /// });
         /// ```
@@ -89,8 +89,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public string OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public string? OrgId { get; set; }
 
         public GetActionArgs()
         {
@@ -109,8 +109,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         public GetActionInvokeArgs()
         {
@@ -138,7 +138,7 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        public readonly string OrgId;
+        public readonly string? OrgId;
         public readonly string Script;
         /// <summary>
         /// the state of the action
@@ -159,7 +159,7 @@ namespace Pulumiverse.Zitadel
 
             string name,
 
-            string orgId,
+            string? orgId,
 
             string script,
 

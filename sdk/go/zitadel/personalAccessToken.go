@@ -25,9 +25,9 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewPersonalAccessToken(ctx, "pat", &zitadel.PersonalAccessTokenArgs{
-// 			OrgId:          pulumi.Any(zitadel_org.Org.Id),
-// 			UserId:         pulumi.Any(zitadel_machine_user.Machine_user.Id),
+// 		_, err := zitadel.NewPersonalAccessToken(ctx, "default", &zitadel.PersonalAccessTokenArgs{
+// 			OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
+// 			UserId:         pulumi.Any(data.Zitadel_machine_user.Default.Id),
 // 			ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
 // 		})
 // 		if err != nil {
@@ -37,13 +37,21 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/personalAccessToken:PersonalAccessToken imported '123456789012345678:123456789012345678:123456789012345678:LHt79...'
+// ```
 type PersonalAccessToken struct {
 	pulumi.CustomResourceState
 
 	// Expiration date of the token in the RFC3339 format
 	ExpirationDate pulumi.StringPtrOutput `pulumi:"expirationDate"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// Value of the token
 	Token pulumi.StringOutput `pulumi:"token"`
 	// ID of the user
@@ -57,9 +65,6 @@ func NewPersonalAccessToken(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	if args.UserId == nil {
 		return nil, errors.New("invalid value for required argument 'UserId'")
 	}
@@ -115,7 +120,7 @@ type personalAccessTokenArgs struct {
 	// Expiration date of the token in the RFC3339 format
 	ExpirationDate *string `pulumi:"expirationDate"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// ID of the user
 	UserId string `pulumi:"userId"`
 }
@@ -125,7 +130,7 @@ type PersonalAccessTokenArgs struct {
 	// Expiration date of the token in the RFC3339 format
 	ExpirationDate pulumi.StringPtrInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// ID of the user
 	UserId pulumi.StringInput
 }
@@ -223,8 +228,8 @@ func (o PersonalAccessTokenOutput) ExpirationDate() pulumi.StringPtrOutput {
 }
 
 // ID of the organization
-func (o PersonalAccessTokenOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *PersonalAccessToken) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o PersonalAccessTokenOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PersonalAccessToken) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Value of the token

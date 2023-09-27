@@ -22,17 +22,25 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var smtp = new Zitadel.SmtpConfig("smtp", new()
+    ///     var @default = new Zitadel.SmtpConfig("default", new()
     ///     {
     ///         Host = "localhost:25",
-    ///         Password = "password",
-    ///         SenderAddress = "address",
+    ///         Password = "secret_password",
+    ///         SenderAddress = "sender@example.com",
     ///         SenderName = "no-reply",
     ///         Tls = true,
     ///         User = "user",
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform # The resource can be imported using the ID format `&lt;[password]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/smtpConfig:SmtpConfig")]

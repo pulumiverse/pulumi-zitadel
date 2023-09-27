@@ -202,12 +202,20 @@ class DefaultPasswordComplexityPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        password_complexity_policy = zitadel.DefaultPasswordComplexityPolicy("passwordComplexityPolicy",
+        default = zitadel.DefaultPasswordComplexityPolicy("default",
             has_lowercase=True,
             has_number=True,
             has_symbol=True,
             has_uppercase=True,
             min_length=8)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy imported ''
         ```
 
         :param str resource_name: The name of the resource.
@@ -233,12 +241,20 @@ class DefaultPasswordComplexityPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        password_complexity_policy = zitadel.DefaultPasswordComplexityPolicy("passwordComplexityPolicy",
+        default = zitadel.DefaultPasswordComplexityPolicy("default",
             has_lowercase=True,
             has_number=True,
             has_symbol=True,
             has_uppercase=True,
             min_length=8)
+        ```
+
+        ## Import
+
+        terraform # The resource can be imported using the ID format `<>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy imported ''
         ```
 
         :param str resource_name: The name of the resource.

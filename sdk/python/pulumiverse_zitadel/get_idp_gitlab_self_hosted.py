@@ -163,7 +163,7 @@ def get_idp_gitlab_self_hosted(id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    gitlab_self_hosted = zitadel.get_idp_gitlab_self_hosted(id="177073614158299139")
+    default = zitadel.get_idp_gitlab_self_hosted(id="123456789012345678")
     ```
 
 
@@ -199,7 +199,7 @@ def get_idp_gitlab_self_hosted_output(id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    gitlab_self_hosted = zitadel.get_idp_gitlab_self_hosted(id="177073614158299139")
+    default = zitadel.get_idp_gitlab_self_hosted(id="123456789012345678")
     ```
 
 

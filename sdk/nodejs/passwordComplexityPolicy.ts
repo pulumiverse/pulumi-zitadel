@@ -13,8 +13,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const passwordComplexityPolicy = new zitadel.PasswordComplexityPolicy("passwordComplexityPolicy", {
- *     orgId: zitadel_org.org.id,
+ * const _default = new zitadel.PasswordComplexityPolicy("default", {
+ *     orgId: data.zitadel_org["default"].id,
  *     minLength: 8,
  *     hasUppercase: true,
  *     hasLowercase: true,
@@ -72,9 +72,9 @@ export class PasswordComplexityPolicy extends pulumi.CustomResource {
      */
     public readonly minLength!: pulumi.Output<number>;
     /**
-     * Id for the organization
+     * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
 
     /**
      * Create a PasswordComplexityPolicy resource with the given unique name, arguments, and options.
@@ -111,9 +111,6 @@ export class PasswordComplexityPolicy extends pulumi.CustomResource {
             }
             if ((!args || args.minLength === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'minLength'");
-            }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
             }
             resourceInputs["hasLowercase"] = args ? args.hasLowercase : undefined;
             resourceInputs["hasNumber"] = args ? args.hasNumber : undefined;
@@ -152,7 +149,7 @@ export interface PasswordComplexityPolicyState {
      */
     minLength?: pulumi.Input<number>;
     /**
-     * Id for the organization
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
 }
@@ -182,7 +179,7 @@ export interface PasswordComplexityPolicyArgs {
      */
     minLength: pulumi.Input<number>;
     /**
-     * Id for the organization
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
 }

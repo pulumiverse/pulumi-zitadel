@@ -25,9 +25,9 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgMember(ctx, "orgMember", &zitadel.OrgMemberArgs{
-// 			OrgId:  pulumi.Any(zitadel_org.Org.Id),
-// 			UserId: pulumi.Any(zitadel_human_user.Human_user.Id),
+// 		_, err := zitadel.NewOrgMember(ctx, "default", &zitadel.OrgMemberArgs{
+// 			OrgId:  pulumi.Any(data.Zitadel_org.Default.Id),
+// 			UserId: pulumi.Any(data.Zitadel_human_user.Default.Id),
 // 			Roles: pulumi.StringArray{
 // 				pulumi.String("ORG_OWNER"),
 // 			},
@@ -39,11 +39,19 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<user_id[:org_id]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/orgMember:OrgMember imported '123456789012345678:123456789012345678'
+// ```
 type OrgMember struct {
 	pulumi.CustomResourceState
 
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// List of roles granted
 	Roles pulumi.StringArrayOutput `pulumi:"roles"`
 	// ID of the user
@@ -57,9 +65,6 @@ func NewOrgMember(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	if args.Roles == nil {
 		return nil, errors.New("invalid value for required argument 'Roles'")
 	}
@@ -112,7 +117,7 @@ func (OrgMemberState) ElementType() reflect.Type {
 
 type orgMemberArgs struct {
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// List of roles granted
 	Roles []string `pulumi:"roles"`
 	// ID of the user
@@ -122,7 +127,7 @@ type orgMemberArgs struct {
 // The set of arguments for constructing a OrgMember resource.
 type OrgMemberArgs struct {
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// List of roles granted
 	Roles pulumi.StringArrayInput
 	// ID of the user
@@ -217,8 +222,8 @@ func (o OrgMemberOutput) ToOrgMemberOutputWithContext(ctx context.Context) OrgMe
 }
 
 // ID of the organization
-func (o OrgMemberOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *OrgMember) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o OrgMemberOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *OrgMember) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // List of roles granted

@@ -13,10 +13,10 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const orgOrg = zitadel.getOrg({
- *     orgId: "177073608051458051",
+ * const default = zitadel.getOrg({
+ *     id: "123456789012345678",
  * });
- * export const org = orgOrg;
+ * export const org = _default;
  * ```
  */
 export function getOrg(args: GetOrgArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgResult> {
@@ -26,7 +26,7 @@ export function getOrg(args: GetOrgArgs, opts?: pulumi.InvokeOptions): Promise<G
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
     return pulumi.runtime.invoke("zitadel:index/getOrg:getOrg", {
-        "orgId": args.orgId,
+        "id": args.id,
     }, opts);
 }
 
@@ -35,9 +35,9 @@ export function getOrg(args: GetOrgArgs, opts?: pulumi.InvokeOptions): Promise<G
  */
 export interface GetOrgArgs {
     /**
-     * The ID of this resource.
+     * ID of the organization
      */
-    orgId: string;
+    id: string;
 }
 
 /**
@@ -45,17 +45,21 @@ export interface GetOrgArgs {
  */
 export interface GetOrgResult {
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * ID of the organization
      */
     readonly id: string;
     /**
-     * Name of the org
+     * Name of the org.
      */
     readonly name: string;
     /**
-     * The ID of this resource.
+     * Primary domain of the org
      */
-    readonly orgId: string;
+    readonly primaryDomain: string;
+    /**
+     * State of the org, supported values: ORG*STATE*UNSPECIFIED, ORG*STATE*ACTIVE, ORG*STATE*INACTIVE, ORG*STATE*REMOVED
+     */
+    readonly state: string;
 }
 
 export function getOrgOutput(args: GetOrgOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOrgResult> {
@@ -67,7 +71,7 @@ export function getOrgOutput(args: GetOrgOutputArgs, opts?: pulumi.InvokeOptions
  */
 export interface GetOrgOutputArgs {
     /**
-     * The ID of this resource.
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    id: pulumi.Input<string>;
 }

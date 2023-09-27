@@ -26,16 +26,16 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var oidcApplicationApplicationOidc = Zitadel.GetApplicationOidc.Invoke(new()
+        ///     var @default = Zitadel.GetApplicationOidc.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = data.Zitadel_project.Project.Id,
-        ///         AppId = "177073626925760515",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         AppId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["oidcApplication"] = oidcApplicationApplicationOidc.Apply(getApplicationOidcResult =&gt; getApplicationOidcResult),
+        ///         ["applicationOidc"] = @default.Apply(getApplicationOidcResult =&gt; getApplicationOidcResult),
         ///     };
         /// });
         /// ```
@@ -59,16 +59,16 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var oidcApplicationApplicationOidc = Zitadel.GetApplicationOidc.Invoke(new()
+        ///     var @default = Zitadel.GetApplicationOidc.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = data.Zitadel_project.Project.Id,
-        ///         AppId = "177073626925760515",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         AppId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["oidcApplication"] = oidcApplicationApplicationOidc.Apply(getApplicationOidcResult =&gt; getApplicationOidcResult),
+        ///         ["applicationOidc"] = @default.Apply(getApplicationOidcResult =&gt; getApplicationOidcResult),
         ///     };
         /// });
         /// ```
@@ -89,10 +89,10 @@ namespace Pulumiverse.Zitadel
         public string AppId { get; set; } = null!;
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public string OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public string? OrgId { get; set; }
 
         /// <summary>
         /// ID of the project
@@ -115,10 +115,10 @@ namespace Pulumiverse.Zitadel
         public Input<string> AppId { get; set; } = null!;
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// ID of the project
@@ -189,9 +189,9 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        public readonly string OrgId;
+        public readonly string? OrgId;
         /// <summary>
         /// Post logout redirect URIs
         /// </summary>
@@ -241,7 +241,7 @@ namespace Pulumiverse.Zitadel
 
             string name,
 
-            string orgId,
+            string? orgId,
 
             ImmutableArray<string> postLogoutRedirectUris,
 

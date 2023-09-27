@@ -13,12 +13,20 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const domainPolicy = new zitadel.DomainPolicy("domainPolicy", {
- *     orgId: zitadel_org.org.id,
+ * const _default = new zitadel.DomainPolicy("default", {
+ *     orgId: data.zitadel_org["default"].id,
  *     userLoginMustBeDomain: false,
- *     validateOrgDomains: false,
- *     smtpSenderAddressMatchesInstanceDomain: false,
+ *     validateOrgDomains: true,
+ *     smtpSenderAddressMatchesInstanceDomain: true,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/domainPolicy:DomainPolicy imported '123456789012345678'
  * ```
  */
 export class DomainPolicy extends pulumi.CustomResource {
@@ -50,9 +58,9 @@ export class DomainPolicy extends pulumi.CustomResource {
     }
 
     /**
-     * Id for the organization
+     * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     public readonly smtpSenderAddressMatchesInstanceDomain!: pulumi.Output<boolean>;
     /**
      * User login must be domain
@@ -82,9 +90,6 @@ export class DomainPolicy extends pulumi.CustomResource {
             resourceInputs["validateOrgDomains"] = state ? state.validateOrgDomains : undefined;
         } else {
             const args = argsOrState as DomainPolicyArgs | undefined;
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             if ((!args || args.smtpSenderAddressMatchesInstanceDomain === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'smtpSenderAddressMatchesInstanceDomain'");
             }
@@ -109,7 +114,7 @@ export class DomainPolicy extends pulumi.CustomResource {
  */
 export interface DomainPolicyState {
     /**
-     * Id for the organization
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
     smtpSenderAddressMatchesInstanceDomain?: pulumi.Input<boolean>;
@@ -128,9 +133,9 @@ export interface DomainPolicyState {
  */
 export interface DomainPolicyArgs {
     /**
-     * Id for the organization
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     smtpSenderAddressMatchesInstanceDomain: pulumi.Input<boolean>;
     /**
      * User login must be domain

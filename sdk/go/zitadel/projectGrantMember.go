@@ -25,11 +25,11 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewProjectGrantMember(ctx, "projectGrantMember", &zitadel.ProjectGrantMemberArgs{
-// 			OrgId:     pulumi.Any(zitadel_org.Org.Id),
-// 			ProjectId: pulumi.Any(zitadel_project.Project.Id),
-// 			GrantId:   pulumi.Any(zitadel_project_grant.Project_grant.Id),
-// 			UserId:    pulumi.Any(zitadel_human_user.Granted_human_user.Id),
+// 		_, err := zitadel.NewProjectGrantMember(ctx, "default", &zitadel.ProjectGrantMemberArgs{
+// 			OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
+// 			ProjectId: pulumi.Any(data.Zitadel_project.Default.Id),
+// 			UserId:    pulumi.Any(data.Zitadel_human_user.Default.Id),
+// 			GrantId:   pulumi.String("123456789012345678"),
 // 			Roles: pulumi.StringArray{
 // 				pulumi.String("PROJECT_GRANT_OWNER"),
 // 			},
@@ -41,13 +41,21 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<project_id:grant_id:user_id[:org_id]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/projectGrantMember:ProjectGrantMember imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678'
+// ```
 type ProjectGrantMember struct {
 	pulumi.CustomResourceState
 
 	// ID of the grant
 	GrantId pulumi.StringOutput `pulumi:"grantId"`
-	// ID of the organization which owns the resource
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// ID of the project
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
 	// List of roles granted
@@ -65,9 +73,6 @@ func NewProjectGrantMember(ctx *pulumi.Context,
 
 	if args.GrantId == nil {
 		return nil, errors.New("invalid value for required argument 'GrantId'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
@@ -103,7 +108,7 @@ func GetProjectGrantMember(ctx *pulumi.Context,
 type projectGrantMemberState struct {
 	// ID of the grant
 	GrantId *string `pulumi:"grantId"`
-	// ID of the organization which owns the resource
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 	// ID of the project
 	ProjectId *string `pulumi:"projectId"`
@@ -116,7 +121,7 @@ type projectGrantMemberState struct {
 type ProjectGrantMemberState struct {
 	// ID of the grant
 	GrantId pulumi.StringPtrInput
-	// ID of the organization which owns the resource
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 	// ID of the project
 	ProjectId pulumi.StringPtrInput
@@ -133,8 +138,8 @@ func (ProjectGrantMemberState) ElementType() reflect.Type {
 type projectGrantMemberArgs struct {
 	// ID of the grant
 	GrantId string `pulumi:"grantId"`
-	// ID of the organization which owns the resource
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// ID of the project
 	ProjectId string `pulumi:"projectId"`
 	// List of roles granted
@@ -147,8 +152,8 @@ type projectGrantMemberArgs struct {
 type ProjectGrantMemberArgs struct {
 	// ID of the grant
 	GrantId pulumi.StringInput
-	// ID of the organization which owns the resource
-	OrgId pulumi.StringInput
+	// ID of the organization
+	OrgId pulumi.StringPtrInput
 	// ID of the project
 	ProjectId pulumi.StringInput
 	// List of roles granted
@@ -249,9 +254,9 @@ func (o ProjectGrantMemberOutput) GrantId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProjectGrantMember) pulumi.StringOutput { return v.GrantId }).(pulumi.StringOutput)
 }
 
-// ID of the organization which owns the resource
-func (o ProjectGrantMemberOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *ProjectGrantMember) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o ProjectGrantMemberOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectGrantMember) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // ID of the project

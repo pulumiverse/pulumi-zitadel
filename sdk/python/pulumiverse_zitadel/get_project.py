@@ -76,9 +76,9 @@ class GetProjectResult:
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> str:
+    def org_id(self) -> Optional[str]:
         """
-        Organization in which the project is located
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -152,13 +152,13 @@ def get_project(org_id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    project_project = zitadel.get_project(org_id=data["zitadel_org"]["org"]["id"],
-        project_id="177073620768522243")
-    pulumi.export("project", project_project)
+    default = zitadel.get_project(org_id=data["zitadel_org"]["default"]["id"],
+        project_id="123456789012345678")
+    pulumi.export("project", default)
     ```
 
 
-    :param str org_id: Organization in which the project is located
+    :param str org_id: ID of the organization
     :param str project_id: The ID of this resource.
     """
     __args__ = dict()
@@ -180,7 +180,7 @@ def get_project(org_id: Optional[str] = None,
 
 
 @_utilities.lift_output_func(get_project)
-def get_project_output(org_id: Optional[pulumi.Input[str]] = None,
+def get_project_output(org_id: Optional[pulumi.Input[Optional[str]]] = None,
                        project_id: Optional[pulumi.Input[str]] = None,
                        opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetProjectResult]:
     """
@@ -192,13 +192,13 @@ def get_project_output(org_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    project_project = zitadel.get_project(org_id=data["zitadel_org"]["org"]["id"],
-        project_id="177073620768522243")
-    pulumi.export("project", project_project)
+    default = zitadel.get_project(org_id=data["zitadel_org"]["default"]["id"],
+        project_id="123456789012345678")
+    pulumi.export("project", default)
     ```
 
 
-    :param str org_id: Organization in which the project is located
+    :param str org_id: ID of the organization
     :param str project_id: The ID of this resource.
     """
     ...

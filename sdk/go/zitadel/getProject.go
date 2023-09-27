@@ -25,14 +25,14 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		projectProject, err := zitadel.LookupProject(ctx, &GetProjectArgs{
-// 			OrgId:     data.Zitadel_org.Org.Id,
-// 			ProjectId: "177073620768522243",
+// 		_default, err := zitadel.LookupProject(ctx, &GetProjectArgs{
+// 			OrgId:     pulumi.StringRef(data.Zitadel_org.Default.Id),
+// 			ProjectId: "123456789012345678",
 // 		}, nil)
 // 		if err != nil {
 // 			return err
 // 		}
-// 		ctx.Export("project", projectProject)
+// 		ctx.Export("project", _default)
 // 		return nil
 // 	})
 // }
@@ -49,8 +49,8 @@ func LookupProject(ctx *pulumi.Context, args *LookupProjectArgs, opts ...pulumi.
 
 // A collection of arguments for invoking getProject.
 type LookupProjectArgs struct {
-	// Organization in which the project is located
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// The ID of this resource.
 	ProjectId string `pulumi:"projectId"`
 }
@@ -63,8 +63,8 @@ type LookupProjectResult struct {
 	Id string `pulumi:"id"`
 	// Name of the project
 	Name string `pulumi:"name"`
-	// Organization in which the project is located
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// Defines from where the private labeling should be triggered
 	PrivateLabelingSetting string `pulumi:"privateLabelingSetting"`
 	// The ID of this resource.
@@ -92,8 +92,8 @@ func LookupProjectOutput(ctx *pulumi.Context, args LookupProjectOutputArgs, opts
 
 // A collection of arguments for invoking getProject.
 type LookupProjectOutputArgs struct {
-	// Organization in which the project is located
-	OrgId pulumi.StringInput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrInput `pulumi:"orgId"`
 	// The ID of this resource.
 	ProjectId pulumi.StringInput `pulumi:"projectId"`
 }
@@ -132,9 +132,9 @@ func (o LookupProjectResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupProjectResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Organization in which the project is located
-func (o LookupProjectResultOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupProjectResult) string { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o LookupProjectResultOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupProjectResult) *string { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Defines from where the private labeling should be triggered

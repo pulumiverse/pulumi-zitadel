@@ -248,9 +248,9 @@ def get_human_user(org_id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    human_user_human_user = zitadel.get_human_user(org_id=data["zitadel_org"]["org"]["id"],
-        user_id="177073614158299139")
-    pulumi.export("humanUser", human_user_human_user)
+    default = zitadel.get_human_user(org_id=data["zitadel_org"]["default"]["id"],
+        user_id="123456789012345678")
+    pulumi.export("humanUser", default)
     ```
 
 
@@ -296,9 +296,9 @@ def get_human_user_output(org_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    human_user_human_user = zitadel.get_human_user(org_id=data["zitadel_org"]["org"]["id"],
-        user_id="177073614158299139")
-    pulumi.export("humanUser", human_user_human_user)
+    default = zitadel.get_human_user(org_id=data["zitadel_org"]["default"]["id"],
+        user_id="123456789012345678")
+    pulumi.export("humanUser", default)
     ```
 
 

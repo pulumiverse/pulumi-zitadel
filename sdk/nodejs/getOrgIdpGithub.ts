@@ -13,9 +13,10 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const github = pulumi.output(zitadel.getOrgIdpGithub({
- *     id: "177073614158299139",
- * }));
+ * const default = zitadel.getOrgIdpGithub({
+ *     orgId: data.zitadel_org["default"].id,
+ *     id: "123456789012345678",
+ * });
  * ```
  */
 export function getOrgIdpGithub(args: GetOrgIdpGithubArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgIdpGithubResult> {
@@ -41,7 +42,7 @@ export interface GetOrgIdpGithubArgs {
     /**
      * ID of the organization
      */
-    orgId: string;
+    orgId?: string;
 }
 
 /**
@@ -83,7 +84,7 @@ export interface GetOrgIdpGithubResult {
     /**
      * ID of the organization
      */
-    readonly orgId: string;
+    readonly orgId?: string;
     /**
      * the scopes requested by ZITADEL during the request on the identity provider
      */
@@ -105,5 +106,5 @@ export interface GetOrgIdpGithubOutputArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
 }

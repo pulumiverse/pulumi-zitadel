@@ -13,7 +13,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const gitlabSelfHosted = new zitadel.IdpGitlabSelfHosted("gitlab_self_hosted", {
+ * const defaultIdpGitlabSelfHosted = new zitadel.IdpGitlabSelfHosted("default", {
  *     clientId: "15765e...",
  *     clientSecret: "*****abcxyz",
  *     isAutoCreation: false,
@@ -27,6 +27,14 @@ import * as utilities from "./utilities";
  *         "email",
  *     ],
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/idpGitlabSelfHosted:IdpGitlabSelfHosted imported '123456789012345678:1234567890abcdef'
  * ```
  */
 export class IdpGitlabSelfHosted extends pulumi.CustomResource {

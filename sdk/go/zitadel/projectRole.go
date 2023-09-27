@@ -25,10 +25,10 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewProjectRole(ctx, "projectRole", &zitadel.ProjectRoleArgs{
-// 			OrgId:       pulumi.Any(zitadel_org.Org.Id),
-// 			ProjectId:   pulumi.Any(zitadel_project.Project.Id),
-// 			RoleKey:     pulumi.String("key"),
+// 		_, err := zitadel.NewProjectRole(ctx, "default", &zitadel.ProjectRoleArgs{
+// 			OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
+// 			ProjectId:   pulumi.Any(data.Zitadel_project.Default.Id),
+// 			RoleKey:     pulumi.String("super-user"),
 // 			DisplayName: pulumi.String("display_name2"),
 // 			Group:       pulumi.String("role_group"),
 // 		})
@@ -39,6 +39,14 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<project_id:role_key[:org_id]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/projectRole:ProjectRole imported '123456789012345678:my-role-key:123456789012345678'
+// ```
 type ProjectRole struct {
 	pulumi.CustomResourceState
 
@@ -47,7 +55,7 @@ type ProjectRole struct {
 	// Group used for project role
 	Group pulumi.StringPtrOutput `pulumi:"group"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// ID of the project
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
 	// Key used for project role
@@ -63,9 +71,6 @@ func NewProjectRole(ctx *pulumi.Context,
 
 	if args.DisplayName == nil {
 		return nil, errors.New("invalid value for required argument 'DisplayName'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
@@ -131,7 +136,7 @@ type projectRoleArgs struct {
 	// Group used for project role
 	Group *string `pulumi:"group"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// ID of the project
 	ProjectId string `pulumi:"projectId"`
 	// Key used for project role
@@ -145,7 +150,7 @@ type ProjectRoleArgs struct {
 	// Group used for project role
 	Group pulumi.StringPtrInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// ID of the project
 	ProjectId pulumi.StringInput
 	// Key used for project role
@@ -250,8 +255,8 @@ func (o ProjectRoleOutput) Group() pulumi.StringPtrOutput {
 }
 
 // ID of the organization
-func (o ProjectRoleOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *ProjectRole) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o ProjectRoleOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectRole) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // ID of the project

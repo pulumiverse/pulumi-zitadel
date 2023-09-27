@@ -26,14 +26,14 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var orgOrg = Zitadel.GetOrg.Invoke(new()
+        ///     var @default = Zitadel.GetOrg.Invoke(new()
         ///     {
-        ///         OrgId = "177073608051458051",
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["org"] = orgOrg.Apply(getOrgResult =&gt; getOrgResult),
+        ///         ["org"] = @default.Apply(getOrgResult =&gt; getOrgResult),
         ///     };
         /// });
         /// ```
@@ -57,14 +57,14 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var orgOrg = Zitadel.GetOrg.Invoke(new()
+        ///     var @default = Zitadel.GetOrg.Invoke(new()
         ///     {
-        ///         OrgId = "177073608051458051",
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["org"] = orgOrg.Apply(getOrgResult =&gt; getOrgResult),
+        ///         ["org"] = @default.Apply(getOrgResult =&gt; getOrgResult),
         ///     };
         /// });
         /// ```
@@ -79,10 +79,10 @@ namespace Pulumiverse.Zitadel
     public sealed class GetOrgArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The ID of this resource.
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public string OrgId { get; set; } = null!;
+        [Input("id", required: true)]
+        public string Id { get; set; } = null!;
 
         public GetOrgArgs()
         {
@@ -93,10 +93,10 @@ namespace Pulumiverse.Zitadel
     public sealed class GetOrgInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The ID of this resource.
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("id", required: true)]
+        public Input<string> Id { get; set; } = null!;
 
         public GetOrgInvokeArgs()
         {
@@ -109,17 +109,21 @@ namespace Pulumiverse.Zitadel
     public sealed class GetOrgResult
     {
         /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
+        /// ID of the organization
         /// </summary>
         public readonly string Id;
         /// <summary>
-        /// Name of the org
+        /// Name of the org.
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// The ID of this resource.
+        /// Primary domain of the org
         /// </summary>
-        public readonly string OrgId;
+        public readonly string PrimaryDomain;
+        /// <summary>
+        /// State of the org, supported values: ORG*STATE*UNSPECIFIED, ORG*STATE*ACTIVE, ORG*STATE*INACTIVE, ORG*STATE*REMOVED
+        /// </summary>
+        public readonly string State;
 
         [OutputConstructor]
         private GetOrgResult(
@@ -127,11 +131,14 @@ namespace Pulumiverse.Zitadel
 
             string name,
 
-            string orgId)
+            string primaryDomain,
+
+            string state)
         {
             Id = id;
             Name = name;
-            OrgId = orgId;
+            PrimaryDomain = primaryDomain;
+            State = state;
         }
     }
 }

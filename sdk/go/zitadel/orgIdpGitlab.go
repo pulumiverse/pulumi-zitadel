@@ -25,8 +25,8 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpGitlab(ctx, "gitlab", &zitadel.OrgIdpGitlabArgs{
-// 			OrgId:        pulumi.Any(zitadel_org.Org.Id),
+// 		_, err := zitadel.NewOrgIdpGitlab(ctx, "default", &zitadel.OrgIdpGitlabArgs{
+// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
 // 			ClientId:     pulumi.String("15765e..."),
 // 			ClientSecret: pulumi.String("*****abcxyz"),
 // 			Scopes: pulumi.StringArray{
@@ -46,6 +46,14 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+//
+// ```sh
+//  $ pulumi import zitadel:index/orgIdpGitlab:OrgIdpGitlab imported '123456789012345678:123456789012345678:1234567890abcdef'
+// ```
 type OrgIdpGitlab struct {
 	pulumi.CustomResourceState
 
@@ -64,7 +72,7 @@ type OrgIdpGitlab struct {
 	// Name of the IDP
 	Name pulumi.StringOutput `pulumi:"name"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes pulumi.StringArrayOutput `pulumi:"scopes"`
 }
@@ -93,9 +101,6 @@ func NewOrgIdpGitlab(ctx *pulumi.Context,
 	}
 	if args.IsLinkingAllowed == nil {
 		return nil, errors.New("invalid value for required argument 'IsLinkingAllowed'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource OrgIdpGitlab
@@ -181,7 +186,7 @@ type orgIdpGitlabArgs struct {
 	// Name of the IDP
 	Name *string `pulumi:"name"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes []string `pulumi:"scopes"`
 }
@@ -203,7 +208,7 @@ type OrgIdpGitlabArgs struct {
 	// Name of the IDP
 	Name pulumi.StringPtrInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes pulumi.StringArrayInput
 }
@@ -331,8 +336,8 @@ func (o OrgIdpGitlabOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o OrgIdpGitlabOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *OrgIdpGitlab) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o OrgIdpGitlabOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *OrgIdpGitlab) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // the scopes requested by ZITADEL during the request on the identity provider
