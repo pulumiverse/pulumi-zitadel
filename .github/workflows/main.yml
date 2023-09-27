@@ -1,7 +1,8 @@
 name: main
 
 on:
-  push:
+  # TODO: Return back
+  #push:
   workflow_dispatch:
 
 jobs:
