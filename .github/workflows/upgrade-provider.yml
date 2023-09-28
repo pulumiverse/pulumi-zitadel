@@ -8,14 +8,15 @@ on:
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
 jobs:
   upgrade_provider:
     name: upgrade-provider
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      issues: write
     steps:
       - name: Install Go
         uses: actions/setup-go@v3
