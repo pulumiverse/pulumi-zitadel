@@ -15,7 +15,7 @@ jobs:
     name: upgrade-provider
     runs-on: ubuntu-latest
     steps:
-      - run: gh pr create --base pr-test --head main
+      - run: gh pr create --base pr-test --head main --title "Test" --body "Test"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Install Go
