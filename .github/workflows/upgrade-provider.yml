@@ -15,6 +15,11 @@ jobs:
     name: upgrade-provider
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: pr-test
+
       - run: gh pr create --base pr-test --head main --title "Test" --body "Test"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
