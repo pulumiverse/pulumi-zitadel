@@ -14,6 +14,7 @@ from .default_label_policy import *
 from .default_lockout_policy import *
 from .default_login_policy import *
 from .default_notification_policy import *
+from .default_oidc_settings import *
 from .default_password_complexity_policy import *
 from .default_privacy_policy import *
 from .domain import *
@@ -21,6 +22,7 @@ from .domain_policy import *
 from .get_action import *
 from .get_application_api import *
 from .get_application_oidc import *
+from .get_default_oidc_settings import *
 from .get_human_user import *
 from .get_idp_azure_ad import *
 from .get_idp_github import *
@@ -40,6 +42,7 @@ from .get_org_idp_google import *
 from .get_org_idp_ldap import *
 from .get_org_jwt_idp import *
 from .get_org_oidc_idp import *
+from .get_orgs import *
 from .get_project import *
 from .get_project_role import *
 from .get_trigger_actions import *
@@ -163,6 +166,14 @@ _utilities.register(
   "fqn": "pulumiverse_zitadel",
   "classes": {
    "zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy": "DefaultNotificationPolicy"
+  }
+ },
+ {
+  "pkg": "zitadel",
+  "mod": "index/defaultOidcSettings",
+  "fqn": "pulumiverse_zitadel",
+  "classes": {
+   "zitadel:index/defaultOidcSettings:DefaultOidcSettings": "DefaultOidcSettings"
   }
  },
  {

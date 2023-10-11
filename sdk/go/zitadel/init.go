@@ -38,6 +38,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DefaultLoginPolicy{}
 	case "zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy":
 		r = &DefaultNotificationPolicy{}
+	case "zitadel:index/defaultOidcSettings:DefaultOidcSettings":
+		r = &DefaultOidcSettings{}
 	case "zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy":
 		r = &DefaultPasswordComplexityPolicy{}
 	case "zitadel:index/defaultPrivacyPolicy:DefaultPrivacyPolicy":
@@ -193,6 +195,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"zitadel",
 		"index/defaultNotificationPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"zitadel",
+		"index/defaultOidcSettings",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -14,6 +14,7 @@ export * from "./defaultLabelPolicy";
 export * from "./defaultLockoutPolicy";
 export * from "./defaultLoginPolicy";
 export * from "./defaultNotificationPolicy";
+export * from "./defaultOidcSettings";
 export * from "./defaultPasswordComplexityPolicy";
 export * from "./defaultPrivacyPolicy";
 export * from "./domain";
@@ -21,6 +22,7 @@ export * from "./domainPolicy";
 export * from "./getAction";
 export * from "./getApplicationApi";
 export * from "./getApplicationOidc";
+export * from "./getDefaultOidcSettings";
 export * from "./getHumanUser";
 export * from "./getIdpAzureAd";
 export * from "./getIdpGithub";
@@ -40,6 +42,7 @@ export * from "./getOrgIdpGoogle";
 export * from "./getOrgIdpLdap";
 export * from "./getOrgJwtIdp";
 export * from "./getOrgOidcIdp";
+export * from "./getOrgs";
 export * from "./getProject";
 export * from "./getProjectRole";
 export * from "./getTriggerActions";
@@ -100,6 +103,7 @@ import { DefaultLabelPolicy } from "./defaultLabelPolicy";
 import { DefaultLockoutPolicy } from "./defaultLockoutPolicy";
 import { DefaultLoginPolicy } from "./defaultLoginPolicy";
 import { DefaultNotificationPolicy } from "./defaultNotificationPolicy";
+import { DefaultOidcSettings } from "./defaultOidcSettings";
 import { DefaultPasswordComplexityPolicy } from "./defaultPasswordComplexityPolicy";
 import { DefaultPrivacyPolicy } from "./defaultPrivacyPolicy";
 import { Domain } from "./domain";
@@ -165,6 +169,8 @@ const _module = {
                 return new DefaultLoginPolicy(name, <any>undefined, { urn })
             case "zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy":
                 return new DefaultNotificationPolicy(name, <any>undefined, { urn })
+            case "zitadel:index/defaultOidcSettings:DefaultOidcSettings":
+                return new DefaultOidcSettings(name, <any>undefined, { urn })
             case "zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy":
                 return new DefaultPasswordComplexityPolicy(name, <any>undefined, { urn })
             case "zitadel:index/defaultPrivacyPolicy:DefaultPrivacyPolicy":
@@ -263,6 +269,7 @@ pulumi.runtime.registerResourceModule("zitadel", "index/defaultLabelPolicy", _mo
 pulumi.runtime.registerResourceModule("zitadel", "index/defaultLockoutPolicy", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/defaultLoginPolicy", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/defaultNotificationPolicy", _module)
+pulumi.runtime.registerResourceModule("zitadel", "index/defaultOidcSettings", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/defaultPasswordComplexityPolicy", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/defaultPrivacyPolicy", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/domain", _module)

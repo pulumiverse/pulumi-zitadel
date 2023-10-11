@@ -1437,6 +1437,79 @@
                 "type": "object"
             }
         },
+        "zitadel:index/defaultOidcSettings:DefaultOidcSettings": {
+            "description": "Resource representing the default oidc settings.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as zitadel from \"@pulumi/zitadel\";\n\nconst defaultDefaultOidcSettings = new zitadel.DefaultOidcSettings(\"default\", {\n    accessTokenLifetime: \"12h0m0s\",\n    idTokenLifetime: \"12h0m0s\",\n    refreshTokenExpiration: \"720h0m0s\",\n    refreshTokenIdleExpiration: \"2160h0m0s\",\n});\n```\n```python\nimport pulumi\nimport pulumiverse_zitadel as zitadel\n\ndefault = zitadel.DefaultOidcSettings(\"default\",\n    access_token_lifetime=\"12h0m0s\",\n    id_token_lifetime=\"12h0m0s\",\n    refresh_token_expiration=\"720h0m0s\",\n    refresh_token_idle_expiration=\"2160h0m0s\")\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Zitadel = Pulumiverse.Zitadel;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @default = new Zitadel.DefaultOidcSettings(\"default\", new()\n    {\n        AccessTokenLifetime = \"12h0m0s\",\n        IdTokenLifetime = \"12h0m0s\",\n        RefreshTokenExpiration = \"720h0m0s\",\n        RefreshTokenIdleExpiration = \"2160h0m0s\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := zitadel.NewDefaultOidcSettings(ctx, \"default\", \u0026zitadel.DefaultOidcSettingsArgs{\n\t\t\tAccessTokenLifetime:        pulumi.String(\"12h0m0s\"),\n\t\t\tIdTokenLifetime:            pulumi.String(\"12h0m0s\"),\n\t\t\tRefreshTokenExpiration:     pulumi.String(\"720h0m0s\"),\n\t\t\tRefreshTokenIdleExpiration: pulumi.String(\"2160h0m0s\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.zitadel.DefaultOidcSettings;\nimport com.pulumi.zitadel.DefaultOidcSettingsArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var default_ = new DefaultOidcSettings(\"default\", DefaultOidcSettingsArgs.builder()        \n            .accessTokenLifetime(\"12h0m0s\")\n            .idTokenLifetime(\"12h0m0s\")\n            .refreshTokenExpiration(\"720h0m0s\")\n            .refreshTokenIdleExpiration(\"2160h0m0s\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  default:\n    type: zitadel:DefaultOidcSettings\n    properties:\n      accessTokenLifetime: 12h0m0s\n      idTokenLifetime: 12h0m0s\n      refreshTokenExpiration: 720h0m0s\n      refreshTokenIdleExpiration: 2160h0m0s\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "accessTokenLifetime": {
+                    "type": "string",
+                    "description": "lifetime duration of access tokens\n"
+                },
+                "idTokenLifetime": {
+                    "type": "string",
+                    "description": "lifetime duration of id tokens\n"
+                },
+                "refreshTokenExpiration": {
+                    "type": "string",
+                    "description": "expiration duration of refresh tokens\n"
+                },
+                "refreshTokenIdleExpiration": {
+                    "type": "string",
+                    "description": "expiration duration of idle refresh tokens\n"
+                }
+            },
+            "required": [
+                "accessTokenLifetime",
+                "idTokenLifetime",
+                "refreshTokenExpiration",
+                "refreshTokenIdleExpiration"
+            ],
+            "inputProperties": {
+                "accessTokenLifetime": {
+                    "type": "string",
+                    "description": "lifetime duration of access tokens\n"
+                },
+                "idTokenLifetime": {
+                    "type": "string",
+                    "description": "lifetime duration of id tokens\n"
+                },
+                "refreshTokenExpiration": {
+                    "type": "string",
+                    "description": "expiration duration of refresh tokens\n"
+                },
+                "refreshTokenIdleExpiration": {
+                    "type": "string",
+                    "description": "expiration duration of idle refresh tokens\n"
+                }
+            },
+            "requiredInputs": [
+                "accessTokenLifetime",
+                "idTokenLifetime",
+                "refreshTokenExpiration",
+                "refreshTokenIdleExpiration"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DefaultOidcSettings resources.\n",
+                "properties": {
+                    "accessTokenLifetime": {
+                        "type": "string",
+                        "description": "lifetime duration of access tokens\n"
+                    },
+                    "idTokenLifetime": {
+                        "type": "string",
+                        "description": "lifetime duration of id tokens\n"
+                    },
+                    "refreshTokenExpiration": {
+                        "type": "string",
+                        "description": "expiration duration of refresh tokens\n"
+                    },
+                    "refreshTokenIdleExpiration": {
+                        "type": "string",
+                        "description": "expiration duration of idle refresh tokens\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy": {
             "description": "Resource representing the default password complexity policy.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as zitadel from \"@pulumi/zitadel\";\n\nconst defaultDefaultPasswordComplexityPolicy = new zitadel.DefaultPasswordComplexityPolicy(\"default\", {\n    hasLowercase: true,\n    hasNumber: true,\n    hasSymbol: true,\n    hasUppercase: true,\n    minLength: 8,\n});\n```\n```python\nimport pulumi\nimport pulumiverse_zitadel as zitadel\n\ndefault = zitadel.DefaultPasswordComplexityPolicy(\"default\",\n    has_lowercase=True,\n    has_number=True,\n    has_symbol=True,\n    has_uppercase=True,\n    min_length=8)\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Zitadel = Pulumiverse.Zitadel;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @default = new Zitadel.DefaultPasswordComplexityPolicy(\"default\", new()\n    {\n        HasLowercase = true,\n        HasNumber = true,\n        HasSymbol = true,\n        HasUppercase = true,\n        MinLength = 8,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := zitadel.NewDefaultPasswordComplexityPolicy(ctx, \"default\", \u0026zitadel.DefaultPasswordComplexityPolicyArgs{\n\t\t\tHasLowercase: pulumi.Bool(true),\n\t\t\tHasNumber:    pulumi.Bool(true),\n\t\t\tHasSymbol:    pulumi.Bool(true),\n\t\t\tHasUppercase: pulumi.Bool(true),\n\t\t\tMinLength:    pulumi.Int(8),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.zitadel.DefaultPasswordComplexityPolicy;\nimport com.pulumi.zitadel.DefaultPasswordComplexityPolicyArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var default_ = new DefaultPasswordComplexityPolicy(\"default\", DefaultPasswordComplexityPolicyArgs.builder()        \n            .hasLowercase(true)\n            .hasNumber(true)\n            .hasSymbol(true)\n            .hasUppercase(true)\n            .minLength(\"8\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  default:\n    type: zitadel:DefaultPasswordComplexityPolicy\n    properties:\n      hasLowercase: true\n      hasNumber: true\n      hasSymbol: true\n      hasUppercase: true\n      minLength: 8\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nterraform # The resource can be imported using the ID format `\u003c\u003e`, e.g.\n\n```sh\n $ pulumi import zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy imported ''\n```\n\n ",
             "properties": {
@@ -7348,6 +7421,42 @@
                 ]
             }
         },
+        "zitadel:index/getDefaultOidcSettings:getDefaultOidcSettings": {
+            "description": "Datasource representing the default oidc settings.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as zitadel from \"@pulumi/zitadel\";\n\nconst default = zitadel.getDefaultOidcSettings({});\nexport const oidcSettings = _default;\n```\n```python\nimport pulumi\nimport pulumi_zitadel as zitadel\n\ndefault = zitadel.get_default_oidc_settings()\npulumi.export(\"oidcSettings\", default)\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Zitadel = Pulumi.Zitadel;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @default = Zitadel.GetDefaultOidcSettings.Invoke();\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"oidcSettings\"] = @default.Apply(getDefaultOidcSettingsResult =\u003e getDefaultOidcSettingsResult),\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_default, err := zitadel.LookupDefaultOidcSettings(ctx, nil, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"oidcSettings\", _default)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.zitadel.ZitadelFunctions;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var default = ZitadelFunctions.getDefaultOidcSettings();\n\n        ctx.export(\"oidcSettings\", default_);\n    }\n}\n```\n```yaml\nvariables:\n  default:\n    Fn::Invoke:\n      Function: zitadel:getDefaultOidcSettings\n      Arguments: {}\noutputs:\n  oidcSettings: ${default}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "outputs": {
+                "description": "A collection of values returned by getDefaultOidcSettings.\n",
+                "properties": {
+                    "accessTokenLifetime": {
+                        "type": "string",
+                        "description": "lifetime duration of access tokens\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "idTokenLifetime": {
+                        "type": "string",
+                        "description": "lifetime duration of id tokens\n"
+                    },
+                    "refreshTokenExpiration": {
+                        "type": "string",
+                        "description": "expiration duration of refresh tokens\n"
+                    },
+                    "refreshTokenIdleExpiration": {
+                        "type": "string",
+                        "description": "expiration duration of idle refresh tokens\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "accessTokenLifetime",
+                    "idTokenLifetime",
+                    "refreshTokenExpiration",
+                    "refreshTokenIdleExpiration",
+                    "id"
+                ]
+            }
+        },
         "zitadel:index/getHumanUser:getHumanUser": {
             "description": "Datasource representing a human user situated under an organization, which then can be authorized through memberships or direct grants on other resources.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as zitadel from \"@pulumi/zitadel\";\n\nconst default = zitadel.getHumanUser({\n    orgId: data.zitadel_org[\"default\"].id,\n    userId: \"123456789012345678\",\n});\nexport const humanUser = _default;\n```\n```python\nimport pulumi\nimport pulumi_zitadel as zitadel\n\ndefault = zitadel.get_human_user(org_id=data[\"zitadel_org\"][\"default\"][\"id\"],\n    user_id=\"123456789012345678\")\npulumi.export(\"humanUser\", default)\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Zitadel = Pulumi.Zitadel;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @default = Zitadel.GetHumanUser.Invoke(new()\n    {\n        OrgId = data.Zitadel_org.Default.Id,\n        UserId = \"123456789012345678\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"humanUser\"] = @default.Apply(getHumanUserResult =\u003e getHumanUserResult),\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_default, err := zitadel.LookupHumanUser(ctx, \u0026GetHumanUserArgs{\n\t\t\tOrgId:  data.Zitadel_org.Default.Id,\n\t\t\tUserId: \"123456789012345678\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"humanUser\", _default)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.zitadel.ZitadelFunctions;\nimport com.pulumi.zitadel.inputs.GetHumanUserArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var default = ZitadelFunctions.getHumanUser(GetHumanUserArgs.builder()\n            .orgId(data.zitadel_org().default().id())\n            .userId(\"123456789012345678\")\n            .build());\n\n        ctx.export(\"humanUser\", default_);\n    }\n}\n```\n```yaml\nvariables:\n  default:\n    Fn::Invoke:\n      Function: zitadel:getHumanUser\n      Arguments:\n        orgId: ${data.zitadel_org.default.id}\n        userId: 123456789012345678\noutputs:\n  humanUser: ${default}\n```\n{{% /example %}}\n{{% /examples %}}",
             "inputs": {
@@ -9091,6 +9200,81 @@
                     "issuer",
                     "name",
                     "scopes"
+                ]
+            }
+        },
+        "zitadel:index/getOrgs:getOrgs": {
+            "description": "Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getOrgs.\n",
+                "properties": {
+                    "domain": {
+                        "type": "string",
+                        "description": "A domain of the org.\n"
+                    },
+                    "domainMethod": {
+                        "type": "string",
+                        "description": "Method for querying orgs by domain, supported values: TEXT*QUERY*METHOD*EQUALS, TEXT*QUERY*METHOD*EQUALS*IGNORE*CASE, TEXT*QUERY*METHOD*STARTS*WITH, TEXT*QUERY*METHOD*STARTS*WITH*IGNORE*CASE, TEXT*QUERY*METHOD*CONTAINS, TEXT*QUERY*METHOD*CONTAINS*IGNORE*CASE, TEXT*QUERY*METHOD*ENDS*WITH, TEXT*QUERY*METHOD*ENDS*WITH*IGNORE*CASE\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the org.\n"
+                    },
+                    "nameMethod": {
+                        "type": "string",
+                        "description": "Method for querying orgs by name, supported values: TEXT*QUERY*METHOD*EQUALS, TEXT*QUERY*METHOD*EQUALS*IGNORE*CASE, TEXT*QUERY*METHOD*STARTS*WITH, TEXT*QUERY*METHOD*STARTS*WITH*IGNORE*CASE, TEXT*QUERY*METHOD*CONTAINS, TEXT*QUERY*METHOD*CONTAINS*IGNORE*CASE, TEXT*QUERY*METHOD*ENDS*WITH, TEXT*QUERY*METHOD*ENDS*WITH*IGNORE*CASE\n"
+                    },
+                    "state": {
+                        "type": "string",
+                        "description": "State of the org, supported values: ORG*STATE*UNSPECIFIED, ORG*STATE*ACTIVE, ORG*STATE*INACTIVE, ORG*STATE*REMOVED\n"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getOrgs.\n",
+                "properties": {
+                    "domain": {
+                        "type": "string",
+                        "description": "A domain of the org.\n"
+                    },
+                    "domainMethod": {
+                        "type": "string",
+                        "description": "Method for querying orgs by domain, supported values: TEXT*QUERY*METHOD*EQUALS, TEXT*QUERY*METHOD*EQUALS*IGNORE*CASE, TEXT*QUERY*METHOD*STARTS*WITH, TEXT*QUERY*METHOD*STARTS*WITH*IGNORE*CASE, TEXT*QUERY*METHOD*CONTAINS, TEXT*QUERY*METHOD*CONTAINS*IGNORE*CASE, TEXT*QUERY*METHOD*ENDS*WITH, TEXT*QUERY*METHOD*ENDS*WITH*IGNORE*CASE\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A set of all organization IDs.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the org.\n"
+                    },
+                    "nameMethod": {
+                        "type": "string",
+                        "description": "Method for querying orgs by name, supported values: TEXT*QUERY*METHOD*EQUALS, TEXT*QUERY*METHOD*EQUALS*IGNORE*CASE, TEXT*QUERY*METHOD*STARTS*WITH, TEXT*QUERY*METHOD*STARTS*WITH*IGNORE*CASE, TEXT*QUERY*METHOD*CONTAINS, TEXT*QUERY*METHOD*CONTAINS*IGNORE*CASE, TEXT*QUERY*METHOD*ENDS*WITH, TEXT*QUERY*METHOD*ENDS*WITH*IGNORE*CASE\n"
+                    },
+                    "primaryDomain": {
+                        "type": "string",
+                        "description": "Primary domain of the org\n"
+                    },
+                    "state": {
+                        "type": "string",
+                        "description": "State of the org, supported values: ORG*STATE*UNSPECIFIED, ORG*STATE*ACTIVE, ORG*STATE*INACTIVE, ORG*STATE*REMOVED\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "ids",
+                    "primaryDomain",
+                    "id"
                 ]
             }
         },
