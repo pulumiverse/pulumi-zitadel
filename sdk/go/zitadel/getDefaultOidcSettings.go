@@ -15,20 +15,23 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_default, err := zitadel.LookupDefaultOidcSettings(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("oidcSettings", _default)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_default, err := zitadel.LookupDefaultOidcSettings(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("oidcSettings", _default)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupDefaultOidcSettings(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*LookupDefaultOidcSettingsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -19,31 +19,34 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewIdpGithub(ctx, "default", &zitadel.IdpGithubArgs{
-// 			ClientId:          pulumi.String("86a165..."),
-// 			ClientSecret:      pulumi.String("*****afdbac18"),
-// 			IsAutoCreation:    pulumi.Bool(false),
-// 			IsAutoUpdate:      pulumi.Bool(true),
-// 			IsCreationAllowed: pulumi.Bool(true),
-// 			IsLinkingAllowed:  pulumi.Bool(false),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewIdpGithub(ctx, "default", &zitadel.IdpGithubArgs{
+//				ClientId:          pulumi.String("86a165..."),
+//				ClientSecret:      pulumi.String("*****afdbac18"),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -51,7 +54,9 @@ import (
 // terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/idpGithub:IdpGithub imported '123456789012345678:1234567890123456781234567890123456787890'
+//
+//	$ pulumi import zitadel:index/idpGithub:IdpGithub imported '123456789012345678:1234567890123456781234567890123456787890'
+//
 // ```
 type IdpGithub struct {
 	pulumi.CustomResourceState
@@ -228,7 +233,7 @@ func (i *IdpGithub) ToIdpGithubOutputWithContext(ctx context.Context) IdpGithubO
 // IdpGithubArrayInput is an input type that accepts IdpGithubArray and IdpGithubArrayOutput values.
 // You can construct a concrete instance of `IdpGithubArrayInput` via:
 //
-//          IdpGithubArray{ IdpGithubArgs{...} }
+//	IdpGithubArray{ IdpGithubArgs{...} }
 type IdpGithubArrayInput interface {
 	pulumi.Input
 
@@ -253,7 +258,7 @@ func (i IdpGithubArray) ToIdpGithubArrayOutputWithContext(ctx context.Context) I
 // IdpGithubMapInput is an input type that accepts IdpGithubMap and IdpGithubMapOutput values.
 // You can construct a concrete instance of `IdpGithubMapInput` via:
 //
-//          IdpGithubMap{ "key": IdpGithubArgs{...} }
+//	IdpGithubMap{ "key": IdpGithubArgs{...} }
 type IdpGithubMapInput interface {
 	pulumi.Input
 

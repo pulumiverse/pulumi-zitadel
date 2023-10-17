@@ -1613,12 +1613,6 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "helpLink",
-                "privacyLink",
-                "supportEmail",
-                "tosLink"
-            ],
             "inputProperties": {
                 "helpLink": {
                     "type": "string"
@@ -1633,12 +1627,6 @@
                     "type": "string"
                 }
             },
-            "requiredInputs": [
-                "helpLink",
-                "privacyLink",
-                "supportEmail",
-                "tosLink"
-            ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering DefaultPrivacyPolicy resources.\n",
                 "properties": {
@@ -6298,12 +6286,6 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "helpLink",
-                "privacyLink",
-                "supportEmail",
-                "tosLink"
-            ],
             "inputProperties": {
                 "helpLink": {
                     "type": "string"
@@ -6323,12 +6305,6 @@
                     "type": "string"
                 }
             },
-            "requiredInputs": [
-                "helpLink",
-                "privacyLink",
-                "supportEmail",
-                "tosLink"
-            ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering PrivacyPolicy resources.\n",
                 "properties": {
@@ -6873,7 +6849,7 @@
             }
         },
         "zitadel:index/smtpConfig:SmtpConfig": {
-            "description": "Resource representing the SMTP configuration of an instance.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as zitadel from \"@pulumi/zitadel\";\n\nconst defaultSmtpConfig = new zitadel.SmtpConfig(\"default\", {\n    host: \"localhost:25\",\n    password: \"secret_password\",\n    senderAddress: \"sender@example.com\",\n    senderName: \"no-reply\",\n    tls: true,\n    user: \"user\",\n});\n```\n```python\nimport pulumi\nimport pulumiverse_zitadel as zitadel\n\ndefault = zitadel.SmtpConfig(\"default\",\n    host=\"localhost:25\",\n    password=\"secret_password\",\n    sender_address=\"sender@example.com\",\n    sender_name=\"no-reply\",\n    tls=True,\n    user=\"user\")\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Zitadel = Pulumiverse.Zitadel;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @default = new Zitadel.SmtpConfig(\"default\", new()\n    {\n        Host = \"localhost:25\",\n        Password = \"secret_password\",\n        SenderAddress = \"sender@example.com\",\n        SenderName = \"no-reply\",\n        Tls = true,\n        User = \"user\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := zitadel.NewSmtpConfig(ctx, \"default\", \u0026zitadel.SmtpConfigArgs{\n\t\t\tHost:          pulumi.String(\"localhost:25\"),\n\t\t\tPassword:      pulumi.String(\"secret_password\"),\n\t\t\tSenderAddress: pulumi.String(\"sender@example.com\"),\n\t\t\tSenderName:    pulumi.String(\"no-reply\"),\n\t\t\tTls:           pulumi.Bool(true),\n\t\t\tUser:          pulumi.String(\"user\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.zitadel.SmtpConfig;\nimport com.pulumi.zitadel.SmtpConfigArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var default_ = new SmtpConfig(\"default\", SmtpConfigArgs.builder()        \n            .host(\"localhost:25\")\n            .password(\"secret_password\")\n            .senderAddress(\"sender@example.com\")\n            .senderName(\"no-reply\")\n            .tls(true)\n            .user(\"user\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  default:\n    type: zitadel:SmtpConfig\n    properties:\n      host: localhost:25\n      password: secret_password\n      senderAddress: sender@example.com\n      senderName: no-reply\n      tls: true\n      user: user\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nterraform # The resource can be imported using the ID format `\u003c[password]\u003e`, e.g.\n\n```sh\n $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'\n```\n\n ",
+            "description": "Resource representing the SMTP configuration of an instance.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as zitadel from \"@pulumi/zitadel\";\n\nconst defaultSmtpConfig = new zitadel.SmtpConfig(\"default\", {\n    host: \"localhost:25\",\n    password: \"secret_password\",\n    replyToAddress: \"replyto@example.com\",\n    senderAddress: \"sender@example.com\",\n    senderName: \"no-reply\",\n    tls: true,\n    user: \"user\",\n});\n```\n```python\nimport pulumi\nimport pulumiverse_zitadel as zitadel\n\ndefault = zitadel.SmtpConfig(\"default\",\n    host=\"localhost:25\",\n    password=\"secret_password\",\n    reply_to_address=\"replyto@example.com\",\n    sender_address=\"sender@example.com\",\n    sender_name=\"no-reply\",\n    tls=True,\n    user=\"user\")\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Zitadel = Pulumiverse.Zitadel;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @default = new Zitadel.SmtpConfig(\"default\", new()\n    {\n        Host = \"localhost:25\",\n        Password = \"secret_password\",\n        ReplyToAddress = \"replyto@example.com\",\n        SenderAddress = \"sender@example.com\",\n        SenderName = \"no-reply\",\n        Tls = true,\n        User = \"user\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := zitadel.NewSmtpConfig(ctx, \"default\", \u0026zitadel.SmtpConfigArgs{\n\t\t\tHost:           pulumi.String(\"localhost:25\"),\n\t\t\tPassword:       pulumi.String(\"secret_password\"),\n\t\t\tReplyToAddress: pulumi.String(\"replyto@example.com\"),\n\t\t\tSenderAddress:  pulumi.String(\"sender@example.com\"),\n\t\t\tSenderName:     pulumi.String(\"no-reply\"),\n\t\t\tTls:            pulumi.Bool(true),\n\t\t\tUser:           pulumi.String(\"user\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.zitadel.SmtpConfig;\nimport com.pulumi.zitadel.SmtpConfigArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var default_ = new SmtpConfig(\"default\", SmtpConfigArgs.builder()        \n            .host(\"localhost:25\")\n            .password(\"secret_password\")\n            .replyToAddress(\"replyto@example.com\")\n            .senderAddress(\"sender@example.com\")\n            .senderName(\"no-reply\")\n            .tls(true)\n            .user(\"user\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  default:\n    type: zitadel:SmtpConfig\n    properties:\n      host: localhost:25\n      password: secret_password\n      replyToAddress: replyto@example.com\n      senderAddress: sender@example.com\n      senderName: no-reply\n      tls: true\n      user: user\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nterraform # The resource can be imported using the ID format `\u003c[password]\u003e`, e.g.\n\n```sh\n $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'\n```\n\n ",
             "properties": {
                 "host": {
                     "type": "string",
@@ -6882,6 +6858,10 @@
                 "password": {
                     "type": "string",
                     "description": "Password used to communicate with your SMTP server.\n"
+                },
+                "replyToAddress": {
+                    "type": "string",
+                    "description": "Address to reply to.\n"
                 },
                 "senderAddress": {
                     "type": "string",
@@ -6913,6 +6893,10 @@
                 "password": {
                     "type": "string",
                     "description": "Password used to communicate with your SMTP server.\n"
+                },
+                "replyToAddress": {
+                    "type": "string",
+                    "description": "Address to reply to.\n"
                 },
                 "senderAddress": {
                     "type": "string",
@@ -6946,6 +6930,10 @@
                     "password": {
                         "type": "string",
                         "description": "Password used to communicate with your SMTP server.\n"
+                    },
+                    "replyToAddress": {
+                        "type": "string",
+                        "description": "Address to reply to.\n"
                     },
                     "senderAddress": {
                         "type": "string",

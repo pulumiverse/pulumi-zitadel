@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewNotificationPolicy(ctx, "default", &zitadel.NotificationPolicyArgs{
-// 			OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
-// 			PasswordChange: pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewNotificationPolicy(ctx, "default", &zitadel.NotificationPolicyArgs{
+//				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
+//				PasswordChange: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/notificationPolicy:NotificationPolicy imported '123456789012345678'
+//
+//	$ pulumi import zitadel:index/notificationPolicy:NotificationPolicy imported '123456789012345678'
+//
 // ```
 type NotificationPolicy struct {
 	pulumi.CustomResourceState
@@ -144,7 +149,7 @@ func (i *NotificationPolicy) ToNotificationPolicyOutputWithContext(ctx context.C
 // NotificationPolicyArrayInput is an input type that accepts NotificationPolicyArray and NotificationPolicyArrayOutput values.
 // You can construct a concrete instance of `NotificationPolicyArrayInput` via:
 //
-//          NotificationPolicyArray{ NotificationPolicyArgs{...} }
+//	NotificationPolicyArray{ NotificationPolicyArgs{...} }
 type NotificationPolicyArrayInput interface {
 	pulumi.Input
 
@@ -169,7 +174,7 @@ func (i NotificationPolicyArray) ToNotificationPolicyArrayOutputWithContext(ctx 
 // NotificationPolicyMapInput is an input type that accepts NotificationPolicyMap and NotificationPolicyMapOutput values.
 // You can construct a concrete instance of `NotificationPolicyMapInput` via:
 //
-//          NotificationPolicyMap{ "key": NotificationPolicyArgs{...} }
+//	NotificationPolicyMap{ "key": NotificationPolicyArgs{...} }
 type NotificationPolicyMapInput interface {
 	pulumi.Input
 

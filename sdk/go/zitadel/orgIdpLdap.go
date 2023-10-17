@@ -19,45 +19,48 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpLdap(ctx, "default", &zitadel.OrgIdpLdapArgs{
-// 			OrgId: pulumi.Any(data.Zitadel_org.Default.Id),
-// 			Servers: pulumi.StringArray{
-// 				pulumi.String("ldaps://my.primary.server:389"),
-// 				pulumi.String("ldaps://my.secondary.server:389"),
-// 			},
-// 			StartTls:     pulumi.Bool(false),
-// 			BaseDn:       pulumi.String("dc=example,dc=com"),
-// 			BindDn:       pulumi.String("cn=admin,dc=example,dc=com"),
-// 			BindPassword: pulumi.String("Password1!"),
-// 			UserBase:     pulumi.String("dn"),
-// 			UserObjectClasses: pulumi.StringArray{
-// 				pulumi.String("inetOrgPerson"),
-// 			},
-// 			UserFilters: pulumi.StringArray{
-// 				pulumi.String("uid"),
-// 				pulumi.String("email"),
-// 			},
-// 			Timeout:            pulumi.String("10s"),
-// 			IdAttribute:        pulumi.String("uid"),
-// 			FirstNameAttribute: pulumi.String("firstname"),
-// 			LastNameAttribute:  pulumi.String("lastname"),
-// 			IsLinkingAllowed:   pulumi.Bool(false),
-// 			IsCreationAllowed:  pulumi.Bool(true),
-// 			IsAutoCreation:     pulumi.Bool(false),
-// 			IsAutoUpdate:       pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgIdpLdap(ctx, "default", &zitadel.OrgIdpLdapArgs{
+//				OrgId: pulumi.Any(data.Zitadel_org.Default.Id),
+//				Servers: pulumi.StringArray{
+//					pulumi.String("ldaps://my.primary.server:389"),
+//					pulumi.String("ldaps://my.secondary.server:389"),
+//				},
+//				StartTls:     pulumi.Bool(false),
+//				BaseDn:       pulumi.String("dc=example,dc=com"),
+//				BindDn:       pulumi.String("cn=admin,dc=example,dc=com"),
+//				BindPassword: pulumi.String("Password1!"),
+//				UserBase:     pulumi.String("dn"),
+//				UserObjectClasses: pulumi.StringArray{
+//					pulumi.String("inetOrgPerson"),
+//				},
+//				UserFilters: pulumi.StringArray{
+//					pulumi.String("uid"),
+//					pulumi.String("email"),
+//				},
+//				Timeout:            pulumi.String("10s"),
+//				IdAttribute:        pulumi.String("uid"),
+//				FirstNameAttribute: pulumi.String("firstname"),
+//				LastNameAttribute:  pulumi.String("lastname"),
+//				IsLinkingAllowed:   pulumi.Bool(false),
+//				IsCreationAllowed:  pulumi.Bool(true),
+//				IsAutoCreation:     pulumi.Bool(false),
+//				IsAutoUpdate:       pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -65,7 +68,9 @@ import (
 // terraform # The resource can be imported using the ID format `<id[:org_id][:bind_password]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/orgIdpLdap:OrgIdpLdap imported '123456789012345678:123456789012345678:b1nd_p4ssw0rd'
+//
+//	$ pulumi import zitadel:index/orgIdpLdap:OrgIdpLdap imported '123456789012345678:123456789012345678:b1nd_p4ssw0rd'
+//
 // ```
 type OrgIdpLdap struct {
 	pulumi.CustomResourceState
@@ -463,7 +468,7 @@ func (i *OrgIdpLdap) ToOrgIdpLdapOutputWithContext(ctx context.Context) OrgIdpLd
 // OrgIdpLdapArrayInput is an input type that accepts OrgIdpLdapArray and OrgIdpLdapArrayOutput values.
 // You can construct a concrete instance of `OrgIdpLdapArrayInput` via:
 //
-//          OrgIdpLdapArray{ OrgIdpLdapArgs{...} }
+//	OrgIdpLdapArray{ OrgIdpLdapArgs{...} }
 type OrgIdpLdapArrayInput interface {
 	pulumi.Input
 
@@ -488,7 +493,7 @@ func (i OrgIdpLdapArray) ToOrgIdpLdapArrayOutputWithContext(ctx context.Context)
 // OrgIdpLdapMapInput is an input type that accepts OrgIdpLdapMap and OrgIdpLdapMapOutput values.
 // You can construct a concrete instance of `OrgIdpLdapMapInput` via:
 //
-//          OrgIdpLdapMap{ "key": OrgIdpLdapArgs{...} }
+//	OrgIdpLdapMap{ "key": OrgIdpLdapArgs{...} }
 type OrgIdpLdapMapInput interface {
 	pulumi.Input
 

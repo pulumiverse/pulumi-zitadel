@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewDefaultOidcSettings(ctx, "default", &zitadel.DefaultOidcSettingsArgs{
-// 			AccessTokenLifetime:        pulumi.String("12h0m0s"),
-// 			IdTokenLifetime:            pulumi.String("12h0m0s"),
-// 			RefreshTokenExpiration:     pulumi.String("720h0m0s"),
-// 			RefreshTokenIdleExpiration: pulumi.String("2160h0m0s"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewDefaultOidcSettings(ctx, "default", &zitadel.DefaultOidcSettingsArgs{
+//				AccessTokenLifetime:        pulumi.String("12h0m0s"),
+//				IdTokenLifetime:            pulumi.String("12h0m0s"),
+//				RefreshTokenExpiration:     pulumi.String("720h0m0s"),
+//				RefreshTokenIdleExpiration: pulumi.String("2160h0m0s"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DefaultOidcSettings struct {
 	pulumi.CustomResourceState
@@ -167,7 +170,7 @@ func (i *DefaultOidcSettings) ToDefaultOidcSettingsOutputWithContext(ctx context
 // DefaultOidcSettingsArrayInput is an input type that accepts DefaultOidcSettingsArray and DefaultOidcSettingsArrayOutput values.
 // You can construct a concrete instance of `DefaultOidcSettingsArrayInput` via:
 //
-//          DefaultOidcSettingsArray{ DefaultOidcSettingsArgs{...} }
+//	DefaultOidcSettingsArray{ DefaultOidcSettingsArgs{...} }
 type DefaultOidcSettingsArrayInput interface {
 	pulumi.Input
 
@@ -192,7 +195,7 @@ func (i DefaultOidcSettingsArray) ToDefaultOidcSettingsArrayOutputWithContext(ct
 // DefaultOidcSettingsMapInput is an input type that accepts DefaultOidcSettingsMap and DefaultOidcSettingsMapOutput values.
 // You can construct a concrete instance of `DefaultOidcSettingsMapInput` via:
 //
-//          DefaultOidcSettingsMap{ "key": DefaultOidcSettingsArgs{...} }
+//	DefaultOidcSettingsMap{ "key": DefaultOidcSettingsArgs{...} }
 type DefaultOidcSettingsMapInput interface {
 	pulumi.Input
 

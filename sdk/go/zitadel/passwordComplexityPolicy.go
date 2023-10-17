@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewPasswordComplexityPolicy(ctx, "default", &zitadel.PasswordComplexityPolicyArgs{
-// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
-// 			MinLength:    pulumi.Int(8),
-// 			HasUppercase: pulumi.Bool(true),
-// 			HasLowercase: pulumi.Bool(true),
-// 			HasNumber:    pulumi.Bool(true),
-// 			HasSymbol:    pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewPasswordComplexityPolicy(ctx, "default", &zitadel.PasswordComplexityPolicyArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				MinLength:    pulumi.Int(8),
+//				HasUppercase: pulumi.Bool(true),
+//				HasLowercase: pulumi.Bool(true),
+//				HasNumber:    pulumi.Bool(true),
+//				HasSymbol:    pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type PasswordComplexityPolicy struct {
 	pulumi.CustomResourceState
@@ -192,7 +195,7 @@ func (i *PasswordComplexityPolicy) ToPasswordComplexityPolicyOutputWithContext(c
 // PasswordComplexityPolicyArrayInput is an input type that accepts PasswordComplexityPolicyArray and PasswordComplexityPolicyArrayOutput values.
 // You can construct a concrete instance of `PasswordComplexityPolicyArrayInput` via:
 //
-//          PasswordComplexityPolicyArray{ PasswordComplexityPolicyArgs{...} }
+//	PasswordComplexityPolicyArray{ PasswordComplexityPolicyArgs{...} }
 type PasswordComplexityPolicyArrayInput interface {
 	pulumi.Input
 
@@ -217,7 +220,7 @@ func (i PasswordComplexityPolicyArray) ToPasswordComplexityPolicyArrayOutputWith
 // PasswordComplexityPolicyMapInput is an input type that accepts PasswordComplexityPolicyMap and PasswordComplexityPolicyMapOutput values.
 // You can construct a concrete instance of `PasswordComplexityPolicyMapInput` via:
 //
-//          PasswordComplexityPolicyMap{ "key": PasswordComplexityPolicyArgs{...} }
+//	PasswordComplexityPolicyMap{ "key": PasswordComplexityPolicyArgs{...} }
 type PasswordComplexityPolicyMapInput interface {
 	pulumi.Input
 

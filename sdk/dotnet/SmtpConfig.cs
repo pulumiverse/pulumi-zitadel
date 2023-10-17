@@ -26,6 +26,7 @@ namespace Pulumiverse.Zitadel
     ///     {
     ///         Host = "localhost:25",
     ///         Password = "secret_password",
+    ///         ReplyToAddress = "replyto@example.com",
     ///         SenderAddress = "sender@example.com",
     ///         SenderName = "no-reply",
     ///         Tls = true,
@@ -57,6 +58,12 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         [Output("password")]
         public Output<string?> Password { get; private set; } = null!;
+
+        /// <summary>
+        /// Address to reply to.
+        /// </summary>
+        [Output("replyToAddress")]
+        public Output<string?> ReplyToAddress { get; private set; } = null!;
 
         /// <summary>
         /// Address used to send emails.
@@ -142,6 +149,12 @@ namespace Pulumiverse.Zitadel
         public Input<string>? Password { get; set; }
 
         /// <summary>
+        /// Address to reply to.
+        /// </summary>
+        [Input("replyToAddress")]
+        public Input<string>? ReplyToAddress { get; set; }
+
+        /// <summary>
         /// Address used to send emails.
         /// </summary>
         [Input("senderAddress", required: true)]
@@ -184,6 +197,12 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         [Input("password")]
         public Input<string>? Password { get; set; }
+
+        /// <summary>
+        /// Address to reply to.
+        /// </summary>
+        [Input("replyToAddress")]
+        public Input<string>? ReplyToAddress { get; set; }
 
         /// <summary>
         /// Address used to send emails.

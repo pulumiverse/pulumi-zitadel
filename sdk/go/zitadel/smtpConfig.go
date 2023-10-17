@@ -19,26 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewSmtpConfig(ctx, "default", &zitadel.SmtpConfigArgs{
-// 			Host:          pulumi.String("localhost:25"),
-// 			Password:      pulumi.String("secret_password"),
-// 			SenderAddress: pulumi.String("sender@example.com"),
-// 			SenderName:    pulumi.String("no-reply"),
-// 			Tls:           pulumi.Bool(true),
-// 			User:          pulumi.String("user"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewSmtpConfig(ctx, "default", &zitadel.SmtpConfigArgs{
+//				Host:           pulumi.String("localhost:25"),
+//				Password:       pulumi.String("secret_password"),
+//				ReplyToAddress: pulumi.String("replyto@example.com"),
+//				SenderAddress:  pulumi.String("sender@example.com"),
+//				SenderName:     pulumi.String("no-reply"),
+//				Tls:            pulumi.Bool(true),
+//				User:           pulumi.String("user"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +50,9 @@ import (
 // terraform # The resource can be imported using the ID format `<[password]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
+//
+//	$ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
+//
 // ```
 type SmtpConfig struct {
 	pulumi.CustomResourceState
@@ -55,6 +61,8 @@ type SmtpConfig struct {
 	Host pulumi.StringOutput `pulumi:"host"`
 	// Password used to communicate with your SMTP server.
 	Password pulumi.StringPtrOutput `pulumi:"password"`
+	// Address to reply to.
+	ReplyToAddress pulumi.StringPtrOutput `pulumi:"replyToAddress"`
 	// Address used to send emails.
 	SenderAddress pulumi.StringOutput `pulumi:"senderAddress"`
 	// Sender name used to send emails.
@@ -108,6 +116,8 @@ type smtpConfigState struct {
 	Host *string `pulumi:"host"`
 	// Password used to communicate with your SMTP server.
 	Password *string `pulumi:"password"`
+	// Address to reply to.
+	ReplyToAddress *string `pulumi:"replyToAddress"`
 	// Address used to send emails.
 	SenderAddress *string `pulumi:"senderAddress"`
 	// Sender name used to send emails.
@@ -123,6 +133,8 @@ type SmtpConfigState struct {
 	Host pulumi.StringPtrInput
 	// Password used to communicate with your SMTP server.
 	Password pulumi.StringPtrInput
+	// Address to reply to.
+	ReplyToAddress pulumi.StringPtrInput
 	// Address used to send emails.
 	SenderAddress pulumi.StringPtrInput
 	// Sender name used to send emails.
@@ -142,6 +154,8 @@ type smtpConfigArgs struct {
 	Host string `pulumi:"host"`
 	// Password used to communicate with your SMTP server.
 	Password *string `pulumi:"password"`
+	// Address to reply to.
+	ReplyToAddress *string `pulumi:"replyToAddress"`
 	// Address used to send emails.
 	SenderAddress string `pulumi:"senderAddress"`
 	// Sender name used to send emails.
@@ -158,6 +172,8 @@ type SmtpConfigArgs struct {
 	Host pulumi.StringInput
 	// Password used to communicate with your SMTP server.
 	Password pulumi.StringPtrInput
+	// Address to reply to.
+	ReplyToAddress pulumi.StringPtrInput
 	// Address used to send emails.
 	SenderAddress pulumi.StringInput
 	// Sender name used to send emails.
@@ -194,7 +210,7 @@ func (i *SmtpConfig) ToSmtpConfigOutputWithContext(ctx context.Context) SmtpConf
 // SmtpConfigArrayInput is an input type that accepts SmtpConfigArray and SmtpConfigArrayOutput values.
 // You can construct a concrete instance of `SmtpConfigArrayInput` via:
 //
-//          SmtpConfigArray{ SmtpConfigArgs{...} }
+//	SmtpConfigArray{ SmtpConfigArgs{...} }
 type SmtpConfigArrayInput interface {
 	pulumi.Input
 
@@ -219,7 +235,7 @@ func (i SmtpConfigArray) ToSmtpConfigArrayOutputWithContext(ctx context.Context)
 // SmtpConfigMapInput is an input type that accepts SmtpConfigMap and SmtpConfigMapOutput values.
 // You can construct a concrete instance of `SmtpConfigMapInput` via:
 //
-//          SmtpConfigMap{ "key": SmtpConfigArgs{...} }
+//	SmtpConfigMap{ "key": SmtpConfigArgs{...} }
 type SmtpConfigMapInput interface {
 	pulumi.Input
 
@@ -263,6 +279,11 @@ func (o SmtpConfigOutput) Host() pulumi.StringOutput {
 // Password used to communicate with your SMTP server.
 func (o SmtpConfigOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SmtpConfig) pulumi.StringPtrOutput { return v.Password }).(pulumi.StringPtrOutput)
+}
+
+// Address to reply to.
+func (o SmtpConfigOutput) ReplyToAddress() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SmtpConfig) pulumi.StringPtrOutput { return v.ReplyToAddress }).(pulumi.StringPtrOutput)
 }
 
 // Address used to send emails.

@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewSmsProviderTwilio(ctx, "default", &zitadel.SmsProviderTwilioArgs{
-// 			SenderNumber: pulumi.String("019920892"),
-// 			Sid:          pulumi.String("sid"),
-// 			Token:        pulumi.String("twilio_token"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewSmsProviderTwilio(ctx, "default", &zitadel.SmsProviderTwilioArgs{
+//				SenderNumber: pulumi.String("019920892"),
+//				Sid:          pulumi.String("sid"),
+//				Token:        pulumi.String("twilio_token"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // terraform # The resource can be imported using the ID format `<id[:token]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/smsProviderTwilio:SmsProviderTwilio imported '123456789012345678:12345678901234567890123456abcdef'
+//
+//	$ pulumi import zitadel:index/smsProviderTwilio:SmsProviderTwilio imported '123456789012345678:12345678901234567890123456abcdef'
+//
 // ```
 type SmsProviderTwilio struct {
 	pulumi.CustomResourceState
@@ -161,7 +166,7 @@ func (i *SmsProviderTwilio) ToSmsProviderTwilioOutputWithContext(ctx context.Con
 // SmsProviderTwilioArrayInput is an input type that accepts SmsProviderTwilioArray and SmsProviderTwilioArrayOutput values.
 // You can construct a concrete instance of `SmsProviderTwilioArrayInput` via:
 //
-//          SmsProviderTwilioArray{ SmsProviderTwilioArgs{...} }
+//	SmsProviderTwilioArray{ SmsProviderTwilioArgs{...} }
 type SmsProviderTwilioArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +191,7 @@ func (i SmsProviderTwilioArray) ToSmsProviderTwilioArrayOutputWithContext(ctx co
 // SmsProviderTwilioMapInput is an input type that accepts SmsProviderTwilioMap and SmsProviderTwilioMapOutput values.
 // You can construct a concrete instance of `SmsProviderTwilioMapInput` via:
 //
-//          SmsProviderTwilioMap{ "key": SmsProviderTwilioArgs{...} }
+//	SmsProviderTwilioMap{ "key": SmsProviderTwilioArgs{...} }
 type SmsProviderTwilioMapInput interface {
 	pulumi.Input
 

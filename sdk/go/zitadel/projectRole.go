@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewProjectRole(ctx, "default", &zitadel.ProjectRoleArgs{
-// 			OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ProjectId:   pulumi.Any(data.Zitadel_project.Default.Id),
-// 			RoleKey:     pulumi.String("super-user"),
-// 			DisplayName: pulumi.String("display_name2"),
-// 			Group:       pulumi.String("role_group"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewProjectRole(ctx, "default", &zitadel.ProjectRoleArgs{
+//				OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
+//				ProjectId:   pulumi.Any(data.Zitadel_project.Default.Id),
+//				RoleKey:     pulumi.String("super-user"),
+//				DisplayName: pulumi.String("display_name2"),
+//				Group:       pulumi.String("role_group"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // terraform # The resource can be imported using the ID format `<project_id:role_key[:org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/projectRole:ProjectRole imported '123456789012345678:my-role-key:123456789012345678'
+//
+//	$ pulumi import zitadel:index/projectRole:ProjectRole imported '123456789012345678:my-role-key:123456789012345678'
+//
 // ```
 type ProjectRole struct {
 	pulumi.CustomResourceState
@@ -183,7 +188,7 @@ func (i *ProjectRole) ToProjectRoleOutputWithContext(ctx context.Context) Projec
 // ProjectRoleArrayInput is an input type that accepts ProjectRoleArray and ProjectRoleArrayOutput values.
 // You can construct a concrete instance of `ProjectRoleArrayInput` via:
 //
-//          ProjectRoleArray{ ProjectRoleArgs{...} }
+//	ProjectRoleArray{ ProjectRoleArgs{...} }
 type ProjectRoleArrayInput interface {
 	pulumi.Input
 
@@ -208,7 +213,7 @@ func (i ProjectRoleArray) ToProjectRoleArrayOutputWithContext(ctx context.Contex
 // ProjectRoleMapInput is an input type that accepts ProjectRoleMap and ProjectRoleMapOutput values.
 // You can construct a concrete instance of `ProjectRoleMapInput` via:
 //
-//          ProjectRoleMap{ "key": ProjectRoleArgs{...} }
+//	ProjectRoleMap{ "key": ProjectRoleArgs{...} }
 type ProjectRoleMapInput interface {
 	pulumi.Input
 

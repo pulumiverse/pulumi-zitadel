@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewDefaultPasswordComplexityPolicy(ctx, "default", &zitadel.DefaultPasswordComplexityPolicyArgs{
-// 			HasLowercase: pulumi.Bool(true),
-// 			HasNumber:    pulumi.Bool(true),
-// 			HasSymbol:    pulumi.Bool(true),
-// 			HasUppercase: pulumi.Bool(true),
-// 			MinLength:    pulumi.Int(8),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewDefaultPasswordComplexityPolicy(ctx, "default", &zitadel.DefaultPasswordComplexityPolicyArgs{
+//				HasLowercase: pulumi.Bool(true),
+//				HasNumber:    pulumi.Bool(true),
+//				HasSymbol:    pulumi.Bool(true),
+//				HasUppercase: pulumi.Bool(true),
+//				MinLength:    pulumi.Int(8),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // terraform # The resource can be imported using the ID format `<>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy imported ''
+//
+//	$ pulumi import zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy imported ''
+//
 // ```
 type DefaultPasswordComplexityPolicy struct {
 	pulumi.CustomResourceState
@@ -189,7 +194,7 @@ func (i *DefaultPasswordComplexityPolicy) ToDefaultPasswordComplexityPolicyOutpu
 // DefaultPasswordComplexityPolicyArrayInput is an input type that accepts DefaultPasswordComplexityPolicyArray and DefaultPasswordComplexityPolicyArrayOutput values.
 // You can construct a concrete instance of `DefaultPasswordComplexityPolicyArrayInput` via:
 //
-//          DefaultPasswordComplexityPolicyArray{ DefaultPasswordComplexityPolicyArgs{...} }
+//	DefaultPasswordComplexityPolicyArray{ DefaultPasswordComplexityPolicyArgs{...} }
 type DefaultPasswordComplexityPolicyArrayInput interface {
 	pulumi.Input
 
@@ -214,7 +219,7 @@ func (i DefaultPasswordComplexityPolicyArray) ToDefaultPasswordComplexityPolicyA
 // DefaultPasswordComplexityPolicyMapInput is an input type that accepts DefaultPasswordComplexityPolicyMap and DefaultPasswordComplexityPolicyMapOutput values.
 // You can construct a concrete instance of `DefaultPasswordComplexityPolicyMapInput` via:
 //
-//          DefaultPasswordComplexityPolicyMap{ "key": DefaultPasswordComplexityPolicyArgs{...} }
+//	DefaultPasswordComplexityPolicyMap{ "key": DefaultPasswordComplexityPolicyArgs{...} }
 type DefaultPasswordComplexityPolicyMapInput interface {
 	pulumi.Input
 

@@ -14,52 +14,56 @@ __all__ = ['DefaultPrivacyPolicyArgs', 'DefaultPrivacyPolicy']
 @pulumi.input_type
 class DefaultPrivacyPolicyArgs:
     def __init__(__self__, *,
-                 help_link: pulumi.Input[str],
-                 privacy_link: pulumi.Input[str],
-                 support_email: pulumi.Input[str],
-                 tos_link: pulumi.Input[str]):
+                 help_link: Optional[pulumi.Input[str]] = None,
+                 privacy_link: Optional[pulumi.Input[str]] = None,
+                 support_email: Optional[pulumi.Input[str]] = None,
+                 tos_link: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a DefaultPrivacyPolicy resource.
         """
-        pulumi.set(__self__, "help_link", help_link)
-        pulumi.set(__self__, "privacy_link", privacy_link)
-        pulumi.set(__self__, "support_email", support_email)
-        pulumi.set(__self__, "tos_link", tos_link)
+        if help_link is not None:
+            pulumi.set(__self__, "help_link", help_link)
+        if privacy_link is not None:
+            pulumi.set(__self__, "privacy_link", privacy_link)
+        if support_email is not None:
+            pulumi.set(__self__, "support_email", support_email)
+        if tos_link is not None:
+            pulumi.set(__self__, "tos_link", tos_link)
 
     @property
     @pulumi.getter(name="helpLink")
-    def help_link(self) -> pulumi.Input[str]:
+    def help_link(self) -> Optional[pulumi.Input[str]]:
         return pulumi.get(self, "help_link")
 
     @help_link.setter
-    def help_link(self, value: pulumi.Input[str]):
+    def help_link(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "help_link", value)
 
     @property
     @pulumi.getter(name="privacyLink")
-    def privacy_link(self) -> pulumi.Input[str]:
+    def privacy_link(self) -> Optional[pulumi.Input[str]]:
         return pulumi.get(self, "privacy_link")
 
     @privacy_link.setter
-    def privacy_link(self, value: pulumi.Input[str]):
+    def privacy_link(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "privacy_link", value)
 
     @property
     @pulumi.getter(name="supportEmail")
-    def support_email(self) -> pulumi.Input[str]:
+    def support_email(self) -> Optional[pulumi.Input[str]]:
         return pulumi.get(self, "support_email")
 
     @support_email.setter
-    def support_email(self, value: pulumi.Input[str]):
+    def support_email(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "support_email", value)
 
     @property
     @pulumi.getter(name="tosLink")
-    def tos_link(self) -> pulumi.Input[str]:
+    def tos_link(self) -> Optional[pulumi.Input[str]]:
         return pulumi.get(self, "tos_link")
 
     @tos_link.setter
-    def tos_link(self, value: pulumi.Input[str]):
+    def tos_link(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "tos_link", value)
 
 
@@ -160,7 +164,7 @@ class DefaultPrivacyPolicy(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: DefaultPrivacyPolicyArgs,
+                 args: Optional[DefaultPrivacyPolicyArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Resource representing the default privacy policy.
@@ -214,17 +218,9 @@ class DefaultPrivacyPolicy(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = DefaultPrivacyPolicyArgs.__new__(DefaultPrivacyPolicyArgs)
 
-            if help_link is None and not opts.urn:
-                raise TypeError("Missing required property 'help_link'")
             __props__.__dict__["help_link"] = help_link
-            if privacy_link is None and not opts.urn:
-                raise TypeError("Missing required property 'privacy_link'")
             __props__.__dict__["privacy_link"] = privacy_link
-            if support_email is None and not opts.urn:
-                raise TypeError("Missing required property 'support_email'")
             __props__.__dict__["support_email"] = support_email
-            if tos_link is None and not opts.urn:
-                raise TypeError("Missing required property 'tos_link'")
             __props__.__dict__["tos_link"] = tos_link
         super(DefaultPrivacyPolicy, __self__).__init__(
             'zitadel:index/defaultPrivacyPolicy:DefaultPrivacyPolicy',
@@ -260,21 +256,21 @@ class DefaultPrivacyPolicy(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="helpLink")
-    def help_link(self) -> pulumi.Output[str]:
+    def help_link(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "help_link")
 
     @property
     @pulumi.getter(name="privacyLink")
-    def privacy_link(self) -> pulumi.Output[str]:
+    def privacy_link(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "privacy_link")
 
     @property
     @pulumi.getter(name="supportEmail")
-    def support_email(self) -> pulumi.Output[str]:
+    def support_email(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "support_email")
 
     @property
     @pulumi.getter(name="tosLink")
-    def tos_link(self) -> pulumi.Output[str]:
+    def tos_link(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "tos_link")
 

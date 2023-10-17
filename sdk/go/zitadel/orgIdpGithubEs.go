@@ -19,35 +19,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpGithubEs(ctx, "default", &zitadel.OrgIdpGithubEsArgs{
-// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ClientId:     pulumi.String("86a165..."),
-// 			ClientSecret: pulumi.String("*****afdbac18"),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 			AuthorizationEndpoint: pulumi.String("https://auth.endpoint"),
-// 			TokenEndpoint:         pulumi.String("https://token.endpoint"),
-// 			UserEndpoint:          pulumi.String("https://user.endpoint"),
-// 			IsLinkingAllowed:      pulumi.Bool(false),
-// 			IsCreationAllowed:     pulumi.Bool(true),
-// 			IsAutoCreation:        pulumi.Bool(false),
-// 			IsAutoUpdate:          pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgIdpGithubEs(ctx, "default", &zitadel.OrgIdpGithubEsArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				ClientId:     pulumi.String("86a165..."),
+//				ClientSecret: pulumi.String("*****afdbac18"),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//				AuthorizationEndpoint: pulumi.String("https://auth.endpoint"),
+//				TokenEndpoint:         pulumi.String("https://token.endpoint"),
+//				UserEndpoint:          pulumi.String("https://user.endpoint"),
+//				IsLinkingAllowed:      pulumi.Bool(false),
+//				IsCreationAllowed:     pulumi.Bool(true),
+//				IsAutoCreation:        pulumi.Bool(false),
+//				IsAutoUpdate:          pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -55,7 +58,9 @@ import (
 // terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/orgIdpGithubEs:OrgIdpGithubEs imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678'
+//
+//	$ pulumi import zitadel:index/orgIdpGithubEs:OrgIdpGithubEs imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678'
+//
 // ```
 type OrgIdpGithubEs struct {
 	pulumi.CustomResourceState
@@ -281,7 +286,7 @@ func (i *OrgIdpGithubEs) ToOrgIdpGithubEsOutputWithContext(ctx context.Context) 
 // OrgIdpGithubEsArrayInput is an input type that accepts OrgIdpGithubEsArray and OrgIdpGithubEsArrayOutput values.
 // You can construct a concrete instance of `OrgIdpGithubEsArrayInput` via:
 //
-//          OrgIdpGithubEsArray{ OrgIdpGithubEsArgs{...} }
+//	OrgIdpGithubEsArray{ OrgIdpGithubEsArgs{...} }
 type OrgIdpGithubEsArrayInput interface {
 	pulumi.Input
 
@@ -306,7 +311,7 @@ func (i OrgIdpGithubEsArray) ToOrgIdpGithubEsArrayOutputWithContext(ctx context.
 // OrgIdpGithubEsMapInput is an input type that accepts OrgIdpGithubEsMap and OrgIdpGithubEsMapOutput values.
 // You can construct a concrete instance of `OrgIdpGithubEsMapInput` via:
 //
-//          OrgIdpGithubEsMap{ "key": OrgIdpGithubEsArgs{...} }
+//	OrgIdpGithubEsMap{ "key": OrgIdpGithubEsArgs{...} }
 type OrgIdpGithubEsMapInput interface {
 	pulumi.Input
 

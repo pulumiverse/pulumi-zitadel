@@ -19,32 +19,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpGoogle(ctx, "default", &zitadel.OrgIdpGoogleArgs{
-// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ClientId:     pulumi.String("182902..."),
-// 			ClientSecret: pulumi.String("GOCSPX-*****"),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 			IsLinkingAllowed:  pulumi.Bool(false),
-// 			IsCreationAllowed: pulumi.Bool(true),
-// 			IsAutoCreation:    pulumi.Bool(false),
-// 			IsAutoUpdate:      pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgIdpGoogle(ctx, "default", &zitadel.OrgIdpGoogleArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				ClientId:     pulumi.String("182902..."),
+//				ClientSecret: pulumi.String("GOCSPX-*****"),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -52,7 +55,9 @@ import (
 // terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/orgIdpGoogle:OrgIdpGoogle imported '123456789012345678:123456789012345678:G1234567890123'
+//
+//	$ pulumi import zitadel:index/orgIdpGoogle:OrgIdpGoogle imported '123456789012345678:123456789012345678:G1234567890123'
+//
 // ```
 type OrgIdpGoogle struct {
 	pulumi.CustomResourceState
@@ -239,7 +244,7 @@ func (i *OrgIdpGoogle) ToOrgIdpGoogleOutputWithContext(ctx context.Context) OrgI
 // OrgIdpGoogleArrayInput is an input type that accepts OrgIdpGoogleArray and OrgIdpGoogleArrayOutput values.
 // You can construct a concrete instance of `OrgIdpGoogleArrayInput` via:
 //
-//          OrgIdpGoogleArray{ OrgIdpGoogleArgs{...} }
+//	OrgIdpGoogleArray{ OrgIdpGoogleArgs{...} }
 type OrgIdpGoogleArrayInput interface {
 	pulumi.Input
 
@@ -264,7 +269,7 @@ func (i OrgIdpGoogleArray) ToOrgIdpGoogleArrayOutputWithContext(ctx context.Cont
 // OrgIdpGoogleMapInput is an input type that accepts OrgIdpGoogleMap and OrgIdpGoogleMapOutput values.
 // You can construct a concrete instance of `OrgIdpGoogleMapInput` via:
 //
-//          OrgIdpGoogleMap{ "key": OrgIdpGoogleArgs{...} }
+//	OrgIdpGoogleMap{ "key": OrgIdpGoogleArgs{...} }
 type OrgIdpGoogleMapInput interface {
 	pulumi.Input
 
