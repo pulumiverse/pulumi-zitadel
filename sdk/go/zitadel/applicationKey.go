@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewApplicationKey(ctx, "default", &zitadel.ApplicationKeyArgs{
-// 			OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ProjectId:      pulumi.Any(data.Zitadel_project.Default.Id),
-// 			AppId:          pulumi.Any(data.Zitadel_application_api.Default.Id),
-// 			KeyType:        pulumi.String("KEY_TYPE_JSON"),
-// 			ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewApplicationKey(ctx, "default", &zitadel.ApplicationKeyArgs{
+//				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
+//				ProjectId:      pulumi.Any(data.Zitadel_project.Default.Id),
+//				AppId:          pulumi.Any(data.Zitadel_application_api.Default.Id),
+//				KeyType:        pulumi.String("KEY_TYPE_JSON"),
+//				ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // terraform # The resource can be imported using the ID format `<id:project_id:app_id[:org_id][:key_details]>`. # You can use __SEMICOLON__ to escape :, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/applicationKey:ApplicationKey imported "123456789012345678:123456789012345678:123456789012345678:123456789012345678:$(cat ~/Downloads/123456789012345678.json | sed -e 's/:/__SEMICOLON__/g')"
+//
+//	$ pulumi import zitadel:index/applicationKey:ApplicationKey imported "123456789012345678:123456789012345678:123456789012345678:123456789012345678:$(cat ~/Downloads/123456789012345678.json | sed -e 's/:/__SEMICOLON__/g')"
+//
 // ```
 type ApplicationKey struct {
 	pulumi.CustomResourceState
@@ -192,7 +197,7 @@ func (i *ApplicationKey) ToApplicationKeyOutputWithContext(ctx context.Context) 
 // ApplicationKeyArrayInput is an input type that accepts ApplicationKeyArray and ApplicationKeyArrayOutput values.
 // You can construct a concrete instance of `ApplicationKeyArrayInput` via:
 //
-//          ApplicationKeyArray{ ApplicationKeyArgs{...} }
+//	ApplicationKeyArray{ ApplicationKeyArgs{...} }
 type ApplicationKeyArrayInput interface {
 	pulumi.Input
 
@@ -217,7 +222,7 @@ func (i ApplicationKeyArray) ToApplicationKeyArrayOutputWithContext(ctx context.
 // ApplicationKeyMapInput is an input type that accepts ApplicationKeyMap and ApplicationKeyMapOutput values.
 // You can construct a concrete instance of `ApplicationKeyMapInput` via:
 //
-//          ApplicationKeyMap{ "key": ApplicationKeyArgs{...} }
+//	ApplicationKeyMap{ "key": ApplicationKeyArgs{...} }
 type ApplicationKeyMapInput interface {
 	pulumi.Input
 

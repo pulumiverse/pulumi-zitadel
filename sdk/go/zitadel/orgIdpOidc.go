@@ -19,34 +19,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpOidc(ctx, "default", &zitadel.OrgIdpOidcArgs{
-// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ClientId:     pulumi.String("a_client_id"),
-// 			ClientSecret: pulumi.String("a_client_secret"),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 			Issuer:            pulumi.String("https://example.com"),
-// 			IsLinkingAllowed:  pulumi.Bool(false),
-// 			IsCreationAllowed: pulumi.Bool(true),
-// 			IsAutoCreation:    pulumi.Bool(false),
-// 			IsAutoUpdate:      pulumi.Bool(true),
-// 			IsIdTokenMapping:  pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgIdpOidc(ctx, "default", &zitadel.OrgIdpOidcArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				ClientId:     pulumi.String("a_client_id"),
+//				ClientSecret: pulumi.String("a_client_secret"),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//				Issuer:            pulumi.String("https://example.com"),
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
+//				IsIdTokenMapping:  pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -54,7 +57,9 @@ import (
 // terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/orgIdpOidc:OrgIdpOidc imported '123456789012345678:123456789012345678:1234567890abcdef'
+//
+//	$ pulumi import zitadel:index/orgIdpOidc:OrgIdpOidc imported '123456789012345678:123456789012345678:1234567890abcdef'
+//
 // ```
 type OrgIdpOidc struct {
 	pulumi.CustomResourceState
@@ -267,7 +272,7 @@ func (i *OrgIdpOidc) ToOrgIdpOidcOutputWithContext(ctx context.Context) OrgIdpOi
 // OrgIdpOidcArrayInput is an input type that accepts OrgIdpOidcArray and OrgIdpOidcArrayOutput values.
 // You can construct a concrete instance of `OrgIdpOidcArrayInput` via:
 //
-//          OrgIdpOidcArray{ OrgIdpOidcArgs{...} }
+//	OrgIdpOidcArray{ OrgIdpOidcArgs{...} }
 type OrgIdpOidcArrayInput interface {
 	pulumi.Input
 
@@ -292,7 +297,7 @@ func (i OrgIdpOidcArray) ToOrgIdpOidcArrayOutputWithContext(ctx context.Context)
 // OrgIdpOidcMapInput is an input type that accepts OrgIdpOidcMap and OrgIdpOidcMapOutput values.
 // You can construct a concrete instance of `OrgIdpOidcMapInput` via:
 //
-//          OrgIdpOidcMap{ "key": OrgIdpOidcArgs{...} }
+//	OrgIdpOidcMap{ "key": OrgIdpOidcArgs{...} }
 type OrgIdpOidcMapInput interface {
 	pulumi.Input
 

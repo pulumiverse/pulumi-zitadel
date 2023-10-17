@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewProjectMember(ctx, "default", &zitadel.ProjectMemberArgs{
-// 			OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ProjectId: pulumi.Any(data.Zitadel_project.Default.Id),
-// 			UserId:    pulumi.Any(data.Zitadel_human_user.Default.Id),
-// 			Roles: pulumi.StringArray{
-// 				pulumi.String("PROJECT_OWNER"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewProjectMember(ctx, "default", &zitadel.ProjectMemberArgs{
+//				OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
+//				ProjectId: pulumi.Any(data.Zitadel_project.Default.Id),
+//				UserId:    pulumi.Any(data.Zitadel_human_user.Default.Id),
+//				Roles: pulumi.StringArray{
+//					pulumi.String("PROJECT_OWNER"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // terraform # The resource can be imported using the ID format `<project_id:user_id[:org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/projectMember:ProjectMember imported '123456789012345678:123456789012345678:123456789012345678'
+//
+//	$ pulumi import zitadel:index/projectMember:ProjectMember imported '123456789012345678:123456789012345678:123456789012345678'
+//
 // ```
 type ProjectMember struct {
 	pulumi.CustomResourceState
@@ -174,7 +179,7 @@ func (i *ProjectMember) ToProjectMemberOutputWithContext(ctx context.Context) Pr
 // ProjectMemberArrayInput is an input type that accepts ProjectMemberArray and ProjectMemberArrayOutput values.
 // You can construct a concrete instance of `ProjectMemberArrayInput` via:
 //
-//          ProjectMemberArray{ ProjectMemberArgs{...} }
+//	ProjectMemberArray{ ProjectMemberArgs{...} }
 type ProjectMemberArrayInput interface {
 	pulumi.Input
 
@@ -199,7 +204,7 @@ func (i ProjectMemberArray) ToProjectMemberArrayOutputWithContext(ctx context.Co
 // ProjectMemberMapInput is an input type that accepts ProjectMemberMap and ProjectMemberMapOutput values.
 // You can construct a concrete instance of `ProjectMemberMapInput` via:
 //
-//          ProjectMemberMap{ "key": ProjectMemberArgs{...} }
+//	ProjectMemberMap{ "key": ProjectMemberArgs{...} }
 type ProjectMemberMapInput interface {
 	pulumi.Input
 

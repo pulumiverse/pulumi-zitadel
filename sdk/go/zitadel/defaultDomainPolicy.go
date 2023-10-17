@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewDefaultDomainPolicy(ctx, "default", &zitadel.DefaultDomainPolicyArgs{
-// 			SmtpSenderAddressMatchesInstanceDomain: pulumi.Bool(true),
-// 			UserLoginMustBeDomain:                  pulumi.Bool(false),
-// 			ValidateOrgDomains:                     pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewDefaultDomainPolicy(ctx, "default", &zitadel.DefaultDomainPolicyArgs{
+//				SmtpSenderAddressMatchesInstanceDomain: pulumi.Bool(true),
+//				UserLoginMustBeDomain:                  pulumi.Bool(false),
+//				ValidateOrgDomains:                     pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // terraform # The resource can be imported using the ID format `<>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/defaultDomainPolicy:DefaultDomainPolicy imported ''
+//
+//	$ pulumi import zitadel:index/defaultDomainPolicy:DefaultDomainPolicy imported ''
+//
 // ```
 type DefaultDomainPolicy struct {
 	pulumi.CustomResourceState
@@ -156,7 +161,7 @@ func (i *DefaultDomainPolicy) ToDefaultDomainPolicyOutputWithContext(ctx context
 // DefaultDomainPolicyArrayInput is an input type that accepts DefaultDomainPolicyArray and DefaultDomainPolicyArrayOutput values.
 // You can construct a concrete instance of `DefaultDomainPolicyArrayInput` via:
 //
-//          DefaultDomainPolicyArray{ DefaultDomainPolicyArgs{...} }
+//	DefaultDomainPolicyArray{ DefaultDomainPolicyArgs{...} }
 type DefaultDomainPolicyArrayInput interface {
 	pulumi.Input
 
@@ -181,7 +186,7 @@ func (i DefaultDomainPolicyArray) ToDefaultDomainPolicyArrayOutputWithContext(ct
 // DefaultDomainPolicyMapInput is an input type that accepts DefaultDomainPolicyMap and DefaultDomainPolicyMapOutput values.
 // You can construct a concrete instance of `DefaultDomainPolicyMapInput` via:
 //
-//          DefaultDomainPolicyMap{ "key": DefaultDomainPolicyArgs{...} }
+//	DefaultDomainPolicyMap{ "key": DefaultDomainPolicyArgs{...} }
 type DefaultDomainPolicyMapInput interface {
 	pulumi.Input
 

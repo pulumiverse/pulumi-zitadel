@@ -18,7 +18,9 @@ import (
 // terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
+//
+//	$ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
+//
 // ```
 type LabelPolicy struct {
 	pulumi.CustomResourceState
@@ -312,7 +314,7 @@ func (i *LabelPolicy) ToLabelPolicyOutputWithContext(ctx context.Context) LabelP
 // LabelPolicyArrayInput is an input type that accepts LabelPolicyArray and LabelPolicyArrayOutput values.
 // You can construct a concrete instance of `LabelPolicyArrayInput` via:
 //
-//          LabelPolicyArray{ LabelPolicyArgs{...} }
+//	LabelPolicyArray{ LabelPolicyArgs{...} }
 type LabelPolicyArrayInput interface {
 	pulumi.Input
 
@@ -337,7 +339,7 @@ func (i LabelPolicyArray) ToLabelPolicyArrayOutputWithContext(ctx context.Contex
 // LabelPolicyMapInput is an input type that accepts LabelPolicyMap and LabelPolicyMapOutput values.
 // You can construct a concrete instance of `LabelPolicyMapInput` via:
 //
-//          LabelPolicyMap{ "key": LabelPolicyArgs{...} }
+//	LabelPolicyMap{ "key": LabelPolicyArgs{...} }
 type LabelPolicyMapInput interface {
 	pulumi.Input
 

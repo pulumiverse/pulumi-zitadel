@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewAction(ctx, "default", &zitadel.ActionArgs{
-// 			OrgId:         pulumi.Any(data.Zitadel_org.Default.Id),
-// 			Script:        pulumi.String("testscript"),
-// 			Timeout:       pulumi.String("10s"),
-// 			AllowedToFail: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewAction(ctx, "default", &zitadel.ActionArgs{
+//				OrgId:         pulumi.Any(data.Zitadel_org.Default.Id),
+//				Script:        pulumi.String("testscript"),
+//				Timeout:       pulumi.String("10s"),
+//				AllowedToFail: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/action:Action imported '123456789012345678:123456789012345678'
+//
+//	$ pulumi import zitadel:index/action:Action imported '123456789012345678:123456789012345678'
+//
 // ```
 type Action struct {
 	pulumi.CustomResourceState
@@ -178,7 +183,7 @@ func (i *Action) ToActionOutputWithContext(ctx context.Context) ActionOutput {
 // ActionArrayInput is an input type that accepts ActionArray and ActionArrayOutput values.
 // You can construct a concrete instance of `ActionArrayInput` via:
 //
-//          ActionArray{ ActionArgs{...} }
+//	ActionArray{ ActionArgs{...} }
 type ActionArrayInput interface {
 	pulumi.Input
 
@@ -203,7 +208,7 @@ func (i ActionArray) ToActionArrayOutputWithContext(ctx context.Context) ActionA
 // ActionMapInput is an input type that accepts ActionMap and ActionMapOutput values.
 // You can construct a concrete instance of `ActionMapInput` via:
 //
-//          ActionMap{ "key": ActionArgs{...} }
+//	ActionMap{ "key": ActionArgs{...} }
 type ActionMapInput interface {
 	pulumi.Input
 

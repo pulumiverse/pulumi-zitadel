@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewApplicationApi(ctx, "default", &zitadel.ApplicationApiArgs{
-// 			OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ProjectId:      pulumi.Any(data.Zitadel_project.Default.Id),
-// 			AuthMethodType: pulumi.String("API_AUTH_METHOD_TYPE_BASIC"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewApplicationApi(ctx, "default", &zitadel.ApplicationApiArgs{
+//				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
+//				ProjectId:      pulumi.Any(data.Zitadel_project.Default.Id),
+//				AuthMethodType: pulumi.String("API_AUTH_METHOD_TYPE_BASIC"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // terraform # The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/applicationApi:ApplicationApi imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
+//
+//	$ pulumi import zitadel:index/applicationApi:ApplicationApi imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
+//
 // ```
 type ApplicationApi struct {
 	pulumi.CustomResourceState
@@ -177,7 +182,7 @@ func (i *ApplicationApi) ToApplicationApiOutputWithContext(ctx context.Context) 
 // ApplicationApiArrayInput is an input type that accepts ApplicationApiArray and ApplicationApiArrayOutput values.
 // You can construct a concrete instance of `ApplicationApiArrayInput` via:
 //
-//          ApplicationApiArray{ ApplicationApiArgs{...} }
+//	ApplicationApiArray{ ApplicationApiArgs{...} }
 type ApplicationApiArrayInput interface {
 	pulumi.Input
 
@@ -202,7 +207,7 @@ func (i ApplicationApiArray) ToApplicationApiArrayOutputWithContext(ctx context.
 // ApplicationApiMapInput is an input type that accepts ApplicationApiMap and ApplicationApiMapOutput values.
 // You can construct a concrete instance of `ApplicationApiMapInput` via:
 //
-//          ApplicationApiMap{ "key": ApplicationApiArgs{...} }
+//	ApplicationApiMap{ "key": ApplicationApiArgs{...} }
 type ApplicationApiMapInput interface {
 	pulumi.Input
 

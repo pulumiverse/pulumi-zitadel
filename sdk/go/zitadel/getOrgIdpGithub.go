@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.LookupOrgIdpGithub(ctx, &GetOrgIdpGithubArgs{
-// 			OrgId: pulumi.StringRef(data.Zitadel_org.Default.Id),
-// 			Id:    "123456789012345678",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.LookupOrgIdpGithub(ctx, &GetOrgIdpGithubArgs{
+//				OrgId: pulumi.StringRef(data.Zitadel_org.Default.Id),
+//				Id:    "123456789012345678",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupOrgIdpGithub(ctx *pulumi.Context, args *LookupOrgIdpGithubArgs, opts ...pulumi.InvokeOption) (*LookupOrgIdpGithubResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

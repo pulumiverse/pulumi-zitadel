@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_default, err := zitadel.LookupOrg(ctx, &GetOrgArgs{
-// 			Id: "123456789012345678",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("org", _default)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_default, err := zitadel.LookupOrg(ctx, &GetOrgArgs{
+//				Id: "123456789012345678",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("org", _default)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupOrg(ctx *pulumi.Context, args *LookupOrgArgs, opts ...pulumi.InvokeOption) (*LookupOrgResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

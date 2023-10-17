@@ -19,44 +19,47 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewIdpLdap(ctx, "default", &zitadel.IdpLdapArgs{
-// 			BaseDn:             pulumi.String("dc=example,dc=com"),
-// 			BindDn:             pulumi.String("cn=admin,dc=example,dc=com"),
-// 			BindPassword:       pulumi.String("Password1!"),
-// 			FirstNameAttribute: pulumi.String("firstname"),
-// 			IdAttribute:        pulumi.String("uid"),
-// 			IsAutoCreation:     pulumi.Bool(false),
-// 			IsAutoUpdate:       pulumi.Bool(true),
-// 			IsCreationAllowed:  pulumi.Bool(true),
-// 			IsLinkingAllowed:   pulumi.Bool(false),
-// 			LastNameAttribute:  pulumi.String("lastname"),
-// 			Servers: pulumi.StringArray{
-// 				pulumi.String("ldaps://my.primary.server:389"),
-// 				pulumi.String("ldaps://my.secondary.server:389"),
-// 			},
-// 			StartTls: pulumi.Bool(false),
-// 			Timeout:  pulumi.String("10s"),
-// 			UserBase: pulumi.String("dn"),
-// 			UserFilters: pulumi.StringArray{
-// 				pulumi.String("uid"),
-// 				pulumi.String("email"),
-// 			},
-// 			UserObjectClasses: pulumi.StringArray{
-// 				pulumi.String("inetOrgPerson"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewIdpLdap(ctx, "default", &zitadel.IdpLdapArgs{
+//				BaseDn:             pulumi.String("dc=example,dc=com"),
+//				BindDn:             pulumi.String("cn=admin,dc=example,dc=com"),
+//				BindPassword:       pulumi.String("Password1!"),
+//				FirstNameAttribute: pulumi.String("firstname"),
+//				IdAttribute:        pulumi.String("uid"),
+//				IsAutoCreation:     pulumi.Bool(false),
+//				IsAutoUpdate:       pulumi.Bool(true),
+//				IsCreationAllowed:  pulumi.Bool(true),
+//				IsLinkingAllowed:   pulumi.Bool(false),
+//				LastNameAttribute:  pulumi.String("lastname"),
+//				Servers: pulumi.StringArray{
+//					pulumi.String("ldaps://my.primary.server:389"),
+//					pulumi.String("ldaps://my.secondary.server:389"),
+//				},
+//				StartTls: pulumi.Bool(false),
+//				Timeout:  pulumi.String("10s"),
+//				UserBase: pulumi.String("dn"),
+//				UserFilters: pulumi.StringArray{
+//					pulumi.String("uid"),
+//					pulumi.String("email"),
+//				},
+//				UserObjectClasses: pulumi.StringArray{
+//					pulumi.String("inetOrgPerson"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -64,7 +67,9 @@ import (
 // terraform # The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/idpLdap:IdpLdap imported '123456789012345678:b1nd_p4ssw0rd'
+//
+//	$ pulumi import zitadel:index/idpLdap:IdpLdap imported '123456789012345678:b1nd_p4ssw0rd'
+//
 // ```
 type IdpLdap struct {
 	pulumi.CustomResourceState
@@ -452,7 +457,7 @@ func (i *IdpLdap) ToIdpLdapOutputWithContext(ctx context.Context) IdpLdapOutput 
 // IdpLdapArrayInput is an input type that accepts IdpLdapArray and IdpLdapArrayOutput values.
 // You can construct a concrete instance of `IdpLdapArrayInput` via:
 //
-//          IdpLdapArray{ IdpLdapArgs{...} }
+//	IdpLdapArray{ IdpLdapArgs{...} }
 type IdpLdapArrayInput interface {
 	pulumi.Input
 
@@ -477,7 +482,7 @@ func (i IdpLdapArray) ToIdpLdapArrayOutputWithContext(ctx context.Context) IdpLd
 // IdpLdapMapInput is an input type that accepts IdpLdapMap and IdpLdapMapOutput values.
 // You can construct a concrete instance of `IdpLdapMapInput` via:
 //
-//          IdpLdapMap{ "key": IdpLdapArgs{...} }
+//	IdpLdapMap{ "key": IdpLdapArgs{...} }
 type IdpLdapMapInput interface {
 	pulumi.Input
 

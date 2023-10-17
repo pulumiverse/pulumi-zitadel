@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewPrivacyPolicy(ctx, "default", &zitadel.PrivacyPolicyArgs{
-// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
-// 			TosLink:      pulumi.String("https://example.com/tos"),
-// 			PrivacyLink:  pulumi.String("https://example.com/privacy"),
-// 			HelpLink:     pulumi.String("https://example.com/help"),
-// 			SupportEmail: pulumi.String("support@example.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewPrivacyPolicy(ctx, "default", &zitadel.PrivacyPolicyArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				TosLink:      pulumi.String("https://example.com/tos"),
+//				PrivacyLink:  pulumi.String("https://example.com/privacy"),
+//				HelpLink:     pulumi.String("https://example.com/help"),
+//				SupportEmail: pulumi.String("support@example.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,38 +47,28 @@ import (
 // terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/privacyPolicy:PrivacyPolicy imported '123456789012345678'
+//
+//	$ pulumi import zitadel:index/privacyPolicy:PrivacyPolicy imported '123456789012345678'
+//
 // ```
 type PrivacyPolicy struct {
 	pulumi.CustomResourceState
 
-	HelpLink pulumi.StringOutput `pulumi:"helpLink"`
+	HelpLink pulumi.StringPtrOutput `pulumi:"helpLink"`
 	// ID of the organization
 	OrgId        pulumi.StringPtrOutput `pulumi:"orgId"`
-	PrivacyLink  pulumi.StringOutput    `pulumi:"privacyLink"`
-	SupportEmail pulumi.StringOutput    `pulumi:"supportEmail"`
-	TosLink      pulumi.StringOutput    `pulumi:"tosLink"`
+	PrivacyLink  pulumi.StringPtrOutput `pulumi:"privacyLink"`
+	SupportEmail pulumi.StringPtrOutput `pulumi:"supportEmail"`
+	TosLink      pulumi.StringPtrOutput `pulumi:"tosLink"`
 }
 
 // NewPrivacyPolicy registers a new resource with the given unique name, arguments, and options.
 func NewPrivacyPolicy(ctx *pulumi.Context,
 	name string, args *PrivacyPolicyArgs, opts ...pulumi.ResourceOption) (*PrivacyPolicy, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &PrivacyPolicyArgs{}
 	}
 
-	if args.HelpLink == nil {
-		return nil, errors.New("invalid value for required argument 'HelpLink'")
-	}
-	if args.PrivacyLink == nil {
-		return nil, errors.New("invalid value for required argument 'PrivacyLink'")
-	}
-	if args.SupportEmail == nil {
-		return nil, errors.New("invalid value for required argument 'SupportEmail'")
-	}
-	if args.TosLink == nil {
-		return nil, errors.New("invalid value for required argument 'TosLink'")
-	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource PrivacyPolicy
 	err := ctx.RegisterResource("zitadel:index/privacyPolicy:PrivacyPolicy", name, args, &resource, opts...)
@@ -122,22 +114,22 @@ func (PrivacyPolicyState) ElementType() reflect.Type {
 }
 
 type privacyPolicyArgs struct {
-	HelpLink string `pulumi:"helpLink"`
+	HelpLink *string `pulumi:"helpLink"`
 	// ID of the organization
 	OrgId        *string `pulumi:"orgId"`
-	PrivacyLink  string  `pulumi:"privacyLink"`
-	SupportEmail string  `pulumi:"supportEmail"`
-	TosLink      string  `pulumi:"tosLink"`
+	PrivacyLink  *string `pulumi:"privacyLink"`
+	SupportEmail *string `pulumi:"supportEmail"`
+	TosLink      *string `pulumi:"tosLink"`
 }
 
 // The set of arguments for constructing a PrivacyPolicy resource.
 type PrivacyPolicyArgs struct {
-	HelpLink pulumi.StringInput
+	HelpLink pulumi.StringPtrInput
 	// ID of the organization
 	OrgId        pulumi.StringPtrInput
-	PrivacyLink  pulumi.StringInput
-	SupportEmail pulumi.StringInput
-	TosLink      pulumi.StringInput
+	PrivacyLink  pulumi.StringPtrInput
+	SupportEmail pulumi.StringPtrInput
+	TosLink      pulumi.StringPtrInput
 }
 
 func (PrivacyPolicyArgs) ElementType() reflect.Type {
@@ -166,7 +158,7 @@ func (i *PrivacyPolicy) ToPrivacyPolicyOutputWithContext(ctx context.Context) Pr
 // PrivacyPolicyArrayInput is an input type that accepts PrivacyPolicyArray and PrivacyPolicyArrayOutput values.
 // You can construct a concrete instance of `PrivacyPolicyArrayInput` via:
 //
-//          PrivacyPolicyArray{ PrivacyPolicyArgs{...} }
+//	PrivacyPolicyArray{ PrivacyPolicyArgs{...} }
 type PrivacyPolicyArrayInput interface {
 	pulumi.Input
 
@@ -191,7 +183,7 @@ func (i PrivacyPolicyArray) ToPrivacyPolicyArrayOutputWithContext(ctx context.Co
 // PrivacyPolicyMapInput is an input type that accepts PrivacyPolicyMap and PrivacyPolicyMapOutput values.
 // You can construct a concrete instance of `PrivacyPolicyMapInput` via:
 //
-//          PrivacyPolicyMap{ "key": PrivacyPolicyArgs{...} }
+//	PrivacyPolicyMap{ "key": PrivacyPolicyArgs{...} }
 type PrivacyPolicyMapInput interface {
 	pulumi.Input
 
@@ -227,8 +219,8 @@ func (o PrivacyPolicyOutput) ToPrivacyPolicyOutputWithContext(ctx context.Contex
 	return o
 }
 
-func (o PrivacyPolicyOutput) HelpLink() pulumi.StringOutput {
-	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringOutput { return v.HelpLink }).(pulumi.StringOutput)
+func (o PrivacyPolicyOutput) HelpLink() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringPtrOutput { return v.HelpLink }).(pulumi.StringPtrOutput)
 }
 
 // ID of the organization
@@ -236,16 +228,16 @@ func (o PrivacyPolicyOutput) OrgId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
-func (o PrivacyPolicyOutput) PrivacyLink() pulumi.StringOutput {
-	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringOutput { return v.PrivacyLink }).(pulumi.StringOutput)
+func (o PrivacyPolicyOutput) PrivacyLink() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringPtrOutput { return v.PrivacyLink }).(pulumi.StringPtrOutput)
 }
 
-func (o PrivacyPolicyOutput) SupportEmail() pulumi.StringOutput {
-	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringOutput { return v.SupportEmail }).(pulumi.StringOutput)
+func (o PrivacyPolicyOutput) SupportEmail() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringPtrOutput { return v.SupportEmail }).(pulumi.StringPtrOutput)
 }
 
-func (o PrivacyPolicyOutput) TosLink() pulumi.StringOutput {
-	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringOutput { return v.TosLink }).(pulumi.StringOutput)
+func (o PrivacyPolicyOutput) TosLink() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PrivacyPolicy) pulumi.StringPtrOutput { return v.TosLink }).(pulumi.StringPtrOutput)
 }
 
 type PrivacyPolicyArrayOutput struct{ *pulumi.OutputState }
