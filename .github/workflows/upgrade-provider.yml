@@ -2,12 +2,17 @@ name: Upgrade provider
 on:
   workflow_dispatch:
 
-  # TODO: remove this
-  push:
+  schedule:
+    - cron: "0 5 * * *"
 
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
+  # TODO: Switch to shared CI like here
+  # https://github.com/pulumiverse/pulumi-vercel/blob/main/.github/workflows/upgrade-provider.yml
+  # after this issue is fixed
+  # https://github.com/pulumi/upgrade-provider/issues/179
+  # or when have time to fix failing go mod tidy in "all" mode.
   upgrade_provider:
     name: upgrade-provider
     runs-on: ubuntu-latest
@@ -35,7 +40,7 @@ jobs:
         run: git fetch --prune --unshallow --tags
         shell: bash
       - name: Install upgrade-provider
-        run: go install github.com/pulumi/upgrade-provider@9dbeae554475dba6b436d2b6ae288118b6f4b0ba
+        run: go install github.com/pulumi/upgrade-provider@176a45cf2471d5fccd6235c385ba1ec17b74a37f
         shell: bash
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
