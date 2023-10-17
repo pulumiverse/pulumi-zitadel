@@ -18,7 +18,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - run: gh pr create --base pr-test --head main --title "Test" --body "Test"
+      - run: gh pr create --base main --head pr-test --title "Test" --body "Test"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Install Go
