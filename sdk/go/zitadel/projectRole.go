@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewProjectRole(ctx, "projectRole", &zitadel.ProjectRoleArgs{
-// 			OrgId:       pulumi.Any(zitadel_org.Org.Id),
-// 			ProjectId:   pulumi.Any(zitadel_project.Project.Id),
-// 			RoleKey:     pulumi.String("key"),
-// 			DisplayName: pulumi.String("display_name2"),
-// 			Group:       pulumi.String("role_group"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewProjectRole(ctx, "projectRole", &zitadel.ProjectRoleArgs{
+//				OrgId:       pulumi.Any(zitadel_org.Org.Id),
+//				ProjectId:   pulumi.Any(zitadel_project.Project.Id),
+//				RoleKey:     pulumi.String("key"),
+//				DisplayName: pulumi.String("display_name2"),
+//				Group:       pulumi.String("role_group"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ProjectRole struct {
 	pulumi.CustomResourceState
@@ -178,7 +181,7 @@ func (i *ProjectRole) ToProjectRoleOutputWithContext(ctx context.Context) Projec
 // ProjectRoleArrayInput is an input type that accepts ProjectRoleArray and ProjectRoleArrayOutput values.
 // You can construct a concrete instance of `ProjectRoleArrayInput` via:
 //
-//          ProjectRoleArray{ ProjectRoleArgs{...} }
+//	ProjectRoleArray{ ProjectRoleArgs{...} }
 type ProjectRoleArrayInput interface {
 	pulumi.Input
 
@@ -203,7 +206,7 @@ func (i ProjectRoleArray) ToProjectRoleArrayOutputWithContext(ctx context.Contex
 // ProjectRoleMapInput is an input type that accepts ProjectRoleMap and ProjectRoleMapOutput values.
 // You can construct a concrete instance of `ProjectRoleMapInput` via:
 //
-//          ProjectRoleMap{ "key": ProjectRoleArgs{...} }
+//	ProjectRoleMap{ "key": ProjectRoleArgs{...} }
 type ProjectRoleMapInput interface {
 	pulumi.Input
 

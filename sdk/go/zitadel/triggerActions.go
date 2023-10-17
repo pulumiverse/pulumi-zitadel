@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewTriggerActions(ctx, "triggerActions", &zitadel.TriggerActionsArgs{
-// 			OrgId:       pulumi.Any(zitadel_org.Org.Id),
-// 			FlowType:    pulumi.String("FLOW_TYPE_EXTERNAL_AUTHENTICATION"),
-// 			TriggerType: pulumi.String("TRIGGER_TYPE_POST_AUTHENTICATION"),
-// 			ActionIds: pulumi.StringArray{
-// 				pulumi.Any(zitadel_action.Action.Id),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewTriggerActions(ctx, "triggerActions", &zitadel.TriggerActionsArgs{
+//				OrgId:       pulumi.Any(zitadel_org.Org.Id),
+//				FlowType:    pulumi.String("FLOW_TYPE_EXTERNAL_AUTHENTICATION"),
+//				TriggerType: pulumi.String("TRIGGER_TYPE_POST_AUTHENTICATION"),
+//				ActionIds: pulumi.StringArray{
+//					pulumi.Any(zitadel_action.Action.Id),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type TriggerActions struct {
 	pulumi.CustomResourceState
@@ -169,7 +172,7 @@ func (i *TriggerActions) ToTriggerActionsOutputWithContext(ctx context.Context) 
 // TriggerActionsArrayInput is an input type that accepts TriggerActionsArray and TriggerActionsArrayOutput values.
 // You can construct a concrete instance of `TriggerActionsArrayInput` via:
 //
-//          TriggerActionsArray{ TriggerActionsArgs{...} }
+//	TriggerActionsArray{ TriggerActionsArgs{...} }
 type TriggerActionsArrayInput interface {
 	pulumi.Input
 
@@ -194,7 +197,7 @@ func (i TriggerActionsArray) ToTriggerActionsArrayOutputWithContext(ctx context.
 // TriggerActionsMapInput is an input type that accepts TriggerActionsMap and TriggerActionsMapOutput values.
 // You can construct a concrete instance of `TriggerActionsMapInput` via:
 //
-//          TriggerActionsMap{ "key": TriggerActionsArgs{...} }
+//	TriggerActionsMap{ "key": TriggerActionsArgs{...} }
 type TriggerActionsMapInput interface {
 	pulumi.Input
 

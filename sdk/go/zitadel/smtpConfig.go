@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewSmtpConfig(ctx, "smtp", &zitadel.SmtpConfigArgs{
-// 			Host:          pulumi.String("localhost:25"),
-// 			Password:      pulumi.String("password"),
-// 			SenderAddress: pulumi.String("address"),
-// 			SenderName:    pulumi.String("no-reply"),
-// 			Tls:           pulumi.Bool(true),
-// 			User:          pulumi.String("user"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewSmtpConfig(ctx, "smtp", &zitadel.SmtpConfigArgs{
+//				Host:          pulumi.String("localhost:25"),
+//				Password:      pulumi.String("password"),
+//				SenderAddress: pulumi.String("address"),
+//				SenderName:    pulumi.String("no-reply"),
+//				Tls:           pulumi.Bool(true),
+//				User:          pulumi.String("user"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SmtpConfig struct {
 	pulumi.CustomResourceState
@@ -186,7 +189,7 @@ func (i *SmtpConfig) ToSmtpConfigOutputWithContext(ctx context.Context) SmtpConf
 // SmtpConfigArrayInput is an input type that accepts SmtpConfigArray and SmtpConfigArrayOutput values.
 // You can construct a concrete instance of `SmtpConfigArrayInput` via:
 //
-//          SmtpConfigArray{ SmtpConfigArgs{...} }
+//	SmtpConfigArray{ SmtpConfigArgs{...} }
 type SmtpConfigArrayInput interface {
 	pulumi.Input
 
@@ -211,7 +214,7 @@ func (i SmtpConfigArray) ToSmtpConfigArrayOutputWithContext(ctx context.Context)
 // SmtpConfigMapInput is an input type that accepts SmtpConfigMap and SmtpConfigMapOutput values.
 // You can construct a concrete instance of `SmtpConfigMapInput` via:
 //
-//          SmtpConfigMap{ "key": SmtpConfigArgs{...} }
+//	SmtpConfigMap{ "key": SmtpConfigArgs{...} }
 type SmtpConfigMapInput interface {
 	pulumi.Input
 

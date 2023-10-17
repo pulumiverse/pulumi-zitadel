@@ -19,35 +19,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpAzureAd(ctx, "azureAd", &zitadel.OrgIdpAzureAdArgs{
-// 			OrgId:        pulumi.Any(zitadel_org.Org.Id),
-// 			ClientId:     pulumi.String("9065bfc8-a08a..."),
-// 			ClientSecret: pulumi.String("H2n***"),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 				pulumi.String("User.Read"),
-// 			},
-// 			TenantType:        pulumi.String("AZURE_AD_TENANT_TYPE_ORGANISATIONS"),
-// 			EmailVerified:     pulumi.Bool(true),
-// 			IsLinkingAllowed:  pulumi.Bool(false),
-// 			IsCreationAllowed: pulumi.Bool(true),
-// 			IsAutoCreation:    pulumi.Bool(false),
-// 			IsAutoUpdate:      pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgIdpAzureAd(ctx, "azureAd", &zitadel.OrgIdpAzureAdArgs{
+//				OrgId:        pulumi.Any(zitadel_org.Org.Id),
+//				ClientId:     pulumi.String("9065bfc8-a08a..."),
+//				ClientSecret: pulumi.String("H2n***"),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//					pulumi.String("User.Read"),
+//				},
+//				TenantType:        pulumi.String("AZURE_AD_TENANT_TYPE_ORGANISATIONS"),
+//				EmailVerified:     pulumi.Bool(true),
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type OrgIdpAzureAd struct {
 	pulumi.CustomResourceState
@@ -270,7 +273,7 @@ func (i *OrgIdpAzureAd) ToOrgIdpAzureAdOutputWithContext(ctx context.Context) Or
 // OrgIdpAzureAdArrayInput is an input type that accepts OrgIdpAzureAdArray and OrgIdpAzureAdArrayOutput values.
 // You can construct a concrete instance of `OrgIdpAzureAdArrayInput` via:
 //
-//          OrgIdpAzureAdArray{ OrgIdpAzureAdArgs{...} }
+//	OrgIdpAzureAdArray{ OrgIdpAzureAdArgs{...} }
 type OrgIdpAzureAdArrayInput interface {
 	pulumi.Input
 
@@ -295,7 +298,7 @@ func (i OrgIdpAzureAdArray) ToOrgIdpAzureAdArrayOutputWithContext(ctx context.Co
 // OrgIdpAzureAdMapInput is an input type that accepts OrgIdpAzureAdMap and OrgIdpAzureAdMapOutput values.
 // You can construct a concrete instance of `OrgIdpAzureAdMapInput` via:
 //
-//          OrgIdpAzureAdMap{ "key": OrgIdpAzureAdArgs{...} }
+//	OrgIdpAzureAdMap{ "key": OrgIdpAzureAdArgs{...} }
 type OrgIdpAzureAdMapInput interface {
 	pulumi.Input
 

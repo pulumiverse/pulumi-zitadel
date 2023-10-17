@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		apiApplicationApplicationApi, err := zitadel.LookupApplicationApi(ctx, &GetApplicationApiArgs{
-// 			OrgId:     data.Zitadel_org.Org.Id,
-// 			ProjectId: data.Zitadel_project.Project.Id,
-// 			AppId:     "177073625566806019",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("apiApplication", apiApplicationApplicationApi)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			apiApplicationApplicationApi, err := zitadel.LookupApplicationApi(ctx, &GetApplicationApiArgs{
+//				OrgId:     data.Zitadel_org.Org.Id,
+//				ProjectId: data.Zitadel_project.Project.Id,
+//				AppId:     "177073625566806019",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("apiApplication", apiApplicationApplicationApi)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupApplicationApi(ctx *pulumi.Context, args *LookupApplicationApiArgs, opts ...pulumi.InvokeOption) (*LookupApplicationApiResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

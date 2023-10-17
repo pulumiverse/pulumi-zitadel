@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewPrivacyPolicy(ctx, "privacyPolicy", &zitadel.PrivacyPolicyArgs{
-// 			OrgId:       pulumi.Any(zitadel_org.Org.Id),
-// 			TosLink:     pulumi.String("https://google.com"),
-// 			PrivacyLink: pulumi.String("https://google.com"),
-// 			HelpLink:    pulumi.String("https://google.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewPrivacyPolicy(ctx, "privacyPolicy", &zitadel.PrivacyPolicyArgs{
+//				OrgId:       pulumi.Any(zitadel_org.Org.Id),
+//				TosLink:     pulumi.String("https://google.com"),
+//				PrivacyLink: pulumi.String("https://google.com"),
+//				HelpLink:    pulumi.String("https://google.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type PrivacyPolicy struct {
 	pulumi.CustomResourceState
@@ -152,7 +155,7 @@ func (i *PrivacyPolicy) ToPrivacyPolicyOutputWithContext(ctx context.Context) Pr
 // PrivacyPolicyArrayInput is an input type that accepts PrivacyPolicyArray and PrivacyPolicyArrayOutput values.
 // You can construct a concrete instance of `PrivacyPolicyArrayInput` via:
 //
-//          PrivacyPolicyArray{ PrivacyPolicyArgs{...} }
+//	PrivacyPolicyArray{ PrivacyPolicyArgs{...} }
 type PrivacyPolicyArrayInput interface {
 	pulumi.Input
 
@@ -177,7 +180,7 @@ func (i PrivacyPolicyArray) ToPrivacyPolicyArrayOutputWithContext(ctx context.Co
 // PrivacyPolicyMapInput is an input type that accepts PrivacyPolicyMap and PrivacyPolicyMapOutput values.
 // You can construct a concrete instance of `PrivacyPolicyMapInput` via:
 //
-//          PrivacyPolicyMap{ "key": PrivacyPolicyArgs{...} }
+//	PrivacyPolicyMap{ "key": PrivacyPolicyArgs{...} }
 type PrivacyPolicyMapInput interface {
 	pulumi.Input
 

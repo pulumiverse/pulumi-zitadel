@@ -19,48 +19,51 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewLoginPolicy(ctx, "loginPolicy", &zitadel.LoginPolicyArgs{
-// 			OrgId:                      pulumi.Any(zitadel_org.Org.Id),
-// 			UserLogin:                  pulumi.Bool(true),
-// 			AllowRegister:              pulumi.Bool(true),
-// 			AllowExternalIdp:           pulumi.Bool(true),
-// 			ForceMfa:                   pulumi.Bool(false),
-// 			PasswordlessType:           pulumi.String("PASSWORDLESS_TYPE_ALLOWED"),
-// 			HidePasswordReset:          pulumi.Bool(false),
-// 			PasswordCheckLifetime:      pulumi.String("240h0m0s"),
-// 			ExternalLoginCheckLifetime: pulumi.String("240h0m0s"),
-// 			MultiFactorCheckLifetime:   pulumi.String("24h0m0s"),
-// 			MfaInitSkipLifetime:        pulumi.String("720h0m0s"),
-// 			SecondFactorCheckLifetime:  pulumi.String("24h0m0s"),
-// 			IgnoreUnknownUsernames:     pulumi.Bool(true),
-// 			DefaultRedirectUri:         pulumi.String("localhost:8080"),
-// 			SecondFactors: pulumi.StringArray{
-// 				pulumi.String("SECOND_FACTOR_TYPE_OTP"),
-// 				pulumi.String("SECOND_FACTOR_TYPE_U2F"),
-// 			},
-// 			MultiFactors: pulumi.StringArray{
-// 				pulumi.String("MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"),
-// 			},
-// 			Idps: pulumi.StringArray{
-// 				pulumi.Any(zitadel_org_idp_oidc.Oidc_idp.Id),
-// 				pulumi.Any(zitadel_org_idp_jwt.Jwt_idp.Id),
-// 			},
-// 			AllowDomainDiscovery:  pulumi.Bool(true),
-// 			DisableLoginWithEmail: pulumi.Bool(true),
-// 			DisableLoginWithPhone: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewLoginPolicy(ctx, "loginPolicy", &zitadel.LoginPolicyArgs{
+//				OrgId:                      pulumi.Any(zitadel_org.Org.Id),
+//				UserLogin:                  pulumi.Bool(true),
+//				AllowRegister:              pulumi.Bool(true),
+//				AllowExternalIdp:           pulumi.Bool(true),
+//				ForceMfa:                   pulumi.Bool(false),
+//				PasswordlessType:           pulumi.String("PASSWORDLESS_TYPE_ALLOWED"),
+//				HidePasswordReset:          pulumi.Bool(false),
+//				PasswordCheckLifetime:      pulumi.String("240h0m0s"),
+//				ExternalLoginCheckLifetime: pulumi.String("240h0m0s"),
+//				MultiFactorCheckLifetime:   pulumi.String("24h0m0s"),
+//				MfaInitSkipLifetime:        pulumi.String("720h0m0s"),
+//				SecondFactorCheckLifetime:  pulumi.String("24h0m0s"),
+//				IgnoreUnknownUsernames:     pulumi.Bool(true),
+//				DefaultRedirectUri:         pulumi.String("localhost:8080"),
+//				SecondFactors: pulumi.StringArray{
+//					pulumi.String("SECOND_FACTOR_TYPE_OTP"),
+//					pulumi.String("SECOND_FACTOR_TYPE_U2F"),
+//				},
+//				MultiFactors: pulumi.StringArray{
+//					pulumi.String("MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"),
+//				},
+//				Idps: pulumi.StringArray{
+//					pulumi.Any(zitadel_org_idp_oidc.Oidc_idp.Id),
+//					pulumi.Any(zitadel_org_idp_jwt.Jwt_idp.Id),
+//				},
+//				AllowDomainDiscovery:  pulumi.Bool(true),
+//				DisableLoginWithEmail: pulumi.Bool(true),
+//				DisableLoginWithPhone: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type LoginPolicy struct {
 	pulumi.CustomResourceState
@@ -356,7 +359,7 @@ func (i *LoginPolicy) ToLoginPolicyOutputWithContext(ctx context.Context) LoginP
 // LoginPolicyArrayInput is an input type that accepts LoginPolicyArray and LoginPolicyArrayOutput values.
 // You can construct a concrete instance of `LoginPolicyArrayInput` via:
 //
-//          LoginPolicyArray{ LoginPolicyArgs{...} }
+//	LoginPolicyArray{ LoginPolicyArgs{...} }
 type LoginPolicyArrayInput interface {
 	pulumi.Input
 
@@ -381,7 +384,7 @@ func (i LoginPolicyArray) ToLoginPolicyArrayOutputWithContext(ctx context.Contex
 // LoginPolicyMapInput is an input type that accepts LoginPolicyMap and LoginPolicyMapOutput values.
 // You can construct a concrete instance of `LoginPolicyMapInput` via:
 //
-//          LoginPolicyMap{ "key": LoginPolicyArgs{...} }
+//	LoginPolicyMap{ "key": LoginPolicyArgs{...} }
 type LoginPolicyMapInput interface {
 	pulumi.Input
 

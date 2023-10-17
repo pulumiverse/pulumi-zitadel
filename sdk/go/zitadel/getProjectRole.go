@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		projectRoleProjectRole, err := zitadel.LookupProjectRole(ctx, &GetProjectRoleArgs{
-// 			OrgId:     data.Zitadel_org.Org.Id,
-// 			ProjectId: data.Zitadel_project.Project.Id,
-// 			RoleKey:   "key",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("projectRole", projectRoleProjectRole)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			projectRoleProjectRole, err := zitadel.LookupProjectRole(ctx, &GetProjectRoleArgs{
+//				OrgId:     data.Zitadel_org.Org.Id,
+//				ProjectId: data.Zitadel_project.Project.Id,
+//				RoleKey:   "key",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("projectRole", projectRoleProjectRole)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupProjectRole(ctx *pulumi.Context, args *LookupProjectRoleArgs, opts ...pulumi.InvokeOption) (*LookupProjectRoleResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

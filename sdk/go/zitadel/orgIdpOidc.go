@@ -19,33 +19,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpOidc(ctx, "oidcIdp", &zitadel.OrgIdpOidcArgs{
-// 			OrgId:        pulumi.Any(zitadel_org.Org.Id),
-// 			StylingType:  pulumi.String("STYLING_TYPE_UNSPECIFIED"),
-// 			ClientId:     pulumi.String("google"),
-// 			ClientSecret: pulumi.String("google_secret"),
-// 			Issuer:       pulumi.String("https://google.com"),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 			DisplayNameMapping: pulumi.String("OIDC_MAPPING_FIELD_PREFERRED_USERNAME"),
-// 			UsernameMapping:    pulumi.String("OIDC_MAPPING_FIELD_PREFERRED_USERNAME"),
-// 			AutoRegister:       pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgIdpOidc(ctx, "oidcIdp", &zitadel.OrgIdpOidcArgs{
+//				OrgId:        pulumi.Any(zitadel_org.Org.Id),
+//				StylingType:  pulumi.String("STYLING_TYPE_UNSPECIFIED"),
+//				ClientId:     pulumi.String("google"),
+//				ClientSecret: pulumi.String("google_secret"),
+//				Issuer:       pulumi.String("https://google.com"),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//				DisplayNameMapping: pulumi.String("OIDC_MAPPING_FIELD_PREFERRED_USERNAME"),
+//				UsernameMapping:    pulumi.String("OIDC_MAPPING_FIELD_PREFERRED_USERNAME"),
+//				AutoRegister:       pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type OrgIdpOidc struct {
 	pulumi.CustomResourceState
@@ -251,7 +254,7 @@ func (i *OrgIdpOidc) ToOrgIdpOidcOutputWithContext(ctx context.Context) OrgIdpOi
 // OrgIdpOidcArrayInput is an input type that accepts OrgIdpOidcArray and OrgIdpOidcArrayOutput values.
 // You can construct a concrete instance of `OrgIdpOidcArrayInput` via:
 //
-//          OrgIdpOidcArray{ OrgIdpOidcArgs{...} }
+//	OrgIdpOidcArray{ OrgIdpOidcArgs{...} }
 type OrgIdpOidcArrayInput interface {
 	pulumi.Input
 
@@ -276,7 +279,7 @@ func (i OrgIdpOidcArray) ToOrgIdpOidcArrayOutputWithContext(ctx context.Context)
 // OrgIdpOidcMapInput is an input type that accepts OrgIdpOidcMap and OrgIdpOidcMapOutput values.
 // You can construct a concrete instance of `OrgIdpOidcMapInput` via:
 //
-//          OrgIdpOidcMap{ "key": OrgIdpOidcArgs{...} }
+//	OrgIdpOidcMap{ "key": OrgIdpOidcArgs{...} }
 type OrgIdpOidcMapInput interface {
 	pulumi.Input
 

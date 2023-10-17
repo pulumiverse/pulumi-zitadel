@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewPersonalAccessToken(ctx, "pat", &zitadel.PersonalAccessTokenArgs{
-// 			OrgId:          pulumi.Any(zitadel_org.Org.Id),
-// 			UserId:         pulumi.Any(zitadel_machine_user.Machine_user.Id),
-// 			ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewPersonalAccessToken(ctx, "pat", &zitadel.PersonalAccessTokenArgs{
+//				OrgId:          pulumi.Any(zitadel_org.Org.Id),
+//				UserId:         pulumi.Any(zitadel_machine_user.Machine_user.Id),
+//				ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type PersonalAccessToken struct {
 	pulumi.CustomResourceState
@@ -156,7 +159,7 @@ func (i *PersonalAccessToken) ToPersonalAccessTokenOutputWithContext(ctx context
 // PersonalAccessTokenArrayInput is an input type that accepts PersonalAccessTokenArray and PersonalAccessTokenArrayOutput values.
 // You can construct a concrete instance of `PersonalAccessTokenArrayInput` via:
 //
-//          PersonalAccessTokenArray{ PersonalAccessTokenArgs{...} }
+//	PersonalAccessTokenArray{ PersonalAccessTokenArgs{...} }
 type PersonalAccessTokenArrayInput interface {
 	pulumi.Input
 
@@ -181,7 +184,7 @@ func (i PersonalAccessTokenArray) ToPersonalAccessTokenArrayOutputWithContext(ct
 // PersonalAccessTokenMapInput is an input type that accepts PersonalAccessTokenMap and PersonalAccessTokenMapOutput values.
 // You can construct a concrete instance of `PersonalAccessTokenMapInput` via:
 //
-//          PersonalAccessTokenMap{ "key": PersonalAccessTokenArgs{...} }
+//	PersonalAccessTokenMap{ "key": PersonalAccessTokenArgs{...} }
 type PersonalAccessTokenMapInput interface {
 	pulumi.Input
 

@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpJwt(ctx, "jwtIdp", &zitadel.OrgIdpJwtArgs{
-// 			OrgId:        pulumi.Any(zitadel_org.Org.Id),
-// 			StylingType:  pulumi.String("STYLING_TYPE_UNSPECIFIED"),
-// 			JwtEndpoint:  pulumi.String("https://jwtendpoint.com"),
-// 			Issuer:       pulumi.String("https://google.com"),
-// 			KeysEndpoint: pulumi.String("https://jwtendpoint.com/keys"),
-// 			HeaderName:   pulumi.String("x-auth-token"),
-// 			AutoRegister: pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgIdpJwt(ctx, "jwtIdp", &zitadel.OrgIdpJwtArgs{
+//				OrgId:        pulumi.Any(zitadel_org.Org.Id),
+//				StylingType:  pulumi.String("STYLING_TYPE_UNSPECIFIED"),
+//				JwtEndpoint:  pulumi.String("https://jwtendpoint.com"),
+//				Issuer:       pulumi.String("https://google.com"),
+//				KeysEndpoint: pulumi.String("https://jwtendpoint.com/keys"),
+//				HeaderName:   pulumi.String("x-auth-token"),
+//				AutoRegister: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type OrgIdpJwt struct {
 	pulumi.CustomResourceState
@@ -219,7 +222,7 @@ func (i *OrgIdpJwt) ToOrgIdpJwtOutputWithContext(ctx context.Context) OrgIdpJwtO
 // OrgIdpJwtArrayInput is an input type that accepts OrgIdpJwtArray and OrgIdpJwtArrayOutput values.
 // You can construct a concrete instance of `OrgIdpJwtArrayInput` via:
 //
-//          OrgIdpJwtArray{ OrgIdpJwtArgs{...} }
+//	OrgIdpJwtArray{ OrgIdpJwtArgs{...} }
 type OrgIdpJwtArrayInput interface {
 	pulumi.Input
 
@@ -244,7 +247,7 @@ func (i OrgIdpJwtArray) ToOrgIdpJwtArrayOutputWithContext(ctx context.Context) O
 // OrgIdpJwtMapInput is an input type that accepts OrgIdpJwtMap and OrgIdpJwtMapOutput values.
 // You can construct a concrete instance of `OrgIdpJwtMapInput` via:
 //
-//          OrgIdpJwtMap{ "key": OrgIdpJwtArgs{...} }
+//	OrgIdpJwtMap{ "key": OrgIdpJwtArgs{...} }
 type OrgIdpJwtMapInput interface {
 	pulumi.Input
 

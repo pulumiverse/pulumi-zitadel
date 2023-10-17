@@ -19,31 +19,34 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewIdpGoogle(ctx, "google", &zitadel.IdpGoogleArgs{
-// 			ClientId:          pulumi.String("182902..."),
-// 			ClientSecret:      pulumi.String("GOCSPX-*****"),
-// 			IsAutoCreation:    pulumi.Bool(false),
-// 			IsAutoUpdate:      pulumi.Bool(true),
-// 			IsCreationAllowed: pulumi.Bool(true),
-// 			IsLinkingAllowed:  pulumi.Bool(false),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewIdpGoogle(ctx, "google", &zitadel.IdpGoogleArgs{
+//				ClientId:          pulumi.String("182902..."),
+//				ClientSecret:      pulumi.String("GOCSPX-*****"),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type IdpGoogle struct {
 	pulumi.CustomResourceState
@@ -220,7 +223,7 @@ func (i *IdpGoogle) ToIdpGoogleOutputWithContext(ctx context.Context) IdpGoogleO
 // IdpGoogleArrayInput is an input type that accepts IdpGoogleArray and IdpGoogleArrayOutput values.
 // You can construct a concrete instance of `IdpGoogleArrayInput` via:
 //
-//          IdpGoogleArray{ IdpGoogleArgs{...} }
+//	IdpGoogleArray{ IdpGoogleArgs{...} }
 type IdpGoogleArrayInput interface {
 	pulumi.Input
 
@@ -245,7 +248,7 @@ func (i IdpGoogleArray) ToIdpGoogleArrayOutputWithContext(ctx context.Context) I
 // IdpGoogleMapInput is an input type that accepts IdpGoogleMap and IdpGoogleMapOutput values.
 // You can construct a concrete instance of `IdpGoogleMapInput` via:
 //
-//          IdpGoogleMap{ "key": IdpGoogleArgs{...} }
+//	IdpGoogleMap{ "key": IdpGoogleArgs{...} }
 type IdpGoogleMapInput interface {
 	pulumi.Input
 

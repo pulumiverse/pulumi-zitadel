@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewDefaultLockoutPolicy(ctx, "lockoutPolicy", &zitadel.DefaultLockoutPolicyArgs{
-// 			MaxPasswordAttempts: pulumi.Int(5),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewDefaultLockoutPolicy(ctx, "lockoutPolicy", &zitadel.DefaultLockoutPolicyArgs{
+//				MaxPasswordAttempts: pulumi.Int(5),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DefaultLockoutPolicy struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *DefaultLockoutPolicy) ToDefaultLockoutPolicyOutputWithContext(ctx conte
 // DefaultLockoutPolicyArrayInput is an input type that accepts DefaultLockoutPolicyArray and DefaultLockoutPolicyArrayOutput values.
 // You can construct a concrete instance of `DefaultLockoutPolicyArrayInput` via:
 //
-//          DefaultLockoutPolicyArray{ DefaultLockoutPolicyArgs{...} }
+//	DefaultLockoutPolicyArray{ DefaultLockoutPolicyArgs{...} }
 type DefaultLockoutPolicyArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i DefaultLockoutPolicyArray) ToDefaultLockoutPolicyArrayOutputWithContext(
 // DefaultLockoutPolicyMapInput is an input type that accepts DefaultLockoutPolicyMap and DefaultLockoutPolicyMapOutput values.
 // You can construct a concrete instance of `DefaultLockoutPolicyMapInput` via:
 //
-//          DefaultLockoutPolicyMap{ "key": DefaultLockoutPolicyArgs{...} }
+//	DefaultLockoutPolicyMap{ "key": DefaultLockoutPolicyArgs{...} }
 type DefaultLockoutPolicyMapInput interface {
 	pulumi.Input
 

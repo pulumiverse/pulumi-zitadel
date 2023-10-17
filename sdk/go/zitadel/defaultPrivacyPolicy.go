@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewDefaultPrivacyPolicy(ctx, "privacyPolicy", &zitadel.DefaultPrivacyPolicyArgs{
-// 			HelpLink:    pulumi.String("https://google.com"),
-// 			PrivacyLink: pulumi.String("https://google.com"),
-// 			TosLink:     pulumi.String("https://google.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewDefaultPrivacyPolicy(ctx, "privacyPolicy", &zitadel.DefaultPrivacyPolicyArgs{
+//				HelpLink:    pulumi.String("https://google.com"),
+//				PrivacyLink: pulumi.String("https://google.com"),
+//				TosLink:     pulumi.String("https://google.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DefaultPrivacyPolicy struct {
 	pulumi.CustomResourceState
@@ -138,7 +141,7 @@ func (i *DefaultPrivacyPolicy) ToDefaultPrivacyPolicyOutputWithContext(ctx conte
 // DefaultPrivacyPolicyArrayInput is an input type that accepts DefaultPrivacyPolicyArray and DefaultPrivacyPolicyArrayOutput values.
 // You can construct a concrete instance of `DefaultPrivacyPolicyArrayInput` via:
 //
-//          DefaultPrivacyPolicyArray{ DefaultPrivacyPolicyArgs{...} }
+//	DefaultPrivacyPolicyArray{ DefaultPrivacyPolicyArgs{...} }
 type DefaultPrivacyPolicyArrayInput interface {
 	pulumi.Input
 
@@ -163,7 +166,7 @@ func (i DefaultPrivacyPolicyArray) ToDefaultPrivacyPolicyArrayOutputWithContext(
 // DefaultPrivacyPolicyMapInput is an input type that accepts DefaultPrivacyPolicyMap and DefaultPrivacyPolicyMapOutput values.
 // You can construct a concrete instance of `DefaultPrivacyPolicyMapInput` via:
 //
-//          DefaultPrivacyPolicyMap{ "key": DefaultPrivacyPolicyArgs{...} }
+//	DefaultPrivacyPolicyMap{ "key": DefaultPrivacyPolicyArgs{...} }
 type DefaultPrivacyPolicyMapInput interface {
 	pulumi.Input
 

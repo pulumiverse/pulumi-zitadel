@@ -19,31 +19,34 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewIdpGitlab(ctx, "gitlab", &zitadel.IdpGitlabArgs{
-// 			ClientId:          pulumi.String("15765e..."),
-// 			ClientSecret:      pulumi.String("*****abcxyz"),
-// 			IsAutoCreation:    pulumi.Bool(false),
-// 			IsAutoUpdate:      pulumi.Bool(true),
-// 			IsCreationAllowed: pulumi.Bool(true),
-// 			IsLinkingAllowed:  pulumi.Bool(false),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewIdpGitlab(ctx, "gitlab", &zitadel.IdpGitlabArgs{
+//				ClientId:          pulumi.String("15765e..."),
+//				ClientSecret:      pulumi.String("*****abcxyz"),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type IdpGitlab struct {
 	pulumi.CustomResourceState
@@ -220,7 +223,7 @@ func (i *IdpGitlab) ToIdpGitlabOutputWithContext(ctx context.Context) IdpGitlabO
 // IdpGitlabArrayInput is an input type that accepts IdpGitlabArray and IdpGitlabArrayOutput values.
 // You can construct a concrete instance of `IdpGitlabArrayInput` via:
 //
-//          IdpGitlabArray{ IdpGitlabArgs{...} }
+//	IdpGitlabArray{ IdpGitlabArgs{...} }
 type IdpGitlabArrayInput interface {
 	pulumi.Input
 
@@ -245,7 +248,7 @@ func (i IdpGitlabArray) ToIdpGitlabArrayOutputWithContext(ctx context.Context) I
 // IdpGitlabMapInput is an input type that accepts IdpGitlabMap and IdpGitlabMapOutput values.
 // You can construct a concrete instance of `IdpGitlabMapInput` via:
 //
-//          IdpGitlabMap{ "key": IdpGitlabArgs{...} }
+//	IdpGitlabMap{ "key": IdpGitlabArgs{...} }
 type IdpGitlabMapInput interface {
 	pulumi.Input
 

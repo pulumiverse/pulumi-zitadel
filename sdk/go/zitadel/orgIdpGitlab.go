@@ -19,32 +19,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpGitlab(ctx, "gitlab", &zitadel.OrgIdpGitlabArgs{
-// 			OrgId:        pulumi.Any(zitadel_org.Org.Id),
-// 			ClientId:     pulumi.String("15765e..."),
-// 			ClientSecret: pulumi.String("*****abcxyz"),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 			IsLinkingAllowed:  pulumi.Bool(false),
-// 			IsCreationAllowed: pulumi.Bool(true),
-// 			IsAutoCreation:    pulumi.Bool(false),
-// 			IsAutoUpdate:      pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgIdpGitlab(ctx, "gitlab", &zitadel.OrgIdpGitlabArgs{
+//				OrgId:        pulumi.Any(zitadel_org.Org.Id),
+//				ClientId:     pulumi.String("15765e..."),
+//				ClientSecret: pulumi.String("*****abcxyz"),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type OrgIdpGitlab struct {
 	pulumi.CustomResourceState
@@ -234,7 +237,7 @@ func (i *OrgIdpGitlab) ToOrgIdpGitlabOutputWithContext(ctx context.Context) OrgI
 // OrgIdpGitlabArrayInput is an input type that accepts OrgIdpGitlabArray and OrgIdpGitlabArrayOutput values.
 // You can construct a concrete instance of `OrgIdpGitlabArrayInput` via:
 //
-//          OrgIdpGitlabArray{ OrgIdpGitlabArgs{...} }
+//	OrgIdpGitlabArray{ OrgIdpGitlabArgs{...} }
 type OrgIdpGitlabArrayInput interface {
 	pulumi.Input
 
@@ -259,7 +262,7 @@ func (i OrgIdpGitlabArray) ToOrgIdpGitlabArrayOutputWithContext(ctx context.Cont
 // OrgIdpGitlabMapInput is an input type that accepts OrgIdpGitlabMap and OrgIdpGitlabMapOutput values.
 // You can construct a concrete instance of `OrgIdpGitlabMapInput` via:
 //
-//          OrgIdpGitlabMap{ "key": OrgIdpGitlabArgs{...} }
+//	OrgIdpGitlabMap{ "key": OrgIdpGitlabArgs{...} }
 type OrgIdpGitlabMapInput interface {
 	pulumi.Input
 

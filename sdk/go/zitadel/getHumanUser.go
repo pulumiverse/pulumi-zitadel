@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		humanUserHumanUser, err := zitadel.LookupHumanUser(ctx, &GetHumanUserArgs{
-// 			OrgId:  data.Zitadel_org.Org.Id,
-// 			UserId: "177073614158299139",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("humanUser", humanUserHumanUser)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			humanUserHumanUser, err := zitadel.LookupHumanUser(ctx, &GetHumanUserArgs{
+//				OrgId:  data.Zitadel_org.Org.Id,
+//				UserId: "177073614158299139",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("humanUser", humanUserHumanUser)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupHumanUser(ctx *pulumi.Context, args *LookupHumanUserArgs, opts ...pulumi.InvokeOption) (*LookupHumanUserResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

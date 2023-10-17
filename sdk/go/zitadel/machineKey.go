@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewMachineKey(ctx, "machineKey", &zitadel.MachineKeyArgs{
-// 			OrgId:          pulumi.Any(zitadel_org.Org.Id),
-// 			UserId:         pulumi.Any(zitadel_machine_user.Machine_user.Id),
-// 			KeyType:        pulumi.String("KEY_TYPE_JSON"),
-// 			ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewMachineKey(ctx, "machineKey", &zitadel.MachineKeyArgs{
+//				OrgId:          pulumi.Any(zitadel_org.Org.Id),
+//				UserId:         pulumi.Any(zitadel_machine_user.Machine_user.Id),
+//				KeyType:        pulumi.String("KEY_TYPE_JSON"),
+//				ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type MachineKey struct {
 	pulumi.CustomResourceState
@@ -170,7 +173,7 @@ func (i *MachineKey) ToMachineKeyOutputWithContext(ctx context.Context) MachineK
 // MachineKeyArrayInput is an input type that accepts MachineKeyArray and MachineKeyArrayOutput values.
 // You can construct a concrete instance of `MachineKeyArrayInput` via:
 //
-//          MachineKeyArray{ MachineKeyArgs{...} }
+//	MachineKeyArray{ MachineKeyArgs{...} }
 type MachineKeyArrayInput interface {
 	pulumi.Input
 
@@ -195,7 +198,7 @@ func (i MachineKeyArray) ToMachineKeyArrayOutputWithContext(ctx context.Context)
 // MachineKeyMapInput is an input type that accepts MachineKeyMap and MachineKeyMapOutput values.
 // You can construct a concrete instance of `MachineKeyMapInput` via:
 //
-//          MachineKeyMap{ "key": MachineKeyArgs{...} }
+//	MachineKeyMap{ "key": MachineKeyArgs{...} }
 type MachineKeyMapInput interface {
 	pulumi.Input
 

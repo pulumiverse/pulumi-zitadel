@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewUserGrant(ctx, "userGrant", &zitadel.UserGrantArgs{
-// 			ProjectId: pulumi.Any(zitadel_project.Project.Id),
-// 			OrgId:     pulumi.Any(zitadel_org.Org.Id),
-// 			RoleKeys: pulumi.StringArray{
-// 				pulumi.String("key"),
-// 			},
-// 			UserId: pulumi.Any(zitadel_human_user.Granted_human_user.Id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewUserGrant(ctx, "userGrant", &zitadel.UserGrantArgs{
+//				ProjectId: pulumi.Any(zitadel_project.Project.Id),
+//				OrgId:     pulumi.Any(zitadel_org.Org.Id),
+//				RoleKeys: pulumi.StringArray{
+//					pulumi.String("key"),
+//				},
+//				UserId: pulumi.Any(zitadel_human_user.Granted_human_user.Id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type UserGrant struct {
 	pulumi.CustomResourceState
@@ -173,7 +176,7 @@ func (i *UserGrant) ToUserGrantOutputWithContext(ctx context.Context) UserGrantO
 // UserGrantArrayInput is an input type that accepts UserGrantArray and UserGrantArrayOutput values.
 // You can construct a concrete instance of `UserGrantArrayInput` via:
 //
-//          UserGrantArray{ UserGrantArgs{...} }
+//	UserGrantArray{ UserGrantArgs{...} }
 type UserGrantArrayInput interface {
 	pulumi.Input
 
@@ -198,7 +201,7 @@ func (i UserGrantArray) ToUserGrantArrayOutputWithContext(ctx context.Context) U
 // UserGrantMapInput is an input type that accepts UserGrantMap and UserGrantMapOutput values.
 // You can construct a concrete instance of `UserGrantMapInput` via:
 //
-//          UserGrantMap{ "key": UserGrantArgs{...} }
+//	UserGrantMap{ "key": UserGrantArgs{...} }
 type UserGrantMapInput interface {
 	pulumi.Input
 

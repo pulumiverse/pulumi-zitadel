@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		machineUserMachineUser, err := zitadel.LookupMachineUser(ctx, &GetMachineUserArgs{
-// 			OrgId:  data.Zitadel_org.Org.Id,
-// 			UserId: "177073617463410691",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("machineUser", machineUserMachineUser)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			machineUserMachineUser, err := zitadel.LookupMachineUser(ctx, &GetMachineUserArgs{
+//				OrgId:  data.Zitadel_org.Org.Id,
+//				UserId: "177073617463410691",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("machineUser", machineUserMachineUser)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupMachineUser(ctx *pulumi.Context, args *LookupMachineUserArgs, opts ...pulumi.InvokeOption) (*LookupMachineUserResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

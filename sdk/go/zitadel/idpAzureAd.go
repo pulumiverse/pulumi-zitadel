@@ -19,34 +19,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewIdpAzureAd(ctx, "azureAd", &zitadel.IdpAzureAdArgs{
-// 			ClientId:          pulumi.String("9065bfc8-a08a..."),
-// 			ClientSecret:      pulumi.String("H2n***"),
-// 			EmailVerified:     pulumi.Bool(true),
-// 			IsAutoCreation:    pulumi.Bool(false),
-// 			IsAutoUpdate:      pulumi.Bool(true),
-// 			IsCreationAllowed: pulumi.Bool(true),
-// 			IsLinkingAllowed:  pulumi.Bool(false),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 				pulumi.String("User.Read"),
-// 			},
-// 			TenantType: pulumi.String("AZURE_AD_TENANT_TYPE_ORGANISATIONS"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewIdpAzureAd(ctx, "azureAd", &zitadel.IdpAzureAdArgs{
+//				ClientId:          pulumi.String("9065bfc8-a08a..."),
+//				ClientSecret:      pulumi.String("H2n***"),
+//				EmailVerified:     pulumi.Bool(true),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//					pulumi.String("User.Read"),
+//				},
+//				TenantType: pulumi.String("AZURE_AD_TENANT_TYPE_ORGANISATIONS"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type IdpAzureAd struct {
 	pulumi.CustomResourceState
@@ -256,7 +259,7 @@ func (i *IdpAzureAd) ToIdpAzureAdOutputWithContext(ctx context.Context) IdpAzure
 // IdpAzureAdArrayInput is an input type that accepts IdpAzureAdArray and IdpAzureAdArrayOutput values.
 // You can construct a concrete instance of `IdpAzureAdArrayInput` via:
 //
-//          IdpAzureAdArray{ IdpAzureAdArgs{...} }
+//	IdpAzureAdArray{ IdpAzureAdArgs{...} }
 type IdpAzureAdArrayInput interface {
 	pulumi.Input
 
@@ -281,7 +284,7 @@ func (i IdpAzureAdArray) ToIdpAzureAdArrayOutputWithContext(ctx context.Context)
 // IdpAzureAdMapInput is an input type that accepts IdpAzureAdMap and IdpAzureAdMapOutput values.
 // You can construct a concrete instance of `IdpAzureAdMapInput` via:
 //
-//          IdpAzureAdMap{ "key": IdpAzureAdArgs{...} }
+//	IdpAzureAdMap{ "key": IdpAzureAdArgs{...} }
 type IdpAzureAdMapInput interface {
 	pulumi.Input
 

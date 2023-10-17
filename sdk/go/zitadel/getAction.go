@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		actionAction, err := zitadel.LookupAction(ctx, &GetActionArgs{
-// 			OrgId:    data.Zitadel_org.Org.Id,
-// 			ActionId: "177073621691269123",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("action", actionAction)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			actionAction, err := zitadel.LookupAction(ctx, &GetActionArgs{
+//				OrgId:    data.Zitadel_org.Org.Id,
+//				ActionId: "177073621691269123",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("action", actionAction)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupAction(ctx *pulumi.Context, args *LookupActionArgs, opts ...pulumi.InvokeOption) (*LookupActionResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -307,7 +307,7 @@ func (i *LabelPolicy) ToLabelPolicyOutputWithContext(ctx context.Context) LabelP
 // LabelPolicyArrayInput is an input type that accepts LabelPolicyArray and LabelPolicyArrayOutput values.
 // You can construct a concrete instance of `LabelPolicyArrayInput` via:
 //
-//          LabelPolicyArray{ LabelPolicyArgs{...} }
+//	LabelPolicyArray{ LabelPolicyArgs{...} }
 type LabelPolicyArrayInput interface {
 	pulumi.Input
 
@@ -332,7 +332,7 @@ func (i LabelPolicyArray) ToLabelPolicyArrayOutputWithContext(ctx context.Contex
 // LabelPolicyMapInput is an input type that accepts LabelPolicyMap and LabelPolicyMapOutput values.
 // You can construct a concrete instance of `LabelPolicyMapInput` via:
 //
-//          LabelPolicyMap{ "key": LabelPolicyArgs{...} }
+//	LabelPolicyMap{ "key": LabelPolicyArgs{...} }
 type LabelPolicyMapInput interface {
 	pulumi.Input
 

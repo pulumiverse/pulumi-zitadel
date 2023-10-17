@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewLockoutPolicy(ctx, "lockoutPolicy", &zitadel.LockoutPolicyArgs{
-// 			OrgId:               pulumi.Any(zitadel_org.Org.Id),
-// 			MaxPasswordAttempts: pulumi.Int(5),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewLockoutPolicy(ctx, "lockoutPolicy", &zitadel.LockoutPolicyArgs{
+//				OrgId:               pulumi.Any(zitadel_org.Org.Id),
+//				MaxPasswordAttempts: pulumi.Int(5),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type LockoutPolicy struct {
 	pulumi.CustomResourceState
@@ -136,7 +139,7 @@ func (i *LockoutPolicy) ToLockoutPolicyOutputWithContext(ctx context.Context) Lo
 // LockoutPolicyArrayInput is an input type that accepts LockoutPolicyArray and LockoutPolicyArrayOutput values.
 // You can construct a concrete instance of `LockoutPolicyArrayInput` via:
 //
-//          LockoutPolicyArray{ LockoutPolicyArgs{...} }
+//	LockoutPolicyArray{ LockoutPolicyArgs{...} }
 type LockoutPolicyArrayInput interface {
 	pulumi.Input
 
@@ -161,7 +164,7 @@ func (i LockoutPolicyArray) ToLockoutPolicyArrayOutputWithContext(ctx context.Co
 // LockoutPolicyMapInput is an input type that accepts LockoutPolicyMap and LockoutPolicyMapOutput values.
 // You can construct a concrete instance of `LockoutPolicyMapInput` via:
 //
-//          LockoutPolicyMap{ "key": LockoutPolicyArgs{...} }
+//	LockoutPolicyMap{ "key": LockoutPolicyArgs{...} }
 type LockoutPolicyMapInput interface {
 	pulumi.Input
 

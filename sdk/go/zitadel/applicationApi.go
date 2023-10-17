@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewApplicationApi(ctx, "applicationApi", &zitadel.ApplicationApiArgs{
-// 			OrgId:          pulumi.Any(zitadel_org.Org.Id),
-// 			ProjectId:      pulumi.Any(zitadel_project.Project.Id),
-// 			AuthMethodType: pulumi.String("API_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewApplicationApi(ctx, "applicationApi", &zitadel.ApplicationApiArgs{
+//				OrgId:          pulumi.Any(zitadel_org.Org.Id),
+//				ProjectId:      pulumi.Any(zitadel_project.Project.Id),
+//				AuthMethodType: pulumi.String("API_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ApplicationApi struct {
 	pulumi.CustomResourceState
@@ -172,7 +175,7 @@ func (i *ApplicationApi) ToApplicationApiOutputWithContext(ctx context.Context) 
 // ApplicationApiArrayInput is an input type that accepts ApplicationApiArray and ApplicationApiArrayOutput values.
 // You can construct a concrete instance of `ApplicationApiArrayInput` via:
 //
-//          ApplicationApiArray{ ApplicationApiArgs{...} }
+//	ApplicationApiArray{ ApplicationApiArgs{...} }
 type ApplicationApiArrayInput interface {
 	pulumi.Input
 
@@ -197,7 +200,7 @@ func (i ApplicationApiArray) ToApplicationApiArrayOutputWithContext(ctx context.
 // ApplicationApiMapInput is an input type that accepts ApplicationApiMap and ApplicationApiMapOutput values.
 // You can construct a concrete instance of `ApplicationApiMapInput` via:
 //
-//          ApplicationApiMap{ "key": ApplicationApiArgs{...} }
+//	ApplicationApiMap{ "key": ApplicationApiArgs{...} }
 type ApplicationApiMapInput interface {
 	pulumi.Input
 

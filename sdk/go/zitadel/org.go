@@ -18,19 +18,22 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrg(ctx, "org", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrg(ctx, "org", nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Org struct {
 	pulumi.CustomResourceState
@@ -119,7 +122,7 @@ func (i *Org) ToOrgOutputWithContext(ctx context.Context) OrgOutput {
 // OrgArrayInput is an input type that accepts OrgArray and OrgArrayOutput values.
 // You can construct a concrete instance of `OrgArrayInput` via:
 //
-//          OrgArray{ OrgArgs{...} }
+//	OrgArray{ OrgArgs{...} }
 type OrgArrayInput interface {
 	pulumi.Input
 
@@ -144,7 +147,7 @@ func (i OrgArray) ToOrgArrayOutputWithContext(ctx context.Context) OrgArrayOutpu
 // OrgMapInput is an input type that accepts OrgMap and OrgMapOutput values.
 // You can construct a concrete instance of `OrgMapInput` via:
 //
-//          OrgMap{ "key": OrgArgs{...} }
+//	OrgMap{ "key": OrgArgs{...} }
 type OrgMapInput interface {
 	pulumi.Input
 

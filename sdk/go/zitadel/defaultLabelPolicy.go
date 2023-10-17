@@ -294,7 +294,7 @@ func (i *DefaultLabelPolicy) ToDefaultLabelPolicyOutputWithContext(ctx context.C
 // DefaultLabelPolicyArrayInput is an input type that accepts DefaultLabelPolicyArray and DefaultLabelPolicyArrayOutput values.
 // You can construct a concrete instance of `DefaultLabelPolicyArrayInput` via:
 //
-//          DefaultLabelPolicyArray{ DefaultLabelPolicyArgs{...} }
+//	DefaultLabelPolicyArray{ DefaultLabelPolicyArgs{...} }
 type DefaultLabelPolicyArrayInput interface {
 	pulumi.Input
 
@@ -319,7 +319,7 @@ func (i DefaultLabelPolicyArray) ToDefaultLabelPolicyArrayOutputWithContext(ctx 
 // DefaultLabelPolicyMapInput is an input type that accepts DefaultLabelPolicyMap and DefaultLabelPolicyMapOutput values.
 // You can construct a concrete instance of `DefaultLabelPolicyMapInput` via:
 //
-//          DefaultLabelPolicyMap{ "key": DefaultLabelPolicyArgs{...} }
+//	DefaultLabelPolicyMap{ "key": DefaultLabelPolicyArgs{...} }
 type DefaultLabelPolicyMapInput interface {
 	pulumi.Input
 

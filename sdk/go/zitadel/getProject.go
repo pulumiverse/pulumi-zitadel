@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		projectProject, err := zitadel.LookupProject(ctx, &GetProjectArgs{
-// 			OrgId:     data.Zitadel_org.Org.Id,
-// 			ProjectId: "177073620768522243",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("project", projectProject)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			projectProject, err := zitadel.LookupProject(ctx, &GetProjectArgs{
+//				OrgId:     data.Zitadel_org.Org.Id,
+//				ProjectId: "177073620768522243",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("project", projectProject)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupProject(ctx *pulumi.Context, args *LookupProjectArgs, opts ...pulumi.InvokeOption) (*LookupProjectResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

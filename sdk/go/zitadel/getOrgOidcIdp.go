@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		orgOidcIdpOrgOidcIdp, err := zitadel.GetOrgOidcIdp(ctx, &GetOrgOidcIdpArgs{
-// 			OrgId: data.Zitadel_org.Org.Id,
-// 			IdpId: "177073612581240835",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("orgOidcIdp", orgOidcIdpOrgOidcIdp)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			orgOidcIdpOrgOidcIdp, err := zitadel.GetOrgOidcIdp(ctx, &GetOrgOidcIdpArgs{
+//				OrgId: data.Zitadel_org.Org.Id,
+//				IdpId: "177073612581240835",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("orgOidcIdp", orgOidcIdpOrgOidcIdp)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetOrgOidcIdp(ctx *pulumi.Context, args *GetOrgOidcIdpArgs, opts ...pulumi.InvokeOption) (*GetOrgOidcIdpResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

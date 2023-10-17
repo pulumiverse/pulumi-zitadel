@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewDomainPolicy(ctx, "domainPolicy", &zitadel.DomainPolicyArgs{
-// 			OrgId:                                  pulumi.Any(zitadel_org.Org.Id),
-// 			UserLoginMustBeDomain:                  pulumi.Bool(false),
-// 			ValidateOrgDomains:                     pulumi.Bool(false),
-// 			SmtpSenderAddressMatchesInstanceDomain: pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewDomainPolicy(ctx, "domainPolicy", &zitadel.DomainPolicyArgs{
+//				OrgId:                                  pulumi.Any(zitadel_org.Org.Id),
+//				UserLoginMustBeDomain:                  pulumi.Bool(false),
+//				ValidateOrgDomains:                     pulumi.Bool(false),
+//				SmtpSenderAddressMatchesInstanceDomain: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DomainPolicy struct {
 	pulumi.CustomResourceState
@@ -162,7 +165,7 @@ func (i *DomainPolicy) ToDomainPolicyOutputWithContext(ctx context.Context) Doma
 // DomainPolicyArrayInput is an input type that accepts DomainPolicyArray and DomainPolicyArrayOutput values.
 // You can construct a concrete instance of `DomainPolicyArrayInput` via:
 //
-//          DomainPolicyArray{ DomainPolicyArgs{...} }
+//	DomainPolicyArray{ DomainPolicyArgs{...} }
 type DomainPolicyArrayInput interface {
 	pulumi.Input
 
@@ -187,7 +190,7 @@ func (i DomainPolicyArray) ToDomainPolicyArrayOutputWithContext(ctx context.Cont
 // DomainPolicyMapInput is an input type that accepts DomainPolicyMap and DomainPolicyMapOutput values.
 // You can construct a concrete instance of `DomainPolicyMapInput` via:
 //
-//          DomainPolicyMap{ "key": DomainPolicyArgs{...} }
+//	DomainPolicyMap{ "key": DomainPolicyArgs{...} }
 type DomainPolicyMapInput interface {
 	pulumi.Input
 

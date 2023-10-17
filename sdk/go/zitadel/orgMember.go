@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgMember(ctx, "orgMember", &zitadel.OrgMemberArgs{
-// 			OrgId:  pulumi.Any(zitadel_org.Org.Id),
-// 			UserId: pulumi.Any(zitadel_human_user.Human_user.Id),
-// 			Roles: pulumi.StringArray{
-// 				pulumi.String("ORG_OWNER"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgMember(ctx, "orgMember", &zitadel.OrgMemberArgs{
+//				OrgId:  pulumi.Any(zitadel_org.Org.Id),
+//				UserId: pulumi.Any(zitadel_human_user.Human_user.Id),
+//				Roles: pulumi.StringArray{
+//					pulumi.String("ORG_OWNER"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type OrgMember struct {
 	pulumi.CustomResourceState
@@ -155,7 +158,7 @@ func (i *OrgMember) ToOrgMemberOutputWithContext(ctx context.Context) OrgMemberO
 // OrgMemberArrayInput is an input type that accepts OrgMemberArray and OrgMemberArrayOutput values.
 // You can construct a concrete instance of `OrgMemberArrayInput` via:
 //
-//          OrgMemberArray{ OrgMemberArgs{...} }
+//	OrgMemberArray{ OrgMemberArgs{...} }
 type OrgMemberArrayInput interface {
 	pulumi.Input
 
@@ -180,7 +183,7 @@ func (i OrgMemberArray) ToOrgMemberArrayOutputWithContext(ctx context.Context) O
 // OrgMemberMapInput is an input type that accepts OrgMemberMap and OrgMemberMapOutput values.
 // You can construct a concrete instance of `OrgMemberMapInput` via:
 //
-//          OrgMemberMap{ "key": OrgMemberArgs{...} }
+//	OrgMemberMap{ "key": OrgMemberArgs{...} }
 type OrgMemberMapInput interface {
 	pulumi.Input
 

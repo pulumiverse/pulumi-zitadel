@@ -19,43 +19,46 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewDefaultLoginPolicy(ctx, "loginPolicy", &zitadel.DefaultLoginPolicyArgs{
-// 			AllowDomainDiscovery:       pulumi.Bool(true),
-// 			AllowExternalIdp:           pulumi.Bool(true),
-// 			AllowRegister:              pulumi.Bool(true),
-// 			DefaultRedirectUri:         pulumi.String("localhost:8080"),
-// 			DisableLoginWithEmail:      pulumi.Bool(true),
-// 			DisableLoginWithPhone:      pulumi.Bool(true),
-// 			ExternalLoginCheckLifetime: pulumi.String("240h0m0s"),
-// 			ForceMfa:                   pulumi.Bool(false),
-// 			HidePasswordReset:          pulumi.Bool(false),
-// 			IgnoreUnknownUsernames:     pulumi.Bool(true),
-// 			MfaInitSkipLifetime:        pulumi.String("720h0m0s"),
-// 			MultiFactorCheckLifetime:   pulumi.String("24h0m0s"),
-// 			MultiFactors: pulumi.StringArray{
-// 				pulumi.String("MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"),
-// 			},
-// 			PasswordCheckLifetime:     pulumi.String("240h0m0s"),
-// 			PasswordlessType:          pulumi.String("PASSWORDLESS_TYPE_ALLOWED"),
-// 			SecondFactorCheckLifetime: pulumi.String("24h0m0s"),
-// 			SecondFactors: pulumi.StringArray{
-// 				pulumi.String("SECOND_FACTOR_TYPE_OTP"),
-// 				pulumi.String("SECOND_FACTOR_TYPE_U2F"),
-// 			},
-// 			UserLogin: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewDefaultLoginPolicy(ctx, "loginPolicy", &zitadel.DefaultLoginPolicyArgs{
+//				AllowDomainDiscovery:       pulumi.Bool(true),
+//				AllowExternalIdp:           pulumi.Bool(true),
+//				AllowRegister:              pulumi.Bool(true),
+//				DefaultRedirectUri:         pulumi.String("localhost:8080"),
+//				DisableLoginWithEmail:      pulumi.Bool(true),
+//				DisableLoginWithPhone:      pulumi.Bool(true),
+//				ExternalLoginCheckLifetime: pulumi.String("240h0m0s"),
+//				ForceMfa:                   pulumi.Bool(false),
+//				HidePasswordReset:          pulumi.Bool(false),
+//				IgnoreUnknownUsernames:     pulumi.Bool(true),
+//				MfaInitSkipLifetime:        pulumi.String("720h0m0s"),
+//				MultiFactorCheckLifetime:   pulumi.String("24h0m0s"),
+//				MultiFactors: pulumi.StringArray{
+//					pulumi.String("MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"),
+//				},
+//				PasswordCheckLifetime:     pulumi.String("240h0m0s"),
+//				PasswordlessType:          pulumi.String("PASSWORDLESS_TYPE_ALLOWED"),
+//				SecondFactorCheckLifetime: pulumi.String("24h0m0s"),
+//				SecondFactors: pulumi.StringArray{
+//					pulumi.String("SECOND_FACTOR_TYPE_OTP"),
+//					pulumi.String("SECOND_FACTOR_TYPE_U2F"),
+//				},
+//				UserLogin: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DefaultLoginPolicy struct {
 	pulumi.CustomResourceState
@@ -338,7 +341,7 @@ func (i *DefaultLoginPolicy) ToDefaultLoginPolicyOutputWithContext(ctx context.C
 // DefaultLoginPolicyArrayInput is an input type that accepts DefaultLoginPolicyArray and DefaultLoginPolicyArrayOutput values.
 // You can construct a concrete instance of `DefaultLoginPolicyArrayInput` via:
 //
-//          DefaultLoginPolicyArray{ DefaultLoginPolicyArgs{...} }
+//	DefaultLoginPolicyArray{ DefaultLoginPolicyArgs{...} }
 type DefaultLoginPolicyArrayInput interface {
 	pulumi.Input
 
@@ -363,7 +366,7 @@ func (i DefaultLoginPolicyArray) ToDefaultLoginPolicyArrayOutputWithContext(ctx 
 // DefaultLoginPolicyMapInput is an input type that accepts DefaultLoginPolicyMap and DefaultLoginPolicyMapOutput values.
 // You can construct a concrete instance of `DefaultLoginPolicyMapInput` via:
 //
-//          DefaultLoginPolicyMap{ "key": DefaultLoginPolicyArgs{...} }
+//	DefaultLoginPolicyMap{ "key": DefaultLoginPolicyArgs{...} }
 type DefaultLoginPolicyMapInput interface {
 	pulumi.Input
 

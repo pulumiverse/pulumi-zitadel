@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewInstanceMember(ctx, "instanceMember", &zitadel.InstanceMemberArgs{
-// 			UserId: pulumi.Any(zitadel_human_user.Human_user.Id),
-// 			Roles: pulumi.StringArray{
-// 				pulumi.String("IAM_OWNER"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewInstanceMember(ctx, "instanceMember", &zitadel.InstanceMemberArgs{
+//				UserId: pulumi.Any(zitadel_human_user.Human_user.Id),
+//				Roles: pulumi.StringArray{
+//					pulumi.String("IAM_OWNER"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type InstanceMember struct {
 	pulumi.CustomResourceState
@@ -141,7 +144,7 @@ func (i *InstanceMember) ToInstanceMemberOutputWithContext(ctx context.Context) 
 // InstanceMemberArrayInput is an input type that accepts InstanceMemberArray and InstanceMemberArrayOutput values.
 // You can construct a concrete instance of `InstanceMemberArrayInput` via:
 //
-//          InstanceMemberArray{ InstanceMemberArgs{...} }
+//	InstanceMemberArray{ InstanceMemberArgs{...} }
 type InstanceMemberArrayInput interface {
 	pulumi.Input
 
@@ -166,7 +169,7 @@ func (i InstanceMemberArray) ToInstanceMemberArrayOutputWithContext(ctx context.
 // InstanceMemberMapInput is an input type that accepts InstanceMemberMap and InstanceMemberMapOutput values.
 // You can construct a concrete instance of `InstanceMemberMapInput` via:
 //
-//          InstanceMemberMap{ "key": InstanceMemberArgs{...} }
+//	InstanceMemberMap{ "key": InstanceMemberArgs{...} }
 type InstanceMemberMapInput interface {
 	pulumi.Input
 

@@ -21,33 +21,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewHumanUser(ctx, "humanUser", &zitadel.HumanUserArgs{
-// 			OrgId:             pulumi.Any(zitadel_org.Org.Id),
-// 			UserName:          pulumi.String("humanfull@localhost.com"),
-// 			FirstName:         pulumi.String("firstname"),
-// 			LastName:          pulumi.String("lastname"),
-// 			NickName:          pulumi.String("nickname"),
-// 			DisplayName:       pulumi.String("displayname"),
-// 			PreferredLanguage: pulumi.String("de"),
-// 			Gender:            pulumi.String("GENDER_MALE"),
-// 			Phone:             pulumi.String("+41799999999"),
-// 			IsPhoneVerified:   pulumi.Bool(true),
-// 			Email:             pulumi.String("test@zitadel.com"),
-// 			IsEmailVerified:   pulumi.Bool(true),
-// 			InitialPassword:   pulumi.String("Password1!"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewHumanUser(ctx, "humanUser", &zitadel.HumanUserArgs{
+//				OrgId:             pulumi.Any(zitadel_org.Org.Id),
+//				UserName:          pulumi.String("humanfull@localhost.com"),
+//				FirstName:         pulumi.String("firstname"),
+//				LastName:          pulumi.String("lastname"),
+//				NickName:          pulumi.String("nickname"),
+//				DisplayName:       pulumi.String("displayname"),
+//				PreferredLanguage: pulumi.String("de"),
+//				Gender:            pulumi.String("GENDER_MALE"),
+//				Phone:             pulumi.String("+41799999999"),
+//				IsPhoneVerified:   pulumi.Bool(true),
+//				Email:             pulumi.String("test@zitadel.com"),
+//				IsEmailVerified:   pulumi.Bool(true),
+//				InitialPassword:   pulumi.String("Password1!"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type HumanUser struct {
 	pulumi.CustomResourceState
@@ -289,7 +292,7 @@ func (i *HumanUser) ToHumanUserOutputWithContext(ctx context.Context) HumanUserO
 // HumanUserArrayInput is an input type that accepts HumanUserArray and HumanUserArrayOutput values.
 // You can construct a concrete instance of `HumanUserArrayInput` via:
 //
-//          HumanUserArray{ HumanUserArgs{...} }
+//	HumanUserArray{ HumanUserArgs{...} }
 type HumanUserArrayInput interface {
 	pulumi.Input
 
@@ -314,7 +317,7 @@ func (i HumanUserArray) ToHumanUserArrayOutputWithContext(ctx context.Context) H
 // HumanUserMapInput is an input type that accepts HumanUserMap and HumanUserMapOutput values.
 // You can construct a concrete instance of `HumanUserMapInput` via:
 //
-//          HumanUserMap{ "key": HumanUserArgs{...} }
+//	HumanUserMap{ "key": HumanUserArgs{...} }
 type HumanUserMapInput interface {
 	pulumi.Input
 

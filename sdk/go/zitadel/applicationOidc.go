@@ -19,44 +19,47 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewApplicationOidc(ctx, "applicationOidc", &zitadel.ApplicationOidcArgs{
-// 			ProjectId: pulumi.Any(zitadel_project.Project.Id),
-// 			OrgId:     pulumi.Any(zitadel_org.Org.Id),
-// 			RedirectUris: pulumi.StringArray{
-// 				pulumi.String("https://localhost.com"),
-// 			},
-// 			ResponseTypes: pulumi.StringArray{
-// 				pulumi.String("OIDC_RESPONSE_TYPE_CODE"),
-// 			},
-// 			GrantTypes: pulumi.StringArray{
-// 				pulumi.String("OIDC_GRANT_TYPE_AUTHORIZATION_CODE"),
-// 			},
-// 			PostLogoutRedirectUris: pulumi.StringArray{
-// 				pulumi.String("https://localhost.com"),
-// 			},
-// 			AppType:                  pulumi.String("OIDC_APP_TYPE_WEB"),
-// 			AuthMethodType:           pulumi.String("OIDC_AUTH_METHOD_TYPE_BASIC"),
-// 			Version:                  pulumi.String("OIDC_VERSION_1_0"),
-// 			ClockSkew:                pulumi.String("0s"),
-// 			DevMode:                  pulumi.Bool(true),
-// 			AccessTokenType:          pulumi.String("OIDC_TOKEN_TYPE_BEARER"),
-// 			AccessTokenRoleAssertion: pulumi.Bool(false),
-// 			IdTokenRoleAssertion:     pulumi.Bool(false),
-// 			IdTokenUserinfoAssertion: pulumi.Bool(false),
-// 			AdditionalOrigins:        pulumi.StringArray{},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewApplicationOidc(ctx, "applicationOidc", &zitadel.ApplicationOidcArgs{
+//				ProjectId: pulumi.Any(zitadel_project.Project.Id),
+//				OrgId:     pulumi.Any(zitadel_org.Org.Id),
+//				RedirectUris: pulumi.StringArray{
+//					pulumi.String("https://localhost.com"),
+//				},
+//				ResponseTypes: pulumi.StringArray{
+//					pulumi.String("OIDC_RESPONSE_TYPE_CODE"),
+//				},
+//				GrantTypes: pulumi.StringArray{
+//					pulumi.String("OIDC_GRANT_TYPE_AUTHORIZATION_CODE"),
+//				},
+//				PostLogoutRedirectUris: pulumi.StringArray{
+//					pulumi.String("https://localhost.com"),
+//				},
+//				AppType:                  pulumi.String("OIDC_APP_TYPE_WEB"),
+//				AuthMethodType:           pulumi.String("OIDC_AUTH_METHOD_TYPE_BASIC"),
+//				Version:                  pulumi.String("OIDC_VERSION_1_0"),
+//				ClockSkew:                pulumi.String("0s"),
+//				DevMode:                  pulumi.Bool(true),
+//				AccessTokenType:          pulumi.String("OIDC_TOKEN_TYPE_BEARER"),
+//				AccessTokenRoleAssertion: pulumi.Bool(false),
+//				IdTokenRoleAssertion:     pulumi.Bool(false),
+//				IdTokenUserinfoAssertion: pulumi.Bool(false),
+//				AdditionalOrigins:        pulumi.StringArray{},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ApplicationOidc struct {
 	pulumi.CustomResourceState
@@ -332,7 +335,7 @@ func (i *ApplicationOidc) ToApplicationOidcOutputWithContext(ctx context.Context
 // ApplicationOidcArrayInput is an input type that accepts ApplicationOidcArray and ApplicationOidcArrayOutput values.
 // You can construct a concrete instance of `ApplicationOidcArrayInput` via:
 //
-//          ApplicationOidcArray{ ApplicationOidcArgs{...} }
+//	ApplicationOidcArray{ ApplicationOidcArgs{...} }
 type ApplicationOidcArrayInput interface {
 	pulumi.Input
 
@@ -357,7 +360,7 @@ func (i ApplicationOidcArray) ToApplicationOidcArrayOutputWithContext(ctx contex
 // ApplicationOidcMapInput is an input type that accepts ApplicationOidcMap and ApplicationOidcMapOutput values.
 // You can construct a concrete instance of `ApplicationOidcMapInput` via:
 //
-//          ApplicationOidcMap{ "key": ApplicationOidcArgs{...} }
+//	ApplicationOidcMap{ "key": ApplicationOidcArgs{...} }
 type ApplicationOidcMapInput interface {
 	pulumi.Input
 
