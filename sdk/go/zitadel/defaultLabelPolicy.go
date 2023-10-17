@@ -7,15 +7,17 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the default label policy.
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<>`, e.g.
+// terraform The resource can be imported using the ID format `<>`, e.g.
 //
 // ```sh
 //
@@ -101,7 +103,7 @@ func NewDefaultLabelPolicy(ctx *pulumi.Context,
 	if args.WarnColorDark == nil {
 		return nil, errors.New("invalid value for required argument 'WarnColorDark'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DefaultLabelPolicy
 	err := ctx.RegisterResource("zitadel:index/defaultLabelPolicy:DefaultLabelPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -301,6 +303,12 @@ func (i *DefaultLabelPolicy) ToDefaultLabelPolicyOutputWithContext(ctx context.C
 	return pulumi.ToOutputWithContext(ctx, i).(DefaultLabelPolicyOutput)
 }
 
+func (i *DefaultLabelPolicy) ToOutput(ctx context.Context) pulumix.Output[*DefaultLabelPolicy] {
+	return pulumix.Output[*DefaultLabelPolicy]{
+		OutputState: i.ToDefaultLabelPolicyOutputWithContext(ctx).OutputState,
+	}
+}
+
 // DefaultLabelPolicyArrayInput is an input type that accepts DefaultLabelPolicyArray and DefaultLabelPolicyArrayOutput values.
 // You can construct a concrete instance of `DefaultLabelPolicyArrayInput` via:
 //
@@ -324,6 +332,12 @@ func (i DefaultLabelPolicyArray) ToDefaultLabelPolicyArrayOutput() DefaultLabelP
 
 func (i DefaultLabelPolicyArray) ToDefaultLabelPolicyArrayOutputWithContext(ctx context.Context) DefaultLabelPolicyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(DefaultLabelPolicyArrayOutput)
+}
+
+func (i DefaultLabelPolicyArray) ToOutput(ctx context.Context) pulumix.Output[[]*DefaultLabelPolicy] {
+	return pulumix.Output[[]*DefaultLabelPolicy]{
+		OutputState: i.ToDefaultLabelPolicyArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // DefaultLabelPolicyMapInput is an input type that accepts DefaultLabelPolicyMap and DefaultLabelPolicyMapOutput values.
@@ -351,6 +365,12 @@ func (i DefaultLabelPolicyMap) ToDefaultLabelPolicyMapOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(DefaultLabelPolicyMapOutput)
 }
 
+func (i DefaultLabelPolicyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*DefaultLabelPolicy] {
+	return pulumix.Output[map[string]*DefaultLabelPolicy]{
+		OutputState: i.ToDefaultLabelPolicyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type DefaultLabelPolicyOutput struct{ *pulumi.OutputState }
 
 func (DefaultLabelPolicyOutput) ElementType() reflect.Type {
@@ -363,6 +383,12 @@ func (o DefaultLabelPolicyOutput) ToDefaultLabelPolicyOutput() DefaultLabelPolic
 
 func (o DefaultLabelPolicyOutput) ToDefaultLabelPolicyOutputWithContext(ctx context.Context) DefaultLabelPolicyOutput {
 	return o
+}
+
+func (o DefaultLabelPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[*DefaultLabelPolicy] {
+	return pulumix.Output[*DefaultLabelPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 // hex value for background color
@@ -494,6 +520,12 @@ func (o DefaultLabelPolicyArrayOutput) ToDefaultLabelPolicyArrayOutputWithContex
 	return o
 }
 
+func (o DefaultLabelPolicyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*DefaultLabelPolicy] {
+	return pulumix.Output[[]*DefaultLabelPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o DefaultLabelPolicyArrayOutput) Index(i pulumi.IntInput) DefaultLabelPolicyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *DefaultLabelPolicy {
 		return vs[0].([]*DefaultLabelPolicy)[vs[1].(int)]
@@ -512,6 +544,12 @@ func (o DefaultLabelPolicyMapOutput) ToDefaultLabelPolicyMapOutput() DefaultLabe
 
 func (o DefaultLabelPolicyMapOutput) ToDefaultLabelPolicyMapOutputWithContext(ctx context.Context) DefaultLabelPolicyMapOutput {
 	return o
+}
+
+func (o DefaultLabelPolicyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*DefaultLabelPolicy] {
+	return pulumix.Output[map[string]*DefaultLabelPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o DefaultLabelPolicyMapOutput) MapIndex(k pulumi.StringInput) DefaultLabelPolicyOutput {

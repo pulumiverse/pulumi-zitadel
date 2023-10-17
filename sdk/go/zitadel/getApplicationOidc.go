@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing an OIDC application belonging to a project, with all configuration possibilities.
@@ -19,7 +21,6 @@ import (
 //
 // import (
 //
-//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -27,7 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_default, err := zitadel.LookupApplicationOidc(ctx, &GetApplicationOidcArgs{
+//			_default, err := zitadel.LookupApplicationOidc(ctx, &zitadel.LookupApplicationOidcArgs{
 //				OrgId:     pulumi.StringRef(data.Zitadel_org.Default.Id),
 //				ProjectId: data.Zitadel_project.Default.Id,
 //				AppId:     "123456789012345678",
@@ -42,7 +43,7 @@ import (
 //
 // ```
 func LookupApplicationOidc(ctx *pulumi.Context, args *LookupApplicationOidcArgs, opts ...pulumi.InvokeOption) (*LookupApplicationOidcResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupApplicationOidcResult
 	err := ctx.Invoke("zitadel:index/getApplicationOidc:getApplicationOidc", args, &rv, opts...)
 	if err != nil {
@@ -143,6 +144,12 @@ func (o LookupApplicationOidcResultOutput) ToLookupApplicationOidcResultOutput()
 
 func (o LookupApplicationOidcResultOutput) ToLookupApplicationOidcResultOutputWithContext(ctx context.Context) LookupApplicationOidcResultOutput {
 	return o
+}
+
+func (o LookupApplicationOidcResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupApplicationOidcResult] {
+	return pulumix.Output[LookupApplicationOidcResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Access token role assertion

@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ApplicationApiArgs', 'ApplicationApi']
@@ -25,13 +25,36 @@ class ApplicationApiArgs:
         :param pulumi.Input[str] name: Name of the application
         :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "project_id", project_id)
+        ApplicationApiArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            project_id=project_id,
+            auth_method_type=auth_method_type,
+            name=name,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             project_id: pulumi.Input[str],
+             auth_method_type: Optional[pulumi.Input[str]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'projectId' in kwargs:
+            project_id = kwargs['projectId']
+        if 'authMethodType' in kwargs:
+            auth_method_type = kwargs['authMethodType']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("project_id", project_id)
         if auth_method_type is not None:
-            pulumi.set(__self__, "auth_method_type", auth_method_type)
+            _setter("auth_method_type", auth_method_type)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="projectId")
@@ -100,18 +123,49 @@ class _ApplicationApiState:
         :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] project_id: ID of the project
         """
+        _ApplicationApiState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            auth_method_type=auth_method_type,
+            client_id=client_id,
+            client_secret=client_secret,
+            name=name,
+            org_id=org_id,
+            project_id=project_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             auth_method_type: Optional[pulumi.Input[str]] = None,
+             client_id: Optional[pulumi.Input[str]] = None,
+             client_secret: Optional[pulumi.Input[str]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             project_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'authMethodType' in kwargs:
+            auth_method_type = kwargs['authMethodType']
+        if 'clientId' in kwargs:
+            client_id = kwargs['clientId']
+        if 'clientSecret' in kwargs:
+            client_secret = kwargs['clientSecret']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'projectId' in kwargs:
+            project_id = kwargs['projectId']
+
         if auth_method_type is not None:
-            pulumi.set(__self__, "auth_method_type", auth_method_type)
+            _setter("auth_method_type", auth_method_type)
         if client_id is not None:
-            pulumi.set(__self__, "client_id", client_id)
+            _setter("client_id", client_id)
         if client_secret is not None:
-            pulumi.set(__self__, "client_secret", client_secret)
+            _setter("client_secret", client_secret)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if project_id is not None:
-            pulumi.set(__self__, "project_id", project_id)
+            _setter("project_id", project_id)
 
     @property
     @pulumi.getter(name="authMethodType")
@@ -213,7 +267,7 @@ class ApplicationApi(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
+        terraform The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/applicationApi:ApplicationApi imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
@@ -249,7 +303,7 @@ class ApplicationApi(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
+        terraform The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/applicationApi:ApplicationApi imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
@@ -265,6 +319,10 @@ class ApplicationApi(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ApplicationApiArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -291,6 +349,8 @@ class ApplicationApi(pulumi.CustomResource):
             __props__.__dict__["project_id"] = project_id
             __props__.__dict__["client_id"] = None
             __props__.__dict__["client_secret"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["clientId", "clientSecret"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(ApplicationApi, __self__).__init__(
             'zitadel:index/applicationApi:ApplicationApi',
             resource_name,

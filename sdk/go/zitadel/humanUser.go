@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // **Caution: Email can only be set verified if a password is set for the user, either with initialPassword or during runtime**
@@ -55,7 +57,7 @@ import (
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `id[:org_id][:initial_password]>`, e.g.
+// terraform The resource can be imported using the ID format `id[:org_id][:initial_password]>`, e.g.
 //
 // ```sh
 //
@@ -118,7 +120,14 @@ func NewHumanUser(ctx *pulumi.Context,
 	if args.UserName == nil {
 		return nil, errors.New("invalid value for required argument 'UserName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.InitialPassword != nil {
+		args.InitialPassword = pulumi.ToSecret(args.InitialPassword).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"initialPassword",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource HumanUser
 	err := ctx.RegisterResource("zitadel:index/humanUser:HumanUser", name, args, &resource, opts...)
 	if err != nil {
@@ -296,6 +305,12 @@ func (i *HumanUser) ToHumanUserOutputWithContext(ctx context.Context) HumanUserO
 	return pulumi.ToOutputWithContext(ctx, i).(HumanUserOutput)
 }
 
+func (i *HumanUser) ToOutput(ctx context.Context) pulumix.Output[*HumanUser] {
+	return pulumix.Output[*HumanUser]{
+		OutputState: i.ToHumanUserOutputWithContext(ctx).OutputState,
+	}
+}
+
 // HumanUserArrayInput is an input type that accepts HumanUserArray and HumanUserArrayOutput values.
 // You can construct a concrete instance of `HumanUserArrayInput` via:
 //
@@ -319,6 +334,12 @@ func (i HumanUserArray) ToHumanUserArrayOutput() HumanUserArrayOutput {
 
 func (i HumanUserArray) ToHumanUserArrayOutputWithContext(ctx context.Context) HumanUserArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(HumanUserArrayOutput)
+}
+
+func (i HumanUserArray) ToOutput(ctx context.Context) pulumix.Output[[]*HumanUser] {
+	return pulumix.Output[[]*HumanUser]{
+		OutputState: i.ToHumanUserArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // HumanUserMapInput is an input type that accepts HumanUserMap and HumanUserMapOutput values.
@@ -346,6 +367,12 @@ func (i HumanUserMap) ToHumanUserMapOutputWithContext(ctx context.Context) Human
 	return pulumi.ToOutputWithContext(ctx, i).(HumanUserMapOutput)
 }
 
+func (i HumanUserMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*HumanUser] {
+	return pulumix.Output[map[string]*HumanUser]{
+		OutputState: i.ToHumanUserMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type HumanUserOutput struct{ *pulumi.OutputState }
 
 func (HumanUserOutput) ElementType() reflect.Type {
@@ -358,6 +385,12 @@ func (o HumanUserOutput) ToHumanUserOutput() HumanUserOutput {
 
 func (o HumanUserOutput) ToHumanUserOutputWithContext(ctx context.Context) HumanUserOutput {
 	return o
+}
+
+func (o HumanUserOutput) ToOutput(ctx context.Context) pulumix.Output[*HumanUser] {
+	return pulumix.Output[*HumanUser]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Display name of the user
@@ -454,6 +487,12 @@ func (o HumanUserArrayOutput) ToHumanUserArrayOutputWithContext(ctx context.Cont
 	return o
 }
 
+func (o HumanUserArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*HumanUser] {
+	return pulumix.Output[[]*HumanUser]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o HumanUserArrayOutput) Index(i pulumi.IntInput) HumanUserOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *HumanUser {
 		return vs[0].([]*HumanUser)[vs[1].(int)]
@@ -472,6 +511,12 @@ func (o HumanUserMapOutput) ToHumanUserMapOutput() HumanUserMapOutput {
 
 func (o HumanUserMapOutput) ToHumanUserMapOutputWithContext(ctx context.Context) HumanUserMapOutput {
 	return o
+}
+
+func (o HumanUserMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*HumanUser] {
+	return pulumix.Output[map[string]*HumanUser]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o HumanUserMapOutput) MapIndex(k pulumi.StringInput) HumanUserOutput {

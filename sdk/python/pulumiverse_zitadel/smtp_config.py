@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['SmtpConfigArgs', 'SmtpConfig']
@@ -31,17 +31,46 @@ class SmtpConfigArgs:
         :param pulumi.Input[bool] tls: TLS used to communicate with your SMTP server.
         :param pulumi.Input[str] user: User used to communicate with your SMTP server.
         """
-        pulumi.set(__self__, "host", host)
-        pulumi.set(__self__, "sender_address", sender_address)
-        pulumi.set(__self__, "sender_name", sender_name)
+        SmtpConfigArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            host=host,
+            sender_address=sender_address,
+            sender_name=sender_name,
+            password=password,
+            reply_to_address=reply_to_address,
+            tls=tls,
+            user=user,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             host: pulumi.Input[str],
+             sender_address: pulumi.Input[str],
+             sender_name: pulumi.Input[str],
+             password: Optional[pulumi.Input[str]] = None,
+             reply_to_address: Optional[pulumi.Input[str]] = None,
+             tls: Optional[pulumi.Input[bool]] = None,
+             user: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'senderAddress' in kwargs:
+            sender_address = kwargs['senderAddress']
+        if 'senderName' in kwargs:
+            sender_name = kwargs['senderName']
+        if 'replyToAddress' in kwargs:
+            reply_to_address = kwargs['replyToAddress']
+
+        _setter("host", host)
+        _setter("sender_address", sender_address)
+        _setter("sender_name", sender_name)
         if password is not None:
-            pulumi.set(__self__, "password", password)
+            _setter("password", password)
         if reply_to_address is not None:
-            pulumi.set(__self__, "reply_to_address", reply_to_address)
+            _setter("reply_to_address", reply_to_address)
         if tls is not None:
-            pulumi.set(__self__, "tls", tls)
+            _setter("tls", tls)
         if user is not None:
-            pulumi.set(__self__, "user", user)
+            _setter("user", user)
 
     @property
     @pulumi.getter
@@ -148,20 +177,49 @@ class _SmtpConfigState:
         :param pulumi.Input[bool] tls: TLS used to communicate with your SMTP server.
         :param pulumi.Input[str] user: User used to communicate with your SMTP server.
         """
+        _SmtpConfigState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            host=host,
+            password=password,
+            reply_to_address=reply_to_address,
+            sender_address=sender_address,
+            sender_name=sender_name,
+            tls=tls,
+            user=user,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             host: Optional[pulumi.Input[str]] = None,
+             password: Optional[pulumi.Input[str]] = None,
+             reply_to_address: Optional[pulumi.Input[str]] = None,
+             sender_address: Optional[pulumi.Input[str]] = None,
+             sender_name: Optional[pulumi.Input[str]] = None,
+             tls: Optional[pulumi.Input[bool]] = None,
+             user: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'replyToAddress' in kwargs:
+            reply_to_address = kwargs['replyToAddress']
+        if 'senderAddress' in kwargs:
+            sender_address = kwargs['senderAddress']
+        if 'senderName' in kwargs:
+            sender_name = kwargs['senderName']
+
         if host is not None:
-            pulumi.set(__self__, "host", host)
+            _setter("host", host)
         if password is not None:
-            pulumi.set(__self__, "password", password)
+            _setter("password", password)
         if reply_to_address is not None:
-            pulumi.set(__self__, "reply_to_address", reply_to_address)
+            _setter("reply_to_address", reply_to_address)
         if sender_address is not None:
-            pulumi.set(__self__, "sender_address", sender_address)
+            _setter("sender_address", sender_address)
         if sender_name is not None:
-            pulumi.set(__self__, "sender_name", sender_name)
+            _setter("sender_name", sender_name)
         if tls is not None:
-            pulumi.set(__self__, "tls", tls)
+            _setter("tls", tls)
         if user is not None:
-            pulumi.set(__self__, "user", user)
+            _setter("user", user)
 
     @property
     @pulumi.getter
@@ -282,7 +340,7 @@ class SmtpConfig(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<[password]>`, e.g.
+        terraform The resource can be imported using the ID format `<[password]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
@@ -325,7 +383,7 @@ class SmtpConfig(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<[password]>`, e.g.
+        terraform The resource can be imported using the ID format `<[password]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
@@ -341,6 +399,10 @@ class SmtpConfig(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            SmtpConfigArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -365,7 +427,7 @@ class SmtpConfig(pulumi.CustomResource):
             if host is None and not opts.urn:
                 raise TypeError("Missing required property 'host'")
             __props__.__dict__["host"] = host
-            __props__.__dict__["password"] = password
+            __props__.__dict__["password"] = None if password is None else pulumi.Output.secret(password)
             __props__.__dict__["reply_to_address"] = reply_to_address
             if sender_address is None and not opts.urn:
                 raise TypeError("Missing required property 'sender_address'")
@@ -375,6 +437,8 @@ class SmtpConfig(pulumi.CustomResource):
             __props__.__dict__["sender_name"] = sender_name
             __props__.__dict__["tls"] = tls
             __props__.__dict__["user"] = user
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["password"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(SmtpConfig, __self__).__init__(
             'zitadel:index/smtpConfig:SmtpConfig',
             resource_name,

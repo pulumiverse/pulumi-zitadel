@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing a generic JWT IdP of the organization.
@@ -47,7 +49,7 @@ import (
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+// terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
 //
 // ```sh
 //
@@ -100,7 +102,7 @@ func NewOrgIdpJwt(ctx *pulumi.Context,
 	if args.StylingType == nil {
 		return nil, errors.New("invalid value for required argument 'StylingType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgIdpJwt
 	err := ctx.RegisterResource("zitadel:index/orgIdpJwt:OrgIdpJwt", name, args, &resource, opts...)
 	if err != nil {
@@ -226,6 +228,12 @@ func (i *OrgIdpJwt) ToOrgIdpJwtOutputWithContext(ctx context.Context) OrgIdpJwtO
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpJwtOutput)
 }
 
+func (i *OrgIdpJwt) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpJwt] {
+	return pulumix.Output[*OrgIdpJwt]{
+		OutputState: i.ToOrgIdpJwtOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpJwtArrayInput is an input type that accepts OrgIdpJwtArray and OrgIdpJwtArrayOutput values.
 // You can construct a concrete instance of `OrgIdpJwtArrayInput` via:
 //
@@ -249,6 +257,12 @@ func (i OrgIdpJwtArray) ToOrgIdpJwtArrayOutput() OrgIdpJwtArrayOutput {
 
 func (i OrgIdpJwtArray) ToOrgIdpJwtArrayOutputWithContext(ctx context.Context) OrgIdpJwtArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpJwtArrayOutput)
+}
+
+func (i OrgIdpJwtArray) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpJwt] {
+	return pulumix.Output[[]*OrgIdpJwt]{
+		OutputState: i.ToOrgIdpJwtArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // OrgIdpJwtMapInput is an input type that accepts OrgIdpJwtMap and OrgIdpJwtMapOutput values.
@@ -276,6 +290,12 @@ func (i OrgIdpJwtMap) ToOrgIdpJwtMapOutputWithContext(ctx context.Context) OrgId
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpJwtMapOutput)
 }
 
+func (i OrgIdpJwtMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpJwt] {
+	return pulumix.Output[map[string]*OrgIdpJwt]{
+		OutputState: i.ToOrgIdpJwtMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type OrgIdpJwtOutput struct{ *pulumi.OutputState }
 
 func (OrgIdpJwtOutput) ElementType() reflect.Type {
@@ -288,6 +308,12 @@ func (o OrgIdpJwtOutput) ToOrgIdpJwtOutput() OrgIdpJwtOutput {
 
 func (o OrgIdpJwtOutput) ToOrgIdpJwtOutputWithContext(ctx context.Context) OrgIdpJwtOutput {
 	return o
+}
+
+func (o OrgIdpJwtOutput) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpJwt] {
+	return pulumix.Output[*OrgIdpJwt]{
+		OutputState: o.OutputState,
+	}
 }
 
 // auto register for users from this idp
@@ -344,6 +370,12 @@ func (o OrgIdpJwtArrayOutput) ToOrgIdpJwtArrayOutputWithContext(ctx context.Cont
 	return o
 }
 
+func (o OrgIdpJwtArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpJwt] {
+	return pulumix.Output[[]*OrgIdpJwt]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o OrgIdpJwtArrayOutput) Index(i pulumi.IntInput) OrgIdpJwtOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *OrgIdpJwt {
 		return vs[0].([]*OrgIdpJwt)[vs[1].(int)]
@@ -362,6 +394,12 @@ func (o OrgIdpJwtMapOutput) ToOrgIdpJwtMapOutput() OrgIdpJwtMapOutput {
 
 func (o OrgIdpJwtMapOutput) ToOrgIdpJwtMapOutputWithContext(ctx context.Context) OrgIdpJwtMapOutput {
 	return o
+}
+
+func (o OrgIdpJwtMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpJwt] {
+	return pulumix.Output[map[string]*OrgIdpJwt]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o OrgIdpJwtMapOutput) MapIndex(k pulumi.StringInput) OrgIdpJwtOutput {

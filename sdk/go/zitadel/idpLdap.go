@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing an LDAP IDP on the instance.
@@ -64,7 +66,7 @@ import (
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
+// terraform The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
 //
 // ```sh
 //
@@ -176,7 +178,14 @@ func NewIdpLdap(ctx *pulumi.Context,
 	if args.UserObjectClasses == nil {
 		return nil, errors.New("invalid value for required argument 'UserObjectClasses'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.BindPassword != nil {
+		args.BindPassword = pulumi.ToSecret(args.BindPassword).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"bindPassword",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IdpLdap
 	err := ctx.RegisterResource("zitadel:index/idpLdap:IdpLdap", name, args, &resource, opts...)
 	if err != nil {
@@ -454,6 +463,12 @@ func (i *IdpLdap) ToIdpLdapOutputWithContext(ctx context.Context) IdpLdapOutput 
 	return pulumi.ToOutputWithContext(ctx, i).(IdpLdapOutput)
 }
 
+func (i *IdpLdap) ToOutput(ctx context.Context) pulumix.Output[*IdpLdap] {
+	return pulumix.Output[*IdpLdap]{
+		OutputState: i.ToIdpLdapOutputWithContext(ctx).OutputState,
+	}
+}
+
 // IdpLdapArrayInput is an input type that accepts IdpLdapArray and IdpLdapArrayOutput values.
 // You can construct a concrete instance of `IdpLdapArrayInput` via:
 //
@@ -477,6 +492,12 @@ func (i IdpLdapArray) ToIdpLdapArrayOutput() IdpLdapArrayOutput {
 
 func (i IdpLdapArray) ToIdpLdapArrayOutputWithContext(ctx context.Context) IdpLdapArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(IdpLdapArrayOutput)
+}
+
+func (i IdpLdapArray) ToOutput(ctx context.Context) pulumix.Output[[]*IdpLdap] {
+	return pulumix.Output[[]*IdpLdap]{
+		OutputState: i.ToIdpLdapArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // IdpLdapMapInput is an input type that accepts IdpLdapMap and IdpLdapMapOutput values.
@@ -504,6 +525,12 @@ func (i IdpLdapMap) ToIdpLdapMapOutputWithContext(ctx context.Context) IdpLdapMa
 	return pulumi.ToOutputWithContext(ctx, i).(IdpLdapMapOutput)
 }
 
+func (i IdpLdapMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*IdpLdap] {
+	return pulumix.Output[map[string]*IdpLdap]{
+		OutputState: i.ToIdpLdapMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type IdpLdapOutput struct{ *pulumi.OutputState }
 
 func (IdpLdapOutput) ElementType() reflect.Type {
@@ -516,6 +543,12 @@ func (o IdpLdapOutput) ToIdpLdapOutput() IdpLdapOutput {
 
 func (o IdpLdapOutput) ToIdpLdapOutputWithContext(ctx context.Context) IdpLdapOutput {
 	return o
+}
+
+func (o IdpLdapOutput) ToOutput(ctx context.Context) pulumix.Output[*IdpLdap] {
+	return pulumix.Output[*IdpLdap]{
+		OutputState: o.OutputState,
+	}
 }
 
 // User attribute for the avatar url
@@ -667,6 +700,12 @@ func (o IdpLdapArrayOutput) ToIdpLdapArrayOutputWithContext(ctx context.Context)
 	return o
 }
 
+func (o IdpLdapArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*IdpLdap] {
+	return pulumix.Output[[]*IdpLdap]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o IdpLdapArrayOutput) Index(i pulumi.IntInput) IdpLdapOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *IdpLdap {
 		return vs[0].([]*IdpLdap)[vs[1].(int)]
@@ -685,6 +724,12 @@ func (o IdpLdapMapOutput) ToIdpLdapMapOutput() IdpLdapMapOutput {
 
 func (o IdpLdapMapOutput) ToIdpLdapMapOutputWithContext(ctx context.Context) IdpLdapMapOutput {
 	return o
+}
+
+func (o IdpLdapMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*IdpLdap] {
+	return pulumix.Output[map[string]*IdpLdap]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o IdpLdapMapOutput) MapIndex(k pulumi.StringInput) IdpLdapOutput {

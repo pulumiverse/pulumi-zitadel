@@ -16,13 +16,13 @@ namespace Pulumiverse.Zitadel
         /// Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
         /// </summary>
         public static Task<GetOrgsResult> InvokeAsync(GetOrgsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrgsResult>("zitadel:index/getOrgs:getOrgs", args ?? new GetOrgsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgsResult>("zitadel:index/getOrgs:getOrgs", args ?? new GetOrgsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
         /// </summary>
         public static Output<GetOrgsResult> Invoke(GetOrgsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrgsResult>("zitadel:index/getOrgs:getOrgs", args ?? new GetOrgsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrgsResult>("zitadel:index/getOrgs:getOrgs", args ?? new GetOrgsInvokeArgs(), options.WithDefaults());
     }
 
 

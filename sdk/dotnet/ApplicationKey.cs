@@ -17,6 +17,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
@@ -36,7 +37,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ## Import
     /// 
-    /// terraform # The resource can be imported using the ID format `&lt;id:project_id:app_id[:org_id][:key_details]&gt;`. # You can use __SEMICOLON__ to escape :, e.g.
+    /// terraform The resource can be imported using the ID format `&lt;id:project_id:app_id[:org_id][:key_details]&gt;`. You can use __SEMICOLON__ to escape :, e.g.
     /// 
     /// ```sh
     ///  $ pulumi import zitadel:index/applicationKey:ApplicationKey imported "123456789012345678:123456789012345678:123456789012345678:123456789012345678:$(cat ~/Downloads/123456789012345678.json | sed -e 's/:/__SEMICOLON__/g')"
@@ -105,6 +106,10 @@ namespace Pulumiverse.Zitadel
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/pulumiverse",
+                AdditionalSecretOutputs =
+                {
+                    "keyDetails",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -178,11 +183,21 @@ namespace Pulumiverse.Zitadel
         [Input("expirationDate")]
         public Input<string>? ExpirationDate { get; set; }
 
+        [Input("keyDetails")]
+        private Input<string>? _keyDetails;
+
         /// <summary>
         /// Value of the app key
         /// </summary>
-        [Input("keyDetails")]
-        public Input<string>? KeyDetails { get; set; }
+        public Input<string>? KeyDetails
+        {
+            get => _keyDetails;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _keyDetails = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Type of the app key, supported values: KEY*TYPE*UNSPECIFIED, KEY*TYPE*JSON

@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing a serviceaccount situated under an organization, which then can be authorized through memberships or direct grants on other resources.
@@ -43,7 +45,7 @@ import (
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+// terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
 //
 // ```sh
 //
@@ -81,7 +83,7 @@ func NewMachineUser(ctx *pulumi.Context,
 	if args.UserName == nil {
 		return nil, errors.New("invalid value for required argument 'UserName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MachineUser
 	err := ctx.RegisterResource("zitadel:index/machineUser:MachineUser", name, args, &resource, opts...)
 	if err != nil {
@@ -195,6 +197,12 @@ func (i *MachineUser) ToMachineUserOutputWithContext(ctx context.Context) Machin
 	return pulumi.ToOutputWithContext(ctx, i).(MachineUserOutput)
 }
 
+func (i *MachineUser) ToOutput(ctx context.Context) pulumix.Output[*MachineUser] {
+	return pulumix.Output[*MachineUser]{
+		OutputState: i.ToMachineUserOutputWithContext(ctx).OutputState,
+	}
+}
+
 // MachineUserArrayInput is an input type that accepts MachineUserArray and MachineUserArrayOutput values.
 // You can construct a concrete instance of `MachineUserArrayInput` via:
 //
@@ -218,6 +226,12 @@ func (i MachineUserArray) ToMachineUserArrayOutput() MachineUserArrayOutput {
 
 func (i MachineUserArray) ToMachineUserArrayOutputWithContext(ctx context.Context) MachineUserArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(MachineUserArrayOutput)
+}
+
+func (i MachineUserArray) ToOutput(ctx context.Context) pulumix.Output[[]*MachineUser] {
+	return pulumix.Output[[]*MachineUser]{
+		OutputState: i.ToMachineUserArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // MachineUserMapInput is an input type that accepts MachineUserMap and MachineUserMapOutput values.
@@ -245,6 +259,12 @@ func (i MachineUserMap) ToMachineUserMapOutputWithContext(ctx context.Context) M
 	return pulumi.ToOutputWithContext(ctx, i).(MachineUserMapOutput)
 }
 
+func (i MachineUserMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*MachineUser] {
+	return pulumix.Output[map[string]*MachineUser]{
+		OutputState: i.ToMachineUserMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type MachineUserOutput struct{ *pulumi.OutputState }
 
 func (MachineUserOutput) ElementType() reflect.Type {
@@ -257,6 +277,12 @@ func (o MachineUserOutput) ToMachineUserOutput() MachineUserOutput {
 
 func (o MachineUserOutput) ToMachineUserOutputWithContext(ctx context.Context) MachineUserOutput {
 	return o
+}
+
+func (o MachineUserOutput) ToOutput(ctx context.Context) pulumix.Output[*MachineUser] {
+	return pulumix.Output[*MachineUser]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Access token type, supported values: ACCESS*TOKEN*TYPE*BEARER, ACCESS*TOKEN*TYPE*JWT
@@ -313,6 +339,12 @@ func (o MachineUserArrayOutput) ToMachineUserArrayOutputWithContext(ctx context.
 	return o
 }
 
+func (o MachineUserArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*MachineUser] {
+	return pulumix.Output[[]*MachineUser]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o MachineUserArrayOutput) Index(i pulumi.IntInput) MachineUserOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *MachineUser {
 		return vs[0].([]*MachineUser)[vs[1].(int)]
@@ -331,6 +363,12 @@ func (o MachineUserMapOutput) ToMachineUserMapOutput() MachineUserMapOutput {
 
 func (o MachineUserMapOutput) ToMachineUserMapOutputWithContext(ctx context.Context) MachineUserMapOutput {
 	return o
+}
+
+func (o MachineUserMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*MachineUser] {
+	return pulumix.Output[map[string]*MachineUser]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o MachineUserMapOutput) MapIndex(k pulumi.StringInput) MachineUserOutput {

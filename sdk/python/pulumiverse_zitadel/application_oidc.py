@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ApplicationOidcArgs', 'ApplicationOidc']
@@ -51,36 +51,109 @@ class ApplicationOidcArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] post_logout_redirect_uris: Post logout redirect URIs
         :param pulumi.Input[str] version: Version, supported values: OIDC*VERSION*1_0
         """
-        pulumi.set(__self__, "grant_types", grant_types)
-        pulumi.set(__self__, "project_id", project_id)
-        pulumi.set(__self__, "redirect_uris", redirect_uris)
-        pulumi.set(__self__, "response_types", response_types)
+        ApplicationOidcArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            grant_types=grant_types,
+            project_id=project_id,
+            redirect_uris=redirect_uris,
+            response_types=response_types,
+            access_token_role_assertion=access_token_role_assertion,
+            access_token_type=access_token_type,
+            additional_origins=additional_origins,
+            app_type=app_type,
+            auth_method_type=auth_method_type,
+            clock_skew=clock_skew,
+            dev_mode=dev_mode,
+            id_token_role_assertion=id_token_role_assertion,
+            id_token_userinfo_assertion=id_token_userinfo_assertion,
+            name=name,
+            org_id=org_id,
+            post_logout_redirect_uris=post_logout_redirect_uris,
+            version=version,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             grant_types: pulumi.Input[Sequence[pulumi.Input[str]]],
+             project_id: pulumi.Input[str],
+             redirect_uris: pulumi.Input[Sequence[pulumi.Input[str]]],
+             response_types: pulumi.Input[Sequence[pulumi.Input[str]]],
+             access_token_role_assertion: Optional[pulumi.Input[bool]] = None,
+             access_token_type: Optional[pulumi.Input[str]] = None,
+             additional_origins: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             app_type: Optional[pulumi.Input[str]] = None,
+             auth_method_type: Optional[pulumi.Input[str]] = None,
+             clock_skew: Optional[pulumi.Input[str]] = None,
+             dev_mode: Optional[pulumi.Input[bool]] = None,
+             id_token_role_assertion: Optional[pulumi.Input[bool]] = None,
+             id_token_userinfo_assertion: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             post_logout_redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             version: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'grantTypes' in kwargs:
+            grant_types = kwargs['grantTypes']
+        if 'projectId' in kwargs:
+            project_id = kwargs['projectId']
+        if 'redirectUris' in kwargs:
+            redirect_uris = kwargs['redirectUris']
+        if 'responseTypes' in kwargs:
+            response_types = kwargs['responseTypes']
+        if 'accessTokenRoleAssertion' in kwargs:
+            access_token_role_assertion = kwargs['accessTokenRoleAssertion']
+        if 'accessTokenType' in kwargs:
+            access_token_type = kwargs['accessTokenType']
+        if 'additionalOrigins' in kwargs:
+            additional_origins = kwargs['additionalOrigins']
+        if 'appType' in kwargs:
+            app_type = kwargs['appType']
+        if 'authMethodType' in kwargs:
+            auth_method_type = kwargs['authMethodType']
+        if 'clockSkew' in kwargs:
+            clock_skew = kwargs['clockSkew']
+        if 'devMode' in kwargs:
+            dev_mode = kwargs['devMode']
+        if 'idTokenRoleAssertion' in kwargs:
+            id_token_role_assertion = kwargs['idTokenRoleAssertion']
+        if 'idTokenUserinfoAssertion' in kwargs:
+            id_token_userinfo_assertion = kwargs['idTokenUserinfoAssertion']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'postLogoutRedirectUris' in kwargs:
+            post_logout_redirect_uris = kwargs['postLogoutRedirectUris']
+
+        _setter("grant_types", grant_types)
+        _setter("project_id", project_id)
+        _setter("redirect_uris", redirect_uris)
+        _setter("response_types", response_types)
         if access_token_role_assertion is not None:
-            pulumi.set(__self__, "access_token_role_assertion", access_token_role_assertion)
+            _setter("access_token_role_assertion", access_token_role_assertion)
         if access_token_type is not None:
-            pulumi.set(__self__, "access_token_type", access_token_type)
+            _setter("access_token_type", access_token_type)
         if additional_origins is not None:
-            pulumi.set(__self__, "additional_origins", additional_origins)
+            _setter("additional_origins", additional_origins)
         if app_type is not None:
-            pulumi.set(__self__, "app_type", app_type)
+            _setter("app_type", app_type)
         if auth_method_type is not None:
-            pulumi.set(__self__, "auth_method_type", auth_method_type)
+            _setter("auth_method_type", auth_method_type)
         if clock_skew is not None:
-            pulumi.set(__self__, "clock_skew", clock_skew)
+            _setter("clock_skew", clock_skew)
         if dev_mode is not None:
-            pulumi.set(__self__, "dev_mode", dev_mode)
+            _setter("dev_mode", dev_mode)
         if id_token_role_assertion is not None:
-            pulumi.set(__self__, "id_token_role_assertion", id_token_role_assertion)
+            _setter("id_token_role_assertion", id_token_role_assertion)
         if id_token_userinfo_assertion is not None:
-            pulumi.set(__self__, "id_token_userinfo_assertion", id_token_userinfo_assertion)
+            _setter("id_token_userinfo_assertion", id_token_userinfo_assertion)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if post_logout_redirect_uris is not None:
-            pulumi.set(__self__, "post_logout_redirect_uris", post_logout_redirect_uris)
+            _setter("post_logout_redirect_uris", post_logout_redirect_uris)
         if version is not None:
-            pulumi.set(__self__, "version", version)
+            _setter("version", version)
 
     @property
     @pulumi.getter(name="grantTypes")
@@ -331,44 +404,125 @@ class _ApplicationOidcState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] response_types: Response type, supported values: OIDC*RESPONSE*TYPE*CODE, OIDC*RESPONSE*TYPE*ID*TOKEN, OIDC*RESPONSE*TYPE*ID*TOKEN*TOKEN
         :param pulumi.Input[str] version: Version, supported values: OIDC*VERSION*1_0
         """
+        _ApplicationOidcState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            access_token_role_assertion=access_token_role_assertion,
+            access_token_type=access_token_type,
+            additional_origins=additional_origins,
+            app_type=app_type,
+            auth_method_type=auth_method_type,
+            client_id=client_id,
+            client_secret=client_secret,
+            clock_skew=clock_skew,
+            dev_mode=dev_mode,
+            grant_types=grant_types,
+            id_token_role_assertion=id_token_role_assertion,
+            id_token_userinfo_assertion=id_token_userinfo_assertion,
+            name=name,
+            org_id=org_id,
+            post_logout_redirect_uris=post_logout_redirect_uris,
+            project_id=project_id,
+            redirect_uris=redirect_uris,
+            response_types=response_types,
+            version=version,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             access_token_role_assertion: Optional[pulumi.Input[bool]] = None,
+             access_token_type: Optional[pulumi.Input[str]] = None,
+             additional_origins: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             app_type: Optional[pulumi.Input[str]] = None,
+             auth_method_type: Optional[pulumi.Input[str]] = None,
+             client_id: Optional[pulumi.Input[str]] = None,
+             client_secret: Optional[pulumi.Input[str]] = None,
+             clock_skew: Optional[pulumi.Input[str]] = None,
+             dev_mode: Optional[pulumi.Input[bool]] = None,
+             grant_types: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             id_token_role_assertion: Optional[pulumi.Input[bool]] = None,
+             id_token_userinfo_assertion: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             post_logout_redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             project_id: Optional[pulumi.Input[str]] = None,
+             redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             response_types: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             version: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'accessTokenRoleAssertion' in kwargs:
+            access_token_role_assertion = kwargs['accessTokenRoleAssertion']
+        if 'accessTokenType' in kwargs:
+            access_token_type = kwargs['accessTokenType']
+        if 'additionalOrigins' in kwargs:
+            additional_origins = kwargs['additionalOrigins']
+        if 'appType' in kwargs:
+            app_type = kwargs['appType']
+        if 'authMethodType' in kwargs:
+            auth_method_type = kwargs['authMethodType']
+        if 'clientId' in kwargs:
+            client_id = kwargs['clientId']
+        if 'clientSecret' in kwargs:
+            client_secret = kwargs['clientSecret']
+        if 'clockSkew' in kwargs:
+            clock_skew = kwargs['clockSkew']
+        if 'devMode' in kwargs:
+            dev_mode = kwargs['devMode']
+        if 'grantTypes' in kwargs:
+            grant_types = kwargs['grantTypes']
+        if 'idTokenRoleAssertion' in kwargs:
+            id_token_role_assertion = kwargs['idTokenRoleAssertion']
+        if 'idTokenUserinfoAssertion' in kwargs:
+            id_token_userinfo_assertion = kwargs['idTokenUserinfoAssertion']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'postLogoutRedirectUris' in kwargs:
+            post_logout_redirect_uris = kwargs['postLogoutRedirectUris']
+        if 'projectId' in kwargs:
+            project_id = kwargs['projectId']
+        if 'redirectUris' in kwargs:
+            redirect_uris = kwargs['redirectUris']
+        if 'responseTypes' in kwargs:
+            response_types = kwargs['responseTypes']
+
         if access_token_role_assertion is not None:
-            pulumi.set(__self__, "access_token_role_assertion", access_token_role_assertion)
+            _setter("access_token_role_assertion", access_token_role_assertion)
         if access_token_type is not None:
-            pulumi.set(__self__, "access_token_type", access_token_type)
+            _setter("access_token_type", access_token_type)
         if additional_origins is not None:
-            pulumi.set(__self__, "additional_origins", additional_origins)
+            _setter("additional_origins", additional_origins)
         if app_type is not None:
-            pulumi.set(__self__, "app_type", app_type)
+            _setter("app_type", app_type)
         if auth_method_type is not None:
-            pulumi.set(__self__, "auth_method_type", auth_method_type)
+            _setter("auth_method_type", auth_method_type)
         if client_id is not None:
-            pulumi.set(__self__, "client_id", client_id)
+            _setter("client_id", client_id)
         if client_secret is not None:
-            pulumi.set(__self__, "client_secret", client_secret)
+            _setter("client_secret", client_secret)
         if clock_skew is not None:
-            pulumi.set(__self__, "clock_skew", clock_skew)
+            _setter("clock_skew", clock_skew)
         if dev_mode is not None:
-            pulumi.set(__self__, "dev_mode", dev_mode)
+            _setter("dev_mode", dev_mode)
         if grant_types is not None:
-            pulumi.set(__self__, "grant_types", grant_types)
+            _setter("grant_types", grant_types)
         if id_token_role_assertion is not None:
-            pulumi.set(__self__, "id_token_role_assertion", id_token_role_assertion)
+            _setter("id_token_role_assertion", id_token_role_assertion)
         if id_token_userinfo_assertion is not None:
-            pulumi.set(__self__, "id_token_userinfo_assertion", id_token_userinfo_assertion)
+            _setter("id_token_userinfo_assertion", id_token_userinfo_assertion)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if post_logout_redirect_uris is not None:
-            pulumi.set(__self__, "post_logout_redirect_uris", post_logout_redirect_uris)
+            _setter("post_logout_redirect_uris", post_logout_redirect_uris)
         if project_id is not None:
-            pulumi.set(__self__, "project_id", project_id)
+            _setter("project_id", project_id)
         if redirect_uris is not None:
-            pulumi.set(__self__, "redirect_uris", redirect_uris)
+            _setter("redirect_uris", redirect_uris)
         if response_types is not None:
-            pulumi.set(__self__, "response_types", response_types)
+            _setter("response_types", response_types)
         if version is not None:
-            pulumi.set(__self__, "version", version)
+            _setter("version", version)
 
     @property
     @pulumi.getter(name="accessTokenRoleAssertion")
@@ -652,7 +806,7 @@ class ApplicationOidc(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
+        terraform The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/applicationOidc:ApplicationOidc imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
@@ -714,7 +868,7 @@ class ApplicationOidc(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
+        terraform The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/applicationOidc:ApplicationOidc imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
@@ -730,6 +884,10 @@ class ApplicationOidc(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ApplicationOidcArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -788,6 +946,8 @@ class ApplicationOidc(pulumi.CustomResource):
             __props__.__dict__["version"] = version
             __props__.__dict__["client_id"] = None
             __props__.__dict__["client_secret"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["clientId", "clientSecret"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(ApplicationOidc, __self__).__init__(
             'zitadel:index/applicationOidc:ApplicationOidc',
             resource_name,

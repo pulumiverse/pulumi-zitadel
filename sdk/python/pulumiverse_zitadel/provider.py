@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ProviderArgs', 'Provider']
@@ -30,17 +30,42 @@ class ProviderArgs:
         :param pulumi.Input[str] port: Used port if not the default ports 80 or 443 are configured
         :param pulumi.Input[str] token: Path to the file containing credentials to connect to ZITADEL
         """
-        pulumi.set(__self__, "domain", domain)
+        ProviderArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            domain=domain,
+            insecure=insecure,
+            jwt_profile_file=jwt_profile_file,
+            jwt_profile_json=jwt_profile_json,
+            port=port,
+            token=token,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             domain: pulumi.Input[str],
+             insecure: Optional[pulumi.Input[bool]] = None,
+             jwt_profile_file: Optional[pulumi.Input[str]] = None,
+             jwt_profile_json: Optional[pulumi.Input[str]] = None,
+             port: Optional[pulumi.Input[str]] = None,
+             token: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'jwtProfileFile' in kwargs:
+            jwt_profile_file = kwargs['jwtProfileFile']
+        if 'jwtProfileJson' in kwargs:
+            jwt_profile_json = kwargs['jwtProfileJson']
+
+        _setter("domain", domain)
         if insecure is not None:
-            pulumi.set(__self__, "insecure", insecure)
+            _setter("insecure", insecure)
         if jwt_profile_file is not None:
-            pulumi.set(__self__, "jwt_profile_file", jwt_profile_file)
+            _setter("jwt_profile_file", jwt_profile_file)
         if jwt_profile_json is not None:
-            pulumi.set(__self__, "jwt_profile_json", jwt_profile_json)
+            _setter("jwt_profile_json", jwt_profile_json)
         if port is not None:
-            pulumi.set(__self__, "port", port)
+            _setter("port", port)
         if token is not None:
-            pulumi.set(__self__, "token", token)
+            _setter("token", token)
 
     @property
     @pulumi.getter
@@ -166,6 +191,10 @@ class Provider(pulumi.ProviderResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ProviderArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

@@ -11,9 +11,9 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const defaultDefaultOidcSettings = new zitadel.DefaultOidcSettings("default", {
+ * const _default = new zitadel.DefaultOidcSettings("default", {
  *     accessTokenLifetime: "12h0m0s",
  *     idTokenLifetime: "12h0m0s",
  *     refreshTokenExpiration: "720h0m0s",

@@ -6,13 +6,14 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
     'GetDefaultOidcSettingsResult',
     'AwaitableGetDefaultOidcSettingsResult',
     'get_default_oidc_settings',
+    'get_default_oidc_settings_output',
 ]
 
 @pulumi.output_type
@@ -110,8 +111,26 @@ def get_default_oidc_settings(opts: Optional[pulumi.InvokeOptions] = None) -> Aw
     __ret__ = pulumi.runtime.invoke('zitadel:index/getDefaultOidcSettings:getDefaultOidcSettings', __args__, opts=opts, typ=GetDefaultOidcSettingsResult).value
 
     return AwaitableGetDefaultOidcSettingsResult(
-        access_token_lifetime=__ret__.access_token_lifetime,
-        id=__ret__.id,
-        id_token_lifetime=__ret__.id_token_lifetime,
-        refresh_token_expiration=__ret__.refresh_token_expiration,
-        refresh_token_idle_expiration=__ret__.refresh_token_idle_expiration)
+        access_token_lifetime=pulumi.get(__ret__, 'access_token_lifetime'),
+        id=pulumi.get(__ret__, 'id'),
+        id_token_lifetime=pulumi.get(__ret__, 'id_token_lifetime'),
+        refresh_token_expiration=pulumi.get(__ret__, 'refresh_token_expiration'),
+        refresh_token_idle_expiration=pulumi.get(__ret__, 'refresh_token_idle_expiration'))
+
+
+@_utilities.lift_output_func(get_default_oidc_settings)
+def get_default_oidc_settings_output(opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetDefaultOidcSettingsResult]:
+    """
+    Datasource representing the default oidc settings.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_zitadel as zitadel
+
+    default = zitadel.get_default_oidc_settings()
+    pulumi.export("oidcSettings", default)
+    ```
+    """
+    ...

@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['DomainArgs', 'Domain']
@@ -23,12 +23,31 @@ class DomainArgs:
         :param pulumi.Input[str] name: Name of the domain
         :param pulumi.Input[str] org_id: ID of the organization
         """
+        DomainArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            is_primary=is_primary,
+            name=name,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             is_primary: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'isPrimary' in kwargs:
+            is_primary = kwargs['isPrimary']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
         if is_primary is not None:
-            pulumi.set(__self__, "is_primary", is_primary)
+            _setter("is_primary", is_primary)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="isPrimary")
@@ -83,16 +102,43 @@ class _DomainState:
         :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[int] validation_type: Validation type
         """
+        _DomainState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            is_primary=is_primary,
+            is_verified=is_verified,
+            name=name,
+            org_id=org_id,
+            validation_type=validation_type,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             is_primary: Optional[pulumi.Input[bool]] = None,
+             is_verified: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             validation_type: Optional[pulumi.Input[int]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'isPrimary' in kwargs:
+            is_primary = kwargs['isPrimary']
+        if 'isVerified' in kwargs:
+            is_verified = kwargs['isVerified']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'validationType' in kwargs:
+            validation_type = kwargs['validationType']
+
         if is_primary is not None:
-            pulumi.set(__self__, "is_primary", is_primary)
+            _setter("is_primary", is_primary)
         if is_verified is not None:
-            pulumi.set(__self__, "is_verified", is_verified)
+            _setter("is_verified", is_verified)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if validation_type is not None:
-            pulumi.set(__self__, "validation_type", validation_type)
+            _setter("validation_type", validation_type)
 
     @property
     @pulumi.getter(name="isPrimary")
@@ -180,7 +226,7 @@ class Domain(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `name[:org_id]`, e.g.
+        terraform The resource can be imported using the ID format `name[:org_id]`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/domain:Domain imported 'example.com:123456789012345678'
@@ -214,7 +260,7 @@ class Domain(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `name[:org_id]`, e.g.
+        terraform The resource can be imported using the ID format `name[:org_id]`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/domain:Domain imported 'example.com:123456789012345678'
@@ -230,6 +276,10 @@ class Domain(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            DomainArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

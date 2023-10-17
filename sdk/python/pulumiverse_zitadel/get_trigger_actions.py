@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -124,11 +124,11 @@ def get_trigger_actions(flow_type: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getTriggerActions:getTriggerActions', __args__, opts=opts, typ=GetTriggerActionsResult).value
 
     return AwaitableGetTriggerActionsResult(
-        action_ids=__ret__.action_ids,
-        flow_type=__ret__.flow_type,
-        id=__ret__.id,
-        org_id=__ret__.org_id,
-        trigger_type=__ret__.trigger_type)
+        action_ids=pulumi.get(__ret__, 'action_ids'),
+        flow_type=pulumi.get(__ret__, 'flow_type'),
+        id=pulumi.get(__ret__, 'id'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        trigger_type=pulumi.get(__ret__, 'trigger_type'))
 
 
 @_utilities.lift_output_func(get_trigger_actions)

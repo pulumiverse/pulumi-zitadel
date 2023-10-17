@@ -11,9 +11,9 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const defaultSmtpConfig = new zitadel.SmtpConfig("default", {
+ * const _default = new zitadel.SmtpConfig("default", {
  *     host: "localhost:25",
  *     password: "secret_password",
  *     replyToAddress: "replyto@example.com",
@@ -26,7 +26,7 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * terraform # The resource can be imported using the ID format `<[password]>`, e.g.
+ * terraform The resource can be imported using the ID format `<[password]>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
@@ -121,7 +121,7 @@ export class SmtpConfig extends pulumi.CustomResource {
                 throw new Error("Missing required property 'senderName'");
             }
             resourceInputs["host"] = args ? args.host : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["replyToAddress"] = args ? args.replyToAddress : undefined;
             resourceInputs["senderAddress"] = args ? args.senderAddress : undefined;
             resourceInputs["senderName"] = args ? args.senderName : undefined;
@@ -129,6 +129,8 @@ export class SmtpConfig extends pulumi.CustomResource {
             resourceInputs["user"] = args ? args.user : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(SmtpConfig.__pulumiType, name, resourceInputs, opts);
     }
 }

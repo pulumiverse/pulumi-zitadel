@@ -9,11 +9,8 @@ import * as utilities from "./utilities";
  */
 export function getOrgs(args?: GetOrgsArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getOrgs:getOrgs", {
         "domain": args.domain,
         "domainMethod": args.domainMethod,
@@ -86,9 +83,11 @@ export interface GetOrgsResult {
      */
     readonly state?: string;
 }
-
+/**
+ * Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
+ */
 export function getOrgsOutput(args?: GetOrgsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOrgsResult> {
-    return pulumi.output(args).apply(a => getOrgs(a, opts))
+    return pulumi.output(args).apply((a: any) => getOrgs(a, opts))
 }
 
 /**

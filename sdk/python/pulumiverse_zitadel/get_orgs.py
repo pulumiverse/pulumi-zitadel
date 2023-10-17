@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -154,14 +154,14 @@ def get_orgs(domain: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getOrgs:getOrgs', __args__, opts=opts, typ=GetOrgsResult).value
 
     return AwaitableGetOrgsResult(
-        domain=__ret__.domain,
-        domain_method=__ret__.domain_method,
-        id=__ret__.id,
-        ids=__ret__.ids,
-        name=__ret__.name,
-        name_method=__ret__.name_method,
-        primary_domain=__ret__.primary_domain,
-        state=__ret__.state)
+        domain=pulumi.get(__ret__, 'domain'),
+        domain_method=pulumi.get(__ret__, 'domain_method'),
+        id=pulumi.get(__ret__, 'id'),
+        ids=pulumi.get(__ret__, 'ids'),
+        name=pulumi.get(__ret__, 'name'),
+        name_method=pulumi.get(__ret__, 'name_method'),
+        primary_domain=pulumi.get(__ret__, 'primary_domain'),
+        state=pulumi.get(__ret__, 'state'))
 
 
 @_utilities.lift_output_func(get_orgs)

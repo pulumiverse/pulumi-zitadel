@@ -11,16 +11,14 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const defaultDefaultNotificationPolicy = new zitadel.DefaultNotificationPolicy("default", {
- *     passwordChange: false,
- * });
+ * const _default = new zitadel.DefaultNotificationPolicy("default", {passwordChange: false});
  * ```
  *
  * ## Import
  *
- * terraform # The resource can be imported using the ID format `<>`, e.g.
+ * terraform The resource can be imported using the ID format `<>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy imported ''

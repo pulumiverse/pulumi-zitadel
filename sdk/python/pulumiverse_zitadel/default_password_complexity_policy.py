@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['DefaultPasswordComplexityPolicyArgs', 'DefaultPasswordComplexityPolicy']
@@ -27,11 +27,40 @@ class DefaultPasswordComplexityPolicyArgs:
         :param pulumi.Input[bool] has_uppercase: defines if the password MUST contain an upper case letter
         :param pulumi.Input[int] min_length: Minimal length for the password
         """
-        pulumi.set(__self__, "has_lowercase", has_lowercase)
-        pulumi.set(__self__, "has_number", has_number)
-        pulumi.set(__self__, "has_symbol", has_symbol)
-        pulumi.set(__self__, "has_uppercase", has_uppercase)
-        pulumi.set(__self__, "min_length", min_length)
+        DefaultPasswordComplexityPolicyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            has_lowercase=has_lowercase,
+            has_number=has_number,
+            has_symbol=has_symbol,
+            has_uppercase=has_uppercase,
+            min_length=min_length,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             has_lowercase: pulumi.Input[bool],
+             has_number: pulumi.Input[bool],
+             has_symbol: pulumi.Input[bool],
+             has_uppercase: pulumi.Input[bool],
+             min_length: pulumi.Input[int],
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'hasLowercase' in kwargs:
+            has_lowercase = kwargs['hasLowercase']
+        if 'hasNumber' in kwargs:
+            has_number = kwargs['hasNumber']
+        if 'hasSymbol' in kwargs:
+            has_symbol = kwargs['hasSymbol']
+        if 'hasUppercase' in kwargs:
+            has_uppercase = kwargs['hasUppercase']
+        if 'minLength' in kwargs:
+            min_length = kwargs['minLength']
+
+        _setter("has_lowercase", has_lowercase)
+        _setter("has_number", has_number)
+        _setter("has_symbol", has_symbol)
+        _setter("has_uppercase", has_uppercase)
+        _setter("min_length", min_length)
 
     @property
     @pulumi.getter(name="hasLowercase")
@@ -110,16 +139,45 @@ class _DefaultPasswordComplexityPolicyState:
         :param pulumi.Input[bool] has_uppercase: defines if the password MUST contain an upper case letter
         :param pulumi.Input[int] min_length: Minimal length for the password
         """
+        _DefaultPasswordComplexityPolicyState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            has_lowercase=has_lowercase,
+            has_number=has_number,
+            has_symbol=has_symbol,
+            has_uppercase=has_uppercase,
+            min_length=min_length,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             has_lowercase: Optional[pulumi.Input[bool]] = None,
+             has_number: Optional[pulumi.Input[bool]] = None,
+             has_symbol: Optional[pulumi.Input[bool]] = None,
+             has_uppercase: Optional[pulumi.Input[bool]] = None,
+             min_length: Optional[pulumi.Input[int]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'hasLowercase' in kwargs:
+            has_lowercase = kwargs['hasLowercase']
+        if 'hasNumber' in kwargs:
+            has_number = kwargs['hasNumber']
+        if 'hasSymbol' in kwargs:
+            has_symbol = kwargs['hasSymbol']
+        if 'hasUppercase' in kwargs:
+            has_uppercase = kwargs['hasUppercase']
+        if 'minLength' in kwargs:
+            min_length = kwargs['minLength']
+
         if has_lowercase is not None:
-            pulumi.set(__self__, "has_lowercase", has_lowercase)
+            _setter("has_lowercase", has_lowercase)
         if has_number is not None:
-            pulumi.set(__self__, "has_number", has_number)
+            _setter("has_number", has_number)
         if has_symbol is not None:
-            pulumi.set(__self__, "has_symbol", has_symbol)
+            _setter("has_symbol", has_symbol)
         if has_uppercase is not None:
-            pulumi.set(__self__, "has_uppercase", has_uppercase)
+            _setter("has_uppercase", has_uppercase)
         if min_length is not None:
-            pulumi.set(__self__, "min_length", min_length)
+            _setter("min_length", min_length)
 
     @property
     @pulumi.getter(name="hasLowercase")
@@ -212,7 +270,7 @@ class DefaultPasswordComplexityPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<>`, e.g.
+        terraform The resource can be imported using the ID format `<>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy imported ''
@@ -251,7 +309,7 @@ class DefaultPasswordComplexityPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<>`, e.g.
+        terraform The resource can be imported using the ID format `<>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy imported ''
@@ -267,6 +325,10 @@ class DefaultPasswordComplexityPolicy(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            DefaultPasswordComplexityPolicyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

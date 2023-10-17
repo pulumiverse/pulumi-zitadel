@@ -21,6 +21,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -30,7 +31,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["oidcSettings"] = @default.Apply(getDefaultOidcSettingsResult =&gt; getDefaultOidcSettingsResult),
+        ///         ["oidcSettings"] = @default,
         ///     };
         /// });
         /// ```
@@ -38,7 +39,36 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetDefaultOidcSettingsResult> InvokeAsync(InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDefaultOidcSettingsResult>("zitadel:index/getDefaultOidcSettings:getDefaultOidcSettings", InvokeArgs.Empty, options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDefaultOidcSettingsResult>("zitadel:index/getDefaultOidcSettings:getDefaultOidcSettings", InvokeArgs.Empty, options.WithDefaults());
+
+        /// <summary>
+        /// Datasource representing the default oidc settings.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Zitadel = Pulumi.Zitadel;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var @default = Zitadel.GetDefaultOidcSettings.Invoke();
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["oidcSettings"] = @default,
+        ///     };
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Output<GetDefaultOidcSettingsResult> Invoke(InvokeOptions? options = null)
+            => global::Pulumi.Deployment.Instance.Invoke<GetDefaultOidcSettingsResult>("zitadel:index/getDefaultOidcSettings:getDefaultOidcSettings", InvokeArgs.Empty, options.WithDefaults());
     }
 
 

@@ -17,6 +17,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
@@ -38,7 +39,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ## Import
     /// 
-    /// terraform # The resource can be imported using the ID format `&lt;project_id:user_id[:org_id]&gt;`, e.g.
+    /// terraform The resource can be imported using the ID format `&lt;project_id:user_id[:org_id]&gt;`, e.g.
     /// 
     /// ```sh
     ///  $ pulumi import zitadel:index/projectMember:ProjectMember imported '123456789012345678:123456789012345678:123456789012345678'

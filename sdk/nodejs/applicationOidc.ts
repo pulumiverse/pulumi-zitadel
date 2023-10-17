@@ -35,7 +35,7 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * terraform # The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
+ * terraform The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/applicationOidc:ApplicationOidc imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
@@ -213,6 +213,8 @@ export class ApplicationOidc extends pulumi.CustomResource {
             resourceInputs["clientSecret"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["clientId", "clientSecret"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ApplicationOidc.__pulumiType, name, resourceInputs, opts);
     }
 }

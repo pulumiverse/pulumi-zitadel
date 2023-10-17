@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the custom privacy policy of an organization.
@@ -44,7 +46,7 @@ import (
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+// terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
 //
 // ```sh
 //
@@ -69,7 +71,7 @@ func NewPrivacyPolicy(ctx *pulumi.Context,
 		args = &PrivacyPolicyArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PrivacyPolicy
 	err := ctx.RegisterResource("zitadel:index/privacyPolicy:PrivacyPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -155,6 +157,12 @@ func (i *PrivacyPolicy) ToPrivacyPolicyOutputWithContext(ctx context.Context) Pr
 	return pulumi.ToOutputWithContext(ctx, i).(PrivacyPolicyOutput)
 }
 
+func (i *PrivacyPolicy) ToOutput(ctx context.Context) pulumix.Output[*PrivacyPolicy] {
+	return pulumix.Output[*PrivacyPolicy]{
+		OutputState: i.ToPrivacyPolicyOutputWithContext(ctx).OutputState,
+	}
+}
+
 // PrivacyPolicyArrayInput is an input type that accepts PrivacyPolicyArray and PrivacyPolicyArrayOutput values.
 // You can construct a concrete instance of `PrivacyPolicyArrayInput` via:
 //
@@ -178,6 +186,12 @@ func (i PrivacyPolicyArray) ToPrivacyPolicyArrayOutput() PrivacyPolicyArrayOutpu
 
 func (i PrivacyPolicyArray) ToPrivacyPolicyArrayOutputWithContext(ctx context.Context) PrivacyPolicyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PrivacyPolicyArrayOutput)
+}
+
+func (i PrivacyPolicyArray) ToOutput(ctx context.Context) pulumix.Output[[]*PrivacyPolicy] {
+	return pulumix.Output[[]*PrivacyPolicy]{
+		OutputState: i.ToPrivacyPolicyArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // PrivacyPolicyMapInput is an input type that accepts PrivacyPolicyMap and PrivacyPolicyMapOutput values.
@@ -205,6 +219,12 @@ func (i PrivacyPolicyMap) ToPrivacyPolicyMapOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(PrivacyPolicyMapOutput)
 }
 
+func (i PrivacyPolicyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PrivacyPolicy] {
+	return pulumix.Output[map[string]*PrivacyPolicy]{
+		OutputState: i.ToPrivacyPolicyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type PrivacyPolicyOutput struct{ *pulumi.OutputState }
 
 func (PrivacyPolicyOutput) ElementType() reflect.Type {
@@ -217,6 +237,12 @@ func (o PrivacyPolicyOutput) ToPrivacyPolicyOutput() PrivacyPolicyOutput {
 
 func (o PrivacyPolicyOutput) ToPrivacyPolicyOutputWithContext(ctx context.Context) PrivacyPolicyOutput {
 	return o
+}
+
+func (o PrivacyPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[*PrivacyPolicy] {
+	return pulumix.Output[*PrivacyPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PrivacyPolicyOutput) HelpLink() pulumi.StringPtrOutput {
@@ -254,6 +280,12 @@ func (o PrivacyPolicyArrayOutput) ToPrivacyPolicyArrayOutputWithContext(ctx cont
 	return o
 }
 
+func (o PrivacyPolicyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PrivacyPolicy] {
+	return pulumix.Output[[]*PrivacyPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o PrivacyPolicyArrayOutput) Index(i pulumi.IntInput) PrivacyPolicyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PrivacyPolicy {
 		return vs[0].([]*PrivacyPolicy)[vs[1].(int)]
@@ -272,6 +304,12 @@ func (o PrivacyPolicyMapOutput) ToPrivacyPolicyMapOutput() PrivacyPolicyMapOutpu
 
 func (o PrivacyPolicyMapOutput) ToPrivacyPolicyMapOutputWithContext(ctx context.Context) PrivacyPolicyMapOutput {
 	return o
+}
+
+func (o PrivacyPolicyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PrivacyPolicy] {
+	return pulumix.Output[map[string]*PrivacyPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PrivacyPolicyMapOutput) MapIndex(k pulumi.StringInput) PrivacyPolicyOutput {

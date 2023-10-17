@@ -32,7 +32,7 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+ * terraform The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/orgIdpGitlabSelfHosted:OrgIdpGitlabSelfHosted imported '123456789012345678:123456789012345678:1234567890abcdef'
@@ -154,7 +154,7 @@ export class OrgIdpGitlabSelfHosted extends pulumi.CustomResource {
                 throw new Error("Missing required property 'issuer'");
             }
             resourceInputs["clientId"] = args ? args.clientId : undefined;
-            resourceInputs["clientSecret"] = args ? args.clientSecret : undefined;
+            resourceInputs["clientSecret"] = args?.clientSecret ? pulumi.secret(args.clientSecret) : undefined;
             resourceInputs["isAutoCreation"] = args ? args.isAutoCreation : undefined;
             resourceInputs["isAutoUpdate"] = args ? args.isAutoUpdate : undefined;
             resourceInputs["isCreationAllowed"] = args ? args.isCreationAllowed : undefined;
@@ -165,6 +165,8 @@ export class OrgIdpGitlabSelfHosted extends pulumi.CustomResource {
             resourceInputs["scopes"] = args ? args.scopes : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["clientSecret"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(OrgIdpGitlabSelfHosted.__pulumiType, name, resourceInputs, opts);
     }
 }

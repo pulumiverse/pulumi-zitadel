@@ -8,11 +8,13 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
 func GetOrgs(ctx *pulumi.Context, args *GetOrgsArgs, opts ...pulumi.InvokeOption) (*GetOrgsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOrgsResult
 	err := ctx.Invoke("zitadel:index/getOrgs:getOrgs", args, &rv, opts...)
 	if err != nil {
@@ -99,6 +101,12 @@ func (o GetOrgsResultOutput) ToGetOrgsResultOutput() GetOrgsResultOutput {
 
 func (o GetOrgsResultOutput) ToGetOrgsResultOutputWithContext(ctx context.Context) GetOrgsResultOutput {
 	return o
+}
+
+func (o GetOrgsResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetOrgsResult] {
+	return pulumix.Output[GetOrgsResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // A domain of the org.

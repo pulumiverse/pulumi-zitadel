@@ -11,9 +11,9 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const defaultDefaultDomainPolicy = new zitadel.DefaultDomainPolicy("default", {
+ * const _default = new zitadel.DefaultDomainPolicy("default", {
  *     smtpSenderAddressMatchesInstanceDomain: true,
  *     userLoginMustBeDomain: false,
  *     validateOrgDomains: true,
@@ -22,7 +22,7 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * terraform # The resource can be imported using the ID format `<>`, e.g.
+ * terraform The resource can be imported using the ID format `<>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/defaultDomainPolicy:DefaultDomainPolicy imported ''

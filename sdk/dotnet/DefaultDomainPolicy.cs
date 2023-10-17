@@ -17,6 +17,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
@@ -34,7 +35,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ## Import
     /// 
-    /// terraform # The resource can be imported using the ID format `&lt;&gt;`, e.g.
+    /// terraform The resource can be imported using the ID format `&lt;&gt;`, e.g.
     /// 
     /// ```sh
     ///  $ pulumi import zitadel:index/defaultDomainPolicy:DefaultDomainPolicy imported ''

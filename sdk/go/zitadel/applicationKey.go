@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing a app key
@@ -45,7 +47,7 @@ import (
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id:project_id:app_id[:org_id][:key_details]>`. # You can use __SEMICOLON__ to escape :, e.g.
+// terraform The resource can be imported using the ID format `<id:project_id:app_id[:org_id][:key_details]>`. You can use __SEMICOLON__ to escape :, e.g.
 //
 // ```sh
 //
@@ -88,7 +90,11 @@ func NewApplicationKey(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"keyDetails",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ApplicationKey
 	err := ctx.RegisterResource("zitadel:index/applicationKey:ApplicationKey", name, args, &resource, opts...)
 	if err != nil {
@@ -194,6 +200,12 @@ func (i *ApplicationKey) ToApplicationKeyOutputWithContext(ctx context.Context) 
 	return pulumi.ToOutputWithContext(ctx, i).(ApplicationKeyOutput)
 }
 
+func (i *ApplicationKey) ToOutput(ctx context.Context) pulumix.Output[*ApplicationKey] {
+	return pulumix.Output[*ApplicationKey]{
+		OutputState: i.ToApplicationKeyOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ApplicationKeyArrayInput is an input type that accepts ApplicationKeyArray and ApplicationKeyArrayOutput values.
 // You can construct a concrete instance of `ApplicationKeyArrayInput` via:
 //
@@ -217,6 +229,12 @@ func (i ApplicationKeyArray) ToApplicationKeyArrayOutput() ApplicationKeyArrayOu
 
 func (i ApplicationKeyArray) ToApplicationKeyArrayOutputWithContext(ctx context.Context) ApplicationKeyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ApplicationKeyArrayOutput)
+}
+
+func (i ApplicationKeyArray) ToOutput(ctx context.Context) pulumix.Output[[]*ApplicationKey] {
+	return pulumix.Output[[]*ApplicationKey]{
+		OutputState: i.ToApplicationKeyArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ApplicationKeyMapInput is an input type that accepts ApplicationKeyMap and ApplicationKeyMapOutput values.
@@ -244,6 +262,12 @@ func (i ApplicationKeyMap) ToApplicationKeyMapOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(ApplicationKeyMapOutput)
 }
 
+func (i ApplicationKeyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ApplicationKey] {
+	return pulumix.Output[map[string]*ApplicationKey]{
+		OutputState: i.ToApplicationKeyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ApplicationKeyOutput struct{ *pulumi.OutputState }
 
 func (ApplicationKeyOutput) ElementType() reflect.Type {
@@ -256,6 +280,12 @@ func (o ApplicationKeyOutput) ToApplicationKeyOutput() ApplicationKeyOutput {
 
 func (o ApplicationKeyOutput) ToApplicationKeyOutputWithContext(ctx context.Context) ApplicationKeyOutput {
 	return o
+}
+
+func (o ApplicationKeyOutput) ToOutput(ctx context.Context) pulumix.Output[*ApplicationKey] {
+	return pulumix.Output[*ApplicationKey]{
+		OutputState: o.OutputState,
+	}
 }
 
 // ID of the application
@@ -302,6 +332,12 @@ func (o ApplicationKeyArrayOutput) ToApplicationKeyArrayOutputWithContext(ctx co
 	return o
 }
 
+func (o ApplicationKeyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ApplicationKey] {
+	return pulumix.Output[[]*ApplicationKey]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ApplicationKeyArrayOutput) Index(i pulumi.IntInput) ApplicationKeyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ApplicationKey {
 		return vs[0].([]*ApplicationKey)[vs[1].(int)]
@@ -320,6 +356,12 @@ func (o ApplicationKeyMapOutput) ToApplicationKeyMapOutput() ApplicationKeyMapOu
 
 func (o ApplicationKeyMapOutput) ToApplicationKeyMapOutputWithContext(ctx context.Context) ApplicationKeyMapOutput {
 	return o
+}
+
+func (o ApplicationKeyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ApplicationKey] {
+	return pulumix.Output[map[string]*ApplicationKey]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ApplicationKeyMapOutput) MapIndex(k pulumi.StringInput) ApplicationKeyOutput {

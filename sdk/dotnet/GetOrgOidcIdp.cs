@@ -21,6 +21,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -34,7 +35,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["orgOidcIdp"] = @default.Apply(getOrgOidcIdpResult =&gt; getOrgOidcIdpResult),
+        ///         ["orgOidcIdp"] = @default,
         ///     };
         /// });
         /// ```
@@ -42,7 +43,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetOrgOidcIdpResult> InvokeAsync(GetOrgOidcIdpArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrgOidcIdpResult>("zitadel:index/getOrgOidcIdp:getOrgOidcIdp", args ?? new GetOrgOidcIdpArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgOidcIdpResult>("zitadel:index/getOrgOidcIdp:getOrgOidcIdp", args ?? new GetOrgOidcIdpArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing a generic OIDC IdP on the organization.
@@ -53,6 +54,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -66,7 +68,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["orgOidcIdp"] = @default.Apply(getOrgOidcIdpResult =&gt; getOrgOidcIdpResult),
+        ///         ["orgOidcIdp"] = @default,
         ///     };
         /// });
         /// ```
@@ -74,7 +76,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetOrgOidcIdpResult> Invoke(GetOrgOidcIdpInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrgOidcIdpResult>("zitadel:index/getOrgOidcIdp:getOrgOidcIdp", args ?? new GetOrgOidcIdpInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrgOidcIdpResult>("zitadel:index/getOrgOidcIdp:getOrgOidcIdp", args ?? new GetOrgOidcIdpInvokeArgs(), options.WithDefaults());
     }
 
 

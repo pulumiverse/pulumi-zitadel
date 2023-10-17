@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ApplicationKeyArgs', 'ApplicationKey']
@@ -27,12 +27,41 @@ class ApplicationKeyArgs:
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "app_id", app_id)
-        pulumi.set(__self__, "expiration_date", expiration_date)
-        pulumi.set(__self__, "key_type", key_type)
-        pulumi.set(__self__, "project_id", project_id)
+        ApplicationKeyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            app_id=app_id,
+            expiration_date=expiration_date,
+            key_type=key_type,
+            project_id=project_id,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             app_id: pulumi.Input[str],
+             expiration_date: pulumi.Input[str],
+             key_type: pulumi.Input[str],
+             project_id: pulumi.Input[str],
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'appId' in kwargs:
+            app_id = kwargs['appId']
+        if 'expirationDate' in kwargs:
+            expiration_date = kwargs['expirationDate']
+        if 'keyType' in kwargs:
+            key_type = kwargs['keyType']
+        if 'projectId' in kwargs:
+            project_id = kwargs['projectId']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("app_id", app_id)
+        _setter("expiration_date", expiration_date)
+        _setter("key_type", key_type)
+        _setter("project_id", project_id)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="appId")
@@ -113,18 +142,51 @@ class _ApplicationKeyState:
         :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] project_id: ID of the project
         """
+        _ApplicationKeyState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            app_id=app_id,
+            expiration_date=expiration_date,
+            key_details=key_details,
+            key_type=key_type,
+            org_id=org_id,
+            project_id=project_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             app_id: Optional[pulumi.Input[str]] = None,
+             expiration_date: Optional[pulumi.Input[str]] = None,
+             key_details: Optional[pulumi.Input[str]] = None,
+             key_type: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             project_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'appId' in kwargs:
+            app_id = kwargs['appId']
+        if 'expirationDate' in kwargs:
+            expiration_date = kwargs['expirationDate']
+        if 'keyDetails' in kwargs:
+            key_details = kwargs['keyDetails']
+        if 'keyType' in kwargs:
+            key_type = kwargs['keyType']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'projectId' in kwargs:
+            project_id = kwargs['projectId']
+
         if app_id is not None:
-            pulumi.set(__self__, "app_id", app_id)
+            _setter("app_id", app_id)
         if expiration_date is not None:
-            pulumi.set(__self__, "expiration_date", expiration_date)
+            _setter("expiration_date", expiration_date)
         if key_details is not None:
-            pulumi.set(__self__, "key_details", key_details)
+            _setter("key_details", key_details)
         if key_type is not None:
-            pulumi.set(__self__, "key_type", key_type)
+            _setter("key_type", key_type)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if project_id is not None:
-            pulumi.set(__self__, "project_id", project_id)
+            _setter("project_id", project_id)
 
     @property
     @pulumi.getter(name="appId")
@@ -229,7 +291,7 @@ class ApplicationKey(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id:project_id:app_id[:org_id][:key_details]>`. # You can use __SEMICOLON__ to escape :, e.g.
+        terraform The resource can be imported using the ID format `<id:project_id:app_id[:org_id][:key_details]>`. You can use __SEMICOLON__ to escape :, e.g.
 
         ```sh
          $ pulumi import zitadel:index/applicationKey:ApplicationKey imported "123456789012345678:123456789012345678:123456789012345678:123456789012345678:$(cat ~/Downloads/123456789012345678.json | sed -e 's/:/__SEMICOLON__/g')"
@@ -268,7 +330,7 @@ class ApplicationKey(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id:project_id:app_id[:org_id][:key_details]>`. # You can use __SEMICOLON__ to escape :, e.g.
+        terraform The resource can be imported using the ID format `<id:project_id:app_id[:org_id][:key_details]>`. You can use __SEMICOLON__ to escape :, e.g.
 
         ```sh
          $ pulumi import zitadel:index/applicationKey:ApplicationKey imported "123456789012345678:123456789012345678:123456789012345678:123456789012345678:$(cat ~/Downloads/123456789012345678.json | sed -e 's/:/__SEMICOLON__/g')"
@@ -284,6 +346,10 @@ class ApplicationKey(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ApplicationKeyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -317,6 +383,8 @@ class ApplicationKey(pulumi.CustomResource):
                 raise TypeError("Missing required property 'project_id'")
             __props__.__dict__["project_id"] = project_id
             __props__.__dict__["key_details"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["keyDetails"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(ApplicationKey, __self__).__init__(
             'zitadel:index/applicationKey:ApplicationKey',
             resource_name,

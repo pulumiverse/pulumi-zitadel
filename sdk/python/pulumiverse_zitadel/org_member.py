@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['OrgMemberArgs', 'OrgMember']
@@ -23,10 +23,29 @@ class OrgMemberArgs:
         :param pulumi.Input[str] user_id: ID of the user
         :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "roles", roles)
-        pulumi.set(__self__, "user_id", user_id)
+        OrgMemberArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            roles=roles,
+            user_id=user_id,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             roles: pulumi.Input[Sequence[pulumi.Input[str]]],
+             user_id: pulumi.Input[str],
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'userId' in kwargs:
+            user_id = kwargs['userId']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("roles", roles)
+        _setter("user_id", user_id)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter
@@ -77,12 +96,31 @@ class _OrgMemberState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] roles: List of roles granted
         :param pulumi.Input[str] user_id: ID of the user
         """
+        _OrgMemberState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            org_id=org_id,
+            roles=roles,
+            user_id=user_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             org_id: Optional[pulumi.Input[str]] = None,
+             roles: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             user_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'userId' in kwargs:
+            user_id = kwargs['userId']
+
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if roles is not None:
-            pulumi.set(__self__, "roles", roles)
+            _setter("roles", roles)
         if user_id is not None:
-            pulumi.set(__self__, "user_id", user_id)
+            _setter("user_id", user_id)
 
     @property
     @pulumi.getter(name="orgId")
@@ -147,7 +185,7 @@ class OrgMember(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<user_id[:org_id]>`, e.g.
+        terraform The resource can be imported using the ID format `<user_id[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/orgMember:OrgMember imported '123456789012345678:123456789012345678'
@@ -182,7 +220,7 @@ class OrgMember(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<user_id[:org_id]>`, e.g.
+        terraform The resource can be imported using the ID format `<user_id[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/orgMember:OrgMember imported '123456789012345678:123456789012345678'
@@ -198,6 +236,10 @@ class OrgMember(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            OrgMemberArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

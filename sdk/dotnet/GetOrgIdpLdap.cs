@@ -21,6 +21,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -38,7 +39,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetOrgIdpLdapResult> InvokeAsync(GetOrgIdpLdapArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrgIdpLdapResult>("zitadel:index/getOrgIdpLdap:getOrgIdpLdap", args ?? new GetOrgIdpLdapArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgIdpLdapResult>("zitadel:index/getOrgIdpLdap:getOrgIdpLdap", args ?? new GetOrgIdpLdapArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing an LDAP IdP on the organization.
@@ -49,6 +50,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -66,7 +68,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetOrgIdpLdapResult> Invoke(GetOrgIdpLdapInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrgIdpLdapResult>("zitadel:index/getOrgIdpLdap:getOrgIdpLdap", args ?? new GetOrgIdpLdapInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrgIdpLdapResult>("zitadel:index/getOrgIdpLdap:getOrgIdpLdap", args ?? new GetOrgIdpLdapInvokeArgs(), options.WithDefaults());
     }
 
 

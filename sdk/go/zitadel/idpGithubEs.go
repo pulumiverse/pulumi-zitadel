@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing a GitHub Enterprise IDP on the instance.
@@ -54,7 +56,7 @@ import (
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+// terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
 //
 // ```sh
 //
@@ -122,7 +124,14 @@ func NewIdpGithubEs(ctx *pulumi.Context,
 	if args.UserEndpoint == nil {
 		return nil, errors.New("invalid value for required argument 'UserEndpoint'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.ClientSecret != nil {
+		args.ClientSecret = pulumi.ToSecret(args.ClientSecret).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IdpGithubEs
 	err := ctx.RegisterResource("zitadel:index/idpGithubEs:IdpGithubEs", name, args, &resource, opts...)
 	if err != nil {
@@ -272,6 +281,12 @@ func (i *IdpGithubEs) ToIdpGithubEsOutputWithContext(ctx context.Context) IdpGit
 	return pulumi.ToOutputWithContext(ctx, i).(IdpGithubEsOutput)
 }
 
+func (i *IdpGithubEs) ToOutput(ctx context.Context) pulumix.Output[*IdpGithubEs] {
+	return pulumix.Output[*IdpGithubEs]{
+		OutputState: i.ToIdpGithubEsOutputWithContext(ctx).OutputState,
+	}
+}
+
 // IdpGithubEsArrayInput is an input type that accepts IdpGithubEsArray and IdpGithubEsArrayOutput values.
 // You can construct a concrete instance of `IdpGithubEsArrayInput` via:
 //
@@ -295,6 +310,12 @@ func (i IdpGithubEsArray) ToIdpGithubEsArrayOutput() IdpGithubEsArrayOutput {
 
 func (i IdpGithubEsArray) ToIdpGithubEsArrayOutputWithContext(ctx context.Context) IdpGithubEsArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(IdpGithubEsArrayOutput)
+}
+
+func (i IdpGithubEsArray) ToOutput(ctx context.Context) pulumix.Output[[]*IdpGithubEs] {
+	return pulumix.Output[[]*IdpGithubEs]{
+		OutputState: i.ToIdpGithubEsArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // IdpGithubEsMapInput is an input type that accepts IdpGithubEsMap and IdpGithubEsMapOutput values.
@@ -322,6 +343,12 @@ func (i IdpGithubEsMap) ToIdpGithubEsMapOutputWithContext(ctx context.Context) I
 	return pulumi.ToOutputWithContext(ctx, i).(IdpGithubEsMapOutput)
 }
 
+func (i IdpGithubEsMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*IdpGithubEs] {
+	return pulumix.Output[map[string]*IdpGithubEs]{
+		OutputState: i.ToIdpGithubEsMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type IdpGithubEsOutput struct{ *pulumi.OutputState }
 
 func (IdpGithubEsOutput) ElementType() reflect.Type {
@@ -334,6 +361,12 @@ func (o IdpGithubEsOutput) ToIdpGithubEsOutput() IdpGithubEsOutput {
 
 func (o IdpGithubEsOutput) ToIdpGithubEsOutputWithContext(ctx context.Context) IdpGithubEsOutput {
 	return o
+}
+
+func (o IdpGithubEsOutput) ToOutput(ctx context.Context) pulumix.Output[*IdpGithubEs] {
+	return pulumix.Output[*IdpGithubEs]{
+		OutputState: o.OutputState,
+	}
 }
 
 // the providers authorization endpoint
@@ -405,6 +438,12 @@ func (o IdpGithubEsArrayOutput) ToIdpGithubEsArrayOutputWithContext(ctx context.
 	return o
 }
 
+func (o IdpGithubEsArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*IdpGithubEs] {
+	return pulumix.Output[[]*IdpGithubEs]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o IdpGithubEsArrayOutput) Index(i pulumi.IntInput) IdpGithubEsOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *IdpGithubEs {
 		return vs[0].([]*IdpGithubEs)[vs[1].(int)]
@@ -423,6 +462,12 @@ func (o IdpGithubEsMapOutput) ToIdpGithubEsMapOutput() IdpGithubEsMapOutput {
 
 func (o IdpGithubEsMapOutput) ToIdpGithubEsMapOutputWithContext(ctx context.Context) IdpGithubEsMapOutput {
 	return o
+}
+
+func (o IdpGithubEsMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*IdpGithubEs] {
+	return pulumix.Output[map[string]*IdpGithubEs]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o IdpGithubEsMapOutput) MapIndex(k pulumi.StringInput) IdpGithubEsOutput {

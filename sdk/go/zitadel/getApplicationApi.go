@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing an API application belonging to a project, with all configuration possibilities.
@@ -19,7 +21,6 @@ import (
 //
 // import (
 //
-//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -27,7 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_default, err := zitadel.LookupApplicationApi(ctx, &GetApplicationApiArgs{
+//			_default, err := zitadel.LookupApplicationApi(ctx, &zitadel.LookupApplicationApiArgs{
 //				OrgId:     pulumi.StringRef(data.Zitadel_org.Default.Id),
 //				ProjectId: data.Zitadel_project.Default.Id,
 //				AppId:     "123456789012345678",
@@ -42,7 +43,7 @@ import (
 //
 // ```
 func LookupApplicationApi(ctx *pulumi.Context, args *LookupApplicationApiArgs, opts ...pulumi.InvokeOption) (*LookupApplicationApiResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupApplicationApiResult
 	err := ctx.Invoke("zitadel:index/getApplicationApi:getApplicationApi", args, &rv, opts...)
 	if err != nil {
@@ -117,6 +118,12 @@ func (o LookupApplicationApiResultOutput) ToLookupApplicationApiResultOutput() L
 
 func (o LookupApplicationApiResultOutput) ToLookupApplicationApiResultOutputWithContext(ctx context.Context) LookupApplicationApiResultOutput {
 	return o
+}
+
+func (o LookupApplicationApiResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupApplicationApiResult] {
+	return pulumix.Output[LookupApplicationApiResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // The ID of this resource.

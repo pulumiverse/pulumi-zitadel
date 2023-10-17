@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the default oidc settings.
@@ -73,7 +75,7 @@ func NewDefaultOidcSettings(ctx *pulumi.Context,
 	if args.RefreshTokenIdleExpiration == nil {
 		return nil, errors.New("invalid value for required argument 'RefreshTokenIdleExpiration'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DefaultOidcSettings
 	err := ctx.RegisterResource("zitadel:index/defaultOidcSettings:DefaultOidcSettings", name, args, &resource, opts...)
 	if err != nil {
@@ -167,6 +169,12 @@ func (i *DefaultOidcSettings) ToDefaultOidcSettingsOutputWithContext(ctx context
 	return pulumi.ToOutputWithContext(ctx, i).(DefaultOidcSettingsOutput)
 }
 
+func (i *DefaultOidcSettings) ToOutput(ctx context.Context) pulumix.Output[*DefaultOidcSettings] {
+	return pulumix.Output[*DefaultOidcSettings]{
+		OutputState: i.ToDefaultOidcSettingsOutputWithContext(ctx).OutputState,
+	}
+}
+
 // DefaultOidcSettingsArrayInput is an input type that accepts DefaultOidcSettingsArray and DefaultOidcSettingsArrayOutput values.
 // You can construct a concrete instance of `DefaultOidcSettingsArrayInput` via:
 //
@@ -190,6 +198,12 @@ func (i DefaultOidcSettingsArray) ToDefaultOidcSettingsArrayOutput() DefaultOidc
 
 func (i DefaultOidcSettingsArray) ToDefaultOidcSettingsArrayOutputWithContext(ctx context.Context) DefaultOidcSettingsArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(DefaultOidcSettingsArrayOutput)
+}
+
+func (i DefaultOidcSettingsArray) ToOutput(ctx context.Context) pulumix.Output[[]*DefaultOidcSettings] {
+	return pulumix.Output[[]*DefaultOidcSettings]{
+		OutputState: i.ToDefaultOidcSettingsArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // DefaultOidcSettingsMapInput is an input type that accepts DefaultOidcSettingsMap and DefaultOidcSettingsMapOutput values.
@@ -217,6 +231,12 @@ func (i DefaultOidcSettingsMap) ToDefaultOidcSettingsMapOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(DefaultOidcSettingsMapOutput)
 }
 
+func (i DefaultOidcSettingsMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*DefaultOidcSettings] {
+	return pulumix.Output[map[string]*DefaultOidcSettings]{
+		OutputState: i.ToDefaultOidcSettingsMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type DefaultOidcSettingsOutput struct{ *pulumi.OutputState }
 
 func (DefaultOidcSettingsOutput) ElementType() reflect.Type {
@@ -229,6 +249,12 @@ func (o DefaultOidcSettingsOutput) ToDefaultOidcSettingsOutput() DefaultOidcSett
 
 func (o DefaultOidcSettingsOutput) ToDefaultOidcSettingsOutputWithContext(ctx context.Context) DefaultOidcSettingsOutput {
 	return o
+}
+
+func (o DefaultOidcSettingsOutput) ToOutput(ctx context.Context) pulumix.Output[*DefaultOidcSettings] {
+	return pulumix.Output[*DefaultOidcSettings]{
+		OutputState: o.OutputState,
+	}
 }
 
 // lifetime duration of access tokens
@@ -265,6 +291,12 @@ func (o DefaultOidcSettingsArrayOutput) ToDefaultOidcSettingsArrayOutputWithCont
 	return o
 }
 
+func (o DefaultOidcSettingsArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*DefaultOidcSettings] {
+	return pulumix.Output[[]*DefaultOidcSettings]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o DefaultOidcSettingsArrayOutput) Index(i pulumi.IntInput) DefaultOidcSettingsOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *DefaultOidcSettings {
 		return vs[0].([]*DefaultOidcSettings)[vs[1].(int)]
@@ -283,6 +315,12 @@ func (o DefaultOidcSettingsMapOutput) ToDefaultOidcSettingsMapOutput() DefaultOi
 
 func (o DefaultOidcSettingsMapOutput) ToDefaultOidcSettingsMapOutputWithContext(ctx context.Context) DefaultOidcSettingsMapOutput {
 	return o
+}
+
+func (o DefaultOidcSettingsMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*DefaultOidcSettings] {
+	return pulumix.Output[map[string]*DefaultOidcSettings]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o DefaultOidcSettingsMapOutput) MapIndex(k pulumi.StringInput) DefaultOidcSettingsOutput {

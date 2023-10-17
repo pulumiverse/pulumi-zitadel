@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['PersonalAccessTokenArgs', 'PersonalAccessToken']
@@ -23,11 +23,32 @@ class PersonalAccessTokenArgs:
         :param pulumi.Input[str] expiration_date: Expiration date of the token in the RFC3339 format
         :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "user_id", user_id)
+        PersonalAccessTokenArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            user_id=user_id,
+            expiration_date=expiration_date,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             user_id: pulumi.Input[str],
+             expiration_date: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'userId' in kwargs:
+            user_id = kwargs['userId']
+        if 'expirationDate' in kwargs:
+            expiration_date = kwargs['expirationDate']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("user_id", user_id)
         if expiration_date is not None:
-            pulumi.set(__self__, "expiration_date", expiration_date)
+            _setter("expiration_date", expiration_date)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="userId")
@@ -80,14 +101,37 @@ class _PersonalAccessTokenState:
         :param pulumi.Input[str] token: Value of the token
         :param pulumi.Input[str] user_id: ID of the user
         """
+        _PersonalAccessTokenState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            expiration_date=expiration_date,
+            org_id=org_id,
+            token=token,
+            user_id=user_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             expiration_date: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             token: Optional[pulumi.Input[str]] = None,
+             user_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'expirationDate' in kwargs:
+            expiration_date = kwargs['expirationDate']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'userId' in kwargs:
+            user_id = kwargs['userId']
+
         if expiration_date is not None:
-            pulumi.set(__self__, "expiration_date", expiration_date)
+            _setter("expiration_date", expiration_date)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if token is not None:
-            pulumi.set(__self__, "token", token)
+            _setter("token", token)
         if user_id is not None:
-            pulumi.set(__self__, "user_id", user_id)
+            _setter("user_id", user_id)
 
     @property
     @pulumi.getter(name="expirationDate")
@@ -164,7 +208,7 @@ class PersonalAccessToken(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
+        terraform The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/personalAccessToken:PersonalAccessToken imported '123456789012345678:123456789012345678:123456789012345678:LHt79...'
@@ -199,7 +243,7 @@ class PersonalAccessToken(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
+        terraform The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/personalAccessToken:PersonalAccessToken imported '123456789012345678:123456789012345678:123456789012345678:LHt79...'
@@ -215,6 +259,10 @@ class PersonalAccessToken(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            PersonalAccessTokenArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -238,6 +286,8 @@ class PersonalAccessToken(pulumi.CustomResource):
                 raise TypeError("Missing required property 'user_id'")
             __props__.__dict__["user_id"] = user_id
             __props__.__dict__["token"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["token"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(PersonalAccessToken, __self__).__init__(
             'zitadel:index/personalAccessToken:PersonalAccessToken',
             resource_name,

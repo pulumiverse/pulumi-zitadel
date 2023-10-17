@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -215,19 +215,19 @@ def get_org_idp_github_es(id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getOrgIdpGithubEs:getOrgIdpGithubEs', __args__, opts=opts, typ=GetOrgIdpGithubEsResult).value
 
     return AwaitableGetOrgIdpGithubEsResult(
-        authorization_endpoint=__ret__.authorization_endpoint,
-        client_id=__ret__.client_id,
-        client_secret=__ret__.client_secret,
-        id=__ret__.id,
-        is_auto_creation=__ret__.is_auto_creation,
-        is_auto_update=__ret__.is_auto_update,
-        is_creation_allowed=__ret__.is_creation_allowed,
-        is_linking_allowed=__ret__.is_linking_allowed,
-        name=__ret__.name,
-        org_id=__ret__.org_id,
-        scopes=__ret__.scopes,
-        token_endpoint=__ret__.token_endpoint,
-        user_endpoint=__ret__.user_endpoint)
+        authorization_endpoint=pulumi.get(__ret__, 'authorization_endpoint'),
+        client_id=pulumi.get(__ret__, 'client_id'),
+        client_secret=pulumi.get(__ret__, 'client_secret'),
+        id=pulumi.get(__ret__, 'id'),
+        is_auto_creation=pulumi.get(__ret__, 'is_auto_creation'),
+        is_auto_update=pulumi.get(__ret__, 'is_auto_update'),
+        is_creation_allowed=pulumi.get(__ret__, 'is_creation_allowed'),
+        is_linking_allowed=pulumi.get(__ret__, 'is_linking_allowed'),
+        name=pulumi.get(__ret__, 'name'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        scopes=pulumi.get(__ret__, 'scopes'),
+        token_endpoint=pulumi.get(__ret__, 'token_endpoint'),
+        user_endpoint=pulumi.get(__ret__, 'user_endpoint'))
 
 
 @_utilities.lift_output_func(get_org_idp_github_es)

@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['DefaultPrivacyPolicyArgs', 'DefaultPrivacyPolicy']
@@ -21,14 +21,39 @@ class DefaultPrivacyPolicyArgs:
         """
         The set of arguments for constructing a DefaultPrivacyPolicy resource.
         """
+        DefaultPrivacyPolicyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            help_link=help_link,
+            privacy_link=privacy_link,
+            support_email=support_email,
+            tos_link=tos_link,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             help_link: Optional[pulumi.Input[str]] = None,
+             privacy_link: Optional[pulumi.Input[str]] = None,
+             support_email: Optional[pulumi.Input[str]] = None,
+             tos_link: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'helpLink' in kwargs:
+            help_link = kwargs['helpLink']
+        if 'privacyLink' in kwargs:
+            privacy_link = kwargs['privacyLink']
+        if 'supportEmail' in kwargs:
+            support_email = kwargs['supportEmail']
+        if 'tosLink' in kwargs:
+            tos_link = kwargs['tosLink']
+
         if help_link is not None:
-            pulumi.set(__self__, "help_link", help_link)
+            _setter("help_link", help_link)
         if privacy_link is not None:
-            pulumi.set(__self__, "privacy_link", privacy_link)
+            _setter("privacy_link", privacy_link)
         if support_email is not None:
-            pulumi.set(__self__, "support_email", support_email)
+            _setter("support_email", support_email)
         if tos_link is not None:
-            pulumi.set(__self__, "tos_link", tos_link)
+            _setter("tos_link", tos_link)
 
     @property
     @pulumi.getter(name="helpLink")
@@ -77,14 +102,39 @@ class _DefaultPrivacyPolicyState:
         """
         Input properties used for looking up and filtering DefaultPrivacyPolicy resources.
         """
+        _DefaultPrivacyPolicyState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            help_link=help_link,
+            privacy_link=privacy_link,
+            support_email=support_email,
+            tos_link=tos_link,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             help_link: Optional[pulumi.Input[str]] = None,
+             privacy_link: Optional[pulumi.Input[str]] = None,
+             support_email: Optional[pulumi.Input[str]] = None,
+             tos_link: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'helpLink' in kwargs:
+            help_link = kwargs['helpLink']
+        if 'privacyLink' in kwargs:
+            privacy_link = kwargs['privacyLink']
+        if 'supportEmail' in kwargs:
+            support_email = kwargs['supportEmail']
+        if 'tosLink' in kwargs:
+            tos_link = kwargs['tosLink']
+
         if help_link is not None:
-            pulumi.set(__self__, "help_link", help_link)
+            _setter("help_link", help_link)
         if privacy_link is not None:
-            pulumi.set(__self__, "privacy_link", privacy_link)
+            _setter("privacy_link", privacy_link)
         if support_email is not None:
-            pulumi.set(__self__, "support_email", support_email)
+            _setter("support_email", support_email)
         if tos_link is not None:
-            pulumi.set(__self__, "tos_link", tos_link)
+            _setter("tos_link", tos_link)
 
     @property
     @pulumi.getter(name="helpLink")
@@ -151,7 +201,7 @@ class DefaultPrivacyPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<>`, e.g.
+        terraform The resource can be imported using the ID format `<>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/defaultPrivacyPolicy:DefaultPrivacyPolicy imported ''
@@ -184,7 +234,7 @@ class DefaultPrivacyPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<>`, e.g.
+        terraform The resource can be imported using the ID format `<>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/defaultPrivacyPolicy:DefaultPrivacyPolicy imported ''
@@ -200,6 +250,10 @@ class DefaultPrivacyPolicy(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            DefaultPrivacyPolicyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

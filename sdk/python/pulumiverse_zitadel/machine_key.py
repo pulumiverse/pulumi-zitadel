@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['MachineKeyArgs', 'MachineKey']
@@ -25,12 +25,37 @@ class MachineKeyArgs:
         :param pulumi.Input[str] expiration_date: Expiration date of the machine key in the RFC3339 format
         :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "key_type", key_type)
-        pulumi.set(__self__, "user_id", user_id)
+        MachineKeyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            key_type=key_type,
+            user_id=user_id,
+            expiration_date=expiration_date,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             key_type: pulumi.Input[str],
+             user_id: pulumi.Input[str],
+             expiration_date: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'keyType' in kwargs:
+            key_type = kwargs['keyType']
+        if 'userId' in kwargs:
+            user_id = kwargs['userId']
+        if 'expirationDate' in kwargs:
+            expiration_date = kwargs['expirationDate']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("key_type", key_type)
+        _setter("user_id", user_id)
         if expiration_date is not None:
-            pulumi.set(__self__, "expiration_date", expiration_date)
+            _setter("expiration_date", expiration_date)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="keyType")
@@ -97,16 +122,45 @@ class _MachineKeyState:
         :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] user_id: ID of the user
         """
+        _MachineKeyState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            expiration_date=expiration_date,
+            key_details=key_details,
+            key_type=key_type,
+            org_id=org_id,
+            user_id=user_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             expiration_date: Optional[pulumi.Input[str]] = None,
+             key_details: Optional[pulumi.Input[str]] = None,
+             key_type: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             user_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'expirationDate' in kwargs:
+            expiration_date = kwargs['expirationDate']
+        if 'keyDetails' in kwargs:
+            key_details = kwargs['keyDetails']
+        if 'keyType' in kwargs:
+            key_type = kwargs['keyType']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'userId' in kwargs:
+            user_id = kwargs['userId']
+
         if expiration_date is not None:
-            pulumi.set(__self__, "expiration_date", expiration_date)
+            _setter("expiration_date", expiration_date)
         if key_details is not None:
-            pulumi.set(__self__, "key_details", key_details)
+            _setter("key_details", key_details)
         if key_type is not None:
-            pulumi.set(__self__, "key_type", key_type)
+            _setter("key_type", key_type)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if user_id is not None:
-            pulumi.set(__self__, "user_id", user_id)
+            _setter("user_id", user_id)
 
     @property
     @pulumi.getter(name="expirationDate")
@@ -197,7 +251,7 @@ class MachineKey(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id:user_id[:org_id][:key_details]>`, e.g.
+        terraform The resource can be imported using the ID format `<id:user_id[:org_id][:key_details]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/machineKey:MachineKey imported '123456789012345678:123456789012345678:123456789012345678:{"type":"serviceaccount","keyId":"123456789012345678","key":"-----BEGIN RSA PRIVATE KEY-----\\nMIIEpQ...-----END RSA PRIVATE KEY-----\\n","userId":"123456789012345678"}'
@@ -234,7 +288,7 @@ class MachineKey(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id:user_id[:org_id][:key_details]>`, e.g.
+        terraform The resource can be imported using the ID format `<id:user_id[:org_id][:key_details]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/machineKey:MachineKey imported '123456789012345678:123456789012345678:123456789012345678:{"type":"serviceaccount","keyId":"123456789012345678","key":"-----BEGIN RSA PRIVATE KEY-----\\nMIIEpQ...-----END RSA PRIVATE KEY-----\\n","userId":"123456789012345678"}'
@@ -250,6 +304,10 @@ class MachineKey(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            MachineKeyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -277,6 +335,8 @@ class MachineKey(pulumi.CustomResource):
                 raise TypeError("Missing required property 'user_id'")
             __props__.__dict__["user_id"] = user_id
             __props__.__dict__["key_details"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["keyDetails"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(MachineKey, __self__).__init__(
             'zitadel:index/machineKey:MachineKey',
             resource_name,

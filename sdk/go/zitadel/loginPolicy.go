@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the custom login policy of an organization.
@@ -51,8 +53,8 @@ import (
 //					pulumi.String("MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"),
 //				},
 //				Idps: pulumi.StringArray{
-//					pulumi.Any(data.Zitadel_idp_google.Default.Id),
-//					pulumi.Any(data.Zitadel_idp_azure_ad.Default.Id),
+//					data.Zitadel_idp_google.Default.Id,
+//					data.Zitadel_idp_azure_ad.Default.Id,
 //				},
 //				AllowDomainDiscovery:  pulumi.Bool(true),
 //				DisableLoginWithEmail: pulumi.Bool(true),
@@ -69,7 +71,7 @@ import (
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+// terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
 //
 // ```sh
 //
@@ -167,7 +169,7 @@ func NewLoginPolicy(ctx *pulumi.Context,
 	if args.UserLogin == nil {
 		return nil, errors.New("invalid value for required argument 'UserLogin'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource LoginPolicy
 	err := ctx.RegisterResource("zitadel:index/loginPolicy:LoginPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -377,6 +379,12 @@ func (i *LoginPolicy) ToLoginPolicyOutputWithContext(ctx context.Context) LoginP
 	return pulumi.ToOutputWithContext(ctx, i).(LoginPolicyOutput)
 }
 
+func (i *LoginPolicy) ToOutput(ctx context.Context) pulumix.Output[*LoginPolicy] {
+	return pulumix.Output[*LoginPolicy]{
+		OutputState: i.ToLoginPolicyOutputWithContext(ctx).OutputState,
+	}
+}
+
 // LoginPolicyArrayInput is an input type that accepts LoginPolicyArray and LoginPolicyArrayOutput values.
 // You can construct a concrete instance of `LoginPolicyArrayInput` via:
 //
@@ -400,6 +408,12 @@ func (i LoginPolicyArray) ToLoginPolicyArrayOutput() LoginPolicyArrayOutput {
 
 func (i LoginPolicyArray) ToLoginPolicyArrayOutputWithContext(ctx context.Context) LoginPolicyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(LoginPolicyArrayOutput)
+}
+
+func (i LoginPolicyArray) ToOutput(ctx context.Context) pulumix.Output[[]*LoginPolicy] {
+	return pulumix.Output[[]*LoginPolicy]{
+		OutputState: i.ToLoginPolicyArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // LoginPolicyMapInput is an input type that accepts LoginPolicyMap and LoginPolicyMapOutput values.
@@ -427,6 +441,12 @@ func (i LoginPolicyMap) ToLoginPolicyMapOutputWithContext(ctx context.Context) L
 	return pulumi.ToOutputWithContext(ctx, i).(LoginPolicyMapOutput)
 }
 
+func (i LoginPolicyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*LoginPolicy] {
+	return pulumix.Output[map[string]*LoginPolicy]{
+		OutputState: i.ToLoginPolicyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type LoginPolicyOutput struct{ *pulumi.OutputState }
 
 func (LoginPolicyOutput) ElementType() reflect.Type {
@@ -439,6 +459,12 @@ func (o LoginPolicyOutput) ToLoginPolicyOutput() LoginPolicyOutput {
 
 func (o LoginPolicyOutput) ToLoginPolicyOutputWithContext(ctx context.Context) LoginPolicyOutput {
 	return o
+}
+
+func (o LoginPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[*LoginPolicy] {
+	return pulumix.Output[*LoginPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 // if set to true, the suffix (@domain.com) of an unknown username input on the login screen will be matched against the org domains and will redirect to the registration of that organisation on success.
@@ -555,6 +581,12 @@ func (o LoginPolicyArrayOutput) ToLoginPolicyArrayOutputWithContext(ctx context.
 	return o
 }
 
+func (o LoginPolicyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*LoginPolicy] {
+	return pulumix.Output[[]*LoginPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o LoginPolicyArrayOutput) Index(i pulumi.IntInput) LoginPolicyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *LoginPolicy {
 		return vs[0].([]*LoginPolicy)[vs[1].(int)]
@@ -573,6 +605,12 @@ func (o LoginPolicyMapOutput) ToLoginPolicyMapOutput() LoginPolicyMapOutput {
 
 func (o LoginPolicyMapOutput) ToLoginPolicyMapOutputWithContext(ctx context.Context) LoginPolicyMapOutput {
 	return o
+}
+
+func (o LoginPolicyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*LoginPolicy] {
+	return pulumix.Output[map[string]*LoginPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o LoginPolicyMapOutput) MapIndex(k pulumi.StringInput) LoginPolicyOutput {

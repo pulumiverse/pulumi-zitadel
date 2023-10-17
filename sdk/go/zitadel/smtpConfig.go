@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the SMTP configuration of an instance.
@@ -47,7 +49,7 @@ import (
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<[password]>`, e.g.
+// terraform The resource can be imported using the ID format `<[password]>`, e.g.
 //
 // ```sh
 //
@@ -89,7 +91,14 @@ func NewSmtpConfig(ctx *pulumi.Context,
 	if args.SenderName == nil {
 		return nil, errors.New("invalid value for required argument 'SenderName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SmtpConfig
 	err := ctx.RegisterResource("zitadel:index/smtpConfig:SmtpConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -207,6 +216,12 @@ func (i *SmtpConfig) ToSmtpConfigOutputWithContext(ctx context.Context) SmtpConf
 	return pulumi.ToOutputWithContext(ctx, i).(SmtpConfigOutput)
 }
 
+func (i *SmtpConfig) ToOutput(ctx context.Context) pulumix.Output[*SmtpConfig] {
+	return pulumix.Output[*SmtpConfig]{
+		OutputState: i.ToSmtpConfigOutputWithContext(ctx).OutputState,
+	}
+}
+
 // SmtpConfigArrayInput is an input type that accepts SmtpConfigArray and SmtpConfigArrayOutput values.
 // You can construct a concrete instance of `SmtpConfigArrayInput` via:
 //
@@ -230,6 +245,12 @@ func (i SmtpConfigArray) ToSmtpConfigArrayOutput() SmtpConfigArrayOutput {
 
 func (i SmtpConfigArray) ToSmtpConfigArrayOutputWithContext(ctx context.Context) SmtpConfigArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SmtpConfigArrayOutput)
+}
+
+func (i SmtpConfigArray) ToOutput(ctx context.Context) pulumix.Output[[]*SmtpConfig] {
+	return pulumix.Output[[]*SmtpConfig]{
+		OutputState: i.ToSmtpConfigArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // SmtpConfigMapInput is an input type that accepts SmtpConfigMap and SmtpConfigMapOutput values.
@@ -257,6 +278,12 @@ func (i SmtpConfigMap) ToSmtpConfigMapOutputWithContext(ctx context.Context) Smt
 	return pulumi.ToOutputWithContext(ctx, i).(SmtpConfigMapOutput)
 }
 
+func (i SmtpConfigMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*SmtpConfig] {
+	return pulumix.Output[map[string]*SmtpConfig]{
+		OutputState: i.ToSmtpConfigMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type SmtpConfigOutput struct{ *pulumi.OutputState }
 
 func (SmtpConfigOutput) ElementType() reflect.Type {
@@ -269,6 +296,12 @@ func (o SmtpConfigOutput) ToSmtpConfigOutput() SmtpConfigOutput {
 
 func (o SmtpConfigOutput) ToSmtpConfigOutputWithContext(ctx context.Context) SmtpConfigOutput {
 	return o
+}
+
+func (o SmtpConfigOutput) ToOutput(ctx context.Context) pulumix.Output[*SmtpConfig] {
+	return pulumix.Output[*SmtpConfig]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Host and port address to your SMTP server.
@@ -320,6 +353,12 @@ func (o SmtpConfigArrayOutput) ToSmtpConfigArrayOutputWithContext(ctx context.Co
 	return o
 }
 
+func (o SmtpConfigArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*SmtpConfig] {
+	return pulumix.Output[[]*SmtpConfig]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o SmtpConfigArrayOutput) Index(i pulumi.IntInput) SmtpConfigOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *SmtpConfig {
 		return vs[0].([]*SmtpConfig)[vs[1].(int)]
@@ -338,6 +377,12 @@ func (o SmtpConfigMapOutput) ToSmtpConfigMapOutput() SmtpConfigMapOutput {
 
 func (o SmtpConfigMapOutput) ToSmtpConfigMapOutputWithContext(ctx context.Context) SmtpConfigMapOutput {
 	return o
+}
+
+func (o SmtpConfigMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*SmtpConfig] {
+	return pulumix.Output[map[string]*SmtpConfig]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o SmtpConfigMapOutput) MapIndex(k pulumi.StringInput) SmtpConfigOutput {

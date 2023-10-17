@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the custom lockout policy of an organization.
@@ -42,7 +44,7 @@ import (
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+// terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
 //
 // ```sh
 //
@@ -68,7 +70,7 @@ func NewLockoutPolicy(ctx *pulumi.Context,
 	if args.MaxPasswordAttempts == nil {
 		return nil, errors.New("invalid value for required argument 'MaxPasswordAttempts'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource LockoutPolicy
 	err := ctx.RegisterResource("zitadel:index/lockoutPolicy:LockoutPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -146,6 +148,12 @@ func (i *LockoutPolicy) ToLockoutPolicyOutputWithContext(ctx context.Context) Lo
 	return pulumi.ToOutputWithContext(ctx, i).(LockoutPolicyOutput)
 }
 
+func (i *LockoutPolicy) ToOutput(ctx context.Context) pulumix.Output[*LockoutPolicy] {
+	return pulumix.Output[*LockoutPolicy]{
+		OutputState: i.ToLockoutPolicyOutputWithContext(ctx).OutputState,
+	}
+}
+
 // LockoutPolicyArrayInput is an input type that accepts LockoutPolicyArray and LockoutPolicyArrayOutput values.
 // You can construct a concrete instance of `LockoutPolicyArrayInput` via:
 //
@@ -169,6 +177,12 @@ func (i LockoutPolicyArray) ToLockoutPolicyArrayOutput() LockoutPolicyArrayOutpu
 
 func (i LockoutPolicyArray) ToLockoutPolicyArrayOutputWithContext(ctx context.Context) LockoutPolicyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(LockoutPolicyArrayOutput)
+}
+
+func (i LockoutPolicyArray) ToOutput(ctx context.Context) pulumix.Output[[]*LockoutPolicy] {
+	return pulumix.Output[[]*LockoutPolicy]{
+		OutputState: i.ToLockoutPolicyArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // LockoutPolicyMapInput is an input type that accepts LockoutPolicyMap and LockoutPolicyMapOutput values.
@@ -196,6 +210,12 @@ func (i LockoutPolicyMap) ToLockoutPolicyMapOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(LockoutPolicyMapOutput)
 }
 
+func (i LockoutPolicyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*LockoutPolicy] {
+	return pulumix.Output[map[string]*LockoutPolicy]{
+		OutputState: i.ToLockoutPolicyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type LockoutPolicyOutput struct{ *pulumi.OutputState }
 
 func (LockoutPolicyOutput) ElementType() reflect.Type {
@@ -208,6 +228,12 @@ func (o LockoutPolicyOutput) ToLockoutPolicyOutput() LockoutPolicyOutput {
 
 func (o LockoutPolicyOutput) ToLockoutPolicyOutputWithContext(ctx context.Context) LockoutPolicyOutput {
 	return o
+}
+
+func (o LockoutPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[*LockoutPolicy] {
+	return pulumix.Output[*LockoutPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
@@ -234,6 +260,12 @@ func (o LockoutPolicyArrayOutput) ToLockoutPolicyArrayOutputWithContext(ctx cont
 	return o
 }
 
+func (o LockoutPolicyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*LockoutPolicy] {
+	return pulumix.Output[[]*LockoutPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o LockoutPolicyArrayOutput) Index(i pulumi.IntInput) LockoutPolicyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *LockoutPolicy {
 		return vs[0].([]*LockoutPolicy)[vs[1].(int)]
@@ -252,6 +284,12 @@ func (o LockoutPolicyMapOutput) ToLockoutPolicyMapOutput() LockoutPolicyMapOutpu
 
 func (o LockoutPolicyMapOutput) ToLockoutPolicyMapOutputWithContext(ctx context.Context) LockoutPolicyMapOutput {
 	return o
+}
+
+func (o LockoutPolicyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*LockoutPolicy] {
+	return pulumix.Output[map[string]*LockoutPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o LockoutPolicyMapOutput) MapIndex(k pulumi.StringInput) LockoutPolicyOutput {

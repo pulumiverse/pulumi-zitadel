@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['DefaultOidcSettingsArgs', 'DefaultOidcSettings']
@@ -25,10 +25,35 @@ class DefaultOidcSettingsArgs:
         :param pulumi.Input[str] refresh_token_expiration: expiration duration of refresh tokens
         :param pulumi.Input[str] refresh_token_idle_expiration: expiration duration of idle refresh tokens
         """
-        pulumi.set(__self__, "access_token_lifetime", access_token_lifetime)
-        pulumi.set(__self__, "id_token_lifetime", id_token_lifetime)
-        pulumi.set(__self__, "refresh_token_expiration", refresh_token_expiration)
-        pulumi.set(__self__, "refresh_token_idle_expiration", refresh_token_idle_expiration)
+        DefaultOidcSettingsArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            access_token_lifetime=access_token_lifetime,
+            id_token_lifetime=id_token_lifetime,
+            refresh_token_expiration=refresh_token_expiration,
+            refresh_token_idle_expiration=refresh_token_idle_expiration,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             access_token_lifetime: pulumi.Input[str],
+             id_token_lifetime: pulumi.Input[str],
+             refresh_token_expiration: pulumi.Input[str],
+             refresh_token_idle_expiration: pulumi.Input[str],
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'accessTokenLifetime' in kwargs:
+            access_token_lifetime = kwargs['accessTokenLifetime']
+        if 'idTokenLifetime' in kwargs:
+            id_token_lifetime = kwargs['idTokenLifetime']
+        if 'refreshTokenExpiration' in kwargs:
+            refresh_token_expiration = kwargs['refreshTokenExpiration']
+        if 'refreshTokenIdleExpiration' in kwargs:
+            refresh_token_idle_expiration = kwargs['refreshTokenIdleExpiration']
+
+        _setter("access_token_lifetime", access_token_lifetime)
+        _setter("id_token_lifetime", id_token_lifetime)
+        _setter("refresh_token_expiration", refresh_token_expiration)
+        _setter("refresh_token_idle_expiration", refresh_token_idle_expiration)
 
     @property
     @pulumi.getter(name="accessTokenLifetime")
@@ -93,14 +118,39 @@ class _DefaultOidcSettingsState:
         :param pulumi.Input[str] refresh_token_expiration: expiration duration of refresh tokens
         :param pulumi.Input[str] refresh_token_idle_expiration: expiration duration of idle refresh tokens
         """
+        _DefaultOidcSettingsState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            access_token_lifetime=access_token_lifetime,
+            id_token_lifetime=id_token_lifetime,
+            refresh_token_expiration=refresh_token_expiration,
+            refresh_token_idle_expiration=refresh_token_idle_expiration,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             access_token_lifetime: Optional[pulumi.Input[str]] = None,
+             id_token_lifetime: Optional[pulumi.Input[str]] = None,
+             refresh_token_expiration: Optional[pulumi.Input[str]] = None,
+             refresh_token_idle_expiration: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'accessTokenLifetime' in kwargs:
+            access_token_lifetime = kwargs['accessTokenLifetime']
+        if 'idTokenLifetime' in kwargs:
+            id_token_lifetime = kwargs['idTokenLifetime']
+        if 'refreshTokenExpiration' in kwargs:
+            refresh_token_expiration = kwargs['refreshTokenExpiration']
+        if 'refreshTokenIdleExpiration' in kwargs:
+            refresh_token_idle_expiration = kwargs['refreshTokenIdleExpiration']
+
         if access_token_lifetime is not None:
-            pulumi.set(__self__, "access_token_lifetime", access_token_lifetime)
+            _setter("access_token_lifetime", access_token_lifetime)
         if id_token_lifetime is not None:
-            pulumi.set(__self__, "id_token_lifetime", id_token_lifetime)
+            _setter("id_token_lifetime", id_token_lifetime)
         if refresh_token_expiration is not None:
-            pulumi.set(__self__, "refresh_token_expiration", refresh_token_expiration)
+            _setter("refresh_token_expiration", refresh_token_expiration)
         if refresh_token_idle_expiration is not None:
-            pulumi.set(__self__, "refresh_token_idle_expiration", refresh_token_idle_expiration)
+            _setter("refresh_token_idle_expiration", refresh_token_idle_expiration)
 
     @property
     @pulumi.getter(name="accessTokenLifetime")
@@ -216,6 +266,10 @@ class DefaultOidcSettings(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            DefaultOidcSettingsArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

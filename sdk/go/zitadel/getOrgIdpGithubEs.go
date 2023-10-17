@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing a GitHub Enterprise IdP of the organization.
@@ -19,7 +21,6 @@ import (
 //
 // import (
 //
-//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -27,7 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := zitadel.LookupOrgIdpGithubEs(ctx, &GetOrgIdpGithubEsArgs{
+//			_, err := zitadel.LookupOrgIdpGithubEs(ctx, &zitadel.LookupOrgIdpGithubEsArgs{
 //				OrgId: pulumi.StringRef(data.Zitadel_org.Default.Id),
 //				Id:    "123456789012345678",
 //			}, nil)
@@ -40,7 +41,7 @@ import (
 //
 // ```
 func LookupOrgIdpGithubEs(ctx *pulumi.Context, args *LookupOrgIdpGithubEsArgs, opts ...pulumi.InvokeOption) (*LookupOrgIdpGithubEsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupOrgIdpGithubEsResult
 	err := ctx.Invoke("zitadel:index/getOrgIdpGithubEs:getOrgIdpGithubEs", args, &rv, opts...)
 	if err != nil {
@@ -125,6 +126,12 @@ func (o LookupOrgIdpGithubEsResultOutput) ToLookupOrgIdpGithubEsResultOutput() L
 
 func (o LookupOrgIdpGithubEsResultOutput) ToLookupOrgIdpGithubEsResultOutputWithContext(ctx context.Context) LookupOrgIdpGithubEsResultOutput {
 	return o
+}
+
+func (o LookupOrgIdpGithubEsResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupOrgIdpGithubEsResult] {
+	return pulumix.Output[LookupOrgIdpGithubEsResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // the providers authorization endpoint

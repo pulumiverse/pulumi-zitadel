@@ -34,7 +34,7 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * terraform # The resource can be imported using the ID format `id[:org_id][:initial_password]>`, e.g.
+ * terraform The resource can be imported using the ID format `id[:org_id][:initial_password]>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/humanUser:HumanUser imported '123456789012345678:123456789012345678:Password1!'
@@ -180,7 +180,7 @@ export class HumanUser extends pulumi.CustomResource {
             resourceInputs["email"] = args ? args.email : undefined;
             resourceInputs["firstName"] = args ? args.firstName : undefined;
             resourceInputs["gender"] = args ? args.gender : undefined;
-            resourceInputs["initialPassword"] = args ? args.initialPassword : undefined;
+            resourceInputs["initialPassword"] = args?.initialPassword ? pulumi.secret(args.initialPassword) : undefined;
             resourceInputs["isEmailVerified"] = args ? args.isEmailVerified : undefined;
             resourceInputs["isPhoneVerified"] = args ? args.isPhoneVerified : undefined;
             resourceInputs["lastName"] = args ? args.lastName : undefined;
@@ -194,6 +194,8 @@ export class HumanUser extends pulumi.CustomResource {
             resourceInputs["state"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["initialPassword"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(HumanUser.__pulumiType, name, resourceInputs, opts);
     }
 }

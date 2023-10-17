@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -169,16 +169,16 @@ def get_org_jwt_idp(idp_id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getOrgJwtIdp:getOrgJwtIdp', __args__, opts=opts, typ=GetOrgJwtIdpResult).value
 
     return AwaitableGetOrgJwtIdpResult(
-        auto_register=__ret__.auto_register,
-        header_name=__ret__.header_name,
-        id=__ret__.id,
-        idp_id=__ret__.idp_id,
-        issuer=__ret__.issuer,
-        jwt_endpoint=__ret__.jwt_endpoint,
-        keys_endpoint=__ret__.keys_endpoint,
-        name=__ret__.name,
-        org_id=__ret__.org_id,
-        styling_type=__ret__.styling_type)
+        auto_register=pulumi.get(__ret__, 'auto_register'),
+        header_name=pulumi.get(__ret__, 'header_name'),
+        id=pulumi.get(__ret__, 'id'),
+        idp_id=pulumi.get(__ret__, 'idp_id'),
+        issuer=pulumi.get(__ret__, 'issuer'),
+        jwt_endpoint=pulumi.get(__ret__, 'jwt_endpoint'),
+        keys_endpoint=pulumi.get(__ret__, 'keys_endpoint'),
+        name=pulumi.get(__ret__, 'name'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        styling_type=pulumi.get(__ret__, 'styling_type'))
 
 
 @_utilities.lift_output_func(get_org_jwt_idp)

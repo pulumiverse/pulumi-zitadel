@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing a serviceaccount situated under an organization, which then can be authorized through memberships or direct grants on other resources.
@@ -19,7 +21,6 @@ import (
 //
 // import (
 //
-//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -27,7 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_default, err := zitadel.LookupMachineUser(ctx, &GetMachineUserArgs{
+//			_default, err := zitadel.LookupMachineUser(ctx, &zitadel.LookupMachineUserArgs{
 //				OrgId:  pulumi.StringRef(data.Zitadel_org.Default.Id),
 //				UserId: "123456789012345678",
 //			}, nil)
@@ -41,7 +42,7 @@ import (
 //
 // ```
 func LookupMachineUser(ctx *pulumi.Context, args *LookupMachineUserArgs, opts ...pulumi.InvokeOption) (*LookupMachineUserResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupMachineUserResult
 	err := ctx.Invoke("zitadel:index/getMachineUser:getMachineUser", args, &rv, opts...)
 	if err != nil {
@@ -120,6 +121,12 @@ func (o LookupMachineUserResultOutput) ToLookupMachineUserResultOutput() LookupM
 
 func (o LookupMachineUserResultOutput) ToLookupMachineUserResultOutputWithContext(ctx context.Context) LookupMachineUserResultOutput {
 	return o
+}
+
+func (o LookupMachineUserResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupMachineUserResult] {
+	return pulumix.Output[LookupMachineUserResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Access token type

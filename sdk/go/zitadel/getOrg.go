@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
@@ -19,7 +21,6 @@ import (
 //
 // import (
 //
-//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -27,7 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_default, err := zitadel.LookupOrg(ctx, &GetOrgArgs{
+//			_default, err := zitadel.LookupOrg(ctx, &zitadel.LookupOrgArgs{
 //				Id: "123456789012345678",
 //			}, nil)
 //			if err != nil {
@@ -40,7 +41,7 @@ import (
 //
 // ```
 func LookupOrg(ctx *pulumi.Context, args *LookupOrgArgs, opts ...pulumi.InvokeOption) (*LookupOrgResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupOrgResult
 	err := ctx.Invoke("zitadel:index/getOrg:getOrg", args, &rv, opts...)
 	if err != nil {
@@ -103,6 +104,12 @@ func (o LookupOrgResultOutput) ToLookupOrgResultOutput() LookupOrgResultOutput {
 
 func (o LookupOrgResultOutput) ToLookupOrgResultOutputWithContext(ctx context.Context) LookupOrgResultOutput {
 	return o
+}
+
+func (o LookupOrgResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupOrgResult] {
+	return pulumix.Output[LookupOrgResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // ID of the organization

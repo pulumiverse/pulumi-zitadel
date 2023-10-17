@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -136,12 +136,12 @@ def get_application_api(app_id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getApplicationApi:getApplicationApi', __args__, opts=opts, typ=GetApplicationApiResult).value
 
     return AwaitableGetApplicationApiResult(
-        app_id=__ret__.app_id,
-        auth_method_type=__ret__.auth_method_type,
-        id=__ret__.id,
-        name=__ret__.name,
-        org_id=__ret__.org_id,
-        project_id=__ret__.project_id)
+        app_id=pulumi.get(__ret__, 'app_id'),
+        auth_method_type=pulumi.get(__ret__, 'auth_method_type'),
+        id=pulumi.get(__ret__, 'id'),
+        name=pulumi.get(__ret__, 'name'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        project_id=pulumi.get(__ret__, 'project_id'))
 
 
 @_utilities.lift_output_func(get_application_api)

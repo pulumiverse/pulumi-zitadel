@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ActionArgs', 'Action']
@@ -25,13 +25,36 @@ class ActionArgs:
         :param pulumi.Input[str] timeout: after which time the action will be terminated if not finished
         :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "allowed_to_fail", allowed_to_fail)
-        pulumi.set(__self__, "script", script)
-        pulumi.set(__self__, "timeout", timeout)
+        ActionArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            allowed_to_fail=allowed_to_fail,
+            script=script,
+            timeout=timeout,
+            name=name,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             allowed_to_fail: pulumi.Input[bool],
+             script: pulumi.Input[str],
+             timeout: pulumi.Input[str],
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'allowedToFail' in kwargs:
+            allowed_to_fail = kwargs['allowedToFail']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("allowed_to_fail", allowed_to_fail)
+        _setter("script", script)
+        _setter("timeout", timeout)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="allowedToFail")
@@ -104,18 +127,43 @@ class _ActionState:
         :param pulumi.Input[int] state: the state of the action
         :param pulumi.Input[str] timeout: after which time the action will be terminated if not finished
         """
+        _ActionState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            allowed_to_fail=allowed_to_fail,
+            name=name,
+            org_id=org_id,
+            script=script,
+            state=state,
+            timeout=timeout,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             allowed_to_fail: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             script: Optional[pulumi.Input[str]] = None,
+             state: Optional[pulumi.Input[int]] = None,
+             timeout: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'allowedToFail' in kwargs:
+            allowed_to_fail = kwargs['allowedToFail']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
         if allowed_to_fail is not None:
-            pulumi.set(__self__, "allowed_to_fail", allowed_to_fail)
+            _setter("allowed_to_fail", allowed_to_fail)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if script is not None:
-            pulumi.set(__self__, "script", script)
+            _setter("script", script)
         if state is not None:
-            pulumi.set(__self__, "state", state)
+            _setter("state", state)
         if timeout is not None:
-            pulumi.set(__self__, "timeout", timeout)
+            _setter("timeout", timeout)
 
     @property
     @pulumi.getter(name="allowedToFail")
@@ -213,7 +261,7 @@ class Action(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+        terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/action:Action imported '123456789012345678:123456789012345678'
@@ -249,7 +297,7 @@ class Action(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+        terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/action:Action imported '123456789012345678:123456789012345678'
@@ -265,6 +313,10 @@ class Action(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ActionArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

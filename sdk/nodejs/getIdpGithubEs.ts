@@ -13,17 +13,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const defaultIdpGithubEs = pulumi.output(zitadel.getIdpGithubEs({
+ * const default = zitadel.getIdpGithubEs({
  *     id: "123456789012345678",
- * }));
+ * });
  * ```
  */
 export function getIdpGithubEs(args: GetIdpGithubEsArgs, opts?: pulumi.InvokeOptions): Promise<GetIdpGithubEsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getIdpGithubEs:getIdpGithubEs", {
         "id": args.id,
     }, opts);
@@ -92,9 +89,22 @@ export interface GetIdpGithubEsResult {
      */
     readonly userEndpoint: string;
 }
-
+/**
+ * Datasource representing a GitHub Enterprise IDP on the instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getIdpGithubEs({
+ *     id: "123456789012345678",
+ * });
+ * ```
+ */
 export function getIdpGithubEsOutput(args: GetIdpGithubEsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIdpGithubEsResult> {
-    return pulumi.output(args).apply(a => getIdpGithubEs(a, opts))
+    return pulumi.output(args).apply((a: any) => getIdpGithubEs(a, opts))
 }
 
 /**

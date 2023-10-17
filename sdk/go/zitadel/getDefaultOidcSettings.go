@@ -4,7 +4,12 @@
 package zitadel
 
 import (
+	"context"
+	"reflect"
+
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing the default oidc settings.
@@ -34,7 +39,7 @@ import (
 //
 // ```
 func LookupDefaultOidcSettings(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*LookupDefaultOidcSettingsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupDefaultOidcSettingsResult
 	err := ctx.Invoke("zitadel:index/getDefaultOidcSettings:getDefaultOidcSettings", nil, &rv, opts...)
 	if err != nil {
@@ -55,4 +60,65 @@ type LookupDefaultOidcSettingsResult struct {
 	RefreshTokenExpiration string `pulumi:"refreshTokenExpiration"`
 	// expiration duration of idle refresh tokens
 	RefreshTokenIdleExpiration string `pulumi:"refreshTokenIdleExpiration"`
+}
+
+func LookupDefaultOidcSettingsOutput(ctx *pulumi.Context, opts ...pulumi.InvokeOption) LookupDefaultOidcSettingsResultOutput {
+	return pulumi.ToOutput(0).ApplyT(func(int) (LookupDefaultOidcSettingsResult, error) {
+		r, err := LookupDefaultOidcSettings(ctx, opts...)
+		var s LookupDefaultOidcSettingsResult
+		if r != nil {
+			s = *r
+		}
+		return s, err
+	}).(LookupDefaultOidcSettingsResultOutput)
+}
+
+// A collection of values returned by getDefaultOidcSettings.
+type LookupDefaultOidcSettingsResultOutput struct{ *pulumi.OutputState }
+
+func (LookupDefaultOidcSettingsResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupDefaultOidcSettingsResult)(nil)).Elem()
+}
+
+func (o LookupDefaultOidcSettingsResultOutput) ToLookupDefaultOidcSettingsResultOutput() LookupDefaultOidcSettingsResultOutput {
+	return o
+}
+
+func (o LookupDefaultOidcSettingsResultOutput) ToLookupDefaultOidcSettingsResultOutputWithContext(ctx context.Context) LookupDefaultOidcSettingsResultOutput {
+	return o
+}
+
+func (o LookupDefaultOidcSettingsResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupDefaultOidcSettingsResult] {
+	return pulumix.Output[LookupDefaultOidcSettingsResult]{
+		OutputState: o.OutputState,
+	}
+}
+
+// lifetime duration of access tokens
+func (o LookupDefaultOidcSettingsResultOutput) AccessTokenLifetime() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDefaultOidcSettingsResult) string { return v.AccessTokenLifetime }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupDefaultOidcSettingsResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDefaultOidcSettingsResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// lifetime duration of id tokens
+func (o LookupDefaultOidcSettingsResultOutput) IdTokenLifetime() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDefaultOidcSettingsResult) string { return v.IdTokenLifetime }).(pulumi.StringOutput)
+}
+
+// expiration duration of refresh tokens
+func (o LookupDefaultOidcSettingsResultOutput) RefreshTokenExpiration() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDefaultOidcSettingsResult) string { return v.RefreshTokenExpiration }).(pulumi.StringOutput)
+}
+
+// expiration duration of idle refresh tokens
+func (o LookupDefaultOidcSettingsResultOutput) RefreshTokenIdleExpiration() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDefaultOidcSettingsResult) string { return v.RefreshTokenIdleExpiration }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupDefaultOidcSettingsResultOutput{})
 }

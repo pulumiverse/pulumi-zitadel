@@ -18,11 +18,8 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getDefaultOidcSettings(opts?: pulumi.InvokeOptions): Promise<GetDefaultOidcSettingsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getDefaultOidcSettings:getDefaultOidcSettings", {
     }, opts);
 }
@@ -51,4 +48,20 @@ export interface GetDefaultOidcSettingsResult {
      * expiration duration of idle refresh tokens
      */
     readonly refreshTokenIdleExpiration: string;
+}
+/**
+ * Datasource representing the default oidc settings.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getDefaultOidcSettings({});
+ * export const oidcSettings = _default;
+ * ```
+ */
+export function getDefaultOidcSettingsOutput(opts?: pulumi.InvokeOptions): pulumi.Output<GetDefaultOidcSettingsResult> {
+    return pulumi.output(getDefaultOidcSettings(opts))
 }

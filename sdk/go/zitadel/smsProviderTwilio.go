@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the SMS provider Twilio configuration of an instance.
@@ -43,7 +45,7 @@ import (
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id[:token]>`, e.g.
+// terraform The resource can be imported using the ID format `<id[:token]>`, e.g.
 //
 // ```sh
 //
@@ -77,7 +79,14 @@ func NewSmsProviderTwilio(ctx *pulumi.Context,
 	if args.Token == nil {
 		return nil, errors.New("invalid value for required argument 'Token'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Token != nil {
+		args.Token = pulumi.ToSecret(args.Token).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"token",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SmsProviderTwilio
 	err := ctx.RegisterResource("zitadel:index/smsProviderTwilio:SmsProviderTwilio", name, args, &resource, opts...)
 	if err != nil {
@@ -163,6 +172,12 @@ func (i *SmsProviderTwilio) ToSmsProviderTwilioOutputWithContext(ctx context.Con
 	return pulumi.ToOutputWithContext(ctx, i).(SmsProviderTwilioOutput)
 }
 
+func (i *SmsProviderTwilio) ToOutput(ctx context.Context) pulumix.Output[*SmsProviderTwilio] {
+	return pulumix.Output[*SmsProviderTwilio]{
+		OutputState: i.ToSmsProviderTwilioOutputWithContext(ctx).OutputState,
+	}
+}
+
 // SmsProviderTwilioArrayInput is an input type that accepts SmsProviderTwilioArray and SmsProviderTwilioArrayOutput values.
 // You can construct a concrete instance of `SmsProviderTwilioArrayInput` via:
 //
@@ -186,6 +201,12 @@ func (i SmsProviderTwilioArray) ToSmsProviderTwilioArrayOutput() SmsProviderTwil
 
 func (i SmsProviderTwilioArray) ToSmsProviderTwilioArrayOutputWithContext(ctx context.Context) SmsProviderTwilioArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SmsProviderTwilioArrayOutput)
+}
+
+func (i SmsProviderTwilioArray) ToOutput(ctx context.Context) pulumix.Output[[]*SmsProviderTwilio] {
+	return pulumix.Output[[]*SmsProviderTwilio]{
+		OutputState: i.ToSmsProviderTwilioArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // SmsProviderTwilioMapInput is an input type that accepts SmsProviderTwilioMap and SmsProviderTwilioMapOutput values.
@@ -213,6 +234,12 @@ func (i SmsProviderTwilioMap) ToSmsProviderTwilioMapOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(SmsProviderTwilioMapOutput)
 }
 
+func (i SmsProviderTwilioMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*SmsProviderTwilio] {
+	return pulumix.Output[map[string]*SmsProviderTwilio]{
+		OutputState: i.ToSmsProviderTwilioMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type SmsProviderTwilioOutput struct{ *pulumi.OutputState }
 
 func (SmsProviderTwilioOutput) ElementType() reflect.Type {
@@ -225,6 +252,12 @@ func (o SmsProviderTwilioOutput) ToSmsProviderTwilioOutput() SmsProviderTwilioOu
 
 func (o SmsProviderTwilioOutput) ToSmsProviderTwilioOutputWithContext(ctx context.Context) SmsProviderTwilioOutput {
 	return o
+}
+
+func (o SmsProviderTwilioOutput) ToOutput(ctx context.Context) pulumix.Output[*SmsProviderTwilio] {
+	return pulumix.Output[*SmsProviderTwilio]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Sender number which is used to send the SMS.
@@ -256,6 +289,12 @@ func (o SmsProviderTwilioArrayOutput) ToSmsProviderTwilioArrayOutputWithContext(
 	return o
 }
 
+func (o SmsProviderTwilioArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*SmsProviderTwilio] {
+	return pulumix.Output[[]*SmsProviderTwilio]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o SmsProviderTwilioArrayOutput) Index(i pulumi.IntInput) SmsProviderTwilioOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *SmsProviderTwilio {
 		return vs[0].([]*SmsProviderTwilio)[vs[1].(int)]
@@ -274,6 +313,12 @@ func (o SmsProviderTwilioMapOutput) ToSmsProviderTwilioMapOutput() SmsProviderTw
 
 func (o SmsProviderTwilioMapOutput) ToSmsProviderTwilioMapOutputWithContext(ctx context.Context) SmsProviderTwilioMapOutput {
 	return o
+}
+
+func (o SmsProviderTwilioMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*SmsProviderTwilio] {
+	return pulumix.Output[map[string]*SmsProviderTwilio]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o SmsProviderTwilioMapOutput) MapIndex(k pulumi.StringInput) SmsProviderTwilioOutput {

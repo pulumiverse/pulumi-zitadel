@@ -13,17 +13,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const defaultIdpGitlab = pulumi.output(zitadel.getIdpGitlab({
+ * const default = zitadel.getIdpGitlab({
  *     id: "123456789012345678",
- * }));
+ * });
  * ```
  */
 export function getIdpGitlab(args: GetIdpGitlabArgs, opts?: pulumi.InvokeOptions): Promise<GetIdpGitlabResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getIdpGitlab:getIdpGitlab", {
         "id": args.id,
     }, opts);
@@ -80,9 +77,22 @@ export interface GetIdpGitlabResult {
      */
     readonly scopes: string[];
 }
-
+/**
+ * Datasource representing a GitLab IDP on the instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getIdpGitlab({
+ *     id: "123456789012345678",
+ * });
+ * ```
+ */
 export function getIdpGitlabOutput(args: GetIdpGitlabOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIdpGitlabResult> {
-    return pulumi.output(args).apply(a => getIdpGitlab(a, opts))
+    return pulumi.output(args).apply((a: any) => getIdpGitlab(a, opts))
 }
 
 /**

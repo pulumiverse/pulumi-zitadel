@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['LockoutPolicyArgs', 'LockoutPolicy']
@@ -21,9 +21,26 @@ class LockoutPolicyArgs:
         :param pulumi.Input[int] max_password_attempts: Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
         :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "max_password_attempts", max_password_attempts)
+        LockoutPolicyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            max_password_attempts=max_password_attempts,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             max_password_attempts: pulumi.Input[int],
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'maxPasswordAttempts' in kwargs:
+            max_password_attempts = kwargs['maxPasswordAttempts']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("max_password_attempts", max_password_attempts)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="maxPasswordAttempts")
@@ -60,10 +77,27 @@ class _LockoutPolicyState:
         :param pulumi.Input[int] max_password_attempts: Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
         :param pulumi.Input[str] org_id: ID of the organization
         """
+        _LockoutPolicyState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            max_password_attempts=max_password_attempts,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             max_password_attempts: Optional[pulumi.Input[int]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'maxPasswordAttempts' in kwargs:
+            max_password_attempts = kwargs['maxPasswordAttempts']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
         if max_password_attempts is not None:
-            pulumi.set(__self__, "max_password_attempts", max_password_attempts)
+            _setter("max_password_attempts", max_password_attempts)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="maxPasswordAttempts")
@@ -114,7 +148,7 @@ class LockoutPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+        terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/lockoutPolicy:LockoutPolicy imported '123456789012345678'
@@ -147,7 +181,7 @@ class LockoutPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+        terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/lockoutPolicy:LockoutPolicy imported '123456789012345678'
@@ -163,6 +197,10 @@ class LockoutPolicy(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            LockoutPolicyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
