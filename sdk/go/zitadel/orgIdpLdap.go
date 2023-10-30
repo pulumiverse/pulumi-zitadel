@@ -29,13 +29,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewOrgIdpLdap(ctx, "ldap", &zitadel.OrgIdpLdapArgs{
-//				OrgId: pulumi.Any(zitadel_org.Org.Id),
-=======
 //			_, err := zitadel.NewOrgIdpLdap(ctx, "default", &zitadel.OrgIdpLdapArgs{
 //				OrgId: pulumi.Any(data.Zitadel_org.Default.Id),
->>>>>>> origin/master
 //				Servers: pulumi.StringArray{
 //					pulumi.String("ldaps://my.primary.server:389"),
 //					pulumi.String("ldaps://my.secondary.server:389"),
@@ -68,8 +63,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -80,7 +73,6 @@ import (
 //
 //	$ pulumi import zitadel:index/orgIdpLdap:OrgIdpLdap imported '123456789012345678:123456789012345678:b1nd_p4ssw0rd'
 //
->>>>>>> origin/master
 // ```
 type OrgIdpLdap struct {
 	pulumi.CustomResourceState

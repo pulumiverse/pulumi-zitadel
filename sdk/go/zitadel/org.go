@@ -28,11 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewOrg(ctx, "org", nil)
-=======
 //			_, err := zitadel.NewOrg(ctx, "default", nil)
->>>>>>> origin/master
 //			if err != nil {
 //				return err
 //			}
@@ -40,8 +36,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -52,7 +46,6 @@ import (
 //
 //	$ pulumi import zitadel:index/org:Org imported '123456789012345678'
 //
->>>>>>> origin/master
 // ```
 type Org struct {
 	pulumi.CustomResourceState

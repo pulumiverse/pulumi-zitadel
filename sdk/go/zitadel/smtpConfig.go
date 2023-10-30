@@ -29,15 +29,6 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewSmtpConfig(ctx, "smtp", &zitadel.SmtpConfigArgs{
-//				Host:          pulumi.String("localhost:25"),
-//				Password:      pulumi.String("password"),
-//				SenderAddress: pulumi.String("address"),
-//				SenderName:    pulumi.String("no-reply"),
-//				Tls:           pulumi.Bool(true),
-//				User:          pulumi.String("user"),
-=======
 //			_, err := zitadel.NewSmtpConfig(ctx, "default", &zitadel.SmtpConfigArgs{
 //				Host:           pulumi.String("localhost:25"),
 //				Password:       pulumi.String("secret_password"),
@@ -46,7 +37,6 @@ import (
 //				SenderName:     pulumi.String("no-reply"),
 //				Tls:            pulumi.Bool(true),
 //				User:           pulumi.String("user"),
->>>>>>> origin/master
 //			})
 //			if err != nil {
 //				return err
@@ -55,8 +45,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -67,7 +55,6 @@ import (
 //
 //	$ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
 //
->>>>>>> origin/master
 // ```
 type SmtpConfig struct {
 	pulumi.CustomResourceState

@@ -21,10 +21,6 @@ import (
 //
 // import (
 //
-<<<<<<< HEAD
-//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-=======
->>>>>>> origin/master
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -32,13 +28,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.LookupIdpGoogle(ctx, &GetIdpGoogleArgs{
-//				Id: "177073614158299139",
-=======
 //			_, err := zitadel.LookupIdpGoogle(ctx, &zitadel.LookupIdpGoogleArgs{
 //				Id: "123456789012345678",
->>>>>>> origin/master
 //			}, nil)
 //			if err != nil {
 //				return err

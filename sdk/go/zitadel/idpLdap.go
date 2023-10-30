@@ -29,11 +29,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewIdpLdap(ctx, "ldap", &zitadel.IdpLdapArgs{
-=======
 //			_, err := zitadel.NewIdpLdap(ctx, "default", &zitadel.IdpLdapArgs{
->>>>>>> origin/master
 //				BaseDn:             pulumi.String("dc=example,dc=com"),
 //				BindDn:             pulumi.String("cn=admin,dc=example,dc=com"),
 //				BindPassword:       pulumi.String("Password1!"),
@@ -66,8 +62,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -78,7 +72,6 @@ import (
 //
 //	$ pulumi import zitadel:index/idpLdap:IdpLdap imported '123456789012345678:b1nd_p4ssw0rd'
 //
->>>>>>> origin/master
 // ```
 type IdpLdap struct {
 	pulumi.CustomResourceState

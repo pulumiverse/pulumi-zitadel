@@ -29,15 +29,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewOrgMember(ctx, "orgMember", &zitadel.OrgMemberArgs{
-//				OrgId:  pulumi.Any(zitadel_org.Org.Id),
-//				UserId: pulumi.Any(zitadel_human_user.Human_user.Id),
-=======
 //			_, err := zitadel.NewOrgMember(ctx, "default", &zitadel.OrgMemberArgs{
 //				OrgId:  pulumi.Any(data.Zitadel_org.Default.Id),
 //				UserId: pulumi.Any(data.Zitadel_human_user.Default.Id),
->>>>>>> origin/master
 //				Roles: pulumi.StringArray{
 //					pulumi.String("ORG_OWNER"),
 //				},
@@ -49,8 +43,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -61,7 +53,6 @@ import (
 //
 //	$ pulumi import zitadel:index/orgMember:OrgMember imported '123456789012345678:123456789012345678'
 //
->>>>>>> origin/master
 // ```
 type OrgMember struct {
 	pulumi.CustomResourceState

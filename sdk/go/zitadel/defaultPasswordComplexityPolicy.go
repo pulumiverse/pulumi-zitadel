@@ -29,11 +29,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewDefaultPasswordComplexityPolicy(ctx, "passwordComplexityPolicy", &zitadel.DefaultPasswordComplexityPolicyArgs{
-=======
 //			_, err := zitadel.NewDefaultPasswordComplexityPolicy(ctx, "default", &zitadel.DefaultPasswordComplexityPolicyArgs{
->>>>>>> origin/master
 //				HasLowercase: pulumi.Bool(true),
 //				HasNumber:    pulumi.Bool(true),
 //				HasSymbol:    pulumi.Bool(true),
@@ -47,8 +43,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -59,7 +53,6 @@ import (
 //
 //	$ pulumi import zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy imported ''
 //
->>>>>>> origin/master
 // ```
 type DefaultPasswordComplexityPolicy struct {
 	pulumi.CustomResourceState

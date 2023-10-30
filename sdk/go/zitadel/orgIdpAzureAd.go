@@ -29,13 +29,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewOrgIdpAzureAd(ctx, "azureAd", &zitadel.OrgIdpAzureAdArgs{
-//				OrgId:        pulumi.Any(zitadel_org.Org.Id),
-=======
 //			_, err := zitadel.NewOrgIdpAzureAd(ctx, "default", &zitadel.OrgIdpAzureAdArgs{
 //				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
->>>>>>> origin/master
 //				ClientId:     pulumi.String("9065bfc8-a08a..."),
 //				ClientSecret: pulumi.String("H2n***"),
 //				Scopes: pulumi.StringArray{
@@ -58,8 +53,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -70,7 +63,6 @@ import (
 //
 //	$ pulumi import zitadel:index/orgIdpAzureAd:OrgIdpAzureAd imported '123456789012345678:123456789012345678:12345678-1234-1234-1234-123456789012'
 //
->>>>>>> origin/master
 // ```
 type OrgIdpAzureAd struct {
 	pulumi.CustomResourceState

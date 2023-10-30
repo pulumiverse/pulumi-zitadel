@@ -29,13 +29,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewOrgIdpGoogle(ctx, "google", &zitadel.OrgIdpGoogleArgs{
-//				OrgId:        pulumi.Any(zitadel_org.Org.Id),
-=======
 //			_, err := zitadel.NewOrgIdpGoogle(ctx, "default", &zitadel.OrgIdpGoogleArgs{
 //				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
->>>>>>> origin/master
 //				ClientId:     pulumi.String("182902..."),
 //				ClientSecret: pulumi.String("GOCSPX-*****"),
 //				Scopes: pulumi.StringArray{
@@ -55,8 +50,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -67,7 +60,6 @@ import (
 //
 //	$ pulumi import zitadel:index/orgIdpGoogle:OrgIdpGoogle imported '123456789012345678:123456789012345678:G1234567890123'
 //
->>>>>>> origin/master
 // ```
 type OrgIdpGoogle struct {
 	pulumi.CustomResourceState

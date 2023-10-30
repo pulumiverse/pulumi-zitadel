@@ -29,17 +29,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewMachineUser(ctx, "machineUser", &zitadel.MachineUserArgs{
-//				OrgId:       pulumi.Any(zitadel_org.Org.Id),
-//				UserName:    pulumi.String("machine@localhost.com"),
-//				Description: pulumi.String("description"),
-=======
 //			_, err := zitadel.NewMachineUser(ctx, "default", &zitadel.MachineUserArgs{
 //				OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
 //				UserName:    pulumi.String("machine@example.com"),
 //				Description: pulumi.String("a machine user"),
->>>>>>> origin/master
 //			})
 //			if err != nil {
 //				return err
@@ -48,8 +41,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -60,7 +51,6 @@ import (
 //
 //	$ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
 //
->>>>>>> origin/master
 // ```
 type MachineUser struct {
 	pulumi.CustomResourceState

@@ -29,27 +29,6 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewDefaultLoginPolicy(ctx, "loginPolicy", &zitadel.DefaultLoginPolicyArgs{
-//				AllowDomainDiscovery:       pulumi.Bool(true),
-//				AllowExternalIdp:           pulumi.Bool(true),
-//				AllowRegister:              pulumi.Bool(true),
-//				DefaultRedirectUri:         pulumi.String("localhost:8080"),
-//				DisableLoginWithEmail:      pulumi.Bool(true),
-//				DisableLoginWithPhone:      pulumi.Bool(true),
-//				ExternalLoginCheckLifetime: pulumi.String("240h0m0s"),
-//				ForceMfa:                   pulumi.Bool(false),
-//				HidePasswordReset:          pulumi.Bool(false),
-//				IgnoreUnknownUsernames:     pulumi.Bool(true),
-//				MfaInitSkipLifetime:        pulumi.String("720h0m0s"),
-//				MultiFactorCheckLifetime:   pulumi.String("24h0m0s"),
-//				MultiFactors: pulumi.StringArray{
-//					pulumi.String("MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"),
-//				},
-//				PasswordCheckLifetime:     pulumi.String("240h0m0s"),
-//				PasswordlessType:          pulumi.String("PASSWORDLESS_TYPE_ALLOWED"),
-//				SecondFactorCheckLifetime: pulumi.String("24h0m0s"),
-=======
 //			_, err := zitadel.NewDefaultLoginPolicy(ctx, "default", &zitadel.DefaultLoginPolicyArgs{
 //				UserLogin:                  pulumi.Bool(true),
 //				AllowRegister:              pulumi.Bool(true),
@@ -65,14 +44,10 @@ import (
 //				SecondFactorCheckLifetime:  pulumi.String("24h0m0s"),
 //				IgnoreUnknownUsernames:     pulumi.Bool(true),
 //				DefaultRedirectUri:         pulumi.String("localhost:8080"),
->>>>>>> origin/master
 //				SecondFactors: pulumi.StringArray{
 //					pulumi.String("SECOND_FACTOR_TYPE_OTP"),
 //					pulumi.String("SECOND_FACTOR_TYPE_U2F"),
 //				},
-<<<<<<< HEAD
-//				UserLogin: pulumi.Bool(true),
-=======
 //				MultiFactors: pulumi.StringArray{
 //					pulumi.String("MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"),
 //				},
@@ -83,7 +58,6 @@ import (
 //				AllowDomainDiscovery:  pulumi.Bool(true),
 //				DisableLoginWithEmail: pulumi.Bool(true),
 //				DisableLoginWithPhone: pulumi.Bool(true),
->>>>>>> origin/master
 //			})
 //			if err != nil {
 //				return err
@@ -92,8 +66,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -104,7 +76,6 @@ import (
 //
 //	$ pulumi import zitadel:index/defaultLoginPolicy:DefaultLoginPolicy imported ''
 //
->>>>>>> origin/master
 // ```
 type DefaultLoginPolicy struct {
 	pulumi.CustomResourceState

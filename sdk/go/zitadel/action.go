@@ -29,13 +29,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewAction(ctx, "action", &zitadel.ActionArgs{
-//				OrgId:         pulumi.Any(zitadel_org.Org.Id),
-=======
 //			_, err := zitadel.NewAction(ctx, "default", &zitadel.ActionArgs{
 //				OrgId:         pulumi.Any(data.Zitadel_org.Default.Id),
->>>>>>> origin/master
 //				Script:        pulumi.String("testscript"),
 //				Timeout:       pulumi.String("10s"),
 //				AllowedToFail: pulumi.Bool(true),
@@ -47,8 +42,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -59,7 +52,6 @@ import (
 //
 //	$ pulumi import zitadel:index/action:Action imported '123456789012345678:123456789012345678'
 //
->>>>>>> origin/master
 // ```
 type Action struct {
 	pulumi.CustomResourceState

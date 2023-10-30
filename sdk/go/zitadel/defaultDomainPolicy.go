@@ -29,17 +29,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewDefaultDomainPolicy(ctx, "domainPolicy", &zitadel.DefaultDomainPolicyArgs{
-//				SmtpSenderAddressMatchesInstanceDomain: pulumi.Bool(false),
-//				UserLoginMustBeDomain:                  pulumi.Bool(false),
-//				ValidateOrgDomains:                     pulumi.Bool(false),
-=======
 //			_, err := zitadel.NewDefaultDomainPolicy(ctx, "default", &zitadel.DefaultDomainPolicyArgs{
 //				SmtpSenderAddressMatchesInstanceDomain: pulumi.Bool(true),
 //				UserLoginMustBeDomain:                  pulumi.Bool(false),
 //				ValidateOrgDomains:                     pulumi.Bool(true),
->>>>>>> origin/master
 //			})
 //			if err != nil {
 //				return err
@@ -48,8 +41,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -60,7 +51,6 @@ import (
 //
 //	$ pulumi import zitadel:index/defaultDomainPolicy:DefaultDomainPolicy imported ''
 //
->>>>>>> origin/master
 // ```
 type DefaultDomainPolicy struct {
 	pulumi.CustomResourceState

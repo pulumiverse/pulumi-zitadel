@@ -21,10 +21,6 @@ import (
 //
 // import (
 //
-<<<<<<< HEAD
-//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-=======
->>>>>>> origin/master
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -32,22 +28,13 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			orgOrg, err := zitadel.LookupOrg(ctx, &GetOrgArgs{
-//				OrgId: "177073608051458051",
-=======
 //			_default, err := zitadel.LookupOrg(ctx, &zitadel.LookupOrgArgs{
 //				Id: "123456789012345678",
->>>>>>> origin/master
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-<<<<<<< HEAD
-//			ctx.Export("org", orgOrg)
-=======
 //			ctx.Export("org", _default)
->>>>>>> origin/master
 //			return nil
 //		})
 //	}

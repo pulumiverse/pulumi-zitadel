@@ -29,13 +29,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewInstanceMember(ctx, "instanceMember", &zitadel.InstanceMemberArgs{
-//				UserId: pulumi.Any(zitadel_human_user.Human_user.Id),
-=======
 //			_, err := zitadel.NewInstanceMember(ctx, "default", &zitadel.InstanceMemberArgs{
 //				UserId: pulumi.Any(data.Zitadel_human_user.Default.Id),
->>>>>>> origin/master
 //				Roles: pulumi.StringArray{
 //					pulumi.String("IAM_OWNER"),
 //				},
@@ -47,8 +42,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -59,7 +52,6 @@ import (
 //
 //	$ pulumi import zitadel:index/instanceMember:InstanceMember imported '123456789012345678'
 //
->>>>>>> origin/master
 // ```
 type InstanceMember struct {
 	pulumi.CustomResourceState

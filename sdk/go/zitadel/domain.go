@@ -28,15 +28,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewDomain(ctx, "domain", &zitadel.DomainArgs{
-//				OrgId:     pulumi.Any(zitadel_org.Org.Id),
-//				IsPrimary: pulumi.Bool(true),
-=======
 //			_, err := zitadel.NewDomain(ctx, "default", &zitadel.DomainArgs{
 //				OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
 //				IsPrimary: pulumi.Bool(false),
->>>>>>> origin/master
 //			})
 //			if err != nil {
 //				return err
@@ -45,8 +39,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -57,7 +49,6 @@ import (
 //
 //	$ pulumi import zitadel:index/domain:Domain imported 'example.com:123456789012345678'
 //
->>>>>>> origin/master
 // ```
 type Domain struct {
 	pulumi.CustomResourceState

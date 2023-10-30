@@ -29,17 +29,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewApplicationKey(ctx, "appKey", &zitadel.ApplicationKeyArgs{
-//				OrgId:          pulumi.Any(zitadel_org.Org.Id),
-//				ProjectId:      pulumi.Any(zitadel_project.Project.Id),
-//				AppId:          pulumi.Any(zitadel_application_api.Application_api.Id),
-=======
 //			_, err := zitadel.NewApplicationKey(ctx, "default", &zitadel.ApplicationKeyArgs{
 //				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
 //				ProjectId:      pulumi.Any(data.Zitadel_project.Default.Id),
 //				AppId:          pulumi.Any(data.Zitadel_application_api.Default.Id),
->>>>>>> origin/master
 //				KeyType:        pulumi.String("KEY_TYPE_JSON"),
 //				ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
 //			})
@@ -50,8 +43,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -62,7 +53,6 @@ import (
 //
 //	$ pulumi import zitadel:index/applicationKey:ApplicationKey imported "123456789012345678:123456789012345678:123456789012345678:123456789012345678:$(cat ~/Downloads/123456789012345678.json | sed -e 's/:/__SEMICOLON__/g')"
 //
->>>>>>> origin/master
 // ```
 type ApplicationKey struct {
 	pulumi.CustomResourceState

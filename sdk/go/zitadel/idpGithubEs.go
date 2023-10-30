@@ -29,11 +29,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewIdpGithubEs(ctx, "githubEs", &zitadel.IdpGithubEsArgs{
-=======
 //			_, err := zitadel.NewIdpGithubEs(ctx, "default", &zitadel.IdpGithubEsArgs{
->>>>>>> origin/master
 //				AuthorizationEndpoint: pulumi.String("https://auth.endpoint"),
 //				ClientId:              pulumi.String("86a165..."),
 //				ClientSecret:          pulumi.String("*****afdbac18"),
@@ -56,8 +52,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -68,7 +62,6 @@ import (
 //
 //	$ pulumi import zitadel:index/idpGithubEs:IdpGithubEs imported '123456789012345678:1234567890123456781234567890123456787890'
 //
->>>>>>> origin/master
 // ```
 type IdpGithubEs struct {
 	pulumi.CustomResourceState

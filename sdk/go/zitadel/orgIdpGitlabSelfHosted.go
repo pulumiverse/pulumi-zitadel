@@ -29,13 +29,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewOrgIdpGitlabSelfHosted(ctx, "gitlabSelfHosted", &zitadel.OrgIdpGitlabSelfHostedArgs{
-//				OrgId:        pulumi.Any(zitadel_org.Org.Id),
-=======
 //			_, err := zitadel.NewOrgIdpGitlabSelfHosted(ctx, "default", &zitadel.OrgIdpGitlabSelfHostedArgs{
 //				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
->>>>>>> origin/master
 //				ClientId:     pulumi.String("15765e..."),
 //				ClientSecret: pulumi.String("*****abcxyz"),
 //				Scopes: pulumi.StringArray{
@@ -56,8 +51,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -68,7 +61,6 @@ import (
 //
 //	$ pulumi import zitadel:index/orgIdpGitlabSelfHosted:OrgIdpGitlabSelfHosted imported '123456789012345678:123456789012345678:1234567890abcdef'
 //
->>>>>>> origin/master
 // ```
 type OrgIdpGitlabSelfHosted struct {
 	pulumi.CustomResourceState

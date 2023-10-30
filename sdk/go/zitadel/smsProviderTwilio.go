@@ -29,17 +29,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewSmsProviderTwilio(ctx, "twilio", &zitadel.SmsProviderTwilioArgs{
-//				SenderNumber: pulumi.String("019920892"),
-//				Sid:          pulumi.String("sid"),
-//				Token:        pulumi.String("token"),
-=======
 //			_, err := zitadel.NewSmsProviderTwilio(ctx, "default", &zitadel.SmsProviderTwilioArgs{
 //				SenderNumber: pulumi.String("019920892"),
 //				Sid:          pulumi.String("sid"),
 //				Token:        pulumi.String("twilio_token"),
->>>>>>> origin/master
 //			})
 //			if err != nil {
 //				return err
@@ -48,8 +41,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -60,7 +51,6 @@ import (
 //
 //	$ pulumi import zitadel:index/smsProviderTwilio:SmsProviderTwilio imported '123456789012345678:12345678901234567890123456abcdef'
 //
->>>>>>> origin/master
 // ```
 type SmsProviderTwilio struct {
 	pulumi.CustomResourceState

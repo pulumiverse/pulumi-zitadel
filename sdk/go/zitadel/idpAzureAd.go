@@ -29,11 +29,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewIdpAzureAd(ctx, "azureAd", &zitadel.IdpAzureAdArgs{
-=======
 //			_, err := zitadel.NewIdpAzureAd(ctx, "default", &zitadel.IdpAzureAdArgs{
->>>>>>> origin/master
 //				ClientId:          pulumi.String("9065bfc8-a08a..."),
 //				ClientSecret:      pulumi.String("H2n***"),
 //				EmailVerified:     pulumi.Bool(true),
@@ -56,8 +52,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -68,7 +62,6 @@ import (
 //
 //	$ pulumi import zitadel:index/idpAzureAd:IdpAzureAd imported '123456789012345678:12345678-1234-1234-1234-123456789012'
 //
->>>>>>> origin/master
 // ```
 type IdpAzureAd struct {
 	pulumi.CustomResourceState

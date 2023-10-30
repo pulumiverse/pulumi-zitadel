@@ -29,13 +29,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewLockoutPolicy(ctx, "lockoutPolicy", &zitadel.LockoutPolicyArgs{
-//				OrgId:               pulumi.Any(zitadel_org.Org.Id),
-=======
 //			_, err := zitadel.NewLockoutPolicy(ctx, "default", &zitadel.LockoutPolicyArgs{
 //				OrgId:               pulumi.Any(data.Zitadel_org.Default.Id),
->>>>>>> origin/master
 //				MaxPasswordAttempts: pulumi.Int(5),
 //			})
 //			if err != nil {
@@ -45,8 +40,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -57,7 +50,6 @@ import (
 //
 //	$ pulumi import zitadel:index/lockoutPolicy:LockoutPolicy imported '123456789012345678'
 //
->>>>>>> origin/master
 // ```
 type LockoutPolicy struct {
 	pulumi.CustomResourceState

@@ -29,21 +29,12 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewTriggerActions(ctx, "triggerActions", &zitadel.TriggerActionsArgs{
-//				OrgId:       pulumi.Any(zitadel_org.Org.Id),
-//				FlowType:    pulumi.String("FLOW_TYPE_EXTERNAL_AUTHENTICATION"),
-//				TriggerType: pulumi.String("TRIGGER_TYPE_POST_AUTHENTICATION"),
-//				ActionIds: pulumi.StringArray{
-//					pulumi.Any(zitadel_action.Action.Id),
-=======
 //			_, err := zitadel.NewTriggerActions(ctx, "default", &zitadel.TriggerActionsArgs{
 //				OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
 //				FlowType:    pulumi.String("FLOW_TYPE_CUSTOMISE_TOKEN"),
 //				TriggerType: pulumi.String("TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION"),
 //				ActionIds: pulumi.StringArray{
 //					data.Zitadel_action.Default.Id,
->>>>>>> origin/master
 //				},
 //			})
 //			if err != nil {
@@ -53,8 +44,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -65,7 +54,6 @@ import (
 //
 //	$ pulumi import zitadel:index/triggerActions:TriggerActions imported 'FLOW_TYPE_EXTERNAL_AUTHENTICATION:TRIGGER_TYPE_POST_CREATION:123456789012345678'
 //
->>>>>>> origin/master
 // ```
 type TriggerActions struct {
 	pulumi.CustomResourceState

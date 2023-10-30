@@ -29,15 +29,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewApplicationOidc(ctx, "applicationOidc", &zitadel.ApplicationOidcArgs{
-//				ProjectId: pulumi.Any(zitadel_project.Project.Id),
-//				OrgId:     pulumi.Any(zitadel_org.Org.Id),
-=======
 //			_, err := zitadel.NewApplicationOidc(ctx, "default", &zitadel.ApplicationOidcArgs{
 //				ProjectId: pulumi.Any(data.Zitadel_project.Default.Id),
 //				OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
->>>>>>> origin/master
 //				RedirectUris: pulumi.StringArray{
 //					pulumi.String("https://localhost.com"),
 //				},
@@ -68,8 +62,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -80,7 +72,6 @@ import (
 //
 //	$ pulumi import zitadel:index/applicationOidc:ApplicationOidc imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
 //
->>>>>>> origin/master
 // ```
 type ApplicationOidc struct {
 	pulumi.CustomResourceState

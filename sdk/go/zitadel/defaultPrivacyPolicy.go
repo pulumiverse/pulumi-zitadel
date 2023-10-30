@@ -28,18 +28,11 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewDefaultPrivacyPolicy(ctx, "privacyPolicy", &zitadel.DefaultPrivacyPolicyArgs{
-//				HelpLink:    pulumi.String("https://google.com"),
-//				PrivacyLink: pulumi.String("https://google.com"),
-//				TosLink:     pulumi.String("https://google.com"),
-=======
 //			_, err := zitadel.NewDefaultPrivacyPolicy(ctx, "default", &zitadel.DefaultPrivacyPolicyArgs{
 //				HelpLink:     pulumi.String("https://example.com/help"),
 //				PrivacyLink:  pulumi.String("https://example.com/privacy"),
 //				SupportEmail: pulumi.String("support@example.com"),
 //				TosLink:      pulumi.String("https://example.com/tos"),
->>>>>>> origin/master
 //			})
 //			if err != nil {
 //				return err
@@ -48,8 +41,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -60,7 +51,6 @@ import (
 //
 //	$ pulumi import zitadel:index/defaultPrivacyPolicy:DefaultPrivacyPolicy imported ''
 //
->>>>>>> origin/master
 // ```
 type DefaultPrivacyPolicy struct {
 	pulumi.CustomResourceState

@@ -29,17 +29,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewApplicationApi(ctx, "applicationApi", &zitadel.ApplicationApiArgs{
-//				OrgId:          pulumi.Any(zitadel_org.Org.Id),
-//				ProjectId:      pulumi.Any(zitadel_project.Project.Id),
-//				AuthMethodType: pulumi.String("API_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT"),
-=======
 //			_, err := zitadel.NewApplicationApi(ctx, "default", &zitadel.ApplicationApiArgs{
 //				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
 //				ProjectId:      pulumi.Any(data.Zitadel_project.Default.Id),
 //				AuthMethodType: pulumi.String("API_AUTH_METHOD_TYPE_BASIC"),
->>>>>>> origin/master
 //			})
 //			if err != nil {
 //				return err
@@ -48,8 +41,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -60,7 +51,6 @@ import (
 //
 //	$ pulumi import zitadel:index/applicationApi:ApplicationApi imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
 //
->>>>>>> origin/master
 // ```
 type ApplicationApi struct {
 	pulumi.CustomResourceState

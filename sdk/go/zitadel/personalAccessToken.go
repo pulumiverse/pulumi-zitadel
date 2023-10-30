@@ -29,15 +29,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewPersonalAccessToken(ctx, "pat", &zitadel.PersonalAccessTokenArgs{
-//				OrgId:          pulumi.Any(zitadel_org.Org.Id),
-//				UserId:         pulumi.Any(zitadel_machine_user.Machine_user.Id),
-=======
 //			_, err := zitadel.NewPersonalAccessToken(ctx, "default", &zitadel.PersonalAccessTokenArgs{
 //				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
 //				UserId:         pulumi.Any(data.Zitadel_machine_user.Default.Id),
->>>>>>> origin/master
 //				ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
 //			})
 //			if err != nil {
@@ -47,8 +41,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -59,7 +51,6 @@ import (
 //
 //	$ pulumi import zitadel:index/personalAccessToken:PersonalAccessToken imported '123456789012345678:123456789012345678:123456789012345678:LHt79...'
 //
->>>>>>> origin/master
 // ```
 type PersonalAccessToken struct {
 	pulumi.CustomResourceState

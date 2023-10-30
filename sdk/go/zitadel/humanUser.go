@@ -31,13 +31,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewHumanUser(ctx, "humanUser", &zitadel.HumanUserArgs{
-//				OrgId:             pulumi.Any(zitadel_org.Org.Id),
-=======
 //			_, err := zitadel.NewHumanUser(ctx, "default", &zitadel.HumanUserArgs{
 //				OrgId:             pulumi.Any(data.Zitadel_org.Default.Id),
->>>>>>> origin/master
 //				UserName:          pulumi.String("humanfull@localhost.com"),
 //				FirstName:         pulumi.String("firstname"),
 //				LastName:          pulumi.String("lastname"),
@@ -58,8 +53,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -70,7 +63,6 @@ import (
 //
 //	$ pulumi import zitadel:index/humanUser:HumanUser imported '123456789012345678:123456789012345678:Password1!'
 //
->>>>>>> origin/master
 // ```
 type HumanUser struct {
 	pulumi.CustomResourceState

@@ -29,11 +29,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewDefaultLockoutPolicy(ctx, "lockoutPolicy", &zitadel.DefaultLockoutPolicyArgs{
-=======
 //			_, err := zitadel.NewDefaultLockoutPolicy(ctx, "default", &zitadel.DefaultLockoutPolicyArgs{
->>>>>>> origin/master
 //				MaxPasswordAttempts: pulumi.Int(5),
 //			})
 //			if err != nil {
@@ -43,8 +39,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -55,7 +49,6 @@ import (
 //
 //	$ pulumi import zitadel:index/defaultLockoutPolicy:DefaultLockoutPolicy imported ''
 //
->>>>>>> origin/master
 // ```
 type DefaultLockoutPolicy struct {
 	pulumi.CustomResourceState

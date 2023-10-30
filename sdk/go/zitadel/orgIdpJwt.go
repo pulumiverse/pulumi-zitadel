@@ -29,17 +29,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewOrgIdpJwt(ctx, "jwtIdp", &zitadel.OrgIdpJwtArgs{
-//				OrgId:        pulumi.Any(zitadel_org.Org.Id),
-//				StylingType:  pulumi.String("STYLING_TYPE_UNSPECIFIED"),
-//				JwtEndpoint:  pulumi.String("https://jwtendpoint.com"),
-=======
 //			_, err := zitadel.NewOrgIdpJwt(ctx, "default", &zitadel.OrgIdpJwtArgs{
 //				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
 //				StylingType:  pulumi.String("STYLING_TYPE_UNSPECIFIED"),
 //				JwtEndpoint:  pulumi.String("https://jwtendpoint.com/jwt"),
->>>>>>> origin/master
 //				Issuer:       pulumi.String("https://google.com"),
 //				KeysEndpoint: pulumi.String("https://jwtendpoint.com/keys"),
 //				HeaderName:   pulumi.String("x-auth-token"),
@@ -52,8 +45,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -64,7 +55,6 @@ import (
 //
 //	$ pulumi import zitadel:index/orgIdpJwt:OrgIdpJwt imported '123456789012345678:123456789012345678'
 //
->>>>>>> origin/master
 // ```
 type OrgIdpJwt struct {
 	pulumi.CustomResourceState

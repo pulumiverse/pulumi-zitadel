@@ -29,15 +29,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewMachineKey(ctx, "machineKey", &zitadel.MachineKeyArgs{
-//				OrgId:          pulumi.Any(zitadel_org.Org.Id),
-//				UserId:         pulumi.Any(zitadel_machine_user.Machine_user.Id),
-=======
 //			_, err := zitadel.NewMachineKey(ctx, "default", &zitadel.MachineKeyArgs{
 //				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
 //				UserId:         pulumi.Any(data.Zitadel_machine_user.Default.Id),
->>>>>>> origin/master
 //				KeyType:        pulumi.String("KEY_TYPE_JSON"),
 //				ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
 //			})
@@ -48,8 +42,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -60,7 +52,6 @@ import (
 //
 //	$ pulumi import zitadel:index/machineKey:MachineKey imported '123456789012345678:123456789012345678:123456789012345678:{"type":"serviceaccount","keyId":"123456789012345678","key":"-----BEGIN RSA PRIVATE KEY-----\nMIIEpQ...-----END RSA PRIVATE KEY-----\n","userId":"123456789012345678"}'
 //
->>>>>>> origin/master
 // ```
 type MachineKey struct {
 	pulumi.CustomResourceState

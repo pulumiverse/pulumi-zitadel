@@ -29,11 +29,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewDefaultNotificationPolicy(ctx, "notificationPolicy", &zitadel.DefaultNotificationPolicyArgs{
-=======
 //			_, err := zitadel.NewDefaultNotificationPolicy(ctx, "default", &zitadel.DefaultNotificationPolicyArgs{
->>>>>>> origin/master
 //				PasswordChange: pulumi.Bool(false),
 //			})
 //			if err != nil {
@@ -43,8 +39,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -55,7 +49,6 @@ import (
 //
 //	$ pulumi import zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy imported ''
 //
->>>>>>> origin/master
 // ```
 type DefaultNotificationPolicy struct {
 	pulumi.CustomResourceState

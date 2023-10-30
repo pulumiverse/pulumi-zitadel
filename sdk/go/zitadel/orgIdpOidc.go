@@ -29,36 +29,21 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewOrgIdpOidc(ctx, "oidcIdp", &zitadel.OrgIdpOidcArgs{
-//				OrgId:        pulumi.Any(zitadel_org.Org.Id),
-//				StylingType:  pulumi.String("STYLING_TYPE_UNSPECIFIED"),
-//				ClientId:     pulumi.String("google"),
-//				ClientSecret: pulumi.String("google_secret"),
-//				Issuer:       pulumi.String("https://google.com"),
-=======
 //			_, err := zitadel.NewOrgIdpOidc(ctx, "default", &zitadel.OrgIdpOidcArgs{
 //				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
 //				ClientId:     pulumi.String("a_client_id"),
 //				ClientSecret: pulumi.String("a_client_secret"),
->>>>>>> origin/master
 //				Scopes: pulumi.StringArray{
 //					pulumi.String("openid"),
 //					pulumi.String("profile"),
 //					pulumi.String("email"),
 //				},
-<<<<<<< HEAD
-//				DisplayNameMapping: pulumi.String("OIDC_MAPPING_FIELD_PREFERRED_USERNAME"),
-//				UsernameMapping:    pulumi.String("OIDC_MAPPING_FIELD_PREFERRED_USERNAME"),
-//				AutoRegister:       pulumi.Bool(false),
-=======
 //				Issuer:            pulumi.String("https://example.com"),
 //				IsLinkingAllowed:  pulumi.Bool(false),
 //				IsCreationAllowed: pulumi.Bool(true),
 //				IsAutoCreation:    pulumi.Bool(false),
 //				IsAutoUpdate:      pulumi.Bool(true),
 //				IsIdTokenMapping:  pulumi.Bool(true),
->>>>>>> origin/master
 //			})
 //			if err != nil {
 //				return err
@@ -67,8 +52,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -79,7 +62,6 @@ import (
 //
 //	$ pulumi import zitadel:index/orgIdpOidc:OrgIdpOidc imported '123456789012345678:123456789012345678:1234567890abcdef'
 //
->>>>>>> origin/master
 // ```
 type OrgIdpOidc struct {
 	pulumi.CustomResourceState

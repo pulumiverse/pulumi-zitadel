@@ -21,10 +21,6 @@ import (
 //
 // import (
 //
-<<<<<<< HEAD
-//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-=======
->>>>>>> origin/master
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -32,24 +28,15 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			triggerActionsTriggerActions, err := zitadel.LookupTriggerActions(ctx, &GetTriggerActionsArgs{
-//				OrgId:       data.Zitadel_org.Org.Id,
-=======
 //			_default, err := zitadel.LookupTriggerActions(ctx, &zitadel.LookupTriggerActionsArgs{
 //				OrgId:       pulumi.StringRef(data.Zitadel_org.Default.Id),
->>>>>>> origin/master
 //				FlowType:    "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
 //				TriggerType: "TRIGGER_TYPE_POST_AUTHENTICATION",
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-<<<<<<< HEAD
-//			ctx.Export("triggerActions", triggerActionsTriggerActions)
-=======
 //			ctx.Export("triggerActions", _default)
->>>>>>> origin/master
 //			return nil
 //		})
 //	}

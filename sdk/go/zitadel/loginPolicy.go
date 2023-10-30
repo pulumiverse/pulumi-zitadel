@@ -29,21 +29,13 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewLoginPolicy(ctx, "loginPolicy", &zitadel.LoginPolicyArgs{
-//				OrgId:                      pulumi.Any(zitadel_org.Org.Id),
-=======
 //			_, err := zitadel.NewLoginPolicy(ctx, "default", &zitadel.LoginPolicyArgs{
 //				OrgId:                      pulumi.Any(data.Zitadel_org.Default.Id),
->>>>>>> origin/master
 //				UserLogin:                  pulumi.Bool(true),
 //				AllowRegister:              pulumi.Bool(true),
 //				AllowExternalIdp:           pulumi.Bool(true),
 //				ForceMfa:                   pulumi.Bool(false),
-<<<<<<< HEAD
-=======
 //				ForceMfaLocalOnly:          pulumi.Bool(false),
->>>>>>> origin/master
 //				PasswordlessType:           pulumi.String("PASSWORDLESS_TYPE_ALLOWED"),
 //				HidePasswordReset:          pulumi.Bool(false),
 //				PasswordCheckLifetime:      pulumi.String("240h0m0s"),
@@ -61,13 +53,8 @@ import (
 //					pulumi.String("MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"),
 //				},
 //				Idps: pulumi.StringArray{
-<<<<<<< HEAD
-//					pulumi.Any(zitadel_org_idp_oidc.Oidc_idp.Id),
-//					pulumi.Any(zitadel_org_idp_jwt.Jwt_idp.Id),
-=======
 //					data.Zitadel_idp_google.Default.Id,
 //					data.Zitadel_idp_azure_ad.Default.Id,
->>>>>>> origin/master
 //				},
 //				AllowDomainDiscovery:  pulumi.Bool(true),
 //				DisableLoginWithEmail: pulumi.Bool(true),
@@ -80,8 +67,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -92,7 +77,6 @@ import (
 //
 //	$ pulumi import zitadel:index/loginPolicy:LoginPolicy imported '123456789012345678'
 //
->>>>>>> origin/master
 // ```
 type LoginPolicy struct {
 	pulumi.CustomResourceState

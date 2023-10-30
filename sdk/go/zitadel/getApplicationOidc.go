@@ -21,10 +21,6 @@ import (
 //
 // import (
 //
-<<<<<<< HEAD
-//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-=======
->>>>>>> origin/master
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -32,26 +28,15 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			oidcApplicationApplicationOidc, err := zitadel.LookupApplicationOidc(ctx, &GetApplicationOidcArgs{
-//				OrgId:     data.Zitadel_org.Org.Id,
-//				ProjectId: data.Zitadel_project.Project.Id,
-//				AppId:     "177073626925760515",
-=======
 //			_default, err := zitadel.LookupApplicationOidc(ctx, &zitadel.LookupApplicationOidcArgs{
 //				OrgId:     pulumi.StringRef(data.Zitadel_org.Default.Id),
 //				ProjectId: data.Zitadel_project.Default.Id,
 //				AppId:     "123456789012345678",
->>>>>>> origin/master
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-<<<<<<< HEAD
-//			ctx.Export("oidcApplication", oidcApplicationApplicationOidc)
-=======
 //			ctx.Export("applicationOidc", _default)
->>>>>>> origin/master
 //			return nil
 //		})
 //	}

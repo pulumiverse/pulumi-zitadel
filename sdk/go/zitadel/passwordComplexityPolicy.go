@@ -29,13 +29,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewPasswordComplexityPolicy(ctx, "passwordComplexityPolicy", &zitadel.PasswordComplexityPolicyArgs{
-//				OrgId:        pulumi.Any(zitadel_org.Org.Id),
-=======
 //			_, err := zitadel.NewPasswordComplexityPolicy(ctx, "default", &zitadel.PasswordComplexityPolicyArgs{
 //				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
->>>>>>> origin/master
 //				MinLength:    pulumi.Int(8),
 //				HasUppercase: pulumi.Bool(true),
 //				HasLowercase: pulumi.Bool(true),

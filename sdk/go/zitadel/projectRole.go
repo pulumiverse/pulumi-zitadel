@@ -29,17 +29,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewProjectRole(ctx, "projectRole", &zitadel.ProjectRoleArgs{
-//				OrgId:       pulumi.Any(zitadel_org.Org.Id),
-//				ProjectId:   pulumi.Any(zitadel_project.Project.Id),
-//				RoleKey:     pulumi.String("key"),
-=======
 //			_, err := zitadel.NewProjectRole(ctx, "default", &zitadel.ProjectRoleArgs{
 //				OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
 //				ProjectId:   pulumi.Any(data.Zitadel_project.Default.Id),
 //				RoleKey:     pulumi.String("super-user"),
->>>>>>> origin/master
 //				DisplayName: pulumi.String("display_name2"),
 //				Group:       pulumi.String("role_group"),
 //			})
@@ -50,8 +43,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -62,7 +53,6 @@ import (
 //
 //	$ pulumi import zitadel:index/projectRole:ProjectRole imported '123456789012345678:my-role-key:123456789012345678'
 //
->>>>>>> origin/master
 // ```
 type ProjectRole struct {
 	pulumi.CustomResourceState

@@ -29,21 +29,12 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-<<<<<<< HEAD
-//			_, err := zitadel.NewProjectGrant(ctx, "projectGrant", &zitadel.ProjectGrantArgs{
-//				OrgId:        pulumi.Any(zitadel_org.Org.Id),
-//				ProjectId:    pulumi.Any(zitadel_project.Project.Id),
-//				GrantedOrgId: pulumi.Any(zitadel_org.Grantedorg.Id),
-//				RoleKeys: pulumi.StringArray{
-//					pulumi.Any(zitadel_project_role.Project_role.Role_key),
-=======
 //			_, err := zitadel.NewProjectGrant(ctx, "default", &zitadel.ProjectGrantArgs{
 //				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
 //				ProjectId:    pulumi.Any(data.Zitadel_project.Default.Id),
 //				GrantedOrgId: pulumi.Any(data.Zitadel_org.Granted_org.Id),
 //				RoleKeys: pulumi.StringArray{
 //					pulumi.String("super-user"),
->>>>>>> origin/master
 //				},
 //			})
 //			if err != nil {
@@ -53,8 +44,6 @@ import (
 //		})
 //	}
 //
-<<<<<<< HEAD
-=======
 // ```
 //
 // ## Import
@@ -65,7 +54,6 @@ import (
 //
 //	$ pulumi import zitadel:index/projectGrant:ProjectGrant imported '123456789012345678:123456789012345678:123456789012345678'
 //
->>>>>>> origin/master
 // ```
 type ProjectGrant struct {
 	pulumi.CustomResourceState
