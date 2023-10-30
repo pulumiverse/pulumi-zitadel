@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewTriggerActions(ctx, "default", &zitadel.TriggerActionsArgs{
-// 			OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
-// 			FlowType:    pulumi.String("FLOW_TYPE_CUSTOMISE_TOKEN"),
-// 			TriggerType: pulumi.String("TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION"),
-// 			ActionIds: pulumi.StringArray{
-// 				pulumi.Any(data.Zitadel_action.Default.Id),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewTriggerActions(ctx, "default", &zitadel.TriggerActionsArgs{
+//				OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
+//				FlowType:    pulumi.String("FLOW_TYPE_CUSTOMISE_TOKEN"),
+//				TriggerType: pulumi.String("TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION"),
+//				ActionIds: pulumi.StringArray{
+//					pulumi.Any(data.Zitadel_action.Default.Id),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // terraform # The resource can be imported using the ID format `<flow_type:trigger_type[:org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/triggerActions:TriggerActions imported 'FLOW_TYPE_EXTERNAL_AUTHENTICATION:TRIGGER_TYPE_POST_CREATION:123456789012345678'
+//
+//	$ pulumi import zitadel:index/triggerActions:TriggerActions imported 'FLOW_TYPE_EXTERNAL_AUTHENTICATION:TRIGGER_TYPE_POST_CREATION:123456789012345678'
+//
 // ```
 type TriggerActions struct {
 	pulumi.CustomResourceState
@@ -174,7 +179,7 @@ func (i *TriggerActions) ToTriggerActionsOutputWithContext(ctx context.Context) 
 // TriggerActionsArrayInput is an input type that accepts TriggerActionsArray and TriggerActionsArrayOutput values.
 // You can construct a concrete instance of `TriggerActionsArrayInput` via:
 //
-//          TriggerActionsArray{ TriggerActionsArgs{...} }
+//	TriggerActionsArray{ TriggerActionsArgs{...} }
 type TriggerActionsArrayInput interface {
 	pulumi.Input
 
@@ -199,7 +204,7 @@ func (i TriggerActionsArray) ToTriggerActionsArrayOutputWithContext(ctx context.
 // TriggerActionsMapInput is an input type that accepts TriggerActionsMap and TriggerActionsMapOutput values.
 // You can construct a concrete instance of `TriggerActionsMapInput` via:
 //
-//          TriggerActionsMap{ "key": TriggerActionsArgs{...} }
+//	TriggerActionsMap{ "key": TriggerActionsArgs{...} }
 type TriggerActionsMapInput interface {
 	pulumi.Input
 

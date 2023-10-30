@@ -16,6 +16,7 @@ import * as utilities from "./utilities";
  * const defaultSmtpConfig = new zitadel.SmtpConfig("default", {
  *     host: "localhost:25",
  *     password: "secret_password",
+ *     replyToAddress: "replyto@example.com",
  *     senderAddress: "sender@example.com",
  *     senderName: "no-reply",
  *     tls: true,
@@ -68,6 +69,10 @@ export class SmtpConfig extends pulumi.CustomResource {
      */
     public readonly password!: pulumi.Output<string | undefined>;
     /**
+     * Address to reply to.
+     */
+    public readonly replyToAddress!: pulumi.Output<string | undefined>;
+    /**
      * Address used to send emails.
      */
     public readonly senderAddress!: pulumi.Output<string>;
@@ -99,6 +104,7 @@ export class SmtpConfig extends pulumi.CustomResource {
             const state = argsOrState as SmtpConfigState | undefined;
             resourceInputs["host"] = state ? state.host : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
+            resourceInputs["replyToAddress"] = state ? state.replyToAddress : undefined;
             resourceInputs["senderAddress"] = state ? state.senderAddress : undefined;
             resourceInputs["senderName"] = state ? state.senderName : undefined;
             resourceInputs["tls"] = state ? state.tls : undefined;
@@ -116,6 +122,7 @@ export class SmtpConfig extends pulumi.CustomResource {
             }
             resourceInputs["host"] = args ? args.host : undefined;
             resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["replyToAddress"] = args ? args.replyToAddress : undefined;
             resourceInputs["senderAddress"] = args ? args.senderAddress : undefined;
             resourceInputs["senderName"] = args ? args.senderName : undefined;
             resourceInputs["tls"] = args ? args.tls : undefined;
@@ -138,6 +145,10 @@ export interface SmtpConfigState {
      * Password used to communicate with your SMTP server.
      */
     password?: pulumi.Input<string>;
+    /**
+     * Address to reply to.
+     */
+    replyToAddress?: pulumi.Input<string>;
     /**
      * Address used to send emails.
      */
@@ -168,6 +179,10 @@ export interface SmtpConfigArgs {
      * Password used to communicate with your SMTP server.
      */
     password?: pulumi.Input<string>;
+    /**
+     * Address to reply to.
+     */
+    replyToAddress?: pulumi.Input<string>;
     /**
      * Address used to send emails.
      */

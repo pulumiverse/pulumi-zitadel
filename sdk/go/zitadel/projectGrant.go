@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewProjectGrant(ctx, "default", &zitadel.ProjectGrantArgs{
-// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ProjectId:    pulumi.Any(data.Zitadel_project.Default.Id),
-// 			GrantedOrgId: pulumi.Any(data.Zitadel_org.Granted_org.Id),
-// 			RoleKeys: pulumi.StringArray{
-// 				pulumi.String("super-user"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewProjectGrant(ctx, "default", &zitadel.ProjectGrantArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				ProjectId:    pulumi.Any(data.Zitadel_project.Default.Id),
+//				GrantedOrgId: pulumi.Any(data.Zitadel_org.Granted_org.Id),
+//				RoleKeys: pulumi.StringArray{
+//					pulumi.String("super-user"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // terraform # The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/projectGrant:ProjectGrant imported '123456789012345678:123456789012345678:123456789012345678'
+//
+//	$ pulumi import zitadel:index/projectGrant:ProjectGrant imported '123456789012345678:123456789012345678:123456789012345678'
+//
 // ```
 type ProjectGrant struct {
 	pulumi.CustomResourceState
@@ -171,7 +176,7 @@ func (i *ProjectGrant) ToProjectGrantOutputWithContext(ctx context.Context) Proj
 // ProjectGrantArrayInput is an input type that accepts ProjectGrantArray and ProjectGrantArrayOutput values.
 // You can construct a concrete instance of `ProjectGrantArrayInput` via:
 //
-//          ProjectGrantArray{ ProjectGrantArgs{...} }
+//	ProjectGrantArray{ ProjectGrantArgs{...} }
 type ProjectGrantArrayInput interface {
 	pulumi.Input
 
@@ -196,7 +201,7 @@ func (i ProjectGrantArray) ToProjectGrantArrayOutputWithContext(ctx context.Cont
 // ProjectGrantMapInput is an input type that accepts ProjectGrantMap and ProjectGrantMapOutput values.
 // You can construct a concrete instance of `ProjectGrantMapInput` via:
 //
-//          ProjectGrantMap{ "key": ProjectGrantArgs{...} }
+//	ProjectGrantMap{ "key": ProjectGrantArgs{...} }
 type ProjectGrantMapInput interface {
 	pulumi.Input
 

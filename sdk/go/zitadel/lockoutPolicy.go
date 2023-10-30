@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewLockoutPolicy(ctx, "default", &zitadel.LockoutPolicyArgs{
-// 			OrgId:               pulumi.Any(data.Zitadel_org.Default.Id),
-// 			MaxPasswordAttempts: pulumi.Int(5),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewLockoutPolicy(ctx, "default", &zitadel.LockoutPolicyArgs{
+//				OrgId:               pulumi.Any(data.Zitadel_org.Default.Id),
+//				MaxPasswordAttempts: pulumi.Int(5),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/lockoutPolicy:LockoutPolicy imported '123456789012345678'
+//
+//	$ pulumi import zitadel:index/lockoutPolicy:LockoutPolicy imported '123456789012345678'
+//
 // ```
 type LockoutPolicy struct {
 	pulumi.CustomResourceState
@@ -144,7 +149,7 @@ func (i *LockoutPolicy) ToLockoutPolicyOutputWithContext(ctx context.Context) Lo
 // LockoutPolicyArrayInput is an input type that accepts LockoutPolicyArray and LockoutPolicyArrayOutput values.
 // You can construct a concrete instance of `LockoutPolicyArrayInput` via:
 //
-//          LockoutPolicyArray{ LockoutPolicyArgs{...} }
+//	LockoutPolicyArray{ LockoutPolicyArgs{...} }
 type LockoutPolicyArrayInput interface {
 	pulumi.Input
 
@@ -169,7 +174,7 @@ func (i LockoutPolicyArray) ToLockoutPolicyArrayOutputWithContext(ctx context.Co
 // LockoutPolicyMapInput is an input type that accepts LockoutPolicyMap and LockoutPolicyMapOutput values.
 // You can construct a concrete instance of `LockoutPolicyMapInput` via:
 //
-//          LockoutPolicyMap{ "key": LockoutPolicyArgs{...} }
+//	LockoutPolicyMap{ "key": LockoutPolicyArgs{...} }
 type LockoutPolicyMapInput interface {
 	pulumi.Input
 

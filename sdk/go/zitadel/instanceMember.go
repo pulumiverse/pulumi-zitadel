@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewInstanceMember(ctx, "default", &zitadel.InstanceMemberArgs{
-// 			UserId: pulumi.Any(data.Zitadel_human_user.Default.Id),
-// 			Roles: pulumi.StringArray{
-// 				pulumi.String("IAM_OWNER"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewInstanceMember(ctx, "default", &zitadel.InstanceMemberArgs{
+//				UserId: pulumi.Any(data.Zitadel_human_user.Default.Id),
+//				Roles: pulumi.StringArray{
+//					pulumi.String("IAM_OWNER"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // terraform # The resource can be imported using the ID format `<user_id>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/instanceMember:InstanceMember imported '123456789012345678'
+//
+//	$ pulumi import zitadel:index/instanceMember:InstanceMember imported '123456789012345678'
+//
 // ```
 type InstanceMember struct {
 	pulumi.CustomResourceState
@@ -149,7 +154,7 @@ func (i *InstanceMember) ToInstanceMemberOutputWithContext(ctx context.Context) 
 // InstanceMemberArrayInput is an input type that accepts InstanceMemberArray and InstanceMemberArrayOutput values.
 // You can construct a concrete instance of `InstanceMemberArrayInput` via:
 //
-//          InstanceMemberArray{ InstanceMemberArgs{...} }
+//	InstanceMemberArray{ InstanceMemberArgs{...} }
 type InstanceMemberArrayInput interface {
 	pulumi.Input
 
@@ -174,7 +179,7 @@ func (i InstanceMemberArray) ToInstanceMemberArrayOutputWithContext(ctx context.
 // InstanceMemberMapInput is an input type that accepts InstanceMemberMap and InstanceMemberMapOutput values.
 // You can construct a concrete instance of `InstanceMemberMapInput` via:
 //
-//          InstanceMemberMap{ "key": InstanceMemberArgs{...} }
+//	InstanceMemberMap{ "key": InstanceMemberArgs{...} }
 type InstanceMemberMapInput interface {
 	pulumi.Input
 

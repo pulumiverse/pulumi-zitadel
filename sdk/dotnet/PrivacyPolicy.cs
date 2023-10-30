@@ -46,7 +46,7 @@ namespace Pulumiverse.Zitadel
     public partial class PrivacyPolicy : global::Pulumi.CustomResource
     {
         [Output("helpLink")]
-        public Output<string> HelpLink { get; private set; } = null!;
+        public Output<string?> HelpLink { get; private set; } = null!;
 
         /// <summary>
         /// ID of the organization
@@ -55,13 +55,13 @@ namespace Pulumiverse.Zitadel
         public Output<string?> OrgId { get; private set; } = null!;
 
         [Output("privacyLink")]
-        public Output<string> PrivacyLink { get; private set; } = null!;
+        public Output<string?> PrivacyLink { get; private set; } = null!;
 
         [Output("supportEmail")]
-        public Output<string> SupportEmail { get; private set; } = null!;
+        public Output<string?> SupportEmail { get; private set; } = null!;
 
         [Output("tosLink")]
-        public Output<string> TosLink { get; private set; } = null!;
+        public Output<string?> TosLink { get; private set; } = null!;
 
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Pulumiverse.Zitadel
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public PrivacyPolicy(string name, PrivacyPolicyArgs args, CustomResourceOptions? options = null)
+        public PrivacyPolicy(string name, PrivacyPolicyArgs? args = null, CustomResourceOptions? options = null)
             : base("zitadel:index/privacyPolicy:PrivacyPolicy", name, args ?? new PrivacyPolicyArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -110,8 +110,8 @@ namespace Pulumiverse.Zitadel
 
     public sealed class PrivacyPolicyArgs : global::Pulumi.ResourceArgs
     {
-        [Input("helpLink", required: true)]
-        public Input<string> HelpLink { get; set; } = null!;
+        [Input("helpLink")]
+        public Input<string>? HelpLink { get; set; }
 
         /// <summary>
         /// ID of the organization
@@ -119,14 +119,14 @@ namespace Pulumiverse.Zitadel
         [Input("orgId")]
         public Input<string>? OrgId { get; set; }
 
-        [Input("privacyLink", required: true)]
-        public Input<string> PrivacyLink { get; set; } = null!;
+        [Input("privacyLink")]
+        public Input<string>? PrivacyLink { get; set; }
 
-        [Input("supportEmail", required: true)]
-        public Input<string> SupportEmail { get; set; } = null!;
+        [Input("supportEmail")]
+        public Input<string>? SupportEmail { get; set; }
 
-        [Input("tosLink", required: true)]
-        public Input<string> TosLink { get; set; } = null!;
+        [Input("tosLink")]
+        public Input<string>? TosLink { get; set; }
 
         public PrivacyPolicyArgs()
         {

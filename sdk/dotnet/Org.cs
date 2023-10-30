@@ -39,6 +39,12 @@ namespace Pulumiverse.Zitadel
     public partial class Org : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+        /// </summary>
+        [Output("isDefault")]
+        public Output<bool?> IsDefault { get; private set; } = null!;
+
+        /// <summary>
         /// Name of the org
         /// </summary>
         [Output("name")]
@@ -104,6 +110,12 @@ namespace Pulumiverse.Zitadel
     public sealed class OrgArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+        /// </summary>
+        [Input("isDefault")]
+        public Input<bool>? IsDefault { get; set; }
+
+        /// <summary>
         /// Name of the org
         /// </summary>
         [Input("name")]
@@ -117,6 +129,12 @@ namespace Pulumiverse.Zitadel
 
     public sealed class OrgState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+        /// </summary>
+        [Input("isDefault")]
+        public Input<bool>? IsDefault { get; set; }
+
         /// <summary>
         /// Name of the org
         /// </summary>

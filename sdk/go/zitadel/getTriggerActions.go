@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_default, err := zitadel.LookupTriggerActions(ctx, &GetTriggerActionsArgs{
-// 			OrgId:       pulumi.StringRef(data.Zitadel_org.Default.Id),
-// 			FlowType:    "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
-// 			TriggerType: "TRIGGER_TYPE_POST_AUTHENTICATION",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("triggerActions", _default)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_default, err := zitadel.LookupTriggerActions(ctx, &GetTriggerActionsArgs{
+//				OrgId:       pulumi.StringRef(data.Zitadel_org.Default.Id),
+//				FlowType:    "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
+//				TriggerType: "TRIGGER_TYPE_POST_AUTHENTICATION",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("triggerActions", _default)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupTriggerActions(ctx *pulumi.Context, args *LookupTriggerActionsArgs, opts ...pulumi.InvokeOption) (*LookupTriggerActionsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewDefaultNotificationPolicy(ctx, "default", &zitadel.DefaultNotificationPolicyArgs{
-// 			PasswordChange: pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewDefaultNotificationPolicy(ctx, "default", &zitadel.DefaultNotificationPolicyArgs{
+//				PasswordChange: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -41,7 +44,9 @@ import (
 // terraform # The resource can be imported using the ID format `<>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy imported ''
+//
+//	$ pulumi import zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy imported ''
+//
 // ```
 type DefaultNotificationPolicy struct {
 	pulumi.CustomResourceState
@@ -133,7 +138,7 @@ func (i *DefaultNotificationPolicy) ToDefaultNotificationPolicyOutputWithContext
 // DefaultNotificationPolicyArrayInput is an input type that accepts DefaultNotificationPolicyArray and DefaultNotificationPolicyArrayOutput values.
 // You can construct a concrete instance of `DefaultNotificationPolicyArrayInput` via:
 //
-//          DefaultNotificationPolicyArray{ DefaultNotificationPolicyArgs{...} }
+//	DefaultNotificationPolicyArray{ DefaultNotificationPolicyArgs{...} }
 type DefaultNotificationPolicyArrayInput interface {
 	pulumi.Input
 
@@ -158,7 +163,7 @@ func (i DefaultNotificationPolicyArray) ToDefaultNotificationPolicyArrayOutputWi
 // DefaultNotificationPolicyMapInput is an input type that accepts DefaultNotificationPolicyMap and DefaultNotificationPolicyMapOutput values.
 // You can construct a concrete instance of `DefaultNotificationPolicyMapInput` via:
 //
-//          DefaultNotificationPolicyMap{ "key": DefaultNotificationPolicyArgs{...} }
+//	DefaultNotificationPolicyMap{ "key": DefaultNotificationPolicyArgs{...} }
 type DefaultNotificationPolicyMapInput interface {
 	pulumi.Input
 

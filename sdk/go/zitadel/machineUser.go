@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewMachineUser(ctx, "default", &zitadel.MachineUserArgs{
-// 			OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
-// 			UserName:    pulumi.String("machine@example.com"),
-// 			Description: pulumi.String("a machine user"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewMachineUser(ctx, "default", &zitadel.MachineUserArgs{
+//				OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
+//				UserName:    pulumi.String("machine@example.com"),
+//				Description: pulumi.String("a machine user"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
+//
+//	$ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
+//
 // ```
 type MachineUser struct {
 	pulumi.CustomResourceState
@@ -193,7 +198,7 @@ func (i *MachineUser) ToMachineUserOutputWithContext(ctx context.Context) Machin
 // MachineUserArrayInput is an input type that accepts MachineUserArray and MachineUserArrayOutput values.
 // You can construct a concrete instance of `MachineUserArrayInput` via:
 //
-//          MachineUserArray{ MachineUserArgs{...} }
+//	MachineUserArray{ MachineUserArgs{...} }
 type MachineUserArrayInput interface {
 	pulumi.Input
 
@@ -218,7 +223,7 @@ func (i MachineUserArray) ToMachineUserArrayOutputWithContext(ctx context.Contex
 // MachineUserMapInput is an input type that accepts MachineUserMap and MachineUserMapOutput values.
 // You can construct a concrete instance of `MachineUserMapInput` via:
 //
-//          MachineUserMap{ "key": MachineUserArgs{...} }
+//	MachineUserMap{ "key": MachineUserArgs{...} }
 type MachineUserMapInput interface {
 	pulumi.Input
 

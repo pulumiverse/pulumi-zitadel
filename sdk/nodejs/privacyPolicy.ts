@@ -58,14 +58,14 @@ export class PrivacyPolicy extends pulumi.CustomResource {
         return obj['__pulumiType'] === PrivacyPolicy.__pulumiType;
     }
 
-    public readonly helpLink!: pulumi.Output<string>;
+    public readonly helpLink!: pulumi.Output<string | undefined>;
     /**
      * ID of the organization
      */
     public readonly orgId!: pulumi.Output<string | undefined>;
-    public readonly privacyLink!: pulumi.Output<string>;
-    public readonly supportEmail!: pulumi.Output<string>;
-    public readonly tosLink!: pulumi.Output<string>;
+    public readonly privacyLink!: pulumi.Output<string | undefined>;
+    public readonly supportEmail!: pulumi.Output<string | undefined>;
+    public readonly tosLink!: pulumi.Output<string | undefined>;
 
     /**
      * Create a PrivacyPolicy resource with the given unique name, arguments, and options.
@@ -74,7 +74,7 @@ export class PrivacyPolicy extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: PrivacyPolicyArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: PrivacyPolicyArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: PrivacyPolicyArgs | PrivacyPolicyState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -87,18 +87,6 @@ export class PrivacyPolicy extends pulumi.CustomResource {
             resourceInputs["tosLink"] = state ? state.tosLink : undefined;
         } else {
             const args = argsOrState as PrivacyPolicyArgs | undefined;
-            if ((!args || args.helpLink === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'helpLink'");
-            }
-            if ((!args || args.privacyLink === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'privacyLink'");
-            }
-            if ((!args || args.supportEmail === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'supportEmail'");
-            }
-            if ((!args || args.tosLink === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'tosLink'");
-            }
             resourceInputs["helpLink"] = args ? args.helpLink : undefined;
             resourceInputs["orgId"] = args ? args.orgId : undefined;
             resourceInputs["privacyLink"] = args ? args.privacyLink : undefined;
@@ -128,12 +116,12 @@ export interface PrivacyPolicyState {
  * The set of arguments for constructing a PrivacyPolicy resource.
  */
 export interface PrivacyPolicyArgs {
-    helpLink: pulumi.Input<string>;
+    helpLink?: pulumi.Input<string>;
     /**
      * ID of the organization
      */
     orgId?: pulumi.Input<string>;
-    privacyLink: pulumi.Input<string>;
-    supportEmail: pulumi.Input<string>;
-    tosLink: pulumi.Input<string>;
+    privacyLink?: pulumi.Input<string>;
+    supportEmail?: pulumi.Input<string>;
+    tosLink?: pulumi.Input<string>;
 }

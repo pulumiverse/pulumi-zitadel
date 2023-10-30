@@ -18,6 +18,7 @@ class SmtpConfigArgs:
                  sender_address: pulumi.Input[str],
                  sender_name: pulumi.Input[str],
                  password: Optional[pulumi.Input[str]] = None,
+                 reply_to_address: Optional[pulumi.Input[str]] = None,
                  tls: Optional[pulumi.Input[bool]] = None,
                  user: Optional[pulumi.Input[str]] = None):
         """
@@ -26,6 +27,7 @@ class SmtpConfigArgs:
         :param pulumi.Input[str] sender_address: Address used to send emails.
         :param pulumi.Input[str] sender_name: Sender name used to send emails.
         :param pulumi.Input[str] password: Password used to communicate with your SMTP server.
+        :param pulumi.Input[str] reply_to_address: Address to reply to.
         :param pulumi.Input[bool] tls: TLS used to communicate with your SMTP server.
         :param pulumi.Input[str] user: User used to communicate with your SMTP server.
         """
@@ -34,6 +36,8 @@ class SmtpConfigArgs:
         pulumi.set(__self__, "sender_name", sender_name)
         if password is not None:
             pulumi.set(__self__, "password", password)
+        if reply_to_address is not None:
+            pulumi.set(__self__, "reply_to_address", reply_to_address)
         if tls is not None:
             pulumi.set(__self__, "tls", tls)
         if user is not None:
@@ -88,6 +92,18 @@ class SmtpConfigArgs:
         pulumi.set(self, "password", value)
 
     @property
+    @pulumi.getter(name="replyToAddress")
+    def reply_to_address(self) -> Optional[pulumi.Input[str]]:
+        """
+        Address to reply to.
+        """
+        return pulumi.get(self, "reply_to_address")
+
+    @reply_to_address.setter
+    def reply_to_address(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "reply_to_address", value)
+
+    @property
     @pulumi.getter
     def tls(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -117,6 +133,7 @@ class _SmtpConfigState:
     def __init__(__self__, *,
                  host: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
+                 reply_to_address: Optional[pulumi.Input[str]] = None,
                  sender_address: Optional[pulumi.Input[str]] = None,
                  sender_name: Optional[pulumi.Input[str]] = None,
                  tls: Optional[pulumi.Input[bool]] = None,
@@ -125,6 +142,7 @@ class _SmtpConfigState:
         Input properties used for looking up and filtering SmtpConfig resources.
         :param pulumi.Input[str] host: Host and port address to your SMTP server.
         :param pulumi.Input[str] password: Password used to communicate with your SMTP server.
+        :param pulumi.Input[str] reply_to_address: Address to reply to.
         :param pulumi.Input[str] sender_address: Address used to send emails.
         :param pulumi.Input[str] sender_name: Sender name used to send emails.
         :param pulumi.Input[bool] tls: TLS used to communicate with your SMTP server.
@@ -134,6 +152,8 @@ class _SmtpConfigState:
             pulumi.set(__self__, "host", host)
         if password is not None:
             pulumi.set(__self__, "password", password)
+        if reply_to_address is not None:
+            pulumi.set(__self__, "reply_to_address", reply_to_address)
         if sender_address is not None:
             pulumi.set(__self__, "sender_address", sender_address)
         if sender_name is not None:
@@ -166,6 +186,18 @@ class _SmtpConfigState:
     @password.setter
     def password(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter(name="replyToAddress")
+    def reply_to_address(self) -> Optional[pulumi.Input[str]]:
+        """
+        Address to reply to.
+        """
+        return pulumi.get(self, "reply_to_address")
+
+    @reply_to_address.setter
+    def reply_to_address(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "reply_to_address", value)
 
     @property
     @pulumi.getter(name="senderAddress")
@@ -223,6 +255,7 @@ class SmtpConfig(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  host: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
+                 reply_to_address: Optional[pulumi.Input[str]] = None,
                  sender_address: Optional[pulumi.Input[str]] = None,
                  sender_name: Optional[pulumi.Input[str]] = None,
                  tls: Optional[pulumi.Input[bool]] = None,
@@ -240,6 +273,7 @@ class SmtpConfig(pulumi.CustomResource):
         default = zitadel.SmtpConfig("default",
             host="localhost:25",
             password="secret_password",
+            reply_to_address="replyto@example.com",
             sender_address="sender@example.com",
             sender_name="no-reply",
             tls=True,
@@ -258,6 +292,7 @@ class SmtpConfig(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] host: Host and port address to your SMTP server.
         :param pulumi.Input[str] password: Password used to communicate with your SMTP server.
+        :param pulumi.Input[str] reply_to_address: Address to reply to.
         :param pulumi.Input[str] sender_address: Address used to send emails.
         :param pulumi.Input[str] sender_name: Sender name used to send emails.
         :param pulumi.Input[bool] tls: TLS used to communicate with your SMTP server.
@@ -281,6 +316,7 @@ class SmtpConfig(pulumi.CustomResource):
         default = zitadel.SmtpConfig("default",
             host="localhost:25",
             password="secret_password",
+            reply_to_address="replyto@example.com",
             sender_address="sender@example.com",
             sender_name="no-reply",
             tls=True,
@@ -312,6 +348,7 @@ class SmtpConfig(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  host: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
+                 reply_to_address: Optional[pulumi.Input[str]] = None,
                  sender_address: Optional[pulumi.Input[str]] = None,
                  sender_name: Optional[pulumi.Input[str]] = None,
                  tls: Optional[pulumi.Input[bool]] = None,
@@ -329,6 +366,7 @@ class SmtpConfig(pulumi.CustomResource):
                 raise TypeError("Missing required property 'host'")
             __props__.__dict__["host"] = host
             __props__.__dict__["password"] = password
+            __props__.__dict__["reply_to_address"] = reply_to_address
             if sender_address is None and not opts.urn:
                 raise TypeError("Missing required property 'sender_address'")
             __props__.__dict__["sender_address"] = sender_address
@@ -349,6 +387,7 @@ class SmtpConfig(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             host: Optional[pulumi.Input[str]] = None,
             password: Optional[pulumi.Input[str]] = None,
+            reply_to_address: Optional[pulumi.Input[str]] = None,
             sender_address: Optional[pulumi.Input[str]] = None,
             sender_name: Optional[pulumi.Input[str]] = None,
             tls: Optional[pulumi.Input[bool]] = None,
@@ -362,6 +401,7 @@ class SmtpConfig(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] host: Host and port address to your SMTP server.
         :param pulumi.Input[str] password: Password used to communicate with your SMTP server.
+        :param pulumi.Input[str] reply_to_address: Address to reply to.
         :param pulumi.Input[str] sender_address: Address used to send emails.
         :param pulumi.Input[str] sender_name: Sender name used to send emails.
         :param pulumi.Input[bool] tls: TLS used to communicate with your SMTP server.
@@ -373,6 +413,7 @@ class SmtpConfig(pulumi.CustomResource):
 
         __props__.__dict__["host"] = host
         __props__.__dict__["password"] = password
+        __props__.__dict__["reply_to_address"] = reply_to_address
         __props__.__dict__["sender_address"] = sender_address
         __props__.__dict__["sender_name"] = sender_name
         __props__.__dict__["tls"] = tls
@@ -394,6 +435,14 @@ class SmtpConfig(pulumi.CustomResource):
         Password used to communicate with your SMTP server.
         """
         return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter(name="replyToAddress")
+    def reply_to_address(self) -> pulumi.Output[Optional[str]]:
+        """
+        Address to reply to.
+        """
+        return pulumi.get(self, "reply_to_address")
 
     @property
     @pulumi.getter(name="senderAddress")

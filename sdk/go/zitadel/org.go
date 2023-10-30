@@ -18,19 +18,22 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrg(ctx, "default", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrg(ctx, "default", nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -38,11 +41,15 @@ import (
 // terraform # The resource can be imported using the ID format `<id>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/org:Org imported '123456789012345678'
+//
+//	$ pulumi import zitadel:index/org:Org imported '123456789012345678'
+//
 // ```
 type Org struct {
 	pulumi.CustomResourceState
 
+	// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+	IsDefault pulumi.BoolPtrOutput `pulumi:"isDefault"`
 	// Name of the org
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Primary domain of the org
@@ -81,6 +88,8 @@ func GetOrg(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Org resources.
 type orgState struct {
+	// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+	IsDefault *bool `pulumi:"isDefault"`
 	// Name of the org
 	Name *string `pulumi:"name"`
 	// Primary domain of the org
@@ -90,6 +99,8 @@ type orgState struct {
 }
 
 type OrgState struct {
+	// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+	IsDefault pulumi.BoolPtrInput
 	// Name of the org
 	Name pulumi.StringPtrInput
 	// Primary domain of the org
@@ -103,12 +114,16 @@ func (OrgState) ElementType() reflect.Type {
 }
 
 type orgArgs struct {
+	// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+	IsDefault *bool `pulumi:"isDefault"`
 	// Name of the org
 	Name *string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a Org resource.
 type OrgArgs struct {
+	// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+	IsDefault pulumi.BoolPtrInput
 	// Name of the org
 	Name pulumi.StringPtrInput
 }
@@ -139,7 +154,7 @@ func (i *Org) ToOrgOutputWithContext(ctx context.Context) OrgOutput {
 // OrgArrayInput is an input type that accepts OrgArray and OrgArrayOutput values.
 // You can construct a concrete instance of `OrgArrayInput` via:
 //
-//          OrgArray{ OrgArgs{...} }
+//	OrgArray{ OrgArgs{...} }
 type OrgArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +179,7 @@ func (i OrgArray) ToOrgArrayOutputWithContext(ctx context.Context) OrgArrayOutpu
 // OrgMapInput is an input type that accepts OrgMap and OrgMapOutput values.
 // You can construct a concrete instance of `OrgMapInput` via:
 //
-//          OrgMap{ "key": OrgArgs{...} }
+//	OrgMap{ "key": OrgArgs{...} }
 type OrgMapInput interface {
 	pulumi.Input
 
@@ -198,6 +213,11 @@ func (o OrgOutput) ToOrgOutput() OrgOutput {
 
 func (o OrgOutput) ToOrgOutputWithContext(ctx context.Context) OrgOutput {
 	return o
+}
+
+// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+func (o OrgOutput) IsDefault() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Org) pulumi.BoolPtrOutput { return v.IsDefault }).(pulumi.BoolPtrOutput)
 }
 
 // Name of the org

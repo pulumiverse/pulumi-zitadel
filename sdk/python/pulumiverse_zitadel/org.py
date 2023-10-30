@@ -14,13 +14,29 @@ __all__ = ['OrgArgs', 'Org']
 @pulumi.input_type
 class OrgArgs:
     def __init__(__self__, *,
+                 is_default: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Org resource.
+        :param pulumi.Input[bool] is_default: True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
         :param pulumi.Input[str] name: Name of the org
         """
+        if is_default is not None:
+            pulumi.set(__self__, "is_default", is_default)
         if name is not None:
             pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="isDefault")
+    def is_default(self) -> Optional[pulumi.Input[bool]]:
+        """
+        True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+        """
+        return pulumi.get(self, "is_default")
+
+    @is_default.setter
+    def is_default(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_default", value)
 
     @property
     @pulumi.getter
@@ -38,21 +54,37 @@ class OrgArgs:
 @pulumi.input_type
 class _OrgState:
     def __init__(__self__, *,
+                 is_default: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  primary_domain: Optional[pulumi.Input[str]] = None,
                  state: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Org resources.
+        :param pulumi.Input[bool] is_default: True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
         :param pulumi.Input[str] name: Name of the org
         :param pulumi.Input[str] primary_domain: Primary domain of the org
         :param pulumi.Input[str] state: State of the org
         """
+        if is_default is not None:
+            pulumi.set(__self__, "is_default", is_default)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if primary_domain is not None:
             pulumi.set(__self__, "primary_domain", primary_domain)
         if state is not None:
             pulumi.set(__self__, "state", state)
+
+    @property
+    @pulumi.getter(name="isDefault")
+    def is_default(self) -> Optional[pulumi.Input[bool]]:
+        """
+        True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+        """
+        return pulumi.get(self, "is_default")
+
+    @is_default.setter
+    def is_default(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_default", value)
 
     @property
     @pulumi.getter
@@ -96,6 +128,7 @@ class Org(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 is_default: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -120,6 +153,7 @@ class Org(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[bool] is_default: True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
         :param pulumi.Input[str] name: Name of the org
         """
         ...
@@ -163,6 +197,7 @@ class Org(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 is_default: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -173,6 +208,7 @@ class Org(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = OrgArgs.__new__(OrgArgs)
 
+            __props__.__dict__["is_default"] = is_default
             __props__.__dict__["name"] = name
             __props__.__dict__["primary_domain"] = None
             __props__.__dict__["state"] = None
@@ -186,6 +222,7 @@ class Org(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            is_default: Optional[pulumi.Input[bool]] = None,
             name: Optional[pulumi.Input[str]] = None,
             primary_domain: Optional[pulumi.Input[str]] = None,
             state: Optional[pulumi.Input[str]] = None) -> 'Org':
@@ -196,6 +233,7 @@ class Org(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[bool] is_default: True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
         :param pulumi.Input[str] name: Name of the org
         :param pulumi.Input[str] primary_domain: Primary domain of the org
         :param pulumi.Input[str] state: State of the org
@@ -204,10 +242,19 @@ class Org(pulumi.CustomResource):
 
         __props__ = _OrgState.__new__(_OrgState)
 
+        __props__.__dict__["is_default"] = is_default
         __props__.__dict__["name"] = name
         __props__.__dict__["primary_domain"] = primary_domain
         __props__.__dict__["state"] = state
         return Org(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="isDefault")
+    def is_default(self) -> pulumi.Output[Optional[bool]]:
+        """
+        True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+        """
+        return pulumi.get(self, "is_default")
 
     @property
     @pulumi.getter
