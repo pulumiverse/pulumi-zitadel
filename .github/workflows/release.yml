@@ -1,8 +1,11 @@
 name: release
 on:
   push:
-    tags:
-      - v*.*.*
+    branches:
+      - main
+      # TODO: Remove when permissions are fixed
+      # https://pulumi-community.slack.com/archives/C037PV12W6L/p1698447153384709?thread_ts=1697543021.775809&cid=C037PV12W6L
+      - master
 env:
   # THIS GITHUB_TOKEN IS A REQUIREMENT TO BE ABLE TO WRITE TO GH RELEASES
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -36,6 +39,11 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
+    - name: Bump version
+      uses: mapped/action-vtl@latest
+      with:
+        baseVersion: 0.0.17
+        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
     - name: Unshallow clone for tags
       run: git fetch --prune --unshallow --tags
     - name: Install Go
