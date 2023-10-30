@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
@@ -19,7 +21,10 @@ import (
 //
 // import (
 //
+<<<<<<< HEAD
 //	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+=======
+>>>>>>> origin/master
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -27,20 +32,29 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			orgOrg, err := zitadel.LookupOrg(ctx, &GetOrgArgs{
 //				OrgId: "177073608051458051",
+=======
+//			_default, err := zitadel.LookupOrg(ctx, &zitadel.LookupOrgArgs{
+//				Id: "123456789012345678",
+>>>>>>> origin/master
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
+<<<<<<< HEAD
 //			ctx.Export("org", orgOrg)
+=======
+//			ctx.Export("org", _default)
+>>>>>>> origin/master
 //			return nil
 //		})
 //	}
 //
 // ```
 func LookupOrg(ctx *pulumi.Context, args *LookupOrgArgs, opts ...pulumi.InvokeOption) (*LookupOrgResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupOrgResult
 	err := ctx.Invoke("zitadel:index/getOrg:getOrg", args, &rv, opts...)
 	if err != nil {
@@ -51,18 +65,20 @@ func LookupOrg(ctx *pulumi.Context, args *LookupOrgArgs, opts ...pulumi.InvokeOp
 
 // A collection of arguments for invoking getOrg.
 type LookupOrgArgs struct {
-	// The ID of this resource.
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	Id string `pulumi:"id"`
 }
 
 // A collection of values returned by getOrg.
 type LookupOrgResult struct {
-	// The provider-assigned unique ID for this managed resource.
+	// ID of the organization
 	Id string `pulumi:"id"`
-	// Name of the org
+	// Name of the org.
 	Name string `pulumi:"name"`
-	// The ID of this resource.
-	OrgId string `pulumi:"orgId"`
+	// Primary domain of the org
+	PrimaryDomain string `pulumi:"primaryDomain"`
+	// State of the org, supported values: ORG*STATE*UNSPECIFIED, ORG*STATE*ACTIVE, ORG*STATE*INACTIVE, ORG*STATE*REMOVED
+	State string `pulumi:"state"`
 }
 
 func LookupOrgOutput(ctx *pulumi.Context, args LookupOrgOutputArgs, opts ...pulumi.InvokeOption) LookupOrgResultOutput {
@@ -80,8 +96,8 @@ func LookupOrgOutput(ctx *pulumi.Context, args LookupOrgOutputArgs, opts ...pulu
 
 // A collection of arguments for invoking getOrg.
 type LookupOrgOutputArgs struct {
-	// The ID of this resource.
-	OrgId pulumi.StringInput `pulumi:"orgId"`
+	// ID of the organization
+	Id pulumi.StringInput `pulumi:"id"`
 }
 
 func (LookupOrgOutputArgs) ElementType() reflect.Type {
@@ -103,19 +119,30 @@ func (o LookupOrgResultOutput) ToLookupOrgResultOutputWithContext(ctx context.Co
 	return o
 }
 
-// The provider-assigned unique ID for this managed resource.
+func (o LookupOrgResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupOrgResult] {
+	return pulumix.Output[LookupOrgResult]{
+		OutputState: o.OutputState,
+	}
+}
+
+// ID of the organization
 func (o LookupOrgResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupOrgResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
-// Name of the org
+// Name of the org.
 func (o LookupOrgResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupOrgResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// The ID of this resource.
-func (o LookupOrgResultOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupOrgResult) string { return v.OrgId }).(pulumi.StringOutput)
+// Primary domain of the org
+func (o LookupOrgResultOutput) PrimaryDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupOrgResult) string { return v.PrimaryDomain }).(pulumi.StringOutput)
+}
+
+// State of the org, supported values: ORG*STATE*UNSPECIFIED, ORG*STATE*ACTIVE, ORG*STATE*INACTIVE, ORG*STATE*REMOVED
+func (o LookupOrgResultOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupOrgResult) string { return v.State }).(pulumi.StringOutput)
 }
 
 func init() {

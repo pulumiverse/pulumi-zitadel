@@ -21,14 +21,16 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var google = Zitadel.GetOrgIdpGoogle.Invoke(new()
+        ///     var @default = Zitadel.GetOrgIdpGoogle.Invoke(new()
         ///     {
-        ///         Id = "177073614158299139",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         /// });
@@ -37,7 +39,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetOrgIdpGoogleResult> InvokeAsync(GetOrgIdpGoogleArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrgIdpGoogleResult>("zitadel:index/getOrgIdpGoogle:getOrgIdpGoogle", args ?? new GetOrgIdpGoogleArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgIdpGoogleResult>("zitadel:index/getOrgIdpGoogle:getOrgIdpGoogle", args ?? new GetOrgIdpGoogleArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing a Google IdP of the organization.
@@ -48,14 +50,16 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var google = Zitadel.GetOrgIdpGoogle.Invoke(new()
+        ///     var @default = Zitadel.GetOrgIdpGoogle.Invoke(new()
         ///     {
-        ///         Id = "177073614158299139",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         /// });
@@ -64,7 +68,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetOrgIdpGoogleResult> Invoke(GetOrgIdpGoogleInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrgIdpGoogleResult>("zitadel:index/getOrgIdpGoogle:getOrgIdpGoogle", args ?? new GetOrgIdpGoogleInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrgIdpGoogleResult>("zitadel:index/getOrgIdpGoogle:getOrgIdpGoogle", args ?? new GetOrgIdpGoogleInvokeArgs(), options.WithDefaults());
     }
 
 
@@ -79,8 +83,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public string OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public string? OrgId { get; set; }
 
         public GetOrgIdpGoogleArgs()
         {
@@ -99,8 +103,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         public GetOrgIdpGoogleInvokeArgs()
         {
@@ -147,7 +151,7 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        public readonly string OrgId;
+        public readonly string? OrgId;
         /// <summary>
         /// the scopes requested by ZITADEL during the request on the identity provider
         /// </summary>
@@ -171,7 +175,7 @@ namespace Pulumiverse.Zitadel
 
             string name,
 
-            string orgId,
+            string? orgId,
 
             ImmutableArray<string> scopes)
         {

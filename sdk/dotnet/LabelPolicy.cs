@@ -12,6 +12,14 @@ namespace Pulumiverse.Zitadel
 {
     /// <summary>
     /// Resource representing the custom label policy of an organization.
+    /// 
+    /// ## Import
+    /// 
+    /// terraform The resource can be imported using the ID format `&lt;[org_id]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
+    /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/labelPolicy:LabelPolicy")]
     public partial class LabelPolicy : global::Pulumi.CustomResource
@@ -98,10 +106,10 @@ namespace Pulumiverse.Zitadel
         public Output<string> LogoUrlDark { get; private set; } = null!;
 
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// hex value for primary color
@@ -247,10 +255,10 @@ namespace Pulumiverse.Zitadel
         public Input<string>? LogoPath { get; set; }
 
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// hex value for primary color
@@ -372,7 +380,7 @@ namespace Pulumiverse.Zitadel
         public Input<string>? LogoUrlDark { get; set; }
 
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
         [Input("orgId")]
         public Input<string>? OrgId { get; set; }

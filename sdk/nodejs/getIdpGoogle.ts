@@ -13,17 +13,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const google = pulumi.output(zitadel.getIdpGoogle({
- *     id: "177073614158299139",
- * }));
+ * const default = zitadel.getIdpGoogle({
+ *     id: "123456789012345678",
+ * });
  * ```
  */
 export function getIdpGoogle(args: GetIdpGoogleArgs, opts?: pulumi.InvokeOptions): Promise<GetIdpGoogleResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getIdpGoogle:getIdpGoogle", {
         "id": args.id,
     }, opts);
@@ -80,9 +77,22 @@ export interface GetIdpGoogleResult {
      */
     readonly scopes: string[];
 }
-
+/**
+ * Datasource representing a Google IDP on the instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getIdpGoogle({
+ *     id: "123456789012345678",
+ * });
+ * ```
+ */
 export function getIdpGoogleOutput(args: GetIdpGoogleOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIdpGoogleResult> {
-    return pulumi.output(args).apply(a => getIdpGoogle(a, opts))
+    return pulumi.output(args).apply((a: any) => getIdpGoogle(a, opts))
 }
 
 /**

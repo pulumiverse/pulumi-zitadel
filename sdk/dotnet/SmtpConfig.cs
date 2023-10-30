@@ -17,22 +17,32 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var smtp = new Zitadel.SmtpConfig("smtp", new()
+    ///     var @default = new Zitadel.SmtpConfig("default", new()
     ///     {
     ///         Host = "localhost:25",
-    ///         Password = "password",
-    ///         SenderAddress = "address",
+    ///         Password = "secret_password",
+    ///         ReplyToAddress = "replyto@example.com",
+    ///         SenderAddress = "sender@example.com",
     ///         SenderName = "no-reply",
     ///         Tls = true,
     ///         User = "user",
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform The resource can be imported using the ID format `&lt;[password]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/smtpConfig:SmtpConfig")]
@@ -49,6 +59,12 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         [Output("password")]
         public Output<string?> Password { get; private set; } = null!;
+
+        /// <summary>
+        /// Address to reply to.
+        /// </summary>
+        [Output("replyToAddress")]
+        public Output<string?> ReplyToAddress { get; private set; } = null!;
 
         /// <summary>
         /// Address used to send emails.
@@ -98,6 +114,10 @@ namespace Pulumiverse.Zitadel
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/pulumiverse",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -127,11 +147,27 @@ namespace Pulumiverse.Zitadel
         [Input("host", required: true)]
         public Input<string> Host { get; set; } = null!;
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password used to communicate with your SMTP server.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Address to reply to.
+        /// </summary>
+        [Input("replyToAddress")]
+        public Input<string>? ReplyToAddress { get; set; }
 
         /// <summary>
         /// Address used to send emails.
@@ -171,11 +207,27 @@ namespace Pulumiverse.Zitadel
         [Input("host")]
         public Input<string>? Host { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password used to communicate with your SMTP server.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Address to reply to.
+        /// </summary>
+        [Input("replyToAddress")]
+        public Input<string>? ReplyToAddress { get; set; }
 
         /// <summary>
         /// Address used to send emails.

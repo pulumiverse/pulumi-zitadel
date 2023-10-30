@@ -58,7 +58,6 @@ jobs:
       matrix:
         goversion:
         - 1.21.x
-
   publish_sdk:
     name: Publish SDKs
     runs-on: ubuntu-latest
@@ -126,7 +125,7 @@ jobs:
       fail-fast: true
       matrix:
         dotnetversion:
-          - 3.1.301
+          - 6.0.300
         goversion:
           - 1.21.x
         language:

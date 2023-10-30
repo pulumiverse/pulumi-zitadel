@@ -17,30 +17,39 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var domainPolicy = new Zitadel.DomainPolicy("domainPolicy", new()
+    ///     var @default = new Zitadel.DomainPolicy("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         UserLoginMustBeDomain = false,
-    ///         ValidateOrgDomains = false,
-    ///         SmtpSenderAddressMatchesInstanceDomain = false,
+    ///         ValidateOrgDomains = true,
+    ///         SmtpSenderAddressMatchesInstanceDomain = true,
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform The resource can be imported using the ID format `&lt;[org_id]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/domainPolicy:DomainPolicy imported '123456789012345678'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/domainPolicy:DomainPolicy")]
     public partial class DomainPolicy : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         [Output("smtpSenderAddressMatchesInstanceDomain")]
         public Output<bool> SmtpSenderAddressMatchesInstanceDomain { get; private set; } = null!;
@@ -105,10 +114,10 @@ namespace Pulumiverse.Zitadel
     public sealed class DomainPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         [Input("smtpSenderAddressMatchesInstanceDomain", required: true)]
         public Input<bool> SmtpSenderAddressMatchesInstanceDomain { get; set; } = null!;
@@ -134,7 +143,7 @@ namespace Pulumiverse.Zitadel
     public sealed class DomainPolicyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
         [Input("orgId")]
         public Input<string>? OrgId { get; set; }

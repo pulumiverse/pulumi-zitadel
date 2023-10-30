@@ -17,14 +17,15 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var ldap = new Zitadel.OrgIdpLdap("ldap", new()
+    ///     var @default = new Zitadel.OrgIdpLdap("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         Servers = new[]
     ///         {
     ///             "ldaps://my.primary.server:389",
@@ -55,6 +56,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform The resource can be imported using the ID format `&lt;id[:org_id][:bind_password]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/orgIdpLdap:OrgIdpLdap imported '123456789012345678:123456789012345678:b1nd_p4ssw0rd'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/orgIdpLdap:OrgIdpLdap")]
@@ -160,7 +169,7 @@ namespace Pulumiverse.Zitadel
         /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// User attribute for the phone
@@ -252,6 +261,10 @@ namespace Pulumiverse.Zitadel
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/pulumiverse",
+                AdditionalSecretOutputs =
+                {
+                    "bindPassword",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -293,11 +306,21 @@ namespace Pulumiverse.Zitadel
         [Input("bindDn", required: true)]
         public Input<string> BindDn { get; set; } = null!;
 
+        [Input("bindPassword", required: true)]
+        private Input<string>? _bindPassword;
+
         /// <summary>
         /// Bind password for LDAP connections
         /// </summary>
-        [Input("bindPassword", required: true)]
-        public Input<string> BindPassword { get; set; } = null!;
+        public Input<string>? BindPassword
+        {
+            get => _bindPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _bindPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// User attribute for the display name
@@ -374,8 +397,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// User attribute for the phone
@@ -487,11 +510,21 @@ namespace Pulumiverse.Zitadel
         [Input("bindDn")]
         public Input<string>? BindDn { get; set; }
 
+        [Input("bindPassword")]
+        private Input<string>? _bindPassword;
+
         /// <summary>
         /// Bind password for LDAP connections
         /// </summary>
-        [Input("bindPassword")]
-        public Input<string>? BindPassword { get; set; }
+        public Input<string>? BindPassword
+        {
+            get => _bindPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _bindPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// User attribute for the display name

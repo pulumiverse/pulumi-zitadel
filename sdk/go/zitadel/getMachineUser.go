@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing a serviceaccount situated under an organization, which then can be authorized through memberships or direct grants on other resources.
@@ -19,7 +21,10 @@ import (
 //
 // import (
 //
+<<<<<<< HEAD
 //	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+=======
+>>>>>>> origin/master
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -27,21 +32,31 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			machineUserMachineUser, err := zitadel.LookupMachineUser(ctx, &GetMachineUserArgs{
 //				OrgId:  data.Zitadel_org.Org.Id,
 //				UserId: "177073617463410691",
+=======
+//			_default, err := zitadel.LookupMachineUser(ctx, &zitadel.LookupMachineUserArgs{
+//				OrgId:  pulumi.StringRef(data.Zitadel_org.Default.Id),
+//				UserId: "123456789012345678",
+>>>>>>> origin/master
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
+<<<<<<< HEAD
 //			ctx.Export("machineUser", machineUserMachineUser)
+=======
+//			ctx.Export("machineUser", _default)
+>>>>>>> origin/master
 //			return nil
 //		})
 //	}
 //
 // ```
 func LookupMachineUser(ctx *pulumi.Context, args *LookupMachineUserArgs, opts ...pulumi.InvokeOption) (*LookupMachineUserResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupMachineUserResult
 	err := ctx.Invoke("zitadel:index/getMachineUser:getMachineUser", args, &rv, opts...)
 	if err != nil {
@@ -53,7 +68,7 @@ func LookupMachineUser(ctx *pulumi.Context, args *LookupMachineUserArgs, opts ..
 // A collection of arguments for invoking getMachineUser.
 type LookupMachineUserArgs struct {
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// The ID of this resource.
 	UserId string `pulumi:"userId"`
 }
@@ -71,7 +86,7 @@ type LookupMachineUserResult struct {
 	// Name of the machine user
 	Name string `pulumi:"name"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// Preferred login name
 	PreferredLoginName string `pulumi:"preferredLoginName"`
 	// State of the user
@@ -98,7 +113,7 @@ func LookupMachineUserOutput(ctx *pulumi.Context, args LookupMachineUserOutputAr
 // A collection of arguments for invoking getMachineUser.
 type LookupMachineUserOutputArgs struct {
 	// ID of the organization
-	OrgId pulumi.StringInput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrInput `pulumi:"orgId"`
 	// The ID of this resource.
 	UserId pulumi.StringInput `pulumi:"userId"`
 }
@@ -120,6 +135,12 @@ func (o LookupMachineUserResultOutput) ToLookupMachineUserResultOutput() LookupM
 
 func (o LookupMachineUserResultOutput) ToLookupMachineUserResultOutputWithContext(ctx context.Context) LookupMachineUserResultOutput {
 	return o
+}
+
+func (o LookupMachineUserResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupMachineUserResult] {
+	return pulumix.Output[LookupMachineUserResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Access token type
@@ -148,8 +169,8 @@ func (o LookupMachineUserResultOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o LookupMachineUserResultOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupMachineUserResult) string { return v.OrgId }).(pulumi.StringOutput)
+func (o LookupMachineUserResultOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupMachineUserResult) *string { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Preferred login name

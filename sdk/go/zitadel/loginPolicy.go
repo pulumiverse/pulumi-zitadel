@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the custom login policy of an organization.
@@ -27,12 +29,21 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.NewLoginPolicy(ctx, "loginPolicy", &zitadel.LoginPolicyArgs{
 //				OrgId:                      pulumi.Any(zitadel_org.Org.Id),
+=======
+//			_, err := zitadel.NewLoginPolicy(ctx, "default", &zitadel.LoginPolicyArgs{
+//				OrgId:                      pulumi.Any(data.Zitadel_org.Default.Id),
+>>>>>>> origin/master
 //				UserLogin:                  pulumi.Bool(true),
 //				AllowRegister:              pulumi.Bool(true),
 //				AllowExternalIdp:           pulumi.Bool(true),
 //				ForceMfa:                   pulumi.Bool(false),
+<<<<<<< HEAD
+=======
+//				ForceMfaLocalOnly:          pulumi.Bool(false),
+>>>>>>> origin/master
 //				PasswordlessType:           pulumi.String("PASSWORDLESS_TYPE_ALLOWED"),
 //				HidePasswordReset:          pulumi.Bool(false),
 //				PasswordCheckLifetime:      pulumi.String("240h0m0s"),
@@ -50,8 +61,13 @@ import (
 //					pulumi.String("MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"),
 //				},
 //				Idps: pulumi.StringArray{
+<<<<<<< HEAD
 //					pulumi.Any(zitadel_org_idp_oidc.Oidc_idp.Id),
 //					pulumi.Any(zitadel_org_idp_jwt.Jwt_idp.Id),
+=======
+//					data.Zitadel_idp_google.Default.Id,
+//					data.Zitadel_idp_azure_ad.Default.Id,
+>>>>>>> origin/master
 //				},
 //				AllowDomainDiscovery:  pulumi.Bool(true),
 //				DisableLoginWithEmail: pulumi.Bool(true),
@@ -64,6 +80,19 @@ import (
 //		})
 //	}
 //
+<<<<<<< HEAD
+=======
+// ```
+//
+// ## Import
+//
+// terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import zitadel:index/loginPolicy:LoginPolicy imported '123456789012345678'
+//
+>>>>>>> origin/master
 // ```
 type LoginPolicy struct {
 	pulumi.CustomResourceState
@@ -83,6 +112,8 @@ type LoginPolicy struct {
 	ExternalLoginCheckLifetime pulumi.StringOutput  `pulumi:"externalLoginCheckLifetime"`
 	// defines if a user MUST use a multi factor to log in
 	ForceMfa pulumi.BoolOutput `pulumi:"forceMfa"`
+	// if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+	ForceMfaLocalOnly pulumi.BoolOutput `pulumi:"forceMfaLocalOnly"`
 	// defines if password reset link should be shown in the login screen
 	HidePasswordReset pulumi.BoolOutput `pulumi:"hidePasswordReset"`
 	// allowed idps to login or register
@@ -93,9 +124,9 @@ type LoginPolicy struct {
 	MultiFactorCheckLifetime pulumi.StringOutput `pulumi:"multiFactorCheckLifetime"`
 	// allowed multi factors
 	MultiFactors pulumi.StringArrayOutput `pulumi:"multiFactors"`
-	// Id for the organization
-	OrgId                 pulumi.StringOutput `pulumi:"orgId"`
-	PasswordCheckLifetime pulumi.StringOutput `pulumi:"passwordCheckLifetime"`
+	// ID of the organization
+	OrgId                 pulumi.StringPtrOutput `pulumi:"orgId"`
+	PasswordCheckLifetime pulumi.StringOutput    `pulumi:"passwordCheckLifetime"`
 	// defines if passwordless is allowed for users
 	PasswordlessType          pulumi.StringOutput `pulumi:"passwordlessType"`
 	SecondFactorCheckLifetime pulumi.StringOutput `pulumi:"secondFactorCheckLifetime"`
@@ -127,6 +158,9 @@ func NewLoginPolicy(ctx *pulumi.Context,
 	if args.ForceMfa == nil {
 		return nil, errors.New("invalid value for required argument 'ForceMfa'")
 	}
+	if args.ForceMfaLocalOnly == nil {
+		return nil, errors.New("invalid value for required argument 'ForceMfaLocalOnly'")
+	}
 	if args.HidePasswordReset == nil {
 		return nil, errors.New("invalid value for required argument 'HidePasswordReset'")
 	}
@@ -138,9 +172,6 @@ func NewLoginPolicy(ctx *pulumi.Context,
 	}
 	if args.MultiFactorCheckLifetime == nil {
 		return nil, errors.New("invalid value for required argument 'MultiFactorCheckLifetime'")
-	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
 	}
 	if args.PasswordCheckLifetime == nil {
 		return nil, errors.New("invalid value for required argument 'PasswordCheckLifetime'")
@@ -154,7 +185,7 @@ func NewLoginPolicy(ctx *pulumi.Context,
 	if args.UserLogin == nil {
 		return nil, errors.New("invalid value for required argument 'UserLogin'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource LoginPolicy
 	err := ctx.RegisterResource("zitadel:index/loginPolicy:LoginPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -192,6 +223,8 @@ type loginPolicyState struct {
 	ExternalLoginCheckLifetime *string `pulumi:"externalLoginCheckLifetime"`
 	// defines if a user MUST use a multi factor to log in
 	ForceMfa *bool `pulumi:"forceMfa"`
+	// if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+	ForceMfaLocalOnly *bool `pulumi:"forceMfaLocalOnly"`
 	// defines if password reset link should be shown in the login screen
 	HidePasswordReset *bool `pulumi:"hidePasswordReset"`
 	// allowed idps to login or register
@@ -202,7 +235,7 @@ type loginPolicyState struct {
 	MultiFactorCheckLifetime *string `pulumi:"multiFactorCheckLifetime"`
 	// allowed multi factors
 	MultiFactors []string `pulumi:"multiFactors"`
-	// Id for the organization
+	// ID of the organization
 	OrgId                 *string `pulumi:"orgId"`
 	PasswordCheckLifetime *string `pulumi:"passwordCheckLifetime"`
 	// defines if passwordless is allowed for users
@@ -230,6 +263,8 @@ type LoginPolicyState struct {
 	ExternalLoginCheckLifetime pulumi.StringPtrInput
 	// defines if a user MUST use a multi factor to log in
 	ForceMfa pulumi.BoolPtrInput
+	// if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+	ForceMfaLocalOnly pulumi.BoolPtrInput
 	// defines if password reset link should be shown in the login screen
 	HidePasswordReset pulumi.BoolPtrInput
 	// allowed idps to login or register
@@ -240,7 +275,7 @@ type LoginPolicyState struct {
 	MultiFactorCheckLifetime pulumi.StringPtrInput
 	// allowed multi factors
 	MultiFactors pulumi.StringArrayInput
-	// Id for the organization
+	// ID of the organization
 	OrgId                 pulumi.StringPtrInput
 	PasswordCheckLifetime pulumi.StringPtrInput
 	// defines if passwordless is allowed for users
@@ -272,6 +307,8 @@ type loginPolicyArgs struct {
 	ExternalLoginCheckLifetime string `pulumi:"externalLoginCheckLifetime"`
 	// defines if a user MUST use a multi factor to log in
 	ForceMfa bool `pulumi:"forceMfa"`
+	// if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+	ForceMfaLocalOnly bool `pulumi:"forceMfaLocalOnly"`
 	// defines if password reset link should be shown in the login screen
 	HidePasswordReset bool `pulumi:"hidePasswordReset"`
 	// allowed idps to login or register
@@ -282,9 +319,9 @@ type loginPolicyArgs struct {
 	MultiFactorCheckLifetime string `pulumi:"multiFactorCheckLifetime"`
 	// allowed multi factors
 	MultiFactors []string `pulumi:"multiFactors"`
-	// Id for the organization
-	OrgId                 string `pulumi:"orgId"`
-	PasswordCheckLifetime string `pulumi:"passwordCheckLifetime"`
+	// ID of the organization
+	OrgId                 *string `pulumi:"orgId"`
+	PasswordCheckLifetime string  `pulumi:"passwordCheckLifetime"`
 	// defines if passwordless is allowed for users
 	PasswordlessType          string `pulumi:"passwordlessType"`
 	SecondFactorCheckLifetime string `pulumi:"secondFactorCheckLifetime"`
@@ -311,6 +348,8 @@ type LoginPolicyArgs struct {
 	ExternalLoginCheckLifetime pulumi.StringInput
 	// defines if a user MUST use a multi factor to log in
 	ForceMfa pulumi.BoolInput
+	// if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+	ForceMfaLocalOnly pulumi.BoolInput
 	// defines if password reset link should be shown in the login screen
 	HidePasswordReset pulumi.BoolInput
 	// allowed idps to login or register
@@ -321,8 +360,8 @@ type LoginPolicyArgs struct {
 	MultiFactorCheckLifetime pulumi.StringInput
 	// allowed multi factors
 	MultiFactors pulumi.StringArrayInput
-	// Id for the organization
-	OrgId                 pulumi.StringInput
+	// ID of the organization
+	OrgId                 pulumi.StringPtrInput
 	PasswordCheckLifetime pulumi.StringInput
 	// defines if passwordless is allowed for users
 	PasswordlessType          pulumi.StringInput
@@ -356,6 +395,12 @@ func (i *LoginPolicy) ToLoginPolicyOutputWithContext(ctx context.Context) LoginP
 	return pulumi.ToOutputWithContext(ctx, i).(LoginPolicyOutput)
 }
 
+func (i *LoginPolicy) ToOutput(ctx context.Context) pulumix.Output[*LoginPolicy] {
+	return pulumix.Output[*LoginPolicy]{
+		OutputState: i.ToLoginPolicyOutputWithContext(ctx).OutputState,
+	}
+}
+
 // LoginPolicyArrayInput is an input type that accepts LoginPolicyArray and LoginPolicyArrayOutput values.
 // You can construct a concrete instance of `LoginPolicyArrayInput` via:
 //
@@ -379,6 +424,12 @@ func (i LoginPolicyArray) ToLoginPolicyArrayOutput() LoginPolicyArrayOutput {
 
 func (i LoginPolicyArray) ToLoginPolicyArrayOutputWithContext(ctx context.Context) LoginPolicyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(LoginPolicyArrayOutput)
+}
+
+func (i LoginPolicyArray) ToOutput(ctx context.Context) pulumix.Output[[]*LoginPolicy] {
+	return pulumix.Output[[]*LoginPolicy]{
+		OutputState: i.ToLoginPolicyArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // LoginPolicyMapInput is an input type that accepts LoginPolicyMap and LoginPolicyMapOutput values.
@@ -406,6 +457,12 @@ func (i LoginPolicyMap) ToLoginPolicyMapOutputWithContext(ctx context.Context) L
 	return pulumi.ToOutputWithContext(ctx, i).(LoginPolicyMapOutput)
 }
 
+func (i LoginPolicyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*LoginPolicy] {
+	return pulumix.Output[map[string]*LoginPolicy]{
+		OutputState: i.ToLoginPolicyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type LoginPolicyOutput struct{ *pulumi.OutputState }
 
 func (LoginPolicyOutput) ElementType() reflect.Type {
@@ -418,6 +475,12 @@ func (o LoginPolicyOutput) ToLoginPolicyOutput() LoginPolicyOutput {
 
 func (o LoginPolicyOutput) ToLoginPolicyOutputWithContext(ctx context.Context) LoginPolicyOutput {
 	return o
+}
+
+func (o LoginPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[*LoginPolicy] {
+	return pulumix.Output[*LoginPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 // if set to true, the suffix (@domain.com) of an unknown username input on the login screen will be matched against the org domains and will redirect to the registration of that organisation on success.
@@ -459,6 +522,11 @@ func (o LoginPolicyOutput) ForceMfa() pulumi.BoolOutput {
 	return o.ApplyT(func(v *LoginPolicy) pulumi.BoolOutput { return v.ForceMfa }).(pulumi.BoolOutput)
 }
 
+// if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+func (o LoginPolicyOutput) ForceMfaLocalOnly() pulumi.BoolOutput {
+	return o.ApplyT(func(v *LoginPolicy) pulumi.BoolOutput { return v.ForceMfaLocalOnly }).(pulumi.BoolOutput)
+}
+
 // defines if password reset link should be shown in the login screen
 func (o LoginPolicyOutput) HidePasswordReset() pulumi.BoolOutput {
 	return o.ApplyT(func(v *LoginPolicy) pulumi.BoolOutput { return v.HidePasswordReset }).(pulumi.BoolOutput)
@@ -487,9 +555,9 @@ func (o LoginPolicyOutput) MultiFactors() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *LoginPolicy) pulumi.StringArrayOutput { return v.MultiFactors }).(pulumi.StringArrayOutput)
 }
 
-// Id for the organization
-func (o LoginPolicyOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *LoginPolicy) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o LoginPolicyOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LoginPolicy) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 func (o LoginPolicyOutput) PasswordCheckLifetime() pulumi.StringOutput {
@@ -529,6 +597,12 @@ func (o LoginPolicyArrayOutput) ToLoginPolicyArrayOutputWithContext(ctx context.
 	return o
 }
 
+func (o LoginPolicyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*LoginPolicy] {
+	return pulumix.Output[[]*LoginPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o LoginPolicyArrayOutput) Index(i pulumi.IntInput) LoginPolicyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *LoginPolicy {
 		return vs[0].([]*LoginPolicy)[vs[1].(int)]
@@ -547,6 +621,12 @@ func (o LoginPolicyMapOutput) ToLoginPolicyMapOutput() LoginPolicyMapOutput {
 
 func (o LoginPolicyMapOutput) ToLoginPolicyMapOutputWithContext(ctx context.Context) LoginPolicyMapOutput {
 	return o
+}
+
+func (o LoginPolicyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*LoginPolicy] {
+	return pulumix.Output[map[string]*LoginPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o LoginPolicyMapOutput) MapIndex(k pulumi.StringInput) LoginPolicyOutput {

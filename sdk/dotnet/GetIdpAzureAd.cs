@@ -21,14 +21,15 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var azureAd = Zitadel.GetIdpAzureAd.Invoke(new()
+        ///     var @default = Zitadel.GetIdpAzureAd.Invoke(new()
         ///     {
-        ///         Id = "177073614158299139",
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         /// });
@@ -37,7 +38,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetIdpAzureAdResult> InvokeAsync(GetIdpAzureAdArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetIdpAzureAdResult>("zitadel:index/getIdpAzureAd:getIdpAzureAd", args ?? new GetIdpAzureAdArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetIdpAzureAdResult>("zitadel:index/getIdpAzureAd:getIdpAzureAd", args ?? new GetIdpAzureAdArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing an Azure AD IDP on the instance.
@@ -48,14 +49,15 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var azureAd = Zitadel.GetIdpAzureAd.Invoke(new()
+        ///     var @default = Zitadel.GetIdpAzureAd.Invoke(new()
         ///     {
-        ///         Id = "177073614158299139",
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         /// });
@@ -64,7 +66,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetIdpAzureAdResult> Invoke(GetIdpAzureAdInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetIdpAzureAdResult>("zitadel:index/getIdpAzureAd:getIdpAzureAd", args ?? new GetIdpAzureAdInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetIdpAzureAdResult>("zitadel:index/getIdpAzureAd:getIdpAzureAd", args ?? new GetIdpAzureAdInvokeArgs(), options.WithDefaults());
     }
 
 

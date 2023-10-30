@@ -13,20 +13,17 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const oidcApplicationApplicationOidc = zitadel.getApplicationOidc({
- *     orgId: data.zitadel_org.org.id,
- *     projectId: data.zitadel_project.project.id,
- *     appId: "177073626925760515",
+ * const default = zitadel.getApplicationOidc({
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: data.zitadel_project["default"].id,
+ *     appId: "123456789012345678",
  * });
- * export const oidcApplication = oidcApplicationApplicationOidc;
+ * export const applicationOidc = _default;
  * ```
  */
 export function getApplicationOidc(args: GetApplicationOidcArgs, opts?: pulumi.InvokeOptions): Promise<GetApplicationOidcResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getApplicationOidc:getApplicationOidc", {
         "appId": args.appId,
         "orgId": args.orgId,
@@ -43,9 +40,9 @@ export interface GetApplicationOidcArgs {
      */
     appId: string;
     /**
-     * orgID of the application
+     * ID of the organization
      */
-    orgId: string;
+    orgId?: string;
     /**
      * ID of the project
      */
@@ -109,9 +106,9 @@ export interface GetApplicationOidcResult {
      */
     readonly name: string;
     /**
-     * orgID of the application
+     * ID of the organization
      */
-    readonly orgId: string;
+    readonly orgId?: string;
     /**
      * Post logout redirect URIs
      */
@@ -133,9 +130,25 @@ export interface GetApplicationOidcResult {
      */
     readonly version: string;
 }
-
+/**
+ * Datasource representing an OIDC application belonging to a project, with all configuration possibilities.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getApplicationOidc({
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: data.zitadel_project["default"].id,
+ *     appId: "123456789012345678",
+ * });
+ * export const applicationOidc = _default;
+ * ```
+ */
 export function getApplicationOidcOutput(args: GetApplicationOidcOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApplicationOidcResult> {
-    return pulumi.output(args).apply(a => getApplicationOidc(a, opts))
+    return pulumi.output(args).apply((a: any) => getApplicationOidc(a, opts))
 }
 
 /**
@@ -147,9 +160,9 @@ export interface GetApplicationOidcOutputArgs {
      */
     appId: pulumi.Input<string>;
     /**
-     * orgID of the application
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * ID of the project
      */

@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing a GitLab IdP on the organization.
@@ -27,8 +29,13 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.NewOrgIdpGitlab(ctx, "gitlab", &zitadel.OrgIdpGitlabArgs{
 //				OrgId:        pulumi.Any(zitadel_org.Org.Id),
+=======
+//			_, err := zitadel.NewOrgIdpGitlab(ctx, "default", &zitadel.OrgIdpGitlabArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+>>>>>>> origin/master
 //				ClientId:     pulumi.String("15765e..."),
 //				ClientSecret: pulumi.String("*****abcxyz"),
 //				Scopes: pulumi.StringArray{
@@ -48,6 +55,19 @@ import (
 //		})
 //	}
 //
+<<<<<<< HEAD
+=======
+// ```
+//
+// ## Import
+//
+// terraform The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import zitadel:index/orgIdpGitlab:OrgIdpGitlab imported '123456789012345678:123456789012345678:1234567890abcdef'
+//
+>>>>>>> origin/master
 // ```
 type OrgIdpGitlab struct {
 	pulumi.CustomResourceState
@@ -67,7 +87,7 @@ type OrgIdpGitlab struct {
 	// Name of the IDP
 	Name pulumi.StringOutput `pulumi:"name"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes pulumi.StringArrayOutput `pulumi:"scopes"`
 }
@@ -97,10 +117,14 @@ func NewOrgIdpGitlab(ctx *pulumi.Context,
 	if args.IsLinkingAllowed == nil {
 		return nil, errors.New("invalid value for required argument 'IsLinkingAllowed'")
 	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
+	if args.ClientSecret != nil {
+		args.ClientSecret = pulumi.ToSecret(args.ClientSecret).(pulumi.StringInput)
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgIdpGitlab
 	err := ctx.RegisterResource("zitadel:index/orgIdpGitlab:OrgIdpGitlab", name, args, &resource, opts...)
 	if err != nil {
@@ -184,7 +208,7 @@ type orgIdpGitlabArgs struct {
 	// Name of the IDP
 	Name *string `pulumi:"name"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes []string `pulumi:"scopes"`
 }
@@ -206,7 +230,7 @@ type OrgIdpGitlabArgs struct {
 	// Name of the IDP
 	Name pulumi.StringPtrInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes pulumi.StringArrayInput
 }
@@ -234,6 +258,12 @@ func (i *OrgIdpGitlab) ToOrgIdpGitlabOutputWithContext(ctx context.Context) OrgI
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpGitlabOutput)
 }
 
+func (i *OrgIdpGitlab) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpGitlab] {
+	return pulumix.Output[*OrgIdpGitlab]{
+		OutputState: i.ToOrgIdpGitlabOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpGitlabArrayInput is an input type that accepts OrgIdpGitlabArray and OrgIdpGitlabArrayOutput values.
 // You can construct a concrete instance of `OrgIdpGitlabArrayInput` via:
 //
@@ -257,6 +287,12 @@ func (i OrgIdpGitlabArray) ToOrgIdpGitlabArrayOutput() OrgIdpGitlabArrayOutput {
 
 func (i OrgIdpGitlabArray) ToOrgIdpGitlabArrayOutputWithContext(ctx context.Context) OrgIdpGitlabArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpGitlabArrayOutput)
+}
+
+func (i OrgIdpGitlabArray) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpGitlab] {
+	return pulumix.Output[[]*OrgIdpGitlab]{
+		OutputState: i.ToOrgIdpGitlabArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // OrgIdpGitlabMapInput is an input type that accepts OrgIdpGitlabMap and OrgIdpGitlabMapOutput values.
@@ -284,6 +320,12 @@ func (i OrgIdpGitlabMap) ToOrgIdpGitlabMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpGitlabMapOutput)
 }
 
+func (i OrgIdpGitlabMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpGitlab] {
+	return pulumix.Output[map[string]*OrgIdpGitlab]{
+		OutputState: i.ToOrgIdpGitlabMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type OrgIdpGitlabOutput struct{ *pulumi.OutputState }
 
 func (OrgIdpGitlabOutput) ElementType() reflect.Type {
@@ -296,6 +338,12 @@ func (o OrgIdpGitlabOutput) ToOrgIdpGitlabOutput() OrgIdpGitlabOutput {
 
 func (o OrgIdpGitlabOutput) ToOrgIdpGitlabOutputWithContext(ctx context.Context) OrgIdpGitlabOutput {
 	return o
+}
+
+func (o OrgIdpGitlabOutput) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpGitlab] {
+	return pulumix.Output[*OrgIdpGitlab]{
+		OutputState: o.OutputState,
+	}
 }
 
 // client id generated by the identity provider
@@ -334,8 +382,8 @@ func (o OrgIdpGitlabOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o OrgIdpGitlabOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *OrgIdpGitlab) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o OrgIdpGitlabOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *OrgIdpGitlab) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // the scopes requested by ZITADEL during the request on the identity provider
@@ -357,6 +405,12 @@ func (o OrgIdpGitlabArrayOutput) ToOrgIdpGitlabArrayOutputWithContext(ctx contex
 	return o
 }
 
+func (o OrgIdpGitlabArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpGitlab] {
+	return pulumix.Output[[]*OrgIdpGitlab]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o OrgIdpGitlabArrayOutput) Index(i pulumi.IntInput) OrgIdpGitlabOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *OrgIdpGitlab {
 		return vs[0].([]*OrgIdpGitlab)[vs[1].(int)]
@@ -375,6 +429,12 @@ func (o OrgIdpGitlabMapOutput) ToOrgIdpGitlabMapOutput() OrgIdpGitlabMapOutput {
 
 func (o OrgIdpGitlabMapOutput) ToOrgIdpGitlabMapOutputWithContext(ctx context.Context) OrgIdpGitlabMapOutput {
 	return o
+}
+
+func (o OrgIdpGitlabMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpGitlab] {
+	return pulumix.Output[map[string]*OrgIdpGitlab]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o OrgIdpGitlabMapOutput) MapIndex(k pulumi.StringInput) OrgIdpGitlabOutput {

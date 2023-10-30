@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing the project, which can then be granted to different organizations or users directly, containing different applications.
@@ -19,7 +21,10 @@ import (
 //
 // import (
 //
+<<<<<<< HEAD
 //	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+=======
+>>>>>>> origin/master
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -27,21 +32,31 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			projectProject, err := zitadel.LookupProject(ctx, &GetProjectArgs{
 //				OrgId:     data.Zitadel_org.Org.Id,
 //				ProjectId: "177073620768522243",
+=======
+//			_default, err := zitadel.LookupProject(ctx, &zitadel.LookupProjectArgs{
+//				OrgId:     pulumi.StringRef(data.Zitadel_org.Default.Id),
+//				ProjectId: "123456789012345678",
+>>>>>>> origin/master
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
+<<<<<<< HEAD
 //			ctx.Export("project", projectProject)
+=======
+//			ctx.Export("project", _default)
+>>>>>>> origin/master
 //			return nil
 //		})
 //	}
 //
 // ```
 func LookupProject(ctx *pulumi.Context, args *LookupProjectArgs, opts ...pulumi.InvokeOption) (*LookupProjectResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupProjectResult
 	err := ctx.Invoke("zitadel:index/getProject:getProject", args, &rv, opts...)
 	if err != nil {
@@ -52,8 +67,8 @@ func LookupProject(ctx *pulumi.Context, args *LookupProjectArgs, opts ...pulumi.
 
 // A collection of arguments for invoking getProject.
 type LookupProjectArgs struct {
-	// Organization in which the project is located
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// The ID of this resource.
 	ProjectId string `pulumi:"projectId"`
 }
@@ -66,8 +81,8 @@ type LookupProjectResult struct {
 	Id string `pulumi:"id"`
 	// Name of the project
 	Name string `pulumi:"name"`
-	// Organization in which the project is located
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// Defines from where the private labeling should be triggered
 	PrivateLabelingSetting string `pulumi:"privateLabelingSetting"`
 	// The ID of this resource.
@@ -95,8 +110,8 @@ func LookupProjectOutput(ctx *pulumi.Context, args LookupProjectOutputArgs, opts
 
 // A collection of arguments for invoking getProject.
 type LookupProjectOutputArgs struct {
-	// Organization in which the project is located
-	OrgId pulumi.StringInput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrInput `pulumi:"orgId"`
 	// The ID of this resource.
 	ProjectId pulumi.StringInput `pulumi:"projectId"`
 }
@@ -120,6 +135,12 @@ func (o LookupProjectResultOutput) ToLookupProjectResultOutputWithContext(ctx co
 	return o
 }
 
+func (o LookupProjectResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupProjectResult] {
+	return pulumix.Output[LookupProjectResult]{
+		OutputState: o.OutputState,
+	}
+}
+
 // ZITADEL checks if the org of the user has permission to this project
 func (o LookupProjectResultOutput) HasProjectCheck() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupProjectResult) bool { return v.HasProjectCheck }).(pulumi.BoolOutput)
@@ -135,9 +156,9 @@ func (o LookupProjectResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupProjectResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Organization in which the project is located
-func (o LookupProjectResultOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupProjectResult) string { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o LookupProjectResultOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupProjectResult) *string { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Defines from where the private labeling should be triggered

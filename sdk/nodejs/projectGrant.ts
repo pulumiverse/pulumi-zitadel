@@ -13,12 +13,20 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const projectGrant = new zitadel.ProjectGrant("projectGrant", {
- *     orgId: zitadel_org.org.id,
- *     projectId: zitadel_project.project.id,
- *     grantedOrgId: zitadel_org.grantedorg.id,
- *     roleKeys: [zitadel_project_role.project_role.role_key],
+ * const _default = new zitadel.ProjectGrant("default", {
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: data.zitadel_project["default"].id,
+ *     grantedOrgId: data.zitadel_org.granted_org.id,
+ *     roleKeys: ["super-user"],
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/projectGrant:ProjectGrant imported '123456789012345678:123456789012345678:123456789012345678'
  * ```
  */
 export class ProjectGrant extends pulumi.CustomResource {
@@ -54,9 +62,9 @@ export class ProjectGrant extends pulumi.CustomResource {
      */
     public readonly grantedOrgId!: pulumi.Output<string>;
     /**
-     * ID of the organization which owns the resource
+     * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * ID of the project
      */
@@ -88,9 +96,6 @@ export class ProjectGrant extends pulumi.CustomResource {
             if ((!args || args.grantedOrgId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'grantedOrgId'");
             }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             if ((!args || args.projectId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'projectId'");
             }
@@ -113,7 +118,7 @@ export interface ProjectGrantState {
      */
     grantedOrgId?: pulumi.Input<string>;
     /**
-     * ID of the organization which owns the resource
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
     /**
@@ -135,9 +140,9 @@ export interface ProjectGrantArgs {
      */
     grantedOrgId: pulumi.Input<string>;
     /**
-     * ID of the organization which owns the resource
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * ID of the project
      */

@@ -13,10 +13,18 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const lockoutPolicy = new zitadel.LockoutPolicy("lockoutPolicy", {
- *     orgId: zitadel_org.org.id,
+ * const _default = new zitadel.LockoutPolicy("default", {
+ *     orgId: data.zitadel_org["default"].id,
  *     maxPasswordAttempts: 5,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/lockoutPolicy:LockoutPolicy imported '123456789012345678'
  * ```
  */
 export class LockoutPolicy extends pulumi.CustomResource {
@@ -52,9 +60,9 @@ export class LockoutPolicy extends pulumi.CustomResource {
      */
     public readonly maxPasswordAttempts!: pulumi.Output<number>;
     /**
-     * Id for the organization
+     * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
 
     /**
      * Create a LockoutPolicy resource with the given unique name, arguments, and options.
@@ -93,7 +101,7 @@ export interface LockoutPolicyState {
      */
     maxPasswordAttempts?: pulumi.Input<number>;
     /**
-     * Id for the organization
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
 }
@@ -107,7 +115,7 @@ export interface LockoutPolicyArgs {
      */
     maxPasswordAttempts: pulumi.Input<number>;
     /**
-     * Id for the organization
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
 }

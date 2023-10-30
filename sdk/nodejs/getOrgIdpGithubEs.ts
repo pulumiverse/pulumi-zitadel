@@ -13,17 +13,15 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const githubEs = pulumi.output(zitadel.getOrgIdpGithubEs({
- *     id: "177073614158299139",
- * }));
+ * const default = zitadel.getOrgIdpGithubEs({
+ *     orgId: data.zitadel_org["default"].id,
+ *     id: "123456789012345678",
+ * });
  * ```
  */
 export function getOrgIdpGithubEs(args: GetOrgIdpGithubEsArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgIdpGithubEsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getOrgIdpGithubEs:getOrgIdpGithubEs", {
         "id": args.id,
         "orgId": args.orgId,
@@ -41,7 +39,7 @@ export interface GetOrgIdpGithubEsArgs {
     /**
      * ID of the organization
      */
-    orgId: string;
+    orgId?: string;
 }
 
 /**
@@ -87,7 +85,7 @@ export interface GetOrgIdpGithubEsResult {
     /**
      * ID of the organization
      */
-    readonly orgId: string;
+    readonly orgId?: string;
     /**
      * the scopes requested by ZITADEL during the request on the identity provider
      */
@@ -101,9 +99,23 @@ export interface GetOrgIdpGithubEsResult {
      */
     readonly userEndpoint: string;
 }
-
+/**
+ * Datasource representing a GitHub Enterprise IdP of the organization.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getOrgIdpGithubEs({
+ *     orgId: data.zitadel_org["default"].id,
+ *     id: "123456789012345678",
+ * });
+ * ```
+ */
 export function getOrgIdpGithubEsOutput(args: GetOrgIdpGithubEsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOrgIdpGithubEsResult> {
-    return pulumi.output(args).apply(a => getOrgIdpGithubEs(a, opts))
+    return pulumi.output(args).apply((a: any) => getOrgIdpGithubEs(a, opts))
 }
 
 /**
@@ -117,5 +129,5 @@ export interface GetOrgIdpGithubEsOutputArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
 }

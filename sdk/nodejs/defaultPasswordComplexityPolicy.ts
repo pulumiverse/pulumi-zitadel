@@ -11,15 +11,23 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const passwordComplexityPolicy = new zitadel.DefaultPasswordComplexityPolicy("password_complexity_policy", {
+ * const _default = new zitadel.DefaultPasswordComplexityPolicy("default", {
  *     hasLowercase: true,
  *     hasNumber: true,
  *     hasSymbol: true,
  *     hasUppercase: true,
  *     minLength: 8,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy imported ''
  * ```
  */
 export class DefaultPasswordComplexityPolicy extends pulumi.CustomResource {

@@ -17,19 +17,28 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var applicationApi = new Zitadel.ApplicationApi("applicationApi", new()
+    ///     var @default = new Zitadel.ApplicationApi("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
-    ///         ProjectId = zitadel_project.Project.Id,
-    ///         AuthMethodType = "API_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT",
+    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         ProjectId = data.Zitadel_project.Default.Id,
+    ///         AuthMethodType = "API_AUTH_METHOD_TYPE_BASIC",
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform The resource can be imported using the ID format `&lt;id:project_id[:org_id][:client_id][:client_secret]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/applicationApi:ApplicationApi imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/applicationApi:ApplicationApi")]
@@ -60,10 +69,10 @@ namespace Pulumiverse.Zitadel
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// ID of the project
@@ -95,6 +104,11 @@ namespace Pulumiverse.Zitadel
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/pulumiverse",
+                AdditionalSecretOutputs =
+                {
+                    "clientId",
+                    "clientSecret",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -131,10 +145,10 @@ namespace Pulumiverse.Zitadel
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// ID of the project
@@ -156,17 +170,37 @@ namespace Pulumiverse.Zitadel
         [Input("authMethodType")]
         public Input<string>? AuthMethodType { get; set; }
 
+        [Input("clientId")]
+        private Input<string>? _clientId;
+
         /// <summary>
         /// generated ID for this config
         /// </summary>
-        [Input("clientId")]
-        public Input<string>? ClientId { get; set; }
+        public Input<string>? ClientId
+        {
+            get => _clientId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _clientId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("clientSecret")]
+        private Input<string>? _clientSecret;
 
         /// <summary>
         /// generated secret for this config
         /// </summary>
-        [Input("clientSecret")]
-        public Input<string>? ClientSecret { get; set; }
+        public Input<string>? ClientSecret
+        {
+            get => _clientSecret;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _clientSecret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Name of the application
@@ -175,7 +209,7 @@ namespace Pulumiverse.Zitadel
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
         [Input("orgId")]
         public Input<string>? OrgId { get; set; }

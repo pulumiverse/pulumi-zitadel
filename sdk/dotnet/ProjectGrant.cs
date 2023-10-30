@@ -17,23 +17,32 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var projectGrant = new Zitadel.ProjectGrant("projectGrant", new()
+    ///     var @default = new Zitadel.ProjectGrant("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
-    ///         ProjectId = zitadel_project.Project.Id,
-    ///         GrantedOrgId = zitadel_org.Grantedorg.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         ProjectId = data.Zitadel_project.Default.Id,
+    ///         GrantedOrgId = data.Zitadel_org.Granted_org.Id,
     ///         RoleKeys = new[]
     ///         {
-    ///             zitadel_project_role.Project_role.Role_key,
+    ///             "super-user",
     ///         },
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform The resource can be imported using the ID format `&lt;id:project_id[:org_id]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/projectGrant:ProjectGrant imported '123456789012345678:123456789012345678:123456789012345678'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/projectGrant:ProjectGrant")]
@@ -46,10 +55,10 @@ namespace Pulumiverse.Zitadel
         public Output<string> GrantedOrgId { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the organization which owns the resource
+        /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// ID of the project
@@ -117,10 +126,10 @@ namespace Pulumiverse.Zitadel
         public Input<string> GrantedOrgId { get; set; } = null!;
 
         /// <summary>
-        /// ID of the organization which owns the resource
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// ID of the project
@@ -155,7 +164,7 @@ namespace Pulumiverse.Zitadel
         public Input<string>? GrantedOrgId { get; set; }
 
         /// <summary>
-        /// ID of the organization which owns the resource
+        /// ID of the organization
         /// </summary>
         [Input("orgId")]
         public Input<string>? OrgId { get; set; }

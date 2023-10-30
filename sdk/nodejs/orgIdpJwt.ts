@@ -13,15 +13,23 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const jwtIdp = new zitadel.OrgIdpJwt("jwtIdp", {
- *     orgId: zitadel_org.org.id,
+ * const _default = new zitadel.OrgIdpJwt("default", {
+ *     orgId: data.zitadel_org["default"].id,
  *     stylingType: "STYLING_TYPE_UNSPECIFIED",
- *     jwtEndpoint: "https://jwtendpoint.com",
+ *     jwtEndpoint: "https://jwtendpoint.com/jwt",
  *     issuer: "https://google.com",
  *     keysEndpoint: "https://jwtendpoint.com/keys",
  *     headerName: "x-auth-token",
  *     autoRegister: false,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/orgIdpJwt:OrgIdpJwt imported '123456789012345678:123456789012345678'
  * ```
  */
 export class OrgIdpJwt extends pulumi.CustomResource {
@@ -79,7 +87,7 @@ export class OrgIdpJwt extends pulumi.CustomResource {
     /**
      * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * Some identity providers specify the styling of the button to their login, supported values: STYLING*TYPE*UNSPECIFIED, STYLING*TYPE*GOOGLE
      */
@@ -122,9 +130,6 @@ export class OrgIdpJwt extends pulumi.CustomResource {
             }
             if ((!args || args.keysEndpoint === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'keysEndpoint'");
-            }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
             }
             if ((!args || args.stylingType === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'stylingType'");
@@ -212,7 +217,7 @@ export interface OrgIdpJwtArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * Some identity providers specify the styling of the button to their login, supported values: STYLING*TYPE*UNSPECIFIED, STYLING*TYPE*GOOGLE
      */

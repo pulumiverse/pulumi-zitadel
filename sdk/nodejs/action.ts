@@ -13,12 +13,20 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const action = new zitadel.Action("action", {
- *     orgId: zitadel_org.org.id,
+ * const _default = new zitadel.Action("default", {
+ *     orgId: data.zitadel_org["default"].id,
  *     script: "testscript",
  *     timeout: "10s",
  *     allowedToFail: true,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/action:Action imported '123456789012345678:123456789012345678'
  * ```
  */
 export class Action extends pulumi.CustomResource {
@@ -57,7 +65,7 @@ export class Action extends pulumi.CustomResource {
     /**
      * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     public readonly script!: pulumi.Output<string>;
     /**
      * the state of the action
@@ -91,9 +99,6 @@ export class Action extends pulumi.CustomResource {
             const args = argsOrState as ActionArgs | undefined;
             if ((!args || args.allowedToFail === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'allowedToFail'");
-            }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
             }
             if ((!args || args.script === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'script'");
@@ -149,7 +154,7 @@ export interface ActionArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     script: pulumi.Input<string>;
     /**
      * after which time the action will be terminated if not finished

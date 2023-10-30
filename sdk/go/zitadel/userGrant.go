@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the authorization given to a user directly, including the given roles.
@@ -27,6 +29,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.NewUserGrant(ctx, "userGrant", &zitadel.UserGrantArgs{
 //				ProjectId: pulumi.Any(zitadel_project.Project.Id),
 //				OrgId:     pulumi.Any(zitadel_org.Org.Id),
@@ -34,6 +37,15 @@ import (
 //					pulumi.String("key"),
 //				},
 //				UserId: pulumi.Any(zitadel_human_user.Granted_human_user.Id),
+=======
+//			_, err := zitadel.NewUserGrant(ctx, "default", &zitadel.UserGrantArgs{
+//				ProjectId: pulumi.Any(data.Zitadel_project.Default.Id),
+//				OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
+//				RoleKeys: pulumi.StringArray{
+//					pulumi.String("super-user"),
+//				},
+//				UserId: pulumi.Any(data.Zitadel_human_user.Default.Id),
+>>>>>>> origin/master
 //			})
 //			if err != nil {
 //				return err
@@ -42,12 +54,25 @@ import (
 //		})
 //	}
 //
+<<<<<<< HEAD
+=======
+// ```
+//
+// ## Import
+//
+// terraform The resource can be imported using the ID format `<flow_type:trigger_type[:org_id]>`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import zitadel:index/userGrant:UserGrant imported '123456789012345678:123456789012345678:123456789012345678'
+//
+>>>>>>> origin/master
 // ```
 type UserGrant struct {
 	pulumi.CustomResourceState
 
-	// ID of the organization which owns the resource
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// ID of the granted project
 	ProjectGrantId pulumi.StringPtrOutput `pulumi:"projectGrantId"`
 	// ID of the project
@@ -65,13 +90,10 @@ func NewUserGrant(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	if args.UserId == nil {
 		return nil, errors.New("invalid value for required argument 'UserId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UserGrant
 	err := ctx.RegisterResource("zitadel:index/userGrant:UserGrant", name, args, &resource, opts...)
 	if err != nil {
@@ -94,7 +116,7 @@ func GetUserGrant(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering UserGrant resources.
 type userGrantState struct {
-	// ID of the organization which owns the resource
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 	// ID of the granted project
 	ProjectGrantId *string `pulumi:"projectGrantId"`
@@ -107,7 +129,7 @@ type userGrantState struct {
 }
 
 type UserGrantState struct {
-	// ID of the organization which owns the resource
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 	// ID of the granted project
 	ProjectGrantId pulumi.StringPtrInput
@@ -124,8 +146,8 @@ func (UserGrantState) ElementType() reflect.Type {
 }
 
 type userGrantArgs struct {
-	// ID of the organization which owns the resource
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// ID of the granted project
 	ProjectGrantId *string `pulumi:"projectGrantId"`
 	// ID of the project
@@ -138,8 +160,8 @@ type userGrantArgs struct {
 
 // The set of arguments for constructing a UserGrant resource.
 type UserGrantArgs struct {
-	// ID of the organization which owns the resource
-	OrgId pulumi.StringInput
+	// ID of the organization
+	OrgId pulumi.StringPtrInput
 	// ID of the granted project
 	ProjectGrantId pulumi.StringPtrInput
 	// ID of the project
@@ -173,6 +195,12 @@ func (i *UserGrant) ToUserGrantOutputWithContext(ctx context.Context) UserGrantO
 	return pulumi.ToOutputWithContext(ctx, i).(UserGrantOutput)
 }
 
+func (i *UserGrant) ToOutput(ctx context.Context) pulumix.Output[*UserGrant] {
+	return pulumix.Output[*UserGrant]{
+		OutputState: i.ToUserGrantOutputWithContext(ctx).OutputState,
+	}
+}
+
 // UserGrantArrayInput is an input type that accepts UserGrantArray and UserGrantArrayOutput values.
 // You can construct a concrete instance of `UserGrantArrayInput` via:
 //
@@ -196,6 +224,12 @@ func (i UserGrantArray) ToUserGrantArrayOutput() UserGrantArrayOutput {
 
 func (i UserGrantArray) ToUserGrantArrayOutputWithContext(ctx context.Context) UserGrantArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(UserGrantArrayOutput)
+}
+
+func (i UserGrantArray) ToOutput(ctx context.Context) pulumix.Output[[]*UserGrant] {
+	return pulumix.Output[[]*UserGrant]{
+		OutputState: i.ToUserGrantArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // UserGrantMapInput is an input type that accepts UserGrantMap and UserGrantMapOutput values.
@@ -223,6 +257,12 @@ func (i UserGrantMap) ToUserGrantMapOutputWithContext(ctx context.Context) UserG
 	return pulumi.ToOutputWithContext(ctx, i).(UserGrantMapOutput)
 }
 
+func (i UserGrantMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*UserGrant] {
+	return pulumix.Output[map[string]*UserGrant]{
+		OutputState: i.ToUserGrantMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type UserGrantOutput struct{ *pulumi.OutputState }
 
 func (UserGrantOutput) ElementType() reflect.Type {
@@ -237,9 +277,15 @@ func (o UserGrantOutput) ToUserGrantOutputWithContext(ctx context.Context) UserG
 	return o
 }
 
-// ID of the organization which owns the resource
-func (o UserGrantOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *UserGrant) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o UserGrantOutput) ToOutput(ctx context.Context) pulumix.Output[*UserGrant] {
+	return pulumix.Output[*UserGrant]{
+		OutputState: o.OutputState,
+	}
+}
+
+// ID of the organization
+func (o UserGrantOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *UserGrant) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // ID of the granted project
@@ -276,6 +322,12 @@ func (o UserGrantArrayOutput) ToUserGrantArrayOutputWithContext(ctx context.Cont
 	return o
 }
 
+func (o UserGrantArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*UserGrant] {
+	return pulumix.Output[[]*UserGrant]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o UserGrantArrayOutput) Index(i pulumi.IntInput) UserGrantOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *UserGrant {
 		return vs[0].([]*UserGrant)[vs[1].(int)]
@@ -294,6 +346,12 @@ func (o UserGrantMapOutput) ToUserGrantMapOutput() UserGrantMapOutput {
 
 func (o UserGrantMapOutput) ToUserGrantMapOutputWithContext(ctx context.Context) UserGrantMapOutput {
 	return o
+}
+
+func (o UserGrantMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*UserGrant] {
+	return pulumix.Output[map[string]*UserGrant]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UserGrantMapOutput) MapIndex(k pulumi.StringInput) UserGrantOutput {

@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing a generic JWT IdP of the organization.
@@ -27,10 +29,17 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.NewOrgIdpJwt(ctx, "jwtIdp", &zitadel.OrgIdpJwtArgs{
 //				OrgId:        pulumi.Any(zitadel_org.Org.Id),
 //				StylingType:  pulumi.String("STYLING_TYPE_UNSPECIFIED"),
 //				JwtEndpoint:  pulumi.String("https://jwtendpoint.com"),
+=======
+//			_, err := zitadel.NewOrgIdpJwt(ctx, "default", &zitadel.OrgIdpJwtArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				StylingType:  pulumi.String("STYLING_TYPE_UNSPECIFIED"),
+//				JwtEndpoint:  pulumi.String("https://jwtendpoint.com/jwt"),
+>>>>>>> origin/master
 //				Issuer:       pulumi.String("https://google.com"),
 //				KeysEndpoint: pulumi.String("https://jwtendpoint.com/keys"),
 //				HeaderName:   pulumi.String("x-auth-token"),
@@ -43,6 +52,19 @@ import (
 //		})
 //	}
 //
+<<<<<<< HEAD
+=======
+// ```
+//
+// ## Import
+//
+// terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import zitadel:index/orgIdpJwt:OrgIdpJwt imported '123456789012345678:123456789012345678'
+//
+>>>>>>> origin/master
 // ```
 type OrgIdpJwt struct {
 	pulumi.CustomResourceState
@@ -60,7 +82,7 @@ type OrgIdpJwt struct {
 	// Name of the IDP
 	Name pulumi.StringOutput `pulumi:"name"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// Some identity providers specify the styling of the button to their login, supported values: STYLING*TYPE*UNSPECIFIED, STYLING*TYPE*GOOGLE
 	StylingType pulumi.StringOutput `pulumi:"stylingType"`
 }
@@ -87,13 +109,10 @@ func NewOrgIdpJwt(ctx *pulumi.Context,
 	if args.KeysEndpoint == nil {
 		return nil, errors.New("invalid value for required argument 'KeysEndpoint'")
 	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	if args.StylingType == nil {
 		return nil, errors.New("invalid value for required argument 'StylingType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgIdpJwt
 	err := ctx.RegisterResource("zitadel:index/orgIdpJwt:OrgIdpJwt", name, args, &resource, opts...)
 	if err != nil {
@@ -171,7 +190,7 @@ type orgIdpJwtArgs struct {
 	// Name of the IDP
 	Name *string `pulumi:"name"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// Some identity providers specify the styling of the button to their login, supported values: STYLING*TYPE*UNSPECIFIED, STYLING*TYPE*GOOGLE
 	StylingType string `pulumi:"stylingType"`
 }
@@ -191,7 +210,7 @@ type OrgIdpJwtArgs struct {
 	// Name of the IDP
 	Name pulumi.StringPtrInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// Some identity providers specify the styling of the button to their login, supported values: STYLING*TYPE*UNSPECIFIED, STYLING*TYPE*GOOGLE
 	StylingType pulumi.StringInput
 }
@@ -219,6 +238,12 @@ func (i *OrgIdpJwt) ToOrgIdpJwtOutputWithContext(ctx context.Context) OrgIdpJwtO
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpJwtOutput)
 }
 
+func (i *OrgIdpJwt) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpJwt] {
+	return pulumix.Output[*OrgIdpJwt]{
+		OutputState: i.ToOrgIdpJwtOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpJwtArrayInput is an input type that accepts OrgIdpJwtArray and OrgIdpJwtArrayOutput values.
 // You can construct a concrete instance of `OrgIdpJwtArrayInput` via:
 //
@@ -242,6 +267,12 @@ func (i OrgIdpJwtArray) ToOrgIdpJwtArrayOutput() OrgIdpJwtArrayOutput {
 
 func (i OrgIdpJwtArray) ToOrgIdpJwtArrayOutputWithContext(ctx context.Context) OrgIdpJwtArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpJwtArrayOutput)
+}
+
+func (i OrgIdpJwtArray) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpJwt] {
+	return pulumix.Output[[]*OrgIdpJwt]{
+		OutputState: i.ToOrgIdpJwtArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // OrgIdpJwtMapInput is an input type that accepts OrgIdpJwtMap and OrgIdpJwtMapOutput values.
@@ -269,6 +300,12 @@ func (i OrgIdpJwtMap) ToOrgIdpJwtMapOutputWithContext(ctx context.Context) OrgId
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpJwtMapOutput)
 }
 
+func (i OrgIdpJwtMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpJwt] {
+	return pulumix.Output[map[string]*OrgIdpJwt]{
+		OutputState: i.ToOrgIdpJwtMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type OrgIdpJwtOutput struct{ *pulumi.OutputState }
 
 func (OrgIdpJwtOutput) ElementType() reflect.Type {
@@ -281,6 +318,12 @@ func (o OrgIdpJwtOutput) ToOrgIdpJwtOutput() OrgIdpJwtOutput {
 
 func (o OrgIdpJwtOutput) ToOrgIdpJwtOutputWithContext(ctx context.Context) OrgIdpJwtOutput {
 	return o
+}
+
+func (o OrgIdpJwtOutput) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpJwt] {
+	return pulumix.Output[*OrgIdpJwt]{
+		OutputState: o.OutputState,
+	}
 }
 
 // auto register for users from this idp
@@ -314,8 +357,8 @@ func (o OrgIdpJwtOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o OrgIdpJwtOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *OrgIdpJwt) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o OrgIdpJwtOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *OrgIdpJwt) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Some identity providers specify the styling of the button to their login, supported values: STYLING*TYPE*UNSPECIFIED, STYLING*TYPE*GOOGLE
@@ -337,6 +380,12 @@ func (o OrgIdpJwtArrayOutput) ToOrgIdpJwtArrayOutputWithContext(ctx context.Cont
 	return o
 }
 
+func (o OrgIdpJwtArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpJwt] {
+	return pulumix.Output[[]*OrgIdpJwt]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o OrgIdpJwtArrayOutput) Index(i pulumi.IntInput) OrgIdpJwtOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *OrgIdpJwt {
 		return vs[0].([]*OrgIdpJwt)[vs[1].(int)]
@@ -355,6 +404,12 @@ func (o OrgIdpJwtMapOutput) ToOrgIdpJwtMapOutput() OrgIdpJwtMapOutput {
 
 func (o OrgIdpJwtMapOutput) ToOrgIdpJwtMapOutputWithContext(ctx context.Context) OrgIdpJwtMapOutput {
 	return o
+}
+
+func (o OrgIdpJwtMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpJwt] {
+	return pulumix.Output[map[string]*OrgIdpJwt]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o OrgIdpJwtMapOutput) MapIndex(k pulumi.StringInput) OrgIdpJwtOutput {

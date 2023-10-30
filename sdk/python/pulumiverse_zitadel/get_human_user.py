@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -248,9 +248,9 @@ def get_human_user(org_id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    human_user_human_user = zitadel.get_human_user(org_id=data["zitadel_org"]["org"]["id"],
-        user_id="177073614158299139")
-    pulumi.export("humanUser", human_user_human_user)
+    default = zitadel.get_human_user(org_id=data["zitadel_org"]["default"]["id"],
+        user_id="123456789012345678")
+    pulumi.export("humanUser", default)
     ```
 
 
@@ -264,23 +264,23 @@ def get_human_user(org_id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getHumanUser:getHumanUser', __args__, opts=opts, typ=GetHumanUserResult).value
 
     return AwaitableGetHumanUserResult(
-        display_name=__ret__.display_name,
-        email=__ret__.email,
-        first_name=__ret__.first_name,
-        gender=__ret__.gender,
-        id=__ret__.id,
-        is_email_verified=__ret__.is_email_verified,
-        is_phone_verified=__ret__.is_phone_verified,
-        last_name=__ret__.last_name,
-        login_names=__ret__.login_names,
-        nick_name=__ret__.nick_name,
-        org_id=__ret__.org_id,
-        phone=__ret__.phone,
-        preferred_language=__ret__.preferred_language,
-        preferred_login_name=__ret__.preferred_login_name,
-        state=__ret__.state,
-        user_id=__ret__.user_id,
-        user_name=__ret__.user_name)
+        display_name=pulumi.get(__ret__, 'display_name'),
+        email=pulumi.get(__ret__, 'email'),
+        first_name=pulumi.get(__ret__, 'first_name'),
+        gender=pulumi.get(__ret__, 'gender'),
+        id=pulumi.get(__ret__, 'id'),
+        is_email_verified=pulumi.get(__ret__, 'is_email_verified'),
+        is_phone_verified=pulumi.get(__ret__, 'is_phone_verified'),
+        last_name=pulumi.get(__ret__, 'last_name'),
+        login_names=pulumi.get(__ret__, 'login_names'),
+        nick_name=pulumi.get(__ret__, 'nick_name'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        phone=pulumi.get(__ret__, 'phone'),
+        preferred_language=pulumi.get(__ret__, 'preferred_language'),
+        preferred_login_name=pulumi.get(__ret__, 'preferred_login_name'),
+        state=pulumi.get(__ret__, 'state'),
+        user_id=pulumi.get(__ret__, 'user_id'),
+        user_name=pulumi.get(__ret__, 'user_name'))
 
 
 @_utilities.lift_output_func(get_human_user)
@@ -296,9 +296,9 @@ def get_human_user_output(org_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    human_user_human_user = zitadel.get_human_user(org_id=data["zitadel_org"]["org"]["id"],
-        user_id="177073614158299139")
-    pulumi.export("humanUser", human_user_human_user)
+    default = zitadel.get_human_user(org_id=data["zitadel_org"]["default"]["id"],
+        user_id="123456789012345678")
+    pulumi.export("humanUser", default)
     ```
 
 

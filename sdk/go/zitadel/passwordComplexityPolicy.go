@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the custom password complexity policy of an organization.
@@ -27,8 +29,13 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.NewPasswordComplexityPolicy(ctx, "passwordComplexityPolicy", &zitadel.PasswordComplexityPolicyArgs{
 //				OrgId:        pulumi.Any(zitadel_org.Org.Id),
+=======
+//			_, err := zitadel.NewPasswordComplexityPolicy(ctx, "default", &zitadel.PasswordComplexityPolicyArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+>>>>>>> origin/master
 //				MinLength:    pulumi.Int(8),
 //				HasUppercase: pulumi.Bool(true),
 //				HasLowercase: pulumi.Bool(true),
@@ -56,8 +63,8 @@ type PasswordComplexityPolicy struct {
 	HasUppercase pulumi.BoolOutput `pulumi:"hasUppercase"`
 	// Minimal length for the password
 	MinLength pulumi.IntOutput `pulumi:"minLength"`
-	// Id for the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 }
 
 // NewPasswordComplexityPolicy registers a new resource with the given unique name, arguments, and options.
@@ -82,10 +89,7 @@ func NewPasswordComplexityPolicy(ctx *pulumi.Context,
 	if args.MinLength == nil {
 		return nil, errors.New("invalid value for required argument 'MinLength'")
 	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PasswordComplexityPolicy
 	err := ctx.RegisterResource("zitadel:index/passwordComplexityPolicy:PasswordComplexityPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -118,7 +122,7 @@ type passwordComplexityPolicyState struct {
 	HasUppercase *bool `pulumi:"hasUppercase"`
 	// Minimal length for the password
 	MinLength *int `pulumi:"minLength"`
-	// Id for the organization
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 }
 
@@ -133,7 +137,7 @@ type PasswordComplexityPolicyState struct {
 	HasUppercase pulumi.BoolPtrInput
 	// Minimal length for the password
 	MinLength pulumi.IntPtrInput
-	// Id for the organization
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 }
 
@@ -152,8 +156,8 @@ type passwordComplexityPolicyArgs struct {
 	HasUppercase bool `pulumi:"hasUppercase"`
 	// Minimal length for the password
 	MinLength int `pulumi:"minLength"`
-	// Id for the organization
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 }
 
 // The set of arguments for constructing a PasswordComplexityPolicy resource.
@@ -168,8 +172,8 @@ type PasswordComplexityPolicyArgs struct {
 	HasUppercase pulumi.BoolInput
 	// Minimal length for the password
 	MinLength pulumi.IntInput
-	// Id for the organization
-	OrgId pulumi.StringInput
+	// ID of the organization
+	OrgId pulumi.StringPtrInput
 }
 
 func (PasswordComplexityPolicyArgs) ElementType() reflect.Type {
@@ -193,6 +197,12 @@ func (i *PasswordComplexityPolicy) ToPasswordComplexityPolicyOutput() PasswordCo
 
 func (i *PasswordComplexityPolicy) ToPasswordComplexityPolicyOutputWithContext(ctx context.Context) PasswordComplexityPolicyOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PasswordComplexityPolicyOutput)
+}
+
+func (i *PasswordComplexityPolicy) ToOutput(ctx context.Context) pulumix.Output[*PasswordComplexityPolicy] {
+	return pulumix.Output[*PasswordComplexityPolicy]{
+		OutputState: i.ToPasswordComplexityPolicyOutputWithContext(ctx).OutputState,
+	}
 }
 
 // PasswordComplexityPolicyArrayInput is an input type that accepts PasswordComplexityPolicyArray and PasswordComplexityPolicyArrayOutput values.
@@ -220,6 +230,12 @@ func (i PasswordComplexityPolicyArray) ToPasswordComplexityPolicyArrayOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(PasswordComplexityPolicyArrayOutput)
 }
 
+func (i PasswordComplexityPolicyArray) ToOutput(ctx context.Context) pulumix.Output[[]*PasswordComplexityPolicy] {
+	return pulumix.Output[[]*PasswordComplexityPolicy]{
+		OutputState: i.ToPasswordComplexityPolicyArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // PasswordComplexityPolicyMapInput is an input type that accepts PasswordComplexityPolicyMap and PasswordComplexityPolicyMapOutput values.
 // You can construct a concrete instance of `PasswordComplexityPolicyMapInput` via:
 //
@@ -245,6 +261,12 @@ func (i PasswordComplexityPolicyMap) ToPasswordComplexityPolicyMapOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(PasswordComplexityPolicyMapOutput)
 }
 
+func (i PasswordComplexityPolicyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PasswordComplexityPolicy] {
+	return pulumix.Output[map[string]*PasswordComplexityPolicy]{
+		OutputState: i.ToPasswordComplexityPolicyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type PasswordComplexityPolicyOutput struct{ *pulumi.OutputState }
 
 func (PasswordComplexityPolicyOutput) ElementType() reflect.Type {
@@ -257,6 +279,12 @@ func (o PasswordComplexityPolicyOutput) ToPasswordComplexityPolicyOutput() Passw
 
 func (o PasswordComplexityPolicyOutput) ToPasswordComplexityPolicyOutputWithContext(ctx context.Context) PasswordComplexityPolicyOutput {
 	return o
+}
+
+func (o PasswordComplexityPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[*PasswordComplexityPolicy] {
+	return pulumix.Output[*PasswordComplexityPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 // defines if the password MUST contain a lower case letter
@@ -284,9 +312,9 @@ func (o PasswordComplexityPolicyOutput) MinLength() pulumi.IntOutput {
 	return o.ApplyT(func(v *PasswordComplexityPolicy) pulumi.IntOutput { return v.MinLength }).(pulumi.IntOutput)
 }
 
-// Id for the organization
-func (o PasswordComplexityPolicyOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *PasswordComplexityPolicy) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o PasswordComplexityPolicyOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PasswordComplexityPolicy) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 type PasswordComplexityPolicyArrayOutput struct{ *pulumi.OutputState }
@@ -301,6 +329,12 @@ func (o PasswordComplexityPolicyArrayOutput) ToPasswordComplexityPolicyArrayOutp
 
 func (o PasswordComplexityPolicyArrayOutput) ToPasswordComplexityPolicyArrayOutputWithContext(ctx context.Context) PasswordComplexityPolicyArrayOutput {
 	return o
+}
+
+func (o PasswordComplexityPolicyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PasswordComplexityPolicy] {
+	return pulumix.Output[[]*PasswordComplexityPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PasswordComplexityPolicyArrayOutput) Index(i pulumi.IntInput) PasswordComplexityPolicyOutput {
@@ -321,6 +355,12 @@ func (o PasswordComplexityPolicyMapOutput) ToPasswordComplexityPolicyMapOutput()
 
 func (o PasswordComplexityPolicyMapOutput) ToPasswordComplexityPolicyMapOutputWithContext(ctx context.Context) PasswordComplexityPolicyMapOutput {
 	return o
+}
+
+func (o PasswordComplexityPolicyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PasswordComplexityPolicy] {
+	return pulumix.Output[map[string]*PasswordComplexityPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PasswordComplexityPolicyMapOutput) MapIndex(k pulumi.StringInput) PasswordComplexityPolicyOutput {

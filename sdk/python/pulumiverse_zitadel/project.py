@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ProjectArgs', 'Project']
@@ -14,44 +14,64 @@ __all__ = ['ProjectArgs', 'Project']
 @pulumi.input_type
 class ProjectArgs:
     def __init__(__self__, *,
-                 org_id: pulumi.Input[str],
                  has_project_check: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None,
                  private_labeling_setting: Optional[pulumi.Input[str]] = None,
                  project_role_assertion: Optional[pulumi.Input[bool]] = None,
                  project_role_check: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a Project resource.
-        :param pulumi.Input[str] org_id: Organization in which the project is located
         :param pulumi.Input[bool] has_project_check: ZITADEL checks if the org of the user has permission to this project
         :param pulumi.Input[str] name: Name of the project
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] private_labeling_setting: Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY
         :param pulumi.Input[bool] project_role_assertion: describes if roles of user should be added in token
         :param pulumi.Input[bool] project_role_check: ZITADEL checks if the user has at least one on this project
         """
-        pulumi.set(__self__, "org_id", org_id)
+        ProjectArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            has_project_check=has_project_check,
+            name=name,
+            org_id=org_id,
+            private_labeling_setting=private_labeling_setting,
+            project_role_assertion=project_role_assertion,
+            project_role_check=project_role_check,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             has_project_check: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             private_labeling_setting: Optional[pulumi.Input[str]] = None,
+             project_role_assertion: Optional[pulumi.Input[bool]] = None,
+             project_role_check: Optional[pulumi.Input[bool]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'hasProjectCheck' in kwargs:
+            has_project_check = kwargs['hasProjectCheck']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'privateLabelingSetting' in kwargs:
+            private_labeling_setting = kwargs['privateLabelingSetting']
+        if 'projectRoleAssertion' in kwargs:
+            project_role_assertion = kwargs['projectRoleAssertion']
+        if 'projectRoleCheck' in kwargs:
+            project_role_check = kwargs['projectRoleCheck']
+
         if has_project_check is not None:
-            pulumi.set(__self__, "has_project_check", has_project_check)
+            _setter("has_project_check", has_project_check)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
+        if org_id is not None:
+            _setter("org_id", org_id)
         if private_labeling_setting is not None:
-            pulumi.set(__self__, "private_labeling_setting", private_labeling_setting)
+            _setter("private_labeling_setting", private_labeling_setting)
         if project_role_assertion is not None:
-            pulumi.set(__self__, "project_role_assertion", project_role_assertion)
+            _setter("project_role_assertion", project_role_assertion)
         if project_role_check is not None:
-            pulumi.set(__self__, "project_role_check", project_role_check)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        Organization in which the project is located
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
+            _setter("project_role_check", project_role_check)
 
     @property
     @pulumi.getter(name="hasProjectCheck")
@@ -76,6 +96,18 @@ class ProjectArgs:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter(name="privateLabelingSetting")
@@ -128,26 +160,59 @@ class _ProjectState:
         Input properties used for looking up and filtering Project resources.
         :param pulumi.Input[bool] has_project_check: ZITADEL checks if the org of the user has permission to this project
         :param pulumi.Input[str] name: Name of the project
-        :param pulumi.Input[str] org_id: Organization in which the project is located
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] private_labeling_setting: Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY
         :param pulumi.Input[bool] project_role_assertion: describes if roles of user should be added in token
         :param pulumi.Input[bool] project_role_check: ZITADEL checks if the user has at least one on this project
         :param pulumi.Input[str] state: State of the project
         """
+        _ProjectState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            has_project_check=has_project_check,
+            name=name,
+            org_id=org_id,
+            private_labeling_setting=private_labeling_setting,
+            project_role_assertion=project_role_assertion,
+            project_role_check=project_role_check,
+            state=state,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             has_project_check: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             private_labeling_setting: Optional[pulumi.Input[str]] = None,
+             project_role_assertion: Optional[pulumi.Input[bool]] = None,
+             project_role_check: Optional[pulumi.Input[bool]] = None,
+             state: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'hasProjectCheck' in kwargs:
+            has_project_check = kwargs['hasProjectCheck']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'privateLabelingSetting' in kwargs:
+            private_labeling_setting = kwargs['privateLabelingSetting']
+        if 'projectRoleAssertion' in kwargs:
+            project_role_assertion = kwargs['projectRoleAssertion']
+        if 'projectRoleCheck' in kwargs:
+            project_role_check = kwargs['projectRoleCheck']
+
         if has_project_check is not None:
-            pulumi.set(__self__, "has_project_check", has_project_check)
+            _setter("has_project_check", has_project_check)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if private_labeling_setting is not None:
-            pulumi.set(__self__, "private_labeling_setting", private_labeling_setting)
+            _setter("private_labeling_setting", private_labeling_setting)
         if project_role_assertion is not None:
-            pulumi.set(__self__, "project_role_assertion", project_role_assertion)
+            _setter("project_role_assertion", project_role_assertion)
         if project_role_check is not None:
-            pulumi.set(__self__, "project_role_check", project_role_check)
+            _setter("project_role_check", project_role_check)
         if state is not None:
-            pulumi.set(__self__, "state", state)
+            _setter("state", state)
 
     @property
     @pulumi.getter(name="hasProjectCheck")
@@ -177,7 +242,7 @@ class _ProjectState:
     @pulumi.getter(name="orgId")
     def org_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Organization in which the project is located
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -255,19 +320,27 @@ class Project(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        project = zitadel.Project("project",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.Project("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             project_role_assertion=True,
             project_role_check=True,
             has_project_check=True,
             private_labeling_setting="PRIVATE_LABELING_SETTING_ENFORCE_PROJECT_RESOURCE_OWNER_POLICY")
         ```
 
+        ## Import
+
+        terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/project:Project imported '123456789012345678:123456789012345678'
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] has_project_check: ZITADEL checks if the org of the user has permission to this project
         :param pulumi.Input[str] name: Name of the project
-        :param pulumi.Input[str] org_id: Organization in which the project is located
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] private_labeling_setting: Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY
         :param pulumi.Input[bool] project_role_assertion: describes if roles of user should be added in token
         :param pulumi.Input[bool] project_role_check: ZITADEL checks if the user has at least one on this project
@@ -276,7 +349,7 @@ class Project(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: ProjectArgs,
+                 args: Optional[ProjectArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Resource representing the project, which can then be granted to different organizations or users directly, containing different applications.
@@ -287,12 +360,20 @@ class Project(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        project = zitadel.Project("project",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.Project("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             project_role_assertion=True,
             project_role_check=True,
             has_project_check=True,
             private_labeling_setting="PRIVATE_LABELING_SETTING_ENFORCE_PROJECT_RESOURCE_OWNER_POLICY")
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/project:Project imported '123456789012345678:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -305,6 +386,10 @@ class Project(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ProjectArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -327,8 +412,6 @@ class Project(pulumi.CustomResource):
 
             __props__.__dict__["has_project_check"] = has_project_check
             __props__.__dict__["name"] = name
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             __props__.__dict__["private_labeling_setting"] = private_labeling_setting
             __props__.__dict__["project_role_assertion"] = project_role_assertion
@@ -360,7 +443,7 @@ class Project(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] has_project_check: ZITADEL checks if the org of the user has permission to this project
         :param pulumi.Input[str] name: Name of the project
-        :param pulumi.Input[str] org_id: Organization in which the project is located
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] private_labeling_setting: Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY
         :param pulumi.Input[bool] project_role_assertion: describes if roles of user should be added in token
         :param pulumi.Input[bool] project_role_check: ZITADEL checks if the user has at least one on this project
@@ -397,9 +480,9 @@ class Project(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Organization in which the project is located
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 

@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ProjectMemberArgs', 'ProjectMember']
@@ -14,33 +14,45 @@ __all__ = ['ProjectMemberArgs', 'ProjectMember']
 @pulumi.input_type
 class ProjectMemberArgs:
     def __init__(__self__, *,
-                 org_id: pulumi.Input[str],
                  project_id: pulumi.Input[str],
                  roles: pulumi.Input[Sequence[pulumi.Input[str]]],
-                 user_id: pulumi.Input[str]):
+                 user_id: pulumi.Input[str],
+                 org_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ProjectMember resource.
-        :param pulumi.Input[str] org_id: ID of the organization which owns the resource
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[Sequence[pulumi.Input[str]]] roles: List of roles granted
         :param pulumi.Input[str] user_id: ID of the user
+        :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "org_id", org_id)
-        pulumi.set(__self__, "project_id", project_id)
-        pulumi.set(__self__, "roles", roles)
-        pulumi.set(__self__, "user_id", user_id)
+        ProjectMemberArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            project_id=project_id,
+            roles=roles,
+            user_id=user_id,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             project_id: pulumi.Input[str],
+             roles: pulumi.Input[Sequence[pulumi.Input[str]]],
+             user_id: pulumi.Input[str],
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'projectId' in kwargs:
+            project_id = kwargs['projectId']
+        if 'userId' in kwargs:
+            user_id = kwargs['userId']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
 
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization which owns the resource
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
+        _setter("project_id", project_id)
+        _setter("roles", roles)
+        _setter("user_id", user_id)
+        if org_id is not None:
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="projectId")
@@ -78,6 +90,18 @@ class ProjectMemberArgs:
     def user_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "user_id", value)
 
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
+
 
 @pulumi.input_type
 class _ProjectMemberState:
@@ -88,25 +112,48 @@ class _ProjectMemberState:
                  user_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ProjectMember resources.
-        :param pulumi.Input[str] org_id: ID of the organization which owns the resource
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[Sequence[pulumi.Input[str]]] roles: List of roles granted
         :param pulumi.Input[str] user_id: ID of the user
         """
+        _ProjectMemberState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            org_id=org_id,
+            project_id=project_id,
+            roles=roles,
+            user_id=user_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             org_id: Optional[pulumi.Input[str]] = None,
+             project_id: Optional[pulumi.Input[str]] = None,
+             roles: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             user_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'projectId' in kwargs:
+            project_id = kwargs['projectId']
+        if 'userId' in kwargs:
+            user_id = kwargs['userId']
+
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if project_id is not None:
-            pulumi.set(__self__, "project_id", project_id)
+            _setter("project_id", project_id)
         if roles is not None:
-            pulumi.set(__self__, "roles", roles)
+            _setter("roles", roles)
         if user_id is not None:
-            pulumi.set(__self__, "user_id", user_id)
+            _setter("user_id", user_id)
 
     @property
     @pulumi.getter(name="orgId")
     def org_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the organization which owns the resource
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -170,16 +217,24 @@ class ProjectMember(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        project_member = zitadel.ProjectMember("projectMember",
-            org_id=zitadel_org["org"]["id"],
-            project_id=zitadel_project["project"]["id"],
-            user_id=zitadel_human_user["human_user"]["id"],
+        default = zitadel.ProjectMember("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=data["zitadel_project"]["default"]["id"],
+            user_id=data["zitadel_human_user"]["default"]["id"],
             roles=["PROJECT_OWNER"])
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<project_id:user_id[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/projectMember:ProjectMember imported '123456789012345678:123456789012345678:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] org_id: ID of the organization which owns the resource
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[Sequence[pulumi.Input[str]]] roles: List of roles granted
         :param pulumi.Input[str] user_id: ID of the user
@@ -199,11 +254,19 @@ class ProjectMember(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        project_member = zitadel.ProjectMember("projectMember",
-            org_id=zitadel_org["org"]["id"],
-            project_id=zitadel_project["project"]["id"],
-            user_id=zitadel_human_user["human_user"]["id"],
+        default = zitadel.ProjectMember("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=data["zitadel_project"]["default"]["id"],
+            user_id=data["zitadel_human_user"]["default"]["id"],
             roles=["PROJECT_OWNER"])
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<project_id:user_id[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/projectMember:ProjectMember imported '123456789012345678:123456789012345678:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -216,6 +279,10 @@ class ProjectMember(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ProjectMemberArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -234,8 +301,6 @@ class ProjectMember(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProjectMemberArgs.__new__(ProjectMemberArgs)
 
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
@@ -267,7 +332,7 @@ class ProjectMember(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] org_id: ID of the organization which owns the resource
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[Sequence[pulumi.Input[str]]] roles: List of roles granted
         :param pulumi.Input[str] user_id: ID of the user
@@ -284,9 +349,9 @@ class ProjectMember(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
-        ID of the organization which owns the resource
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 

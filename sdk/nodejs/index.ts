@@ -5,83 +5,406 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
-export * from "./action";
-export * from "./applicationApi";
-export * from "./applicationKey";
-export * from "./applicationOidc";
-export * from "./defaultDomainPolicy";
-export * from "./defaultLabelPolicy";
-export * from "./defaultLockoutPolicy";
-export * from "./defaultLoginPolicy";
-export * from "./defaultNotificationPolicy";
-export * from "./defaultPasswordComplexityPolicy";
-export * from "./defaultPrivacyPolicy";
-export * from "./domain";
-export * from "./domainPolicy";
-export * from "./getAction";
-export * from "./getApplicationApi";
-export * from "./getApplicationOidc";
-export * from "./getHumanUser";
-export * from "./getIdpAzureAd";
-export * from "./getIdpGithub";
-export * from "./getIdpGithubEs";
-export * from "./getIdpGitlab";
-export * from "./getIdpGitlabSelfHosted";
-export * from "./getIdpGoogle";
-export * from "./getIdpLdap";
-export * from "./getMachineUser";
-export * from "./getOrg";
-export * from "./getOrgIdpAzureAd";
-export * from "./getOrgIdpGithub";
-export * from "./getOrgIdpGithubEs";
-export * from "./getOrgIdpGitlab";
-export * from "./getOrgIdpGitlabSelfHosted";
-export * from "./getOrgIdpGoogle";
-export * from "./getOrgIdpLdap";
-export * from "./getOrgJwtIdp";
-export * from "./getOrgOidcIdp";
-export * from "./getProject";
-export * from "./getProjectRole";
-export * from "./getTriggerActions";
-export * from "./humanUser";
-export * from "./idpAzureAd";
-export * from "./idpGithub";
-export * from "./idpGithubEs";
-export * from "./idpGitlab";
-export * from "./idpGitlabSelfHosted";
-export * from "./idpGoogle";
-export * from "./idpLdap";
-export * from "./instanceMember";
-export * from "./labelPolicy";
-export * from "./lockoutPolicy";
-export * from "./loginPolicy";
-export * from "./machineKey";
-export * from "./machineUser";
-export * from "./notificationPolicy";
-export * from "./org";
-export * from "./orgIdpAzureAd";
-export * from "./orgIdpGithub";
-export * from "./orgIdpGithubEs";
-export * from "./orgIdpGitlab";
-export * from "./orgIdpGitlabSelfHosted";
-export * from "./orgIdpGoogle";
-export * from "./orgIdpJwt";
-export * from "./orgIdpLdap";
-export * from "./orgIdpOidc";
-export * from "./orgMember";
-export * from "./passwordComplexityPolicy";
-export * from "./personalAccessToken";
-export * from "./privacyPolicy";
-export * from "./project";
-export * from "./projectGrant";
-export * from "./projectGrantMember";
-export * from "./projectMember";
-export * from "./projectRole";
-export * from "./provider";
-export * from "./smsProviderTwilio";
-export * from "./smtpConfig";
-export * from "./triggerActions";
-export * from "./userGrant";
+export { ActionArgs, ActionState } from "./action";
+export type Action = import("./action").Action;
+export const Action: typeof import("./action").Action = null as any;
+utilities.lazyLoad(exports, ["Action"], () => require("./action"));
+
+export { ApplicationApiArgs, ApplicationApiState } from "./applicationApi";
+export type ApplicationApi = import("./applicationApi").ApplicationApi;
+export const ApplicationApi: typeof import("./applicationApi").ApplicationApi = null as any;
+utilities.lazyLoad(exports, ["ApplicationApi"], () => require("./applicationApi"));
+
+export { ApplicationKeyArgs, ApplicationKeyState } from "./applicationKey";
+export type ApplicationKey = import("./applicationKey").ApplicationKey;
+export const ApplicationKey: typeof import("./applicationKey").ApplicationKey = null as any;
+utilities.lazyLoad(exports, ["ApplicationKey"], () => require("./applicationKey"));
+
+export { ApplicationOidcArgs, ApplicationOidcState } from "./applicationOidc";
+export type ApplicationOidc = import("./applicationOidc").ApplicationOidc;
+export const ApplicationOidc: typeof import("./applicationOidc").ApplicationOidc = null as any;
+utilities.lazyLoad(exports, ["ApplicationOidc"], () => require("./applicationOidc"));
+
+export { DefaultDomainPolicyArgs, DefaultDomainPolicyState } from "./defaultDomainPolicy";
+export type DefaultDomainPolicy = import("./defaultDomainPolicy").DefaultDomainPolicy;
+export const DefaultDomainPolicy: typeof import("./defaultDomainPolicy").DefaultDomainPolicy = null as any;
+utilities.lazyLoad(exports, ["DefaultDomainPolicy"], () => require("./defaultDomainPolicy"));
+
+export { DefaultLabelPolicyArgs, DefaultLabelPolicyState } from "./defaultLabelPolicy";
+export type DefaultLabelPolicy = import("./defaultLabelPolicy").DefaultLabelPolicy;
+export const DefaultLabelPolicy: typeof import("./defaultLabelPolicy").DefaultLabelPolicy = null as any;
+utilities.lazyLoad(exports, ["DefaultLabelPolicy"], () => require("./defaultLabelPolicy"));
+
+export { DefaultLockoutPolicyArgs, DefaultLockoutPolicyState } from "./defaultLockoutPolicy";
+export type DefaultLockoutPolicy = import("./defaultLockoutPolicy").DefaultLockoutPolicy;
+export const DefaultLockoutPolicy: typeof import("./defaultLockoutPolicy").DefaultLockoutPolicy = null as any;
+utilities.lazyLoad(exports, ["DefaultLockoutPolicy"], () => require("./defaultLockoutPolicy"));
+
+export { DefaultLoginPolicyArgs, DefaultLoginPolicyState } from "./defaultLoginPolicy";
+export type DefaultLoginPolicy = import("./defaultLoginPolicy").DefaultLoginPolicy;
+export const DefaultLoginPolicy: typeof import("./defaultLoginPolicy").DefaultLoginPolicy = null as any;
+utilities.lazyLoad(exports, ["DefaultLoginPolicy"], () => require("./defaultLoginPolicy"));
+
+export { DefaultNotificationPolicyArgs, DefaultNotificationPolicyState } from "./defaultNotificationPolicy";
+export type DefaultNotificationPolicy = import("./defaultNotificationPolicy").DefaultNotificationPolicy;
+export const DefaultNotificationPolicy: typeof import("./defaultNotificationPolicy").DefaultNotificationPolicy = null as any;
+utilities.lazyLoad(exports, ["DefaultNotificationPolicy"], () => require("./defaultNotificationPolicy"));
+
+export { DefaultOidcSettingsArgs, DefaultOidcSettingsState } from "./defaultOidcSettings";
+export type DefaultOidcSettings = import("./defaultOidcSettings").DefaultOidcSettings;
+export const DefaultOidcSettings: typeof import("./defaultOidcSettings").DefaultOidcSettings = null as any;
+utilities.lazyLoad(exports, ["DefaultOidcSettings"], () => require("./defaultOidcSettings"));
+
+export { DefaultPasswordComplexityPolicyArgs, DefaultPasswordComplexityPolicyState } from "./defaultPasswordComplexityPolicy";
+export type DefaultPasswordComplexityPolicy = import("./defaultPasswordComplexityPolicy").DefaultPasswordComplexityPolicy;
+export const DefaultPasswordComplexityPolicy: typeof import("./defaultPasswordComplexityPolicy").DefaultPasswordComplexityPolicy = null as any;
+utilities.lazyLoad(exports, ["DefaultPasswordComplexityPolicy"], () => require("./defaultPasswordComplexityPolicy"));
+
+export { DefaultPrivacyPolicyArgs, DefaultPrivacyPolicyState } from "./defaultPrivacyPolicy";
+export type DefaultPrivacyPolicy = import("./defaultPrivacyPolicy").DefaultPrivacyPolicy;
+export const DefaultPrivacyPolicy: typeof import("./defaultPrivacyPolicy").DefaultPrivacyPolicy = null as any;
+utilities.lazyLoad(exports, ["DefaultPrivacyPolicy"], () => require("./defaultPrivacyPolicy"));
+
+export { DomainArgs, DomainState } from "./domain";
+export type Domain = import("./domain").Domain;
+export const Domain: typeof import("./domain").Domain = null as any;
+utilities.lazyLoad(exports, ["Domain"], () => require("./domain"));
+
+export { DomainPolicyArgs, DomainPolicyState } from "./domainPolicy";
+export type DomainPolicy = import("./domainPolicy").DomainPolicy;
+export const DomainPolicy: typeof import("./domainPolicy").DomainPolicy = null as any;
+utilities.lazyLoad(exports, ["DomainPolicy"], () => require("./domainPolicy"));
+
+export { GetActionArgs, GetActionResult, GetActionOutputArgs } from "./getAction";
+export const getAction: typeof import("./getAction").getAction = null as any;
+export const getActionOutput: typeof import("./getAction").getActionOutput = null as any;
+utilities.lazyLoad(exports, ["getAction","getActionOutput"], () => require("./getAction"));
+
+export { GetApplicationApiArgs, GetApplicationApiResult, GetApplicationApiOutputArgs } from "./getApplicationApi";
+export const getApplicationApi: typeof import("./getApplicationApi").getApplicationApi = null as any;
+export const getApplicationApiOutput: typeof import("./getApplicationApi").getApplicationApiOutput = null as any;
+utilities.lazyLoad(exports, ["getApplicationApi","getApplicationApiOutput"], () => require("./getApplicationApi"));
+
+export { GetApplicationOidcArgs, GetApplicationOidcResult, GetApplicationOidcOutputArgs } from "./getApplicationOidc";
+export const getApplicationOidc: typeof import("./getApplicationOidc").getApplicationOidc = null as any;
+export const getApplicationOidcOutput: typeof import("./getApplicationOidc").getApplicationOidcOutput = null as any;
+utilities.lazyLoad(exports, ["getApplicationOidc","getApplicationOidcOutput"], () => require("./getApplicationOidc"));
+
+export { GetDefaultOidcSettingsResult } from "./getDefaultOidcSettings";
+export const getDefaultOidcSettings: typeof import("./getDefaultOidcSettings").getDefaultOidcSettings = null as any;
+export const getDefaultOidcSettingsOutput: typeof import("./getDefaultOidcSettings").getDefaultOidcSettingsOutput = null as any;
+utilities.lazyLoad(exports, ["getDefaultOidcSettings","getDefaultOidcSettingsOutput"], () => require("./getDefaultOidcSettings"));
+
+export { GetHumanUserArgs, GetHumanUserResult, GetHumanUserOutputArgs } from "./getHumanUser";
+export const getHumanUser: typeof import("./getHumanUser").getHumanUser = null as any;
+export const getHumanUserOutput: typeof import("./getHumanUser").getHumanUserOutput = null as any;
+utilities.lazyLoad(exports, ["getHumanUser","getHumanUserOutput"], () => require("./getHumanUser"));
+
+export { GetIdpAzureAdArgs, GetIdpAzureAdResult, GetIdpAzureAdOutputArgs } from "./getIdpAzureAd";
+export const getIdpAzureAd: typeof import("./getIdpAzureAd").getIdpAzureAd = null as any;
+export const getIdpAzureAdOutput: typeof import("./getIdpAzureAd").getIdpAzureAdOutput = null as any;
+utilities.lazyLoad(exports, ["getIdpAzureAd","getIdpAzureAdOutput"], () => require("./getIdpAzureAd"));
+
+export { GetIdpGithubArgs, GetIdpGithubResult, GetIdpGithubOutputArgs } from "./getIdpGithub";
+export const getIdpGithub: typeof import("./getIdpGithub").getIdpGithub = null as any;
+export const getIdpGithubOutput: typeof import("./getIdpGithub").getIdpGithubOutput = null as any;
+utilities.lazyLoad(exports, ["getIdpGithub","getIdpGithubOutput"], () => require("./getIdpGithub"));
+
+export { GetIdpGithubEsArgs, GetIdpGithubEsResult, GetIdpGithubEsOutputArgs } from "./getIdpGithubEs";
+export const getIdpGithubEs: typeof import("./getIdpGithubEs").getIdpGithubEs = null as any;
+export const getIdpGithubEsOutput: typeof import("./getIdpGithubEs").getIdpGithubEsOutput = null as any;
+utilities.lazyLoad(exports, ["getIdpGithubEs","getIdpGithubEsOutput"], () => require("./getIdpGithubEs"));
+
+export { GetIdpGitlabArgs, GetIdpGitlabResult, GetIdpGitlabOutputArgs } from "./getIdpGitlab";
+export const getIdpGitlab: typeof import("./getIdpGitlab").getIdpGitlab = null as any;
+export const getIdpGitlabOutput: typeof import("./getIdpGitlab").getIdpGitlabOutput = null as any;
+utilities.lazyLoad(exports, ["getIdpGitlab","getIdpGitlabOutput"], () => require("./getIdpGitlab"));
+
+export { GetIdpGitlabSelfHostedArgs, GetIdpGitlabSelfHostedResult, GetIdpGitlabSelfHostedOutputArgs } from "./getIdpGitlabSelfHosted";
+export const getIdpGitlabSelfHosted: typeof import("./getIdpGitlabSelfHosted").getIdpGitlabSelfHosted = null as any;
+export const getIdpGitlabSelfHostedOutput: typeof import("./getIdpGitlabSelfHosted").getIdpGitlabSelfHostedOutput = null as any;
+utilities.lazyLoad(exports, ["getIdpGitlabSelfHosted","getIdpGitlabSelfHostedOutput"], () => require("./getIdpGitlabSelfHosted"));
+
+export { GetIdpGoogleArgs, GetIdpGoogleResult, GetIdpGoogleOutputArgs } from "./getIdpGoogle";
+export const getIdpGoogle: typeof import("./getIdpGoogle").getIdpGoogle = null as any;
+export const getIdpGoogleOutput: typeof import("./getIdpGoogle").getIdpGoogleOutput = null as any;
+utilities.lazyLoad(exports, ["getIdpGoogle","getIdpGoogleOutput"], () => require("./getIdpGoogle"));
+
+export { GetIdpLdapArgs, GetIdpLdapResult, GetIdpLdapOutputArgs } from "./getIdpLdap";
+export const getIdpLdap: typeof import("./getIdpLdap").getIdpLdap = null as any;
+export const getIdpLdapOutput: typeof import("./getIdpLdap").getIdpLdapOutput = null as any;
+utilities.lazyLoad(exports, ["getIdpLdap","getIdpLdapOutput"], () => require("./getIdpLdap"));
+
+export { GetMachineUserArgs, GetMachineUserResult, GetMachineUserOutputArgs } from "./getMachineUser";
+export const getMachineUser: typeof import("./getMachineUser").getMachineUser = null as any;
+export const getMachineUserOutput: typeof import("./getMachineUser").getMachineUserOutput = null as any;
+utilities.lazyLoad(exports, ["getMachineUser","getMachineUserOutput"], () => require("./getMachineUser"));
+
+export { GetOrgArgs, GetOrgResult, GetOrgOutputArgs } from "./getOrg";
+export const getOrg: typeof import("./getOrg").getOrg = null as any;
+export const getOrgOutput: typeof import("./getOrg").getOrgOutput = null as any;
+utilities.lazyLoad(exports, ["getOrg","getOrgOutput"], () => require("./getOrg"));
+
+export { GetOrgIdpAzureAdArgs, GetOrgIdpAzureAdResult, GetOrgIdpAzureAdOutputArgs } from "./getOrgIdpAzureAd";
+export const getOrgIdpAzureAd: typeof import("./getOrgIdpAzureAd").getOrgIdpAzureAd = null as any;
+export const getOrgIdpAzureAdOutput: typeof import("./getOrgIdpAzureAd").getOrgIdpAzureAdOutput = null as any;
+utilities.lazyLoad(exports, ["getOrgIdpAzureAd","getOrgIdpAzureAdOutput"], () => require("./getOrgIdpAzureAd"));
+
+export { GetOrgIdpGithubArgs, GetOrgIdpGithubResult, GetOrgIdpGithubOutputArgs } from "./getOrgIdpGithub";
+export const getOrgIdpGithub: typeof import("./getOrgIdpGithub").getOrgIdpGithub = null as any;
+export const getOrgIdpGithubOutput: typeof import("./getOrgIdpGithub").getOrgIdpGithubOutput = null as any;
+utilities.lazyLoad(exports, ["getOrgIdpGithub","getOrgIdpGithubOutput"], () => require("./getOrgIdpGithub"));
+
+export { GetOrgIdpGithubEsArgs, GetOrgIdpGithubEsResult, GetOrgIdpGithubEsOutputArgs } from "./getOrgIdpGithubEs";
+export const getOrgIdpGithubEs: typeof import("./getOrgIdpGithubEs").getOrgIdpGithubEs = null as any;
+export const getOrgIdpGithubEsOutput: typeof import("./getOrgIdpGithubEs").getOrgIdpGithubEsOutput = null as any;
+utilities.lazyLoad(exports, ["getOrgIdpGithubEs","getOrgIdpGithubEsOutput"], () => require("./getOrgIdpGithubEs"));
+
+export { GetOrgIdpGitlabArgs, GetOrgIdpGitlabResult, GetOrgIdpGitlabOutputArgs } from "./getOrgIdpGitlab";
+export const getOrgIdpGitlab: typeof import("./getOrgIdpGitlab").getOrgIdpGitlab = null as any;
+export const getOrgIdpGitlabOutput: typeof import("./getOrgIdpGitlab").getOrgIdpGitlabOutput = null as any;
+utilities.lazyLoad(exports, ["getOrgIdpGitlab","getOrgIdpGitlabOutput"], () => require("./getOrgIdpGitlab"));
+
+export { GetOrgIdpGitlabSelfHostedArgs, GetOrgIdpGitlabSelfHostedResult, GetOrgIdpGitlabSelfHostedOutputArgs } from "./getOrgIdpGitlabSelfHosted";
+export const getOrgIdpGitlabSelfHosted: typeof import("./getOrgIdpGitlabSelfHosted").getOrgIdpGitlabSelfHosted = null as any;
+export const getOrgIdpGitlabSelfHostedOutput: typeof import("./getOrgIdpGitlabSelfHosted").getOrgIdpGitlabSelfHostedOutput = null as any;
+utilities.lazyLoad(exports, ["getOrgIdpGitlabSelfHosted","getOrgIdpGitlabSelfHostedOutput"], () => require("./getOrgIdpGitlabSelfHosted"));
+
+export { GetOrgIdpGoogleArgs, GetOrgIdpGoogleResult, GetOrgIdpGoogleOutputArgs } from "./getOrgIdpGoogle";
+export const getOrgIdpGoogle: typeof import("./getOrgIdpGoogle").getOrgIdpGoogle = null as any;
+export const getOrgIdpGoogleOutput: typeof import("./getOrgIdpGoogle").getOrgIdpGoogleOutput = null as any;
+utilities.lazyLoad(exports, ["getOrgIdpGoogle","getOrgIdpGoogleOutput"], () => require("./getOrgIdpGoogle"));
+
+export { GetOrgIdpLdapArgs, GetOrgIdpLdapResult, GetOrgIdpLdapOutputArgs } from "./getOrgIdpLdap";
+export const getOrgIdpLdap: typeof import("./getOrgIdpLdap").getOrgIdpLdap = null as any;
+export const getOrgIdpLdapOutput: typeof import("./getOrgIdpLdap").getOrgIdpLdapOutput = null as any;
+utilities.lazyLoad(exports, ["getOrgIdpLdap","getOrgIdpLdapOutput"], () => require("./getOrgIdpLdap"));
+
+export { GetOrgJwtIdpArgs, GetOrgJwtIdpResult, GetOrgJwtIdpOutputArgs } from "./getOrgJwtIdp";
+export const getOrgJwtIdp: typeof import("./getOrgJwtIdp").getOrgJwtIdp = null as any;
+export const getOrgJwtIdpOutput: typeof import("./getOrgJwtIdp").getOrgJwtIdpOutput = null as any;
+utilities.lazyLoad(exports, ["getOrgJwtIdp","getOrgJwtIdpOutput"], () => require("./getOrgJwtIdp"));
+
+export { GetOrgOidcIdpArgs, GetOrgOidcIdpResult, GetOrgOidcIdpOutputArgs } from "./getOrgOidcIdp";
+export const getOrgOidcIdp: typeof import("./getOrgOidcIdp").getOrgOidcIdp = null as any;
+export const getOrgOidcIdpOutput: typeof import("./getOrgOidcIdp").getOrgOidcIdpOutput = null as any;
+utilities.lazyLoad(exports, ["getOrgOidcIdp","getOrgOidcIdpOutput"], () => require("./getOrgOidcIdp"));
+
+export { GetOrgsArgs, GetOrgsResult, GetOrgsOutputArgs } from "./getOrgs";
+export const getOrgs: typeof import("./getOrgs").getOrgs = null as any;
+export const getOrgsOutput: typeof import("./getOrgs").getOrgsOutput = null as any;
+utilities.lazyLoad(exports, ["getOrgs","getOrgsOutput"], () => require("./getOrgs"));
+
+export { GetProjectArgs, GetProjectResult, GetProjectOutputArgs } from "./getProject";
+export const getProject: typeof import("./getProject").getProject = null as any;
+export const getProjectOutput: typeof import("./getProject").getProjectOutput = null as any;
+utilities.lazyLoad(exports, ["getProject","getProjectOutput"], () => require("./getProject"));
+
+export { GetProjectRoleArgs, GetProjectRoleResult, GetProjectRoleOutputArgs } from "./getProjectRole";
+export const getProjectRole: typeof import("./getProjectRole").getProjectRole = null as any;
+export const getProjectRoleOutput: typeof import("./getProjectRole").getProjectRoleOutput = null as any;
+utilities.lazyLoad(exports, ["getProjectRole","getProjectRoleOutput"], () => require("./getProjectRole"));
+
+export { GetTriggerActionsArgs, GetTriggerActionsResult, GetTriggerActionsOutputArgs } from "./getTriggerActions";
+export const getTriggerActions: typeof import("./getTriggerActions").getTriggerActions = null as any;
+export const getTriggerActionsOutput: typeof import("./getTriggerActions").getTriggerActionsOutput = null as any;
+utilities.lazyLoad(exports, ["getTriggerActions","getTriggerActionsOutput"], () => require("./getTriggerActions"));
+
+export { HumanUserArgs, HumanUserState } from "./humanUser";
+export type HumanUser = import("./humanUser").HumanUser;
+export const HumanUser: typeof import("./humanUser").HumanUser = null as any;
+utilities.lazyLoad(exports, ["HumanUser"], () => require("./humanUser"));
+
+export { IdpAzureAdArgs, IdpAzureAdState } from "./idpAzureAd";
+export type IdpAzureAd = import("./idpAzureAd").IdpAzureAd;
+export const IdpAzureAd: typeof import("./idpAzureAd").IdpAzureAd = null as any;
+utilities.lazyLoad(exports, ["IdpAzureAd"], () => require("./idpAzureAd"));
+
+export { IdpGithubArgs, IdpGithubState } from "./idpGithub";
+export type IdpGithub = import("./idpGithub").IdpGithub;
+export const IdpGithub: typeof import("./idpGithub").IdpGithub = null as any;
+utilities.lazyLoad(exports, ["IdpGithub"], () => require("./idpGithub"));
+
+export { IdpGithubEsArgs, IdpGithubEsState } from "./idpGithubEs";
+export type IdpGithubEs = import("./idpGithubEs").IdpGithubEs;
+export const IdpGithubEs: typeof import("./idpGithubEs").IdpGithubEs = null as any;
+utilities.lazyLoad(exports, ["IdpGithubEs"], () => require("./idpGithubEs"));
+
+export { IdpGitlabArgs, IdpGitlabState } from "./idpGitlab";
+export type IdpGitlab = import("./idpGitlab").IdpGitlab;
+export const IdpGitlab: typeof import("./idpGitlab").IdpGitlab = null as any;
+utilities.lazyLoad(exports, ["IdpGitlab"], () => require("./idpGitlab"));
+
+export { IdpGitlabSelfHostedArgs, IdpGitlabSelfHostedState } from "./idpGitlabSelfHosted";
+export type IdpGitlabSelfHosted = import("./idpGitlabSelfHosted").IdpGitlabSelfHosted;
+export const IdpGitlabSelfHosted: typeof import("./idpGitlabSelfHosted").IdpGitlabSelfHosted = null as any;
+utilities.lazyLoad(exports, ["IdpGitlabSelfHosted"], () => require("./idpGitlabSelfHosted"));
+
+export { IdpGoogleArgs, IdpGoogleState } from "./idpGoogle";
+export type IdpGoogle = import("./idpGoogle").IdpGoogle;
+export const IdpGoogle: typeof import("./idpGoogle").IdpGoogle = null as any;
+utilities.lazyLoad(exports, ["IdpGoogle"], () => require("./idpGoogle"));
+
+export { IdpLdapArgs, IdpLdapState } from "./idpLdap";
+export type IdpLdap = import("./idpLdap").IdpLdap;
+export const IdpLdap: typeof import("./idpLdap").IdpLdap = null as any;
+utilities.lazyLoad(exports, ["IdpLdap"], () => require("./idpLdap"));
+
+export { InstanceMemberArgs, InstanceMemberState } from "./instanceMember";
+export type InstanceMember = import("./instanceMember").InstanceMember;
+export const InstanceMember: typeof import("./instanceMember").InstanceMember = null as any;
+utilities.lazyLoad(exports, ["InstanceMember"], () => require("./instanceMember"));
+
+export { LabelPolicyArgs, LabelPolicyState } from "./labelPolicy";
+export type LabelPolicy = import("./labelPolicy").LabelPolicy;
+export const LabelPolicy: typeof import("./labelPolicy").LabelPolicy = null as any;
+utilities.lazyLoad(exports, ["LabelPolicy"], () => require("./labelPolicy"));
+
+export { LockoutPolicyArgs, LockoutPolicyState } from "./lockoutPolicy";
+export type LockoutPolicy = import("./lockoutPolicy").LockoutPolicy;
+export const LockoutPolicy: typeof import("./lockoutPolicy").LockoutPolicy = null as any;
+utilities.lazyLoad(exports, ["LockoutPolicy"], () => require("./lockoutPolicy"));
+
+export { LoginPolicyArgs, LoginPolicyState } from "./loginPolicy";
+export type LoginPolicy = import("./loginPolicy").LoginPolicy;
+export const LoginPolicy: typeof import("./loginPolicy").LoginPolicy = null as any;
+utilities.lazyLoad(exports, ["LoginPolicy"], () => require("./loginPolicy"));
+
+export { MachineKeyArgs, MachineKeyState } from "./machineKey";
+export type MachineKey = import("./machineKey").MachineKey;
+export const MachineKey: typeof import("./machineKey").MachineKey = null as any;
+utilities.lazyLoad(exports, ["MachineKey"], () => require("./machineKey"));
+
+export { MachineUserArgs, MachineUserState } from "./machineUser";
+export type MachineUser = import("./machineUser").MachineUser;
+export const MachineUser: typeof import("./machineUser").MachineUser = null as any;
+utilities.lazyLoad(exports, ["MachineUser"], () => require("./machineUser"));
+
+export { NotificationPolicyArgs, NotificationPolicyState } from "./notificationPolicy";
+export type NotificationPolicy = import("./notificationPolicy").NotificationPolicy;
+export const NotificationPolicy: typeof import("./notificationPolicy").NotificationPolicy = null as any;
+utilities.lazyLoad(exports, ["NotificationPolicy"], () => require("./notificationPolicy"));
+
+export { OrgArgs, OrgState } from "./org";
+export type Org = import("./org").Org;
+export const Org: typeof import("./org").Org = null as any;
+utilities.lazyLoad(exports, ["Org"], () => require("./org"));
+
+export { OrgIdpAzureAdArgs, OrgIdpAzureAdState } from "./orgIdpAzureAd";
+export type OrgIdpAzureAd = import("./orgIdpAzureAd").OrgIdpAzureAd;
+export const OrgIdpAzureAd: typeof import("./orgIdpAzureAd").OrgIdpAzureAd = null as any;
+utilities.lazyLoad(exports, ["OrgIdpAzureAd"], () => require("./orgIdpAzureAd"));
+
+export { OrgIdpGithubArgs, OrgIdpGithubState } from "./orgIdpGithub";
+export type OrgIdpGithub = import("./orgIdpGithub").OrgIdpGithub;
+export const OrgIdpGithub: typeof import("./orgIdpGithub").OrgIdpGithub = null as any;
+utilities.lazyLoad(exports, ["OrgIdpGithub"], () => require("./orgIdpGithub"));
+
+export { OrgIdpGithubEsArgs, OrgIdpGithubEsState } from "./orgIdpGithubEs";
+export type OrgIdpGithubEs = import("./orgIdpGithubEs").OrgIdpGithubEs;
+export const OrgIdpGithubEs: typeof import("./orgIdpGithubEs").OrgIdpGithubEs = null as any;
+utilities.lazyLoad(exports, ["OrgIdpGithubEs"], () => require("./orgIdpGithubEs"));
+
+export { OrgIdpGitlabArgs, OrgIdpGitlabState } from "./orgIdpGitlab";
+export type OrgIdpGitlab = import("./orgIdpGitlab").OrgIdpGitlab;
+export const OrgIdpGitlab: typeof import("./orgIdpGitlab").OrgIdpGitlab = null as any;
+utilities.lazyLoad(exports, ["OrgIdpGitlab"], () => require("./orgIdpGitlab"));
+
+export { OrgIdpGitlabSelfHostedArgs, OrgIdpGitlabSelfHostedState } from "./orgIdpGitlabSelfHosted";
+export type OrgIdpGitlabSelfHosted = import("./orgIdpGitlabSelfHosted").OrgIdpGitlabSelfHosted;
+export const OrgIdpGitlabSelfHosted: typeof import("./orgIdpGitlabSelfHosted").OrgIdpGitlabSelfHosted = null as any;
+utilities.lazyLoad(exports, ["OrgIdpGitlabSelfHosted"], () => require("./orgIdpGitlabSelfHosted"));
+
+export { OrgIdpGoogleArgs, OrgIdpGoogleState } from "./orgIdpGoogle";
+export type OrgIdpGoogle = import("./orgIdpGoogle").OrgIdpGoogle;
+export const OrgIdpGoogle: typeof import("./orgIdpGoogle").OrgIdpGoogle = null as any;
+utilities.lazyLoad(exports, ["OrgIdpGoogle"], () => require("./orgIdpGoogle"));
+
+export { OrgIdpJwtArgs, OrgIdpJwtState } from "./orgIdpJwt";
+export type OrgIdpJwt = import("./orgIdpJwt").OrgIdpJwt;
+export const OrgIdpJwt: typeof import("./orgIdpJwt").OrgIdpJwt = null as any;
+utilities.lazyLoad(exports, ["OrgIdpJwt"], () => require("./orgIdpJwt"));
+
+export { OrgIdpLdapArgs, OrgIdpLdapState } from "./orgIdpLdap";
+export type OrgIdpLdap = import("./orgIdpLdap").OrgIdpLdap;
+export const OrgIdpLdap: typeof import("./orgIdpLdap").OrgIdpLdap = null as any;
+utilities.lazyLoad(exports, ["OrgIdpLdap"], () => require("./orgIdpLdap"));
+
+export { OrgIdpOidcArgs, OrgIdpOidcState } from "./orgIdpOidc";
+export type OrgIdpOidc = import("./orgIdpOidc").OrgIdpOidc;
+export const OrgIdpOidc: typeof import("./orgIdpOidc").OrgIdpOidc = null as any;
+utilities.lazyLoad(exports, ["OrgIdpOidc"], () => require("./orgIdpOidc"));
+
+export { OrgMemberArgs, OrgMemberState } from "./orgMember";
+export type OrgMember = import("./orgMember").OrgMember;
+export const OrgMember: typeof import("./orgMember").OrgMember = null as any;
+utilities.lazyLoad(exports, ["OrgMember"], () => require("./orgMember"));
+
+export { PasswordComplexityPolicyArgs, PasswordComplexityPolicyState } from "./passwordComplexityPolicy";
+export type PasswordComplexityPolicy = import("./passwordComplexityPolicy").PasswordComplexityPolicy;
+export const PasswordComplexityPolicy: typeof import("./passwordComplexityPolicy").PasswordComplexityPolicy = null as any;
+utilities.lazyLoad(exports, ["PasswordComplexityPolicy"], () => require("./passwordComplexityPolicy"));
+
+export { PersonalAccessTokenArgs, PersonalAccessTokenState } from "./personalAccessToken";
+export type PersonalAccessToken = import("./personalAccessToken").PersonalAccessToken;
+export const PersonalAccessToken: typeof import("./personalAccessToken").PersonalAccessToken = null as any;
+utilities.lazyLoad(exports, ["PersonalAccessToken"], () => require("./personalAccessToken"));
+
+export { PrivacyPolicyArgs, PrivacyPolicyState } from "./privacyPolicy";
+export type PrivacyPolicy = import("./privacyPolicy").PrivacyPolicy;
+export const PrivacyPolicy: typeof import("./privacyPolicy").PrivacyPolicy = null as any;
+utilities.lazyLoad(exports, ["PrivacyPolicy"], () => require("./privacyPolicy"));
+
+export { ProjectArgs, ProjectState } from "./project";
+export type Project = import("./project").Project;
+export const Project: typeof import("./project").Project = null as any;
+utilities.lazyLoad(exports, ["Project"], () => require("./project"));
+
+export { ProjectGrantArgs, ProjectGrantState } from "./projectGrant";
+export type ProjectGrant = import("./projectGrant").ProjectGrant;
+export const ProjectGrant: typeof import("./projectGrant").ProjectGrant = null as any;
+utilities.lazyLoad(exports, ["ProjectGrant"], () => require("./projectGrant"));
+
+export { ProjectGrantMemberArgs, ProjectGrantMemberState } from "./projectGrantMember";
+export type ProjectGrantMember = import("./projectGrantMember").ProjectGrantMember;
+export const ProjectGrantMember: typeof import("./projectGrantMember").ProjectGrantMember = null as any;
+utilities.lazyLoad(exports, ["ProjectGrantMember"], () => require("./projectGrantMember"));
+
+export { ProjectMemberArgs, ProjectMemberState } from "./projectMember";
+export type ProjectMember = import("./projectMember").ProjectMember;
+export const ProjectMember: typeof import("./projectMember").ProjectMember = null as any;
+utilities.lazyLoad(exports, ["ProjectMember"], () => require("./projectMember"));
+
+export { ProjectRoleArgs, ProjectRoleState } from "./projectRole";
+export type ProjectRole = import("./projectRole").ProjectRole;
+export const ProjectRole: typeof import("./projectRole").ProjectRole = null as any;
+utilities.lazyLoad(exports, ["ProjectRole"], () => require("./projectRole"));
+
+export { ProviderArgs } from "./provider";
+export type Provider = import("./provider").Provider;
+export const Provider: typeof import("./provider").Provider = null as any;
+utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+
+export { SmsProviderTwilioArgs, SmsProviderTwilioState } from "./smsProviderTwilio";
+export type SmsProviderTwilio = import("./smsProviderTwilio").SmsProviderTwilio;
+export const SmsProviderTwilio: typeof import("./smsProviderTwilio").SmsProviderTwilio = null as any;
+utilities.lazyLoad(exports, ["SmsProviderTwilio"], () => require("./smsProviderTwilio"));
+
+export { SmtpConfigArgs, SmtpConfigState } from "./smtpConfig";
+export type SmtpConfig = import("./smtpConfig").SmtpConfig;
+export const SmtpConfig: typeof import("./smtpConfig").SmtpConfig = null as any;
+utilities.lazyLoad(exports, ["SmtpConfig"], () => require("./smtpConfig"));
+
+export { TriggerActionsArgs, TriggerActionsState } from "./triggerActions";
+export type TriggerActions = import("./triggerActions").TriggerActions;
+export const TriggerActions: typeof import("./triggerActions").TriggerActions = null as any;
+utilities.lazyLoad(exports, ["TriggerActions"], () => require("./triggerActions"));
+
+export { UserGrantArgs, UserGrantState } from "./userGrant";
+export type UserGrant = import("./userGrant").UserGrant;
+export const UserGrant: typeof import("./userGrant").UserGrant = null as any;
+utilities.lazyLoad(exports, ["UserGrant"], () => require("./userGrant"));
+
 
 // Export sub-modules:
 import * as config from "./config";
@@ -89,59 +412,6 @@ import * as config from "./config";
 export {
     config,
 };
-
-// Import resources to register:
-import { Action } from "./action";
-import { ApplicationApi } from "./applicationApi";
-import { ApplicationKey } from "./applicationKey";
-import { ApplicationOidc } from "./applicationOidc";
-import { DefaultDomainPolicy } from "./defaultDomainPolicy";
-import { DefaultLabelPolicy } from "./defaultLabelPolicy";
-import { DefaultLockoutPolicy } from "./defaultLockoutPolicy";
-import { DefaultLoginPolicy } from "./defaultLoginPolicy";
-import { DefaultNotificationPolicy } from "./defaultNotificationPolicy";
-import { DefaultPasswordComplexityPolicy } from "./defaultPasswordComplexityPolicy";
-import { DefaultPrivacyPolicy } from "./defaultPrivacyPolicy";
-import { Domain } from "./domain";
-import { DomainPolicy } from "./domainPolicy";
-import { HumanUser } from "./humanUser";
-import { IdpAzureAd } from "./idpAzureAd";
-import { IdpGithub } from "./idpGithub";
-import { IdpGithubEs } from "./idpGithubEs";
-import { IdpGitlab } from "./idpGitlab";
-import { IdpGitlabSelfHosted } from "./idpGitlabSelfHosted";
-import { IdpGoogle } from "./idpGoogle";
-import { IdpLdap } from "./idpLdap";
-import { InstanceMember } from "./instanceMember";
-import { LabelPolicy } from "./labelPolicy";
-import { LockoutPolicy } from "./lockoutPolicy";
-import { LoginPolicy } from "./loginPolicy";
-import { MachineKey } from "./machineKey";
-import { MachineUser } from "./machineUser";
-import { NotificationPolicy } from "./notificationPolicy";
-import { Org } from "./org";
-import { OrgIdpAzureAd } from "./orgIdpAzureAd";
-import { OrgIdpGithub } from "./orgIdpGithub";
-import { OrgIdpGithubEs } from "./orgIdpGithubEs";
-import { OrgIdpGitlab } from "./orgIdpGitlab";
-import { OrgIdpGitlabSelfHosted } from "./orgIdpGitlabSelfHosted";
-import { OrgIdpGoogle } from "./orgIdpGoogle";
-import { OrgIdpJwt } from "./orgIdpJwt";
-import { OrgIdpLdap } from "./orgIdpLdap";
-import { OrgIdpOidc } from "./orgIdpOidc";
-import { OrgMember } from "./orgMember";
-import { PasswordComplexityPolicy } from "./passwordComplexityPolicy";
-import { PersonalAccessToken } from "./personalAccessToken";
-import { PrivacyPolicy } from "./privacyPolicy";
-import { Project } from "./project";
-import { ProjectGrant } from "./projectGrant";
-import { ProjectGrantMember } from "./projectGrantMember";
-import { ProjectMember } from "./projectMember";
-import { ProjectRole } from "./projectRole";
-import { SmsProviderTwilio } from "./smsProviderTwilio";
-import { SmtpConfig } from "./smtpConfig";
-import { TriggerActions } from "./triggerActions";
-import { UserGrant } from "./userGrant";
 
 const _module = {
     version: utilities.getVersion(),
@@ -165,6 +435,8 @@ const _module = {
                 return new DefaultLoginPolicy(name, <any>undefined, { urn })
             case "zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy":
                 return new DefaultNotificationPolicy(name, <any>undefined, { urn })
+            case "zitadel:index/defaultOidcSettings:DefaultOidcSettings":
+                return new DefaultOidcSettings(name, <any>undefined, { urn })
             case "zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy":
                 return new DefaultPasswordComplexityPolicy(name, <any>undefined, { urn })
             case "zitadel:index/defaultPrivacyPolicy:DefaultPrivacyPolicy":
@@ -263,6 +535,7 @@ pulumi.runtime.registerResourceModule("zitadel", "index/defaultLabelPolicy", _mo
 pulumi.runtime.registerResourceModule("zitadel", "index/defaultLockoutPolicy", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/defaultLoginPolicy", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/defaultNotificationPolicy", _module)
+pulumi.runtime.registerResourceModule("zitadel", "index/defaultOidcSettings", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/defaultPasswordComplexityPolicy", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/defaultPrivacyPolicy", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/domain", _module)
@@ -305,9 +578,6 @@ pulumi.runtime.registerResourceModule("zitadel", "index/smsProviderTwilio", _mod
 pulumi.runtime.registerResourceModule("zitadel", "index/smtpConfig", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/triggerActions", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/userGrant", _module)
-
-import { Provider } from "./provider";
-
 pulumi.runtime.registerResourcePackage("zitadel", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

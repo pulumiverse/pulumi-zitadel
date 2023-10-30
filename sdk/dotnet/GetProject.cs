@@ -21,20 +21,21 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var projectProject = Zitadel.GetProject.Invoke(new()
+        ///     var @default = Zitadel.GetProject.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = "177073620768522243",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["project"] = projectProject.Apply(getProjectResult =&gt; getProjectResult),
+        ///         ["project"] = @default,
         ///     };
         /// });
         /// ```
@@ -42,7 +43,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetProjectResult> InvokeAsync(GetProjectArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProjectResult>("zitadel:index/getProject:getProject", args ?? new GetProjectArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProjectResult>("zitadel:index/getProject:getProject", args ?? new GetProjectArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing the project, which can then be granted to different organizations or users directly, containing different applications.
@@ -53,20 +54,21 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var projectProject = Zitadel.GetProject.Invoke(new()
+        ///     var @default = Zitadel.GetProject.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = "177073620768522243",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["project"] = projectProject.Apply(getProjectResult =&gt; getProjectResult),
+        ///         ["project"] = @default,
         ///     };
         /// });
         /// ```
@@ -74,17 +76,17 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetProjectResult> Invoke(GetProjectInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProjectResult>("zitadel:index/getProject:getProject", args ?? new GetProjectInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProjectResult>("zitadel:index/getProject:getProject", args ?? new GetProjectInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetProjectArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// Organization in which the project is located
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public string OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public string? OrgId { get; set; }
 
         /// <summary>
         /// The ID of this resource.
@@ -101,10 +103,10 @@ namespace Pulumiverse.Zitadel
     public sealed class GetProjectInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// Organization in which the project is located
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// The ID of this resource.
@@ -135,9 +137,9 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// Organization in which the project is located
+        /// ID of the organization
         /// </summary>
-        public readonly string OrgId;
+        public readonly string? OrgId;
         /// <summary>
         /// Defines from where the private labeling should be triggered
         /// </summary>
@@ -167,7 +169,7 @@ namespace Pulumiverse.Zitadel
 
             string name,
 
-            string orgId,
+            string? orgId,
 
             string privateLabelingSetting,
 

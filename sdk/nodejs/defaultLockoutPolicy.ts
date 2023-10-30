@@ -11,11 +11,17 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const lockoutPolicy = new zitadel.DefaultLockoutPolicy("lockout_policy", {
- *     maxPasswordAttempts: 5,
- * });
+ * const _default = new zitadel.DefaultLockoutPolicy("default", {maxPasswordAttempts: 5});
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/defaultLockoutPolicy:DefaultLockoutPolicy imported ''
  * ```
  */
 export class DefaultLockoutPolicy extends pulumi.CustomResource {

@@ -13,13 +13,21 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const project = new zitadel.Project("project", {
- *     orgId: zitadel_org.org.id,
+ * const _default = new zitadel.Project("default", {
+ *     orgId: data.zitadel_org["default"].id,
  *     projectRoleAssertion: true,
  *     projectRoleCheck: true,
  *     hasProjectCheck: true,
  *     privateLabelingSetting: "PRIVATE_LABELING_SETTING_ENFORCE_PROJECT_RESOURCE_OWNER_POLICY",
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/project:Project imported '123456789012345678:123456789012345678'
  * ```
  */
 export class Project extends pulumi.CustomResource {
@@ -59,9 +67,9 @@ export class Project extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Organization in which the project is located
+     * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY
      */
@@ -86,7 +94,7 @@ export class Project extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: ProjectArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: ProjectArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ProjectArgs | ProjectState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -101,9 +109,6 @@ export class Project extends pulumi.CustomResource {
             resourceInputs["state"] = state ? state.state : undefined;
         } else {
             const args = argsOrState as ProjectArgs | undefined;
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             resourceInputs["hasProjectCheck"] = args ? args.hasProjectCheck : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["orgId"] = args ? args.orgId : undefined;
@@ -130,7 +135,7 @@ export interface ProjectState {
      */
     name?: pulumi.Input<string>;
     /**
-     * Organization in which the project is located
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
     /**
@@ -164,9 +169,9 @@ export interface ProjectArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * Organization in which the project is located
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * Defines from where the private labeling should be triggered, supported values: PRIVATE*LABELING*SETTING*UNSPECIFIED, PRIVATE*LABELING*SETTING*ENFORCE*PROJECT*RESOURCE*OWNER*POLICY, PRIVATE*LABELING*SETTING*ALLOW*LOGIN*USER*RESOURCE*OWNER*POLICY
      */

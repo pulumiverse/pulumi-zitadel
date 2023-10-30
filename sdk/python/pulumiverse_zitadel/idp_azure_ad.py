@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['IdpAzureAdArgs', 'IdpAzureAd']
@@ -39,21 +39,70 @@ class IdpAzureAdArgs:
         :param pulumi.Input[str] tenant_id: if tenant*id is not set, the tenant*type is used
         :param pulumi.Input[str] tenant_type: the azure ad tenant type
         """
-        pulumi.set(__self__, "client_id", client_id)
-        pulumi.set(__self__, "client_secret", client_secret)
-        pulumi.set(__self__, "email_verified", email_verified)
-        pulumi.set(__self__, "is_auto_creation", is_auto_creation)
-        pulumi.set(__self__, "is_auto_update", is_auto_update)
-        pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
-        pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
+        IdpAzureAdArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            client_id=client_id,
+            client_secret=client_secret,
+            email_verified=email_verified,
+            is_auto_creation=is_auto_creation,
+            is_auto_update=is_auto_update,
+            is_creation_allowed=is_creation_allowed,
+            is_linking_allowed=is_linking_allowed,
+            name=name,
+            scopes=scopes,
+            tenant_id=tenant_id,
+            tenant_type=tenant_type,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             client_id: pulumi.Input[str],
+             client_secret: pulumi.Input[str],
+             email_verified: pulumi.Input[bool],
+             is_auto_creation: pulumi.Input[bool],
+             is_auto_update: pulumi.Input[bool],
+             is_creation_allowed: pulumi.Input[bool],
+             is_linking_allowed: pulumi.Input[bool],
+             name: Optional[pulumi.Input[str]] = None,
+             scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             tenant_id: Optional[pulumi.Input[str]] = None,
+             tenant_type: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'clientId' in kwargs:
+            client_id = kwargs['clientId']
+        if 'clientSecret' in kwargs:
+            client_secret = kwargs['clientSecret']
+        if 'emailVerified' in kwargs:
+            email_verified = kwargs['emailVerified']
+        if 'isAutoCreation' in kwargs:
+            is_auto_creation = kwargs['isAutoCreation']
+        if 'isAutoUpdate' in kwargs:
+            is_auto_update = kwargs['isAutoUpdate']
+        if 'isCreationAllowed' in kwargs:
+            is_creation_allowed = kwargs['isCreationAllowed']
+        if 'isLinkingAllowed' in kwargs:
+            is_linking_allowed = kwargs['isLinkingAllowed']
+        if 'tenantId' in kwargs:
+            tenant_id = kwargs['tenantId']
+        if 'tenantType' in kwargs:
+            tenant_type = kwargs['tenantType']
+
+        _setter("client_id", client_id)
+        _setter("client_secret", client_secret)
+        _setter("email_verified", email_verified)
+        _setter("is_auto_creation", is_auto_creation)
+        _setter("is_auto_update", is_auto_update)
+        _setter("is_creation_allowed", is_creation_allowed)
+        _setter("is_linking_allowed", is_linking_allowed)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if scopes is not None:
-            pulumi.set(__self__, "scopes", scopes)
+            _setter("scopes", scopes)
         if tenant_id is not None:
-            pulumi.set(__self__, "tenant_id", tenant_id)
+            _setter("tenant_id", tenant_id)
         if tenant_type is not None:
-            pulumi.set(__self__, "tenant_type", tenant_type)
+            _setter("tenant_type", tenant_type)
 
     @property
     @pulumi.getter(name="clientId")
@@ -216,28 +265,77 @@ class _IdpAzureAdState:
         :param pulumi.Input[str] tenant_id: if tenant*id is not set, the tenant*type is used
         :param pulumi.Input[str] tenant_type: the azure ad tenant type
         """
+        _IdpAzureAdState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            client_id=client_id,
+            client_secret=client_secret,
+            email_verified=email_verified,
+            is_auto_creation=is_auto_creation,
+            is_auto_update=is_auto_update,
+            is_creation_allowed=is_creation_allowed,
+            is_linking_allowed=is_linking_allowed,
+            name=name,
+            scopes=scopes,
+            tenant_id=tenant_id,
+            tenant_type=tenant_type,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             client_id: Optional[pulumi.Input[str]] = None,
+             client_secret: Optional[pulumi.Input[str]] = None,
+             email_verified: Optional[pulumi.Input[bool]] = None,
+             is_auto_creation: Optional[pulumi.Input[bool]] = None,
+             is_auto_update: Optional[pulumi.Input[bool]] = None,
+             is_creation_allowed: Optional[pulumi.Input[bool]] = None,
+             is_linking_allowed: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             tenant_id: Optional[pulumi.Input[str]] = None,
+             tenant_type: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'clientId' in kwargs:
+            client_id = kwargs['clientId']
+        if 'clientSecret' in kwargs:
+            client_secret = kwargs['clientSecret']
+        if 'emailVerified' in kwargs:
+            email_verified = kwargs['emailVerified']
+        if 'isAutoCreation' in kwargs:
+            is_auto_creation = kwargs['isAutoCreation']
+        if 'isAutoUpdate' in kwargs:
+            is_auto_update = kwargs['isAutoUpdate']
+        if 'isCreationAllowed' in kwargs:
+            is_creation_allowed = kwargs['isCreationAllowed']
+        if 'isLinkingAllowed' in kwargs:
+            is_linking_allowed = kwargs['isLinkingAllowed']
+        if 'tenantId' in kwargs:
+            tenant_id = kwargs['tenantId']
+        if 'tenantType' in kwargs:
+            tenant_type = kwargs['tenantType']
+
         if client_id is not None:
-            pulumi.set(__self__, "client_id", client_id)
+            _setter("client_id", client_id)
         if client_secret is not None:
-            pulumi.set(__self__, "client_secret", client_secret)
+            _setter("client_secret", client_secret)
         if email_verified is not None:
-            pulumi.set(__self__, "email_verified", email_verified)
+            _setter("email_verified", email_verified)
         if is_auto_creation is not None:
-            pulumi.set(__self__, "is_auto_creation", is_auto_creation)
+            _setter("is_auto_creation", is_auto_creation)
         if is_auto_update is not None:
-            pulumi.set(__self__, "is_auto_update", is_auto_update)
+            _setter("is_auto_update", is_auto_update)
         if is_creation_allowed is not None:
-            pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
+            _setter("is_creation_allowed", is_creation_allowed)
         if is_linking_allowed is not None:
-            pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
+            _setter("is_linking_allowed", is_linking_allowed)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if scopes is not None:
-            pulumi.set(__self__, "scopes", scopes)
+            _setter("scopes", scopes)
         if tenant_id is not None:
-            pulumi.set(__self__, "tenant_id", tenant_id)
+            _setter("tenant_id", tenant_id)
         if tenant_type is not None:
-            pulumi.set(__self__, "tenant_type", tenant_type)
+            _setter("tenant_type", tenant_type)
 
     @property
     @pulumi.getter(name="clientId")
@@ -398,7 +496,7 @@ class IdpAzureAd(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        azure_ad = zitadel.IdpAzureAd("azureAd",
+        default = zitadel.IdpAzureAd("default",
             client_id="9065bfc8-a08a...",
             client_secret="H2n***",
             email_verified=True,
@@ -413,6 +511,14 @@ class IdpAzureAd(pulumi.CustomResource):
                 "User.Read",
             ],
             tenant_type="AZURE_AD_TENANT_TYPE_ORGANISATIONS")
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpAzureAd:IdpAzureAd imported '123456789012345678:12345678-1234-1234-1234-123456789012'
         ```
 
         :param str resource_name: The name of the resource.
@@ -444,7 +550,7 @@ class IdpAzureAd(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        azure_ad = zitadel.IdpAzureAd("azureAd",
+        default = zitadel.IdpAzureAd("default",
             client_id="9065bfc8-a08a...",
             client_secret="H2n***",
             email_verified=True,
@@ -461,6 +567,14 @@ class IdpAzureAd(pulumi.CustomResource):
             tenant_type="AZURE_AD_TENANT_TYPE_ORGANISATIONS")
         ```
 
+        ## Import
+
+        terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpAzureAd:IdpAzureAd imported '123456789012345678:12345678-1234-1234-1234-123456789012'
+        ```
+
         :param str resource_name: The name of the resource.
         :param IdpAzureAdArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -471,6 +585,10 @@ class IdpAzureAd(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            IdpAzureAdArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -501,7 +619,7 @@ class IdpAzureAd(pulumi.CustomResource):
             __props__.__dict__["client_id"] = client_id
             if client_secret is None and not opts.urn:
                 raise TypeError("Missing required property 'client_secret'")
-            __props__.__dict__["client_secret"] = client_secret
+            __props__.__dict__["client_secret"] = None if client_secret is None else pulumi.Output.secret(client_secret)
             if email_verified is None and not opts.urn:
                 raise TypeError("Missing required property 'email_verified'")
             __props__.__dict__["email_verified"] = email_verified
@@ -521,6 +639,8 @@ class IdpAzureAd(pulumi.CustomResource):
             __props__.__dict__["scopes"] = scopes
             __props__.__dict__["tenant_id"] = tenant_id
             __props__.__dict__["tenant_type"] = tenant_type
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["clientSecret"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(IdpAzureAd, __self__).__init__(
             'zitadel:index/idpAzureAd:IdpAzureAd',
             resource_name,

@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -64,7 +64,7 @@ class GetTriggerActionsResult:
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> str:
+    def org_id(self) -> Optional[str]:
         """
         ID of the organization
         """
@@ -105,10 +105,10 @@ def get_trigger_actions(flow_type: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    trigger_actions_trigger_actions = zitadel.get_trigger_actions(org_id=data["zitadel_org"]["org"]["id"],
+    default = zitadel.get_trigger_actions(org_id=data["zitadel_org"]["default"]["id"],
         flow_type="FLOW_TYPE_EXTERNAL_AUTHENTICATION",
         trigger_type="TRIGGER_TYPE_POST_AUTHENTICATION")
-    pulumi.export("triggerActions", trigger_actions_trigger_actions)
+    pulumi.export("triggerActions", default)
     ```
 
 
@@ -124,16 +124,16 @@ def get_trigger_actions(flow_type: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getTriggerActions:getTriggerActions', __args__, opts=opts, typ=GetTriggerActionsResult).value
 
     return AwaitableGetTriggerActionsResult(
-        action_ids=__ret__.action_ids,
-        flow_type=__ret__.flow_type,
-        id=__ret__.id,
-        org_id=__ret__.org_id,
-        trigger_type=__ret__.trigger_type)
+        action_ids=pulumi.get(__ret__, 'action_ids'),
+        flow_type=pulumi.get(__ret__, 'flow_type'),
+        id=pulumi.get(__ret__, 'id'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        trigger_type=pulumi.get(__ret__, 'trigger_type'))
 
 
 @_utilities.lift_output_func(get_trigger_actions)
 def get_trigger_actions_output(flow_type: Optional[pulumi.Input[str]] = None,
-                               org_id: Optional[pulumi.Input[str]] = None,
+                               org_id: Optional[pulumi.Input[Optional[str]]] = None,
                                trigger_type: Optional[pulumi.Input[str]] = None,
                                opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetTriggerActionsResult]:
     """
@@ -145,10 +145,10 @@ def get_trigger_actions_output(flow_type: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    trigger_actions_trigger_actions = zitadel.get_trigger_actions(org_id=data["zitadel_org"]["org"]["id"],
+    default = zitadel.get_trigger_actions(org_id=data["zitadel_org"]["default"]["id"],
         flow_type="FLOW_TYPE_EXTERNAL_AUTHENTICATION",
         trigger_type="TRIGGER_TYPE_POST_AUTHENTICATION")
-    pulumi.export("triggerActions", trigger_actions_trigger_actions)
+    pulumi.export("triggerActions", default)
     ```
 
 

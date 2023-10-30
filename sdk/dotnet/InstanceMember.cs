@@ -17,14 +17,15 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var instanceMember = new Zitadel.InstanceMember("instanceMember", new()
+    ///     var @default = new Zitadel.InstanceMember("default", new()
     ///     {
-    ///         UserId = zitadel_human_user.Human_user.Id,
+    ///         UserId = data.Zitadel_human_user.Default.Id,
     ///         Roles = new[]
     ///         {
     ///             "IAM_OWNER",
@@ -32,6 +33,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform The resource can be imported using the ID format `&lt;user_id&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/instanceMember:InstanceMember imported '123456789012345678'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/instanceMember:InstanceMember")]

@@ -17,17 +17,26 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var lockoutPolicy = new Zitadel.DefaultLockoutPolicy("lockoutPolicy", new()
+    ///     var @default = new Zitadel.DefaultLockoutPolicy("default", new()
     ///     {
     ///         MaxPasswordAttempts = 5,
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform The resource can be imported using the ID format `&lt;&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/defaultLockoutPolicy:DefaultLockoutPolicy imported ''
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/defaultLockoutPolicy:DefaultLockoutPolicy")]

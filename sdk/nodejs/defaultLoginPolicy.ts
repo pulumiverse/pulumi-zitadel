@@ -11,31 +11,44 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const loginPolicy = new zitadel.DefaultLoginPolicy("login_policy", {
- *     allowDomainDiscovery: true,
- *     allowExternalIdp: true,
+ * const _default = new zitadel.DefaultLoginPolicy("default", {
+ *     userLogin: true,
  *     allowRegister: true,
- *     defaultRedirectUri: "localhost:8080",
- *     disableLoginWithEmail: true,
- *     disableLoginWithPhone: true,
- *     externalLoginCheckLifetime: "240h0m0s",
+ *     allowExternalIdp: true,
  *     forceMfa: false,
- *     hidePasswordReset: false,
- *     ignoreUnknownUsernames: true,
- *     mfaInitSkipLifetime: "720h0m0s",
- *     multiFactorCheckLifetime: "24h0m0s",
- *     multiFactors: ["MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"],
- *     passwordCheckLifetime: "240h0m0s",
+ *     forceMfaLocalOnly: false,
  *     passwordlessType: "PASSWORDLESS_TYPE_ALLOWED",
+ *     hidePasswordReset: false,
+ *     passwordCheckLifetime: "240h0m0s",
+ *     externalLoginCheckLifetime: "240h0m0s",
+ *     multiFactorCheckLifetime: "24h0m0s",
+ *     mfaInitSkipLifetime: "720h0m0s",
  *     secondFactorCheckLifetime: "24h0m0s",
+ *     ignoreUnknownUsernames: true,
+ *     defaultRedirectUri: "localhost:8080",
  *     secondFactors: [
  *         "SECOND_FACTOR_TYPE_OTP",
  *         "SECOND_FACTOR_TYPE_U2F",
  *     ],
- *     userLogin: true,
+ *     multiFactors: ["MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"],
+ *     idps: [
+ *         data.zitadel_idp_google["default"].id,
+ *         data.zitadel_idp_azure_ad["default"].id,
+ *     ],
+ *     allowDomainDiscovery: true,
+ *     disableLoginWithEmail: true,
+ *     disableLoginWithPhone: true,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/defaultLoginPolicy:DefaultLoginPolicy imported ''
  * ```
  */
 export class DefaultLoginPolicy extends pulumi.CustomResource {
@@ -96,6 +109,10 @@ export class DefaultLoginPolicy extends pulumi.CustomResource {
      */
     public readonly forceMfa!: pulumi.Output<boolean>;
     /**
+     * if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+     */
+    public readonly forceMfaLocalOnly!: pulumi.Output<boolean>;
+    /**
      * defines if password reset link should be shown in the login screen
      */
     public readonly hidePasswordReset!: pulumi.Output<boolean>;
@@ -149,6 +166,7 @@ export class DefaultLoginPolicy extends pulumi.CustomResource {
             resourceInputs["disableLoginWithPhone"] = state ? state.disableLoginWithPhone : undefined;
             resourceInputs["externalLoginCheckLifetime"] = state ? state.externalLoginCheckLifetime : undefined;
             resourceInputs["forceMfa"] = state ? state.forceMfa : undefined;
+            resourceInputs["forceMfaLocalOnly"] = state ? state.forceMfaLocalOnly : undefined;
             resourceInputs["hidePasswordReset"] = state ? state.hidePasswordReset : undefined;
             resourceInputs["idps"] = state ? state.idps : undefined;
             resourceInputs["ignoreUnknownUsernames"] = state ? state.ignoreUnknownUsernames : undefined;
@@ -176,6 +194,9 @@ export class DefaultLoginPolicy extends pulumi.CustomResource {
             }
             if ((!args || args.forceMfa === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'forceMfa'");
+            }
+            if ((!args || args.forceMfaLocalOnly === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'forceMfaLocalOnly'");
             }
             if ((!args || args.hidePasswordReset === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'hidePasswordReset'");
@@ -209,6 +230,7 @@ export class DefaultLoginPolicy extends pulumi.CustomResource {
             resourceInputs["disableLoginWithPhone"] = args ? args.disableLoginWithPhone : undefined;
             resourceInputs["externalLoginCheckLifetime"] = args ? args.externalLoginCheckLifetime : undefined;
             resourceInputs["forceMfa"] = args ? args.forceMfa : undefined;
+            resourceInputs["forceMfaLocalOnly"] = args ? args.forceMfaLocalOnly : undefined;
             resourceInputs["hidePasswordReset"] = args ? args.hidePasswordReset : undefined;
             resourceInputs["idps"] = args ? args.idps : undefined;
             resourceInputs["ignoreUnknownUsernames"] = args ? args.ignoreUnknownUsernames : undefined;
@@ -259,6 +281,10 @@ export interface DefaultLoginPolicyState {
      * defines if a user MUST use a multi factor to log in
      */
     forceMfa?: pulumi.Input<boolean>;
+    /**
+     * if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+     */
+    forceMfaLocalOnly?: pulumi.Input<boolean>;
     /**
      * defines if password reset link should be shown in the login screen
      */
@@ -326,6 +352,10 @@ export interface DefaultLoginPolicyArgs {
      * defines if a user MUST use a multi factor to log in
      */
     forceMfa: pulumi.Input<boolean>;
+    /**
+     * if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+     */
+    forceMfaLocalOnly: pulumi.Input<boolean>;
     /**
      * defines if password reset link should be shown in the login screen
      */

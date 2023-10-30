@@ -17,28 +17,37 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var notificationPolicy = new Zitadel.NotificationPolicy("notificationPolicy", new()
+    ///     var @default = new Zitadel.NotificationPolicy("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         PasswordChange = false,
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform The resource can be imported using the ID format `&lt;[org_id]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/notificationPolicy:NotificationPolicy imported '123456789012345678'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/notificationPolicy:NotificationPolicy")]
     public partial class NotificationPolicy : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// Send notification if a user changes his password
@@ -94,10 +103,10 @@ namespace Pulumiverse.Zitadel
     public sealed class NotificationPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// Send notification if a user changes his password
@@ -114,7 +123,7 @@ namespace Pulumiverse.Zitadel
     public sealed class NotificationPolicyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
         [Input("orgId")]
         public Input<string>? OrgId { get; set; }

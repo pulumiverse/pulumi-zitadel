@@ -13,11 +13,19 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const applicationApi = new zitadel.ApplicationApi("applicationApi", {
- *     orgId: zitadel_org.org.id,
- *     projectId: zitadel_project.project.id,
- *     authMethodType: "API_AUTH_METHOD_TYPE_PRIVATE_KEY_JWT",
+ * const _default = new zitadel.ApplicationApi("default", {
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: data.zitadel_project["default"].id,
+ *     authMethodType: "API_AUTH_METHOD_TYPE_BASIC",
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/applicationApi:ApplicationApi imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
  * ```
  */
 export class ApplicationApi extends pulumi.CustomResource {
@@ -65,9 +73,9 @@ export class ApplicationApi extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * orgID of the application
+     * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * ID of the project
      */
@@ -94,9 +102,6 @@ export class ApplicationApi extends pulumi.CustomResource {
             resourceInputs["projectId"] = state ? state.projectId : undefined;
         } else {
             const args = argsOrState as ApplicationApiArgs | undefined;
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             if ((!args || args.projectId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'projectId'");
             }
@@ -108,6 +113,8 @@ export class ApplicationApi extends pulumi.CustomResource {
             resourceInputs["clientSecret"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["clientId", "clientSecret"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ApplicationApi.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -133,7 +140,7 @@ export interface ApplicationApiState {
      */
     name?: pulumi.Input<string>;
     /**
-     * orgID of the application
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
     /**
@@ -155,9 +162,9 @@ export interface ApplicationApiArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * orgID of the application
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * ID of the project
      */

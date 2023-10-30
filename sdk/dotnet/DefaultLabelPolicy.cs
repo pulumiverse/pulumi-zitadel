@@ -12,6 +12,14 @@ namespace Pulumiverse.Zitadel
 {
     /// <summary>
     /// Resource representing the default label policy.
+    /// 
+    /// ## Import
+    /// 
+    /// terraform The resource can be imported using the ID format `&lt;&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/defaultLabelPolicy:DefaultLabelPolicy imported ''
+    /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/defaultLabelPolicy:DefaultLabelPolicy")]
     public partial class DefaultLabelPolicy : global::Pulumi.CustomResource

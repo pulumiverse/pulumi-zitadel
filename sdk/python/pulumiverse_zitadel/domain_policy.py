@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['DomainPolicyArgs', 'DomainPolicy']
@@ -14,32 +14,46 @@ __all__ = ['DomainPolicyArgs', 'DomainPolicy']
 @pulumi.input_type
 class DomainPolicyArgs:
     def __init__(__self__, *,
-                 org_id: pulumi.Input[str],
                  smtp_sender_address_matches_instance_domain: pulumi.Input[bool],
                  user_login_must_be_domain: pulumi.Input[bool],
-                 validate_org_domains: pulumi.Input[bool]):
+                 validate_org_domains: pulumi.Input[bool],
+                 org_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a DomainPolicy resource.
-        :param pulumi.Input[str] org_id: Id for the organization
         :param pulumi.Input[bool] user_login_must_be_domain: User login must be domain
         :param pulumi.Input[bool] validate_org_domains: Validate organization domains
+        :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "org_id", org_id)
-        pulumi.set(__self__, "smtp_sender_address_matches_instance_domain", smtp_sender_address_matches_instance_domain)
-        pulumi.set(__self__, "user_login_must_be_domain", user_login_must_be_domain)
-        pulumi.set(__self__, "validate_org_domains", validate_org_domains)
+        DomainPolicyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            smtp_sender_address_matches_instance_domain=smtp_sender_address_matches_instance_domain,
+            user_login_must_be_domain=user_login_must_be_domain,
+            validate_org_domains=validate_org_domains,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             smtp_sender_address_matches_instance_domain: pulumi.Input[bool],
+             user_login_must_be_domain: pulumi.Input[bool],
+             validate_org_domains: pulumi.Input[bool],
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'smtpSenderAddressMatchesInstanceDomain' in kwargs:
+            smtp_sender_address_matches_instance_domain = kwargs['smtpSenderAddressMatchesInstanceDomain']
+        if 'userLoginMustBeDomain' in kwargs:
+            user_login_must_be_domain = kwargs['userLoginMustBeDomain']
+        if 'validateOrgDomains' in kwargs:
+            validate_org_domains = kwargs['validateOrgDomains']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
 
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        Id for the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
+        _setter("smtp_sender_address_matches_instance_domain", smtp_sender_address_matches_instance_domain)
+        _setter("user_login_must_be_domain", user_login_must_be_domain)
+        _setter("validate_org_domains", validate_org_domains)
+        if org_id is not None:
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="smtpSenderAddressMatchesInstanceDomain")
@@ -74,6 +88,18 @@ class DomainPolicyArgs:
     def validate_org_domains(self, value: pulumi.Input[bool]):
         pulumi.set(self, "validate_org_domains", value)
 
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
+
 
 @pulumi.input_type
 class _DomainPolicyState:
@@ -84,24 +110,49 @@ class _DomainPolicyState:
                  validate_org_domains: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering DomainPolicy resources.
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[bool] user_login_must_be_domain: User login must be domain
         :param pulumi.Input[bool] validate_org_domains: Validate organization domains
         """
+        _DomainPolicyState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            org_id=org_id,
+            smtp_sender_address_matches_instance_domain=smtp_sender_address_matches_instance_domain,
+            user_login_must_be_domain=user_login_must_be_domain,
+            validate_org_domains=validate_org_domains,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             org_id: Optional[pulumi.Input[str]] = None,
+             smtp_sender_address_matches_instance_domain: Optional[pulumi.Input[bool]] = None,
+             user_login_must_be_domain: Optional[pulumi.Input[bool]] = None,
+             validate_org_domains: Optional[pulumi.Input[bool]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'smtpSenderAddressMatchesInstanceDomain' in kwargs:
+            smtp_sender_address_matches_instance_domain = kwargs['smtpSenderAddressMatchesInstanceDomain']
+        if 'userLoginMustBeDomain' in kwargs:
+            user_login_must_be_domain = kwargs['userLoginMustBeDomain']
+        if 'validateOrgDomains' in kwargs:
+            validate_org_domains = kwargs['validateOrgDomains']
+
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if smtp_sender_address_matches_instance_domain is not None:
-            pulumi.set(__self__, "smtp_sender_address_matches_instance_domain", smtp_sender_address_matches_instance_domain)
+            _setter("smtp_sender_address_matches_instance_domain", smtp_sender_address_matches_instance_domain)
         if user_login_must_be_domain is not None:
-            pulumi.set(__self__, "user_login_must_be_domain", user_login_must_be_domain)
+            _setter("user_login_must_be_domain", user_login_must_be_domain)
         if validate_org_domains is not None:
-            pulumi.set(__self__, "validate_org_domains", validate_org_domains)
+            _setter("validate_org_domains", validate_org_domains)
 
     @property
     @pulumi.getter(name="orgId")
     def org_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -162,16 +213,24 @@ class DomainPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        domain_policy = zitadel.DomainPolicy("domainPolicy",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.DomainPolicy("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             user_login_must_be_domain=False,
-            validate_org_domains=False,
-            smtp_sender_address_matches_instance_domain=False)
+            validate_org_domains=True,
+            smtp_sender_address_matches_instance_domain=True)
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/domainPolicy:DomainPolicy imported '123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[bool] user_login_must_be_domain: User login must be domain
         :param pulumi.Input[bool] validate_org_domains: Validate organization domains
         """
@@ -190,11 +249,19 @@ class DomainPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        domain_policy = zitadel.DomainPolicy("domainPolicy",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.DomainPolicy("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             user_login_must_be_domain=False,
-            validate_org_domains=False,
-            smtp_sender_address_matches_instance_domain=False)
+            validate_org_domains=True,
+            smtp_sender_address_matches_instance_domain=True)
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/domainPolicy:DomainPolicy imported '123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -207,6 +274,10 @@ class DomainPolicy(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            DomainPolicyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -225,8 +296,6 @@ class DomainPolicy(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = DomainPolicyArgs.__new__(DomainPolicyArgs)
 
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if smtp_sender_address_matches_instance_domain is None and not opts.urn:
                 raise TypeError("Missing required property 'smtp_sender_address_matches_instance_domain'")
@@ -258,7 +327,7 @@ class DomainPolicy(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[bool] user_login_must_be_domain: User login must be domain
         :param pulumi.Input[bool] validate_org_domains: Validate organization domains
         """
@@ -274,9 +343,9 @@ class DomainPolicy(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 

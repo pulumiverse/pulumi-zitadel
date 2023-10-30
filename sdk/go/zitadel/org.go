@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
@@ -26,7 +28,11 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.NewOrg(ctx, "org", nil)
+=======
+//			_, err := zitadel.NewOrg(ctx, "default", nil)
+>>>>>>> origin/master
 //			if err != nil {
 //				return err
 //			}
@@ -34,12 +40,29 @@ import (
 //		})
 //	}
 //
+<<<<<<< HEAD
+=======
+// ```
+//
+// ## Import
+//
+// terraform The resource can be imported using the ID format `<id>`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import zitadel:index/org:Org imported '123456789012345678'
+//
+>>>>>>> origin/master
 // ```
 type Org struct {
 	pulumi.CustomResourceState
 
 	// Name of the org
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Primary domain of the org
+	PrimaryDomain pulumi.StringOutput `pulumi:"primaryDomain"`
+	// State of the org
+	State pulumi.StringOutput `pulumi:"state"`
 }
 
 // NewOrg registers a new resource with the given unique name, arguments, and options.
@@ -49,7 +72,7 @@ func NewOrg(ctx *pulumi.Context,
 		args = &OrgArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Org
 	err := ctx.RegisterResource("zitadel:index/org:Org", name, args, &resource, opts...)
 	if err != nil {
@@ -74,11 +97,19 @@ func GetOrg(ctx *pulumi.Context,
 type orgState struct {
 	// Name of the org
 	Name *string `pulumi:"name"`
+	// Primary domain of the org
+	PrimaryDomain *string `pulumi:"primaryDomain"`
+	// State of the org
+	State *string `pulumi:"state"`
 }
 
 type OrgState struct {
 	// Name of the org
 	Name pulumi.StringPtrInput
+	// Primary domain of the org
+	PrimaryDomain pulumi.StringPtrInput
+	// State of the org
+	State pulumi.StringPtrInput
 }
 
 func (OrgState) ElementType() reflect.Type {
@@ -119,6 +150,12 @@ func (i *Org) ToOrgOutputWithContext(ctx context.Context) OrgOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(OrgOutput)
 }
 
+func (i *Org) ToOutput(ctx context.Context) pulumix.Output[*Org] {
+	return pulumix.Output[*Org]{
+		OutputState: i.ToOrgOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgArrayInput is an input type that accepts OrgArray and OrgArrayOutput values.
 // You can construct a concrete instance of `OrgArrayInput` via:
 //
@@ -142,6 +179,12 @@ func (i OrgArray) ToOrgArrayOutput() OrgArrayOutput {
 
 func (i OrgArray) ToOrgArrayOutputWithContext(ctx context.Context) OrgArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(OrgArrayOutput)
+}
+
+func (i OrgArray) ToOutput(ctx context.Context) pulumix.Output[[]*Org] {
+	return pulumix.Output[[]*Org]{
+		OutputState: i.ToOrgArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // OrgMapInput is an input type that accepts OrgMap and OrgMapOutput values.
@@ -169,6 +212,12 @@ func (i OrgMap) ToOrgMapOutputWithContext(ctx context.Context) OrgMapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(OrgMapOutput)
 }
 
+func (i OrgMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Org] {
+	return pulumix.Output[map[string]*Org]{
+		OutputState: i.ToOrgMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type OrgOutput struct{ *pulumi.OutputState }
 
 func (OrgOutput) ElementType() reflect.Type {
@@ -183,9 +232,25 @@ func (o OrgOutput) ToOrgOutputWithContext(ctx context.Context) OrgOutput {
 	return o
 }
 
+func (o OrgOutput) ToOutput(ctx context.Context) pulumix.Output[*Org] {
+	return pulumix.Output[*Org]{
+		OutputState: o.OutputState,
+	}
+}
+
 // Name of the org
 func (o OrgOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Org) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Primary domain of the org
+func (o OrgOutput) PrimaryDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v *Org) pulumi.StringOutput { return v.PrimaryDomain }).(pulumi.StringOutput)
+}
+
+// State of the org
+func (o OrgOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v *Org) pulumi.StringOutput { return v.State }).(pulumi.StringOutput)
 }
 
 type OrgArrayOutput struct{ *pulumi.OutputState }
@@ -200,6 +265,12 @@ func (o OrgArrayOutput) ToOrgArrayOutput() OrgArrayOutput {
 
 func (o OrgArrayOutput) ToOrgArrayOutputWithContext(ctx context.Context) OrgArrayOutput {
 	return o
+}
+
+func (o OrgArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Org] {
+	return pulumix.Output[[]*Org]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o OrgArrayOutput) Index(i pulumi.IntInput) OrgOutput {
@@ -220,6 +291,12 @@ func (o OrgMapOutput) ToOrgMapOutput() OrgMapOutput {
 
 func (o OrgMapOutput) ToOrgMapOutputWithContext(ctx context.Context) OrgMapOutput {
 	return o
+}
+
+func (o OrgMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Org] {
+	return pulumix.Output[map[string]*Org]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o OrgMapOutput) MapIndex(k pulumi.StringInput) OrgOutput {

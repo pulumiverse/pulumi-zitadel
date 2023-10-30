@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing an LDAP IDP on the instance.
@@ -19,7 +21,10 @@ import (
 //
 // import (
 //
+<<<<<<< HEAD
 //	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+=======
+>>>>>>> origin/master
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -27,8 +32,13 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.LookupIdpLdap(ctx, &GetIdpLdapArgs{
 //				Id: "177073614158299139",
+=======
+//			_, err := zitadel.LookupIdpLdap(ctx, &zitadel.LookupIdpLdapArgs{
+//				Id: "123456789012345678",
+>>>>>>> origin/master
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -39,7 +49,7 @@ import (
 //
 // ```
 func LookupIdpLdap(ctx *pulumi.Context, args *LookupIdpLdapArgs, opts ...pulumi.InvokeOption) (*LookupIdpLdapResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupIdpLdapResult
 	err := ctx.Invoke("zitadel:index/getIdpLdap:getIdpLdap", args, &rv, opts...)
 	if err != nil {
@@ -150,6 +160,12 @@ func (o LookupIdpLdapResultOutput) ToLookupIdpLdapResultOutput() LookupIdpLdapRe
 
 func (o LookupIdpLdapResultOutput) ToLookupIdpLdapResultOutputWithContext(ctx context.Context) LookupIdpLdapResultOutput {
 	return o
+}
+
+func (o LookupIdpLdapResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupIdpLdapResult] {
+	return pulumix.Output[LookupIdpLdapResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // User attribute for the avatar url

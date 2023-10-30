@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -95,7 +95,7 @@ class GetMachineUserResult:
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> str:
+    def org_id(self) -> Optional[str]:
         """
         ID of the organization
         """
@@ -164,9 +164,9 @@ def get_machine_user(org_id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    machine_user_machine_user = zitadel.get_machine_user(org_id=data["zitadel_org"]["org"]["id"],
-        user_id="177073617463410691")
-    pulumi.export("machineUser", machine_user_machine_user)
+    default = zitadel.get_machine_user(org_id=data["zitadel_org"]["default"]["id"],
+        user_id="123456789012345678")
+    pulumi.export("machineUser", default)
     ```
 
 
@@ -180,20 +180,20 @@ def get_machine_user(org_id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getMachineUser:getMachineUser', __args__, opts=opts, typ=GetMachineUserResult).value
 
     return AwaitableGetMachineUserResult(
-        access_token_type=__ret__.access_token_type,
-        description=__ret__.description,
-        id=__ret__.id,
-        login_names=__ret__.login_names,
-        name=__ret__.name,
-        org_id=__ret__.org_id,
-        preferred_login_name=__ret__.preferred_login_name,
-        state=__ret__.state,
-        user_id=__ret__.user_id,
-        user_name=__ret__.user_name)
+        access_token_type=pulumi.get(__ret__, 'access_token_type'),
+        description=pulumi.get(__ret__, 'description'),
+        id=pulumi.get(__ret__, 'id'),
+        login_names=pulumi.get(__ret__, 'login_names'),
+        name=pulumi.get(__ret__, 'name'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        preferred_login_name=pulumi.get(__ret__, 'preferred_login_name'),
+        state=pulumi.get(__ret__, 'state'),
+        user_id=pulumi.get(__ret__, 'user_id'),
+        user_name=pulumi.get(__ret__, 'user_name'))
 
 
 @_utilities.lift_output_func(get_machine_user)
-def get_machine_user_output(org_id: Optional[pulumi.Input[str]] = None,
+def get_machine_user_output(org_id: Optional[pulumi.Input[Optional[str]]] = None,
                             user_id: Optional[pulumi.Input[str]] = None,
                             opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetMachineUserResult]:
     """
@@ -205,9 +205,9 @@ def get_machine_user_output(org_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    machine_user_machine_user = zitadel.get_machine_user(org_id=data["zitadel_org"]["org"]["id"],
-        user_id="177073617463410691")
-    pulumi.export("machineUser", machine_user_machine_user)
+    default = zitadel.get_machine_user(org_id=data["zitadel_org"]["default"]["id"],
+        user_id="123456789012345678")
+    pulumi.export("machineUser", default)
     ```
 
 

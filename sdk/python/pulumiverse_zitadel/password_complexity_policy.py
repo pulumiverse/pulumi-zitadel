@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['PasswordComplexityPolicyArgs', 'PasswordComplexityPolicy']
@@ -19,7 +19,7 @@ class PasswordComplexityPolicyArgs:
                  has_symbol: pulumi.Input[bool],
                  has_uppercase: pulumi.Input[bool],
                  min_length: pulumi.Input[int],
-                 org_id: pulumi.Input[str]):
+                 org_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a PasswordComplexityPolicy resource.
         :param pulumi.Input[bool] has_lowercase: defines if the password MUST contain a lower case letter
@@ -27,14 +27,48 @@ class PasswordComplexityPolicyArgs:
         :param pulumi.Input[bool] has_symbol: defines if the password MUST contain a symbol. E.g. "$"
         :param pulumi.Input[bool] has_uppercase: defines if the password MUST contain an upper case letter
         :param pulumi.Input[int] min_length: Minimal length for the password
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "has_lowercase", has_lowercase)
-        pulumi.set(__self__, "has_number", has_number)
-        pulumi.set(__self__, "has_symbol", has_symbol)
-        pulumi.set(__self__, "has_uppercase", has_uppercase)
-        pulumi.set(__self__, "min_length", min_length)
-        pulumi.set(__self__, "org_id", org_id)
+        PasswordComplexityPolicyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            has_lowercase=has_lowercase,
+            has_number=has_number,
+            has_symbol=has_symbol,
+            has_uppercase=has_uppercase,
+            min_length=min_length,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             has_lowercase: pulumi.Input[bool],
+             has_number: pulumi.Input[bool],
+             has_symbol: pulumi.Input[bool],
+             has_uppercase: pulumi.Input[bool],
+             min_length: pulumi.Input[int],
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'hasLowercase' in kwargs:
+            has_lowercase = kwargs['hasLowercase']
+        if 'hasNumber' in kwargs:
+            has_number = kwargs['hasNumber']
+        if 'hasSymbol' in kwargs:
+            has_symbol = kwargs['hasSymbol']
+        if 'hasUppercase' in kwargs:
+            has_uppercase = kwargs['hasUppercase']
+        if 'minLength' in kwargs:
+            min_length = kwargs['minLength']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("has_lowercase", has_lowercase)
+        _setter("has_number", has_number)
+        _setter("has_symbol", has_symbol)
+        _setter("has_uppercase", has_uppercase)
+        _setter("min_length", min_length)
+        if org_id is not None:
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="hasLowercase")
@@ -98,14 +132,14 @@ class PasswordComplexityPolicyArgs:
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
+    def org_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
     @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
+    def org_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "org_id", value)
 
 
@@ -125,20 +159,53 @@ class _PasswordComplexityPolicyState:
         :param pulumi.Input[bool] has_symbol: defines if the password MUST contain a symbol. E.g. "$"
         :param pulumi.Input[bool] has_uppercase: defines if the password MUST contain an upper case letter
         :param pulumi.Input[int] min_length: Minimal length for the password
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         """
+        _PasswordComplexityPolicyState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            has_lowercase=has_lowercase,
+            has_number=has_number,
+            has_symbol=has_symbol,
+            has_uppercase=has_uppercase,
+            min_length=min_length,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             has_lowercase: Optional[pulumi.Input[bool]] = None,
+             has_number: Optional[pulumi.Input[bool]] = None,
+             has_symbol: Optional[pulumi.Input[bool]] = None,
+             has_uppercase: Optional[pulumi.Input[bool]] = None,
+             min_length: Optional[pulumi.Input[int]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'hasLowercase' in kwargs:
+            has_lowercase = kwargs['hasLowercase']
+        if 'hasNumber' in kwargs:
+            has_number = kwargs['hasNumber']
+        if 'hasSymbol' in kwargs:
+            has_symbol = kwargs['hasSymbol']
+        if 'hasUppercase' in kwargs:
+            has_uppercase = kwargs['hasUppercase']
+        if 'minLength' in kwargs:
+            min_length = kwargs['minLength']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
         if has_lowercase is not None:
-            pulumi.set(__self__, "has_lowercase", has_lowercase)
+            _setter("has_lowercase", has_lowercase)
         if has_number is not None:
-            pulumi.set(__self__, "has_number", has_number)
+            _setter("has_number", has_number)
         if has_symbol is not None:
-            pulumi.set(__self__, "has_symbol", has_symbol)
+            _setter("has_symbol", has_symbol)
         if has_uppercase is not None:
-            pulumi.set(__self__, "has_uppercase", has_uppercase)
+            _setter("has_uppercase", has_uppercase)
         if min_length is not None:
-            pulumi.set(__self__, "min_length", min_length)
+            _setter("min_length", min_length)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="hasLowercase")
@@ -204,7 +271,7 @@ class _PasswordComplexityPolicyState:
     @pulumi.getter(name="orgId")
     def org_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -234,8 +301,8 @@ class PasswordComplexityPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        password_complexity_policy = zitadel.PasswordComplexityPolicy("passwordComplexityPolicy",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.PasswordComplexityPolicy("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             min_length=8,
             has_uppercase=True,
             has_lowercase=True,
@@ -250,7 +317,7 @@ class PasswordComplexityPolicy(pulumi.CustomResource):
         :param pulumi.Input[bool] has_symbol: defines if the password MUST contain a symbol. E.g. "$"
         :param pulumi.Input[bool] has_uppercase: defines if the password MUST contain an upper case letter
         :param pulumi.Input[int] min_length: Minimal length for the password
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         """
         ...
     @overload
@@ -267,8 +334,8 @@ class PasswordComplexityPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        password_complexity_policy = zitadel.PasswordComplexityPolicy("passwordComplexityPolicy",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.PasswordComplexityPolicy("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             min_length=8,
             has_uppercase=True,
             has_lowercase=True,
@@ -286,6 +353,10 @@ class PasswordComplexityPolicy(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            PasswordComplexityPolicyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -321,8 +392,6 @@ class PasswordComplexityPolicy(pulumi.CustomResource):
             if min_length is None and not opts.urn:
                 raise TypeError("Missing required property 'min_length'")
             __props__.__dict__["min_length"] = min_length
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
         super(PasswordComplexityPolicy, __self__).__init__(
             'zitadel:index/passwordComplexityPolicy:PasswordComplexityPolicy',
@@ -352,7 +421,7 @@ class PasswordComplexityPolicy(pulumi.CustomResource):
         :param pulumi.Input[bool] has_symbol: defines if the password MUST contain a symbol. E.g. "$"
         :param pulumi.Input[bool] has_uppercase: defines if the password MUST contain an upper case letter
         :param pulumi.Input[int] min_length: Minimal length for the password
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -408,9 +477,9 @@ class PasswordComplexityPolicy(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 

@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ProjectRoleArgs', 'ProjectRole']
@@ -15,24 +15,52 @@ __all__ = ['ProjectRoleArgs', 'ProjectRole']
 class ProjectRoleArgs:
     def __init__(__self__, *,
                  display_name: pulumi.Input[str],
-                 org_id: pulumi.Input[str],
                  project_id: pulumi.Input[str],
                  role_key: pulumi.Input[str],
-                 group: Optional[pulumi.Input[str]] = None):
+                 group: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ProjectRole resource.
         :param pulumi.Input[str] display_name: Name used for project role
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[str] role_key: Key used for project role
         :param pulumi.Input[str] group: Group used for project role
+        :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "display_name", display_name)
-        pulumi.set(__self__, "org_id", org_id)
-        pulumi.set(__self__, "project_id", project_id)
-        pulumi.set(__self__, "role_key", role_key)
+        ProjectRoleArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            display_name=display_name,
+            project_id=project_id,
+            role_key=role_key,
+            group=group,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             display_name: pulumi.Input[str],
+             project_id: pulumi.Input[str],
+             role_key: pulumi.Input[str],
+             group: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'displayName' in kwargs:
+            display_name = kwargs['displayName']
+        if 'projectId' in kwargs:
+            project_id = kwargs['projectId']
+        if 'roleKey' in kwargs:
+            role_key = kwargs['roleKey']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("display_name", display_name)
+        _setter("project_id", project_id)
+        _setter("role_key", role_key)
         if group is not None:
-            pulumi.set(__self__, "group", group)
+            _setter("group", group)
+        if org_id is not None:
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="displayName")
@@ -45,18 +73,6 @@ class ProjectRoleArgs:
     @display_name.setter
     def display_name(self, value: pulumi.Input[str]):
         pulumi.set(self, "display_name", value)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter(name="projectId")
@@ -94,6 +110,18 @@ class ProjectRoleArgs:
     def group(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "group", value)
 
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
+
 
 @pulumi.input_type
 class _ProjectRoleState:
@@ -111,16 +139,43 @@ class _ProjectRoleState:
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[str] role_key: Key used for project role
         """
+        _ProjectRoleState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            display_name=display_name,
+            group=group,
+            org_id=org_id,
+            project_id=project_id,
+            role_key=role_key,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             display_name: Optional[pulumi.Input[str]] = None,
+             group: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             project_id: Optional[pulumi.Input[str]] = None,
+             role_key: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'displayName' in kwargs:
+            display_name = kwargs['displayName']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'projectId' in kwargs:
+            project_id = kwargs['projectId']
+        if 'roleKey' in kwargs:
+            role_key = kwargs['roleKey']
+
         if display_name is not None:
-            pulumi.set(__self__, "display_name", display_name)
+            _setter("display_name", display_name)
         if group is not None:
-            pulumi.set(__self__, "group", group)
+            _setter("group", group)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if project_id is not None:
-            pulumi.set(__self__, "project_id", project_id)
+            _setter("project_id", project_id)
         if role_key is not None:
-            pulumi.set(__self__, "role_key", role_key)
+            _setter("role_key", role_key)
 
     @property
     @pulumi.getter(name="displayName")
@@ -203,12 +258,20 @@ class ProjectRole(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        project_role = zitadel.ProjectRole("projectRole",
-            org_id=zitadel_org["org"]["id"],
-            project_id=zitadel_project["project"]["id"],
-            role_key="key",
+        default = zitadel.ProjectRole("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=data["zitadel_project"]["default"]["id"],
+            role_key="super-user",
             display_name="display_name2",
             group="role_group")
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<project_id:role_key[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/projectRole:ProjectRole imported '123456789012345678:my-role-key:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -234,12 +297,20 @@ class ProjectRole(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        project_role = zitadel.ProjectRole("projectRole",
-            org_id=zitadel_org["org"]["id"],
-            project_id=zitadel_project["project"]["id"],
-            role_key="key",
+        default = zitadel.ProjectRole("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=data["zitadel_project"]["default"]["id"],
+            role_key="super-user",
             display_name="display_name2",
             group="role_group")
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<project_id:role_key[:org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/projectRole:ProjectRole imported '123456789012345678:my-role-key:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -252,6 +323,10 @@ class ProjectRole(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ProjectRoleArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -275,8 +350,6 @@ class ProjectRole(pulumi.CustomResource):
                 raise TypeError("Missing required property 'display_name'")
             __props__.__dict__["display_name"] = display_name
             __props__.__dict__["group"] = group
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
@@ -341,7 +414,7 @@ class ProjectRole(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

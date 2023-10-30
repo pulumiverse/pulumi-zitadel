@@ -19,14 +19,15 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var humanUser = new Zitadel.HumanUser("humanUser", new()
+    ///     var @default = new Zitadel.HumanUser("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         UserName = "humanfull@localhost.com",
     ///         FirstName = "firstname",
     ///         LastName = "lastname",
@@ -42,6 +43,14 @@ namespace Pulumiverse.Zitadel
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform The resource can be imported using the ID format `id[:org_id][:initial_password]&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/humanUser:HumanUser imported '123456789012345678:123456789012345678:Password1!'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/humanUser:HumanUser")]
@@ -111,7 +120,7 @@ namespace Pulumiverse.Zitadel
         /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// Phone of the user
@@ -167,6 +176,10 @@ namespace Pulumiverse.Zitadel
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/pulumiverse",
+                AdditionalSecretOutputs =
+                {
+                    "initialPassword",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -214,11 +227,21 @@ namespace Pulumiverse.Zitadel
         [Input("gender")]
         public Input<string>? Gender { get; set; }
 
+        [Input("initialPassword")]
+        private Input<string>? _initialPassword;
+
         /// <summary>
         /// Initially set password for the user, not changeable after creation
         /// </summary>
-        [Input("initialPassword")]
-        public Input<string>? InitialPassword { get; set; }
+        public Input<string>? InitialPassword
+        {
+            get => _initialPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _initialPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Is the email verified of the user, can only be true if password of the user is set
@@ -247,8 +270,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// Phone of the user
@@ -300,11 +323,21 @@ namespace Pulumiverse.Zitadel
         [Input("gender")]
         public Input<string>? Gender { get; set; }
 
+        [Input("initialPassword")]
+        private Input<string>? _initialPassword;
+
         /// <summary>
         /// Initially set password for the user, not changeable after creation
         /// </summary>
-        [Input("initialPassword")]
-        public Input<string>? InitialPassword { get; set; }
+        public Input<string>? InitialPassword
+        {
+            get => _initialPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _initialPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Is the email verified of the user, can only be true if password of the user is set

@@ -21,21 +21,22 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var apiApplicationApplicationApi = Zitadel.GetApplicationApi.Invoke(new()
+        ///     var @default = Zitadel.GetApplicationApi.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = data.Zitadel_project.Project.Id,
-        ///         AppId = "177073625566806019",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         AppId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["apiApplication"] = apiApplicationApplicationApi.Apply(getApplicationApiResult =&gt; getApplicationApiResult),
+        ///         ["applicationApi"] = @default,
         ///     };
         /// });
         /// ```
@@ -43,7 +44,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetApplicationApiResult> InvokeAsync(GetApplicationApiArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApplicationApiResult>("zitadel:index/getApplicationApi:getApplicationApi", args ?? new GetApplicationApiArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApplicationApiResult>("zitadel:index/getApplicationApi:getApplicationApi", args ?? new GetApplicationApiArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing an API application belonging to a project, with all configuration possibilities.
@@ -54,21 +55,22 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var apiApplicationApplicationApi = Zitadel.GetApplicationApi.Invoke(new()
+        ///     var @default = Zitadel.GetApplicationApi.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = data.Zitadel_project.Project.Id,
-        ///         AppId = "177073625566806019",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         AppId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["apiApplication"] = apiApplicationApplicationApi.Apply(getApplicationApiResult =&gt; getApplicationApiResult),
+        ///         ["applicationApi"] = @default,
         ///     };
         /// });
         /// ```
@@ -76,7 +78,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetApplicationApiResult> Invoke(GetApplicationApiInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApplicationApiResult>("zitadel:index/getApplicationApi:getApplicationApi", args ?? new GetApplicationApiInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApplicationApiResult>("zitadel:index/getApplicationApi:getApplicationApi", args ?? new GetApplicationApiInvokeArgs(), options.WithDefaults());
     }
 
 
@@ -89,10 +91,10 @@ namespace Pulumiverse.Zitadel
         public string AppId { get; set; } = null!;
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public string OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public string? OrgId { get; set; }
 
         /// <summary>
         /// ID of the project
@@ -115,10 +117,10 @@ namespace Pulumiverse.Zitadel
         public Input<string> AppId { get; set; } = null!;
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// ID of the project
@@ -153,9 +155,9 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        public readonly string OrgId;
+        public readonly string? OrgId;
         /// <summary>
         /// ID of the project
         /// </summary>
@@ -171,7 +173,7 @@ namespace Pulumiverse.Zitadel
 
             string name,
 
-            string orgId,
+            string? orgId,
 
             string projectId)
         {

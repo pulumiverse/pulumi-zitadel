@@ -21,14 +21,15 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var ldap = Zitadel.GetIdpLdap.Invoke(new()
+        ///     var @default = Zitadel.GetIdpLdap.Invoke(new()
         ///     {
-        ///         Id = "177073614158299139",
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         /// });
@@ -37,7 +38,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetIdpLdapResult> InvokeAsync(GetIdpLdapArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetIdpLdapResult>("zitadel:index/getIdpLdap:getIdpLdap", args ?? new GetIdpLdapArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetIdpLdapResult>("zitadel:index/getIdpLdap:getIdpLdap", args ?? new GetIdpLdapArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing an LDAP IDP on the instance.
@@ -48,14 +49,15 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var ldap = Zitadel.GetIdpLdap.Invoke(new()
+        ///     var @default = Zitadel.GetIdpLdap.Invoke(new()
         ///     {
-        ///         Id = "177073614158299139",
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         /// });
@@ -64,7 +66,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetIdpLdapResult> Invoke(GetIdpLdapInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetIdpLdapResult>("zitadel:index/getIdpLdap:getIdpLdap", args ?? new GetIdpLdapInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetIdpLdapResult>("zitadel:index/getIdpLdap:getIdpLdap", args ?? new GetIdpLdapInvokeArgs(), options.WithDefaults());
     }
 
 

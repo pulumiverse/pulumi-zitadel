@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the membership of a user on an organization, defined with the given role.
@@ -27,9 +29,15 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.NewOrgMember(ctx, "orgMember", &zitadel.OrgMemberArgs{
 //				OrgId:  pulumi.Any(zitadel_org.Org.Id),
 //				UserId: pulumi.Any(zitadel_human_user.Human_user.Id),
+=======
+//			_, err := zitadel.NewOrgMember(ctx, "default", &zitadel.OrgMemberArgs{
+//				OrgId:  pulumi.Any(data.Zitadel_org.Default.Id),
+//				UserId: pulumi.Any(data.Zitadel_human_user.Default.Id),
+>>>>>>> origin/master
 //				Roles: pulumi.StringArray{
 //					pulumi.String("ORG_OWNER"),
 //				},
@@ -41,12 +49,25 @@ import (
 //		})
 //	}
 //
+<<<<<<< HEAD
+=======
+// ```
+//
+// ## Import
+//
+// terraform The resource can be imported using the ID format `<user_id[:org_id]>`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import zitadel:index/orgMember:OrgMember imported '123456789012345678:123456789012345678'
+//
+>>>>>>> origin/master
 // ```
 type OrgMember struct {
 	pulumi.CustomResourceState
 
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// List of roles granted
 	Roles pulumi.StringArrayOutput `pulumi:"roles"`
 	// ID of the user
@@ -60,16 +81,13 @@ func NewOrgMember(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	if args.Roles == nil {
 		return nil, errors.New("invalid value for required argument 'Roles'")
 	}
 	if args.UserId == nil {
 		return nil, errors.New("invalid value for required argument 'UserId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgMember
 	err := ctx.RegisterResource("zitadel:index/orgMember:OrgMember", name, args, &resource, opts...)
 	if err != nil {
@@ -115,7 +133,7 @@ func (OrgMemberState) ElementType() reflect.Type {
 
 type orgMemberArgs struct {
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// List of roles granted
 	Roles []string `pulumi:"roles"`
 	// ID of the user
@@ -125,7 +143,7 @@ type orgMemberArgs struct {
 // The set of arguments for constructing a OrgMember resource.
 type OrgMemberArgs struct {
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// List of roles granted
 	Roles pulumi.StringArrayInput
 	// ID of the user
@@ -155,6 +173,12 @@ func (i *OrgMember) ToOrgMemberOutputWithContext(ctx context.Context) OrgMemberO
 	return pulumi.ToOutputWithContext(ctx, i).(OrgMemberOutput)
 }
 
+func (i *OrgMember) ToOutput(ctx context.Context) pulumix.Output[*OrgMember] {
+	return pulumix.Output[*OrgMember]{
+		OutputState: i.ToOrgMemberOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgMemberArrayInput is an input type that accepts OrgMemberArray and OrgMemberArrayOutput values.
 // You can construct a concrete instance of `OrgMemberArrayInput` via:
 //
@@ -178,6 +202,12 @@ func (i OrgMemberArray) ToOrgMemberArrayOutput() OrgMemberArrayOutput {
 
 func (i OrgMemberArray) ToOrgMemberArrayOutputWithContext(ctx context.Context) OrgMemberArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(OrgMemberArrayOutput)
+}
+
+func (i OrgMemberArray) ToOutput(ctx context.Context) pulumix.Output[[]*OrgMember] {
+	return pulumix.Output[[]*OrgMember]{
+		OutputState: i.ToOrgMemberArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // OrgMemberMapInput is an input type that accepts OrgMemberMap and OrgMemberMapOutput values.
@@ -205,6 +235,12 @@ func (i OrgMemberMap) ToOrgMemberMapOutputWithContext(ctx context.Context) OrgMe
 	return pulumi.ToOutputWithContext(ctx, i).(OrgMemberMapOutput)
 }
 
+func (i OrgMemberMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgMember] {
+	return pulumix.Output[map[string]*OrgMember]{
+		OutputState: i.ToOrgMemberMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type OrgMemberOutput struct{ *pulumi.OutputState }
 
 func (OrgMemberOutput) ElementType() reflect.Type {
@@ -219,9 +255,15 @@ func (o OrgMemberOutput) ToOrgMemberOutputWithContext(ctx context.Context) OrgMe
 	return o
 }
 
+func (o OrgMemberOutput) ToOutput(ctx context.Context) pulumix.Output[*OrgMember] {
+	return pulumix.Output[*OrgMember]{
+		OutputState: o.OutputState,
+	}
+}
+
 // ID of the organization
-func (o OrgMemberOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *OrgMember) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o OrgMemberOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *OrgMember) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // List of roles granted
@@ -248,6 +290,12 @@ func (o OrgMemberArrayOutput) ToOrgMemberArrayOutputWithContext(ctx context.Cont
 	return o
 }
 
+func (o OrgMemberArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*OrgMember] {
+	return pulumix.Output[[]*OrgMember]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o OrgMemberArrayOutput) Index(i pulumi.IntInput) OrgMemberOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *OrgMember {
 		return vs[0].([]*OrgMember)[vs[1].(int)]
@@ -266,6 +314,12 @@ func (o OrgMemberMapOutput) ToOrgMemberMapOutput() OrgMemberMapOutput {
 
 func (o OrgMemberMapOutput) ToOrgMemberMapOutputWithContext(ctx context.Context) OrgMemberMapOutput {
 	return o
+}
+
+func (o OrgMemberMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgMember] {
+	return pulumix.Output[map[string]*OrgMember]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o OrgMemberMapOutput) MapIndex(k pulumi.StringInput) OrgMemberOutput {

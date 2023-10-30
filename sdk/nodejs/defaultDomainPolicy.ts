@@ -11,13 +11,21 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const domainPolicy = new zitadel.DefaultDomainPolicy("domain_policy", {
- *     smtpSenderAddressMatchesInstanceDomain: false,
+ * const _default = new zitadel.DefaultDomainPolicy("default", {
+ *     smtpSenderAddressMatchesInstanceDomain: true,
  *     userLoginMustBeDomain: false,
- *     validateOrgDomains: false,
+ *     validateOrgDomains: true,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/defaultDomainPolicy:DefaultDomainPolicy imported ''
  * ```
  */
 export class DefaultDomainPolicy extends pulumi.CustomResource {

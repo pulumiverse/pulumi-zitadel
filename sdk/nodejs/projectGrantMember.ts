@@ -13,13 +13,21 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const projectGrantMember = new zitadel.ProjectGrantMember("projectGrantMember", {
- *     orgId: zitadel_org.org.id,
- *     projectId: zitadel_project.project.id,
- *     grantId: zitadel_project_grant.project_grant.id,
- *     userId: zitadel_human_user.granted_human_user.id,
+ * const _default = new zitadel.ProjectGrantMember("default", {
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: data.zitadel_project["default"].id,
+ *     userId: data.zitadel_human_user["default"].id,
+ *     grantId: "123456789012345678",
  *     roles: ["PROJECT_GRANT_OWNER"],
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<project_id:grant_id:user_id[:org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/projectGrantMember:ProjectGrantMember imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678'
  * ```
  */
 export class ProjectGrantMember extends pulumi.CustomResource {
@@ -55,9 +63,9 @@ export class ProjectGrantMember extends pulumi.CustomResource {
      */
     public readonly grantId!: pulumi.Output<string>;
     /**
-     * ID of the organization which owns the resource
+     * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * ID of the project
      */
@@ -94,9 +102,6 @@ export class ProjectGrantMember extends pulumi.CustomResource {
             if ((!args || args.grantId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'grantId'");
             }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             if ((!args || args.projectId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'projectId'");
             }
@@ -126,7 +131,7 @@ export interface ProjectGrantMemberState {
      */
     grantId?: pulumi.Input<string>;
     /**
-     * ID of the organization which owns the resource
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
     /**
@@ -152,9 +157,9 @@ export interface ProjectGrantMemberArgs {
      */
     grantId: pulumi.Input<string>;
     /**
-     * ID of the organization which owns the resource
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * ID of the project
      */

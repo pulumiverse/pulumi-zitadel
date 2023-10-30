@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing an Azure AD IdP on the organization.
@@ -27,8 +29,13 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.NewOrgIdpAzureAd(ctx, "azureAd", &zitadel.OrgIdpAzureAdArgs{
 //				OrgId:        pulumi.Any(zitadel_org.Org.Id),
+=======
+//			_, err := zitadel.NewOrgIdpAzureAd(ctx, "default", &zitadel.OrgIdpAzureAdArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+>>>>>>> origin/master
 //				ClientId:     pulumi.String("9065bfc8-a08a..."),
 //				ClientSecret: pulumi.String("H2n***"),
 //				Scopes: pulumi.StringArray{
@@ -51,6 +58,19 @@ import (
 //		})
 //	}
 //
+<<<<<<< HEAD
+=======
+// ```
+//
+// ## Import
+//
+// terraform The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import zitadel:index/orgIdpAzureAd:OrgIdpAzureAd imported '123456789012345678:123456789012345678:12345678-1234-1234-1234-123456789012'
+//
+>>>>>>> origin/master
 // ```
 type OrgIdpAzureAd struct {
 	pulumi.CustomResourceState
@@ -72,7 +92,7 @@ type OrgIdpAzureAd struct {
 	// Name of the IDP
 	Name pulumi.StringOutput `pulumi:"name"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes pulumi.StringArrayOutput `pulumi:"scopes"`
 	// if tenant*id is not set, the tenant*type is used
@@ -109,10 +129,14 @@ func NewOrgIdpAzureAd(ctx *pulumi.Context,
 	if args.IsLinkingAllowed == nil {
 		return nil, errors.New("invalid value for required argument 'IsLinkingAllowed'")
 	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
+	if args.ClientSecret != nil {
+		args.ClientSecret = pulumi.ToSecret(args.ClientSecret).(pulumi.StringInput)
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgIdpAzureAd
 	err := ctx.RegisterResource("zitadel:index/orgIdpAzureAd:OrgIdpAzureAd", name, args, &resource, opts...)
 	if err != nil {
@@ -210,7 +234,7 @@ type orgIdpAzureAdArgs struct {
 	// Name of the IDP
 	Name *string `pulumi:"name"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes []string `pulumi:"scopes"`
 	// if tenant*id is not set, the tenant*type is used
@@ -238,7 +262,7 @@ type OrgIdpAzureAdArgs struct {
 	// Name of the IDP
 	Name pulumi.StringPtrInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// the scopes requested by ZITADEL during the request on the identity provider
 	Scopes pulumi.StringArrayInput
 	// if tenant*id is not set, the tenant*type is used
@@ -270,6 +294,12 @@ func (i *OrgIdpAzureAd) ToOrgIdpAzureAdOutputWithContext(ctx context.Context) Or
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpAzureAdOutput)
 }
 
+func (i *OrgIdpAzureAd) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpAzureAd] {
+	return pulumix.Output[*OrgIdpAzureAd]{
+		OutputState: i.ToOrgIdpAzureAdOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpAzureAdArrayInput is an input type that accepts OrgIdpAzureAdArray and OrgIdpAzureAdArrayOutput values.
 // You can construct a concrete instance of `OrgIdpAzureAdArrayInput` via:
 //
@@ -293,6 +323,12 @@ func (i OrgIdpAzureAdArray) ToOrgIdpAzureAdArrayOutput() OrgIdpAzureAdArrayOutpu
 
 func (i OrgIdpAzureAdArray) ToOrgIdpAzureAdArrayOutputWithContext(ctx context.Context) OrgIdpAzureAdArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpAzureAdArrayOutput)
+}
+
+func (i OrgIdpAzureAdArray) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpAzureAd] {
+	return pulumix.Output[[]*OrgIdpAzureAd]{
+		OutputState: i.ToOrgIdpAzureAdArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // OrgIdpAzureAdMapInput is an input type that accepts OrgIdpAzureAdMap and OrgIdpAzureAdMapOutput values.
@@ -320,6 +356,12 @@ func (i OrgIdpAzureAdMap) ToOrgIdpAzureAdMapOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpAzureAdMapOutput)
 }
 
+func (i OrgIdpAzureAdMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpAzureAd] {
+	return pulumix.Output[map[string]*OrgIdpAzureAd]{
+		OutputState: i.ToOrgIdpAzureAdMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type OrgIdpAzureAdOutput struct{ *pulumi.OutputState }
 
 func (OrgIdpAzureAdOutput) ElementType() reflect.Type {
@@ -332,6 +374,12 @@ func (o OrgIdpAzureAdOutput) ToOrgIdpAzureAdOutput() OrgIdpAzureAdOutput {
 
 func (o OrgIdpAzureAdOutput) ToOrgIdpAzureAdOutputWithContext(ctx context.Context) OrgIdpAzureAdOutput {
 	return o
+}
+
+func (o OrgIdpAzureAdOutput) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpAzureAd] {
+	return pulumix.Output[*OrgIdpAzureAd]{
+		OutputState: o.OutputState,
+	}
 }
 
 // client id generated by the identity provider
@@ -375,8 +423,8 @@ func (o OrgIdpAzureAdOutput) Name() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o OrgIdpAzureAdOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *OrgIdpAzureAd) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o OrgIdpAzureAdOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *OrgIdpAzureAd) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // the scopes requested by ZITADEL during the request on the identity provider
@@ -408,6 +456,12 @@ func (o OrgIdpAzureAdArrayOutput) ToOrgIdpAzureAdArrayOutputWithContext(ctx cont
 	return o
 }
 
+func (o OrgIdpAzureAdArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpAzureAd] {
+	return pulumix.Output[[]*OrgIdpAzureAd]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o OrgIdpAzureAdArrayOutput) Index(i pulumi.IntInput) OrgIdpAzureAdOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *OrgIdpAzureAd {
 		return vs[0].([]*OrgIdpAzureAd)[vs[1].(int)]
@@ -426,6 +480,12 @@ func (o OrgIdpAzureAdMapOutput) ToOrgIdpAzureAdMapOutput() OrgIdpAzureAdMapOutpu
 
 func (o OrgIdpAzureAdMapOutput) ToOrgIdpAzureAdMapOutputWithContext(ctx context.Context) OrgIdpAzureAdMapOutput {
 	return o
+}
+
+func (o OrgIdpAzureAdMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpAzureAd] {
+	return pulumix.Output[map[string]*OrgIdpAzureAd]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o OrgIdpAzureAdMapOutput) MapIndex(k pulumi.StringInput) OrgIdpAzureAdOutput {

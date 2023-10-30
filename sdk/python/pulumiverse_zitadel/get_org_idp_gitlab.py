@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -119,7 +119,7 @@ class GetOrgIdpGitlabResult:
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> str:
+    def org_id(self) -> Optional[str]:
         """
         ID of the organization
         """
@@ -164,7 +164,8 @@ def get_org_idp_gitlab(id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    gitlab = zitadel.get_org_idp_gitlab(id="177073614158299139")
+    default = zitadel.get_org_idp_gitlab(org_id=data["zitadel_org"]["default"]["id"],
+        id="123456789012345678")
     ```
 
 
@@ -178,21 +179,21 @@ def get_org_idp_gitlab(id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getOrgIdpGitlab:getOrgIdpGitlab', __args__, opts=opts, typ=GetOrgIdpGitlabResult).value
 
     return AwaitableGetOrgIdpGitlabResult(
-        client_id=__ret__.client_id,
-        client_secret=__ret__.client_secret,
-        id=__ret__.id,
-        is_auto_creation=__ret__.is_auto_creation,
-        is_auto_update=__ret__.is_auto_update,
-        is_creation_allowed=__ret__.is_creation_allowed,
-        is_linking_allowed=__ret__.is_linking_allowed,
-        name=__ret__.name,
-        org_id=__ret__.org_id,
-        scopes=__ret__.scopes)
+        client_id=pulumi.get(__ret__, 'client_id'),
+        client_secret=pulumi.get(__ret__, 'client_secret'),
+        id=pulumi.get(__ret__, 'id'),
+        is_auto_creation=pulumi.get(__ret__, 'is_auto_creation'),
+        is_auto_update=pulumi.get(__ret__, 'is_auto_update'),
+        is_creation_allowed=pulumi.get(__ret__, 'is_creation_allowed'),
+        is_linking_allowed=pulumi.get(__ret__, 'is_linking_allowed'),
+        name=pulumi.get(__ret__, 'name'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        scopes=pulumi.get(__ret__, 'scopes'))
 
 
 @_utilities.lift_output_func(get_org_idp_gitlab)
 def get_org_idp_gitlab_output(id: Optional[pulumi.Input[str]] = None,
-                              org_id: Optional[pulumi.Input[str]] = None,
+                              org_id: Optional[pulumi.Input[Optional[str]]] = None,
                               opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetOrgIdpGitlabResult]:
     """
     Datasource representing a GitLab IdP of the organization.
@@ -203,7 +204,8 @@ def get_org_idp_gitlab_output(id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    gitlab = zitadel.get_org_idp_gitlab(id="177073614158299139")
+    default = zitadel.get_org_idp_gitlab(org_id=data["zitadel_org"]["default"]["id"],
+        id="123456789012345678")
     ```
 
 

@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['OrgIdpGitlabSelfHostedArgs', 'OrgIdpGitlabSelfHosted']
@@ -21,8 +21,8 @@ class OrgIdpGitlabSelfHostedArgs:
                  is_creation_allowed: pulumi.Input[bool],
                  is_linking_allowed: pulumi.Input[bool],
                  issuer: pulumi.Input[str],
-                 org_id: pulumi.Input[str],
                  name: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None,
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a OrgIdpGitlabSelfHosted resource.
@@ -33,22 +33,66 @@ class OrgIdpGitlabSelfHostedArgs:
         :param pulumi.Input[bool] is_creation_allowed: enable if users should be able to create a new account in ZITADEL when using an external account
         :param pulumi.Input[bool] is_linking_allowed: enable if users should be able to link an existing ZITADEL user with an external account
         :param pulumi.Input[str] issuer: the providers issuer
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] name: Name of the IDP
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: the scopes requested by ZITADEL during the request on the identity provider
         """
-        pulumi.set(__self__, "client_id", client_id)
-        pulumi.set(__self__, "client_secret", client_secret)
-        pulumi.set(__self__, "is_auto_creation", is_auto_creation)
-        pulumi.set(__self__, "is_auto_update", is_auto_update)
-        pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
-        pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
-        pulumi.set(__self__, "issuer", issuer)
-        pulumi.set(__self__, "org_id", org_id)
+        OrgIdpGitlabSelfHostedArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            client_id=client_id,
+            client_secret=client_secret,
+            is_auto_creation=is_auto_creation,
+            is_auto_update=is_auto_update,
+            is_creation_allowed=is_creation_allowed,
+            is_linking_allowed=is_linking_allowed,
+            issuer=issuer,
+            name=name,
+            org_id=org_id,
+            scopes=scopes,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             client_id: pulumi.Input[str],
+             client_secret: pulumi.Input[str],
+             is_auto_creation: pulumi.Input[bool],
+             is_auto_update: pulumi.Input[bool],
+             is_creation_allowed: pulumi.Input[bool],
+             is_linking_allowed: pulumi.Input[bool],
+             issuer: pulumi.Input[str],
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'clientId' in kwargs:
+            client_id = kwargs['clientId']
+        if 'clientSecret' in kwargs:
+            client_secret = kwargs['clientSecret']
+        if 'isAutoCreation' in kwargs:
+            is_auto_creation = kwargs['isAutoCreation']
+        if 'isAutoUpdate' in kwargs:
+            is_auto_update = kwargs['isAutoUpdate']
+        if 'isCreationAllowed' in kwargs:
+            is_creation_allowed = kwargs['isCreationAllowed']
+        if 'isLinkingAllowed' in kwargs:
+            is_linking_allowed = kwargs['isLinkingAllowed']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("client_id", client_id)
+        _setter("client_secret", client_secret)
+        _setter("is_auto_creation", is_auto_creation)
+        _setter("is_auto_update", is_auto_update)
+        _setter("is_creation_allowed", is_creation_allowed)
+        _setter("is_linking_allowed", is_linking_allowed)
+        _setter("issuer", issuer)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
+        if org_id is not None:
+            _setter("org_id", org_id)
         if scopes is not None:
-            pulumi.set(__self__, "scopes", scopes)
+            _setter("scopes", scopes)
 
     @property
     @pulumi.getter(name="clientId")
@@ -135,18 +179,6 @@ class OrgIdpGitlabSelfHostedArgs:
         pulumi.set(self, "issuer", value)
 
     @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
-
-    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -157,6 +189,18 @@ class OrgIdpGitlabSelfHostedArgs:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter
@@ -197,26 +241,69 @@ class _OrgIdpGitlabSelfHostedState:
         :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: the scopes requested by ZITADEL during the request on the identity provider
         """
+        _OrgIdpGitlabSelfHostedState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            client_id=client_id,
+            client_secret=client_secret,
+            is_auto_creation=is_auto_creation,
+            is_auto_update=is_auto_update,
+            is_creation_allowed=is_creation_allowed,
+            is_linking_allowed=is_linking_allowed,
+            issuer=issuer,
+            name=name,
+            org_id=org_id,
+            scopes=scopes,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             client_id: Optional[pulumi.Input[str]] = None,
+             client_secret: Optional[pulumi.Input[str]] = None,
+             is_auto_creation: Optional[pulumi.Input[bool]] = None,
+             is_auto_update: Optional[pulumi.Input[bool]] = None,
+             is_creation_allowed: Optional[pulumi.Input[bool]] = None,
+             is_linking_allowed: Optional[pulumi.Input[bool]] = None,
+             issuer: Optional[pulumi.Input[str]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'clientId' in kwargs:
+            client_id = kwargs['clientId']
+        if 'clientSecret' in kwargs:
+            client_secret = kwargs['clientSecret']
+        if 'isAutoCreation' in kwargs:
+            is_auto_creation = kwargs['isAutoCreation']
+        if 'isAutoUpdate' in kwargs:
+            is_auto_update = kwargs['isAutoUpdate']
+        if 'isCreationAllowed' in kwargs:
+            is_creation_allowed = kwargs['isCreationAllowed']
+        if 'isLinkingAllowed' in kwargs:
+            is_linking_allowed = kwargs['isLinkingAllowed']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
         if client_id is not None:
-            pulumi.set(__self__, "client_id", client_id)
+            _setter("client_id", client_id)
         if client_secret is not None:
-            pulumi.set(__self__, "client_secret", client_secret)
+            _setter("client_secret", client_secret)
         if is_auto_creation is not None:
-            pulumi.set(__self__, "is_auto_creation", is_auto_creation)
+            _setter("is_auto_creation", is_auto_creation)
         if is_auto_update is not None:
-            pulumi.set(__self__, "is_auto_update", is_auto_update)
+            _setter("is_auto_update", is_auto_update)
         if is_creation_allowed is not None:
-            pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
+            _setter("is_creation_allowed", is_creation_allowed)
         if is_linking_allowed is not None:
-            pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
+            _setter("is_linking_allowed", is_linking_allowed)
         if issuer is not None:
-            pulumi.set(__self__, "issuer", issuer)
+            _setter("issuer", issuer)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if scopes is not None:
-            pulumi.set(__self__, "scopes", scopes)
+            _setter("scopes", scopes)
 
     @property
     @pulumi.getter(name="clientId")
@@ -364,8 +451,8 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        gitlab_self_hosted = zitadel.OrgIdpGitlabSelfHosted("gitlabSelfHosted",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.OrgIdpGitlabSelfHosted("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             client_id="15765e...",
             client_secret="*****abcxyz",
             scopes=[
@@ -378,6 +465,14 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
             is_creation_allowed=True,
             is_auto_creation=False,
             is_auto_update=True)
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/orgIdpGitlabSelfHosted:OrgIdpGitlabSelfHosted imported '123456789012345678:123456789012345678:1234567890abcdef'
         ```
 
         :param str resource_name: The name of the resource.
@@ -408,8 +503,8 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        gitlab_self_hosted = zitadel.OrgIdpGitlabSelfHosted("gitlabSelfHosted",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.OrgIdpGitlabSelfHosted("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             client_id="15765e...",
             client_secret="*****abcxyz",
             scopes=[
@@ -424,6 +519,14 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
             is_auto_update=True)
         ```
 
+        ## Import
+
+        terraform The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/orgIdpGitlabSelfHosted:OrgIdpGitlabSelfHosted imported '123456789012345678:123456789012345678:1234567890abcdef'
+        ```
+
         :param str resource_name: The name of the resource.
         :param OrgIdpGitlabSelfHostedArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -434,6 +537,10 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            OrgIdpGitlabSelfHostedArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -463,7 +570,7 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
             __props__.__dict__["client_id"] = client_id
             if client_secret is None and not opts.urn:
                 raise TypeError("Missing required property 'client_secret'")
-            __props__.__dict__["client_secret"] = client_secret
+            __props__.__dict__["client_secret"] = None if client_secret is None else pulumi.Output.secret(client_secret)
             if is_auto_creation is None and not opts.urn:
                 raise TypeError("Missing required property 'is_auto_creation'")
             __props__.__dict__["is_auto_creation"] = is_auto_creation
@@ -480,10 +587,10 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
                 raise TypeError("Missing required property 'issuer'")
             __props__.__dict__["issuer"] = issuer
             __props__.__dict__["name"] = name
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             __props__.__dict__["scopes"] = scopes
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["clientSecret"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(OrgIdpGitlabSelfHosted, __self__).__init__(
             'zitadel:index/orgIdpGitlabSelfHosted:OrgIdpGitlabSelfHosted',
             resource_name,
@@ -604,7 +711,7 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

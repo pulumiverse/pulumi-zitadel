@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -78,7 +78,7 @@ class GetActionResult:
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> str:
+    def org_id(self) -> Optional[str]:
         """
         ID of the organization
         """
@@ -134,9 +134,9 @@ def get_action(action_id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    action_action = zitadel.get_action(org_id=data["zitadel_org"]["org"]["id"],
-        action_id="177073621691269123")
-    pulumi.export("action", action_action)
+    default = zitadel.get_action(org_id=data["zitadel_org"]["default"]["id"],
+        action_id="123456789012345678")
+    pulumi.export("action", default)
     ```
 
 
@@ -150,19 +150,19 @@ def get_action(action_id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getAction:getAction', __args__, opts=opts, typ=GetActionResult).value
 
     return AwaitableGetActionResult(
-        action_id=__ret__.action_id,
-        allowed_to_fail=__ret__.allowed_to_fail,
-        id=__ret__.id,
-        name=__ret__.name,
-        org_id=__ret__.org_id,
-        script=__ret__.script,
-        state=__ret__.state,
-        timeout=__ret__.timeout)
+        action_id=pulumi.get(__ret__, 'action_id'),
+        allowed_to_fail=pulumi.get(__ret__, 'allowed_to_fail'),
+        id=pulumi.get(__ret__, 'id'),
+        name=pulumi.get(__ret__, 'name'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        script=pulumi.get(__ret__, 'script'),
+        state=pulumi.get(__ret__, 'state'),
+        timeout=pulumi.get(__ret__, 'timeout'))
 
 
 @_utilities.lift_output_func(get_action)
 def get_action_output(action_id: Optional[pulumi.Input[str]] = None,
-                      org_id: Optional[pulumi.Input[str]] = None,
+                      org_id: Optional[pulumi.Input[Optional[str]]] = None,
                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetActionResult]:
     """
     Datasource representing an action belonging to an organization.
@@ -173,9 +173,9 @@ def get_action_output(action_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    action_action = zitadel.get_action(org_id=data["zitadel_org"]["org"]["id"],
-        action_id="177073621691269123")
-    pulumi.export("action", action_action)
+    default = zitadel.get_action(org_id=data["zitadel_org"]["default"]["id"],
+        action_id="123456789012345678")
+    pulumi.export("action", default)
     ```
 
 

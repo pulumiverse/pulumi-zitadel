@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['PersonalAccessTokenArgs', 'PersonalAccessToken']
@@ -14,31 +14,41 @@ __all__ = ['PersonalAccessTokenArgs', 'PersonalAccessToken']
 @pulumi.input_type
 class PersonalAccessTokenArgs:
     def __init__(__self__, *,
-                 org_id: pulumi.Input[str],
                  user_id: pulumi.Input[str],
-                 expiration_date: Optional[pulumi.Input[str]] = None):
+                 expiration_date: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a PersonalAccessToken resource.
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] user_id: ID of the user
         :param pulumi.Input[str] expiration_date: Expiration date of the token in the RFC3339 format
+        :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "org_id", org_id)
-        pulumi.set(__self__, "user_id", user_id)
+        PersonalAccessTokenArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            user_id=user_id,
+            expiration_date=expiration_date,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             user_id: pulumi.Input[str],
+             expiration_date: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'userId' in kwargs:
+            user_id = kwargs['userId']
+        if 'expirationDate' in kwargs:
+            expiration_date = kwargs['expirationDate']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("user_id", user_id)
         if expiration_date is not None:
-            pulumi.set(__self__, "expiration_date", expiration_date)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
+            _setter("expiration_date", expiration_date)
+        if org_id is not None:
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="userId")
@@ -64,6 +74,18 @@ class PersonalAccessTokenArgs:
     def expiration_date(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "expiration_date", value)
 
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
+
 
 @pulumi.input_type
 class _PersonalAccessTokenState:
@@ -79,14 +101,37 @@ class _PersonalAccessTokenState:
         :param pulumi.Input[str] token: Value of the token
         :param pulumi.Input[str] user_id: ID of the user
         """
+        _PersonalAccessTokenState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            expiration_date=expiration_date,
+            org_id=org_id,
+            token=token,
+            user_id=user_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             expiration_date: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             token: Optional[pulumi.Input[str]] = None,
+             user_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'expirationDate' in kwargs:
+            expiration_date = kwargs['expirationDate']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'userId' in kwargs:
+            user_id = kwargs['userId']
+
         if expiration_date is not None:
-            pulumi.set(__self__, "expiration_date", expiration_date)
+            _setter("expiration_date", expiration_date)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if token is not None:
-            pulumi.set(__self__, "token", token)
+            _setter("token", token)
         if user_id is not None:
-            pulumi.set(__self__, "user_id", user_id)
+            _setter("user_id", user_id)
 
     @property
     @pulumi.getter(name="expirationDate")
@@ -155,10 +200,18 @@ class PersonalAccessToken(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        pat = zitadel.PersonalAccessToken("pat",
-            org_id=zitadel_org["org"]["id"],
-            user_id=zitadel_machine_user["machine_user"]["id"],
+        default = zitadel.PersonalAccessToken("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            user_id=data["zitadel_machine_user"]["default"]["id"],
             expiration_date="2519-04-01T08:45:00Z")
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/personalAccessToken:PersonalAccessToken imported '123456789012345678:123456789012345678:123456789012345678:LHt79...'
         ```
 
         :param str resource_name: The name of the resource.
@@ -182,10 +235,18 @@ class PersonalAccessToken(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        pat = zitadel.PersonalAccessToken("pat",
-            org_id=zitadel_org["org"]["id"],
-            user_id=zitadel_machine_user["machine_user"]["id"],
+        default = zitadel.PersonalAccessToken("default",
+            org_id=data["zitadel_org"]["default"]["id"],
+            user_id=data["zitadel_machine_user"]["default"]["id"],
             expiration_date="2519-04-01T08:45:00Z")
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/personalAccessToken:PersonalAccessToken imported '123456789012345678:123456789012345678:123456789012345678:LHt79...'
         ```
 
         :param str resource_name: The name of the resource.
@@ -198,6 +259,10 @@ class PersonalAccessToken(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            PersonalAccessTokenArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -216,13 +281,13 @@ class PersonalAccessToken(pulumi.CustomResource):
             __props__ = PersonalAccessTokenArgs.__new__(PersonalAccessTokenArgs)
 
             __props__.__dict__["expiration_date"] = expiration_date
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if user_id is None and not opts.urn:
                 raise TypeError("Missing required property 'user_id'")
             __props__.__dict__["user_id"] = user_id
             __props__.__dict__["token"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["token"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(PersonalAccessToken, __self__).__init__(
             'zitadel:index/personalAccessToken:PersonalAccessToken',
             resource_name,
@@ -269,7 +334,7 @@ class PersonalAccessToken(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

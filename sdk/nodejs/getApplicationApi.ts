@@ -13,20 +13,17 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const apiApplicationApplicationApi = zitadel.getApplicationApi({
- *     orgId: data.zitadel_org.org.id,
- *     projectId: data.zitadel_project.project.id,
- *     appId: "177073625566806019",
+ * const default = zitadel.getApplicationApi({
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: data.zitadel_project["default"].id,
+ *     appId: "123456789012345678",
  * });
- * export const apiApplication = apiApplicationApplicationApi;
+ * export const applicationApi = _default;
  * ```
  */
 export function getApplicationApi(args: GetApplicationApiArgs, opts?: pulumi.InvokeOptions): Promise<GetApplicationApiResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getApplicationApi:getApplicationApi", {
         "appId": args.appId,
         "orgId": args.orgId,
@@ -43,9 +40,9 @@ export interface GetApplicationApiArgs {
      */
     appId: string;
     /**
-     * orgID of the application
+     * ID of the organization
      */
-    orgId: string;
+    orgId?: string;
     /**
      * ID of the project
      */
@@ -73,17 +70,33 @@ export interface GetApplicationApiResult {
      */
     readonly name: string;
     /**
-     * orgID of the application
+     * ID of the organization
      */
-    readonly orgId: string;
+    readonly orgId?: string;
     /**
      * ID of the project
      */
     readonly projectId: string;
 }
-
+/**
+ * Datasource representing an API application belonging to a project, with all configuration possibilities.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getApplicationApi({
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: data.zitadel_project["default"].id,
+ *     appId: "123456789012345678",
+ * });
+ * export const applicationApi = _default;
+ * ```
+ */
 export function getApplicationApiOutput(args: GetApplicationApiOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApplicationApiResult> {
-    return pulumi.output(args).apply(a => getApplicationApi(a, opts))
+    return pulumi.output(args).apply((a: any) => getApplicationApi(a, opts))
 }
 
 /**
@@ -95,9 +108,9 @@ export interface GetApplicationApiOutputArgs {
      */
     appId: pulumi.Input<string>;
     /**
-     * orgID of the application
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * ID of the project
      */

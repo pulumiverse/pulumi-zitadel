@@ -11,9 +11,9 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const github = new zitadel.IdpGithub("github", {
+ * const _default = new zitadel.IdpGithub("default", {
  *     clientId: "86a165...",
  *     clientSecret: "*****afdbac18",
  *     isAutoCreation: false,
@@ -26,6 +26,14 @@ import * as utilities from "./utilities";
  *         "email",
  *     ],
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/idpGithub:IdpGithub imported '123456789012345678:1234567890123456781234567890123456787890'
  * ```
  */
 export class IdpGithub extends pulumi.CustomResource {
@@ -131,7 +139,7 @@ export class IdpGithub extends pulumi.CustomResource {
                 throw new Error("Missing required property 'isLinkingAllowed'");
             }
             resourceInputs["clientId"] = args ? args.clientId : undefined;
-            resourceInputs["clientSecret"] = args ? args.clientSecret : undefined;
+            resourceInputs["clientSecret"] = args?.clientSecret ? pulumi.secret(args.clientSecret) : undefined;
             resourceInputs["isAutoCreation"] = args ? args.isAutoCreation : undefined;
             resourceInputs["isAutoUpdate"] = args ? args.isAutoUpdate : undefined;
             resourceInputs["isCreationAllowed"] = args ? args.isCreationAllowed : undefined;
@@ -140,6 +148,8 @@ export class IdpGithub extends pulumi.CustomResource {
             resourceInputs["scopes"] = args ? args.scopes : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["clientSecret"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(IdpGithub.__pulumiType, name, resourceInputs, opts);
     }
 }

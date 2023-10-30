@@ -13,13 +13,21 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const appKey = new zitadel.ApplicationKey("appKey", {
- *     orgId: zitadel_org.org.id,
- *     projectId: zitadel_project.project.id,
- *     appId: zitadel_application_api.application_api.id,
+ * const _default = new zitadel.ApplicationKey("default", {
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: data.zitadel_project["default"].id,
+ *     appId: data.zitadel_application_api["default"].id,
  *     keyType: "KEY_TYPE_JSON",
  *     expirationDate: "2519-04-01T08:45:00Z",
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<id:project_id:app_id[:org_id][:key_details]>`. You can use __SEMICOLON__ to escape :, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/applicationKey:ApplicationKey imported "123456789012345678:123456789012345678:123456789012345678:123456789012345678:$(cat ~/Downloads/123456789012345678.json | sed -e 's/:/__SEMICOLON__/g')"
  * ```
  */
 export class ApplicationKey extends pulumi.CustomResource {
@@ -69,7 +77,7 @@ export class ApplicationKey extends pulumi.CustomResource {
     /**
      * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * ID of the project
      */
@@ -105,9 +113,6 @@ export class ApplicationKey extends pulumi.CustomResource {
             if ((!args || args.keyType === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'keyType'");
             }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             if ((!args || args.projectId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'projectId'");
             }
@@ -119,6 +124,8 @@ export class ApplicationKey extends pulumi.CustomResource {
             resourceInputs["keyDetails"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["keyDetails"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ApplicationKey.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -172,7 +179,7 @@ export interface ApplicationKeyArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * ID of the project
      */

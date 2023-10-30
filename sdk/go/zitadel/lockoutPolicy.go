@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the custom lockout policy of an organization.
@@ -27,8 +29,13 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.NewLockoutPolicy(ctx, "lockoutPolicy", &zitadel.LockoutPolicyArgs{
 //				OrgId:               pulumi.Any(zitadel_org.Org.Id),
+=======
+//			_, err := zitadel.NewLockoutPolicy(ctx, "default", &zitadel.LockoutPolicyArgs{
+//				OrgId:               pulumi.Any(data.Zitadel_org.Default.Id),
+>>>>>>> origin/master
 //				MaxPasswordAttempts: pulumi.Int(5),
 //			})
 //			if err != nil {
@@ -38,14 +45,27 @@ import (
 //		})
 //	}
 //
+<<<<<<< HEAD
+=======
+// ```
+//
+// ## Import
+//
+// terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import zitadel:index/lockoutPolicy:LockoutPolicy imported '123456789012345678'
+//
+>>>>>>> origin/master
 // ```
 type LockoutPolicy struct {
 	pulumi.CustomResourceState
 
 	// Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
 	MaxPasswordAttempts pulumi.IntOutput `pulumi:"maxPasswordAttempts"`
-	// Id for the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 }
 
 // NewLockoutPolicy registers a new resource with the given unique name, arguments, and options.
@@ -58,7 +78,7 @@ func NewLockoutPolicy(ctx *pulumi.Context,
 	if args.MaxPasswordAttempts == nil {
 		return nil, errors.New("invalid value for required argument 'MaxPasswordAttempts'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource LockoutPolicy
 	err := ctx.RegisterResource("zitadel:index/lockoutPolicy:LockoutPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -83,14 +103,14 @@ func GetLockoutPolicy(ctx *pulumi.Context,
 type lockoutPolicyState struct {
 	// Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
 	MaxPasswordAttempts *int `pulumi:"maxPasswordAttempts"`
-	// Id for the organization
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 }
 
 type LockoutPolicyState struct {
 	// Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
 	MaxPasswordAttempts pulumi.IntPtrInput
-	// Id for the organization
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 }
 
@@ -101,7 +121,7 @@ func (LockoutPolicyState) ElementType() reflect.Type {
 type lockoutPolicyArgs struct {
 	// Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
 	MaxPasswordAttempts int `pulumi:"maxPasswordAttempts"`
-	// Id for the organization
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 }
 
@@ -109,7 +129,7 @@ type lockoutPolicyArgs struct {
 type LockoutPolicyArgs struct {
 	// Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
 	MaxPasswordAttempts pulumi.IntInput
-	// Id for the organization
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 }
 
@@ -134,6 +154,12 @@ func (i *LockoutPolicy) ToLockoutPolicyOutput() LockoutPolicyOutput {
 
 func (i *LockoutPolicy) ToLockoutPolicyOutputWithContext(ctx context.Context) LockoutPolicyOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(LockoutPolicyOutput)
+}
+
+func (i *LockoutPolicy) ToOutput(ctx context.Context) pulumix.Output[*LockoutPolicy] {
+	return pulumix.Output[*LockoutPolicy]{
+		OutputState: i.ToLockoutPolicyOutputWithContext(ctx).OutputState,
+	}
 }
 
 // LockoutPolicyArrayInput is an input type that accepts LockoutPolicyArray and LockoutPolicyArrayOutput values.
@@ -161,6 +187,12 @@ func (i LockoutPolicyArray) ToLockoutPolicyArrayOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(LockoutPolicyArrayOutput)
 }
 
+func (i LockoutPolicyArray) ToOutput(ctx context.Context) pulumix.Output[[]*LockoutPolicy] {
+	return pulumix.Output[[]*LockoutPolicy]{
+		OutputState: i.ToLockoutPolicyArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // LockoutPolicyMapInput is an input type that accepts LockoutPolicyMap and LockoutPolicyMapOutput values.
 // You can construct a concrete instance of `LockoutPolicyMapInput` via:
 //
@@ -186,6 +218,12 @@ func (i LockoutPolicyMap) ToLockoutPolicyMapOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(LockoutPolicyMapOutput)
 }
 
+func (i LockoutPolicyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*LockoutPolicy] {
+	return pulumix.Output[map[string]*LockoutPolicy]{
+		OutputState: i.ToLockoutPolicyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type LockoutPolicyOutput struct{ *pulumi.OutputState }
 
 func (LockoutPolicyOutput) ElementType() reflect.Type {
@@ -200,14 +238,20 @@ func (o LockoutPolicyOutput) ToLockoutPolicyOutputWithContext(ctx context.Contex
 	return o
 }
 
+func (o LockoutPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[*LockoutPolicy] {
+	return pulumix.Output[*LockoutPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
 // Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
 func (o LockoutPolicyOutput) MaxPasswordAttempts() pulumi.IntOutput {
 	return o.ApplyT(func(v *LockoutPolicy) pulumi.IntOutput { return v.MaxPasswordAttempts }).(pulumi.IntOutput)
 }
 
-// Id for the organization
-func (o LockoutPolicyOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *LockoutPolicy) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o LockoutPolicyOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LockoutPolicy) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 type LockoutPolicyArrayOutput struct{ *pulumi.OutputState }
@@ -222,6 +266,12 @@ func (o LockoutPolicyArrayOutput) ToLockoutPolicyArrayOutput() LockoutPolicyArra
 
 func (o LockoutPolicyArrayOutput) ToLockoutPolicyArrayOutputWithContext(ctx context.Context) LockoutPolicyArrayOutput {
 	return o
+}
+
+func (o LockoutPolicyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*LockoutPolicy] {
+	return pulumix.Output[[]*LockoutPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o LockoutPolicyArrayOutput) Index(i pulumi.IntInput) LockoutPolicyOutput {
@@ -242,6 +292,12 @@ func (o LockoutPolicyMapOutput) ToLockoutPolicyMapOutput() LockoutPolicyMapOutpu
 
 func (o LockoutPolicyMapOutput) ToLockoutPolicyMapOutputWithContext(ctx context.Context) LockoutPolicyMapOutput {
 	return o
+}
+
+func (o LockoutPolicyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*LockoutPolicy] {
+	return pulumix.Output[map[string]*LockoutPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o LockoutPolicyMapOutput) MapIndex(k pulumi.StringInput) LockoutPolicyOutput {

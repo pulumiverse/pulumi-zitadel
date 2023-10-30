@@ -6,26 +6,10 @@ import * as utilities from "./utilities";
 
 /**
  * Datasource representing a generic JWT IdP on the organization.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
- *
- * const orgJwtIdpOrgJwtIdp = zitadel.getOrgJwtIdp({
- *     orgId: data.zitadel_org.org.id,
- *     idpId: "177073612581240835",
- * });
- * export const orgJwtIdp = orgJwtIdpOrgJwtIdp;
- * ```
  */
 export function getOrgJwtIdp(args: GetOrgJwtIdpArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgJwtIdpResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getOrgJwtIdp:getOrgJwtIdp", {
         "idpId": args.idpId,
         "orgId": args.orgId,
@@ -91,9 +75,11 @@ export interface GetOrgJwtIdpResult {
      */
     readonly stylingType: string;
 }
-
+/**
+ * Datasource representing a generic JWT IdP on the organization.
+ */
 export function getOrgJwtIdpOutput(args: GetOrgJwtIdpOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOrgJwtIdpResult> {
-    return pulumi.output(args).apply(a => getOrgJwtIdp(a, opts))
+    return pulumi.output(args).apply((a: any) => getOrgJwtIdp(a, opts))
 }
 
 /**

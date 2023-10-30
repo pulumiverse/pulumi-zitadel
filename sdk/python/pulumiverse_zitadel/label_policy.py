@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['LabelPolicyArgs', 'LabelPolicy']
@@ -20,7 +20,6 @@ class LabelPolicyArgs:
                  font_color: pulumi.Input[str],
                  font_color_dark: pulumi.Input[str],
                  hide_login_name_suffix: pulumi.Input[bool],
-                 org_id: pulumi.Input[str],
                  primary_color: pulumi.Input[str],
                  primary_color_dark: pulumi.Input[str],
                  warn_color: pulumi.Input[str],
@@ -35,6 +34,7 @@ class LabelPolicyArgs:
                  logo_dark_path: Optional[pulumi.Input[str]] = None,
                  logo_hash: Optional[pulumi.Input[str]] = None,
                  logo_path: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None,
                  set_active: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a LabelPolicy resource.
@@ -44,46 +44,144 @@ class LabelPolicyArgs:
         :param pulumi.Input[str] font_color: hex value for font color
         :param pulumi.Input[str] font_color_dark: hex value for font color dark theme
         :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.com/docs/apis/openidoauth/scopes#reserved-scopes
-        :param pulumi.Input[str] org_id: Id for the organization
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[str] warn_color: hex value for warn color
         :param pulumi.Input[str] warn_color_dark: hex value for warn color dark theme
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
         """
-        pulumi.set(__self__, "background_color", background_color)
-        pulumi.set(__self__, "background_color_dark", background_color_dark)
-        pulumi.set(__self__, "disable_watermark", disable_watermark)
-        pulumi.set(__self__, "font_color", font_color)
-        pulumi.set(__self__, "font_color_dark", font_color_dark)
-        pulumi.set(__self__, "hide_login_name_suffix", hide_login_name_suffix)
-        pulumi.set(__self__, "org_id", org_id)
-        pulumi.set(__self__, "primary_color", primary_color)
-        pulumi.set(__self__, "primary_color_dark", primary_color_dark)
-        pulumi.set(__self__, "warn_color", warn_color)
-        pulumi.set(__self__, "warn_color_dark", warn_color_dark)
+        LabelPolicyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            background_color=background_color,
+            background_color_dark=background_color_dark,
+            disable_watermark=disable_watermark,
+            font_color=font_color,
+            font_color_dark=font_color_dark,
+            hide_login_name_suffix=hide_login_name_suffix,
+            primary_color=primary_color,
+            primary_color_dark=primary_color_dark,
+            warn_color=warn_color,
+            warn_color_dark=warn_color_dark,
+            font_hash=font_hash,
+            font_path=font_path,
+            icon_dark_hash=icon_dark_hash,
+            icon_dark_path=icon_dark_path,
+            icon_hash=icon_hash,
+            icon_path=icon_path,
+            logo_dark_hash=logo_dark_hash,
+            logo_dark_path=logo_dark_path,
+            logo_hash=logo_hash,
+            logo_path=logo_path,
+            org_id=org_id,
+            set_active=set_active,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             background_color: pulumi.Input[str],
+             background_color_dark: pulumi.Input[str],
+             disable_watermark: pulumi.Input[bool],
+             font_color: pulumi.Input[str],
+             font_color_dark: pulumi.Input[str],
+             hide_login_name_suffix: pulumi.Input[bool],
+             primary_color: pulumi.Input[str],
+             primary_color_dark: pulumi.Input[str],
+             warn_color: pulumi.Input[str],
+             warn_color_dark: pulumi.Input[str],
+             font_hash: Optional[pulumi.Input[str]] = None,
+             font_path: Optional[pulumi.Input[str]] = None,
+             icon_dark_hash: Optional[pulumi.Input[str]] = None,
+             icon_dark_path: Optional[pulumi.Input[str]] = None,
+             icon_hash: Optional[pulumi.Input[str]] = None,
+             icon_path: Optional[pulumi.Input[str]] = None,
+             logo_dark_hash: Optional[pulumi.Input[str]] = None,
+             logo_dark_path: Optional[pulumi.Input[str]] = None,
+             logo_hash: Optional[pulumi.Input[str]] = None,
+             logo_path: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             set_active: Optional[pulumi.Input[bool]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'backgroundColor' in kwargs:
+            background_color = kwargs['backgroundColor']
+        if 'backgroundColorDark' in kwargs:
+            background_color_dark = kwargs['backgroundColorDark']
+        if 'disableWatermark' in kwargs:
+            disable_watermark = kwargs['disableWatermark']
+        if 'fontColor' in kwargs:
+            font_color = kwargs['fontColor']
+        if 'fontColorDark' in kwargs:
+            font_color_dark = kwargs['fontColorDark']
+        if 'hideLoginNameSuffix' in kwargs:
+            hide_login_name_suffix = kwargs['hideLoginNameSuffix']
+        if 'primaryColor' in kwargs:
+            primary_color = kwargs['primaryColor']
+        if 'primaryColorDark' in kwargs:
+            primary_color_dark = kwargs['primaryColorDark']
+        if 'warnColor' in kwargs:
+            warn_color = kwargs['warnColor']
+        if 'warnColorDark' in kwargs:
+            warn_color_dark = kwargs['warnColorDark']
+        if 'fontHash' in kwargs:
+            font_hash = kwargs['fontHash']
+        if 'fontPath' in kwargs:
+            font_path = kwargs['fontPath']
+        if 'iconDarkHash' in kwargs:
+            icon_dark_hash = kwargs['iconDarkHash']
+        if 'iconDarkPath' in kwargs:
+            icon_dark_path = kwargs['iconDarkPath']
+        if 'iconHash' in kwargs:
+            icon_hash = kwargs['iconHash']
+        if 'iconPath' in kwargs:
+            icon_path = kwargs['iconPath']
+        if 'logoDarkHash' in kwargs:
+            logo_dark_hash = kwargs['logoDarkHash']
+        if 'logoDarkPath' in kwargs:
+            logo_dark_path = kwargs['logoDarkPath']
+        if 'logoHash' in kwargs:
+            logo_hash = kwargs['logoHash']
+        if 'logoPath' in kwargs:
+            logo_path = kwargs['logoPath']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'setActive' in kwargs:
+            set_active = kwargs['setActive']
+
+        _setter("background_color", background_color)
+        _setter("background_color_dark", background_color_dark)
+        _setter("disable_watermark", disable_watermark)
+        _setter("font_color", font_color)
+        _setter("font_color_dark", font_color_dark)
+        _setter("hide_login_name_suffix", hide_login_name_suffix)
+        _setter("primary_color", primary_color)
+        _setter("primary_color_dark", primary_color_dark)
+        _setter("warn_color", warn_color)
+        _setter("warn_color_dark", warn_color_dark)
         if font_hash is not None:
-            pulumi.set(__self__, "font_hash", font_hash)
+            _setter("font_hash", font_hash)
         if font_path is not None:
-            pulumi.set(__self__, "font_path", font_path)
+            _setter("font_path", font_path)
         if icon_dark_hash is not None:
-            pulumi.set(__self__, "icon_dark_hash", icon_dark_hash)
+            _setter("icon_dark_hash", icon_dark_hash)
         if icon_dark_path is not None:
-            pulumi.set(__self__, "icon_dark_path", icon_dark_path)
+            _setter("icon_dark_path", icon_dark_path)
         if icon_hash is not None:
-            pulumi.set(__self__, "icon_hash", icon_hash)
+            _setter("icon_hash", icon_hash)
         if icon_path is not None:
-            pulumi.set(__self__, "icon_path", icon_path)
+            _setter("icon_path", icon_path)
         if logo_dark_hash is not None:
-            pulumi.set(__self__, "logo_dark_hash", logo_dark_hash)
+            _setter("logo_dark_hash", logo_dark_hash)
         if logo_dark_path is not None:
-            pulumi.set(__self__, "logo_dark_path", logo_dark_path)
+            _setter("logo_dark_path", logo_dark_path)
         if logo_hash is not None:
-            pulumi.set(__self__, "logo_hash", logo_hash)
+            _setter("logo_hash", logo_hash)
         if logo_path is not None:
-            pulumi.set(__self__, "logo_path", logo_path)
+            _setter("logo_path", logo_path)
+        if org_id is not None:
+            _setter("org_id", org_id)
         if set_active is not None:
-            pulumi.set(__self__, "set_active", set_active)
+            _setter("set_active", set_active)
 
     @property
     @pulumi.getter(name="backgroundColor")
@@ -156,18 +254,6 @@ class LabelPolicyArgs:
     @hide_login_name_suffix.setter
     def hide_login_name_suffix(self, value: pulumi.Input[bool]):
         pulumi.set(self, "hide_login_name_suffix", value)
-
-    @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        Id for the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter(name="primaryColor")
@@ -308,6 +394,18 @@ class LabelPolicyArgs:
         pulumi.set(self, "logo_path", value)
 
     @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
+
+    @property
     @pulumi.getter(name="setActive")
     def set_active(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -358,67 +456,184 @@ class _LabelPolicyState:
         :param pulumi.Input[str] font_color: hex value for font color
         :param pulumi.Input[str] font_color_dark: hex value for font color dark theme
         :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.com/docs/apis/openidoauth/scopes#reserved-scopes
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
         :param pulumi.Input[str] warn_color: hex value for warn color
         :param pulumi.Input[str] warn_color_dark: hex value for warn color dark theme
         """
+        _LabelPolicyState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            background_color=background_color,
+            background_color_dark=background_color_dark,
+            disable_watermark=disable_watermark,
+            font_color=font_color,
+            font_color_dark=font_color_dark,
+            font_hash=font_hash,
+            font_path=font_path,
+            font_url=font_url,
+            hide_login_name_suffix=hide_login_name_suffix,
+            icon_dark_hash=icon_dark_hash,
+            icon_dark_path=icon_dark_path,
+            icon_hash=icon_hash,
+            icon_path=icon_path,
+            icon_url=icon_url,
+            icon_url_dark=icon_url_dark,
+            logo_dark_hash=logo_dark_hash,
+            logo_dark_path=logo_dark_path,
+            logo_hash=logo_hash,
+            logo_path=logo_path,
+            logo_url=logo_url,
+            logo_url_dark=logo_url_dark,
+            org_id=org_id,
+            primary_color=primary_color,
+            primary_color_dark=primary_color_dark,
+            set_active=set_active,
+            warn_color=warn_color,
+            warn_color_dark=warn_color_dark,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             background_color: Optional[pulumi.Input[str]] = None,
+             background_color_dark: Optional[pulumi.Input[str]] = None,
+             disable_watermark: Optional[pulumi.Input[bool]] = None,
+             font_color: Optional[pulumi.Input[str]] = None,
+             font_color_dark: Optional[pulumi.Input[str]] = None,
+             font_hash: Optional[pulumi.Input[str]] = None,
+             font_path: Optional[pulumi.Input[str]] = None,
+             font_url: Optional[pulumi.Input[str]] = None,
+             hide_login_name_suffix: Optional[pulumi.Input[bool]] = None,
+             icon_dark_hash: Optional[pulumi.Input[str]] = None,
+             icon_dark_path: Optional[pulumi.Input[str]] = None,
+             icon_hash: Optional[pulumi.Input[str]] = None,
+             icon_path: Optional[pulumi.Input[str]] = None,
+             icon_url: Optional[pulumi.Input[str]] = None,
+             icon_url_dark: Optional[pulumi.Input[str]] = None,
+             logo_dark_hash: Optional[pulumi.Input[str]] = None,
+             logo_dark_path: Optional[pulumi.Input[str]] = None,
+             logo_hash: Optional[pulumi.Input[str]] = None,
+             logo_path: Optional[pulumi.Input[str]] = None,
+             logo_url: Optional[pulumi.Input[str]] = None,
+             logo_url_dark: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             primary_color: Optional[pulumi.Input[str]] = None,
+             primary_color_dark: Optional[pulumi.Input[str]] = None,
+             set_active: Optional[pulumi.Input[bool]] = None,
+             warn_color: Optional[pulumi.Input[str]] = None,
+             warn_color_dark: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'backgroundColor' in kwargs:
+            background_color = kwargs['backgroundColor']
+        if 'backgroundColorDark' in kwargs:
+            background_color_dark = kwargs['backgroundColorDark']
+        if 'disableWatermark' in kwargs:
+            disable_watermark = kwargs['disableWatermark']
+        if 'fontColor' in kwargs:
+            font_color = kwargs['fontColor']
+        if 'fontColorDark' in kwargs:
+            font_color_dark = kwargs['fontColorDark']
+        if 'fontHash' in kwargs:
+            font_hash = kwargs['fontHash']
+        if 'fontPath' in kwargs:
+            font_path = kwargs['fontPath']
+        if 'fontUrl' in kwargs:
+            font_url = kwargs['fontUrl']
+        if 'hideLoginNameSuffix' in kwargs:
+            hide_login_name_suffix = kwargs['hideLoginNameSuffix']
+        if 'iconDarkHash' in kwargs:
+            icon_dark_hash = kwargs['iconDarkHash']
+        if 'iconDarkPath' in kwargs:
+            icon_dark_path = kwargs['iconDarkPath']
+        if 'iconHash' in kwargs:
+            icon_hash = kwargs['iconHash']
+        if 'iconPath' in kwargs:
+            icon_path = kwargs['iconPath']
+        if 'iconUrl' in kwargs:
+            icon_url = kwargs['iconUrl']
+        if 'iconUrlDark' in kwargs:
+            icon_url_dark = kwargs['iconUrlDark']
+        if 'logoDarkHash' in kwargs:
+            logo_dark_hash = kwargs['logoDarkHash']
+        if 'logoDarkPath' in kwargs:
+            logo_dark_path = kwargs['logoDarkPath']
+        if 'logoHash' in kwargs:
+            logo_hash = kwargs['logoHash']
+        if 'logoPath' in kwargs:
+            logo_path = kwargs['logoPath']
+        if 'logoUrl' in kwargs:
+            logo_url = kwargs['logoUrl']
+        if 'logoUrlDark' in kwargs:
+            logo_url_dark = kwargs['logoUrlDark']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'primaryColor' in kwargs:
+            primary_color = kwargs['primaryColor']
+        if 'primaryColorDark' in kwargs:
+            primary_color_dark = kwargs['primaryColorDark']
+        if 'setActive' in kwargs:
+            set_active = kwargs['setActive']
+        if 'warnColor' in kwargs:
+            warn_color = kwargs['warnColor']
+        if 'warnColorDark' in kwargs:
+            warn_color_dark = kwargs['warnColorDark']
+
         if background_color is not None:
-            pulumi.set(__self__, "background_color", background_color)
+            _setter("background_color", background_color)
         if background_color_dark is not None:
-            pulumi.set(__self__, "background_color_dark", background_color_dark)
+            _setter("background_color_dark", background_color_dark)
         if disable_watermark is not None:
-            pulumi.set(__self__, "disable_watermark", disable_watermark)
+            _setter("disable_watermark", disable_watermark)
         if font_color is not None:
-            pulumi.set(__self__, "font_color", font_color)
+            _setter("font_color", font_color)
         if font_color_dark is not None:
-            pulumi.set(__self__, "font_color_dark", font_color_dark)
+            _setter("font_color_dark", font_color_dark)
         if font_hash is not None:
-            pulumi.set(__self__, "font_hash", font_hash)
+            _setter("font_hash", font_hash)
         if font_path is not None:
-            pulumi.set(__self__, "font_path", font_path)
+            _setter("font_path", font_path)
         if font_url is not None:
-            pulumi.set(__self__, "font_url", font_url)
+            _setter("font_url", font_url)
         if hide_login_name_suffix is not None:
-            pulumi.set(__self__, "hide_login_name_suffix", hide_login_name_suffix)
+            _setter("hide_login_name_suffix", hide_login_name_suffix)
         if icon_dark_hash is not None:
-            pulumi.set(__self__, "icon_dark_hash", icon_dark_hash)
+            _setter("icon_dark_hash", icon_dark_hash)
         if icon_dark_path is not None:
-            pulumi.set(__self__, "icon_dark_path", icon_dark_path)
+            _setter("icon_dark_path", icon_dark_path)
         if icon_hash is not None:
-            pulumi.set(__self__, "icon_hash", icon_hash)
+            _setter("icon_hash", icon_hash)
         if icon_path is not None:
-            pulumi.set(__self__, "icon_path", icon_path)
+            _setter("icon_path", icon_path)
         if icon_url is not None:
-            pulumi.set(__self__, "icon_url", icon_url)
+            _setter("icon_url", icon_url)
         if icon_url_dark is not None:
-            pulumi.set(__self__, "icon_url_dark", icon_url_dark)
+            _setter("icon_url_dark", icon_url_dark)
         if logo_dark_hash is not None:
-            pulumi.set(__self__, "logo_dark_hash", logo_dark_hash)
+            _setter("logo_dark_hash", logo_dark_hash)
         if logo_dark_path is not None:
-            pulumi.set(__self__, "logo_dark_path", logo_dark_path)
+            _setter("logo_dark_path", logo_dark_path)
         if logo_hash is not None:
-            pulumi.set(__self__, "logo_hash", logo_hash)
+            _setter("logo_hash", logo_hash)
         if logo_path is not None:
-            pulumi.set(__self__, "logo_path", logo_path)
+            _setter("logo_path", logo_path)
         if logo_url is not None:
-            pulumi.set(__self__, "logo_url", logo_url)
+            _setter("logo_url", logo_url)
         if logo_url_dark is not None:
-            pulumi.set(__self__, "logo_url_dark", logo_url_dark)
+            _setter("logo_url_dark", logo_url_dark)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if primary_color is not None:
-            pulumi.set(__self__, "primary_color", primary_color)
+            _setter("primary_color", primary_color)
         if primary_color_dark is not None:
-            pulumi.set(__self__, "primary_color_dark", primary_color_dark)
+            _setter("primary_color_dark", primary_color_dark)
         if set_active is not None:
-            pulumi.set(__self__, "set_active", set_active)
+            _setter("set_active", set_active)
         if warn_color is not None:
-            pulumi.set(__self__, "warn_color", warn_color)
+            _setter("warn_color", warn_color)
         if warn_color_dark is not None:
-            pulumi.set(__self__, "warn_color_dark", warn_color_dark)
+            _setter("warn_color_dark", warn_color_dark)
 
     @property
     @pulumi.getter(name="backgroundColor")
@@ -631,7 +846,7 @@ class _LabelPolicyState:
     @pulumi.getter(name="orgId")
     def org_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -731,6 +946,14 @@ class LabelPolicy(pulumi.CustomResource):
         """
         Resource representing the custom label policy of an organization.
 
+        ## Import
+
+        terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] background_color: hex value for background color
@@ -739,7 +962,7 @@ class LabelPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] font_color: hex value for font color
         :param pulumi.Input[str] font_color_dark: hex value for font color dark theme
         :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.com/docs/apis/openidoauth/scopes#reserved-scopes
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
@@ -755,6 +978,14 @@ class LabelPolicy(pulumi.CustomResource):
         """
         Resource representing the custom label policy of an organization.
 
+        ## Import
+
+        terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
+        ```
+
         :param str resource_name: The name of the resource.
         :param LabelPolicyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -765,6 +996,10 @@ class LabelPolicy(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            LabelPolicyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -829,8 +1064,6 @@ class LabelPolicy(pulumi.CustomResource):
             __props__.__dict__["logo_dark_path"] = logo_dark_path
             __props__.__dict__["logo_hash"] = logo_hash
             __props__.__dict__["logo_path"] = logo_path
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             if primary_color is None and not opts.urn:
                 raise TypeError("Missing required property 'primary_color'")
@@ -900,7 +1133,7 @@ class LabelPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] font_color: hex value for font color
         :param pulumi.Input[str] font_color_dark: hex value for font color dark theme
         :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.com/docs/apis/openidoauth/scopes#reserved-scopes
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
@@ -1065,9 +1298,9 @@ class LabelPolicy(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 

@@ -13,17 +13,15 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const gitlabSelfHosted = pulumi.output(zitadel.getOrgIdpGitlabSelfHosted({
- *     id: "177073614158299139",
- * }));
+ * const default = zitadel.getOrgIdpGitlabSelfHosted({
+ *     orgId: data.zitadel_org["default"].id,
+ *     id: "123456789012345678",
+ * });
  * ```
  */
 export function getOrgIdpGitlabSelfHosted(args: GetOrgIdpGitlabSelfHostedArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgIdpGitlabSelfHostedResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getOrgIdpGitlabSelfHosted:getOrgIdpGitlabSelfHosted", {
         "id": args.id,
         "orgId": args.orgId,
@@ -41,7 +39,7 @@ export interface GetOrgIdpGitlabSelfHostedArgs {
     /**
      * ID of the organization
      */
-    orgId: string;
+    orgId?: string;
 }
 
 /**
@@ -87,15 +85,29 @@ export interface GetOrgIdpGitlabSelfHostedResult {
     /**
      * ID of the organization
      */
-    readonly orgId: string;
+    readonly orgId?: string;
     /**
      * the scopes requested by ZITADEL during the request on the identity provider
      */
     readonly scopes: string[];
 }
-
+/**
+ * Datasource representing a GitLab Self Hosted IdP of the organization.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getOrgIdpGitlabSelfHosted({
+ *     orgId: data.zitadel_org["default"].id,
+ *     id: "123456789012345678",
+ * });
+ * ```
+ */
 export function getOrgIdpGitlabSelfHostedOutput(args: GetOrgIdpGitlabSelfHostedOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOrgIdpGitlabSelfHostedResult> {
-    return pulumi.output(args).apply(a => getOrgIdpGitlabSelfHosted(a, opts))
+    return pulumi.output(args).apply((a: any) => getOrgIdpGitlabSelfHosted(a, opts))
 }
 
 /**
@@ -109,5 +121,5 @@ export interface GetOrgIdpGitlabSelfHostedOutputArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
 }

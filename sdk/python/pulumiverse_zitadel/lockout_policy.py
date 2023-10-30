@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['LockoutPolicyArgs', 'LockoutPolicy']
@@ -19,11 +19,28 @@ class LockoutPolicyArgs:
         """
         The set of arguments for constructing a LockoutPolicy resource.
         :param pulumi.Input[int] max_password_attempts: Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "max_password_attempts", max_password_attempts)
+        LockoutPolicyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            max_password_attempts=max_password_attempts,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             max_password_attempts: pulumi.Input[int],
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'maxPasswordAttempts' in kwargs:
+            max_password_attempts = kwargs['maxPasswordAttempts']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("max_password_attempts", max_password_attempts)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="maxPasswordAttempts")
@@ -41,7 +58,7 @@ class LockoutPolicyArgs:
     @pulumi.getter(name="orgId")
     def org_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -58,12 +75,29 @@ class _LockoutPolicyState:
         """
         Input properties used for looking up and filtering LockoutPolicy resources.
         :param pulumi.Input[int] max_password_attempts: Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         """
+        _LockoutPolicyState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            max_password_attempts=max_password_attempts,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             max_password_attempts: Optional[pulumi.Input[int]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'maxPasswordAttempts' in kwargs:
+            max_password_attempts = kwargs['maxPasswordAttempts']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
         if max_password_attempts is not None:
-            pulumi.set(__self__, "max_password_attempts", max_password_attempts)
+            _setter("max_password_attempts", max_password_attempts)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="maxPasswordAttempts")
@@ -81,7 +115,7 @@ class _LockoutPolicyState:
     @pulumi.getter(name="orgId")
     def org_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 
@@ -107,15 +141,23 @@ class LockoutPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        lockout_policy = zitadel.LockoutPolicy("lockoutPolicy",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.LockoutPolicy("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             max_password_attempts=5)
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/lockoutPolicy:LockoutPolicy imported '123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] max_password_attempts: Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         """
         ...
     @overload
@@ -132,9 +174,17 @@ class LockoutPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        lockout_policy = zitadel.LockoutPolicy("lockoutPolicy",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.LockoutPolicy("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             max_password_attempts=5)
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/lockoutPolicy:LockoutPolicy imported '123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -147,6 +197,10 @@ class LockoutPolicy(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            LockoutPolicyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -187,7 +241,7 @@ class LockoutPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] max_password_attempts: Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correct or the password is reset.
-        :param pulumi.Input[str] org_id: Id for the organization
+        :param pulumi.Input[str] org_id: ID of the organization
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -207,9 +261,9 @@ class LockoutPolicy(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
-        Id for the organization
+        ID of the organization
         """
         return pulumi.get(self, "org_id")
 

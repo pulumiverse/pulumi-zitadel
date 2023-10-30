@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['DefaultLockoutPolicyArgs', 'DefaultLockoutPolicy']
@@ -19,7 +19,20 @@ class DefaultLockoutPolicyArgs:
         The set of arguments for constructing a DefaultLockoutPolicy resource.
         :param pulumi.Input[int] max_password_attempts: Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correctly or the password is reset.
         """
-        pulumi.set(__self__, "max_password_attempts", max_password_attempts)
+        DefaultLockoutPolicyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            max_password_attempts=max_password_attempts,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             max_password_attempts: pulumi.Input[int],
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'maxPasswordAttempts' in kwargs:
+            max_password_attempts = kwargs['maxPasswordAttempts']
+
+        _setter("max_password_attempts", max_password_attempts)
 
     @property
     @pulumi.getter(name="maxPasswordAttempts")
@@ -42,8 +55,21 @@ class _DefaultLockoutPolicyState:
         Input properties used for looking up and filtering DefaultLockoutPolicy resources.
         :param pulumi.Input[int] max_password_attempts: Maximum password check attempts before the account gets locked. Attempts are reset as soon as the password is entered correctly or the password is reset.
         """
+        _DefaultLockoutPolicyState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            max_password_attempts=max_password_attempts,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             max_password_attempts: Optional[pulumi.Input[int]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'maxPasswordAttempts' in kwargs:
+            max_password_attempts = kwargs['maxPasswordAttempts']
+
         if max_password_attempts is not None:
-            pulumi.set(__self__, "max_password_attempts", max_password_attempts)
+            _setter("max_password_attempts", max_password_attempts)
 
     @property
     @pulumi.getter(name="maxPasswordAttempts")
@@ -74,7 +100,15 @@ class DefaultLockoutPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        lockout_policy = zitadel.DefaultLockoutPolicy("lockoutPolicy", max_password_attempts=5)
+        default = zitadel.DefaultLockoutPolicy("default", max_password_attempts=5)
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/defaultLockoutPolicy:DefaultLockoutPolicy imported ''
         ```
 
         :param str resource_name: The name of the resource.
@@ -96,7 +130,15 @@ class DefaultLockoutPolicy(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        lockout_policy = zitadel.DefaultLockoutPolicy("lockoutPolicy", max_password_attempts=5)
+        default = zitadel.DefaultLockoutPolicy("default", max_password_attempts=5)
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/defaultLockoutPolicy:DefaultLockoutPolicy imported ''
         ```
 
         :param str resource_name: The name of the resource.
@@ -109,6 +151,10 @@ class DefaultLockoutPolicy(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            DefaultLockoutPolicyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

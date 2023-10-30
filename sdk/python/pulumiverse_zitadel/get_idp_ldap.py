@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -379,7 +379,7 @@ def get_idp_ldap(id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    ldap = zitadel.get_idp_ldap(id="177073614158299139")
+    default = zitadel.get_idp_ldap(id="123456789012345678")
     ```
 
 
@@ -391,34 +391,34 @@ def get_idp_ldap(id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getIdpLdap:getIdpLdap', __args__, opts=opts, typ=GetIdpLdapResult).value
 
     return AwaitableGetIdpLdapResult(
-        avatar_url_attribute=__ret__.avatar_url_attribute,
-        base_dn=__ret__.base_dn,
-        bind_dn=__ret__.bind_dn,
-        bind_password=__ret__.bind_password,
-        display_name_attribute=__ret__.display_name_attribute,
-        email_attribute=__ret__.email_attribute,
-        email_verified_attribute=__ret__.email_verified_attribute,
-        first_name_attribute=__ret__.first_name_attribute,
-        id=__ret__.id,
-        id_attribute=__ret__.id_attribute,
-        is_auto_creation=__ret__.is_auto_creation,
-        is_auto_update=__ret__.is_auto_update,
-        is_creation_allowed=__ret__.is_creation_allowed,
-        is_linking_allowed=__ret__.is_linking_allowed,
-        last_name_attribute=__ret__.last_name_attribute,
-        name=__ret__.name,
-        nick_name_attribute=__ret__.nick_name_attribute,
-        phone_attribute=__ret__.phone_attribute,
-        phone_verified_attribute=__ret__.phone_verified_attribute,
-        preferred_language_attribute=__ret__.preferred_language_attribute,
-        preferred_username_attribute=__ret__.preferred_username_attribute,
-        profile_attribute=__ret__.profile_attribute,
-        servers=__ret__.servers,
-        start_tls=__ret__.start_tls,
-        timeout=__ret__.timeout,
-        user_base=__ret__.user_base,
-        user_filters=__ret__.user_filters,
-        user_object_classes=__ret__.user_object_classes)
+        avatar_url_attribute=pulumi.get(__ret__, 'avatar_url_attribute'),
+        base_dn=pulumi.get(__ret__, 'base_dn'),
+        bind_dn=pulumi.get(__ret__, 'bind_dn'),
+        bind_password=pulumi.get(__ret__, 'bind_password'),
+        display_name_attribute=pulumi.get(__ret__, 'display_name_attribute'),
+        email_attribute=pulumi.get(__ret__, 'email_attribute'),
+        email_verified_attribute=pulumi.get(__ret__, 'email_verified_attribute'),
+        first_name_attribute=pulumi.get(__ret__, 'first_name_attribute'),
+        id=pulumi.get(__ret__, 'id'),
+        id_attribute=pulumi.get(__ret__, 'id_attribute'),
+        is_auto_creation=pulumi.get(__ret__, 'is_auto_creation'),
+        is_auto_update=pulumi.get(__ret__, 'is_auto_update'),
+        is_creation_allowed=pulumi.get(__ret__, 'is_creation_allowed'),
+        is_linking_allowed=pulumi.get(__ret__, 'is_linking_allowed'),
+        last_name_attribute=pulumi.get(__ret__, 'last_name_attribute'),
+        name=pulumi.get(__ret__, 'name'),
+        nick_name_attribute=pulumi.get(__ret__, 'nick_name_attribute'),
+        phone_attribute=pulumi.get(__ret__, 'phone_attribute'),
+        phone_verified_attribute=pulumi.get(__ret__, 'phone_verified_attribute'),
+        preferred_language_attribute=pulumi.get(__ret__, 'preferred_language_attribute'),
+        preferred_username_attribute=pulumi.get(__ret__, 'preferred_username_attribute'),
+        profile_attribute=pulumi.get(__ret__, 'profile_attribute'),
+        servers=pulumi.get(__ret__, 'servers'),
+        start_tls=pulumi.get(__ret__, 'start_tls'),
+        timeout=pulumi.get(__ret__, 'timeout'),
+        user_base=pulumi.get(__ret__, 'user_base'),
+        user_filters=pulumi.get(__ret__, 'user_filters'),
+        user_object_classes=pulumi.get(__ret__, 'user_object_classes'))
 
 
 @_utilities.lift_output_func(get_idp_ldap)
@@ -433,7 +433,7 @@ def get_idp_ldap_output(id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    ldap = zitadel.get_idp_ldap(id="177073614158299139")
+    default = zitadel.get_idp_ldap(id="123456789012345678")
     ```
 
 

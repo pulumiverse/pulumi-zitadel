@@ -13,11 +13,19 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const pat = new zitadel.PersonalAccessToken("pat", {
- *     orgId: zitadel_org.org.id,
- *     userId: zitadel_machine_user.machine_user.id,
+ * const _default = new zitadel.PersonalAccessToken("default", {
+ *     orgId: data.zitadel_org["default"].id,
+ *     userId: data.zitadel_machine_user["default"].id,
  *     expirationDate: "2519-04-01T08:45:00Z",
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/personalAccessToken:PersonalAccessToken imported '123456789012345678:123456789012345678:123456789012345678:LHt79...'
  * ```
  */
 export class PersonalAccessToken extends pulumi.CustomResource {
@@ -55,7 +63,7 @@ export class PersonalAccessToken extends pulumi.CustomResource {
     /**
      * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * Value of the token
      */
@@ -84,9 +92,6 @@ export class PersonalAccessToken extends pulumi.CustomResource {
             resourceInputs["userId"] = state ? state.userId : undefined;
         } else {
             const args = argsOrState as PersonalAccessTokenArgs | undefined;
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             if ((!args || args.userId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'userId'");
             }
@@ -96,6 +101,8 @@ export class PersonalAccessToken extends pulumi.CustomResource {
             resourceInputs["token"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["token"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(PersonalAccessToken.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -133,7 +140,7 @@ export interface PersonalAccessTokenArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * ID of the user
      */

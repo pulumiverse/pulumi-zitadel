@@ -1,17 +1,28 @@
 name: main
 
 on:
-  # TODO: Return back
-  #push:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - v*
+  pull_request:
   workflow_dispatch:
 
 jobs:
   prerequisites:
-    uses: pulumiverse/infra/.github/workflows/provider-prerequisites.yaml@actions-workflows-v0.0.1
+    permissions:
+      pull-requests: write
+    uses: pulumiverse/infra/.github/workflows/provider-prerequisites.yaml@actions-workflows-v0.0.4
     with:
       provider: zitadel
+      goversion: 1.21.x
   build:
     needs: prerequisites
-    uses: pulumiverse/infra/.github/workflows/provider-build-sdk.yaml@actions-workflows-v0.0.1
+    uses: pulumiverse/infra/.github/workflows/provider-build-sdk.yaml@actions-workflows-v0.0.4
     with:
       provider: zitadel
+      goversion: 1.21.x
+      dotnetversion: 6.0.300
+      nodeversion: 14.x
+      pythonversion: 3.9

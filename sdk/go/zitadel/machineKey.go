@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing a machine key
@@ -27,9 +29,15 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.NewMachineKey(ctx, "machineKey", &zitadel.MachineKeyArgs{
 //				OrgId:          pulumi.Any(zitadel_org.Org.Id),
 //				UserId:         pulumi.Any(zitadel_machine_user.Machine_user.Id),
+=======
+//			_, err := zitadel.NewMachineKey(ctx, "default", &zitadel.MachineKeyArgs{
+//				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
+//				UserId:         pulumi.Any(data.Zitadel_machine_user.Default.Id),
+>>>>>>> origin/master
 //				KeyType:        pulumi.String("KEY_TYPE_JSON"),
 //				ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
 //			})
@@ -40,6 +48,19 @@ import (
 //		})
 //	}
 //
+<<<<<<< HEAD
+=======
+// ```
+//
+// ## Import
+//
+// terraform The resource can be imported using the ID format `<id:user_id[:org_id][:key_details]>`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import zitadel:index/machineKey:MachineKey imported '123456789012345678:123456789012345678:123456789012345678:{"type":"serviceaccount","keyId":"123456789012345678","key":"-----BEGIN RSA PRIVATE KEY-----\nMIIEpQ...-----END RSA PRIVATE KEY-----\n","userId":"123456789012345678"}'
+//
+>>>>>>> origin/master
 // ```
 type MachineKey struct {
 	pulumi.CustomResourceState
@@ -51,7 +72,7 @@ type MachineKey struct {
 	// Type of the machine key, supported values: KEY*TYPE*UNSPECIFIED, KEY*TYPE*JSON
 	KeyType pulumi.StringOutput `pulumi:"keyType"`
 	// ID of the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// ID of the user
 	UserId pulumi.StringOutput `pulumi:"userId"`
 }
@@ -66,13 +87,14 @@ func NewMachineKey(ctx *pulumi.Context,
 	if args.KeyType == nil {
 		return nil, errors.New("invalid value for required argument 'KeyType'")
 	}
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	if args.UserId == nil {
 		return nil, errors.New("invalid value for required argument 'UserId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"keyDetails",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MachineKey
 	err := ctx.RegisterResource("zitadel:index/machineKey:MachineKey", name, args, &resource, opts...)
 	if err != nil {
@@ -130,7 +152,7 @@ type machineKeyArgs struct {
 	// Type of the machine key, supported values: KEY*TYPE*UNSPECIFIED, KEY*TYPE*JSON
 	KeyType string `pulumi:"keyType"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// ID of the user
 	UserId string `pulumi:"userId"`
 }
@@ -142,7 +164,7 @@ type MachineKeyArgs struct {
 	// Type of the machine key, supported values: KEY*TYPE*UNSPECIFIED, KEY*TYPE*JSON
 	KeyType pulumi.StringInput
 	// ID of the organization
-	OrgId pulumi.StringInput
+	OrgId pulumi.StringPtrInput
 	// ID of the user
 	UserId pulumi.StringInput
 }
@@ -170,6 +192,12 @@ func (i *MachineKey) ToMachineKeyOutputWithContext(ctx context.Context) MachineK
 	return pulumi.ToOutputWithContext(ctx, i).(MachineKeyOutput)
 }
 
+func (i *MachineKey) ToOutput(ctx context.Context) pulumix.Output[*MachineKey] {
+	return pulumix.Output[*MachineKey]{
+		OutputState: i.ToMachineKeyOutputWithContext(ctx).OutputState,
+	}
+}
+
 // MachineKeyArrayInput is an input type that accepts MachineKeyArray and MachineKeyArrayOutput values.
 // You can construct a concrete instance of `MachineKeyArrayInput` via:
 //
@@ -193,6 +221,12 @@ func (i MachineKeyArray) ToMachineKeyArrayOutput() MachineKeyArrayOutput {
 
 func (i MachineKeyArray) ToMachineKeyArrayOutputWithContext(ctx context.Context) MachineKeyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(MachineKeyArrayOutput)
+}
+
+func (i MachineKeyArray) ToOutput(ctx context.Context) pulumix.Output[[]*MachineKey] {
+	return pulumix.Output[[]*MachineKey]{
+		OutputState: i.ToMachineKeyArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // MachineKeyMapInput is an input type that accepts MachineKeyMap and MachineKeyMapOutput values.
@@ -220,6 +254,12 @@ func (i MachineKeyMap) ToMachineKeyMapOutputWithContext(ctx context.Context) Mac
 	return pulumi.ToOutputWithContext(ctx, i).(MachineKeyMapOutput)
 }
 
+func (i MachineKeyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*MachineKey] {
+	return pulumix.Output[map[string]*MachineKey]{
+		OutputState: i.ToMachineKeyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type MachineKeyOutput struct{ *pulumi.OutputState }
 
 func (MachineKeyOutput) ElementType() reflect.Type {
@@ -232,6 +272,12 @@ func (o MachineKeyOutput) ToMachineKeyOutput() MachineKeyOutput {
 
 func (o MachineKeyOutput) ToMachineKeyOutputWithContext(ctx context.Context) MachineKeyOutput {
 	return o
+}
+
+func (o MachineKeyOutput) ToOutput(ctx context.Context) pulumix.Output[*MachineKey] {
+	return pulumix.Output[*MachineKey]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Expiration date of the machine key in the RFC3339 format
@@ -250,8 +296,8 @@ func (o MachineKeyOutput) KeyType() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o MachineKeyOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *MachineKey) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o MachineKeyOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MachineKey) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // ID of the user
@@ -273,6 +319,12 @@ func (o MachineKeyArrayOutput) ToMachineKeyArrayOutputWithContext(ctx context.Co
 	return o
 }
 
+func (o MachineKeyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*MachineKey] {
+	return pulumix.Output[[]*MachineKey]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o MachineKeyArrayOutput) Index(i pulumi.IntInput) MachineKeyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *MachineKey {
 		return vs[0].([]*MachineKey)[vs[1].(int)]
@@ -291,6 +343,12 @@ func (o MachineKeyMapOutput) ToMachineKeyMapOutput() MachineKeyMapOutput {
 
 func (o MachineKeyMapOutput) ToMachineKeyMapOutputWithContext(ctx context.Context) MachineKeyMapOutput {
 	return o
+}
+
+func (o MachineKeyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*MachineKey] {
+	return pulumix.Output[map[string]*MachineKey]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o MachineKeyMapOutput) MapIndex(k pulumi.StringInput) MachineKeyOutput {

@@ -17,41 +17,56 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var loginPolicy = new Zitadel.DefaultLoginPolicy("loginPolicy", new()
+    ///     var @default = new Zitadel.DefaultLoginPolicy("default", new()
     ///     {
-    ///         AllowDomainDiscovery = true,
-    ///         AllowExternalIdp = true,
+    ///         UserLogin = true,
     ///         AllowRegister = true,
-    ///         DefaultRedirectUri = "localhost:8080",
-    ///         DisableLoginWithEmail = true,
-    ///         DisableLoginWithPhone = true,
-    ///         ExternalLoginCheckLifetime = "240h0m0s",
+    ///         AllowExternalIdp = true,
     ///         ForceMfa = false,
-    ///         HidePasswordReset = false,
-    ///         IgnoreUnknownUsernames = true,
-    ///         MfaInitSkipLifetime = "720h0m0s",
-    ///         MultiFactorCheckLifetime = "24h0m0s",
-    ///         MultiFactors = new[]
-    ///         {
-    ///             "MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION",
-    ///         },
-    ///         PasswordCheckLifetime = "240h0m0s",
+    ///         ForceMfaLocalOnly = false,
     ///         PasswordlessType = "PASSWORDLESS_TYPE_ALLOWED",
+    ///         HidePasswordReset = false,
+    ///         PasswordCheckLifetime = "240h0m0s",
+    ///         ExternalLoginCheckLifetime = "240h0m0s",
+    ///         MultiFactorCheckLifetime = "24h0m0s",
+    ///         MfaInitSkipLifetime = "720h0m0s",
     ///         SecondFactorCheckLifetime = "24h0m0s",
+    ///         IgnoreUnknownUsernames = true,
+    ///         DefaultRedirectUri = "localhost:8080",
     ///         SecondFactors = new[]
     ///         {
     ///             "SECOND_FACTOR_TYPE_OTP",
     ///             "SECOND_FACTOR_TYPE_U2F",
     ///         },
-    ///         UserLogin = true,
+    ///         MultiFactors = new[]
+    ///         {
+    ///             "MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION",
+    ///         },
+    ///         Idps = new[]
+    ///         {
+    ///             data.Zitadel_idp_google.Default.Id,
+    ///             data.Zitadel_idp_azure_ad.Default.Id,
+    ///         },
+    ///         AllowDomainDiscovery = true,
+    ///         DisableLoginWithEmail = true,
+    ///         DisableLoginWithPhone = true,
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform The resource can be imported using the ID format `&lt;&gt;`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/defaultLoginPolicy:DefaultLoginPolicy imported ''
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/defaultLoginPolicy:DefaultLoginPolicy")]
@@ -101,6 +116,12 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         [Output("forceMfa")]
         public Output<bool> ForceMfa { get; private set; } = null!;
+
+        /// <summary>
+        /// if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+        /// </summary>
+        [Output("forceMfaLocalOnly")]
+        public Output<bool> ForceMfaLocalOnly { get; private set; } = null!;
 
         /// <summary>
         /// defines if password reset link should be shown in the login screen
@@ -249,6 +270,12 @@ namespace Pulumiverse.Zitadel
         public Input<bool> ForceMfa { get; set; } = null!;
 
         /// <summary>
+        /// if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+        /// </summary>
+        [Input("forceMfaLocalOnly", required: true)]
+        public Input<bool> ForceMfaLocalOnly { get; set; } = null!;
+
+        /// <summary>
         /// defines if password reset link should be shown in the login screen
         /// </summary>
         [Input("hidePasswordReset", required: true)]
@@ -372,6 +399,12 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         [Input("forceMfa")]
         public Input<bool>? ForceMfa { get; set; }
+
+        /// <summary>
+        /// if activated, ZITADEL only enforces MFA on local authentications. On authentications through MFA, ZITADEL won't prompt for MFA.
+        /// </summary>
+        [Input("forceMfaLocalOnly")]
+        public Input<bool>? ForceMfaLocalOnly { get; set; }
 
         /// <summary>
         /// defines if password reset link should be shown in the login screen

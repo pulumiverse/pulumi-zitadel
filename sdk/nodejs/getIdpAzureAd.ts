@@ -13,17 +13,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const azureAd = pulumi.output(zitadel.getIdpAzureAd({
- *     id: "177073614158299139",
- * }));
+ * const default = zitadel.getIdpAzureAd({
+ *     id: "123456789012345678",
+ * });
  * ```
  */
 export function getIdpAzureAd(args: GetIdpAzureAdArgs, opts?: pulumi.InvokeOptions): Promise<GetIdpAzureAdResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getIdpAzureAd:getIdpAzureAd", {
         "id": args.id,
     }, opts);
@@ -92,9 +89,22 @@ export interface GetIdpAzureAdResult {
      */
     readonly tenantType: string;
 }
-
+/**
+ * Datasource representing an Azure AD IDP on the instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getIdpAzureAd({
+ *     id: "123456789012345678",
+ * });
+ * ```
+ */
 export function getIdpAzureAdOutput(args: GetIdpAzureAdOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIdpAzureAdResult> {
-    return pulumi.output(args).apply(a => getIdpAzureAd(a, opts))
+    return pulumi.output(args).apply((a: any) => getIdpAzureAd(a, opts))
 }
 
 /**

@@ -21,21 +21,22 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var oidcApplicationApplicationOidc = Zitadel.GetApplicationOidc.Invoke(new()
+        ///     var @default = Zitadel.GetApplicationOidc.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = data.Zitadel_project.Project.Id,
-        ///         AppId = "177073626925760515",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         AppId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["oidcApplication"] = oidcApplicationApplicationOidc.Apply(getApplicationOidcResult =&gt; getApplicationOidcResult),
+        ///         ["applicationOidc"] = @default,
         ///     };
         /// });
         /// ```
@@ -43,7 +44,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetApplicationOidcResult> InvokeAsync(GetApplicationOidcArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApplicationOidcResult>("zitadel:index/getApplicationOidc:getApplicationOidc", args ?? new GetApplicationOidcArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApplicationOidcResult>("zitadel:index/getApplicationOidc:getApplicationOidc", args ?? new GetApplicationOidcArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing an OIDC application belonging to a project, with all configuration possibilities.
@@ -54,21 +55,22 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var oidcApplicationApplicationOidc = Zitadel.GetApplicationOidc.Invoke(new()
+        ///     var @default = Zitadel.GetApplicationOidc.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = data.Zitadel_project.Project.Id,
-        ///         AppId = "177073626925760515",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         AppId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["oidcApplication"] = oidcApplicationApplicationOidc.Apply(getApplicationOidcResult =&gt; getApplicationOidcResult),
+        ///         ["applicationOidc"] = @default,
         ///     };
         /// });
         /// ```
@@ -76,7 +78,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetApplicationOidcResult> Invoke(GetApplicationOidcInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApplicationOidcResult>("zitadel:index/getApplicationOidc:getApplicationOidc", args ?? new GetApplicationOidcInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApplicationOidcResult>("zitadel:index/getApplicationOidc:getApplicationOidc", args ?? new GetApplicationOidcInvokeArgs(), options.WithDefaults());
     }
 
 
@@ -89,10 +91,10 @@ namespace Pulumiverse.Zitadel
         public string AppId { get; set; } = null!;
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public string OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public string? OrgId { get; set; }
 
         /// <summary>
         /// ID of the project
@@ -115,10 +117,10 @@ namespace Pulumiverse.Zitadel
         public Input<string> AppId { get; set; } = null!;
 
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// ID of the project
@@ -189,9 +191,9 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// orgID of the application
+        /// ID of the organization
         /// </summary>
-        public readonly string OrgId;
+        public readonly string? OrgId;
         /// <summary>
         /// Post logout redirect URIs
         /// </summary>
@@ -241,7 +243,7 @@ namespace Pulumiverse.Zitadel
 
             string name,
 
-            string orgId,
+            string? orgId,
 
             ImmutableArray<string> postLogoutRedirectUris,
 

@@ -21,20 +21,21 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var machineUserMachineUser = Zitadel.GetMachineUser.Invoke(new()
+        ///     var @default = Zitadel.GetMachineUser.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         UserId = "177073617463410691",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         UserId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["machineUser"] = machineUserMachineUser.Apply(getMachineUserResult =&gt; getMachineUserResult),
+        ///         ["machineUser"] = @default,
         ///     };
         /// });
         /// ```
@@ -42,7 +43,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetMachineUserResult> InvokeAsync(GetMachineUserArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMachineUserResult>("zitadel:index/getMachineUser:getMachineUser", args ?? new GetMachineUserArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMachineUserResult>("zitadel:index/getMachineUser:getMachineUser", args ?? new GetMachineUserArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing a serviceaccount situated under an organization, which then can be authorized through memberships or direct grants on other resources.
@@ -53,20 +54,21 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var machineUserMachineUser = Zitadel.GetMachineUser.Invoke(new()
+        ///     var @default = Zitadel.GetMachineUser.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         UserId = "177073617463410691",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         UserId = "123456789012345678",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["machineUser"] = machineUserMachineUser.Apply(getMachineUserResult =&gt; getMachineUserResult),
+        ///         ["machineUser"] = @default,
         ///     };
         /// });
         /// ```
@@ -74,7 +76,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetMachineUserResult> Invoke(GetMachineUserInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMachineUserResult>("zitadel:index/getMachineUser:getMachineUser", args ?? new GetMachineUserInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMachineUserResult>("zitadel:index/getMachineUser:getMachineUser", args ?? new GetMachineUserInvokeArgs(), options.WithDefaults());
     }
 
 
@@ -83,8 +85,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public string OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public string? OrgId { get; set; }
 
         /// <summary>
         /// The ID of this resource.
@@ -103,8 +105,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// The ID of this resource.
@@ -145,7 +147,7 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        public readonly string OrgId;
+        public readonly string? OrgId;
         /// <summary>
         /// Preferred login name
         /// </summary>
@@ -175,7 +177,7 @@ namespace Pulumiverse.Zitadel
 
             string name,
 
-            string orgId,
+            string? orgId,
 
             string preferredLoginName,
 

@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing an LDAP IdP on the organization.
@@ -19,7 +21,10 @@ import (
 //
 // import (
 //
+<<<<<<< HEAD
 //	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+=======
+>>>>>>> origin/master
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -27,8 +32,14 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.LookupOrgIdpLdap(ctx, &GetOrgIdpLdapArgs{
 //				Id: "177073614158299139",
+=======
+//			_, err := zitadel.LookupOrgIdpLdap(ctx, &zitadel.LookupOrgIdpLdapArgs{
+//				OrgId: pulumi.StringRef(data.Zitadel_org.Default.Id),
+//				Id:    "123456789012345678",
+>>>>>>> origin/master
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -39,7 +50,7 @@ import (
 //
 // ```
 func LookupOrgIdpLdap(ctx *pulumi.Context, args *LookupOrgIdpLdapArgs, opts ...pulumi.InvokeOption) (*LookupOrgIdpLdapResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupOrgIdpLdapResult
 	err := ctx.Invoke("zitadel:index/getOrgIdpLdap:getOrgIdpLdap", args, &rv, opts...)
 	if err != nil {
@@ -53,7 +64,7 @@ type LookupOrgIdpLdapArgs struct {
 	// The ID of this resource.
 	Id string `pulumi:"id"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 }
 
 // A collection of values returned by getOrgIdpLdap.
@@ -93,7 +104,7 @@ type LookupOrgIdpLdapResult struct {
 	// User attribute for the nick name
 	NickNameAttribute string `pulumi:"nickNameAttribute"`
 	// ID of the organization
-	OrgId string `pulumi:"orgId"`
+	OrgId *string `pulumi:"orgId"`
 	// User attribute for the phone
 	PhoneAttribute string `pulumi:"phoneAttribute"`
 	// User attribute for the phone verified state
@@ -136,7 +147,7 @@ type LookupOrgIdpLdapOutputArgs struct {
 	// The ID of this resource.
 	Id pulumi.StringInput `pulumi:"id"`
 	// ID of the organization
-	OrgId pulumi.StringInput `pulumi:"orgId"`
+	OrgId pulumi.StringPtrInput `pulumi:"orgId"`
 }
 
 func (LookupOrgIdpLdapOutputArgs) ElementType() reflect.Type {
@@ -156,6 +167,12 @@ func (o LookupOrgIdpLdapResultOutput) ToLookupOrgIdpLdapResultOutput() LookupOrg
 
 func (o LookupOrgIdpLdapResultOutput) ToLookupOrgIdpLdapResultOutputWithContext(ctx context.Context) LookupOrgIdpLdapResultOutput {
 	return o
+}
+
+func (o LookupOrgIdpLdapResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupOrgIdpLdapResult] {
+	return pulumix.Output[LookupOrgIdpLdapResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // User attribute for the avatar url
@@ -244,8 +261,8 @@ func (o LookupOrgIdpLdapResultOutput) NickNameAttribute() pulumi.StringOutput {
 }
 
 // ID of the organization
-func (o LookupOrgIdpLdapResultOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupOrgIdpLdapResult) string { return v.OrgId }).(pulumi.StringOutput)
+func (o LookupOrgIdpLdapResultOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupOrgIdpLdapResult) *string { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // User attribute for the phone

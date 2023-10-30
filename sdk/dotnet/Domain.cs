@@ -17,18 +17,27 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var domain = new Zitadel.Domain("domain", new()
+    ///     var @default = new Zitadel.Domain("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
-    ///         IsPrimary = true,
+    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         IsPrimary = false,
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// terraform The resource can be imported using the ID format `name[:org_id]`, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import zitadel:index/domain:Domain imported 'example.com:123456789012345678'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/domain:Domain")]
@@ -56,7 +65,7 @@ namespace Pulumiverse.Zitadel
         /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
         /// Validation type
@@ -72,7 +81,7 @@ namespace Pulumiverse.Zitadel
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Domain(string name, DomainArgs args, CustomResourceOptions? options = null)
+        public Domain(string name, DomainArgs? args = null, CustomResourceOptions? options = null)
             : base("zitadel:index/domain:Domain", name, args ?? new DomainArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -126,8 +135,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         public DomainArgs()
         {

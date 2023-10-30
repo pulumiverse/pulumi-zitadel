@@ -21,21 +21,22 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var projectRoleProjectRole = Zitadel.GetProjectRole.Invoke(new()
+        ///     var @default = Zitadel.GetProjectRole.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = data.Zitadel_project.Project.Id,
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = data.Zitadel_project.Default.Id,
         ///         RoleKey = "key",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["projectRole"] = projectRoleProjectRole.Apply(getProjectRoleResult =&gt; getProjectRoleResult),
+        ///         ["projectRole"] = @default,
         ///     };
         /// });
         /// ```
@@ -43,7 +44,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetProjectRoleResult> InvokeAsync(GetProjectRoleArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProjectRoleResult>("zitadel:index/getProjectRole:getProjectRole", args ?? new GetProjectRoleArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProjectRoleResult>("zitadel:index/getProjectRole:getProjectRole", args ?? new GetProjectRoleArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing the project roles, which can be given as authorizations to users.
@@ -54,21 +55,22 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var projectRoleProjectRole = Zitadel.GetProjectRole.Invoke(new()
+        ///     var @default = Zitadel.GetProjectRole.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         ProjectId = data.Zitadel_project.Project.Id,
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         ProjectId = data.Zitadel_project.Default.Id,
         ///         RoleKey = "key",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["projectRole"] = projectRoleProjectRole.Apply(getProjectRoleResult =&gt; getProjectRoleResult),
+        ///         ["projectRole"] = @default,
         ///     };
         /// });
         /// ```
@@ -76,7 +78,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetProjectRoleResult> Invoke(GetProjectRoleInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProjectRoleResult>("zitadel:index/getProjectRole:getProjectRole", args ?? new GetProjectRoleInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProjectRoleResult>("zitadel:index/getProjectRole:getProjectRole", args ?? new GetProjectRoleInvokeArgs(), options.WithDefaults());
     }
 
 

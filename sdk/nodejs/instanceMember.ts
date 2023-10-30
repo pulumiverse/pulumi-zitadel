@@ -13,10 +13,18 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const instanceMember = new zitadel.InstanceMember("instanceMember", {
- *     userId: zitadel_human_user.human_user.id,
+ * const _default = new zitadel.InstanceMember("default", {
+ *     userId: data.zitadel_human_user["default"].id,
  *     roles: ["IAM_OWNER"],
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<user_id>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/instanceMember:InstanceMember imported '123456789012345678'
  * ```
  */
 export class InstanceMember extends pulumi.CustomResource {

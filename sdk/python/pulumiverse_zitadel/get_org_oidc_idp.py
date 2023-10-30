@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -21,25 +21,31 @@ class GetOrgOidcIdpResult:
     """
     A collection of values returned by getOrgOidcIdp.
     """
-    def __init__(__self__, auto_register=None, client_id=None, client_secret=None, display_name_mapping=None, id=None, idp_id=None, issuer=None, name=None, org_id=None, scopes=None, styling_type=None, username_mapping=None):
-        if auto_register and not isinstance(auto_register, bool):
-            raise TypeError("Expected argument 'auto_register' to be a bool")
-        pulumi.set(__self__, "auto_register", auto_register)
+    def __init__(__self__, client_id=None, client_secret=None, id=None, is_auto_creation=None, is_auto_update=None, is_creation_allowed=None, is_id_token_mapping=None, is_linking_allowed=None, issuer=None, name=None, org_id=None, scopes=None):
         if client_id and not isinstance(client_id, str):
             raise TypeError("Expected argument 'client_id' to be a str")
         pulumi.set(__self__, "client_id", client_id)
         if client_secret and not isinstance(client_secret, str):
             raise TypeError("Expected argument 'client_secret' to be a str")
         pulumi.set(__self__, "client_secret", client_secret)
-        if display_name_mapping and not isinstance(display_name_mapping, str):
-            raise TypeError("Expected argument 'display_name_mapping' to be a str")
-        pulumi.set(__self__, "display_name_mapping", display_name_mapping)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
-        if idp_id and not isinstance(idp_id, str):
-            raise TypeError("Expected argument 'idp_id' to be a str")
-        pulumi.set(__self__, "idp_id", idp_id)
+        if is_auto_creation and not isinstance(is_auto_creation, bool):
+            raise TypeError("Expected argument 'is_auto_creation' to be a bool")
+        pulumi.set(__self__, "is_auto_creation", is_auto_creation)
+        if is_auto_update and not isinstance(is_auto_update, bool):
+            raise TypeError("Expected argument 'is_auto_update' to be a bool")
+        pulumi.set(__self__, "is_auto_update", is_auto_update)
+        if is_creation_allowed and not isinstance(is_creation_allowed, bool):
+            raise TypeError("Expected argument 'is_creation_allowed' to be a bool")
+        pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
+        if is_id_token_mapping and not isinstance(is_id_token_mapping, bool):
+            raise TypeError("Expected argument 'is_id_token_mapping' to be a bool")
+        pulumi.set(__self__, "is_id_token_mapping", is_id_token_mapping)
+        if is_linking_allowed and not isinstance(is_linking_allowed, bool):
+            raise TypeError("Expected argument 'is_linking_allowed' to be a bool")
+        pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
         if issuer and not isinstance(issuer, str):
             raise TypeError("Expected argument 'issuer' to be a str")
         pulumi.set(__self__, "issuer", issuer)
@@ -52,20 +58,6 @@ class GetOrgOidcIdpResult:
         if scopes and not isinstance(scopes, list):
             raise TypeError("Expected argument 'scopes' to be a list")
         pulumi.set(__self__, "scopes", scopes)
-        if styling_type and not isinstance(styling_type, str):
-            raise TypeError("Expected argument 'styling_type' to be a str")
-        pulumi.set(__self__, "styling_type", styling_type)
-        if username_mapping and not isinstance(username_mapping, str):
-            raise TypeError("Expected argument 'username_mapping' to be a str")
-        pulumi.set(__self__, "username_mapping", username_mapping)
-
-    @property
-    @pulumi.getter(name="autoRegister")
-    def auto_register(self) -> bool:
-        """
-        auto register for users from this idp
-        """
-        return pulumi.get(self, "auto_register")
 
     @property
     @pulumi.getter(name="clientId")
@@ -84,34 +76,58 @@ class GetOrgOidcIdpResult:
         return pulumi.get(self, "client_secret")
 
     @property
-    @pulumi.getter(name="displayNameMapping")
-    def display_name_mapping(self) -> str:
-        """
-        definition which field is mapped to the display name of the user
-        """
-        return pulumi.get(self, "display_name_mapping")
-
-    @property
     @pulumi.getter
     def id(self) -> str:
         """
-        The provider-assigned unique ID for this managed resource.
+        The ID of this resource.
         """
         return pulumi.get(self, "id")
 
     @property
-    @pulumi.getter(name="idpId")
-    def idp_id(self) -> str:
+    @pulumi.getter(name="isAutoCreation")
+    def is_auto_creation(self) -> bool:
         """
-        The ID of this resource.
+        enabled if a new account in ZITADEL are created automatically on login with an external account
         """
-        return pulumi.get(self, "idp_id")
+        return pulumi.get(self, "is_auto_creation")
+
+    @property
+    @pulumi.getter(name="isAutoUpdate")
+    def is_auto_update(self) -> bool:
+        """
+        enabled if a the ZITADEL account fields are updated automatically on each login
+        """
+        return pulumi.get(self, "is_auto_update")
+
+    @property
+    @pulumi.getter(name="isCreationAllowed")
+    def is_creation_allowed(self) -> bool:
+        """
+        enabled if users are able to create a new account in ZITADEL when using an external account
+        """
+        return pulumi.get(self, "is_creation_allowed")
+
+    @property
+    @pulumi.getter(name="isIdTokenMapping")
+    def is_id_token_mapping(self) -> bool:
+        """
+        if true, provider information get mapped from the id token, not from the userinfo endpoint.
+        """
+        return pulumi.get(self, "is_id_token_mapping")
+
+    @property
+    @pulumi.getter(name="isLinkingAllowed")
+    def is_linking_allowed(self) -> bool:
+        """
+        enabled if users are able to link an existing ZITADEL user with an external account
+        """
+        return pulumi.get(self, "is_linking_allowed")
 
     @property
     @pulumi.getter
     def issuer(self) -> str:
         """
-        the oidc issuer of the identity provider
+        the issuer of the idp
         """
         return pulumi.get(self, "issuer")
 
@@ -125,7 +141,7 @@ class GetOrgOidcIdpResult:
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> str:
+    def org_id(self) -> Optional[str]:
         """
         ID of the organization
         """
@@ -139,22 +155,6 @@ class GetOrgOidcIdpResult:
         """
         return pulumi.get(self, "scopes")
 
-    @property
-    @pulumi.getter(name="stylingType")
-    def styling_type(self) -> str:
-        """
-        Some identity providers specify the styling of the button to their login
-        """
-        return pulumi.get(self, "styling_type")
-
-    @property
-    @pulumi.getter(name="usernameMapping")
-    def username_mapping(self) -> str:
-        """
-        definition which field is mapped to the email of the user
-        """
-        return pulumi.get(self, "username_mapping")
-
 
 class AwaitableGetOrgOidcIdpResult(GetOrgOidcIdpResult):
     # pylint: disable=using-constant-test
@@ -162,21 +162,21 @@ class AwaitableGetOrgOidcIdpResult(GetOrgOidcIdpResult):
         if False:
             yield self
         return GetOrgOidcIdpResult(
-            auto_register=self.auto_register,
             client_id=self.client_id,
             client_secret=self.client_secret,
-            display_name_mapping=self.display_name_mapping,
             id=self.id,
-            idp_id=self.idp_id,
+            is_auto_creation=self.is_auto_creation,
+            is_auto_update=self.is_auto_update,
+            is_creation_allowed=self.is_creation_allowed,
+            is_id_token_mapping=self.is_id_token_mapping,
+            is_linking_allowed=self.is_linking_allowed,
             issuer=self.issuer,
             name=self.name,
             org_id=self.org_id,
-            scopes=self.scopes,
-            styling_type=self.styling_type,
-            username_mapping=self.username_mapping)
+            scopes=self.scopes)
 
 
-def get_org_oidc_idp(idp_id: Optional[str] = None,
+def get_org_oidc_idp(id: Optional[str] = None,
                      org_id: Optional[str] = None,
                      opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetOrgOidcIdpResult:
     """
@@ -188,39 +188,39 @@ def get_org_oidc_idp(idp_id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    org_oidc_idp_org_oidc_idp = zitadel.get_org_oidc_idp(org_id=data["zitadel_org"]["org"]["id"],
-        idp_id="177073612581240835")
-    pulumi.export("orgOidcIdp", org_oidc_idp_org_oidc_idp)
+    default = zitadel.get_org_oidc_idp(org_id=data["zitadel_org"]["default"]["id"],
+        id="123456789012345678")
+    pulumi.export("orgOidcIdp", default)
     ```
 
 
-    :param str idp_id: The ID of this resource.
+    :param str id: The ID of this resource.
     :param str org_id: ID of the organization
     """
     __args__ = dict()
-    __args__['idpId'] = idp_id
+    __args__['id'] = id
     __args__['orgId'] = org_id
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('zitadel:index/getOrgOidcIdp:getOrgOidcIdp', __args__, opts=opts, typ=GetOrgOidcIdpResult).value
 
     return AwaitableGetOrgOidcIdpResult(
-        auto_register=__ret__.auto_register,
-        client_id=__ret__.client_id,
-        client_secret=__ret__.client_secret,
-        display_name_mapping=__ret__.display_name_mapping,
-        id=__ret__.id,
-        idp_id=__ret__.idp_id,
-        issuer=__ret__.issuer,
-        name=__ret__.name,
-        org_id=__ret__.org_id,
-        scopes=__ret__.scopes,
-        styling_type=__ret__.styling_type,
-        username_mapping=__ret__.username_mapping)
+        client_id=pulumi.get(__ret__, 'client_id'),
+        client_secret=pulumi.get(__ret__, 'client_secret'),
+        id=pulumi.get(__ret__, 'id'),
+        is_auto_creation=pulumi.get(__ret__, 'is_auto_creation'),
+        is_auto_update=pulumi.get(__ret__, 'is_auto_update'),
+        is_creation_allowed=pulumi.get(__ret__, 'is_creation_allowed'),
+        is_id_token_mapping=pulumi.get(__ret__, 'is_id_token_mapping'),
+        is_linking_allowed=pulumi.get(__ret__, 'is_linking_allowed'),
+        issuer=pulumi.get(__ret__, 'issuer'),
+        name=pulumi.get(__ret__, 'name'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        scopes=pulumi.get(__ret__, 'scopes'))
 
 
 @_utilities.lift_output_func(get_org_oidc_idp)
-def get_org_oidc_idp_output(idp_id: Optional[pulumi.Input[str]] = None,
-                            org_id: Optional[pulumi.Input[str]] = None,
+def get_org_oidc_idp_output(id: Optional[pulumi.Input[str]] = None,
+                            org_id: Optional[pulumi.Input[Optional[str]]] = None,
                             opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetOrgOidcIdpResult]:
     """
     Datasource representing a generic OIDC IdP on the organization.
@@ -231,13 +231,13 @@ def get_org_oidc_idp_output(idp_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    org_oidc_idp_org_oidc_idp = zitadel.get_org_oidc_idp(org_id=data["zitadel_org"]["org"]["id"],
-        idp_id="177073612581240835")
-    pulumi.export("orgOidcIdp", org_oidc_idp_org_oidc_idp)
+    default = zitadel.get_org_oidc_idp(org_id=data["zitadel_org"]["default"]["id"],
+        id="123456789012345678")
+    pulumi.export("orgOidcIdp", default)
     ```
 
 
-    :param str idp_id: The ID of this resource.
+    :param str id: The ID of this resource.
     :param str org_id: ID of the organization
     """
     ...

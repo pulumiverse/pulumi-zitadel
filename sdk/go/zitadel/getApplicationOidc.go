@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing an OIDC application belonging to a project, with all configuration possibilities.
@@ -19,7 +21,10 @@ import (
 //
 // import (
 //
+<<<<<<< HEAD
 //	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
+=======
+>>>>>>> origin/master
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
 //
@@ -27,22 +32,33 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			oidcApplicationApplicationOidc, err := zitadel.LookupApplicationOidc(ctx, &GetApplicationOidcArgs{
 //				OrgId:     data.Zitadel_org.Org.Id,
 //				ProjectId: data.Zitadel_project.Project.Id,
 //				AppId:     "177073626925760515",
+=======
+//			_default, err := zitadel.LookupApplicationOidc(ctx, &zitadel.LookupApplicationOidcArgs{
+//				OrgId:     pulumi.StringRef(data.Zitadel_org.Default.Id),
+//				ProjectId: data.Zitadel_project.Default.Id,
+//				AppId:     "123456789012345678",
+>>>>>>> origin/master
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
+<<<<<<< HEAD
 //			ctx.Export("oidcApplication", oidcApplicationApplicationOidc)
+=======
+//			ctx.Export("applicationOidc", _default)
+>>>>>>> origin/master
 //			return nil
 //		})
 //	}
 //
 // ```
 func LookupApplicationOidc(ctx *pulumi.Context, args *LookupApplicationOidcArgs, opts ...pulumi.InvokeOption) (*LookupApplicationOidcResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupApplicationOidcResult
 	err := ctx.Invoke("zitadel:index/getApplicationOidc:getApplicationOidc", args, &rv, opts...)
 	if err != nil {
@@ -55,8 +71,8 @@ func LookupApplicationOidc(ctx *pulumi.Context, args *LookupApplicationOidcArgs,
 type LookupApplicationOidcArgs struct {
 	// The ID of this resource.
 	AppId string `pulumi:"appId"`
-	// orgID of the application
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// ID of the project
 	ProjectId string `pulumi:"projectId"`
 }
@@ -89,8 +105,8 @@ type LookupApplicationOidcResult struct {
 	IdTokenUserinfoAssertion bool `pulumi:"idTokenUserinfoAssertion"`
 	// Name of the application
 	Name string `pulumi:"name"`
-	// orgID of the application
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// Post logout redirect URIs
 	PostLogoutRedirectUris []string `pulumi:"postLogoutRedirectUris"`
 	// ID of the project
@@ -120,8 +136,8 @@ func LookupApplicationOidcOutput(ctx *pulumi.Context, args LookupApplicationOidc
 type LookupApplicationOidcOutputArgs struct {
 	// The ID of this resource.
 	AppId pulumi.StringInput `pulumi:"appId"`
-	// orgID of the application
-	OrgId pulumi.StringInput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrInput `pulumi:"orgId"`
 	// ID of the project
 	ProjectId pulumi.StringInput `pulumi:"projectId"`
 }
@@ -143,6 +159,12 @@ func (o LookupApplicationOidcResultOutput) ToLookupApplicationOidcResultOutput()
 
 func (o LookupApplicationOidcResultOutput) ToLookupApplicationOidcResultOutputWithContext(ctx context.Context) LookupApplicationOidcResultOutput {
 	return o
+}
+
+func (o LookupApplicationOidcResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupApplicationOidcResult] {
+	return pulumix.Output[LookupApplicationOidcResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Access token role assertion
@@ -210,9 +232,9 @@ func (o LookupApplicationOidcResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupApplicationOidcResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// orgID of the application
-func (o LookupApplicationOidcResultOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupApplicationOidcResult) string { return v.OrgId }).(pulumi.StringOutput)
+// ID of the organization
+func (o LookupApplicationOidcResultOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupApplicationOidcResult) *string { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Post logout redirect URIs

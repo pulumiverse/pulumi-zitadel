@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['IdpGitlabArgs', 'IdpGitlab']
@@ -33,16 +33,53 @@ class IdpGitlabArgs:
         :param pulumi.Input[str] name: Name of the IDP
         :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: the scopes requested by ZITADEL during the request on the identity provider
         """
-        pulumi.set(__self__, "client_id", client_id)
-        pulumi.set(__self__, "client_secret", client_secret)
-        pulumi.set(__self__, "is_auto_creation", is_auto_creation)
-        pulumi.set(__self__, "is_auto_update", is_auto_update)
-        pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
-        pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
+        IdpGitlabArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            client_id=client_id,
+            client_secret=client_secret,
+            is_auto_creation=is_auto_creation,
+            is_auto_update=is_auto_update,
+            is_creation_allowed=is_creation_allowed,
+            is_linking_allowed=is_linking_allowed,
+            name=name,
+            scopes=scopes,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             client_id: pulumi.Input[str],
+             client_secret: pulumi.Input[str],
+             is_auto_creation: pulumi.Input[bool],
+             is_auto_update: pulumi.Input[bool],
+             is_creation_allowed: pulumi.Input[bool],
+             is_linking_allowed: pulumi.Input[bool],
+             name: Optional[pulumi.Input[str]] = None,
+             scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'clientId' in kwargs:
+            client_id = kwargs['clientId']
+        if 'clientSecret' in kwargs:
+            client_secret = kwargs['clientSecret']
+        if 'isAutoCreation' in kwargs:
+            is_auto_creation = kwargs['isAutoCreation']
+        if 'isAutoUpdate' in kwargs:
+            is_auto_update = kwargs['isAutoUpdate']
+        if 'isCreationAllowed' in kwargs:
+            is_creation_allowed = kwargs['isCreationAllowed']
+        if 'isLinkingAllowed' in kwargs:
+            is_linking_allowed = kwargs['isLinkingAllowed']
+
+        _setter("client_id", client_id)
+        _setter("client_secret", client_secret)
+        _setter("is_auto_creation", is_auto_creation)
+        _setter("is_auto_update", is_auto_update)
+        _setter("is_creation_allowed", is_creation_allowed)
+        _setter("is_linking_allowed", is_linking_allowed)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if scopes is not None:
-            pulumi.set(__self__, "scopes", scopes)
+            _setter("scopes", scopes)
 
     @property
     @pulumi.getter(name="clientId")
@@ -163,22 +200,59 @@ class _IdpGitlabState:
         :param pulumi.Input[str] name: Name of the IDP
         :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: the scopes requested by ZITADEL during the request on the identity provider
         """
+        _IdpGitlabState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            client_id=client_id,
+            client_secret=client_secret,
+            is_auto_creation=is_auto_creation,
+            is_auto_update=is_auto_update,
+            is_creation_allowed=is_creation_allowed,
+            is_linking_allowed=is_linking_allowed,
+            name=name,
+            scopes=scopes,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             client_id: Optional[pulumi.Input[str]] = None,
+             client_secret: Optional[pulumi.Input[str]] = None,
+             is_auto_creation: Optional[pulumi.Input[bool]] = None,
+             is_auto_update: Optional[pulumi.Input[bool]] = None,
+             is_creation_allowed: Optional[pulumi.Input[bool]] = None,
+             is_linking_allowed: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'clientId' in kwargs:
+            client_id = kwargs['clientId']
+        if 'clientSecret' in kwargs:
+            client_secret = kwargs['clientSecret']
+        if 'isAutoCreation' in kwargs:
+            is_auto_creation = kwargs['isAutoCreation']
+        if 'isAutoUpdate' in kwargs:
+            is_auto_update = kwargs['isAutoUpdate']
+        if 'isCreationAllowed' in kwargs:
+            is_creation_allowed = kwargs['isCreationAllowed']
+        if 'isLinkingAllowed' in kwargs:
+            is_linking_allowed = kwargs['isLinkingAllowed']
+
         if client_id is not None:
-            pulumi.set(__self__, "client_id", client_id)
+            _setter("client_id", client_id)
         if client_secret is not None:
-            pulumi.set(__self__, "client_secret", client_secret)
+            _setter("client_secret", client_secret)
         if is_auto_creation is not None:
-            pulumi.set(__self__, "is_auto_creation", is_auto_creation)
+            _setter("is_auto_creation", is_auto_creation)
         if is_auto_update is not None:
-            pulumi.set(__self__, "is_auto_update", is_auto_update)
+            _setter("is_auto_update", is_auto_update)
         if is_creation_allowed is not None:
-            pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
+            _setter("is_creation_allowed", is_creation_allowed)
         if is_linking_allowed is not None:
-            pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
+            _setter("is_linking_allowed", is_linking_allowed)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if scopes is not None:
-            pulumi.set(__self__, "scopes", scopes)
+            _setter("scopes", scopes)
 
     @property
     @pulumi.getter(name="clientId")
@@ -300,7 +374,7 @@ class IdpGitlab(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        gitlab = zitadel.IdpGitlab("gitlab",
+        default = zitadel.IdpGitlab("default",
             client_id="15765e...",
             client_secret="*****abcxyz",
             is_auto_creation=False,
@@ -312,6 +386,14 @@ class IdpGitlab(pulumi.CustomResource):
                 "profile",
                 "email",
             ])
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpGitlab:IdpGitlab imported '123456789012345678:1234567890abcdef'
         ```
 
         :param str resource_name: The name of the resource.
@@ -340,7 +422,7 @@ class IdpGitlab(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        gitlab = zitadel.IdpGitlab("gitlab",
+        default = zitadel.IdpGitlab("default",
             client_id="15765e...",
             client_secret="*****abcxyz",
             is_auto_creation=False,
@@ -354,6 +436,14 @@ class IdpGitlab(pulumi.CustomResource):
             ])
         ```
 
+        ## Import
+
+        terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/idpGitlab:IdpGitlab imported '123456789012345678:1234567890abcdef'
+        ```
+
         :param str resource_name: The name of the resource.
         :param IdpGitlabArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -364,6 +454,10 @@ class IdpGitlab(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            IdpGitlabArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -391,7 +485,7 @@ class IdpGitlab(pulumi.CustomResource):
             __props__.__dict__["client_id"] = client_id
             if client_secret is None and not opts.urn:
                 raise TypeError("Missing required property 'client_secret'")
-            __props__.__dict__["client_secret"] = client_secret
+            __props__.__dict__["client_secret"] = None if client_secret is None else pulumi.Output.secret(client_secret)
             if is_auto_creation is None and not opts.urn:
                 raise TypeError("Missing required property 'is_auto_creation'")
             __props__.__dict__["is_auto_creation"] = is_auto_creation
@@ -406,6 +500,8 @@ class IdpGitlab(pulumi.CustomResource):
             __props__.__dict__["is_linking_allowed"] = is_linking_allowed
             __props__.__dict__["name"] = name
             __props__.__dict__["scopes"] = scopes
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["clientSecret"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(IdpGitlab, __self__).__init__(
             'zitadel:index/idpGitlab:IdpGitlab',
             resource_name,

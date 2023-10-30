@@ -13,11 +13,19 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const machineUser = new zitadel.MachineUser("machineUser", {
- *     orgId: zitadel_org.org.id,
- *     userName: "machine@localhost.com",
- *     description: "description",
+ * const _default = new zitadel.MachineUser("default", {
+ *     orgId: data.zitadel_org["default"].id,
+ *     userName: "machine@example.com",
+ *     description: "a machine user",
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
  * ```
  */
 export class MachineUser extends pulumi.CustomResource {
@@ -67,7 +75,7 @@ export class MachineUser extends pulumi.CustomResource {
     /**
      * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * Preferred login name
      */
@@ -104,9 +112,6 @@ export class MachineUser extends pulumi.CustomResource {
             resourceInputs["userName"] = state ? state.userName : undefined;
         } else {
             const args = argsOrState as MachineUserArgs | undefined;
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             if ((!args || args.userName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'userName'");
             }
@@ -181,7 +186,7 @@ export interface MachineUserArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * Username
      */

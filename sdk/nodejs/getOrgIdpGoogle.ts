@@ -13,17 +13,15 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const google = pulumi.output(zitadel.getOrgIdpGoogle({
- *     id: "177073614158299139",
- * }));
+ * const default = zitadel.getOrgIdpGoogle({
+ *     orgId: data.zitadel_org["default"].id,
+ *     id: "123456789012345678",
+ * });
  * ```
  */
 export function getOrgIdpGoogle(args: GetOrgIdpGoogleArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgIdpGoogleResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getOrgIdpGoogle:getOrgIdpGoogle", {
         "id": args.id,
         "orgId": args.orgId,
@@ -41,7 +39,7 @@ export interface GetOrgIdpGoogleArgs {
     /**
      * ID of the organization
      */
-    orgId: string;
+    orgId?: string;
 }
 
 /**
@@ -83,15 +81,29 @@ export interface GetOrgIdpGoogleResult {
     /**
      * ID of the organization
      */
-    readonly orgId: string;
+    readonly orgId?: string;
     /**
      * the scopes requested by ZITADEL during the request on the identity provider
      */
     readonly scopes: string[];
 }
-
+/**
+ * Datasource representing a Google IdP of the organization.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getOrgIdpGoogle({
+ *     orgId: data.zitadel_org["default"].id,
+ *     id: "123456789012345678",
+ * });
+ * ```
+ */
 export function getOrgIdpGoogleOutput(args: GetOrgIdpGoogleOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOrgIdpGoogleResult> {
-    return pulumi.output(args).apply(a => getOrgIdpGoogle(a, opts))
+    return pulumi.output(args).apply((a: any) => getOrgIdpGoogle(a, opts))
 }
 
 /**
@@ -105,5 +117,5 @@ export interface GetOrgIdpGoogleOutputArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
 }

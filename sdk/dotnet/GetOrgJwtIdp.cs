@@ -14,67 +14,15 @@ namespace Pulumiverse.Zitadel
     {
         /// <summary>
         /// Datasource representing a generic JWT IdP on the organization.
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using Pulumi;
-        /// using Zitadel = Pulumi.Zitadel;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var orgJwtIdpOrgJwtIdp = Zitadel.GetOrgJwtIdp.Invoke(new()
-        ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         IdpId = "177073612581240835",
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["orgJwtIdp"] = orgJwtIdpOrgJwtIdp.Apply(getOrgJwtIdpResult =&gt; getOrgJwtIdpResult),
-        ///     };
-        /// });
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Task<GetOrgJwtIdpResult> InvokeAsync(GetOrgJwtIdpArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrgJwtIdpResult>("zitadel:index/getOrgJwtIdp:getOrgJwtIdp", args ?? new GetOrgJwtIdpArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgJwtIdpResult>("zitadel:index/getOrgJwtIdp:getOrgJwtIdp", args ?? new GetOrgJwtIdpArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing a generic JWT IdP on the organization.
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using Pulumi;
-        /// using Zitadel = Pulumi.Zitadel;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var orgJwtIdpOrgJwtIdp = Zitadel.GetOrgJwtIdp.Invoke(new()
-        ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
-        ///         IdpId = "177073612581240835",
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["orgJwtIdp"] = orgJwtIdpOrgJwtIdp.Apply(getOrgJwtIdpResult =&gt; getOrgJwtIdpResult),
-        ///     };
-        /// });
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Output<GetOrgJwtIdpResult> Invoke(GetOrgJwtIdpInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrgJwtIdpResult>("zitadel:index/getOrgJwtIdp:getOrgJwtIdp", args ?? new GetOrgJwtIdpInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrgJwtIdpResult>("zitadel:index/getOrgJwtIdp:getOrgJwtIdp", args ?? new GetOrgJwtIdpInvokeArgs(), options.WithDefaults());
     }
 
 

@@ -17,14 +17,15 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var passwordComplexityPolicy = new Zitadel.PasswordComplexityPolicy("passwordComplexityPolicy", new()
+    ///     var @default = new Zitadel.PasswordComplexityPolicy("default", new()
     ///     {
-    ///         OrgId = zitadel_org.Org.Id,
+    ///         OrgId = data.Zitadel_org.Default.Id,
     ///         MinLength = 8,
     ///         HasUppercase = true,
     ///         HasLowercase = true,
@@ -69,10 +70,10 @@ namespace Pulumiverse.Zitadel
         public Output<int> MinLength { get; private set; } = null!;
 
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
         [Output("orgId")]
-        public Output<string> OrgId { get; private set; } = null!;
+        public Output<string?> OrgId { get; private set; } = null!;
 
 
         /// <summary>
@@ -152,10 +153,10 @@ namespace Pulumiverse.Zitadel
         public Input<int> MinLength { get; set; } = null!;
 
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         public PasswordComplexityPolicyArgs()
         {
@@ -196,7 +197,7 @@ namespace Pulumiverse.Zitadel
         public Input<int>? MinLength { get; set; }
 
         /// <summary>
-        /// Id for the organization
+        /// ID of the organization
         /// </summary>
         [Input("orgId")]
         public Input<string>? OrgId { get; set; }

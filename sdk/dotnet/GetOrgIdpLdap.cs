@@ -21,14 +21,16 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var ldap = Zitadel.GetOrgIdpLdap.Invoke(new()
+        ///     var @default = Zitadel.GetOrgIdpLdap.Invoke(new()
         ///     {
-        ///         Id = "177073614158299139",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         /// });
@@ -37,7 +39,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetOrgIdpLdapResult> InvokeAsync(GetOrgIdpLdapArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrgIdpLdapResult>("zitadel:index/getOrgIdpLdap:getOrgIdpLdap", args ?? new GetOrgIdpLdapArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgIdpLdapResult>("zitadel:index/getOrgIdpLdap:getOrgIdpLdap", args ?? new GetOrgIdpLdapArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing an LDAP IdP on the organization.
@@ -48,14 +50,16 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var ldap = Zitadel.GetOrgIdpLdap.Invoke(new()
+        ///     var @default = Zitadel.GetOrgIdpLdap.Invoke(new()
         ///     {
-        ///         Id = "177073614158299139",
+        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         Id = "123456789012345678",
         ///     });
         /// 
         /// });
@@ -64,7 +68,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetOrgIdpLdapResult> Invoke(GetOrgIdpLdapInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrgIdpLdapResult>("zitadel:index/getOrgIdpLdap:getOrgIdpLdap", args ?? new GetOrgIdpLdapInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrgIdpLdapResult>("zitadel:index/getOrgIdpLdap:getOrgIdpLdap", args ?? new GetOrgIdpLdapInvokeArgs(), options.WithDefaults());
     }
 
 
@@ -79,8 +83,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public string OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public string? OrgId { get; set; }
 
         public GetOrgIdpLdapArgs()
         {
@@ -99,8 +103,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         public GetOrgIdpLdapInvokeArgs()
         {
@@ -183,7 +187,7 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        public readonly string OrgId;
+        public readonly string? OrgId;
         /// <summary>
         /// User attribute for the phone
         /// </summary>
@@ -265,7 +269,7 @@ namespace Pulumiverse.Zitadel
 
             string nickNameAttribute,
 
-            string orgId,
+            string? orgId,
 
             string phoneAttribute,
 

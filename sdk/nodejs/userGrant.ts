@@ -13,12 +13,20 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const userGrant = new zitadel.UserGrant("userGrant", {
- *     projectId: zitadel_project.project.id,
- *     orgId: zitadel_org.org.id,
- *     roleKeys: ["key"],
- *     userId: zitadel_human_user.granted_human_user.id,
+ * const _default = new zitadel.UserGrant("default", {
+ *     projectId: data.zitadel_project["default"].id,
+ *     orgId: data.zitadel_org["default"].id,
+ *     roleKeys: ["super-user"],
+ *     userId: data.zitadel_human_user["default"].id,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<flow_type:trigger_type[:org_id]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/userGrant:UserGrant imported '123456789012345678:123456789012345678:123456789012345678'
  * ```
  */
 export class UserGrant extends pulumi.CustomResource {
@@ -50,9 +58,9 @@ export class UserGrant extends pulumi.CustomResource {
     }
 
     /**
-     * ID of the organization which owns the resource
+     * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * ID of the granted project
      */
@@ -90,9 +98,6 @@ export class UserGrant extends pulumi.CustomResource {
             resourceInputs["userId"] = state ? state.userId : undefined;
         } else {
             const args = argsOrState as UserGrantArgs | undefined;
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             if ((!args || args.userId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'userId'");
             }
@@ -112,7 +117,7 @@ export class UserGrant extends pulumi.CustomResource {
  */
 export interface UserGrantState {
     /**
-     * ID of the organization which owns the resource
+     * ID of the organization
      */
     orgId?: pulumi.Input<string>;
     /**
@@ -138,9 +143,9 @@ export interface UserGrantState {
  */
 export interface UserGrantArgs {
     /**
-     * ID of the organization which owns the resource
+     * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * ID of the granted project
      */

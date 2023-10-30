@@ -13,8 +13,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const gitlabSelfHosted = new zitadel.OrgIdpGitlabSelfHosted("gitlabSelfHosted", {
- *     orgId: zitadel_org.org.id,
+ * const _default = new zitadel.OrgIdpGitlabSelfHosted("default", {
+ *     orgId: data.zitadel_org["default"].id,
  *     clientId: "15765e...",
  *     clientSecret: "*****abcxyz",
  *     scopes: [
@@ -28,6 +28,14 @@ import * as utilities from "./utilities";
  *     isAutoCreation: false,
  *     isAutoUpdate: true,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/orgIdpGitlabSelfHosted:OrgIdpGitlabSelfHosted imported '123456789012345678:123456789012345678:1234567890abcdef'
  * ```
  */
 export class OrgIdpGitlabSelfHosted extends pulumi.CustomResource {
@@ -93,7 +101,7 @@ export class OrgIdpGitlabSelfHosted extends pulumi.CustomResource {
     /**
      * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * the scopes requested by ZITADEL during the request on the identity provider
      */
@@ -145,11 +153,8 @@ export class OrgIdpGitlabSelfHosted extends pulumi.CustomResource {
             if ((!args || args.issuer === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'issuer'");
             }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             resourceInputs["clientId"] = args ? args.clientId : undefined;
-            resourceInputs["clientSecret"] = args ? args.clientSecret : undefined;
+            resourceInputs["clientSecret"] = args?.clientSecret ? pulumi.secret(args.clientSecret) : undefined;
             resourceInputs["isAutoCreation"] = args ? args.isAutoCreation : undefined;
             resourceInputs["isAutoUpdate"] = args ? args.isAutoUpdate : undefined;
             resourceInputs["isCreationAllowed"] = args ? args.isCreationAllowed : undefined;
@@ -160,6 +165,8 @@ export class OrgIdpGitlabSelfHosted extends pulumi.CustomResource {
             resourceInputs["scopes"] = args ? args.scopes : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["clientSecret"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(OrgIdpGitlabSelfHosted.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -249,7 +256,7 @@ export interface OrgIdpGitlabSelfHostedArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * the scopes requested by ZITADEL during the request on the identity provider
      */

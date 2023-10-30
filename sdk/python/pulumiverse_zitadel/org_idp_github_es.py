@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['OrgIdpGithubEsArgs', 'OrgIdpGithubEs']
@@ -21,10 +21,10 @@ class OrgIdpGithubEsArgs:
                  is_auto_update: pulumi.Input[bool],
                  is_creation_allowed: pulumi.Input[bool],
                  is_linking_allowed: pulumi.Input[bool],
-                 org_id: pulumi.Input[str],
                  token_endpoint: pulumi.Input[str],
                  user_endpoint: pulumi.Input[str],
                  name: Optional[pulumi.Input[str]] = None,
+                 org_id: Optional[pulumi.Input[str]] = None,
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a OrgIdpGithubEs resource.
@@ -35,26 +35,80 @@ class OrgIdpGithubEsArgs:
         :param pulumi.Input[bool] is_auto_update: enable if a the ZITADEL account fields should be updated automatically on each login
         :param pulumi.Input[bool] is_creation_allowed: enable if users should be able to create a new account in ZITADEL when using an external account
         :param pulumi.Input[bool] is_linking_allowed: enable if users should be able to link an existing ZITADEL user with an external account
-        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] token_endpoint: the providers token endpoint
         :param pulumi.Input[str] user_endpoint: the providers user endpoint
         :param pulumi.Input[str] name: Name of the IDP
+        :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: the scopes requested by ZITADEL during the request on the identity provider
         """
-        pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
-        pulumi.set(__self__, "client_id", client_id)
-        pulumi.set(__self__, "client_secret", client_secret)
-        pulumi.set(__self__, "is_auto_creation", is_auto_creation)
-        pulumi.set(__self__, "is_auto_update", is_auto_update)
-        pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
-        pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
-        pulumi.set(__self__, "org_id", org_id)
-        pulumi.set(__self__, "token_endpoint", token_endpoint)
-        pulumi.set(__self__, "user_endpoint", user_endpoint)
+        OrgIdpGithubEsArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            authorization_endpoint=authorization_endpoint,
+            client_id=client_id,
+            client_secret=client_secret,
+            is_auto_creation=is_auto_creation,
+            is_auto_update=is_auto_update,
+            is_creation_allowed=is_creation_allowed,
+            is_linking_allowed=is_linking_allowed,
+            token_endpoint=token_endpoint,
+            user_endpoint=user_endpoint,
+            name=name,
+            org_id=org_id,
+            scopes=scopes,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             authorization_endpoint: pulumi.Input[str],
+             client_id: pulumi.Input[str],
+             client_secret: pulumi.Input[str],
+             is_auto_creation: pulumi.Input[bool],
+             is_auto_update: pulumi.Input[bool],
+             is_creation_allowed: pulumi.Input[bool],
+             is_linking_allowed: pulumi.Input[bool],
+             token_endpoint: pulumi.Input[str],
+             user_endpoint: pulumi.Input[str],
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'authorizationEndpoint' in kwargs:
+            authorization_endpoint = kwargs['authorizationEndpoint']
+        if 'clientId' in kwargs:
+            client_id = kwargs['clientId']
+        if 'clientSecret' in kwargs:
+            client_secret = kwargs['clientSecret']
+        if 'isAutoCreation' in kwargs:
+            is_auto_creation = kwargs['isAutoCreation']
+        if 'isAutoUpdate' in kwargs:
+            is_auto_update = kwargs['isAutoUpdate']
+        if 'isCreationAllowed' in kwargs:
+            is_creation_allowed = kwargs['isCreationAllowed']
+        if 'isLinkingAllowed' in kwargs:
+            is_linking_allowed = kwargs['isLinkingAllowed']
+        if 'tokenEndpoint' in kwargs:
+            token_endpoint = kwargs['tokenEndpoint']
+        if 'userEndpoint' in kwargs:
+            user_endpoint = kwargs['userEndpoint']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("authorization_endpoint", authorization_endpoint)
+        _setter("client_id", client_id)
+        _setter("client_secret", client_secret)
+        _setter("is_auto_creation", is_auto_creation)
+        _setter("is_auto_update", is_auto_update)
+        _setter("is_creation_allowed", is_creation_allowed)
+        _setter("is_linking_allowed", is_linking_allowed)
+        _setter("token_endpoint", token_endpoint)
+        _setter("user_endpoint", user_endpoint)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
+        if org_id is not None:
+            _setter("org_id", org_id)
         if scopes is not None:
-            pulumi.set(__self__, "scopes", scopes)
+            _setter("scopes", scopes)
 
     @property
     @pulumi.getter(name="authorizationEndpoint")
@@ -141,18 +195,6 @@ class OrgIdpGithubEsArgs:
         pulumi.set(self, "is_linking_allowed", value)
 
     @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Input[str]:
-        """
-        ID of the organization
-        """
-        return pulumi.get(self, "org_id")
-
-    @org_id.setter
-    def org_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "org_id", value)
-
-    @property
     @pulumi.getter(name="tokenEndpoint")
     def token_endpoint(self) -> pulumi.Input[str]:
         """
@@ -187,6 +229,18 @@ class OrgIdpGithubEsArgs:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="orgId")
+    def org_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the organization
+        """
+        return pulumi.get(self, "org_id")
+
+    @org_id.setter
+    def org_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "org_id", value)
 
     @property
     @pulumi.getter
@@ -231,30 +285,83 @@ class _OrgIdpGithubEsState:
         :param pulumi.Input[str] token_endpoint: the providers token endpoint
         :param pulumi.Input[str] user_endpoint: the providers user endpoint
         """
+        _OrgIdpGithubEsState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            authorization_endpoint=authorization_endpoint,
+            client_id=client_id,
+            client_secret=client_secret,
+            is_auto_creation=is_auto_creation,
+            is_auto_update=is_auto_update,
+            is_creation_allowed=is_creation_allowed,
+            is_linking_allowed=is_linking_allowed,
+            name=name,
+            org_id=org_id,
+            scopes=scopes,
+            token_endpoint=token_endpoint,
+            user_endpoint=user_endpoint,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             authorization_endpoint: Optional[pulumi.Input[str]] = None,
+             client_id: Optional[pulumi.Input[str]] = None,
+             client_secret: Optional[pulumi.Input[str]] = None,
+             is_auto_creation: Optional[pulumi.Input[bool]] = None,
+             is_auto_update: Optional[pulumi.Input[bool]] = None,
+             is_creation_allowed: Optional[pulumi.Input[bool]] = None,
+             is_linking_allowed: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             token_endpoint: Optional[pulumi.Input[str]] = None,
+             user_endpoint: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'authorizationEndpoint' in kwargs:
+            authorization_endpoint = kwargs['authorizationEndpoint']
+        if 'clientId' in kwargs:
+            client_id = kwargs['clientId']
+        if 'clientSecret' in kwargs:
+            client_secret = kwargs['clientSecret']
+        if 'isAutoCreation' in kwargs:
+            is_auto_creation = kwargs['isAutoCreation']
+        if 'isAutoUpdate' in kwargs:
+            is_auto_update = kwargs['isAutoUpdate']
+        if 'isCreationAllowed' in kwargs:
+            is_creation_allowed = kwargs['isCreationAllowed']
+        if 'isLinkingAllowed' in kwargs:
+            is_linking_allowed = kwargs['isLinkingAllowed']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'tokenEndpoint' in kwargs:
+            token_endpoint = kwargs['tokenEndpoint']
+        if 'userEndpoint' in kwargs:
+            user_endpoint = kwargs['userEndpoint']
+
         if authorization_endpoint is not None:
-            pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
+            _setter("authorization_endpoint", authorization_endpoint)
         if client_id is not None:
-            pulumi.set(__self__, "client_id", client_id)
+            _setter("client_id", client_id)
         if client_secret is not None:
-            pulumi.set(__self__, "client_secret", client_secret)
+            _setter("client_secret", client_secret)
         if is_auto_creation is not None:
-            pulumi.set(__self__, "is_auto_creation", is_auto_creation)
+            _setter("is_auto_creation", is_auto_creation)
         if is_auto_update is not None:
-            pulumi.set(__self__, "is_auto_update", is_auto_update)
+            _setter("is_auto_update", is_auto_update)
         if is_creation_allowed is not None:
-            pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
+            _setter("is_creation_allowed", is_creation_allowed)
         if is_linking_allowed is not None:
-            pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
+            _setter("is_linking_allowed", is_linking_allowed)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if scopes is not None:
-            pulumi.set(__self__, "scopes", scopes)
+            _setter("scopes", scopes)
         if token_endpoint is not None:
-            pulumi.set(__self__, "token_endpoint", token_endpoint)
+            _setter("token_endpoint", token_endpoint)
         if user_endpoint is not None:
-            pulumi.set(__self__, "user_endpoint", user_endpoint)
+            _setter("user_endpoint", user_endpoint)
 
     @property
     @pulumi.getter(name="authorizationEndpoint")
@@ -428,8 +535,8 @@ class OrgIdpGithubEs(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        github_es = zitadel.OrgIdpGithubEs("githubEs",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.OrgIdpGithubEs("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             client_id="86a165...",
             client_secret="*****afdbac18",
             scopes=[
@@ -444,6 +551,14 @@ class OrgIdpGithubEs(pulumi.CustomResource):
             is_creation_allowed=True,
             is_auto_creation=False,
             is_auto_update=True)
+        ```
+
+        ## Import
+
+        terraform The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/orgIdpGithubEs:OrgIdpGithubEs imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678'
         ```
 
         :param str resource_name: The name of the resource.
@@ -476,8 +591,8 @@ class OrgIdpGithubEs(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        github_es = zitadel.OrgIdpGithubEs("githubEs",
-            org_id=zitadel_org["org"]["id"],
+        default = zitadel.OrgIdpGithubEs("default",
+            org_id=data["zitadel_org"]["default"]["id"],
             client_id="86a165...",
             client_secret="*****afdbac18",
             scopes=[
@@ -494,6 +609,14 @@ class OrgIdpGithubEs(pulumi.CustomResource):
             is_auto_update=True)
         ```
 
+        ## Import
+
+        terraform The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+
+        ```sh
+         $ pulumi import zitadel:index/orgIdpGithubEs:OrgIdpGithubEs imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678'
+        ```
+
         :param str resource_name: The name of the resource.
         :param OrgIdpGithubEsArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -504,6 +627,10 @@ class OrgIdpGithubEs(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            OrgIdpGithubEsArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -538,7 +665,7 @@ class OrgIdpGithubEs(pulumi.CustomResource):
             __props__.__dict__["client_id"] = client_id
             if client_secret is None and not opts.urn:
                 raise TypeError("Missing required property 'client_secret'")
-            __props__.__dict__["client_secret"] = client_secret
+            __props__.__dict__["client_secret"] = None if client_secret is None else pulumi.Output.secret(client_secret)
             if is_auto_creation is None and not opts.urn:
                 raise TypeError("Missing required property 'is_auto_creation'")
             __props__.__dict__["is_auto_creation"] = is_auto_creation
@@ -552,8 +679,6 @@ class OrgIdpGithubEs(pulumi.CustomResource):
                 raise TypeError("Missing required property 'is_linking_allowed'")
             __props__.__dict__["is_linking_allowed"] = is_linking_allowed
             __props__.__dict__["name"] = name
-            if org_id is None and not opts.urn:
-                raise TypeError("Missing required property 'org_id'")
             __props__.__dict__["org_id"] = org_id
             __props__.__dict__["scopes"] = scopes
             if token_endpoint is None and not opts.urn:
@@ -562,6 +687,8 @@ class OrgIdpGithubEs(pulumi.CustomResource):
             if user_endpoint is None and not opts.urn:
                 raise TypeError("Missing required property 'user_endpoint'")
             __props__.__dict__["user_endpoint"] = user_endpoint
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["clientSecret"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(OrgIdpGithubEs, __self__).__init__(
             'zitadel:index/orgIdpGithubEs:OrgIdpGithubEs',
             resource_name,
@@ -688,7 +815,7 @@ class OrgIdpGithubEs(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="orgId")
-    def org_id(self) -> pulumi.Output[str]:
+    def org_id(self) -> pulumi.Output[Optional[str]]:
         """
         ID of the organization
         """

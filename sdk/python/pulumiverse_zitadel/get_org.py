@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -21,22 +21,25 @@ class GetOrgResult:
     """
     A collection of values returned by getOrg.
     """
-    def __init__(__self__, id=None, name=None, org_id=None):
+    def __init__(__self__, id=None, name=None, primary_domain=None, state=None):
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
-        if org_id and not isinstance(org_id, str):
-            raise TypeError("Expected argument 'org_id' to be a str")
-        pulumi.set(__self__, "org_id", org_id)
+        if primary_domain and not isinstance(primary_domain, str):
+            raise TypeError("Expected argument 'primary_domain' to be a str")
+        pulumi.set(__self__, "primary_domain", primary_domain)
+        if state and not isinstance(state, str):
+            raise TypeError("Expected argument 'state' to be a str")
+        pulumi.set(__self__, "state", state)
 
     @property
     @pulumi.getter
     def id(self) -> str:
         """
-        The provider-assigned unique ID for this managed resource.
+        ID of the organization
         """
         return pulumi.get(self, "id")
 
@@ -44,17 +47,25 @@ class GetOrgResult:
     @pulumi.getter
     def name(self) -> str:
         """
-        Name of the org
+        Name of the org.
         """
         return pulumi.get(self, "name")
 
     @property
-    @pulumi.getter(name="orgId")
-    def org_id(self) -> str:
+    @pulumi.getter(name="primaryDomain")
+    def primary_domain(self) -> str:
         """
-        The ID of this resource.
+        Primary domain of the org
         """
-        return pulumi.get(self, "org_id")
+        return pulumi.get(self, "primary_domain")
+
+    @property
+    @pulumi.getter
+    def state(self) -> str:
+        """
+        State of the org, supported values: ORG*STATE*UNSPECIFIED, ORG*STATE*ACTIVE, ORG*STATE*INACTIVE, ORG*STATE*REMOVED
+        """
+        return pulumi.get(self, "state")
 
 
 class AwaitableGetOrgResult(GetOrgResult):
@@ -65,10 +76,11 @@ class AwaitableGetOrgResult(GetOrgResult):
         return GetOrgResult(
             id=self.id,
             name=self.name,
-            org_id=self.org_id)
+            primary_domain=self.primary_domain,
+            state=self.state)
 
 
-def get_org(org_id: Optional[str] = None,
+def get_org(id: Optional[str] = None,
             opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetOrgResult:
     """
     Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
@@ -79,26 +91,27 @@ def get_org(org_id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    org_org = zitadel.get_org(org_id="177073608051458051")
-    pulumi.export("org", org_org)
+    default = zitadel.get_org(id="123456789012345678")
+    pulumi.export("org", default)
     ```
 
 
-    :param str org_id: The ID of this resource.
+    :param str id: ID of the organization
     """
     __args__ = dict()
-    __args__['orgId'] = org_id
+    __args__['id'] = id
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('zitadel:index/getOrg:getOrg', __args__, opts=opts, typ=GetOrgResult).value
 
     return AwaitableGetOrgResult(
-        id=__ret__.id,
-        name=__ret__.name,
-        org_id=__ret__.org_id)
+        id=pulumi.get(__ret__, 'id'),
+        name=pulumi.get(__ret__, 'name'),
+        primary_domain=pulumi.get(__ret__, 'primary_domain'),
+        state=pulumi.get(__ret__, 'state'))
 
 
 @_utilities.lift_output_func(get_org)
-def get_org_output(org_id: Optional[pulumi.Input[str]] = None,
+def get_org_output(id: Optional[pulumi.Input[str]] = None,
                    opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetOrgResult]:
     """
     Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
@@ -109,11 +122,11 @@ def get_org_output(org_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    org_org = zitadel.get_org(org_id="177073608051458051")
-    pulumi.export("org", org_org)
+    default = zitadel.get_org(id="123456789012345678")
+    pulumi.export("org", default)
     ```
 
 
-    :param str org_id: The ID of this resource.
+    :param str id: ID of the organization
     """
     ...

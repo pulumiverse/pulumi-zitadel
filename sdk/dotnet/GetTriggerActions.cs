@@ -21,21 +21,22 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var triggerActionsTriggerActions = Zitadel.GetTriggerActions.Invoke(new()
+        ///     var @default = Zitadel.GetTriggerActions.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
+        ///         OrgId = data.Zitadel_org.Default.Id,
         ///         FlowType = "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
         ///         TriggerType = "TRIGGER_TYPE_POST_AUTHENTICATION",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["triggerActions"] = triggerActionsTriggerActions.Apply(getTriggerActionsResult =&gt; getTriggerActionsResult),
+        ///         ["triggerActions"] = @default,
         ///     };
         /// });
         /// ```
@@ -43,7 +44,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetTriggerActionsResult> InvokeAsync(GetTriggerActionsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTriggerActionsResult>("zitadel:index/getTriggerActions:getTriggerActions", args ?? new GetTriggerActionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTriggerActionsResult>("zitadel:index/getTriggerActions:getTriggerActions", args ?? new GetTriggerActionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Resource representing triggers, when actions get started
@@ -54,21 +55,22 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var triggerActionsTriggerActions = Zitadel.GetTriggerActions.Invoke(new()
+        ///     var @default = Zitadel.GetTriggerActions.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Org.Id,
+        ///         OrgId = data.Zitadel_org.Default.Id,
         ///         FlowType = "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
         ///         TriggerType = "TRIGGER_TYPE_POST_AUTHENTICATION",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["triggerActions"] = triggerActionsTriggerActions.Apply(getTriggerActionsResult =&gt; getTriggerActionsResult),
+        ///         ["triggerActions"] = @default,
         ///     };
         /// });
         /// ```
@@ -76,7 +78,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetTriggerActionsResult> Invoke(GetTriggerActionsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTriggerActionsResult>("zitadel:index/getTriggerActions:getTriggerActions", args ?? new GetTriggerActionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTriggerActionsResult>("zitadel:index/getTriggerActions:getTriggerActions", args ?? new GetTriggerActionsInvokeArgs(), options.WithDefaults());
     }
 
 
@@ -91,8 +93,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public string OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public string? OrgId { get; set; }
 
         /// <summary>
         /// Trigger type on when the actions get triggered
@@ -117,8 +119,8 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        [Input("orgId", required: true)]
-        public Input<string> OrgId { get; set; } = null!;
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
 
         /// <summary>
         /// Trigger type on when the actions get triggered
@@ -151,7 +153,7 @@ namespace Pulumiverse.Zitadel
         /// <summary>
         /// ID of the organization
         /// </summary>
-        public readonly string OrgId;
+        public readonly string? OrgId;
         /// <summary>
         /// Trigger type on when the actions get triggered
         /// </summary>
@@ -165,7 +167,7 @@ namespace Pulumiverse.Zitadel
 
             string id,
 
-            string orgId,
+            string? orgId,
 
             string triggerType)
         {

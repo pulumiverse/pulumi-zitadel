@@ -11,9 +11,17 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const org = new zitadel.Org("org", {});
+ * const _default = new zitadel.Org("default", {});
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<id>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/org:Org imported '123456789012345678'
  * ```
  */
 export class Org extends pulumi.CustomResource {
@@ -48,6 +56,14 @@ export class Org extends pulumi.CustomResource {
      * Name of the org
      */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Primary domain of the org
+     */
+    public /*out*/ readonly primaryDomain!: pulumi.Output<string>;
+    /**
+     * State of the org
+     */
+    public /*out*/ readonly state!: pulumi.Output<string>;
 
     /**
      * Create a Org resource with the given unique name, arguments, and options.
@@ -63,9 +79,13 @@ export class Org extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as OrgState | undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["primaryDomain"] = state ? state.primaryDomain : undefined;
+            resourceInputs["state"] = state ? state.state : undefined;
         } else {
             const args = argsOrState as OrgArgs | undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["primaryDomain"] = undefined /*out*/;
+            resourceInputs["state"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Org.__pulumiType, name, resourceInputs, opts);
@@ -80,6 +100,14 @@ export interface OrgState {
      * Name of the org
      */
     name?: pulumi.Input<string>;
+    /**
+     * Primary domain of the org
+     */
+    primaryDomain?: pulumi.Input<string>;
+    /**
+     * State of the org
+     */
+    state?: pulumi.Input<string>;
 }
 
 /**

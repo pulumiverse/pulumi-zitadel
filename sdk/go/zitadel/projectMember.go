@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the membership of a user on an project, defined with the given role.
@@ -27,10 +29,17 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.NewProjectMember(ctx, "projectMember", &zitadel.ProjectMemberArgs{
 //				OrgId:     pulumi.Any(zitadel_org.Org.Id),
 //				ProjectId: pulumi.Any(zitadel_project.Project.Id),
 //				UserId:    pulumi.Any(zitadel_human_user.Human_user.Id),
+=======
+//			_, err := zitadel.NewProjectMember(ctx, "default", &zitadel.ProjectMemberArgs{
+//				OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
+//				ProjectId: pulumi.Any(data.Zitadel_project.Default.Id),
+//				UserId:    pulumi.Any(data.Zitadel_human_user.Default.Id),
+>>>>>>> origin/master
 //				Roles: pulumi.StringArray{
 //					pulumi.String("PROJECT_OWNER"),
 //				},
@@ -42,12 +51,25 @@ import (
 //		})
 //	}
 //
+<<<<<<< HEAD
+=======
+// ```
+//
+// ## Import
+//
+// terraform The resource can be imported using the ID format `<project_id:user_id[:org_id]>`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import zitadel:index/projectMember:ProjectMember imported '123456789012345678:123456789012345678:123456789012345678'
+//
+>>>>>>> origin/master
 // ```
 type ProjectMember struct {
 	pulumi.CustomResourceState
 
-	// ID of the organization which owns the resource
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// ID of the project
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
 	// List of roles granted
@@ -63,9 +85,6 @@ func NewProjectMember(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
@@ -75,7 +94,7 @@ func NewProjectMember(ctx *pulumi.Context,
 	if args.UserId == nil {
 		return nil, errors.New("invalid value for required argument 'UserId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProjectMember
 	err := ctx.RegisterResource("zitadel:index/projectMember:ProjectMember", name, args, &resource, opts...)
 	if err != nil {
@@ -98,7 +117,7 @@ func GetProjectMember(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ProjectMember resources.
 type projectMemberState struct {
-	// ID of the organization which owns the resource
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 	// ID of the project
 	ProjectId *string `pulumi:"projectId"`
@@ -109,7 +128,7 @@ type projectMemberState struct {
 }
 
 type ProjectMemberState struct {
-	// ID of the organization which owns the resource
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 	// ID of the project
 	ProjectId pulumi.StringPtrInput
@@ -124,8 +143,8 @@ func (ProjectMemberState) ElementType() reflect.Type {
 }
 
 type projectMemberArgs struct {
-	// ID of the organization which owns the resource
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// ID of the project
 	ProjectId string `pulumi:"projectId"`
 	// List of roles granted
@@ -136,8 +155,8 @@ type projectMemberArgs struct {
 
 // The set of arguments for constructing a ProjectMember resource.
 type ProjectMemberArgs struct {
-	// ID of the organization which owns the resource
-	OrgId pulumi.StringInput
+	// ID of the organization
+	OrgId pulumi.StringPtrInput
 	// ID of the project
 	ProjectId pulumi.StringInput
 	// List of roles granted
@@ -169,6 +188,12 @@ func (i *ProjectMember) ToProjectMemberOutputWithContext(ctx context.Context) Pr
 	return pulumi.ToOutputWithContext(ctx, i).(ProjectMemberOutput)
 }
 
+func (i *ProjectMember) ToOutput(ctx context.Context) pulumix.Output[*ProjectMember] {
+	return pulumix.Output[*ProjectMember]{
+		OutputState: i.ToProjectMemberOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ProjectMemberArrayInput is an input type that accepts ProjectMemberArray and ProjectMemberArrayOutput values.
 // You can construct a concrete instance of `ProjectMemberArrayInput` via:
 //
@@ -192,6 +217,12 @@ func (i ProjectMemberArray) ToProjectMemberArrayOutput() ProjectMemberArrayOutpu
 
 func (i ProjectMemberArray) ToProjectMemberArrayOutputWithContext(ctx context.Context) ProjectMemberArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ProjectMemberArrayOutput)
+}
+
+func (i ProjectMemberArray) ToOutput(ctx context.Context) pulumix.Output[[]*ProjectMember] {
+	return pulumix.Output[[]*ProjectMember]{
+		OutputState: i.ToProjectMemberArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ProjectMemberMapInput is an input type that accepts ProjectMemberMap and ProjectMemberMapOutput values.
@@ -219,6 +250,12 @@ func (i ProjectMemberMap) ToProjectMemberMapOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(ProjectMemberMapOutput)
 }
 
+func (i ProjectMemberMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProjectMember] {
+	return pulumix.Output[map[string]*ProjectMember]{
+		OutputState: i.ToProjectMemberMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ProjectMemberOutput struct{ *pulumi.OutputState }
 
 func (ProjectMemberOutput) ElementType() reflect.Type {
@@ -233,9 +270,15 @@ func (o ProjectMemberOutput) ToProjectMemberOutputWithContext(ctx context.Contex
 	return o
 }
 
-// ID of the organization which owns the resource
-func (o ProjectMemberOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *ProjectMember) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o ProjectMemberOutput) ToOutput(ctx context.Context) pulumix.Output[*ProjectMember] {
+	return pulumix.Output[*ProjectMember]{
+		OutputState: o.OutputState,
+	}
+}
+
+// ID of the organization
+func (o ProjectMemberOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectMember) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // ID of the project
@@ -267,6 +310,12 @@ func (o ProjectMemberArrayOutput) ToProjectMemberArrayOutputWithContext(ctx cont
 	return o
 }
 
+func (o ProjectMemberArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ProjectMember] {
+	return pulumix.Output[[]*ProjectMember]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ProjectMemberArrayOutput) Index(i pulumi.IntInput) ProjectMemberOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ProjectMember {
 		return vs[0].([]*ProjectMember)[vs[1].(int)]
@@ -285,6 +334,12 @@ func (o ProjectMemberMapOutput) ToProjectMemberMapOutput() ProjectMemberMapOutpu
 
 func (o ProjectMemberMapOutput) ToProjectMemberMapOutputWithContext(ctx context.Context) ProjectMemberMapOutput {
 	return o
+}
+
+func (o ProjectMemberMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProjectMember] {
+	return pulumix.Output[map[string]*ProjectMember]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ProjectMemberMapOutput) MapIndex(k pulumi.StringInput) ProjectMemberOutput {

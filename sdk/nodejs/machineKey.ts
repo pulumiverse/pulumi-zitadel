@@ -13,12 +13,20 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const machineKey = new zitadel.MachineKey("machineKey", {
- *     orgId: zitadel_org.org.id,
- *     userId: zitadel_machine_user.machine_user.id,
+ * const _default = new zitadel.MachineKey("default", {
+ *     orgId: data.zitadel_org["default"].id,
+ *     userId: data.zitadel_machine_user["default"].id,
  *     keyType: "KEY_TYPE_JSON",
  *     expirationDate: "2519-04-01T08:45:00Z",
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * terraform The resource can be imported using the ID format `<id:user_id[:org_id][:key_details]>`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import zitadel:index/machineKey:MachineKey imported '123456789012345678:123456789012345678:123456789012345678:{"type":"serviceaccount","keyId":"123456789012345678","key":"-----BEGIN RSA PRIVATE KEY-----\nMIIEpQ...-----END RSA PRIVATE KEY-----\n","userId":"123456789012345678"}'
  * ```
  */
 export class MachineKey extends pulumi.CustomResource {
@@ -64,7 +72,7 @@ export class MachineKey extends pulumi.CustomResource {
     /**
      * ID of the organization
      */
-    public readonly orgId!: pulumi.Output<string>;
+    public readonly orgId!: pulumi.Output<string | undefined>;
     /**
      * ID of the user
      */
@@ -93,9 +101,6 @@ export class MachineKey extends pulumi.CustomResource {
             if ((!args || args.keyType === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'keyType'");
             }
-            if ((!args || args.orgId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'orgId'");
-            }
             if ((!args || args.userId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'userId'");
             }
@@ -106,6 +111,8 @@ export class MachineKey extends pulumi.CustomResource {
             resourceInputs["keyDetails"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["keyDetails"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(MachineKey.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -151,7 +158,7 @@ export interface MachineKeyArgs {
     /**
      * ID of the organization
      */
-    orgId: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
      * ID of the user
      */

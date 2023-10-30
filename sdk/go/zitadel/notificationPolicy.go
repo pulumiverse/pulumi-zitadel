@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the custom notification policy of an organization.
@@ -27,8 +29,13 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.NewNotificationPolicy(ctx, "notificationPolicy", &zitadel.NotificationPolicyArgs{
 //				OrgId:          pulumi.Any(zitadel_org.Org.Id),
+=======
+//			_, err := zitadel.NewNotificationPolicy(ctx, "default", &zitadel.NotificationPolicyArgs{
+//				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
+>>>>>>> origin/master
 //				PasswordChange: pulumi.Bool(false),
 //			})
 //			if err != nil {
@@ -38,12 +45,25 @@ import (
 //		})
 //	}
 //
+<<<<<<< HEAD
+=======
+// ```
+//
+// ## Import
+//
+// terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import zitadel:index/notificationPolicy:NotificationPolicy imported '123456789012345678'
+//
+>>>>>>> origin/master
 // ```
 type NotificationPolicy struct {
 	pulumi.CustomResourceState
 
-	// Id for the organization
-	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	// ID of the organization
+	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
 	// Send notification if a user changes his password
 	PasswordChange pulumi.BoolOutput `pulumi:"passwordChange"`
 }
@@ -55,13 +75,10 @@ func NewNotificationPolicy(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	if args.PasswordChange == nil {
 		return nil, errors.New("invalid value for required argument 'PasswordChange'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource NotificationPolicy
 	err := ctx.RegisterResource("zitadel:index/notificationPolicy:NotificationPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -84,14 +101,14 @@ func GetNotificationPolicy(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering NotificationPolicy resources.
 type notificationPolicyState struct {
-	// Id for the organization
+	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
 	// Send notification if a user changes his password
 	PasswordChange *bool `pulumi:"passwordChange"`
 }
 
 type NotificationPolicyState struct {
-	// Id for the organization
+	// ID of the organization
 	OrgId pulumi.StringPtrInput
 	// Send notification if a user changes his password
 	PasswordChange pulumi.BoolPtrInput
@@ -102,16 +119,16 @@ func (NotificationPolicyState) ElementType() reflect.Type {
 }
 
 type notificationPolicyArgs struct {
-	// Id for the organization
-	OrgId string `pulumi:"orgId"`
+	// ID of the organization
+	OrgId *string `pulumi:"orgId"`
 	// Send notification if a user changes his password
 	PasswordChange bool `pulumi:"passwordChange"`
 }
 
 // The set of arguments for constructing a NotificationPolicy resource.
 type NotificationPolicyArgs struct {
-	// Id for the organization
-	OrgId pulumi.StringInput
+	// ID of the organization
+	OrgId pulumi.StringPtrInput
 	// Send notification if a user changes his password
 	PasswordChange pulumi.BoolInput
 }
@@ -139,6 +156,12 @@ func (i *NotificationPolicy) ToNotificationPolicyOutputWithContext(ctx context.C
 	return pulumi.ToOutputWithContext(ctx, i).(NotificationPolicyOutput)
 }
 
+func (i *NotificationPolicy) ToOutput(ctx context.Context) pulumix.Output[*NotificationPolicy] {
+	return pulumix.Output[*NotificationPolicy]{
+		OutputState: i.ToNotificationPolicyOutputWithContext(ctx).OutputState,
+	}
+}
+
 // NotificationPolicyArrayInput is an input type that accepts NotificationPolicyArray and NotificationPolicyArrayOutput values.
 // You can construct a concrete instance of `NotificationPolicyArrayInput` via:
 //
@@ -162,6 +185,12 @@ func (i NotificationPolicyArray) ToNotificationPolicyArrayOutput() NotificationP
 
 func (i NotificationPolicyArray) ToNotificationPolicyArrayOutputWithContext(ctx context.Context) NotificationPolicyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(NotificationPolicyArrayOutput)
+}
+
+func (i NotificationPolicyArray) ToOutput(ctx context.Context) pulumix.Output[[]*NotificationPolicy] {
+	return pulumix.Output[[]*NotificationPolicy]{
+		OutputState: i.ToNotificationPolicyArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // NotificationPolicyMapInput is an input type that accepts NotificationPolicyMap and NotificationPolicyMapOutput values.
@@ -189,6 +218,12 @@ func (i NotificationPolicyMap) ToNotificationPolicyMapOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(NotificationPolicyMapOutput)
 }
 
+func (i NotificationPolicyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*NotificationPolicy] {
+	return pulumix.Output[map[string]*NotificationPolicy]{
+		OutputState: i.ToNotificationPolicyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type NotificationPolicyOutput struct{ *pulumi.OutputState }
 
 func (NotificationPolicyOutput) ElementType() reflect.Type {
@@ -203,9 +238,15 @@ func (o NotificationPolicyOutput) ToNotificationPolicyOutputWithContext(ctx cont
 	return o
 }
 
-// Id for the organization
-func (o NotificationPolicyOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *NotificationPolicy) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o NotificationPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[*NotificationPolicy] {
+	return pulumix.Output[*NotificationPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
+// ID of the organization
+func (o NotificationPolicyOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NotificationPolicy) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 // Send notification if a user changes his password
@@ -227,6 +268,12 @@ func (o NotificationPolicyArrayOutput) ToNotificationPolicyArrayOutputWithContex
 	return o
 }
 
+func (o NotificationPolicyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*NotificationPolicy] {
+	return pulumix.Output[[]*NotificationPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o NotificationPolicyArrayOutput) Index(i pulumi.IntInput) NotificationPolicyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *NotificationPolicy {
 		return vs[0].([]*NotificationPolicy)[vs[1].(int)]
@@ -245,6 +292,12 @@ func (o NotificationPolicyMapOutput) ToNotificationPolicyMapOutput() Notificatio
 
 func (o NotificationPolicyMapOutput) ToNotificationPolicyMapOutputWithContext(ctx context.Context) NotificationPolicyMapOutput {
 	return o
+}
+
+func (o NotificationPolicyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*NotificationPolicy] {
+	return pulumix.Output[map[string]*NotificationPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o NotificationPolicyMapOutput) MapIndex(k pulumi.StringInput) NotificationPolicyOutput {

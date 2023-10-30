@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the custom domain policy of an organization.
@@ -27,11 +29,19 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+<<<<<<< HEAD
 //			_, err := zitadel.NewDomainPolicy(ctx, "domainPolicy", &zitadel.DomainPolicyArgs{
 //				OrgId:                                  pulumi.Any(zitadel_org.Org.Id),
 //				UserLoginMustBeDomain:                  pulumi.Bool(false),
 //				ValidateOrgDomains:                     pulumi.Bool(false),
 //				SmtpSenderAddressMatchesInstanceDomain: pulumi.Bool(false),
+=======
+//			_, err := zitadel.NewDomainPolicy(ctx, "default", &zitadel.DomainPolicyArgs{
+//				OrgId:                                  pulumi.Any(data.Zitadel_org.Default.Id),
+//				UserLoginMustBeDomain:                  pulumi.Bool(false),
+//				ValidateOrgDomains:                     pulumi.Bool(true),
+//				SmtpSenderAddressMatchesInstanceDomain: pulumi.Bool(true),
+>>>>>>> origin/master
 //			})
 //			if err != nil {
 //				return err
@@ -40,13 +50,26 @@ import (
 //		})
 //	}
 //
+<<<<<<< HEAD
+=======
+// ```
+//
+// ## Import
+//
+// terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+//
+// ```sh
+//
+//	$ pulumi import zitadel:index/domainPolicy:DomainPolicy imported '123456789012345678'
+//
+>>>>>>> origin/master
 // ```
 type DomainPolicy struct {
 	pulumi.CustomResourceState
 
-	// Id for the organization
-	OrgId                                  pulumi.StringOutput `pulumi:"orgId"`
-	SmtpSenderAddressMatchesInstanceDomain pulumi.BoolOutput   `pulumi:"smtpSenderAddressMatchesInstanceDomain"`
+	// ID of the organization
+	OrgId                                  pulumi.StringPtrOutput `pulumi:"orgId"`
+	SmtpSenderAddressMatchesInstanceDomain pulumi.BoolOutput      `pulumi:"smtpSenderAddressMatchesInstanceDomain"`
 	// User login must be domain
 	UserLoginMustBeDomain pulumi.BoolOutput `pulumi:"userLoginMustBeDomain"`
 	// Validate organization domains
@@ -60,9 +83,6 @@ func NewDomainPolicy(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.OrgId == nil {
-		return nil, errors.New("invalid value for required argument 'OrgId'")
-	}
 	if args.SmtpSenderAddressMatchesInstanceDomain == nil {
 		return nil, errors.New("invalid value for required argument 'SmtpSenderAddressMatchesInstanceDomain'")
 	}
@@ -72,7 +92,7 @@ func NewDomainPolicy(ctx *pulumi.Context,
 	if args.ValidateOrgDomains == nil {
 		return nil, errors.New("invalid value for required argument 'ValidateOrgDomains'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DomainPolicy
 	err := ctx.RegisterResource("zitadel:index/domainPolicy:DomainPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -95,7 +115,7 @@ func GetDomainPolicy(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering DomainPolicy resources.
 type domainPolicyState struct {
-	// Id for the organization
+	// ID of the organization
 	OrgId                                  *string `pulumi:"orgId"`
 	SmtpSenderAddressMatchesInstanceDomain *bool   `pulumi:"smtpSenderAddressMatchesInstanceDomain"`
 	// User login must be domain
@@ -105,7 +125,7 @@ type domainPolicyState struct {
 }
 
 type DomainPolicyState struct {
-	// Id for the organization
+	// ID of the organization
 	OrgId                                  pulumi.StringPtrInput
 	SmtpSenderAddressMatchesInstanceDomain pulumi.BoolPtrInput
 	// User login must be domain
@@ -119,9 +139,9 @@ func (DomainPolicyState) ElementType() reflect.Type {
 }
 
 type domainPolicyArgs struct {
-	// Id for the organization
-	OrgId                                  string `pulumi:"orgId"`
-	SmtpSenderAddressMatchesInstanceDomain bool   `pulumi:"smtpSenderAddressMatchesInstanceDomain"`
+	// ID of the organization
+	OrgId                                  *string `pulumi:"orgId"`
+	SmtpSenderAddressMatchesInstanceDomain bool    `pulumi:"smtpSenderAddressMatchesInstanceDomain"`
 	// User login must be domain
 	UserLoginMustBeDomain bool `pulumi:"userLoginMustBeDomain"`
 	// Validate organization domains
@@ -130,8 +150,8 @@ type domainPolicyArgs struct {
 
 // The set of arguments for constructing a DomainPolicy resource.
 type DomainPolicyArgs struct {
-	// Id for the organization
-	OrgId                                  pulumi.StringInput
+	// ID of the organization
+	OrgId                                  pulumi.StringPtrInput
 	SmtpSenderAddressMatchesInstanceDomain pulumi.BoolInput
 	// User login must be domain
 	UserLoginMustBeDomain pulumi.BoolInput
@@ -162,6 +182,12 @@ func (i *DomainPolicy) ToDomainPolicyOutputWithContext(ctx context.Context) Doma
 	return pulumi.ToOutputWithContext(ctx, i).(DomainPolicyOutput)
 }
 
+func (i *DomainPolicy) ToOutput(ctx context.Context) pulumix.Output[*DomainPolicy] {
+	return pulumix.Output[*DomainPolicy]{
+		OutputState: i.ToDomainPolicyOutputWithContext(ctx).OutputState,
+	}
+}
+
 // DomainPolicyArrayInput is an input type that accepts DomainPolicyArray and DomainPolicyArrayOutput values.
 // You can construct a concrete instance of `DomainPolicyArrayInput` via:
 //
@@ -185,6 +211,12 @@ func (i DomainPolicyArray) ToDomainPolicyArrayOutput() DomainPolicyArrayOutput {
 
 func (i DomainPolicyArray) ToDomainPolicyArrayOutputWithContext(ctx context.Context) DomainPolicyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(DomainPolicyArrayOutput)
+}
+
+func (i DomainPolicyArray) ToOutput(ctx context.Context) pulumix.Output[[]*DomainPolicy] {
+	return pulumix.Output[[]*DomainPolicy]{
+		OutputState: i.ToDomainPolicyArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // DomainPolicyMapInput is an input type that accepts DomainPolicyMap and DomainPolicyMapOutput values.
@@ -212,6 +244,12 @@ func (i DomainPolicyMap) ToDomainPolicyMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(DomainPolicyMapOutput)
 }
 
+func (i DomainPolicyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*DomainPolicy] {
+	return pulumix.Output[map[string]*DomainPolicy]{
+		OutputState: i.ToDomainPolicyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type DomainPolicyOutput struct{ *pulumi.OutputState }
 
 func (DomainPolicyOutput) ElementType() reflect.Type {
@@ -226,9 +264,15 @@ func (o DomainPolicyOutput) ToDomainPolicyOutputWithContext(ctx context.Context)
 	return o
 }
 
-// Id for the organization
-func (o DomainPolicyOutput) OrgId() pulumi.StringOutput {
-	return o.ApplyT(func(v *DomainPolicy) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+func (o DomainPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[*DomainPolicy] {
+	return pulumix.Output[*DomainPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
+// ID of the organization
+func (o DomainPolicyOutput) OrgId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainPolicy) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
 func (o DomainPolicyOutput) SmtpSenderAddressMatchesInstanceDomain() pulumi.BoolOutput {
@@ -259,6 +303,12 @@ func (o DomainPolicyArrayOutput) ToDomainPolicyArrayOutputWithContext(ctx contex
 	return o
 }
 
+func (o DomainPolicyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*DomainPolicy] {
+	return pulumix.Output[[]*DomainPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o DomainPolicyArrayOutput) Index(i pulumi.IntInput) DomainPolicyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *DomainPolicy {
 		return vs[0].([]*DomainPolicy)[vs[1].(int)]
@@ -277,6 +327,12 @@ func (o DomainPolicyMapOutput) ToDomainPolicyMapOutput() DomainPolicyMapOutput {
 
 func (o DomainPolicyMapOutput) ToDomainPolicyMapOutputWithContext(ctx context.Context) DomainPolicyMapOutput {
 	return o
+}
+
+func (o DomainPolicyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*DomainPolicy] {
+	return pulumix.Output[map[string]*DomainPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o DomainPolicyMapOutput) MapIndex(k pulumi.StringInput) DomainPolicyOutput {
