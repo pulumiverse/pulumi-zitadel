@@ -40,7 +40,7 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v2
     - name: Bump version
-      uses: mapped/action-vtl@dev
+      uses: mapped/action-vtl@latest
       with:
         baseVersion: 0.0.17
         gitHubToken: ${{ secrets.GITHUB_TOKEN }}
