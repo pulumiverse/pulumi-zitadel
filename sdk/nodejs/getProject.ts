@@ -21,11 +21,8 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getProject(args: GetProjectArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getProject:getProject", {
         "orgId": args.orgId,
         "projectId": args.projectId,
@@ -87,9 +84,24 @@ export interface GetProjectResult {
      */
     readonly state: string;
 }
-
+/**
+ * Datasource representing the project, which can then be granted to different organizations or users directly, containing different applications.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getProject({
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: "123456789012345678",
+ * });
+ * export const project = _default;
+ * ```
+ */
 export function getProjectOutput(args: GetProjectOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProjectResult> {
-    return pulumi.output(args).apply(a => getProject(a, opts))
+    return pulumi.output(args).apply((a: any) => getProject(a, opts))
 }
 
 /**

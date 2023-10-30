@@ -22,7 +22,7 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * terraform # The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
+ * terraform The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/personalAccessToken:PersonalAccessToken imported '123456789012345678:123456789012345678:123456789012345678:LHt79...'
@@ -101,6 +101,8 @@ export class PersonalAccessToken extends pulumi.CustomResource {
             resourceInputs["token"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["token"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(PersonalAccessToken.__pulumiType, name, resourceInputs, opts);
     }
 }

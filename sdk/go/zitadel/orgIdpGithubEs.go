@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing a GitHub Enterprise IdP on the organization.
@@ -19,43 +21,48 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpGithubEs(ctx, "default", &zitadel.OrgIdpGithubEsArgs{
-// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ClientId:     pulumi.String("86a165..."),
-// 			ClientSecret: pulumi.String("*****afdbac18"),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 			AuthorizationEndpoint: pulumi.String("https://auth.endpoint"),
-// 			TokenEndpoint:         pulumi.String("https://token.endpoint"),
-// 			UserEndpoint:          pulumi.String("https://user.endpoint"),
-// 			IsLinkingAllowed:      pulumi.Bool(false),
-// 			IsCreationAllowed:     pulumi.Bool(true),
-// 			IsAutoCreation:        pulumi.Bool(false),
-// 			IsAutoUpdate:          pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgIdpGithubEs(ctx, "default", &zitadel.OrgIdpGithubEsArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				ClientId:     pulumi.String("86a165..."),
+//				ClientSecret: pulumi.String("*****afdbac18"),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//				AuthorizationEndpoint: pulumi.String("https://auth.endpoint"),
+//				TokenEndpoint:         pulumi.String("https://token.endpoint"),
+//				UserEndpoint:          pulumi.String("https://user.endpoint"),
+//				IsLinkingAllowed:      pulumi.Bool(false),
+//				IsCreationAllowed:     pulumi.Bool(true),
+//				IsAutoCreation:        pulumi.Bool(false),
+//				IsAutoUpdate:          pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+// terraform The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/orgIdpGithubEs:OrgIdpGithubEs imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678'
+//
+//	$ pulumi import zitadel:index/orgIdpGithubEs:OrgIdpGithubEs imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678'
+//
 // ```
 type OrgIdpGithubEs struct {
 	pulumi.CustomResourceState
@@ -120,7 +127,14 @@ func NewOrgIdpGithubEs(ctx *pulumi.Context,
 	if args.UserEndpoint == nil {
 		return nil, errors.New("invalid value for required argument 'UserEndpoint'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.ClientSecret != nil {
+		args.ClientSecret = pulumi.ToSecret(args.ClientSecret).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgIdpGithubEs
 	err := ctx.RegisterResource("zitadel:index/orgIdpGithubEs:OrgIdpGithubEs", name, args, &resource, opts...)
 	if err != nil {
@@ -278,10 +292,16 @@ func (i *OrgIdpGithubEs) ToOrgIdpGithubEsOutputWithContext(ctx context.Context) 
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpGithubEsOutput)
 }
 
+func (i *OrgIdpGithubEs) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpGithubEs] {
+	return pulumix.Output[*OrgIdpGithubEs]{
+		OutputState: i.ToOrgIdpGithubEsOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpGithubEsArrayInput is an input type that accepts OrgIdpGithubEsArray and OrgIdpGithubEsArrayOutput values.
 // You can construct a concrete instance of `OrgIdpGithubEsArrayInput` via:
 //
-//          OrgIdpGithubEsArray{ OrgIdpGithubEsArgs{...} }
+//	OrgIdpGithubEsArray{ OrgIdpGithubEsArgs{...} }
 type OrgIdpGithubEsArrayInput interface {
 	pulumi.Input
 
@@ -303,10 +323,16 @@ func (i OrgIdpGithubEsArray) ToOrgIdpGithubEsArrayOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpGithubEsArrayOutput)
 }
 
+func (i OrgIdpGithubEsArray) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpGithubEs] {
+	return pulumix.Output[[]*OrgIdpGithubEs]{
+		OutputState: i.ToOrgIdpGithubEsArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpGithubEsMapInput is an input type that accepts OrgIdpGithubEsMap and OrgIdpGithubEsMapOutput values.
 // You can construct a concrete instance of `OrgIdpGithubEsMapInput` via:
 //
-//          OrgIdpGithubEsMap{ "key": OrgIdpGithubEsArgs{...} }
+//	OrgIdpGithubEsMap{ "key": OrgIdpGithubEsArgs{...} }
 type OrgIdpGithubEsMapInput interface {
 	pulumi.Input
 
@@ -328,6 +354,12 @@ func (i OrgIdpGithubEsMap) ToOrgIdpGithubEsMapOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpGithubEsMapOutput)
 }
 
+func (i OrgIdpGithubEsMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpGithubEs] {
+	return pulumix.Output[map[string]*OrgIdpGithubEs]{
+		OutputState: i.ToOrgIdpGithubEsMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type OrgIdpGithubEsOutput struct{ *pulumi.OutputState }
 
 func (OrgIdpGithubEsOutput) ElementType() reflect.Type {
@@ -340,6 +372,12 @@ func (o OrgIdpGithubEsOutput) ToOrgIdpGithubEsOutput() OrgIdpGithubEsOutput {
 
 func (o OrgIdpGithubEsOutput) ToOrgIdpGithubEsOutputWithContext(ctx context.Context) OrgIdpGithubEsOutput {
 	return o
+}
+
+func (o OrgIdpGithubEsOutput) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpGithubEs] {
+	return pulumix.Output[*OrgIdpGithubEs]{
+		OutputState: o.OutputState,
+	}
 }
 
 // the providers authorization endpoint
@@ -416,6 +454,12 @@ func (o OrgIdpGithubEsArrayOutput) ToOrgIdpGithubEsArrayOutputWithContext(ctx co
 	return o
 }
 
+func (o OrgIdpGithubEsArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpGithubEs] {
+	return pulumix.Output[[]*OrgIdpGithubEs]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o OrgIdpGithubEsArrayOutput) Index(i pulumi.IntInput) OrgIdpGithubEsOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *OrgIdpGithubEs {
 		return vs[0].([]*OrgIdpGithubEs)[vs[1].(int)]
@@ -434,6 +478,12 @@ func (o OrgIdpGithubEsMapOutput) ToOrgIdpGithubEsMapOutput() OrgIdpGithubEsMapOu
 
 func (o OrgIdpGithubEsMapOutput) ToOrgIdpGithubEsMapOutputWithContext(ctx context.Context) OrgIdpGithubEsMapOutput {
 	return o
+}
+
+func (o OrgIdpGithubEsMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpGithubEs] {
+	return pulumix.Output[map[string]*OrgIdpGithubEs]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o OrgIdpGithubEsMapOutput) MapIndex(k pulumi.StringInput) OrgIdpGithubEsOutput {

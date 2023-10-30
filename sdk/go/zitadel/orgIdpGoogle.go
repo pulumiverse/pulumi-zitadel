@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing a Google IdP on the organization.
@@ -19,40 +21,45 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpGoogle(ctx, "default", &zitadel.OrgIdpGoogleArgs{
-// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ClientId:     pulumi.String("182902..."),
-// 			ClientSecret: pulumi.String("GOCSPX-*****"),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 			IsLinkingAllowed:  pulumi.Bool(false),
-// 			IsCreationAllowed: pulumi.Bool(true),
-// 			IsAutoCreation:    pulumi.Bool(false),
-// 			IsAutoUpdate:      pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgIdpGoogle(ctx, "default", &zitadel.OrgIdpGoogleArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				ClientId:     pulumi.String("182902..."),
+//				ClientSecret: pulumi.String("GOCSPX-*****"),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+// terraform The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/orgIdpGoogle:OrgIdpGoogle imported '123456789012345678:123456789012345678:G1234567890123'
+//
+//	$ pulumi import zitadel:index/orgIdpGoogle:OrgIdpGoogle imported '123456789012345678:123456789012345678:G1234567890123'
+//
 // ```
 type OrgIdpGoogle struct {
 	pulumi.CustomResourceState
@@ -102,7 +109,14 @@ func NewOrgIdpGoogle(ctx *pulumi.Context,
 	if args.IsLinkingAllowed == nil {
 		return nil, errors.New("invalid value for required argument 'IsLinkingAllowed'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.ClientSecret != nil {
+		args.ClientSecret = pulumi.ToSecret(args.ClientSecret).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgIdpGoogle
 	err := ctx.RegisterResource("zitadel:index/orgIdpGoogle:OrgIdpGoogle", name, args, &resource, opts...)
 	if err != nil {
@@ -236,10 +250,16 @@ func (i *OrgIdpGoogle) ToOrgIdpGoogleOutputWithContext(ctx context.Context) OrgI
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpGoogleOutput)
 }
 
+func (i *OrgIdpGoogle) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpGoogle] {
+	return pulumix.Output[*OrgIdpGoogle]{
+		OutputState: i.ToOrgIdpGoogleOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpGoogleArrayInput is an input type that accepts OrgIdpGoogleArray and OrgIdpGoogleArrayOutput values.
 // You can construct a concrete instance of `OrgIdpGoogleArrayInput` via:
 //
-//          OrgIdpGoogleArray{ OrgIdpGoogleArgs{...} }
+//	OrgIdpGoogleArray{ OrgIdpGoogleArgs{...} }
 type OrgIdpGoogleArrayInput interface {
 	pulumi.Input
 
@@ -261,10 +281,16 @@ func (i OrgIdpGoogleArray) ToOrgIdpGoogleArrayOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpGoogleArrayOutput)
 }
 
+func (i OrgIdpGoogleArray) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpGoogle] {
+	return pulumix.Output[[]*OrgIdpGoogle]{
+		OutputState: i.ToOrgIdpGoogleArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpGoogleMapInput is an input type that accepts OrgIdpGoogleMap and OrgIdpGoogleMapOutput values.
 // You can construct a concrete instance of `OrgIdpGoogleMapInput` via:
 //
-//          OrgIdpGoogleMap{ "key": OrgIdpGoogleArgs{...} }
+//	OrgIdpGoogleMap{ "key": OrgIdpGoogleArgs{...} }
 type OrgIdpGoogleMapInput interface {
 	pulumi.Input
 
@@ -286,6 +312,12 @@ func (i OrgIdpGoogleMap) ToOrgIdpGoogleMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpGoogleMapOutput)
 }
 
+func (i OrgIdpGoogleMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpGoogle] {
+	return pulumix.Output[map[string]*OrgIdpGoogle]{
+		OutputState: i.ToOrgIdpGoogleMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type OrgIdpGoogleOutput struct{ *pulumi.OutputState }
 
 func (OrgIdpGoogleOutput) ElementType() reflect.Type {
@@ -298,6 +330,12 @@ func (o OrgIdpGoogleOutput) ToOrgIdpGoogleOutput() OrgIdpGoogleOutput {
 
 func (o OrgIdpGoogleOutput) ToOrgIdpGoogleOutputWithContext(ctx context.Context) OrgIdpGoogleOutput {
 	return o
+}
+
+func (o OrgIdpGoogleOutput) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpGoogle] {
+	return pulumix.Output[*OrgIdpGoogle]{
+		OutputState: o.OutputState,
+	}
 }
 
 // client id generated by the identity provider
@@ -359,6 +397,12 @@ func (o OrgIdpGoogleArrayOutput) ToOrgIdpGoogleArrayOutputWithContext(ctx contex
 	return o
 }
 
+func (o OrgIdpGoogleArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpGoogle] {
+	return pulumix.Output[[]*OrgIdpGoogle]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o OrgIdpGoogleArrayOutput) Index(i pulumi.IntInput) OrgIdpGoogleOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *OrgIdpGoogle {
 		return vs[0].([]*OrgIdpGoogle)[vs[1].(int)]
@@ -377,6 +421,12 @@ func (o OrgIdpGoogleMapOutput) ToOrgIdpGoogleMapOutput() OrgIdpGoogleMapOutput {
 
 func (o OrgIdpGoogleMapOutput) ToOrgIdpGoogleMapOutputWithContext(ctx context.Context) OrgIdpGoogleMapOutput {
 	return o
+}
+
+func (o OrgIdpGoogleMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpGoogle] {
+	return pulumix.Output[map[string]*OrgIdpGoogle]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o OrgIdpGoogleMapOutput) MapIndex(k pulumi.StringInput) OrgIdpGoogleOutput {

@@ -21,6 +21,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -35,7 +36,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["applicationApi"] = @default.Apply(getApplicationApiResult =&gt; getApplicationApiResult),
+        ///         ["applicationApi"] = @default,
         ///     };
         /// });
         /// ```
@@ -43,7 +44,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetApplicationApiResult> InvokeAsync(GetApplicationApiArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApplicationApiResult>("zitadel:index/getApplicationApi:getApplicationApi", args ?? new GetApplicationApiArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApplicationApiResult>("zitadel:index/getApplicationApi:getApplicationApi", args ?? new GetApplicationApiArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing an API application belonging to a project, with all configuration possibilities.
@@ -54,6 +55,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -68,7 +70,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["applicationApi"] = @default.Apply(getApplicationApiResult =&gt; getApplicationApiResult),
+        ///         ["applicationApi"] = @default,
         ///     };
         /// });
         /// ```
@@ -76,7 +78,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetApplicationApiResult> Invoke(GetApplicationApiInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApplicationApiResult>("zitadel:index/getApplicationApi:getApplicationApi", args ?? new GetApplicationApiInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApplicationApiResult>("zitadel:index/getApplicationApi:getApplicationApi", args ?? new GetApplicationApiInvokeArgs(), options.WithDefaults());
     }
 
 

@@ -8,6 +8,7 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 type module struct {
@@ -38,6 +39,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DefaultLoginPolicy{}
 	case "zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy":
 		r = &DefaultNotificationPolicy{}
+	case "zitadel:index/defaultOidcSettings:DefaultOidcSettings":
+		r = &DefaultOidcSettings{}
 	case "zitadel:index/defaultPasswordComplexityPolicy:DefaultPasswordComplexityPolicy":
 		r = &DefaultPasswordComplexityPolicy{}
 	case "zitadel:index/defaultPrivacyPolicy:DefaultPrivacyPolicy":
@@ -149,7 +152,10 @@ func (p *pkg) ConstructProvider(ctx *pulumi.Context, name, typ, urn string) (pul
 }
 
 func init() {
-	version, _ := PkgVersion()
+	version, err := internal.PkgVersion()
+	if err != nil {
+		version = semver.Version{Major: 1}
+	}
 	pulumi.RegisterResourceModule(
 		"zitadel",
 		"index/action",
@@ -193,6 +199,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"zitadel",
 		"index/defaultNotificationPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"zitadel",
+		"index/defaultOidcSettings",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

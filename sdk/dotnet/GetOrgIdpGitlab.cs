@@ -21,6 +21,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -38,7 +39,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetOrgIdpGitlabResult> InvokeAsync(GetOrgIdpGitlabArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrgIdpGitlabResult>("zitadel:index/getOrgIdpGitlab:getOrgIdpGitlab", args ?? new GetOrgIdpGitlabArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgIdpGitlabResult>("zitadel:index/getOrgIdpGitlab:getOrgIdpGitlab", args ?? new GetOrgIdpGitlabArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing a GitLab IdP of the organization.
@@ -49,6 +50,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -66,7 +68,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetOrgIdpGitlabResult> Invoke(GetOrgIdpGitlabInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrgIdpGitlabResult>("zitadel:index/getOrgIdpGitlab:getOrgIdpGitlab", args ?? new GetOrgIdpGitlabInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrgIdpGitlabResult>("zitadel:index/getOrgIdpGitlab:getOrgIdpGitlab", args ?? new GetOrgIdpGitlabInvokeArgs(), options.WithDefaults());
     }
 
 

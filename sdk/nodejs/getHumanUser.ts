@@ -21,11 +21,8 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getHumanUser(args: GetHumanUserArgs, opts?: pulumi.InvokeOptions): Promise<GetHumanUserResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getHumanUser:getHumanUser", {
         "orgId": args.orgId,
         "userId": args.userId,
@@ -119,9 +116,24 @@ export interface GetHumanUserResult {
      */
     readonly userName: string;
 }
-
+/**
+ * Datasource representing a human user situated under an organization, which then can be authorized through memberships or direct grants on other resources.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getHumanUser({
+ *     orgId: data.zitadel_org["default"].id,
+ *     userId: "123456789012345678",
+ * });
+ * export const humanUser = _default;
+ * ```
+ */
 export function getHumanUserOutput(args: GetHumanUserOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetHumanUserResult> {
-    return pulumi.output(args).apply(a => getHumanUser(a, opts))
+    return pulumi.output(args).apply((a: any) => getHumanUser(a, opts))
 }
 
 /**

@@ -21,11 +21,8 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getAction(args: GetActionArgs, opts?: pulumi.InvokeOptions): Promise<GetActionResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getAction:getAction", {
         "actionId": args.actionId,
         "orgId": args.orgId,
@@ -77,9 +74,24 @@ export interface GetActionResult {
      */
     readonly timeout: string;
 }
-
+/**
+ * Datasource representing an action belonging to an organization.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getAction({
+ *     orgId: data.zitadel_org["default"].id,
+ *     actionId: "123456789012345678",
+ * });
+ * export const action = _default;
+ * ```
+ */
 export function getActionOutput(args: GetActionOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetActionResult> {
-    return pulumi.output(args).apply(a => getAction(a, opts))
+    return pulumi.output(args).apply((a: any) => getAction(a, opts))
 }
 
 /**

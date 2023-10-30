@@ -22,11 +22,8 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getProjectRole(args: GetProjectRoleArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectRoleResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getProjectRole:getProjectRole", {
         "orgId": args.orgId,
         "projectId": args.projectId,
@@ -81,9 +78,25 @@ export interface GetProjectRoleResult {
      */
     readonly roleKey: string;
 }
-
+/**
+ * Datasource representing the project roles, which can be given as authorizations to users.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getProjectRole({
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: data.zitadel_project["default"].id,
+ *     roleKey: "key",
+ * });
+ * export const projectRole = _default;
+ * ```
+ */
 export function getProjectRoleOutput(args: GetProjectRoleOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProjectRoleResult> {
-    return pulumi.output(args).apply(a => getProjectRole(a, opts))
+    return pulumi.output(args).apply((a: any) => getProjectRole(a, opts))
 }
 
 /**

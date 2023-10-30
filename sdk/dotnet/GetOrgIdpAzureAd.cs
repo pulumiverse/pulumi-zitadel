@@ -21,6 +21,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -38,7 +39,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetOrgIdpAzureAdResult> InvokeAsync(GetOrgIdpAzureAdArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrgIdpAzureAdResult>("zitadel:index/getOrgIdpAzureAd:getOrgIdpAzureAd", args ?? new GetOrgIdpAzureAdArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgIdpAzureAdResult>("zitadel:index/getOrgIdpAzureAd:getOrgIdpAzureAd", args ?? new GetOrgIdpAzureAdArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing an Azure AD IdP of the organization.
@@ -49,6 +50,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -66,7 +68,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetOrgIdpAzureAdResult> Invoke(GetOrgIdpAzureAdInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrgIdpAzureAdResult>("zitadel:index/getOrgIdpAzureAd:getOrgIdpAzureAd", args ?? new GetOrgIdpAzureAdInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrgIdpAzureAdResult>("zitadel:index/getOrgIdpAzureAd:getOrgIdpAzureAd", args ?? new GetOrgIdpAzureAdInvokeArgs(), options.WithDefaults());
     }
 
 

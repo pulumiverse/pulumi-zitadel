@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing a generic OIDC IdP on the organization.
@@ -19,42 +21,47 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpOidc(ctx, "default", &zitadel.OrgIdpOidcArgs{
-// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ClientId:     pulumi.String("a_client_id"),
-// 			ClientSecret: pulumi.String("a_client_secret"),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 			Issuer:            pulumi.String("https://example.com"),
-// 			IsLinkingAllowed:  pulumi.Bool(false),
-// 			IsCreationAllowed: pulumi.Bool(true),
-// 			IsAutoCreation:    pulumi.Bool(false),
-// 			IsAutoUpdate:      pulumi.Bool(true),
-// 			IsIdTokenMapping:  pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgIdpOidc(ctx, "default", &zitadel.OrgIdpOidcArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				ClientId:     pulumi.String("a_client_id"),
+//				ClientSecret: pulumi.String("a_client_secret"),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//				Issuer:            pulumi.String("https://example.com"),
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
+//				IsIdTokenMapping:  pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+// terraform The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/orgIdpOidc:OrgIdpOidc imported '123456789012345678:123456789012345678:1234567890abcdef'
+//
+//	$ pulumi import zitadel:index/orgIdpOidc:OrgIdpOidc imported '123456789012345678:123456789012345678:1234567890abcdef'
+//
 // ```
 type OrgIdpOidc struct {
 	pulumi.CustomResourceState
@@ -114,7 +121,14 @@ func NewOrgIdpOidc(ctx *pulumi.Context,
 	if args.Issuer == nil {
 		return nil, errors.New("invalid value for required argument 'Issuer'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.ClientSecret != nil {
+		args.ClientSecret = pulumi.ToSecret(args.ClientSecret).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgIdpOidc
 	err := ctx.RegisterResource("zitadel:index/orgIdpOidc:OrgIdpOidc", name, args, &resource, opts...)
 	if err != nil {
@@ -264,10 +278,16 @@ func (i *OrgIdpOidc) ToOrgIdpOidcOutputWithContext(ctx context.Context) OrgIdpOi
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpOidcOutput)
 }
 
+func (i *OrgIdpOidc) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpOidc] {
+	return pulumix.Output[*OrgIdpOidc]{
+		OutputState: i.ToOrgIdpOidcOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpOidcArrayInput is an input type that accepts OrgIdpOidcArray and OrgIdpOidcArrayOutput values.
 // You can construct a concrete instance of `OrgIdpOidcArrayInput` via:
 //
-//          OrgIdpOidcArray{ OrgIdpOidcArgs{...} }
+//	OrgIdpOidcArray{ OrgIdpOidcArgs{...} }
 type OrgIdpOidcArrayInput interface {
 	pulumi.Input
 
@@ -289,10 +309,16 @@ func (i OrgIdpOidcArray) ToOrgIdpOidcArrayOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpOidcArrayOutput)
 }
 
+func (i OrgIdpOidcArray) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpOidc] {
+	return pulumix.Output[[]*OrgIdpOidc]{
+		OutputState: i.ToOrgIdpOidcArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpOidcMapInput is an input type that accepts OrgIdpOidcMap and OrgIdpOidcMapOutput values.
 // You can construct a concrete instance of `OrgIdpOidcMapInput` via:
 //
-//          OrgIdpOidcMap{ "key": OrgIdpOidcArgs{...} }
+//	OrgIdpOidcMap{ "key": OrgIdpOidcArgs{...} }
 type OrgIdpOidcMapInput interface {
 	pulumi.Input
 
@@ -314,6 +340,12 @@ func (i OrgIdpOidcMap) ToOrgIdpOidcMapOutputWithContext(ctx context.Context) Org
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpOidcMapOutput)
 }
 
+func (i OrgIdpOidcMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpOidc] {
+	return pulumix.Output[map[string]*OrgIdpOidc]{
+		OutputState: i.ToOrgIdpOidcMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type OrgIdpOidcOutput struct{ *pulumi.OutputState }
 
 func (OrgIdpOidcOutput) ElementType() reflect.Type {
@@ -326,6 +358,12 @@ func (o OrgIdpOidcOutput) ToOrgIdpOidcOutput() OrgIdpOidcOutput {
 
 func (o OrgIdpOidcOutput) ToOrgIdpOidcOutputWithContext(ctx context.Context) OrgIdpOidcOutput {
 	return o
+}
+
+func (o OrgIdpOidcOutput) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpOidc] {
+	return pulumix.Output[*OrgIdpOidc]{
+		OutputState: o.OutputState,
+	}
 }
 
 // client id generated by the identity provider
@@ -397,6 +435,12 @@ func (o OrgIdpOidcArrayOutput) ToOrgIdpOidcArrayOutputWithContext(ctx context.Co
 	return o
 }
 
+func (o OrgIdpOidcArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpOidc] {
+	return pulumix.Output[[]*OrgIdpOidc]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o OrgIdpOidcArrayOutput) Index(i pulumi.IntInput) OrgIdpOidcOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *OrgIdpOidc {
 		return vs[0].([]*OrgIdpOidc)[vs[1].(int)]
@@ -415,6 +459,12 @@ func (o OrgIdpOidcMapOutput) ToOrgIdpOidcMapOutput() OrgIdpOidcMapOutput {
 
 func (o OrgIdpOidcMapOutput) ToOrgIdpOidcMapOutputWithContext(ctx context.Context) OrgIdpOidcMapOutput {
 	return o
+}
+
+func (o OrgIdpOidcMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpOidc] {
+	return pulumix.Output[map[string]*OrgIdpOidc]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o OrgIdpOidcMapOutput) MapIndex(k pulumi.StringInput) OrgIdpOidcOutput {

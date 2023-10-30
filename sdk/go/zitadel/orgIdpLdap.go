@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing an LDAP IdP on the organization.
@@ -19,53 +21,58 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpLdap(ctx, "default", &zitadel.OrgIdpLdapArgs{
-// 			OrgId: pulumi.Any(data.Zitadel_org.Default.Id),
-// 			Servers: pulumi.StringArray{
-// 				pulumi.String("ldaps://my.primary.server:389"),
-// 				pulumi.String("ldaps://my.secondary.server:389"),
-// 			},
-// 			StartTls:     pulumi.Bool(false),
-// 			BaseDn:       pulumi.String("dc=example,dc=com"),
-// 			BindDn:       pulumi.String("cn=admin,dc=example,dc=com"),
-// 			BindPassword: pulumi.String("Password1!"),
-// 			UserBase:     pulumi.String("dn"),
-// 			UserObjectClasses: pulumi.StringArray{
-// 				pulumi.String("inetOrgPerson"),
-// 			},
-// 			UserFilters: pulumi.StringArray{
-// 				pulumi.String("uid"),
-// 				pulumi.String("email"),
-// 			},
-// 			Timeout:            pulumi.String("10s"),
-// 			IdAttribute:        pulumi.String("uid"),
-// 			FirstNameAttribute: pulumi.String("firstname"),
-// 			LastNameAttribute:  pulumi.String("lastname"),
-// 			IsLinkingAllowed:   pulumi.Bool(false),
-// 			IsCreationAllowed:  pulumi.Bool(true),
-// 			IsAutoCreation:     pulumi.Bool(false),
-// 			IsAutoUpdate:       pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgIdpLdap(ctx, "default", &zitadel.OrgIdpLdapArgs{
+//				OrgId: pulumi.Any(data.Zitadel_org.Default.Id),
+//				Servers: pulumi.StringArray{
+//					pulumi.String("ldaps://my.primary.server:389"),
+//					pulumi.String("ldaps://my.secondary.server:389"),
+//				},
+//				StartTls:     pulumi.Bool(false),
+//				BaseDn:       pulumi.String("dc=example,dc=com"),
+//				BindDn:       pulumi.String("cn=admin,dc=example,dc=com"),
+//				BindPassword: pulumi.String("Password1!"),
+//				UserBase:     pulumi.String("dn"),
+//				UserObjectClasses: pulumi.StringArray{
+//					pulumi.String("inetOrgPerson"),
+//				},
+//				UserFilters: pulumi.StringArray{
+//					pulumi.String("uid"),
+//					pulumi.String("email"),
+//				},
+//				Timeout:            pulumi.String("10s"),
+//				IdAttribute:        pulumi.String("uid"),
+//				FirstNameAttribute: pulumi.String("firstname"),
+//				LastNameAttribute:  pulumi.String("lastname"),
+//				IsLinkingAllowed:   pulumi.Bool(false),
+//				IsCreationAllowed:  pulumi.Bool(true),
+//				IsAutoCreation:     pulumi.Bool(false),
+//				IsAutoUpdate:       pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id[:org_id][:bind_password]>`, e.g.
+// terraform The resource can be imported using the ID format `<id[:org_id][:bind_password]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/orgIdpLdap:OrgIdpLdap imported '123456789012345678:123456789012345678:b1nd_p4ssw0rd'
+//
+//	$ pulumi import zitadel:index/orgIdpLdap:OrgIdpLdap imported '123456789012345678:123456789012345678:b1nd_p4ssw0rd'
+//
 // ```
 type OrgIdpLdap struct {
 	pulumi.CustomResourceState
@@ -174,7 +181,14 @@ func NewOrgIdpLdap(ctx *pulumi.Context,
 	if args.UserObjectClasses == nil {
 		return nil, errors.New("invalid value for required argument 'UserObjectClasses'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.BindPassword != nil {
+		args.BindPassword = pulumi.ToSecret(args.BindPassword).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"bindPassword",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgIdpLdap
 	err := ctx.RegisterResource("zitadel:index/orgIdpLdap:OrgIdpLdap", name, args, &resource, opts...)
 	if err != nil {
@@ -460,10 +474,16 @@ func (i *OrgIdpLdap) ToOrgIdpLdapOutputWithContext(ctx context.Context) OrgIdpLd
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpLdapOutput)
 }
 
+func (i *OrgIdpLdap) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpLdap] {
+	return pulumix.Output[*OrgIdpLdap]{
+		OutputState: i.ToOrgIdpLdapOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpLdapArrayInput is an input type that accepts OrgIdpLdapArray and OrgIdpLdapArrayOutput values.
 // You can construct a concrete instance of `OrgIdpLdapArrayInput` via:
 //
-//          OrgIdpLdapArray{ OrgIdpLdapArgs{...} }
+//	OrgIdpLdapArray{ OrgIdpLdapArgs{...} }
 type OrgIdpLdapArrayInput interface {
 	pulumi.Input
 
@@ -485,10 +505,16 @@ func (i OrgIdpLdapArray) ToOrgIdpLdapArrayOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpLdapArrayOutput)
 }
 
+func (i OrgIdpLdapArray) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpLdap] {
+	return pulumix.Output[[]*OrgIdpLdap]{
+		OutputState: i.ToOrgIdpLdapArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpLdapMapInput is an input type that accepts OrgIdpLdapMap and OrgIdpLdapMapOutput values.
 // You can construct a concrete instance of `OrgIdpLdapMapInput` via:
 //
-//          OrgIdpLdapMap{ "key": OrgIdpLdapArgs{...} }
+//	OrgIdpLdapMap{ "key": OrgIdpLdapArgs{...} }
 type OrgIdpLdapMapInput interface {
 	pulumi.Input
 
@@ -510,6 +536,12 @@ func (i OrgIdpLdapMap) ToOrgIdpLdapMapOutputWithContext(ctx context.Context) Org
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpLdapMapOutput)
 }
 
+func (i OrgIdpLdapMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpLdap] {
+	return pulumix.Output[map[string]*OrgIdpLdap]{
+		OutputState: i.ToOrgIdpLdapMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type OrgIdpLdapOutput struct{ *pulumi.OutputState }
 
 func (OrgIdpLdapOutput) ElementType() reflect.Type {
@@ -522,6 +554,12 @@ func (o OrgIdpLdapOutput) ToOrgIdpLdapOutput() OrgIdpLdapOutput {
 
 func (o OrgIdpLdapOutput) ToOrgIdpLdapOutputWithContext(ctx context.Context) OrgIdpLdapOutput {
 	return o
+}
+
+func (o OrgIdpLdapOutput) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpLdap] {
+	return pulumix.Output[*OrgIdpLdap]{
+		OutputState: o.OutputState,
+	}
 }
 
 // User attribute for the avatar url
@@ -678,6 +716,12 @@ func (o OrgIdpLdapArrayOutput) ToOrgIdpLdapArrayOutputWithContext(ctx context.Co
 	return o
 }
 
+func (o OrgIdpLdapArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpLdap] {
+	return pulumix.Output[[]*OrgIdpLdap]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o OrgIdpLdapArrayOutput) Index(i pulumi.IntInput) OrgIdpLdapOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *OrgIdpLdap {
 		return vs[0].([]*OrgIdpLdap)[vs[1].(int)]
@@ -696,6 +740,12 @@ func (o OrgIdpLdapMapOutput) ToOrgIdpLdapMapOutput() OrgIdpLdapMapOutput {
 
 func (o OrgIdpLdapMapOutput) ToOrgIdpLdapMapOutputWithContext(ctx context.Context) OrgIdpLdapMapOutput {
 	return o
+}
+
+func (o OrgIdpLdapMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpLdap] {
+	return pulumix.Output[map[string]*OrgIdpLdap]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o OrgIdpLdapMapOutput) MapIndex(k pulumi.StringInput) OrgIdpLdapOutput {

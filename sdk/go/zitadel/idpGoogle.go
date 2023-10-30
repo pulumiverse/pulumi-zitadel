@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing a Google IDP on the instance.
@@ -19,39 +21,44 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewIdpGoogle(ctx, "default", &zitadel.IdpGoogleArgs{
-// 			ClientId:          pulumi.String("182902..."),
-// 			ClientSecret:      pulumi.String("GOCSPX-*****"),
-// 			IsAutoCreation:    pulumi.Bool(false),
-// 			IsAutoUpdate:      pulumi.Bool(true),
-// 			IsCreationAllowed: pulumi.Bool(true),
-// 			IsLinkingAllowed:  pulumi.Bool(false),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewIdpGoogle(ctx, "default", &zitadel.IdpGoogleArgs{
+//				ClientId:          pulumi.String("182902..."),
+//				ClientSecret:      pulumi.String("GOCSPX-*****"),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+// terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/idpGoogle:IdpGoogle imported '123456789012345678:G1234567890123'
+//
+//	$ pulumi import zitadel:index/idpGoogle:IdpGoogle imported '123456789012345678:G1234567890123'
+//
 // ```
 type IdpGoogle struct {
 	pulumi.CustomResourceState
@@ -99,7 +106,14 @@ func NewIdpGoogle(ctx *pulumi.Context,
 	if args.IsLinkingAllowed == nil {
 		return nil, errors.New("invalid value for required argument 'IsLinkingAllowed'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.ClientSecret != nil {
+		args.ClientSecret = pulumi.ToSecret(args.ClientSecret).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IdpGoogle
 	err := ctx.RegisterResource("zitadel:index/idpGoogle:IdpGoogle", name, args, &resource, opts...)
 	if err != nil {
@@ -225,10 +239,16 @@ func (i *IdpGoogle) ToIdpGoogleOutputWithContext(ctx context.Context) IdpGoogleO
 	return pulumi.ToOutputWithContext(ctx, i).(IdpGoogleOutput)
 }
 
+func (i *IdpGoogle) ToOutput(ctx context.Context) pulumix.Output[*IdpGoogle] {
+	return pulumix.Output[*IdpGoogle]{
+		OutputState: i.ToIdpGoogleOutputWithContext(ctx).OutputState,
+	}
+}
+
 // IdpGoogleArrayInput is an input type that accepts IdpGoogleArray and IdpGoogleArrayOutput values.
 // You can construct a concrete instance of `IdpGoogleArrayInput` via:
 //
-//          IdpGoogleArray{ IdpGoogleArgs{...} }
+//	IdpGoogleArray{ IdpGoogleArgs{...} }
 type IdpGoogleArrayInput interface {
 	pulumi.Input
 
@@ -250,10 +270,16 @@ func (i IdpGoogleArray) ToIdpGoogleArrayOutputWithContext(ctx context.Context) I
 	return pulumi.ToOutputWithContext(ctx, i).(IdpGoogleArrayOutput)
 }
 
+func (i IdpGoogleArray) ToOutput(ctx context.Context) pulumix.Output[[]*IdpGoogle] {
+	return pulumix.Output[[]*IdpGoogle]{
+		OutputState: i.ToIdpGoogleArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // IdpGoogleMapInput is an input type that accepts IdpGoogleMap and IdpGoogleMapOutput values.
 // You can construct a concrete instance of `IdpGoogleMapInput` via:
 //
-//          IdpGoogleMap{ "key": IdpGoogleArgs{...} }
+//	IdpGoogleMap{ "key": IdpGoogleArgs{...} }
 type IdpGoogleMapInput interface {
 	pulumi.Input
 
@@ -275,6 +301,12 @@ func (i IdpGoogleMap) ToIdpGoogleMapOutputWithContext(ctx context.Context) IdpGo
 	return pulumi.ToOutputWithContext(ctx, i).(IdpGoogleMapOutput)
 }
 
+func (i IdpGoogleMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*IdpGoogle] {
+	return pulumix.Output[map[string]*IdpGoogle]{
+		OutputState: i.ToIdpGoogleMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type IdpGoogleOutput struct{ *pulumi.OutputState }
 
 func (IdpGoogleOutput) ElementType() reflect.Type {
@@ -287,6 +319,12 @@ func (o IdpGoogleOutput) ToIdpGoogleOutput() IdpGoogleOutput {
 
 func (o IdpGoogleOutput) ToIdpGoogleOutputWithContext(ctx context.Context) IdpGoogleOutput {
 	return o
+}
+
+func (o IdpGoogleOutput) ToOutput(ctx context.Context) pulumix.Output[*IdpGoogle] {
+	return pulumix.Output[*IdpGoogle]{
+		OutputState: o.OutputState,
+	}
 }
 
 // client id generated by the identity provider
@@ -343,6 +381,12 @@ func (o IdpGoogleArrayOutput) ToIdpGoogleArrayOutputWithContext(ctx context.Cont
 	return o
 }
 
+func (o IdpGoogleArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*IdpGoogle] {
+	return pulumix.Output[[]*IdpGoogle]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o IdpGoogleArrayOutput) Index(i pulumi.IntInput) IdpGoogleOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *IdpGoogle {
 		return vs[0].([]*IdpGoogle)[vs[1].(int)]
@@ -361,6 +405,12 @@ func (o IdpGoogleMapOutput) ToIdpGoogleMapOutput() IdpGoogleMapOutput {
 
 func (o IdpGoogleMapOutput) ToIdpGoogleMapOutputWithContext(ctx context.Context) IdpGoogleMapOutput {
 	return o
+}
+
+func (o IdpGoogleMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*IdpGoogle] {
+	return pulumix.Output[map[string]*IdpGoogle]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o IdpGoogleMapOutput) MapIndex(k pulumi.StringInput) IdpGoogleOutput {

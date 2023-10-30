@@ -11,14 +11,14 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const defaultOrg = new zitadel.Org("default", {});
+ * const _default = new zitadel.Org("default", {});
  * ```
  *
  * ## Import
  *
- * terraform # The resource can be imported using the ID format `<id>`, e.g.
+ * terraform The resource can be imported using the ID format `<id>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/org:Org imported '123456789012345678'

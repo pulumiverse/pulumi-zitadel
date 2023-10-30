@@ -20,11 +20,8 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getOrgIdpAzureAd(args: GetOrgIdpAzureAdArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgIdpAzureAdResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getOrgIdpAzureAd:getOrgIdpAzureAd", {
         "id": args.id,
         "orgId": args.orgId,
@@ -102,9 +99,23 @@ export interface GetOrgIdpAzureAdResult {
      */
     readonly tenantType: string;
 }
-
+/**
+ * Datasource representing an Azure AD IdP of the organization.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getOrgIdpAzureAd({
+ *     orgId: data.zitadel_org["default"].id,
+ *     id: "123456789012345678",
+ * });
+ * ```
+ */
 export function getOrgIdpAzureAdOutput(args: GetOrgIdpAzureAdOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOrgIdpAzureAdResult> {
-    return pulumi.output(args).apply(a => getOrgIdpAzureAd(a, opts))
+    return pulumi.output(args).apply((a: any) => getOrgIdpAzureAd(a, opts))
 }
 
 /**

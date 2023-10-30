@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing a GitLab IDP on the instance.
@@ -19,39 +21,44 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewIdpGitlab(ctx, "default", &zitadel.IdpGitlabArgs{
-// 			ClientId:          pulumi.String("15765e..."),
-// 			ClientSecret:      pulumi.String("*****abcxyz"),
-// 			IsAutoCreation:    pulumi.Bool(false),
-// 			IsAutoUpdate:      pulumi.Bool(true),
-// 			IsCreationAllowed: pulumi.Bool(true),
-// 			IsLinkingAllowed:  pulumi.Bool(false),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewIdpGitlab(ctx, "default", &zitadel.IdpGitlabArgs{
+//				ClientId:          pulumi.String("15765e..."),
+//				ClientSecret:      pulumi.String("*****abcxyz"),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+// terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/idpGitlab:IdpGitlab imported '123456789012345678:1234567890abcdef'
+//
+//	$ pulumi import zitadel:index/idpGitlab:IdpGitlab imported '123456789012345678:1234567890abcdef'
+//
 // ```
 type IdpGitlab struct {
 	pulumi.CustomResourceState
@@ -99,7 +106,14 @@ func NewIdpGitlab(ctx *pulumi.Context,
 	if args.IsLinkingAllowed == nil {
 		return nil, errors.New("invalid value for required argument 'IsLinkingAllowed'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.ClientSecret != nil {
+		args.ClientSecret = pulumi.ToSecret(args.ClientSecret).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IdpGitlab
 	err := ctx.RegisterResource("zitadel:index/idpGitlab:IdpGitlab", name, args, &resource, opts...)
 	if err != nil {
@@ -225,10 +239,16 @@ func (i *IdpGitlab) ToIdpGitlabOutputWithContext(ctx context.Context) IdpGitlabO
 	return pulumi.ToOutputWithContext(ctx, i).(IdpGitlabOutput)
 }
 
+func (i *IdpGitlab) ToOutput(ctx context.Context) pulumix.Output[*IdpGitlab] {
+	return pulumix.Output[*IdpGitlab]{
+		OutputState: i.ToIdpGitlabOutputWithContext(ctx).OutputState,
+	}
+}
+
 // IdpGitlabArrayInput is an input type that accepts IdpGitlabArray and IdpGitlabArrayOutput values.
 // You can construct a concrete instance of `IdpGitlabArrayInput` via:
 //
-//          IdpGitlabArray{ IdpGitlabArgs{...} }
+//	IdpGitlabArray{ IdpGitlabArgs{...} }
 type IdpGitlabArrayInput interface {
 	pulumi.Input
 
@@ -250,10 +270,16 @@ func (i IdpGitlabArray) ToIdpGitlabArrayOutputWithContext(ctx context.Context) I
 	return pulumi.ToOutputWithContext(ctx, i).(IdpGitlabArrayOutput)
 }
 
+func (i IdpGitlabArray) ToOutput(ctx context.Context) pulumix.Output[[]*IdpGitlab] {
+	return pulumix.Output[[]*IdpGitlab]{
+		OutputState: i.ToIdpGitlabArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // IdpGitlabMapInput is an input type that accepts IdpGitlabMap and IdpGitlabMapOutput values.
 // You can construct a concrete instance of `IdpGitlabMapInput` via:
 //
-//          IdpGitlabMap{ "key": IdpGitlabArgs{...} }
+//	IdpGitlabMap{ "key": IdpGitlabArgs{...} }
 type IdpGitlabMapInput interface {
 	pulumi.Input
 
@@ -275,6 +301,12 @@ func (i IdpGitlabMap) ToIdpGitlabMapOutputWithContext(ctx context.Context) IdpGi
 	return pulumi.ToOutputWithContext(ctx, i).(IdpGitlabMapOutput)
 }
 
+func (i IdpGitlabMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*IdpGitlab] {
+	return pulumix.Output[map[string]*IdpGitlab]{
+		OutputState: i.ToIdpGitlabMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type IdpGitlabOutput struct{ *pulumi.OutputState }
 
 func (IdpGitlabOutput) ElementType() reflect.Type {
@@ -287,6 +319,12 @@ func (o IdpGitlabOutput) ToIdpGitlabOutput() IdpGitlabOutput {
 
 func (o IdpGitlabOutput) ToIdpGitlabOutputWithContext(ctx context.Context) IdpGitlabOutput {
 	return o
+}
+
+func (o IdpGitlabOutput) ToOutput(ctx context.Context) pulumix.Output[*IdpGitlab] {
+	return pulumix.Output[*IdpGitlab]{
+		OutputState: o.OutputState,
+	}
 }
 
 // client id generated by the identity provider
@@ -343,6 +381,12 @@ func (o IdpGitlabArrayOutput) ToIdpGitlabArrayOutputWithContext(ctx context.Cont
 	return o
 }
 
+func (o IdpGitlabArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*IdpGitlab] {
+	return pulumix.Output[[]*IdpGitlab]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o IdpGitlabArrayOutput) Index(i pulumi.IntInput) IdpGitlabOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *IdpGitlab {
 		return vs[0].([]*IdpGitlab)[vs[1].(int)]
@@ -361,6 +405,12 @@ func (o IdpGitlabMapOutput) ToIdpGitlabMapOutput() IdpGitlabMapOutput {
 
 func (o IdpGitlabMapOutput) ToIdpGitlabMapOutputWithContext(ctx context.Context) IdpGitlabMapOutput {
 	return o
+}
+
+func (o IdpGitlabMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*IdpGitlab] {
+	return pulumix.Output[map[string]*IdpGitlab]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o IdpGitlabMapOutput) MapIndex(k pulumi.StringInput) IdpGitlabOutput {

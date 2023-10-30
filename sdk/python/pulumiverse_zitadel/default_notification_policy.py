@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['DefaultNotificationPolicyArgs', 'DefaultNotificationPolicy']
@@ -19,7 +19,20 @@ class DefaultNotificationPolicyArgs:
         The set of arguments for constructing a DefaultNotificationPolicy resource.
         :param pulumi.Input[bool] password_change: Send notification if a user changes his password
         """
-        pulumi.set(__self__, "password_change", password_change)
+        DefaultNotificationPolicyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            password_change=password_change,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             password_change: pulumi.Input[bool],
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'passwordChange' in kwargs:
+            password_change = kwargs['passwordChange']
+
+        _setter("password_change", password_change)
 
     @property
     @pulumi.getter(name="passwordChange")
@@ -42,8 +55,21 @@ class _DefaultNotificationPolicyState:
         Input properties used for looking up and filtering DefaultNotificationPolicy resources.
         :param pulumi.Input[bool] password_change: Send notification if a user changes his password
         """
+        _DefaultNotificationPolicyState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            password_change=password_change,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             password_change: Optional[pulumi.Input[bool]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'passwordChange' in kwargs:
+            password_change = kwargs['passwordChange']
+
         if password_change is not None:
-            pulumi.set(__self__, "password_change", password_change)
+            _setter("password_change", password_change)
 
     @property
     @pulumi.getter(name="passwordChange")
@@ -79,7 +105,7 @@ class DefaultNotificationPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<>`, e.g.
+        terraform The resource can be imported using the ID format `<>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy imported ''
@@ -109,7 +135,7 @@ class DefaultNotificationPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<>`, e.g.
+        terraform The resource can be imported using the ID format `<>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/defaultNotificationPolicy:DefaultNotificationPolicy imported ''
@@ -125,6 +151,10 @@ class DefaultNotificationPolicy(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            DefaultNotificationPolicyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

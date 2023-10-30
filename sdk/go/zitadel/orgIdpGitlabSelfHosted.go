@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing a GitLab Self Hosted IdP on the organization.
@@ -19,41 +21,46 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewOrgIdpGitlabSelfHosted(ctx, "default", &zitadel.OrgIdpGitlabSelfHostedArgs{
-// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ClientId:     pulumi.String("15765e..."),
-// 			ClientSecret: pulumi.String("*****abcxyz"),
-// 			Scopes: pulumi.StringArray{
-// 				pulumi.String("openid"),
-// 				pulumi.String("profile"),
-// 				pulumi.String("email"),
-// 			},
-// 			Issuer:            pulumi.String("https://my.issuer"),
-// 			IsLinkingAllowed:  pulumi.Bool(false),
-// 			IsCreationAllowed: pulumi.Bool(true),
-// 			IsAutoCreation:    pulumi.Bool(false),
-// 			IsAutoUpdate:      pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewOrgIdpGitlabSelfHosted(ctx, "default", &zitadel.OrgIdpGitlabSelfHostedArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				ClientId:     pulumi.String("15765e..."),
+//				ClientSecret: pulumi.String("*****abcxyz"),
+//				Scopes: pulumi.StringArray{
+//					pulumi.String("openid"),
+//					pulumi.String("profile"),
+//					pulumi.String("email"),
+//				},
+//				Issuer:            pulumi.String("https://my.issuer"),
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+// terraform The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/orgIdpGitlabSelfHosted:OrgIdpGitlabSelfHosted imported '123456789012345678:123456789012345678:1234567890abcdef'
+//
+//	$ pulumi import zitadel:index/orgIdpGitlabSelfHosted:OrgIdpGitlabSelfHosted imported '123456789012345678:123456789012345678:1234567890abcdef'
+//
 // ```
 type OrgIdpGitlabSelfHosted struct {
 	pulumi.CustomResourceState
@@ -108,7 +115,14 @@ func NewOrgIdpGitlabSelfHosted(ctx *pulumi.Context,
 	if args.Issuer == nil {
 		return nil, errors.New("invalid value for required argument 'Issuer'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.ClientSecret != nil {
+		args.ClientSecret = pulumi.ToSecret(args.ClientSecret).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgIdpGitlabSelfHosted
 	err := ctx.RegisterResource("zitadel:index/orgIdpGitlabSelfHosted:OrgIdpGitlabSelfHosted", name, args, &resource, opts...)
 	if err != nil {
@@ -250,10 +264,16 @@ func (i *OrgIdpGitlabSelfHosted) ToOrgIdpGitlabSelfHostedOutputWithContext(ctx c
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpGitlabSelfHostedOutput)
 }
 
+func (i *OrgIdpGitlabSelfHosted) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpGitlabSelfHosted] {
+	return pulumix.Output[*OrgIdpGitlabSelfHosted]{
+		OutputState: i.ToOrgIdpGitlabSelfHostedOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpGitlabSelfHostedArrayInput is an input type that accepts OrgIdpGitlabSelfHostedArray and OrgIdpGitlabSelfHostedArrayOutput values.
 // You can construct a concrete instance of `OrgIdpGitlabSelfHostedArrayInput` via:
 //
-//          OrgIdpGitlabSelfHostedArray{ OrgIdpGitlabSelfHostedArgs{...} }
+//	OrgIdpGitlabSelfHostedArray{ OrgIdpGitlabSelfHostedArgs{...} }
 type OrgIdpGitlabSelfHostedArrayInput interface {
 	pulumi.Input
 
@@ -275,10 +295,16 @@ func (i OrgIdpGitlabSelfHostedArray) ToOrgIdpGitlabSelfHostedArrayOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpGitlabSelfHostedArrayOutput)
 }
 
+func (i OrgIdpGitlabSelfHostedArray) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpGitlabSelfHosted] {
+	return pulumix.Output[[]*OrgIdpGitlabSelfHosted]{
+		OutputState: i.ToOrgIdpGitlabSelfHostedArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // OrgIdpGitlabSelfHostedMapInput is an input type that accepts OrgIdpGitlabSelfHostedMap and OrgIdpGitlabSelfHostedMapOutput values.
 // You can construct a concrete instance of `OrgIdpGitlabSelfHostedMapInput` via:
 //
-//          OrgIdpGitlabSelfHostedMap{ "key": OrgIdpGitlabSelfHostedArgs{...} }
+//	OrgIdpGitlabSelfHostedMap{ "key": OrgIdpGitlabSelfHostedArgs{...} }
 type OrgIdpGitlabSelfHostedMapInput interface {
 	pulumi.Input
 
@@ -300,6 +326,12 @@ func (i OrgIdpGitlabSelfHostedMap) ToOrgIdpGitlabSelfHostedMapOutputWithContext(
 	return pulumi.ToOutputWithContext(ctx, i).(OrgIdpGitlabSelfHostedMapOutput)
 }
 
+func (i OrgIdpGitlabSelfHostedMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpGitlabSelfHosted] {
+	return pulumix.Output[map[string]*OrgIdpGitlabSelfHosted]{
+		OutputState: i.ToOrgIdpGitlabSelfHostedMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type OrgIdpGitlabSelfHostedOutput struct{ *pulumi.OutputState }
 
 func (OrgIdpGitlabSelfHostedOutput) ElementType() reflect.Type {
@@ -312,6 +344,12 @@ func (o OrgIdpGitlabSelfHostedOutput) ToOrgIdpGitlabSelfHostedOutput() OrgIdpGit
 
 func (o OrgIdpGitlabSelfHostedOutput) ToOrgIdpGitlabSelfHostedOutputWithContext(ctx context.Context) OrgIdpGitlabSelfHostedOutput {
 	return o
+}
+
+func (o OrgIdpGitlabSelfHostedOutput) ToOutput(ctx context.Context) pulumix.Output[*OrgIdpGitlabSelfHosted] {
+	return pulumix.Output[*OrgIdpGitlabSelfHosted]{
+		OutputState: o.OutputState,
+	}
 }
 
 // client id generated by the identity provider
@@ -378,6 +416,12 @@ func (o OrgIdpGitlabSelfHostedArrayOutput) ToOrgIdpGitlabSelfHostedArrayOutputWi
 	return o
 }
 
+func (o OrgIdpGitlabSelfHostedArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*OrgIdpGitlabSelfHosted] {
+	return pulumix.Output[[]*OrgIdpGitlabSelfHosted]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o OrgIdpGitlabSelfHostedArrayOutput) Index(i pulumi.IntInput) OrgIdpGitlabSelfHostedOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *OrgIdpGitlabSelfHosted {
 		return vs[0].([]*OrgIdpGitlabSelfHosted)[vs[1].(int)]
@@ -396,6 +440,12 @@ func (o OrgIdpGitlabSelfHostedMapOutput) ToOrgIdpGitlabSelfHostedMapOutput() Org
 
 func (o OrgIdpGitlabSelfHostedMapOutput) ToOrgIdpGitlabSelfHostedMapOutputWithContext(ctx context.Context) OrgIdpGitlabSelfHostedMapOutput {
 	return o
+}
+
+func (o OrgIdpGitlabSelfHostedMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*OrgIdpGitlabSelfHosted] {
+	return pulumix.Output[map[string]*OrgIdpGitlabSelfHosted]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o OrgIdpGitlabSelfHostedMapOutput) MapIndex(k pulumi.StringInput) OrgIdpGitlabSelfHostedOutput {

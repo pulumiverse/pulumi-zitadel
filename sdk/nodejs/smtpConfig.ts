@@ -11,11 +11,12 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const defaultSmtpConfig = new zitadel.SmtpConfig("default", {
+ * const _default = new zitadel.SmtpConfig("default", {
  *     host: "localhost:25",
  *     password: "secret_password",
+ *     replyToAddress: "replyto@example.com",
  *     senderAddress: "sender@example.com",
  *     senderName: "no-reply",
  *     tls: true,
@@ -25,7 +26,7 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * terraform # The resource can be imported using the ID format `<[password]>`, e.g.
+ * terraform The resource can be imported using the ID format `<[password]>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
@@ -68,6 +69,10 @@ export class SmtpConfig extends pulumi.CustomResource {
      */
     public readonly password!: pulumi.Output<string | undefined>;
     /**
+     * Address to reply to.
+     */
+    public readonly replyToAddress!: pulumi.Output<string | undefined>;
+    /**
      * Address used to send emails.
      */
     public readonly senderAddress!: pulumi.Output<string>;
@@ -99,6 +104,7 @@ export class SmtpConfig extends pulumi.CustomResource {
             const state = argsOrState as SmtpConfigState | undefined;
             resourceInputs["host"] = state ? state.host : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
+            resourceInputs["replyToAddress"] = state ? state.replyToAddress : undefined;
             resourceInputs["senderAddress"] = state ? state.senderAddress : undefined;
             resourceInputs["senderName"] = state ? state.senderName : undefined;
             resourceInputs["tls"] = state ? state.tls : undefined;
@@ -115,13 +121,16 @@ export class SmtpConfig extends pulumi.CustomResource {
                 throw new Error("Missing required property 'senderName'");
             }
             resourceInputs["host"] = args ? args.host : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
+            resourceInputs["replyToAddress"] = args ? args.replyToAddress : undefined;
             resourceInputs["senderAddress"] = args ? args.senderAddress : undefined;
             resourceInputs["senderName"] = args ? args.senderName : undefined;
             resourceInputs["tls"] = args ? args.tls : undefined;
             resourceInputs["user"] = args ? args.user : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(SmtpConfig.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -138,6 +147,10 @@ export interface SmtpConfigState {
      * Password used to communicate with your SMTP server.
      */
     password?: pulumi.Input<string>;
+    /**
+     * Address to reply to.
+     */
+    replyToAddress?: pulumi.Input<string>;
     /**
      * Address used to send emails.
      */
@@ -168,6 +181,10 @@ export interface SmtpConfigArgs {
      * Password used to communicate with your SMTP server.
      */
     password?: pulumi.Input<string>;
+    /**
+     * Address to reply to.
+     */
+    replyToAddress?: pulumi.Input<string>;
     /**
      * Address used to send emails.
      */

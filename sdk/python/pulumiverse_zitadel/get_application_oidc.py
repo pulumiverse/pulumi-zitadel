@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -292,25 +292,25 @@ def get_application_oidc(app_id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getApplicationOidc:getApplicationOidc', __args__, opts=opts, typ=GetApplicationOidcResult).value
 
     return AwaitableGetApplicationOidcResult(
-        access_token_role_assertion=__ret__.access_token_role_assertion,
-        access_token_type=__ret__.access_token_type,
-        additional_origins=__ret__.additional_origins,
-        app_id=__ret__.app_id,
-        app_type=__ret__.app_type,
-        auth_method_type=__ret__.auth_method_type,
-        clock_skew=__ret__.clock_skew,
-        dev_mode=__ret__.dev_mode,
-        grant_types=__ret__.grant_types,
-        id=__ret__.id,
-        id_token_role_assertion=__ret__.id_token_role_assertion,
-        id_token_userinfo_assertion=__ret__.id_token_userinfo_assertion,
-        name=__ret__.name,
-        org_id=__ret__.org_id,
-        post_logout_redirect_uris=__ret__.post_logout_redirect_uris,
-        project_id=__ret__.project_id,
-        redirect_uris=__ret__.redirect_uris,
-        response_types=__ret__.response_types,
-        version=__ret__.version)
+        access_token_role_assertion=pulumi.get(__ret__, 'access_token_role_assertion'),
+        access_token_type=pulumi.get(__ret__, 'access_token_type'),
+        additional_origins=pulumi.get(__ret__, 'additional_origins'),
+        app_id=pulumi.get(__ret__, 'app_id'),
+        app_type=pulumi.get(__ret__, 'app_type'),
+        auth_method_type=pulumi.get(__ret__, 'auth_method_type'),
+        clock_skew=pulumi.get(__ret__, 'clock_skew'),
+        dev_mode=pulumi.get(__ret__, 'dev_mode'),
+        grant_types=pulumi.get(__ret__, 'grant_types'),
+        id=pulumi.get(__ret__, 'id'),
+        id_token_role_assertion=pulumi.get(__ret__, 'id_token_role_assertion'),
+        id_token_userinfo_assertion=pulumi.get(__ret__, 'id_token_userinfo_assertion'),
+        name=pulumi.get(__ret__, 'name'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        post_logout_redirect_uris=pulumi.get(__ret__, 'post_logout_redirect_uris'),
+        project_id=pulumi.get(__ret__, 'project_id'),
+        redirect_uris=pulumi.get(__ret__, 'redirect_uris'),
+        response_types=pulumi.get(__ret__, 'response_types'),
+        version=pulumi.get(__ret__, 'version'))
 
 
 @_utilities.lift_output_func(get_application_oidc)

@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing an action belonging to an organization.
@@ -19,32 +21,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewAction(ctx, "default", &zitadel.ActionArgs{
-// 			OrgId:         pulumi.Any(data.Zitadel_org.Default.Id),
-// 			Script:        pulumi.String("testscript"),
-// 			Timeout:       pulumi.String("10s"),
-// 			AllowedToFail: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewAction(ctx, "default", &zitadel.ActionArgs{
+//				OrgId:         pulumi.Any(data.Zitadel_org.Default.Id),
+//				Script:        pulumi.String("testscript"),
+//				Timeout:       pulumi.String("10s"),
+//				AllowedToFail: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+// terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/action:Action imported '123456789012345678:123456789012345678'
+//
+//	$ pulumi import zitadel:index/action:Action imported '123456789012345678:123456789012345678'
+//
 // ```
 type Action struct {
 	pulumi.CustomResourceState
@@ -77,7 +84,7 @@ func NewAction(ctx *pulumi.Context,
 	if args.Timeout == nil {
 		return nil, errors.New("invalid value for required argument 'Timeout'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Action
 	err := ctx.RegisterResource("zitadel:index/action:Action", name, args, &resource, opts...)
 	if err != nil {
@@ -175,10 +182,16 @@ func (i *Action) ToActionOutputWithContext(ctx context.Context) ActionOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ActionOutput)
 }
 
+func (i *Action) ToOutput(ctx context.Context) pulumix.Output[*Action] {
+	return pulumix.Output[*Action]{
+		OutputState: i.ToActionOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ActionArrayInput is an input type that accepts ActionArray and ActionArrayOutput values.
 // You can construct a concrete instance of `ActionArrayInput` via:
 //
-//          ActionArray{ ActionArgs{...} }
+//	ActionArray{ ActionArgs{...} }
 type ActionArrayInput interface {
 	pulumi.Input
 
@@ -200,10 +213,16 @@ func (i ActionArray) ToActionArrayOutputWithContext(ctx context.Context) ActionA
 	return pulumi.ToOutputWithContext(ctx, i).(ActionArrayOutput)
 }
 
+func (i ActionArray) ToOutput(ctx context.Context) pulumix.Output[[]*Action] {
+	return pulumix.Output[[]*Action]{
+		OutputState: i.ToActionArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ActionMapInput is an input type that accepts ActionMap and ActionMapOutput values.
 // You can construct a concrete instance of `ActionMapInput` via:
 //
-//          ActionMap{ "key": ActionArgs{...} }
+//	ActionMap{ "key": ActionArgs{...} }
 type ActionMapInput interface {
 	pulumi.Input
 
@@ -225,6 +244,12 @@ func (i ActionMap) ToActionMapOutputWithContext(ctx context.Context) ActionMapOu
 	return pulumi.ToOutputWithContext(ctx, i).(ActionMapOutput)
 }
 
+func (i ActionMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Action] {
+	return pulumix.Output[map[string]*Action]{
+		OutputState: i.ToActionMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ActionOutput struct{ *pulumi.OutputState }
 
 func (ActionOutput) ElementType() reflect.Type {
@@ -237,6 +262,12 @@ func (o ActionOutput) ToActionOutput() ActionOutput {
 
 func (o ActionOutput) ToActionOutputWithContext(ctx context.Context) ActionOutput {
 	return o
+}
+
+func (o ActionOutput) ToOutput(ctx context.Context) pulumix.Output[*Action] {
+	return pulumix.Output[*Action]{
+		OutputState: o.OutputState,
+	}
 }
 
 // when true, the next action will be called even if this action fails
@@ -281,6 +312,12 @@ func (o ActionArrayOutput) ToActionArrayOutputWithContext(ctx context.Context) A
 	return o
 }
 
+func (o ActionArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Action] {
+	return pulumix.Output[[]*Action]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ActionArrayOutput) Index(i pulumi.IntInput) ActionOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Action {
 		return vs[0].([]*Action)[vs[1].(int)]
@@ -299,6 +336,12 @@ func (o ActionMapOutput) ToActionMapOutput() ActionMapOutput {
 
 func (o ActionMapOutput) ToActionMapOutputWithContext(ctx context.Context) ActionMapOutput {
 	return o
+}
+
+func (o ActionMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Action] {
+	return pulumix.Output[map[string]*Action]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ActionMapOutput) MapIndex(k pulumi.StringInput) ActionOutput {

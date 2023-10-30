@@ -20,11 +20,8 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getOrgIdpLdap(args: GetOrgIdpLdapArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgIdpLdapResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getOrgIdpLdap:getOrgIdpLdap", {
         "id": args.id,
         "orgId": args.orgId,
@@ -166,9 +163,23 @@ export interface GetOrgIdpLdapResult {
      */
     readonly userObjectClasses: string[];
 }
-
+/**
+ * Datasource representing an LDAP IdP on the organization.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getOrgIdpLdap({
+ *     orgId: data.zitadel_org["default"].id,
+ *     id: "123456789012345678",
+ * });
+ * ```
+ */
 export function getOrgIdpLdapOutput(args: GetOrgIdpLdapOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOrgIdpLdapResult> {
-    return pulumi.output(args).apply(a => getOrgIdpLdap(a, opts))
+    return pulumi.output(args).apply((a: any) => getOrgIdpLdap(a, opts))
 }
 
 /**

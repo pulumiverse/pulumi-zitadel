@@ -21,6 +21,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -37,7 +38,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetIdpGoogleResult> InvokeAsync(GetIdpGoogleArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetIdpGoogleResult>("zitadel:index/getIdpGoogle:getIdpGoogle", args ?? new GetIdpGoogleArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetIdpGoogleResult>("zitadel:index/getIdpGoogle:getIdpGoogle", args ?? new GetIdpGoogleArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing a Google IDP on the instance.
@@ -48,6 +49,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -64,7 +66,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetIdpGoogleResult> Invoke(GetIdpGoogleInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetIdpGoogleResult>("zitadel:index/getIdpGoogle:getIdpGoogle", args ?? new GetIdpGoogleInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetIdpGoogleResult>("zitadel:index/getIdpGoogle:getIdpGoogle", args ?? new GetIdpGoogleInvokeArgs(), options.WithDefaults());
     }
 
 

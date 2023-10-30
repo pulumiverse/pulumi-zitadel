@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing an API application belonging to a project, with all configuration possibilities.
@@ -19,31 +21,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewApplicationApi(ctx, "default", &zitadel.ApplicationApiArgs{
-// 			OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ProjectId:      pulumi.Any(data.Zitadel_project.Default.Id),
-// 			AuthMethodType: pulumi.String("API_AUTH_METHOD_TYPE_BASIC"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewApplicationApi(ctx, "default", &zitadel.ApplicationApiArgs{
+//				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
+//				ProjectId:      pulumi.Any(data.Zitadel_project.Default.Id),
+//				AuthMethodType: pulumi.String("API_AUTH_METHOD_TYPE_BASIC"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
+// terraform The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/applicationApi:ApplicationApi imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
+//
+//	$ pulumi import zitadel:index/applicationApi:ApplicationApi imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
+//
 // ```
 type ApplicationApi struct {
 	pulumi.CustomResourceState
@@ -72,7 +79,12 @@ func NewApplicationApi(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientId",
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ApplicationApi
 	err := ctx.RegisterResource("zitadel:index/applicationApi:ApplicationApi", name, args, &resource, opts...)
 	if err != nil {
@@ -174,10 +186,16 @@ func (i *ApplicationApi) ToApplicationApiOutputWithContext(ctx context.Context) 
 	return pulumi.ToOutputWithContext(ctx, i).(ApplicationApiOutput)
 }
 
+func (i *ApplicationApi) ToOutput(ctx context.Context) pulumix.Output[*ApplicationApi] {
+	return pulumix.Output[*ApplicationApi]{
+		OutputState: i.ToApplicationApiOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ApplicationApiArrayInput is an input type that accepts ApplicationApiArray and ApplicationApiArrayOutput values.
 // You can construct a concrete instance of `ApplicationApiArrayInput` via:
 //
-//          ApplicationApiArray{ ApplicationApiArgs{...} }
+//	ApplicationApiArray{ ApplicationApiArgs{...} }
 type ApplicationApiArrayInput interface {
 	pulumi.Input
 
@@ -199,10 +217,16 @@ func (i ApplicationApiArray) ToApplicationApiArrayOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(ApplicationApiArrayOutput)
 }
 
+func (i ApplicationApiArray) ToOutput(ctx context.Context) pulumix.Output[[]*ApplicationApi] {
+	return pulumix.Output[[]*ApplicationApi]{
+		OutputState: i.ToApplicationApiArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ApplicationApiMapInput is an input type that accepts ApplicationApiMap and ApplicationApiMapOutput values.
 // You can construct a concrete instance of `ApplicationApiMapInput` via:
 //
-//          ApplicationApiMap{ "key": ApplicationApiArgs{...} }
+//	ApplicationApiMap{ "key": ApplicationApiArgs{...} }
 type ApplicationApiMapInput interface {
 	pulumi.Input
 
@@ -224,6 +248,12 @@ func (i ApplicationApiMap) ToApplicationApiMapOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(ApplicationApiMapOutput)
 }
 
+func (i ApplicationApiMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ApplicationApi] {
+	return pulumix.Output[map[string]*ApplicationApi]{
+		OutputState: i.ToApplicationApiMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ApplicationApiOutput struct{ *pulumi.OutputState }
 
 func (ApplicationApiOutput) ElementType() reflect.Type {
@@ -236,6 +266,12 @@ func (o ApplicationApiOutput) ToApplicationApiOutput() ApplicationApiOutput {
 
 func (o ApplicationApiOutput) ToApplicationApiOutputWithContext(ctx context.Context) ApplicationApiOutput {
 	return o
+}
+
+func (o ApplicationApiOutput) ToOutput(ctx context.Context) pulumix.Output[*ApplicationApi] {
+	return pulumix.Output[*ApplicationApi]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Auth method type, supported values: API*AUTH*METHOD*TYPE*BASIC, API*AUTH*METHOD*TYPE*PRIVATE*KEY*JWT
@@ -282,6 +318,12 @@ func (o ApplicationApiArrayOutput) ToApplicationApiArrayOutputWithContext(ctx co
 	return o
 }
 
+func (o ApplicationApiArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ApplicationApi] {
+	return pulumix.Output[[]*ApplicationApi]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ApplicationApiArrayOutput) Index(i pulumi.IntInput) ApplicationApiOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ApplicationApi {
 		return vs[0].([]*ApplicationApi)[vs[1].(int)]
@@ -300,6 +342,12 @@ func (o ApplicationApiMapOutput) ToApplicationApiMapOutput() ApplicationApiMapOu
 
 func (o ApplicationApiMapOutput) ToApplicationApiMapOutputWithContext(ctx context.Context) ApplicationApiMapOutput {
 	return o
+}
+
+func (o ApplicationApiMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ApplicationApi] {
+	return pulumix.Output[map[string]*ApplicationApi]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ApplicationApiMapOutput) MapIndex(k pulumi.StringInput) ApplicationApiOutput {

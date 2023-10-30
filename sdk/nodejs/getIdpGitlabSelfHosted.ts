@@ -13,17 +13,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const defaultIdpGitlabSelfHosted = pulumi.output(zitadel.getIdpGitlabSelfHosted({
+ * const default = zitadel.getIdpGitlabSelfHosted({
  *     id: "123456789012345678",
- * }));
+ * });
  * ```
  */
 export function getIdpGitlabSelfHosted(args: GetIdpGitlabSelfHostedArgs, opts?: pulumi.InvokeOptions): Promise<GetIdpGitlabSelfHostedResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getIdpGitlabSelfHosted:getIdpGitlabSelfHosted", {
         "id": args.id,
     }, opts);
@@ -84,9 +81,22 @@ export interface GetIdpGitlabSelfHostedResult {
      */
     readonly scopes: string[];
 }
-
+/**
+ * Datasource representing a GitLab Self Hosted IDP on the instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getIdpGitlabSelfHosted({
+ *     id: "123456789012345678",
+ * });
+ * ```
+ */
 export function getIdpGitlabSelfHostedOutput(args: GetIdpGitlabSelfHostedOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIdpGitlabSelfHostedResult> {
-    return pulumi.output(args).apply(a => getIdpGitlabSelfHosted(a, opts))
+    return pulumi.output(args).apply((a: any) => getIdpGitlabSelfHosted(a, opts))
 }
 
 /**

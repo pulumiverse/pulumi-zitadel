@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -150,14 +150,14 @@ def get_action(action_id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getAction:getAction', __args__, opts=opts, typ=GetActionResult).value
 
     return AwaitableGetActionResult(
-        action_id=__ret__.action_id,
-        allowed_to_fail=__ret__.allowed_to_fail,
-        id=__ret__.id,
-        name=__ret__.name,
-        org_id=__ret__.org_id,
-        script=__ret__.script,
-        state=__ret__.state,
-        timeout=__ret__.timeout)
+        action_id=pulumi.get(__ret__, 'action_id'),
+        allowed_to_fail=pulumi.get(__ret__, 'allowed_to_fail'),
+        id=pulumi.get(__ret__, 'id'),
+        name=pulumi.get(__ret__, 'name'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        script=pulumi.get(__ret__, 'script'),
+        state=pulumi.get(__ret__, 'state'),
+        timeout=pulumi.get(__ret__, 'timeout'))
 
 
 @_utilities.lift_output_func(get_action)

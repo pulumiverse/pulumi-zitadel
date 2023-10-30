@@ -6,7 +6,10 @@ package config
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 // Domain used to connect to the ZITADEL instance
 func GetDomain(ctx *pulumi.Context) string {

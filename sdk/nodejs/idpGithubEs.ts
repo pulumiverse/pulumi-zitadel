@@ -11,9 +11,9 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const defaultIdpGithubEs = new zitadel.IdpGithubEs("default", {
+ * const _default = new zitadel.IdpGithubEs("default", {
  *     authorizationEndpoint: "https://auth.endpoint",
  *     clientId: "86a165...",
  *     clientSecret: "*****afdbac18",
@@ -33,7 +33,7 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * terraform # The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+ * terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/idpGithubEs:IdpGithubEs imported '123456789012345678:1234567890123456781234567890123456787890'
@@ -167,7 +167,7 @@ export class IdpGithubEs extends pulumi.CustomResource {
             }
             resourceInputs["authorizationEndpoint"] = args ? args.authorizationEndpoint : undefined;
             resourceInputs["clientId"] = args ? args.clientId : undefined;
-            resourceInputs["clientSecret"] = args ? args.clientSecret : undefined;
+            resourceInputs["clientSecret"] = args?.clientSecret ? pulumi.secret(args.clientSecret) : undefined;
             resourceInputs["isAutoCreation"] = args ? args.isAutoCreation : undefined;
             resourceInputs["isAutoUpdate"] = args ? args.isAutoUpdate : undefined;
             resourceInputs["isCreationAllowed"] = args ? args.isCreationAllowed : undefined;
@@ -178,6 +178,8 @@ export class IdpGithubEs extends pulumi.CustomResource {
             resourceInputs["userEndpoint"] = args ? args.userEndpoint : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["clientSecret"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(IdpGithubEs.__pulumiType, name, resourceInputs, opts);
     }
 }

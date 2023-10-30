@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the grant of a project to a different organization, also containing the available roles which can be given to the members of the projectgrant.
@@ -19,34 +21,39 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewProjectGrant(ctx, "default", &zitadel.ProjectGrantArgs{
-// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ProjectId:    pulumi.Any(data.Zitadel_project.Default.Id),
-// 			GrantedOrgId: pulumi.Any(data.Zitadel_org.Granted_org.Id),
-// 			RoleKeys: pulumi.StringArray{
-// 				pulumi.String("super-user"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewProjectGrant(ctx, "default", &zitadel.ProjectGrantArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				ProjectId:    pulumi.Any(data.Zitadel_project.Default.Id),
+//				GrantedOrgId: pulumi.Any(data.Zitadel_org.Granted_org.Id),
+//				RoleKeys: pulumi.StringArray{
+//					pulumi.String("super-user"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
+// terraform The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/projectGrant:ProjectGrant imported '123456789012345678:123456789012345678:123456789012345678'
+//
+//	$ pulumi import zitadel:index/projectGrant:ProjectGrant imported '123456789012345678:123456789012345678:123456789012345678'
+//
 // ```
 type ProjectGrant struct {
 	pulumi.CustomResourceState
@@ -74,7 +81,7 @@ func NewProjectGrant(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProjectGrant
 	err := ctx.RegisterResource("zitadel:index/projectGrant:ProjectGrant", name, args, &resource, opts...)
 	if err != nil {
@@ -168,10 +175,16 @@ func (i *ProjectGrant) ToProjectGrantOutputWithContext(ctx context.Context) Proj
 	return pulumi.ToOutputWithContext(ctx, i).(ProjectGrantOutput)
 }
 
+func (i *ProjectGrant) ToOutput(ctx context.Context) pulumix.Output[*ProjectGrant] {
+	return pulumix.Output[*ProjectGrant]{
+		OutputState: i.ToProjectGrantOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ProjectGrantArrayInput is an input type that accepts ProjectGrantArray and ProjectGrantArrayOutput values.
 // You can construct a concrete instance of `ProjectGrantArrayInput` via:
 //
-//          ProjectGrantArray{ ProjectGrantArgs{...} }
+//	ProjectGrantArray{ ProjectGrantArgs{...} }
 type ProjectGrantArrayInput interface {
 	pulumi.Input
 
@@ -193,10 +206,16 @@ func (i ProjectGrantArray) ToProjectGrantArrayOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(ProjectGrantArrayOutput)
 }
 
+func (i ProjectGrantArray) ToOutput(ctx context.Context) pulumix.Output[[]*ProjectGrant] {
+	return pulumix.Output[[]*ProjectGrant]{
+		OutputState: i.ToProjectGrantArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ProjectGrantMapInput is an input type that accepts ProjectGrantMap and ProjectGrantMapOutput values.
 // You can construct a concrete instance of `ProjectGrantMapInput` via:
 //
-//          ProjectGrantMap{ "key": ProjectGrantArgs{...} }
+//	ProjectGrantMap{ "key": ProjectGrantArgs{...} }
 type ProjectGrantMapInput interface {
 	pulumi.Input
 
@@ -218,6 +237,12 @@ func (i ProjectGrantMap) ToProjectGrantMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(ProjectGrantMapOutput)
 }
 
+func (i ProjectGrantMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProjectGrant] {
+	return pulumix.Output[map[string]*ProjectGrant]{
+		OutputState: i.ToProjectGrantMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ProjectGrantOutput struct{ *pulumi.OutputState }
 
 func (ProjectGrantOutput) ElementType() reflect.Type {
@@ -230,6 +255,12 @@ func (o ProjectGrantOutput) ToProjectGrantOutput() ProjectGrantOutput {
 
 func (o ProjectGrantOutput) ToProjectGrantOutputWithContext(ctx context.Context) ProjectGrantOutput {
 	return o
+}
+
+func (o ProjectGrantOutput) ToOutput(ctx context.Context) pulumix.Output[*ProjectGrant] {
+	return pulumix.Output[*ProjectGrant]{
+		OutputState: o.OutputState,
+	}
 }
 
 // ID of the organization granted the project
@@ -266,6 +297,12 @@ func (o ProjectGrantArrayOutput) ToProjectGrantArrayOutputWithContext(ctx contex
 	return o
 }
 
+func (o ProjectGrantArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ProjectGrant] {
+	return pulumix.Output[[]*ProjectGrant]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ProjectGrantArrayOutput) Index(i pulumi.IntInput) ProjectGrantOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ProjectGrant {
 		return vs[0].([]*ProjectGrant)[vs[1].(int)]
@@ -284,6 +321,12 @@ func (o ProjectGrantMapOutput) ToProjectGrantMapOutput() ProjectGrantMapOutput {
 
 func (o ProjectGrantMapOutput) ToProjectGrantMapOutputWithContext(ctx context.Context) ProjectGrantMapOutput {
 	return o
+}
+
+func (o ProjectGrantMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProjectGrant] {
+	return pulumix.Output[map[string]*ProjectGrant]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ProjectGrantMapOutput) MapIndex(k pulumi.StringInput) ProjectGrantOutput {

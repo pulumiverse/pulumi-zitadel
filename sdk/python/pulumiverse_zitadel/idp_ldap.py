@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['IdpLdapArgs', 'IdpLdap']
@@ -71,47 +71,158 @@ class IdpLdapArgs:
         :param pulumi.Input[str] preferred_username_attribute: User attribute for the preferred username
         :param pulumi.Input[str] profile_attribute: User attribute for the profile
         """
-        pulumi.set(__self__, "base_dn", base_dn)
-        pulumi.set(__self__, "bind_dn", bind_dn)
-        pulumi.set(__self__, "bind_password", bind_password)
-        pulumi.set(__self__, "is_auto_creation", is_auto_creation)
-        pulumi.set(__self__, "is_auto_update", is_auto_update)
-        pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
-        pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
-        pulumi.set(__self__, "servers", servers)
-        pulumi.set(__self__, "start_tls", start_tls)
-        pulumi.set(__self__, "timeout", timeout)
-        pulumi.set(__self__, "user_base", user_base)
-        pulumi.set(__self__, "user_filters", user_filters)
-        pulumi.set(__self__, "user_object_classes", user_object_classes)
+        IdpLdapArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            base_dn=base_dn,
+            bind_dn=bind_dn,
+            bind_password=bind_password,
+            is_auto_creation=is_auto_creation,
+            is_auto_update=is_auto_update,
+            is_creation_allowed=is_creation_allowed,
+            is_linking_allowed=is_linking_allowed,
+            servers=servers,
+            start_tls=start_tls,
+            timeout=timeout,
+            user_base=user_base,
+            user_filters=user_filters,
+            user_object_classes=user_object_classes,
+            avatar_url_attribute=avatar_url_attribute,
+            display_name_attribute=display_name_attribute,
+            email_attribute=email_attribute,
+            email_verified_attribute=email_verified_attribute,
+            first_name_attribute=first_name_attribute,
+            id_attribute=id_attribute,
+            last_name_attribute=last_name_attribute,
+            name=name,
+            nick_name_attribute=nick_name_attribute,
+            phone_attribute=phone_attribute,
+            phone_verified_attribute=phone_verified_attribute,
+            preferred_language_attribute=preferred_language_attribute,
+            preferred_username_attribute=preferred_username_attribute,
+            profile_attribute=profile_attribute,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             base_dn: pulumi.Input[str],
+             bind_dn: pulumi.Input[str],
+             bind_password: pulumi.Input[str],
+             is_auto_creation: pulumi.Input[bool],
+             is_auto_update: pulumi.Input[bool],
+             is_creation_allowed: pulumi.Input[bool],
+             is_linking_allowed: pulumi.Input[bool],
+             servers: pulumi.Input[Sequence[pulumi.Input[str]]],
+             start_tls: pulumi.Input[bool],
+             timeout: pulumi.Input[str],
+             user_base: pulumi.Input[str],
+             user_filters: pulumi.Input[Sequence[pulumi.Input[str]]],
+             user_object_classes: pulumi.Input[Sequence[pulumi.Input[str]]],
+             avatar_url_attribute: Optional[pulumi.Input[str]] = None,
+             display_name_attribute: Optional[pulumi.Input[str]] = None,
+             email_attribute: Optional[pulumi.Input[str]] = None,
+             email_verified_attribute: Optional[pulumi.Input[str]] = None,
+             first_name_attribute: Optional[pulumi.Input[str]] = None,
+             id_attribute: Optional[pulumi.Input[str]] = None,
+             last_name_attribute: Optional[pulumi.Input[str]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             nick_name_attribute: Optional[pulumi.Input[str]] = None,
+             phone_attribute: Optional[pulumi.Input[str]] = None,
+             phone_verified_attribute: Optional[pulumi.Input[str]] = None,
+             preferred_language_attribute: Optional[pulumi.Input[str]] = None,
+             preferred_username_attribute: Optional[pulumi.Input[str]] = None,
+             profile_attribute: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'baseDn' in kwargs:
+            base_dn = kwargs['baseDn']
+        if 'bindDn' in kwargs:
+            bind_dn = kwargs['bindDn']
+        if 'bindPassword' in kwargs:
+            bind_password = kwargs['bindPassword']
+        if 'isAutoCreation' in kwargs:
+            is_auto_creation = kwargs['isAutoCreation']
+        if 'isAutoUpdate' in kwargs:
+            is_auto_update = kwargs['isAutoUpdate']
+        if 'isCreationAllowed' in kwargs:
+            is_creation_allowed = kwargs['isCreationAllowed']
+        if 'isLinkingAllowed' in kwargs:
+            is_linking_allowed = kwargs['isLinkingAllowed']
+        if 'startTls' in kwargs:
+            start_tls = kwargs['startTls']
+        if 'userBase' in kwargs:
+            user_base = kwargs['userBase']
+        if 'userFilters' in kwargs:
+            user_filters = kwargs['userFilters']
+        if 'userObjectClasses' in kwargs:
+            user_object_classes = kwargs['userObjectClasses']
+        if 'avatarUrlAttribute' in kwargs:
+            avatar_url_attribute = kwargs['avatarUrlAttribute']
+        if 'displayNameAttribute' in kwargs:
+            display_name_attribute = kwargs['displayNameAttribute']
+        if 'emailAttribute' in kwargs:
+            email_attribute = kwargs['emailAttribute']
+        if 'emailVerifiedAttribute' in kwargs:
+            email_verified_attribute = kwargs['emailVerifiedAttribute']
+        if 'firstNameAttribute' in kwargs:
+            first_name_attribute = kwargs['firstNameAttribute']
+        if 'idAttribute' in kwargs:
+            id_attribute = kwargs['idAttribute']
+        if 'lastNameAttribute' in kwargs:
+            last_name_attribute = kwargs['lastNameAttribute']
+        if 'nickNameAttribute' in kwargs:
+            nick_name_attribute = kwargs['nickNameAttribute']
+        if 'phoneAttribute' in kwargs:
+            phone_attribute = kwargs['phoneAttribute']
+        if 'phoneVerifiedAttribute' in kwargs:
+            phone_verified_attribute = kwargs['phoneVerifiedAttribute']
+        if 'preferredLanguageAttribute' in kwargs:
+            preferred_language_attribute = kwargs['preferredLanguageAttribute']
+        if 'preferredUsernameAttribute' in kwargs:
+            preferred_username_attribute = kwargs['preferredUsernameAttribute']
+        if 'profileAttribute' in kwargs:
+            profile_attribute = kwargs['profileAttribute']
+
+        _setter("base_dn", base_dn)
+        _setter("bind_dn", bind_dn)
+        _setter("bind_password", bind_password)
+        _setter("is_auto_creation", is_auto_creation)
+        _setter("is_auto_update", is_auto_update)
+        _setter("is_creation_allowed", is_creation_allowed)
+        _setter("is_linking_allowed", is_linking_allowed)
+        _setter("servers", servers)
+        _setter("start_tls", start_tls)
+        _setter("timeout", timeout)
+        _setter("user_base", user_base)
+        _setter("user_filters", user_filters)
+        _setter("user_object_classes", user_object_classes)
         if avatar_url_attribute is not None:
-            pulumi.set(__self__, "avatar_url_attribute", avatar_url_attribute)
+            _setter("avatar_url_attribute", avatar_url_attribute)
         if display_name_attribute is not None:
-            pulumi.set(__self__, "display_name_attribute", display_name_attribute)
+            _setter("display_name_attribute", display_name_attribute)
         if email_attribute is not None:
-            pulumi.set(__self__, "email_attribute", email_attribute)
+            _setter("email_attribute", email_attribute)
         if email_verified_attribute is not None:
-            pulumi.set(__self__, "email_verified_attribute", email_verified_attribute)
+            _setter("email_verified_attribute", email_verified_attribute)
         if first_name_attribute is not None:
-            pulumi.set(__self__, "first_name_attribute", first_name_attribute)
+            _setter("first_name_attribute", first_name_attribute)
         if id_attribute is not None:
-            pulumi.set(__self__, "id_attribute", id_attribute)
+            _setter("id_attribute", id_attribute)
         if last_name_attribute is not None:
-            pulumi.set(__self__, "last_name_attribute", last_name_attribute)
+            _setter("last_name_attribute", last_name_attribute)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if nick_name_attribute is not None:
-            pulumi.set(__self__, "nick_name_attribute", nick_name_attribute)
+            _setter("nick_name_attribute", nick_name_attribute)
         if phone_attribute is not None:
-            pulumi.set(__self__, "phone_attribute", phone_attribute)
+            _setter("phone_attribute", phone_attribute)
         if phone_verified_attribute is not None:
-            pulumi.set(__self__, "phone_verified_attribute", phone_verified_attribute)
+            _setter("phone_verified_attribute", phone_verified_attribute)
         if preferred_language_attribute is not None:
-            pulumi.set(__self__, "preferred_language_attribute", preferred_language_attribute)
+            _setter("preferred_language_attribute", preferred_language_attribute)
         if preferred_username_attribute is not None:
-            pulumi.set(__self__, "preferred_username_attribute", preferred_username_attribute)
+            _setter("preferred_username_attribute", preferred_username_attribute)
         if profile_attribute is not None:
-            pulumi.set(__self__, "profile_attribute", profile_attribute)
+            _setter("profile_attribute", profile_attribute)
 
     @property
     @pulumi.getter(name="baseDn")
@@ -498,60 +609,171 @@ class _IdpLdapState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] user_filters: User filters for LDAP connections
         :param pulumi.Input[Sequence[pulumi.Input[str]]] user_object_classes: User object classes for LDAP connections
         """
+        _IdpLdapState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            avatar_url_attribute=avatar_url_attribute,
+            base_dn=base_dn,
+            bind_dn=bind_dn,
+            bind_password=bind_password,
+            display_name_attribute=display_name_attribute,
+            email_attribute=email_attribute,
+            email_verified_attribute=email_verified_attribute,
+            first_name_attribute=first_name_attribute,
+            id_attribute=id_attribute,
+            is_auto_creation=is_auto_creation,
+            is_auto_update=is_auto_update,
+            is_creation_allowed=is_creation_allowed,
+            is_linking_allowed=is_linking_allowed,
+            last_name_attribute=last_name_attribute,
+            name=name,
+            nick_name_attribute=nick_name_attribute,
+            phone_attribute=phone_attribute,
+            phone_verified_attribute=phone_verified_attribute,
+            preferred_language_attribute=preferred_language_attribute,
+            preferred_username_attribute=preferred_username_attribute,
+            profile_attribute=profile_attribute,
+            servers=servers,
+            start_tls=start_tls,
+            timeout=timeout,
+            user_base=user_base,
+            user_filters=user_filters,
+            user_object_classes=user_object_classes,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             avatar_url_attribute: Optional[pulumi.Input[str]] = None,
+             base_dn: Optional[pulumi.Input[str]] = None,
+             bind_dn: Optional[pulumi.Input[str]] = None,
+             bind_password: Optional[pulumi.Input[str]] = None,
+             display_name_attribute: Optional[pulumi.Input[str]] = None,
+             email_attribute: Optional[pulumi.Input[str]] = None,
+             email_verified_attribute: Optional[pulumi.Input[str]] = None,
+             first_name_attribute: Optional[pulumi.Input[str]] = None,
+             id_attribute: Optional[pulumi.Input[str]] = None,
+             is_auto_creation: Optional[pulumi.Input[bool]] = None,
+             is_auto_update: Optional[pulumi.Input[bool]] = None,
+             is_creation_allowed: Optional[pulumi.Input[bool]] = None,
+             is_linking_allowed: Optional[pulumi.Input[bool]] = None,
+             last_name_attribute: Optional[pulumi.Input[str]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             nick_name_attribute: Optional[pulumi.Input[str]] = None,
+             phone_attribute: Optional[pulumi.Input[str]] = None,
+             phone_verified_attribute: Optional[pulumi.Input[str]] = None,
+             preferred_language_attribute: Optional[pulumi.Input[str]] = None,
+             preferred_username_attribute: Optional[pulumi.Input[str]] = None,
+             profile_attribute: Optional[pulumi.Input[str]] = None,
+             servers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             start_tls: Optional[pulumi.Input[bool]] = None,
+             timeout: Optional[pulumi.Input[str]] = None,
+             user_base: Optional[pulumi.Input[str]] = None,
+             user_filters: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             user_object_classes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'avatarUrlAttribute' in kwargs:
+            avatar_url_attribute = kwargs['avatarUrlAttribute']
+        if 'baseDn' in kwargs:
+            base_dn = kwargs['baseDn']
+        if 'bindDn' in kwargs:
+            bind_dn = kwargs['bindDn']
+        if 'bindPassword' in kwargs:
+            bind_password = kwargs['bindPassword']
+        if 'displayNameAttribute' in kwargs:
+            display_name_attribute = kwargs['displayNameAttribute']
+        if 'emailAttribute' in kwargs:
+            email_attribute = kwargs['emailAttribute']
+        if 'emailVerifiedAttribute' in kwargs:
+            email_verified_attribute = kwargs['emailVerifiedAttribute']
+        if 'firstNameAttribute' in kwargs:
+            first_name_attribute = kwargs['firstNameAttribute']
+        if 'idAttribute' in kwargs:
+            id_attribute = kwargs['idAttribute']
+        if 'isAutoCreation' in kwargs:
+            is_auto_creation = kwargs['isAutoCreation']
+        if 'isAutoUpdate' in kwargs:
+            is_auto_update = kwargs['isAutoUpdate']
+        if 'isCreationAllowed' in kwargs:
+            is_creation_allowed = kwargs['isCreationAllowed']
+        if 'isLinkingAllowed' in kwargs:
+            is_linking_allowed = kwargs['isLinkingAllowed']
+        if 'lastNameAttribute' in kwargs:
+            last_name_attribute = kwargs['lastNameAttribute']
+        if 'nickNameAttribute' in kwargs:
+            nick_name_attribute = kwargs['nickNameAttribute']
+        if 'phoneAttribute' in kwargs:
+            phone_attribute = kwargs['phoneAttribute']
+        if 'phoneVerifiedAttribute' in kwargs:
+            phone_verified_attribute = kwargs['phoneVerifiedAttribute']
+        if 'preferredLanguageAttribute' in kwargs:
+            preferred_language_attribute = kwargs['preferredLanguageAttribute']
+        if 'preferredUsernameAttribute' in kwargs:
+            preferred_username_attribute = kwargs['preferredUsernameAttribute']
+        if 'profileAttribute' in kwargs:
+            profile_attribute = kwargs['profileAttribute']
+        if 'startTls' in kwargs:
+            start_tls = kwargs['startTls']
+        if 'userBase' in kwargs:
+            user_base = kwargs['userBase']
+        if 'userFilters' in kwargs:
+            user_filters = kwargs['userFilters']
+        if 'userObjectClasses' in kwargs:
+            user_object_classes = kwargs['userObjectClasses']
+
         if avatar_url_attribute is not None:
-            pulumi.set(__self__, "avatar_url_attribute", avatar_url_attribute)
+            _setter("avatar_url_attribute", avatar_url_attribute)
         if base_dn is not None:
-            pulumi.set(__self__, "base_dn", base_dn)
+            _setter("base_dn", base_dn)
         if bind_dn is not None:
-            pulumi.set(__self__, "bind_dn", bind_dn)
+            _setter("bind_dn", bind_dn)
         if bind_password is not None:
-            pulumi.set(__self__, "bind_password", bind_password)
+            _setter("bind_password", bind_password)
         if display_name_attribute is not None:
-            pulumi.set(__self__, "display_name_attribute", display_name_attribute)
+            _setter("display_name_attribute", display_name_attribute)
         if email_attribute is not None:
-            pulumi.set(__self__, "email_attribute", email_attribute)
+            _setter("email_attribute", email_attribute)
         if email_verified_attribute is not None:
-            pulumi.set(__self__, "email_verified_attribute", email_verified_attribute)
+            _setter("email_verified_attribute", email_verified_attribute)
         if first_name_attribute is not None:
-            pulumi.set(__self__, "first_name_attribute", first_name_attribute)
+            _setter("first_name_attribute", first_name_attribute)
         if id_attribute is not None:
-            pulumi.set(__self__, "id_attribute", id_attribute)
+            _setter("id_attribute", id_attribute)
         if is_auto_creation is not None:
-            pulumi.set(__self__, "is_auto_creation", is_auto_creation)
+            _setter("is_auto_creation", is_auto_creation)
         if is_auto_update is not None:
-            pulumi.set(__self__, "is_auto_update", is_auto_update)
+            _setter("is_auto_update", is_auto_update)
         if is_creation_allowed is not None:
-            pulumi.set(__self__, "is_creation_allowed", is_creation_allowed)
+            _setter("is_creation_allowed", is_creation_allowed)
         if is_linking_allowed is not None:
-            pulumi.set(__self__, "is_linking_allowed", is_linking_allowed)
+            _setter("is_linking_allowed", is_linking_allowed)
         if last_name_attribute is not None:
-            pulumi.set(__self__, "last_name_attribute", last_name_attribute)
+            _setter("last_name_attribute", last_name_attribute)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if nick_name_attribute is not None:
-            pulumi.set(__self__, "nick_name_attribute", nick_name_attribute)
+            _setter("nick_name_attribute", nick_name_attribute)
         if phone_attribute is not None:
-            pulumi.set(__self__, "phone_attribute", phone_attribute)
+            _setter("phone_attribute", phone_attribute)
         if phone_verified_attribute is not None:
-            pulumi.set(__self__, "phone_verified_attribute", phone_verified_attribute)
+            _setter("phone_verified_attribute", phone_verified_attribute)
         if preferred_language_attribute is not None:
-            pulumi.set(__self__, "preferred_language_attribute", preferred_language_attribute)
+            _setter("preferred_language_attribute", preferred_language_attribute)
         if preferred_username_attribute is not None:
-            pulumi.set(__self__, "preferred_username_attribute", preferred_username_attribute)
+            _setter("preferred_username_attribute", preferred_username_attribute)
         if profile_attribute is not None:
-            pulumi.set(__self__, "profile_attribute", profile_attribute)
+            _setter("profile_attribute", profile_attribute)
         if servers is not None:
-            pulumi.set(__self__, "servers", servers)
+            _setter("servers", servers)
         if start_tls is not None:
-            pulumi.set(__self__, "start_tls", start_tls)
+            _setter("start_tls", start_tls)
         if timeout is not None:
-            pulumi.set(__self__, "timeout", timeout)
+            _setter("timeout", timeout)
         if user_base is not None:
-            pulumi.set(__self__, "user_base", user_base)
+            _setter("user_base", user_base)
         if user_filters is not None:
-            pulumi.set(__self__, "user_filters", user_filters)
+            _setter("user_filters", user_filters)
         if user_object_classes is not None:
-            pulumi.set(__self__, "user_object_classes", user_object_classes)
+            _setter("user_object_classes", user_object_classes)
 
     @property
     @pulumi.getter(name="avatarUrlAttribute")
@@ -947,7 +1169,7 @@ class IdpLdap(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
+        terraform The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/idpLdap:IdpLdap imported '123456789012345678:b1nd_p4ssw0rd'
@@ -1025,7 +1247,7 @@ class IdpLdap(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
+        terraform The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/idpLdap:IdpLdap imported '123456789012345678:b1nd_p4ssw0rd'
@@ -1041,6 +1263,10 @@ class IdpLdap(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            IdpLdapArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -1091,7 +1317,7 @@ class IdpLdap(pulumi.CustomResource):
             __props__.__dict__["bind_dn"] = bind_dn
             if bind_password is None and not opts.urn:
                 raise TypeError("Missing required property 'bind_password'")
-            __props__.__dict__["bind_password"] = bind_password
+            __props__.__dict__["bind_password"] = None if bind_password is None else pulumi.Output.secret(bind_password)
             __props__.__dict__["display_name_attribute"] = display_name_attribute
             __props__.__dict__["email_attribute"] = email_attribute
             __props__.__dict__["email_verified_attribute"] = email_verified_attribute
@@ -1135,6 +1361,8 @@ class IdpLdap(pulumi.CustomResource):
             if user_object_classes is None and not opts.urn:
                 raise TypeError("Missing required property 'user_object_classes'")
             __props__.__dict__["user_object_classes"] = user_object_classes
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["bindPassword"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(IdpLdap, __self__).__init__(
             'zitadel:index/idpLdap:IdpLdap',
             resource_name,

@@ -15,7 +15,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ## Import
     /// 
-    /// terraform # The resource can be imported using the ID format `&lt;[org_id]&gt;`, e.g.
+    /// terraform The resource can be imported using the ID format `&lt;[org_id]&gt;`, e.g.
     /// 
     /// ```sh
     ///  $ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'

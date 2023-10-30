@@ -16,13 +16,13 @@ namespace Pulumiverse.Zitadel
         /// Datasource representing a generic JWT IdP on the organization.
         /// </summary>
         public static Task<GetOrgJwtIdpResult> InvokeAsync(GetOrgJwtIdpArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrgJwtIdpResult>("zitadel:index/getOrgJwtIdp:getOrgJwtIdp", args ?? new GetOrgJwtIdpArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgJwtIdpResult>("zitadel:index/getOrgJwtIdp:getOrgJwtIdp", args ?? new GetOrgJwtIdpArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing a generic JWT IdP on the organization.
         /// </summary>
         public static Output<GetOrgJwtIdpResult> Invoke(GetOrgJwtIdpInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrgJwtIdpResult>("zitadel:index/getOrgJwtIdp:getOrgJwtIdp", args ?? new GetOrgJwtIdpInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrgJwtIdpResult>("zitadel:index/getOrgJwtIdp:getOrgJwtIdp", args ?? new GetOrgJwtIdpInvokeArgs(), options.WithDefaults());
     }
 
 

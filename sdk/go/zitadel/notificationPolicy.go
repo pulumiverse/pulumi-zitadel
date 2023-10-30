@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the custom notification policy of an organization.
@@ -19,30 +21,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewNotificationPolicy(ctx, "default", &zitadel.NotificationPolicyArgs{
-// 			OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
-// 			PasswordChange: pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewNotificationPolicy(ctx, "default", &zitadel.NotificationPolicyArgs{
+//				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
+//				PasswordChange: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+// terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/notificationPolicy:NotificationPolicy imported '123456789012345678'
+//
+//	$ pulumi import zitadel:index/notificationPolicy:NotificationPolicy imported '123456789012345678'
+//
 // ```
 type NotificationPolicy struct {
 	pulumi.CustomResourceState
@@ -63,7 +70,7 @@ func NewNotificationPolicy(ctx *pulumi.Context,
 	if args.PasswordChange == nil {
 		return nil, errors.New("invalid value for required argument 'PasswordChange'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource NotificationPolicy
 	err := ctx.RegisterResource("zitadel:index/notificationPolicy:NotificationPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -141,10 +148,16 @@ func (i *NotificationPolicy) ToNotificationPolicyOutputWithContext(ctx context.C
 	return pulumi.ToOutputWithContext(ctx, i).(NotificationPolicyOutput)
 }
 
+func (i *NotificationPolicy) ToOutput(ctx context.Context) pulumix.Output[*NotificationPolicy] {
+	return pulumix.Output[*NotificationPolicy]{
+		OutputState: i.ToNotificationPolicyOutputWithContext(ctx).OutputState,
+	}
+}
+
 // NotificationPolicyArrayInput is an input type that accepts NotificationPolicyArray and NotificationPolicyArrayOutput values.
 // You can construct a concrete instance of `NotificationPolicyArrayInput` via:
 //
-//          NotificationPolicyArray{ NotificationPolicyArgs{...} }
+//	NotificationPolicyArray{ NotificationPolicyArgs{...} }
 type NotificationPolicyArrayInput interface {
 	pulumi.Input
 
@@ -166,10 +179,16 @@ func (i NotificationPolicyArray) ToNotificationPolicyArrayOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(NotificationPolicyArrayOutput)
 }
 
+func (i NotificationPolicyArray) ToOutput(ctx context.Context) pulumix.Output[[]*NotificationPolicy] {
+	return pulumix.Output[[]*NotificationPolicy]{
+		OutputState: i.ToNotificationPolicyArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // NotificationPolicyMapInput is an input type that accepts NotificationPolicyMap and NotificationPolicyMapOutput values.
 // You can construct a concrete instance of `NotificationPolicyMapInput` via:
 //
-//          NotificationPolicyMap{ "key": NotificationPolicyArgs{...} }
+//	NotificationPolicyMap{ "key": NotificationPolicyArgs{...} }
 type NotificationPolicyMapInput interface {
 	pulumi.Input
 
@@ -191,6 +210,12 @@ func (i NotificationPolicyMap) ToNotificationPolicyMapOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(NotificationPolicyMapOutput)
 }
 
+func (i NotificationPolicyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*NotificationPolicy] {
+	return pulumix.Output[map[string]*NotificationPolicy]{
+		OutputState: i.ToNotificationPolicyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type NotificationPolicyOutput struct{ *pulumi.OutputState }
 
 func (NotificationPolicyOutput) ElementType() reflect.Type {
@@ -203,6 +228,12 @@ func (o NotificationPolicyOutput) ToNotificationPolicyOutput() NotificationPolic
 
 func (o NotificationPolicyOutput) ToNotificationPolicyOutputWithContext(ctx context.Context) NotificationPolicyOutput {
 	return o
+}
+
+func (o NotificationPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[*NotificationPolicy] {
+	return pulumix.Output[*NotificationPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 // ID of the organization
@@ -229,6 +260,12 @@ func (o NotificationPolicyArrayOutput) ToNotificationPolicyArrayOutputWithContex
 	return o
 }
 
+func (o NotificationPolicyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*NotificationPolicy] {
+	return pulumix.Output[[]*NotificationPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o NotificationPolicyArrayOutput) Index(i pulumi.IntInput) NotificationPolicyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *NotificationPolicy {
 		return vs[0].([]*NotificationPolicy)[vs[1].(int)]
@@ -247,6 +284,12 @@ func (o NotificationPolicyMapOutput) ToNotificationPolicyMapOutput() Notificatio
 
 func (o NotificationPolicyMapOutput) ToNotificationPolicyMapOutputWithContext(ctx context.Context) NotificationPolicyMapOutput {
 	return o
+}
+
+func (o NotificationPolicyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*NotificationPolicy] {
+	return pulumix.Output[map[string]*NotificationPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o NotificationPolicyMapOutput) MapIndex(k pulumi.StringInput) NotificationPolicyOutput {
