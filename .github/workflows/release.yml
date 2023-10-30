@@ -44,6 +44,9 @@ jobs:
       with:
         baseVersion: 0.0.17
         gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        # TODO: Remove when permissions are fixed
+        # https://pulumi-community.slack.com/archives/C037PV12W6L/p1698447153384709?thread_ts=1697543021.775809&cid=C037PV12W6L
+        releasesBranch: master
     - name: Unshallow clone for tags
       run: git fetch --prune --unshallow --tags
     - name: Install Go
