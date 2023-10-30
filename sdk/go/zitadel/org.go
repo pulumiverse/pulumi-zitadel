@@ -50,6 +50,8 @@ import (
 type Org struct {
 	pulumi.CustomResourceState
 
+	// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+	IsDefault pulumi.BoolPtrOutput `pulumi:"isDefault"`
 	// Name of the org
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Primary domain of the org
@@ -88,6 +90,8 @@ func GetOrg(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Org resources.
 type orgState struct {
+	// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+	IsDefault *bool `pulumi:"isDefault"`
 	// Name of the org
 	Name *string `pulumi:"name"`
 	// Primary domain of the org
@@ -97,6 +101,8 @@ type orgState struct {
 }
 
 type OrgState struct {
+	// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+	IsDefault pulumi.BoolPtrInput
 	// Name of the org
 	Name pulumi.StringPtrInput
 	// Primary domain of the org
@@ -110,12 +116,16 @@ func (OrgState) ElementType() reflect.Type {
 }
 
 type orgArgs struct {
+	// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+	IsDefault *bool `pulumi:"isDefault"`
 	// Name of the org
 	Name *string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a Org resource.
 type OrgArgs struct {
+	// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+	IsDefault pulumi.BoolPtrInput
 	// Name of the org
 	Name pulumi.StringPtrInput
 }
@@ -229,6 +239,11 @@ func (o OrgOutput) ToOutput(ctx context.Context) pulumix.Output[*Org] {
 	return pulumix.Output[*Org]{
 		OutputState: o.OutputState,
 	}
+}
+
+// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+func (o OrgOutput) IsDefault() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Org) pulumi.BoolPtrOutput { return v.IsDefault }).(pulumi.BoolPtrOutput)
 }
 
 // Name of the org

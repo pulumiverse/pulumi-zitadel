@@ -4315,6 +4315,10 @@
         "zitadel:index/org:Org": {
             "description": "Resource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as zitadel from \"@pulumiverse/zitadel\";\n\nconst _default = new zitadel.Org(\"default\", {});\n```\n```python\nimport pulumi\nimport pulumiverse_zitadel as zitadel\n\ndefault = zitadel.Org(\"default\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Zitadel = Pulumiverse.Zitadel;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @default = new Zitadel.Org(\"default\");\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := zitadel.NewOrg(ctx, \"default\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.zitadel.Org;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var default_ = new Org(\"default\");\n\n    }\n}\n```\n```yaml\nresources:\n  default:\n    type: zitadel:Org\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nterraform The resource can be imported using the ID format `\u003cid\u003e`, e.g.\n\n```sh\n $ pulumi import zitadel:index/org:Org imported '123456789012345678'\n```\n\n ",
             "properties": {
+                "isDefault": {
+                    "type": "boolean",
+                    "description": "True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "Name of the org\n"
@@ -4334,6 +4338,10 @@
                 "state"
             ],
             "inputProperties": {
+                "isDefault": {
+                    "type": "boolean",
+                    "description": "True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "Name of the org\n"
@@ -4342,6 +4350,10 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Org resources.\n",
                 "properties": {
+                    "isDefault": {
+                        "type": "boolean",
+                        "description": "True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.\n"
+                    },
                     "name": {
                         "type": "string",
                         "description": "Name of the org\n"
@@ -8378,6 +8390,10 @@
                         "type": "string",
                         "description": "ID of the organization\n"
                     },
+                    "isDefault": {
+                        "type": "boolean",
+                        "description": "Indicates whether the org is the default org of the instance.\n"
+                    },
                     "name": {
                         "type": "string",
                         "description": "Name of the org.\n"
@@ -8394,6 +8410,7 @@
                 "type": "object",
                 "required": [
                     "id",
+                    "isDefault",
                     "name",
                     "primaryDomain",
                     "state"

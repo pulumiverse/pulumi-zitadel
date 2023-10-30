@@ -115,6 +115,10 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         public readonly string Id;
         /// <summary>
+        /// Indicates whether the org is the default org of the instance.
+        /// </summary>
+        public readonly bool IsDefault;
+        /// <summary>
         /// Name of the org.
         /// </summary>
         public readonly string Name;
@@ -131,6 +135,8 @@ namespace Pulumiverse.Zitadel
         private GetOrgResult(
             string id,
 
+            bool isDefault,
+
             string name,
 
             string primaryDomain,
@@ -138,6 +144,7 @@ namespace Pulumiverse.Zitadel
             string state)
         {
             Id = id;
+            IsDefault = isDefault;
             Name = name;
             PrimaryDomain = primaryDomain;
             State = state;

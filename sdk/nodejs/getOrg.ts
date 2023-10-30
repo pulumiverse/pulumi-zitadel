@@ -46,6 +46,10 @@ export interface GetOrgResult {
      */
     readonly id: string;
     /**
+     * Indicates whether the org is the default org of the instance.
+     */
+    readonly isDefault: boolean;
+    /**
      * Name of the org.
      */
     readonly name: string;

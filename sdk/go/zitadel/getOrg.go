@@ -60,6 +60,8 @@ type LookupOrgArgs struct {
 type LookupOrgResult struct {
 	// ID of the organization
 	Id string `pulumi:"id"`
+	// Indicates whether the org is the default org of the instance.
+	IsDefault bool `pulumi:"isDefault"`
 	// Name of the org.
 	Name string `pulumi:"name"`
 	// Primary domain of the org
@@ -115,6 +117,11 @@ func (o LookupOrgResultOutput) ToOutput(ctx context.Context) pulumix.Output[Look
 // ID of the organization
 func (o LookupOrgResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupOrgResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Indicates whether the org is the default org of the instance.
+func (o LookupOrgResultOutput) IsDefault() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupOrgResult) bool { return v.IsDefault }).(pulumi.BoolOutput)
 }
 
 // Name of the org.

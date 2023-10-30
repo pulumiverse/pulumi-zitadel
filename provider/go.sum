@@ -2437,8 +2437,8 @@ github.com/zeebo/xxh3 v1.0.2/go.mod h1:5NWz9Sef7zIDm2JHfFlcQvNekmcEl9ekUZQQKCYaD
 github.com/zenazn/goji v0.9.0/go.mod h1:7S9M489iMyHBNxwZnk9/EHS098H4/F6TATF2mIxtB1Q=
 github.com/zitadel/oidc v1.13.4 h1:+k2GKqP9Ld9S2MSFlj+KaNsoZ3J9oy+Ezw51EzSFuC8=
 github.com/zitadel/oidc v1.13.4/go.mod h1:3h2DhUcP02YV6q/CA/BG4yla0o6rXjK+DkJGK/dwJfw=
-github.com/zitadel/terraform-provider-zitadel v1.0.3 h1:fsky0W/dSW5or8rbsQcF/7bZntQaeGxsul5d1hOEwM0=
-github.com/zitadel/terraform-provider-zitadel v1.0.3/go.mod h1:6AHXpHOu0B6O2lNavJiiyoOKB4T10IUlNZdIaO1Tzz8=
+github.com/zitadel/terraform-provider-zitadel v1.0.4 h1:fv2X0nueuUfyYy+uYwLHsBbvNeAfTeYlQyFJX/A9KbY=
+github.com/zitadel/terraform-provider-zitadel v1.0.4/go.mod h1:6AHXpHOu0B6O2lNavJiiyoOKB4T10IUlNZdIaO1Tzz8=
 github.com/zitadel/zitadel-go/v2 v2.0.21 h1:P+m8rBReph8UhxrchSR0npthHTlwqmVHi8k8JI1q1ds=
 github.com/zitadel/zitadel-go/v2 v2.0.21/go.mod h1:1kHc4fpCjAHVAA13bZNrpxaAO83VaPnF8rzM157A9rQ=
 go.etcd.io/bbolt v1.3.2/go.mod h1:IbVyRI1SCnLcuJnV2u8VeU0CEYM7e686BmAb1XKL+uU=
