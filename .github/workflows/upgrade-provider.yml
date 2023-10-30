@@ -5,6 +5,14 @@ on:
   schedule:
     - cron: "0 5 * * *"
 
+  # TODO: Remove when permissions are fixed
+  # https://pulumi-community.slack.com/archives/C037PV12W6L/p1698447153384709?thread_ts=1697543021.775809&cid=C037PV12W6L
+  push:
+    branches:
+      - master
+    tags-ignore:
+      - v*
+
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
