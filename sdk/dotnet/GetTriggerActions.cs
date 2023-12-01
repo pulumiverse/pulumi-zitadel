@@ -21,6 +21,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -35,7 +36,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["triggerActions"] = @default.Apply(getTriggerActionsResult =&gt; getTriggerActionsResult),
+        ///         ["triggerActions"] = @default,
         ///     };
         /// });
         /// ```
@@ -43,7 +44,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetTriggerActionsResult> InvokeAsync(GetTriggerActionsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTriggerActionsResult>("zitadel:index/getTriggerActions:getTriggerActions", args ?? new GetTriggerActionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTriggerActionsResult>("zitadel:index/getTriggerActions:getTriggerActions", args ?? new GetTriggerActionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Resource representing triggers, when actions get started
@@ -54,6 +55,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -68,7 +70,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["triggerActions"] = @default.Apply(getTriggerActionsResult =&gt; getTriggerActionsResult),
+        ///         ["triggerActions"] = @default,
         ///     };
         /// });
         /// ```
@@ -76,7 +78,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetTriggerActionsResult> Invoke(GetTriggerActionsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTriggerActionsResult>("zitadel:index/getTriggerActions:getTriggerActions", args ?? new GetTriggerActionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTriggerActionsResult>("zitadel:index/getTriggerActions:getTriggerActions", args ?? new GetTriggerActionsInvokeArgs(), options.WithDefaults());
     }
 
 

@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['HumanUserArgs', 'HumanUser']
@@ -43,28 +43,83 @@ class HumanUserArgs:
         :param pulumi.Input[str] phone: Phone of the user
         :param pulumi.Input[str] preferred_language: Preferred language of the user
         """
-        pulumi.set(__self__, "email", email)
-        pulumi.set(__self__, "first_name", first_name)
-        pulumi.set(__self__, "last_name", last_name)
-        pulumi.set(__self__, "user_name", user_name)
+        HumanUserArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            email=email,
+            first_name=first_name,
+            last_name=last_name,
+            user_name=user_name,
+            display_name=display_name,
+            gender=gender,
+            initial_password=initial_password,
+            is_email_verified=is_email_verified,
+            is_phone_verified=is_phone_verified,
+            nick_name=nick_name,
+            org_id=org_id,
+            phone=phone,
+            preferred_language=preferred_language,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             email: pulumi.Input[str],
+             first_name: pulumi.Input[str],
+             last_name: pulumi.Input[str],
+             user_name: pulumi.Input[str],
+             display_name: Optional[pulumi.Input[str]] = None,
+             gender: Optional[pulumi.Input[str]] = None,
+             initial_password: Optional[pulumi.Input[str]] = None,
+             is_email_verified: Optional[pulumi.Input[bool]] = None,
+             is_phone_verified: Optional[pulumi.Input[bool]] = None,
+             nick_name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             phone: Optional[pulumi.Input[str]] = None,
+             preferred_language: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'firstName' in kwargs:
+            first_name = kwargs['firstName']
+        if 'lastName' in kwargs:
+            last_name = kwargs['lastName']
+        if 'userName' in kwargs:
+            user_name = kwargs['userName']
+        if 'displayName' in kwargs:
+            display_name = kwargs['displayName']
+        if 'initialPassword' in kwargs:
+            initial_password = kwargs['initialPassword']
+        if 'isEmailVerified' in kwargs:
+            is_email_verified = kwargs['isEmailVerified']
+        if 'isPhoneVerified' in kwargs:
+            is_phone_verified = kwargs['isPhoneVerified']
+        if 'nickName' in kwargs:
+            nick_name = kwargs['nickName']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'preferredLanguage' in kwargs:
+            preferred_language = kwargs['preferredLanguage']
+
+        _setter("email", email)
+        _setter("first_name", first_name)
+        _setter("last_name", last_name)
+        _setter("user_name", user_name)
         if display_name is not None:
-            pulumi.set(__self__, "display_name", display_name)
+            _setter("display_name", display_name)
         if gender is not None:
-            pulumi.set(__self__, "gender", gender)
+            _setter("gender", gender)
         if initial_password is not None:
-            pulumi.set(__self__, "initial_password", initial_password)
+            _setter("initial_password", initial_password)
         if is_email_verified is not None:
-            pulumi.set(__self__, "is_email_verified", is_email_verified)
+            _setter("is_email_verified", is_email_verified)
         if is_phone_verified is not None:
-            pulumi.set(__self__, "is_phone_verified", is_phone_verified)
+            _setter("is_phone_verified", is_phone_verified)
         if nick_name is not None:
-            pulumi.set(__self__, "nick_name", nick_name)
+            _setter("nick_name", nick_name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if phone is not None:
-            pulumi.set(__self__, "phone", phone)
+            _setter("phone", phone)
         if preferred_language is not None:
-            pulumi.set(__self__, "preferred_language", preferred_language)
+            _setter("preferred_language", preferred_language)
 
     @property
     @pulumi.getter
@@ -261,38 +316,103 @@ class _HumanUserState:
         :param pulumi.Input[str] state: State of the user
         :param pulumi.Input[str] user_name: Username
         """
+        _HumanUserState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            display_name=display_name,
+            email=email,
+            first_name=first_name,
+            gender=gender,
+            initial_password=initial_password,
+            is_email_verified=is_email_verified,
+            is_phone_verified=is_phone_verified,
+            last_name=last_name,
+            login_names=login_names,
+            nick_name=nick_name,
+            org_id=org_id,
+            phone=phone,
+            preferred_language=preferred_language,
+            preferred_login_name=preferred_login_name,
+            state=state,
+            user_name=user_name,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             display_name: Optional[pulumi.Input[str]] = None,
+             email: Optional[pulumi.Input[str]] = None,
+             first_name: Optional[pulumi.Input[str]] = None,
+             gender: Optional[pulumi.Input[str]] = None,
+             initial_password: Optional[pulumi.Input[str]] = None,
+             is_email_verified: Optional[pulumi.Input[bool]] = None,
+             is_phone_verified: Optional[pulumi.Input[bool]] = None,
+             last_name: Optional[pulumi.Input[str]] = None,
+             login_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             nick_name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             phone: Optional[pulumi.Input[str]] = None,
+             preferred_language: Optional[pulumi.Input[str]] = None,
+             preferred_login_name: Optional[pulumi.Input[str]] = None,
+             state: Optional[pulumi.Input[str]] = None,
+             user_name: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'displayName' in kwargs:
+            display_name = kwargs['displayName']
+        if 'firstName' in kwargs:
+            first_name = kwargs['firstName']
+        if 'initialPassword' in kwargs:
+            initial_password = kwargs['initialPassword']
+        if 'isEmailVerified' in kwargs:
+            is_email_verified = kwargs['isEmailVerified']
+        if 'isPhoneVerified' in kwargs:
+            is_phone_verified = kwargs['isPhoneVerified']
+        if 'lastName' in kwargs:
+            last_name = kwargs['lastName']
+        if 'loginNames' in kwargs:
+            login_names = kwargs['loginNames']
+        if 'nickName' in kwargs:
+            nick_name = kwargs['nickName']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'preferredLanguage' in kwargs:
+            preferred_language = kwargs['preferredLanguage']
+        if 'preferredLoginName' in kwargs:
+            preferred_login_name = kwargs['preferredLoginName']
+        if 'userName' in kwargs:
+            user_name = kwargs['userName']
+
         if display_name is not None:
-            pulumi.set(__self__, "display_name", display_name)
+            _setter("display_name", display_name)
         if email is not None:
-            pulumi.set(__self__, "email", email)
+            _setter("email", email)
         if first_name is not None:
-            pulumi.set(__self__, "first_name", first_name)
+            _setter("first_name", first_name)
         if gender is not None:
-            pulumi.set(__self__, "gender", gender)
+            _setter("gender", gender)
         if initial_password is not None:
-            pulumi.set(__self__, "initial_password", initial_password)
+            _setter("initial_password", initial_password)
         if is_email_verified is not None:
-            pulumi.set(__self__, "is_email_verified", is_email_verified)
+            _setter("is_email_verified", is_email_verified)
         if is_phone_verified is not None:
-            pulumi.set(__self__, "is_phone_verified", is_phone_verified)
+            _setter("is_phone_verified", is_phone_verified)
         if last_name is not None:
-            pulumi.set(__self__, "last_name", last_name)
+            _setter("last_name", last_name)
         if login_names is not None:
-            pulumi.set(__self__, "login_names", login_names)
+            _setter("login_names", login_names)
         if nick_name is not None:
-            pulumi.set(__self__, "nick_name", nick_name)
+            _setter("nick_name", nick_name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if phone is not None:
-            pulumi.set(__self__, "phone", phone)
+            _setter("phone", phone)
         if preferred_language is not None:
-            pulumi.set(__self__, "preferred_language", preferred_language)
+            _setter("preferred_language", preferred_language)
         if preferred_login_name is not None:
-            pulumi.set(__self__, "preferred_login_name", preferred_login_name)
+            _setter("preferred_login_name", preferred_login_name)
         if state is not None:
-            pulumi.set(__self__, "state", state)
+            _setter("state", state)
         if user_name is not None:
-            pulumi.set(__self__, "user_name", user_name)
+            _setter("user_name", user_name)
 
     @property
     @pulumi.getter(name="displayName")
@@ -535,7 +655,7 @@ class HumanUser(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `id[:org_id][:initial_password]>`, e.g.
+        terraform The resource can be imported using the ID format `id[:org_id][:initial_password]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/humanUser:HumanUser imported '123456789012345678:123456789012345678:Password1!'
@@ -592,7 +712,7 @@ class HumanUser(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `id[:org_id][:initial_password]>`, e.g.
+        terraform The resource can be imported using the ID format `id[:org_id][:initial_password]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/humanUser:HumanUser imported '123456789012345678:123456789012345678:Password1!'
@@ -608,6 +728,10 @@ class HumanUser(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            HumanUserArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -643,7 +767,7 @@ class HumanUser(pulumi.CustomResource):
                 raise TypeError("Missing required property 'first_name'")
             __props__.__dict__["first_name"] = first_name
             __props__.__dict__["gender"] = gender
-            __props__.__dict__["initial_password"] = initial_password
+            __props__.__dict__["initial_password"] = None if initial_password is None else pulumi.Output.secret(initial_password)
             __props__.__dict__["is_email_verified"] = is_email_verified
             __props__.__dict__["is_phone_verified"] = is_phone_verified
             if last_name is None and not opts.urn:
@@ -659,6 +783,8 @@ class HumanUser(pulumi.CustomResource):
             __props__.__dict__["login_names"] = None
             __props__.__dict__["preferred_login_name"] = None
             __props__.__dict__["state"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["initialPassword"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(HumanUser, __self__).__init__(
             'zitadel:index/humanUser:HumanUser',
             resource_name,

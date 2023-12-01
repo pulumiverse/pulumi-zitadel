@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
@@ -18,26 +20,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_default, err := zitadel.LookupOrg(ctx, &GetOrgArgs{
-// 			Id: "123456789012345678",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("org", _default)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_default, err := zitadel.LookupOrg(ctx, &zitadel.LookupOrgArgs{
+//				Id: "123456789012345678",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("org", _default)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupOrg(ctx *pulumi.Context, args *LookupOrgArgs, opts ...pulumi.InvokeOption) (*LookupOrgResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupOrgResult
 	err := ctx.Invoke("zitadel:index/getOrg:getOrg", args, &rv, opts...)
 	if err != nil {
@@ -56,6 +60,8 @@ type LookupOrgArgs struct {
 type LookupOrgResult struct {
 	// ID of the organization
 	Id string `pulumi:"id"`
+	// Indicates whether the org is the default org of the instance.
+	IsDefault bool `pulumi:"isDefault"`
 	// Name of the org.
 	Name string `pulumi:"name"`
 	// Primary domain of the org
@@ -102,9 +108,20 @@ func (o LookupOrgResultOutput) ToLookupOrgResultOutputWithContext(ctx context.Co
 	return o
 }
 
+func (o LookupOrgResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupOrgResult] {
+	return pulumix.Output[LookupOrgResult]{
+		OutputState: o.OutputState,
+	}
+}
+
 // ID of the organization
 func (o LookupOrgResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupOrgResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Indicates whether the org is the default org of the instance.
+func (o LookupOrgResultOutput) IsDefault() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupOrgResult) bool { return v.IsDefault }).(pulumi.BoolOutput)
 }
 
 // Name of the org.

@@ -11,14 +11,14 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const defaultOrg = new zitadel.Org("default", {});
+ * const _default = new zitadel.Org("default", {});
  * ```
  *
  * ## Import
  *
- * terraform # The resource can be imported using the ID format `<id>`, e.g.
+ * terraform The resource can be imported using the ID format `<id>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/org:Org imported '123456789012345678'
@@ -53,6 +53,10 @@ export class Org extends pulumi.CustomResource {
     }
 
     /**
+     * True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+     */
+    public readonly isDefault!: pulumi.Output<boolean | undefined>;
+    /**
      * Name of the org
      */
     public readonly name!: pulumi.Output<string>;
@@ -78,11 +82,13 @@ export class Org extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as OrgState | undefined;
+            resourceInputs["isDefault"] = state ? state.isDefault : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["primaryDomain"] = state ? state.primaryDomain : undefined;
             resourceInputs["state"] = state ? state.state : undefined;
         } else {
             const args = argsOrState as OrgArgs | undefined;
+            resourceInputs["isDefault"] = args ? args.isDefault : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["primaryDomain"] = undefined /*out*/;
             resourceInputs["state"] = undefined /*out*/;
@@ -96,6 +102,10 @@ export class Org extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Org resources.
  */
 export interface OrgState {
+    /**
+     * True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+     */
+    isDefault?: pulumi.Input<boolean>;
     /**
      * Name of the org
      */
@@ -114,6 +124,10 @@ export interface OrgState {
  * The set of arguments for constructing a Org resource.
  */
 export interface OrgArgs {
+    /**
+     * True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+     */
+    isDefault?: pulumi.Input<boolean>;
     /**
      * Name of the org
      */

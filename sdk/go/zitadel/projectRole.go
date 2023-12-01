@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the project roles, which can be given as authorizations to users.
@@ -19,33 +21,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewProjectRole(ctx, "default", &zitadel.ProjectRoleArgs{
-// 			OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
-// 			ProjectId:   pulumi.Any(data.Zitadel_project.Default.Id),
-// 			RoleKey:     pulumi.String("super-user"),
-// 			DisplayName: pulumi.String("display_name2"),
-// 			Group:       pulumi.String("role_group"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewProjectRole(ctx, "default", &zitadel.ProjectRoleArgs{
+//				OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
+//				ProjectId:   pulumi.Any(data.Zitadel_project.Default.Id),
+//				RoleKey:     pulumi.String("super-user"),
+//				DisplayName: pulumi.String("display_name2"),
+//				Group:       pulumi.String("role_group"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<project_id:role_key[:org_id]>`, e.g.
+// terraform The resource can be imported using the ID format `<project_id:role_key[:org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/projectRole:ProjectRole imported '123456789012345678:my-role-key:123456789012345678'
+//
+//	$ pulumi import zitadel:index/projectRole:ProjectRole imported '123456789012345678:my-role-key:123456789012345678'
+//
 // ```
 type ProjectRole struct {
 	pulumi.CustomResourceState
@@ -78,7 +85,7 @@ func NewProjectRole(ctx *pulumi.Context,
 	if args.RoleKey == nil {
 		return nil, errors.New("invalid value for required argument 'RoleKey'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProjectRole
 	err := ctx.RegisterResource("zitadel:index/projectRole:ProjectRole", name, args, &resource, opts...)
 	if err != nil {
@@ -180,10 +187,16 @@ func (i *ProjectRole) ToProjectRoleOutputWithContext(ctx context.Context) Projec
 	return pulumi.ToOutputWithContext(ctx, i).(ProjectRoleOutput)
 }
 
+func (i *ProjectRole) ToOutput(ctx context.Context) pulumix.Output[*ProjectRole] {
+	return pulumix.Output[*ProjectRole]{
+		OutputState: i.ToProjectRoleOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ProjectRoleArrayInput is an input type that accepts ProjectRoleArray and ProjectRoleArrayOutput values.
 // You can construct a concrete instance of `ProjectRoleArrayInput` via:
 //
-//          ProjectRoleArray{ ProjectRoleArgs{...} }
+//	ProjectRoleArray{ ProjectRoleArgs{...} }
 type ProjectRoleArrayInput interface {
 	pulumi.Input
 
@@ -205,10 +218,16 @@ func (i ProjectRoleArray) ToProjectRoleArrayOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(ProjectRoleArrayOutput)
 }
 
+func (i ProjectRoleArray) ToOutput(ctx context.Context) pulumix.Output[[]*ProjectRole] {
+	return pulumix.Output[[]*ProjectRole]{
+		OutputState: i.ToProjectRoleArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ProjectRoleMapInput is an input type that accepts ProjectRoleMap and ProjectRoleMapOutput values.
 // You can construct a concrete instance of `ProjectRoleMapInput` via:
 //
-//          ProjectRoleMap{ "key": ProjectRoleArgs{...} }
+//	ProjectRoleMap{ "key": ProjectRoleArgs{...} }
 type ProjectRoleMapInput interface {
 	pulumi.Input
 
@@ -230,6 +249,12 @@ func (i ProjectRoleMap) ToProjectRoleMapOutputWithContext(ctx context.Context) P
 	return pulumi.ToOutputWithContext(ctx, i).(ProjectRoleMapOutput)
 }
 
+func (i ProjectRoleMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProjectRole] {
+	return pulumix.Output[map[string]*ProjectRole]{
+		OutputState: i.ToProjectRoleMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ProjectRoleOutput struct{ *pulumi.OutputState }
 
 func (ProjectRoleOutput) ElementType() reflect.Type {
@@ -242,6 +267,12 @@ func (o ProjectRoleOutput) ToProjectRoleOutput() ProjectRoleOutput {
 
 func (o ProjectRoleOutput) ToProjectRoleOutputWithContext(ctx context.Context) ProjectRoleOutput {
 	return o
+}
+
+func (o ProjectRoleOutput) ToOutput(ctx context.Context) pulumix.Output[*ProjectRole] {
+	return pulumix.Output[*ProjectRole]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Name used for project role
@@ -283,6 +314,12 @@ func (o ProjectRoleArrayOutput) ToProjectRoleArrayOutputWithContext(ctx context.
 	return o
 }
 
+func (o ProjectRoleArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ProjectRole] {
+	return pulumix.Output[[]*ProjectRole]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ProjectRoleArrayOutput) Index(i pulumi.IntInput) ProjectRoleOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ProjectRole {
 		return vs[0].([]*ProjectRole)[vs[1].(int)]
@@ -301,6 +338,12 @@ func (o ProjectRoleMapOutput) ToProjectRoleMapOutput() ProjectRoleMapOutput {
 
 func (o ProjectRoleMapOutput) ToProjectRoleMapOutputWithContext(ctx context.Context) ProjectRoleMapOutput {
 	return o
+}
+
+func (o ProjectRoleMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProjectRole] {
+	return pulumix.Output[map[string]*ProjectRole]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ProjectRoleMapOutput) MapIndex(k pulumi.StringInput) ProjectRoleOutput {

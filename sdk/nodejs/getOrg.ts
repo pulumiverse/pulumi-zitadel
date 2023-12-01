@@ -20,11 +20,8 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getOrg(args: GetOrgArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getOrg:getOrg", {
         "id": args.id,
     }, opts);
@@ -49,6 +46,10 @@ export interface GetOrgResult {
      */
     readonly id: string;
     /**
+     * Indicates whether the org is the default org of the instance.
+     */
+    readonly isDefault: boolean;
+    /**
      * Name of the org.
      */
     readonly name: string;
@@ -61,9 +62,23 @@ export interface GetOrgResult {
      */
     readonly state: string;
 }
-
+/**
+ * Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getOrg({
+ *     id: "123456789012345678",
+ * });
+ * export const org = _default;
+ * ```
+ */
 export function getOrgOutput(args: GetOrgOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOrgResult> {
-    return pulumi.output(args).apply(a => getOrg(a, opts))
+    return pulumi.output(args).apply((a: any) => getOrg(a, opts))
 }
 
 /**

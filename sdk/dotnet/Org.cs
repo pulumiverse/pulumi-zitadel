@@ -17,6 +17,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Zitadel = Pulumiverse.Zitadel;
     /// 
@@ -29,7 +30,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ## Import
     /// 
-    /// terraform # The resource can be imported using the ID format `&lt;id&gt;`, e.g.
+    /// terraform The resource can be imported using the ID format `&lt;id&gt;`, e.g.
     /// 
     /// ```sh
     ///  $ pulumi import zitadel:index/org:Org imported '123456789012345678'
@@ -38,6 +39,12 @@ namespace Pulumiverse.Zitadel
     [ZitadelResourceType("zitadel:index/org:Org")]
     public partial class Org : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+        /// </summary>
+        [Output("isDefault")]
+        public Output<bool?> IsDefault { get; private set; } = null!;
+
         /// <summary>
         /// Name of the org
         /// </summary>
@@ -104,6 +111,12 @@ namespace Pulumiverse.Zitadel
     public sealed class OrgArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+        /// </summary>
+        [Input("isDefault")]
+        public Input<bool>? IsDefault { get; set; }
+
+        /// <summary>
         /// Name of the org
         /// </summary>
         [Input("name")]
@@ -117,6 +130,12 @@ namespace Pulumiverse.Zitadel
 
     public sealed class OrgState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// True sets the org as default org for the instance. Only one org can be default org. Nothing happens if you set it to false until you set another org as default org.
+        /// </summary>
+        [Input("isDefault")]
+        public Input<bool>? IsDefault { get; set; }
+
         /// <summary>
         /// Name of the org
         /// </summary>

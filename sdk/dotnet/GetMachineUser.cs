@@ -21,6 +21,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -34,7 +35,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["machineUser"] = @default.Apply(getMachineUserResult =&gt; getMachineUserResult),
+        ///         ["machineUser"] = @default,
         ///     };
         /// });
         /// ```
@@ -42,7 +43,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetMachineUserResult> InvokeAsync(GetMachineUserArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMachineUserResult>("zitadel:index/getMachineUser:getMachineUser", args ?? new GetMachineUserArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMachineUserResult>("zitadel:index/getMachineUser:getMachineUser", args ?? new GetMachineUserArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing a serviceaccount situated under an organization, which then can be authorized through memberships or direct grants on other resources.
@@ -53,6 +54,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -66,7 +68,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["machineUser"] = @default.Apply(getMachineUserResult =&gt; getMachineUserResult),
+        ///         ["machineUser"] = @default,
         ///     };
         /// });
         /// ```
@@ -74,7 +76,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetMachineUserResult> Invoke(GetMachineUserInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMachineUserResult>("zitadel:index/getMachineUser:getMachineUser", args ?? new GetMachineUserInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMachineUserResult>("zitadel:index/getMachineUser:getMachineUser", args ?? new GetMachineUserInvokeArgs(), options.WithDefaults());
     }
 
 

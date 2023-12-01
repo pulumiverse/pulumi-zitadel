@@ -124,6 +124,7 @@ func Provider() tfbridge.ProviderInfo {
 			"zitadel_default_domain_policy":              {Tok: tfbridge.MakeResource(mainPkg, mainMod, "DefaultDomainPolicy")},
 			"zitadel_default_privacy_policy":             {Tok: tfbridge.MakeResource(mainPkg, mainMod, "DefaultPrivacyPolicy")},
 			"zitadel_default_password_complexity_policy": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "DefaultPasswordComplexityPolicy")},
+			"zitadel_default_oidc_settings":              {Tok: tfbridge.MakeResource(mainPkg, mainMod, "DefaultOidcSettings")},
 			"zitadel_sms_provider_twilio":                {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SmsProviderTwilio")},
 			"zitadel_smtp_config":                        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SmtpConfig")},
 			"zitadel_default_notification_policy":        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "DefaultNotificationPolicy")},
@@ -147,6 +148,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"zitadel_org":                        {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getOrg")},
+			"zitadel_orgs":                       {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getOrgs")},
 			"zitadel_human_user":                 {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getHumanUser")},
 			"zitadel_machine_user":               {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getMachineUser")},
 			"zitadel_project":                    {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getProject")},
@@ -171,6 +173,7 @@ func Provider() tfbridge.ProviderInfo {
 			"zitadel_org_idp_google":             {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getOrgIdpGoogle")},
 			"zitadel_org_idp_azure_ad":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getOrgIdpAzureAd")},
 			"zitadel_org_idp_ldap":               {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getOrgIdpLdap")},
+			"zitadel_default_oidc_settings":      {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getDefaultOidcSettings")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@pulumiverse/zitadel",

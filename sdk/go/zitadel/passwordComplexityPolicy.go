@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the custom password complexity policy of an organization.
@@ -19,26 +21,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewPasswordComplexityPolicy(ctx, "default", &zitadel.PasswordComplexityPolicyArgs{
-// 			OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
-// 			MinLength:    pulumi.Int(8),
-// 			HasUppercase: pulumi.Bool(true),
-// 			HasLowercase: pulumi.Bool(true),
-// 			HasNumber:    pulumi.Bool(true),
-// 			HasSymbol:    pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewPasswordComplexityPolicy(ctx, "default", &zitadel.PasswordComplexityPolicyArgs{
+//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				MinLength:    pulumi.Int(8),
+//				HasUppercase: pulumi.Bool(true),
+//				HasLowercase: pulumi.Bool(true),
+//				HasNumber:    pulumi.Bool(true),
+//				HasSymbol:    pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type PasswordComplexityPolicy struct {
 	pulumi.CustomResourceState
@@ -79,7 +84,7 @@ func NewPasswordComplexityPolicy(ctx *pulumi.Context,
 	if args.MinLength == nil {
 		return nil, errors.New("invalid value for required argument 'MinLength'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PasswordComplexityPolicy
 	err := ctx.RegisterResource("zitadel:index/passwordComplexityPolicy:PasswordComplexityPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -189,10 +194,16 @@ func (i *PasswordComplexityPolicy) ToPasswordComplexityPolicyOutputWithContext(c
 	return pulumi.ToOutputWithContext(ctx, i).(PasswordComplexityPolicyOutput)
 }
 
+func (i *PasswordComplexityPolicy) ToOutput(ctx context.Context) pulumix.Output[*PasswordComplexityPolicy] {
+	return pulumix.Output[*PasswordComplexityPolicy]{
+		OutputState: i.ToPasswordComplexityPolicyOutputWithContext(ctx).OutputState,
+	}
+}
+
 // PasswordComplexityPolicyArrayInput is an input type that accepts PasswordComplexityPolicyArray and PasswordComplexityPolicyArrayOutput values.
 // You can construct a concrete instance of `PasswordComplexityPolicyArrayInput` via:
 //
-//          PasswordComplexityPolicyArray{ PasswordComplexityPolicyArgs{...} }
+//	PasswordComplexityPolicyArray{ PasswordComplexityPolicyArgs{...} }
 type PasswordComplexityPolicyArrayInput interface {
 	pulumi.Input
 
@@ -214,10 +225,16 @@ func (i PasswordComplexityPolicyArray) ToPasswordComplexityPolicyArrayOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(PasswordComplexityPolicyArrayOutput)
 }
 
+func (i PasswordComplexityPolicyArray) ToOutput(ctx context.Context) pulumix.Output[[]*PasswordComplexityPolicy] {
+	return pulumix.Output[[]*PasswordComplexityPolicy]{
+		OutputState: i.ToPasswordComplexityPolicyArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // PasswordComplexityPolicyMapInput is an input type that accepts PasswordComplexityPolicyMap and PasswordComplexityPolicyMapOutput values.
 // You can construct a concrete instance of `PasswordComplexityPolicyMapInput` via:
 //
-//          PasswordComplexityPolicyMap{ "key": PasswordComplexityPolicyArgs{...} }
+//	PasswordComplexityPolicyMap{ "key": PasswordComplexityPolicyArgs{...} }
 type PasswordComplexityPolicyMapInput interface {
 	pulumi.Input
 
@@ -239,6 +256,12 @@ func (i PasswordComplexityPolicyMap) ToPasswordComplexityPolicyMapOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(PasswordComplexityPolicyMapOutput)
 }
 
+func (i PasswordComplexityPolicyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PasswordComplexityPolicy] {
+	return pulumix.Output[map[string]*PasswordComplexityPolicy]{
+		OutputState: i.ToPasswordComplexityPolicyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type PasswordComplexityPolicyOutput struct{ *pulumi.OutputState }
 
 func (PasswordComplexityPolicyOutput) ElementType() reflect.Type {
@@ -251,6 +274,12 @@ func (o PasswordComplexityPolicyOutput) ToPasswordComplexityPolicyOutput() Passw
 
 func (o PasswordComplexityPolicyOutput) ToPasswordComplexityPolicyOutputWithContext(ctx context.Context) PasswordComplexityPolicyOutput {
 	return o
+}
+
+func (o PasswordComplexityPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[*PasswordComplexityPolicy] {
+	return pulumix.Output[*PasswordComplexityPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 // defines if the password MUST contain a lower case letter
@@ -297,6 +326,12 @@ func (o PasswordComplexityPolicyArrayOutput) ToPasswordComplexityPolicyArrayOutp
 	return o
 }
 
+func (o PasswordComplexityPolicyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PasswordComplexityPolicy] {
+	return pulumix.Output[[]*PasswordComplexityPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o PasswordComplexityPolicyArrayOutput) Index(i pulumi.IntInput) PasswordComplexityPolicyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PasswordComplexityPolicy {
 		return vs[0].([]*PasswordComplexityPolicy)[vs[1].(int)]
@@ -315,6 +350,12 @@ func (o PasswordComplexityPolicyMapOutput) ToPasswordComplexityPolicyMapOutput()
 
 func (o PasswordComplexityPolicyMapOutput) ToPasswordComplexityPolicyMapOutputWithContext(ctx context.Context) PasswordComplexityPolicyMapOutput {
 	return o
+}
+
+func (o PasswordComplexityPolicyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PasswordComplexityPolicy] {
+	return pulumix.Output[map[string]*PasswordComplexityPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PasswordComplexityPolicyMapOutput) MapIndex(k pulumi.StringInput) PasswordComplexityPolicyOutput {

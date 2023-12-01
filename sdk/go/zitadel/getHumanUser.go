@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing a human user situated under an organization, which then can be authorized through memberships or direct grants on other resources.
@@ -18,27 +20,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_default, err := zitadel.LookupHumanUser(ctx, &GetHumanUserArgs{
-// 			OrgId:  data.Zitadel_org.Default.Id,
-// 			UserId: "123456789012345678",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("humanUser", _default)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_default, err := zitadel.LookupHumanUser(ctx, &zitadel.LookupHumanUserArgs{
+//				OrgId:  data.Zitadel_org.Default.Id,
+//				UserId: "123456789012345678",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("humanUser", _default)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupHumanUser(ctx *pulumi.Context, args *LookupHumanUserArgs, opts ...pulumi.InvokeOption) (*LookupHumanUserResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupHumanUserResult
 	err := ctx.Invoke("zitadel:index/getHumanUser:getHumanUser", args, &rv, opts...)
 	if err != nil {
@@ -131,6 +135,12 @@ func (o LookupHumanUserResultOutput) ToLookupHumanUserResultOutput() LookupHuman
 
 func (o LookupHumanUserResultOutput) ToLookupHumanUserResultOutputWithContext(ctx context.Context) LookupHumanUserResultOutput {
 	return o
+}
+
+func (o LookupHumanUserResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupHumanUserResult] {
+	return pulumix.Output[LookupHumanUserResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Display name of the user

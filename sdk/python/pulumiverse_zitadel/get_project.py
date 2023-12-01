@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -168,15 +168,15 @@ def get_project(org_id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getProject:getProject', __args__, opts=opts, typ=GetProjectResult).value
 
     return AwaitableGetProjectResult(
-        has_project_check=__ret__.has_project_check,
-        id=__ret__.id,
-        name=__ret__.name,
-        org_id=__ret__.org_id,
-        private_labeling_setting=__ret__.private_labeling_setting,
-        project_id=__ret__.project_id,
-        project_role_assertion=__ret__.project_role_assertion,
-        project_role_check=__ret__.project_role_check,
-        state=__ret__.state)
+        has_project_check=pulumi.get(__ret__, 'has_project_check'),
+        id=pulumi.get(__ret__, 'id'),
+        name=pulumi.get(__ret__, 'name'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        private_labeling_setting=pulumi.get(__ret__, 'private_labeling_setting'),
+        project_id=pulumi.get(__ret__, 'project_id'),
+        project_role_assertion=pulumi.get(__ret__, 'project_role_assertion'),
+        project_role_check=pulumi.get(__ret__, 'project_role_check'),
+        state=pulumi.get(__ret__, 'state'))
 
 
 @_utilities.lift_output_func(get_project)

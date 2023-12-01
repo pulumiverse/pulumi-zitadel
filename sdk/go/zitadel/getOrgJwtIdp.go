@@ -8,11 +8,13 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing a generic JWT IdP on the organization.
 func GetOrgJwtIdp(ctx *pulumi.Context, args *GetOrgJwtIdpArgs, opts ...pulumi.InvokeOption) (*GetOrgJwtIdpResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOrgJwtIdpResult
 	err := ctx.Invoke("zitadel:index/getOrgJwtIdp:getOrgJwtIdp", args, &rv, opts...)
 	if err != nil {
@@ -91,6 +93,12 @@ func (o GetOrgJwtIdpResultOutput) ToGetOrgJwtIdpResultOutput() GetOrgJwtIdpResul
 
 func (o GetOrgJwtIdpResultOutput) ToGetOrgJwtIdpResultOutputWithContext(ctx context.Context) GetOrgJwtIdpResultOutput {
 	return o
+}
+
+func (o GetOrgJwtIdpResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetOrgJwtIdpResult] {
+	return pulumix.Output[GetOrgJwtIdpResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // auto register for users from this idp

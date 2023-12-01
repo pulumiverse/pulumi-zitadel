@@ -8,6 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing triggers, when actions get started
@@ -18,28 +20,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-zitadel/sdk/go/zitadel"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_default, err := zitadel.LookupTriggerActions(ctx, &GetTriggerActionsArgs{
-// 			OrgId:       pulumi.StringRef(data.Zitadel_org.Default.Id),
-// 			FlowType:    "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
-// 			TriggerType: "TRIGGER_TYPE_POST_AUTHENTICATION",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("triggerActions", _default)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_default, err := zitadel.LookupTriggerActions(ctx, &zitadel.LookupTriggerActionsArgs{
+//				OrgId:       pulumi.StringRef(data.Zitadel_org.Default.Id),
+//				FlowType:    "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
+//				TriggerType: "TRIGGER_TYPE_POST_AUTHENTICATION",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("triggerActions", _default)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupTriggerActions(ctx *pulumi.Context, args *LookupTriggerActionsArgs, opts ...pulumi.InvokeOption) (*LookupTriggerActionsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupTriggerActionsResult
 	err := ctx.Invoke("zitadel:index/getTriggerActions:getTriggerActions", args, &rv, opts...)
 	if err != nil {
@@ -112,6 +116,12 @@ func (o LookupTriggerActionsResultOutput) ToLookupTriggerActionsResultOutput() L
 
 func (o LookupTriggerActionsResultOutput) ToLookupTriggerActionsResultOutputWithContext(ctx context.Context) LookupTriggerActionsResultOutput {
 	return o
+}
+
+func (o LookupTriggerActionsResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupTriggerActionsResult] {
+	return pulumix.Output[LookupTriggerActionsResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 // IDs of the triggered actions

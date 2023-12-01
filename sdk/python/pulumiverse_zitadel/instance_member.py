@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['InstanceMemberArgs', 'InstanceMember']
@@ -21,8 +21,23 @@ class InstanceMemberArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] roles: List of roles granted, full list available here: https://zitadel.com/docs/guides/manage/console/managers#roles
         :param pulumi.Input[str] user_id: ID of the user
         """
-        pulumi.set(__self__, "roles", roles)
-        pulumi.set(__self__, "user_id", user_id)
+        InstanceMemberArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            roles=roles,
+            user_id=user_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             roles: pulumi.Input[Sequence[pulumi.Input[str]]],
+             user_id: pulumi.Input[str],
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'userId' in kwargs:
+            user_id = kwargs['userId']
+
+        _setter("roles", roles)
+        _setter("user_id", user_id)
 
     @property
     @pulumi.getter
@@ -59,10 +74,25 @@ class _InstanceMemberState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] roles: List of roles granted, full list available here: https://zitadel.com/docs/guides/manage/console/managers#roles
         :param pulumi.Input[str] user_id: ID of the user
         """
+        _InstanceMemberState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            roles=roles,
+            user_id=user_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             roles: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             user_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'userId' in kwargs:
+            user_id = kwargs['userId']
+
         if roles is not None:
-            pulumi.set(__self__, "roles", roles)
+            _setter("roles", roles)
         if user_id is not None:
-            pulumi.set(__self__, "user_id", user_id)
+            _setter("user_id", user_id)
 
     @property
     @pulumi.getter
@@ -113,7 +143,7 @@ class InstanceMember(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<user_id>`, e.g.
+        terraform The resource can be imported using the ID format `<user_id>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/instanceMember:InstanceMember imported '123456789012345678'
@@ -146,7 +176,7 @@ class InstanceMember(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<user_id>`, e.g.
+        terraform The resource can be imported using the ID format `<user_id>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/instanceMember:InstanceMember imported '123456789012345678'
@@ -162,6 +192,10 @@ class InstanceMember(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            InstanceMemberArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

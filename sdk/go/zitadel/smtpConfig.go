@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the SMTP configuration of an instance.
@@ -19,34 +21,40 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewSmtpConfig(ctx, "default", &zitadel.SmtpConfigArgs{
-// 			Host:          pulumi.String("localhost:25"),
-// 			Password:      pulumi.String("secret_password"),
-// 			SenderAddress: pulumi.String("sender@example.com"),
-// 			SenderName:    pulumi.String("no-reply"),
-// 			Tls:           pulumi.Bool(true),
-// 			User:          pulumi.String("user"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewSmtpConfig(ctx, "default", &zitadel.SmtpConfigArgs{
+//				Host:           pulumi.String("localhost:25"),
+//				Password:       pulumi.String("secret_password"),
+//				ReplyToAddress: pulumi.String("replyto@example.com"),
+//				SenderAddress:  pulumi.String("sender@example.com"),
+//				SenderName:     pulumi.String("no-reply"),
+//				Tls:            pulumi.Bool(true),
+//				User:           pulumi.String("user"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<[password]>`, e.g.
+// terraform The resource can be imported using the ID format `<[password]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
+//
+//	$ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'
+//
 // ```
 type SmtpConfig struct {
 	pulumi.CustomResourceState
@@ -55,6 +63,8 @@ type SmtpConfig struct {
 	Host pulumi.StringOutput `pulumi:"host"`
 	// Password used to communicate with your SMTP server.
 	Password pulumi.StringPtrOutput `pulumi:"password"`
+	// Address to reply to.
+	ReplyToAddress pulumi.StringPtrOutput `pulumi:"replyToAddress"`
 	// Address used to send emails.
 	SenderAddress pulumi.StringOutput `pulumi:"senderAddress"`
 	// Sender name used to send emails.
@@ -81,7 +91,14 @@ func NewSmtpConfig(ctx *pulumi.Context,
 	if args.SenderName == nil {
 		return nil, errors.New("invalid value for required argument 'SenderName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SmtpConfig
 	err := ctx.RegisterResource("zitadel:index/smtpConfig:SmtpConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -108,6 +125,8 @@ type smtpConfigState struct {
 	Host *string `pulumi:"host"`
 	// Password used to communicate with your SMTP server.
 	Password *string `pulumi:"password"`
+	// Address to reply to.
+	ReplyToAddress *string `pulumi:"replyToAddress"`
 	// Address used to send emails.
 	SenderAddress *string `pulumi:"senderAddress"`
 	// Sender name used to send emails.
@@ -123,6 +142,8 @@ type SmtpConfigState struct {
 	Host pulumi.StringPtrInput
 	// Password used to communicate with your SMTP server.
 	Password pulumi.StringPtrInput
+	// Address to reply to.
+	ReplyToAddress pulumi.StringPtrInput
 	// Address used to send emails.
 	SenderAddress pulumi.StringPtrInput
 	// Sender name used to send emails.
@@ -142,6 +163,8 @@ type smtpConfigArgs struct {
 	Host string `pulumi:"host"`
 	// Password used to communicate with your SMTP server.
 	Password *string `pulumi:"password"`
+	// Address to reply to.
+	ReplyToAddress *string `pulumi:"replyToAddress"`
 	// Address used to send emails.
 	SenderAddress string `pulumi:"senderAddress"`
 	// Sender name used to send emails.
@@ -158,6 +181,8 @@ type SmtpConfigArgs struct {
 	Host pulumi.StringInput
 	// Password used to communicate with your SMTP server.
 	Password pulumi.StringPtrInput
+	// Address to reply to.
+	ReplyToAddress pulumi.StringPtrInput
 	// Address used to send emails.
 	SenderAddress pulumi.StringInput
 	// Sender name used to send emails.
@@ -191,10 +216,16 @@ func (i *SmtpConfig) ToSmtpConfigOutputWithContext(ctx context.Context) SmtpConf
 	return pulumi.ToOutputWithContext(ctx, i).(SmtpConfigOutput)
 }
 
+func (i *SmtpConfig) ToOutput(ctx context.Context) pulumix.Output[*SmtpConfig] {
+	return pulumix.Output[*SmtpConfig]{
+		OutputState: i.ToSmtpConfigOutputWithContext(ctx).OutputState,
+	}
+}
+
 // SmtpConfigArrayInput is an input type that accepts SmtpConfigArray and SmtpConfigArrayOutput values.
 // You can construct a concrete instance of `SmtpConfigArrayInput` via:
 //
-//          SmtpConfigArray{ SmtpConfigArgs{...} }
+//	SmtpConfigArray{ SmtpConfigArgs{...} }
 type SmtpConfigArrayInput interface {
 	pulumi.Input
 
@@ -216,10 +247,16 @@ func (i SmtpConfigArray) ToSmtpConfigArrayOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(SmtpConfigArrayOutput)
 }
 
+func (i SmtpConfigArray) ToOutput(ctx context.Context) pulumix.Output[[]*SmtpConfig] {
+	return pulumix.Output[[]*SmtpConfig]{
+		OutputState: i.ToSmtpConfigArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // SmtpConfigMapInput is an input type that accepts SmtpConfigMap and SmtpConfigMapOutput values.
 // You can construct a concrete instance of `SmtpConfigMapInput` via:
 //
-//          SmtpConfigMap{ "key": SmtpConfigArgs{...} }
+//	SmtpConfigMap{ "key": SmtpConfigArgs{...} }
 type SmtpConfigMapInput interface {
 	pulumi.Input
 
@@ -241,6 +278,12 @@ func (i SmtpConfigMap) ToSmtpConfigMapOutputWithContext(ctx context.Context) Smt
 	return pulumi.ToOutputWithContext(ctx, i).(SmtpConfigMapOutput)
 }
 
+func (i SmtpConfigMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*SmtpConfig] {
+	return pulumix.Output[map[string]*SmtpConfig]{
+		OutputState: i.ToSmtpConfigMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type SmtpConfigOutput struct{ *pulumi.OutputState }
 
 func (SmtpConfigOutput) ElementType() reflect.Type {
@@ -255,6 +298,12 @@ func (o SmtpConfigOutput) ToSmtpConfigOutputWithContext(ctx context.Context) Smt
 	return o
 }
 
+func (o SmtpConfigOutput) ToOutput(ctx context.Context) pulumix.Output[*SmtpConfig] {
+	return pulumix.Output[*SmtpConfig]{
+		OutputState: o.OutputState,
+	}
+}
+
 // Host and port address to your SMTP server.
 func (o SmtpConfigOutput) Host() pulumi.StringOutput {
 	return o.ApplyT(func(v *SmtpConfig) pulumi.StringOutput { return v.Host }).(pulumi.StringOutput)
@@ -263,6 +312,11 @@ func (o SmtpConfigOutput) Host() pulumi.StringOutput {
 // Password used to communicate with your SMTP server.
 func (o SmtpConfigOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SmtpConfig) pulumi.StringPtrOutput { return v.Password }).(pulumi.StringPtrOutput)
+}
+
+// Address to reply to.
+func (o SmtpConfigOutput) ReplyToAddress() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SmtpConfig) pulumi.StringPtrOutput { return v.ReplyToAddress }).(pulumi.StringPtrOutput)
 }
 
 // Address used to send emails.
@@ -299,6 +353,12 @@ func (o SmtpConfigArrayOutput) ToSmtpConfigArrayOutputWithContext(ctx context.Co
 	return o
 }
 
+func (o SmtpConfigArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*SmtpConfig] {
+	return pulumix.Output[[]*SmtpConfig]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o SmtpConfigArrayOutput) Index(i pulumi.IntInput) SmtpConfigOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *SmtpConfig {
 		return vs[0].([]*SmtpConfig)[vs[1].(int)]
@@ -317,6 +377,12 @@ func (o SmtpConfigMapOutput) ToSmtpConfigMapOutput() SmtpConfigMapOutput {
 
 func (o SmtpConfigMapOutput) ToSmtpConfigMapOutputWithContext(ctx context.Context) SmtpConfigMapOutput {
 	return o
+}
+
+func (o SmtpConfigMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*SmtpConfig] {
+	return pulumix.Output[map[string]*SmtpConfig]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o SmtpConfigMapOutput) MapIndex(k pulumi.StringInput) SmtpConfigOutput {

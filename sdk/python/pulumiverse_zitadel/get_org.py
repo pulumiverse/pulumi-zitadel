@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -21,10 +21,13 @@ class GetOrgResult:
     """
     A collection of values returned by getOrg.
     """
-    def __init__(__self__, id=None, name=None, primary_domain=None, state=None):
+    def __init__(__self__, id=None, is_default=None, name=None, primary_domain=None, state=None):
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
+        if is_default and not isinstance(is_default, bool):
+            raise TypeError("Expected argument 'is_default' to be a bool")
+        pulumi.set(__self__, "is_default", is_default)
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
@@ -42,6 +45,14 @@ class GetOrgResult:
         ID of the organization
         """
         return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="isDefault")
+    def is_default(self) -> bool:
+        """
+        Indicates whether the org is the default org of the instance.
+        """
+        return pulumi.get(self, "is_default")
 
     @property
     @pulumi.getter
@@ -75,6 +86,7 @@ class AwaitableGetOrgResult(GetOrgResult):
             yield self
         return GetOrgResult(
             id=self.id,
+            is_default=self.is_default,
             name=self.name,
             primary_domain=self.primary_domain,
             state=self.state)
@@ -104,10 +116,11 @@ def get_org(id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getOrg:getOrg', __args__, opts=opts, typ=GetOrgResult).value
 
     return AwaitableGetOrgResult(
-        id=__ret__.id,
-        name=__ret__.name,
-        primary_domain=__ret__.primary_domain,
-        state=__ret__.state)
+        id=pulumi.get(__ret__, 'id'),
+        is_default=pulumi.get(__ret__, 'is_default'),
+        name=pulumi.get(__ret__, 'name'),
+        primary_domain=pulumi.get(__ret__, 'primary_domain'),
+        state=pulumi.get(__ret__, 'state'))
 
 
 @_utilities.lift_output_func(get_org)

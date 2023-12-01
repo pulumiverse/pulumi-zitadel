@@ -13,17 +13,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const defaultIdpLdap = pulumi.output(zitadel.getIdpLdap({
+ * const default = zitadel.getIdpLdap({
  *     id: "123456789012345678",
- * }));
+ * });
  * ```
  */
 export function getIdpLdap(args: GetIdpLdapArgs, opts?: pulumi.InvokeOptions): Promise<GetIdpLdapResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getIdpLdap:getIdpLdap", {
         "id": args.id,
     }, opts);
@@ -156,9 +153,22 @@ export interface GetIdpLdapResult {
      */
     readonly userObjectClasses: string[];
 }
-
+/**
+ * Datasource representing an LDAP IDP on the instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getIdpLdap({
+ *     id: "123456789012345678",
+ * });
+ * ```
+ */
 export function getIdpLdapOutput(args: GetIdpLdapOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIdpLdapResult> {
-    return pulumi.output(args).apply(a => getIdpLdap(a, opts))
+    return pulumi.output(args).apply((a: any) => getIdpLdap(a, opts))
 }
 
 /**

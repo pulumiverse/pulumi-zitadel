@@ -21,6 +21,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -35,7 +36,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["applicationOidc"] = @default.Apply(getApplicationOidcResult =&gt; getApplicationOidcResult),
+        ///         ["applicationOidc"] = @default,
         ///     };
         /// });
         /// ```
@@ -43,7 +44,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetApplicationOidcResult> InvokeAsync(GetApplicationOidcArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApplicationOidcResult>("zitadel:index/getApplicationOidc:getApplicationOidc", args ?? new GetApplicationOidcArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApplicationOidcResult>("zitadel:index/getApplicationOidc:getApplicationOidc", args ?? new GetApplicationOidcArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing an OIDC application belonging to a project, with all configuration possibilities.
@@ -54,6 +55,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -68,7 +70,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["applicationOidc"] = @default.Apply(getApplicationOidcResult =&gt; getApplicationOidcResult),
+        ///         ["applicationOidc"] = @default,
         ///     };
         /// });
         /// ```
@@ -76,7 +78,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetApplicationOidcResult> Invoke(GetApplicationOidcInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApplicationOidcResult>("zitadel:index/getApplicationOidc:getApplicationOidc", args ?? new GetApplicationOidcInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApplicationOidcResult>("zitadel:index/getApplicationOidc:getApplicationOidc", args ?? new GetApplicationOidcInvokeArgs(), options.WithDefaults());
     }
 
 

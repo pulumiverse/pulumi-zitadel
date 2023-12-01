@@ -11,9 +11,9 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const defaultSmsProviderTwilio = new zitadel.SmsProviderTwilio("default", {
+ * const _default = new zitadel.SmsProviderTwilio("default", {
  *     senderNumber: "019920892",
  *     sid: "sid",
  *     token: "twilio_token",
@@ -22,7 +22,7 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * terraform # The resource can be imported using the ID format `<id[:token]>`, e.g.
+ * terraform The resource can be imported using the ID format `<id[:token]>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/smsProviderTwilio:SmsProviderTwilio imported '123456789012345678:12345678901234567890123456abcdef'
@@ -98,9 +98,11 @@ export class SmsProviderTwilio extends pulumi.CustomResource {
             }
             resourceInputs["senderNumber"] = args ? args.senderNumber : undefined;
             resourceInputs["sid"] = args ? args.sid : undefined;
-            resourceInputs["token"] = args ? args.token : undefined;
+            resourceInputs["token"] = args?.token ? pulumi.secret(args.token) : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["token"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(SmsProviderTwilio.__pulumiType, name, resourceInputs, opts);
     }
 }

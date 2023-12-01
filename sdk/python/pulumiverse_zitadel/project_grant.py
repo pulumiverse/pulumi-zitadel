@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['ProjectGrantArgs', 'ProjectGrant']
@@ -25,12 +25,37 @@ class ProjectGrantArgs:
         :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[Sequence[pulumi.Input[str]]] role_keys: List of roles granted
         """
-        pulumi.set(__self__, "granted_org_id", granted_org_id)
-        pulumi.set(__self__, "project_id", project_id)
+        ProjectGrantArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            granted_org_id=granted_org_id,
+            project_id=project_id,
+            org_id=org_id,
+            role_keys=role_keys,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             granted_org_id: pulumi.Input[str],
+             project_id: pulumi.Input[str],
+             org_id: Optional[pulumi.Input[str]] = None,
+             role_keys: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'grantedOrgId' in kwargs:
+            granted_org_id = kwargs['grantedOrgId']
+        if 'projectId' in kwargs:
+            project_id = kwargs['projectId']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'roleKeys' in kwargs:
+            role_keys = kwargs['roleKeys']
+
+        _setter("granted_org_id", granted_org_id)
+        _setter("project_id", project_id)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if role_keys is not None:
-            pulumi.set(__self__, "role_keys", role_keys)
+            _setter("role_keys", role_keys)
 
     @property
     @pulumi.getter(name="grantedOrgId")
@@ -95,14 +120,39 @@ class _ProjectGrantState:
         :param pulumi.Input[str] project_id: ID of the project
         :param pulumi.Input[Sequence[pulumi.Input[str]]] role_keys: List of roles granted
         """
+        _ProjectGrantState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            granted_org_id=granted_org_id,
+            org_id=org_id,
+            project_id=project_id,
+            role_keys=role_keys,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             granted_org_id: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             project_id: Optional[pulumi.Input[str]] = None,
+             role_keys: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'grantedOrgId' in kwargs:
+            granted_org_id = kwargs['grantedOrgId']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'projectId' in kwargs:
+            project_id = kwargs['projectId']
+        if 'roleKeys' in kwargs:
+            role_keys = kwargs['roleKeys']
+
         if granted_org_id is not None:
-            pulumi.set(__self__, "granted_org_id", granted_org_id)
+            _setter("granted_org_id", granted_org_id)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if project_id is not None:
-            pulumi.set(__self__, "project_id", project_id)
+            _setter("project_id", project_id)
         if role_keys is not None:
-            pulumi.set(__self__, "role_keys", role_keys)
+            _setter("role_keys", role_keys)
 
     @property
     @pulumi.getter(name="grantedOrgId")
@@ -181,7 +231,7 @@ class ProjectGrant(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
+        terraform The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/projectGrant:ProjectGrant imported '123456789012345678:123456789012345678:123456789012345678'
@@ -218,7 +268,7 @@ class ProjectGrant(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
+        terraform The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/projectGrant:ProjectGrant imported '123456789012345678:123456789012345678:123456789012345678'
@@ -234,6 +284,10 @@ class ProjectGrant(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ProjectGrantArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

@@ -22,11 +22,8 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getApplicationApi(args: GetApplicationApiArgs, opts?: pulumi.InvokeOptions): Promise<GetApplicationApiResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getApplicationApi:getApplicationApi", {
         "appId": args.appId,
         "orgId": args.orgId,
@@ -81,9 +78,25 @@ export interface GetApplicationApiResult {
      */
     readonly projectId: string;
 }
-
+/**
+ * Datasource representing an API application belonging to a project, with all configuration possibilities.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getApplicationApi({
+ *     orgId: data.zitadel_org["default"].id,
+ *     projectId: data.zitadel_project["default"].id,
+ *     appId: "123456789012345678",
+ * });
+ * export const applicationApi = _default;
+ * ```
+ */
 export function getApplicationApiOutput(args: GetApplicationApiOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApplicationApiResult> {
-    return pulumi.output(args).apply(a => getApplicationApi(a, opts))
+    return pulumi.output(args).apply((a: any) => getApplicationApi(a, opts))
 }
 
 /**

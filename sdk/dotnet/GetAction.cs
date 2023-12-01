@@ -21,6 +21,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -34,7 +35,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["action"] = @default.Apply(getActionResult =&gt; getActionResult),
+        ///         ["action"] = @default,
         ///     };
         /// });
         /// ```
@@ -42,7 +43,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetActionResult> InvokeAsync(GetActionArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetActionResult>("zitadel:index/getAction:getAction", args ?? new GetActionArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetActionResult>("zitadel:index/getAction:getAction", args ?? new GetActionArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing an action belonging to an organization.
@@ -53,6 +54,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -66,7 +68,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["action"] = @default.Apply(getActionResult =&gt; getActionResult),
+        ///         ["action"] = @default,
         ///     };
         /// });
         /// ```
@@ -74,7 +76,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetActionResult> Invoke(GetActionInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetActionResult>("zitadel:index/getAction:getAction", args ?? new GetActionInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetActionResult>("zitadel:index/getAction:getAction", args ?? new GetActionInvokeArgs(), options.WithDefaults());
     }
 
 

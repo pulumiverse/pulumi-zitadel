@@ -1,0 +1,61 @@
+name: Upgrade provider
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: "0 5 * * *"
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  # TODO: Switch to shared CI like here
+  # https://github.com/pulumiverse/pulumi-vercel/blob/main/.github/workflows/upgrade-provider.yml
+  # after this issue is fixed
+  # https://github.com/pulumi/upgrade-provider/issues/179
+  # or when have time to fix failing go mod tidy in "all" mode.
+  upgrade_provider:
+    name: upgrade-provider
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.21.x
+      - name: Install pulumictl
+        uses: jaxxstorm/action-install-gh-release@v1.10.0
+        with:
+          repo: pulumi/pulumictl
+      - name: Install Pulumi CLI
+        uses: pulumi/actions@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          # TODO: Return back when permissions are fixed
+          # https://pulumi-community.slack.com/archives/C037PV12W6L/p1698447153384709?thread_ts=1697543021.775809&cid=C037PV12W6L
+          ref: master
+          # ref: ${{ github.ref_name }}
+
+      - name: Unshallow clone for tags
+        run: git fetch --prune --unshallow --tags
+        shell: bash
+      - name: Install upgrade-provider
+        run: go install github.com/pulumi/upgrade-provider@176a45cf2471d5fccd6235c385ba1ec17b74a37f
+        shell: bash
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: "7.6"
+      - name: "Set up git identity: name"
+        run: git config --global user.name 'vavsab'
+        shell: bash
+      - name: Run upgrade-provider
+        run: |
+          upgrade-provider "$REPO" --kind="provider" --pr-reviewers="vavsab"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ env.GH_TOKEN }}
+          REPO: ${{ github.repository }}

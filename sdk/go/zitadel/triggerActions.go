@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing triggers, when actions get started
@@ -19,34 +21,39 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewTriggerActions(ctx, "default", &zitadel.TriggerActionsArgs{
-// 			OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
-// 			FlowType:    pulumi.String("FLOW_TYPE_CUSTOMISE_TOKEN"),
-// 			TriggerType: pulumi.String("TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION"),
-// 			ActionIds: pulumi.StringArray{
-// 				pulumi.Any(data.Zitadel_action.Default.Id),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewTriggerActions(ctx, "default", &zitadel.TriggerActionsArgs{
+//				OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
+//				FlowType:    pulumi.String("FLOW_TYPE_CUSTOMISE_TOKEN"),
+//				TriggerType: pulumi.String("TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION"),
+//				ActionIds: pulumi.StringArray{
+//					data.Zitadel_action.Default.Id,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<flow_type:trigger_type[:org_id]>`, e.g.
+// terraform The resource can be imported using the ID format `<flow_type:trigger_type[:org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/triggerActions:TriggerActions imported 'FLOW_TYPE_EXTERNAL_AUTHENTICATION:TRIGGER_TYPE_POST_CREATION:123456789012345678'
+//
+//	$ pulumi import zitadel:index/triggerActions:TriggerActions imported 'FLOW_TYPE_EXTERNAL_AUTHENTICATION:TRIGGER_TYPE_POST_CREATION:123456789012345678'
+//
 // ```
 type TriggerActions struct {
 	pulumi.CustomResourceState
@@ -77,7 +84,7 @@ func NewTriggerActions(ctx *pulumi.Context,
 	if args.TriggerType == nil {
 		return nil, errors.New("invalid value for required argument 'TriggerType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TriggerActions
 	err := ctx.RegisterResource("zitadel:index/triggerActions:TriggerActions", name, args, &resource, opts...)
 	if err != nil {
@@ -171,10 +178,16 @@ func (i *TriggerActions) ToTriggerActionsOutputWithContext(ctx context.Context) 
 	return pulumi.ToOutputWithContext(ctx, i).(TriggerActionsOutput)
 }
 
+func (i *TriggerActions) ToOutput(ctx context.Context) pulumix.Output[*TriggerActions] {
+	return pulumix.Output[*TriggerActions]{
+		OutputState: i.ToTriggerActionsOutputWithContext(ctx).OutputState,
+	}
+}
+
 // TriggerActionsArrayInput is an input type that accepts TriggerActionsArray and TriggerActionsArrayOutput values.
 // You can construct a concrete instance of `TriggerActionsArrayInput` via:
 //
-//          TriggerActionsArray{ TriggerActionsArgs{...} }
+//	TriggerActionsArray{ TriggerActionsArgs{...} }
 type TriggerActionsArrayInput interface {
 	pulumi.Input
 
@@ -196,10 +209,16 @@ func (i TriggerActionsArray) ToTriggerActionsArrayOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(TriggerActionsArrayOutput)
 }
 
+func (i TriggerActionsArray) ToOutput(ctx context.Context) pulumix.Output[[]*TriggerActions] {
+	return pulumix.Output[[]*TriggerActions]{
+		OutputState: i.ToTriggerActionsArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // TriggerActionsMapInput is an input type that accepts TriggerActionsMap and TriggerActionsMapOutput values.
 // You can construct a concrete instance of `TriggerActionsMapInput` via:
 //
-//          TriggerActionsMap{ "key": TriggerActionsArgs{...} }
+//	TriggerActionsMap{ "key": TriggerActionsArgs{...} }
 type TriggerActionsMapInput interface {
 	pulumi.Input
 
@@ -221,6 +240,12 @@ func (i TriggerActionsMap) ToTriggerActionsMapOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(TriggerActionsMapOutput)
 }
 
+func (i TriggerActionsMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*TriggerActions] {
+	return pulumix.Output[map[string]*TriggerActions]{
+		OutputState: i.ToTriggerActionsMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type TriggerActionsOutput struct{ *pulumi.OutputState }
 
 func (TriggerActionsOutput) ElementType() reflect.Type {
@@ -233,6 +258,12 @@ func (o TriggerActionsOutput) ToTriggerActionsOutput() TriggerActionsOutput {
 
 func (o TriggerActionsOutput) ToTriggerActionsOutputWithContext(ctx context.Context) TriggerActionsOutput {
 	return o
+}
+
+func (o TriggerActionsOutput) ToOutput(ctx context.Context) pulumix.Output[*TriggerActions] {
+	return pulumix.Output[*TriggerActions]{
+		OutputState: o.OutputState,
+	}
 }
 
 // IDs of the triggered actions
@@ -269,6 +300,12 @@ func (o TriggerActionsArrayOutput) ToTriggerActionsArrayOutputWithContext(ctx co
 	return o
 }
 
+func (o TriggerActionsArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*TriggerActions] {
+	return pulumix.Output[[]*TriggerActions]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o TriggerActionsArrayOutput) Index(i pulumi.IntInput) TriggerActionsOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *TriggerActions {
 		return vs[0].([]*TriggerActions)[vs[1].(int)]
@@ -287,6 +324,12 @@ func (o TriggerActionsMapOutput) ToTriggerActionsMapOutput() TriggerActionsMapOu
 
 func (o TriggerActionsMapOutput) ToTriggerActionsMapOutputWithContext(ctx context.Context) TriggerActionsMapOutput {
 	return o
+}
+
+func (o TriggerActionsMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*TriggerActions] {
+	return pulumix.Output[map[string]*TriggerActions]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o TriggerActionsMapOutput) MapIndex(k pulumi.StringInput) TriggerActionsOutput {

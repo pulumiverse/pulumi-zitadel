@@ -21,6 +21,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -33,7 +34,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["org"] = @default.Apply(getOrgResult =&gt; getOrgResult),
+        ///         ["org"] = @default,
         ///     };
         /// });
         /// ```
@@ -41,7 +42,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetOrgResult> InvokeAsync(GetOrgArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrgResult>("zitadel:index/getOrg:getOrg", args ?? new GetOrgArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgResult>("zitadel:index/getOrg:getOrg", args ?? new GetOrgArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
@@ -52,6 +53,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -64,7 +66,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["org"] = @default.Apply(getOrgResult =&gt; getOrgResult),
+        ///         ["org"] = @default,
         ///     };
         /// });
         /// ```
@@ -72,7 +74,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetOrgResult> Invoke(GetOrgInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrgResult>("zitadel:index/getOrg:getOrg", args ?? new GetOrgInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrgResult>("zitadel:index/getOrg:getOrg", args ?? new GetOrgInvokeArgs(), options.WithDefaults());
     }
 
 
@@ -113,6 +115,10 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         public readonly string Id;
         /// <summary>
+        /// Indicates whether the org is the default org of the instance.
+        /// </summary>
+        public readonly bool IsDefault;
+        /// <summary>
         /// Name of the org.
         /// </summary>
         public readonly string Name;
@@ -129,6 +135,8 @@ namespace Pulumiverse.Zitadel
         private GetOrgResult(
             string id,
 
+            bool isDefault,
+
             string name,
 
             string primaryDomain,
@@ -136,6 +144,7 @@ namespace Pulumiverse.Zitadel
             string state)
         {
             Id = id;
+            IsDefault = isDefault;
             Name = name;
             PrimaryDomain = primaryDomain;
             State = state;

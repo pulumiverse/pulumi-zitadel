@@ -21,6 +21,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -34,7 +35,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["humanUser"] = @default.Apply(getHumanUserResult =&gt; getHumanUserResult),
+        ///         ["humanUser"] = @default,
         ///     };
         /// });
         /// ```
@@ -42,7 +43,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetHumanUserResult> InvokeAsync(GetHumanUserArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetHumanUserResult>("zitadel:index/getHumanUser:getHumanUser", args ?? new GetHumanUserArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetHumanUserResult>("zitadel:index/getHumanUser:getHumanUser", args ?? new GetHumanUserArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing a human user situated under an organization, which then can be authorized through memberships or direct grants on other resources.
@@ -53,6 +54,7 @@ namespace Pulumiverse.Zitadel
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Zitadel = Pulumi.Zitadel;
         /// 
@@ -66,7 +68,7 @@ namespace Pulumiverse.Zitadel
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["humanUser"] = @default.Apply(getHumanUserResult =&gt; getHumanUserResult),
+        ///         ["humanUser"] = @default,
         ///     };
         /// });
         /// ```
@@ -74,7 +76,7 @@ namespace Pulumiverse.Zitadel
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetHumanUserResult> Invoke(GetHumanUserInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetHumanUserResult>("zitadel:index/getHumanUser:getHumanUser", args ?? new GetHumanUserInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetHumanUserResult>("zitadel:index/getHumanUser:getHumanUser", args ?? new GetHumanUserInvokeArgs(), options.WithDefaults());
     }
 
 

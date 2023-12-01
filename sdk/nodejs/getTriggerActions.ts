@@ -22,11 +22,8 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getTriggerActions(args: GetTriggerActionsArgs, opts?: pulumi.InvokeOptions): Promise<GetTriggerActionsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getTriggerActions:getTriggerActions", {
         "flowType": args.flowType,
         "orgId": args.orgId,
@@ -77,9 +74,25 @@ export interface GetTriggerActionsResult {
      */
     readonly triggerType: string;
 }
-
+/**
+ * Resource representing triggers, when actions get started
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getTriggerActions({
+ *     orgId: data.zitadel_org["default"].id,
+ *     flowType: "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
+ *     triggerType: "TRIGGER_TYPE_POST_AUTHENTICATION",
+ * });
+ * export const triggerActions = _default;
+ * ```
+ */
 export function getTriggerActionsOutput(args: GetTriggerActionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTriggerActionsResult> {
-    return pulumi.output(args).apply(a => getTriggerActions(a, opts))
+    return pulumi.output(args).apply((a: any) => getTriggerActions(a, opts))
 }
 
 /**

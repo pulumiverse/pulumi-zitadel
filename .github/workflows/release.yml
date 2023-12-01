@@ -1,8 +1,8 @@
 name: release
 on:
   push:
-    tags:
-      - v*.*.*
+    branches:
+      - main
 env:
   # THIS GITHUB_TOKEN IS A REQUIREMENT TO BE ABLE TO WRITE TO GH RELEASES
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -36,6 +36,13 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
+    - name: Bump version
+      uses: mapped/action-vtl@latest
+      with:
+        baseVersion: 0.0.17
+        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        # No need to create VERSION file
+        versionFile: "" 
     - name: Unshallow clone for tags
       run: git fetch --prune --unshallow --tags
     - name: Install Go
@@ -57,7 +64,7 @@ jobs:
       fail-fast: true
       matrix:
         goversion:
-        - 1.18.x
+        - 1.21.x
   publish_sdk:
     name: Publish SDKs
     runs-on: ubuntu-latest
@@ -125,9 +132,9 @@ jobs:
       fail-fast: true
       matrix:
         dotnetversion:
-          - 3.1.301
+          - 6.0.300
         goversion:
-          - 1.18.x
+          - 1.21.x
         language:
           - nodejs
           - python

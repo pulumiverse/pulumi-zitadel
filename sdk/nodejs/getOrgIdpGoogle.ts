@@ -20,11 +20,8 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getOrgIdpGoogle(args: GetOrgIdpGoogleArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgIdpGoogleResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("zitadel:index/getOrgIdpGoogle:getOrgIdpGoogle", {
         "id": args.id,
         "orgId": args.orgId,
@@ -90,9 +87,23 @@ export interface GetOrgIdpGoogleResult {
      */
     readonly scopes: string[];
 }
-
+/**
+ * Datasource representing a Google IdP of the organization.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * const default = zitadel.getOrgIdpGoogle({
+ *     orgId: data.zitadel_org["default"].id,
+ *     id: "123456789012345678",
+ * });
+ * ```
+ */
 export function getOrgIdpGoogleOutput(args: GetOrgIdpGoogleOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOrgIdpGoogleResult> {
-    return pulumi.output(args).apply(a => getOrgIdpGoogle(a, opts))
+    return pulumi.output(args).apply((a: any) => getOrgIdpGoogle(a, opts))
 }
 
 /**

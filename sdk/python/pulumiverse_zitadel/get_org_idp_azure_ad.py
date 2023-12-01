@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -215,19 +215,19 @@ def get_org_idp_azure_ad(id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getOrgIdpAzureAd:getOrgIdpAzureAd', __args__, opts=opts, typ=GetOrgIdpAzureAdResult).value
 
     return AwaitableGetOrgIdpAzureAdResult(
-        client_id=__ret__.client_id,
-        client_secret=__ret__.client_secret,
-        email_verified=__ret__.email_verified,
-        id=__ret__.id,
-        is_auto_creation=__ret__.is_auto_creation,
-        is_auto_update=__ret__.is_auto_update,
-        is_creation_allowed=__ret__.is_creation_allowed,
-        is_linking_allowed=__ret__.is_linking_allowed,
-        name=__ret__.name,
-        org_id=__ret__.org_id,
-        scopes=__ret__.scopes,
-        tenant_id=__ret__.tenant_id,
-        tenant_type=__ret__.tenant_type)
+        client_id=pulumi.get(__ret__, 'client_id'),
+        client_secret=pulumi.get(__ret__, 'client_secret'),
+        email_verified=pulumi.get(__ret__, 'email_verified'),
+        id=pulumi.get(__ret__, 'id'),
+        is_auto_creation=pulumi.get(__ret__, 'is_auto_creation'),
+        is_auto_update=pulumi.get(__ret__, 'is_auto_update'),
+        is_creation_allowed=pulumi.get(__ret__, 'is_creation_allowed'),
+        is_linking_allowed=pulumi.get(__ret__, 'is_linking_allowed'),
+        name=pulumi.get(__ret__, 'name'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        scopes=pulumi.get(__ret__, 'scopes'),
+        tenant_id=pulumi.get(__ret__, 'tenant_id'),
+        tenant_type=pulumi.get(__ret__, 'tenant_type'))
 
 
 @_utilities.lift_output_func(get_org_idp_azure_ad)

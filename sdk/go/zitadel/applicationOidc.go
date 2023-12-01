@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing an OIDC application belonging to a project, with all configuration possibilities.
@@ -19,52 +21,57 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := zitadel.NewApplicationOidc(ctx, "default", &zitadel.ApplicationOidcArgs{
-// 			ProjectId: pulumi.Any(data.Zitadel_project.Default.Id),
-// 			OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
-// 			RedirectUris: pulumi.StringArray{
-// 				pulumi.String("https://localhost.com"),
-// 			},
-// 			ResponseTypes: pulumi.StringArray{
-// 				pulumi.String("OIDC_RESPONSE_TYPE_CODE"),
-// 			},
-// 			GrantTypes: pulumi.StringArray{
-// 				pulumi.String("OIDC_GRANT_TYPE_AUTHORIZATION_CODE"),
-// 			},
-// 			PostLogoutRedirectUris: pulumi.StringArray{
-// 				pulumi.String("https://localhost.com"),
-// 			},
-// 			AppType:                  pulumi.String("OIDC_APP_TYPE_WEB"),
-// 			AuthMethodType:           pulumi.String("OIDC_AUTH_METHOD_TYPE_BASIC"),
-// 			Version:                  pulumi.String("OIDC_VERSION_1_0"),
-// 			ClockSkew:                pulumi.String("0s"),
-// 			DevMode:                  pulumi.Bool(true),
-// 			AccessTokenType:          pulumi.String("OIDC_TOKEN_TYPE_BEARER"),
-// 			AccessTokenRoleAssertion: pulumi.Bool(false),
-// 			IdTokenRoleAssertion:     pulumi.Bool(false),
-// 			IdTokenUserinfoAssertion: pulumi.Bool(false),
-// 			AdditionalOrigins:        pulumi.StringArray{},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.NewApplicationOidc(ctx, "default", &zitadel.ApplicationOidcArgs{
+//				ProjectId: pulumi.Any(data.Zitadel_project.Default.Id),
+//				OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
+//				RedirectUris: pulumi.StringArray{
+//					pulumi.String("https://localhost.com"),
+//				},
+//				ResponseTypes: pulumi.StringArray{
+//					pulumi.String("OIDC_RESPONSE_TYPE_CODE"),
+//				},
+//				GrantTypes: pulumi.StringArray{
+//					pulumi.String("OIDC_GRANT_TYPE_AUTHORIZATION_CODE"),
+//				},
+//				PostLogoutRedirectUris: pulumi.StringArray{
+//					pulumi.String("https://localhost.com"),
+//				},
+//				AppType:                  pulumi.String("OIDC_APP_TYPE_WEB"),
+//				AuthMethodType:           pulumi.String("OIDC_AUTH_METHOD_TYPE_BASIC"),
+//				Version:                  pulumi.String("OIDC_VERSION_1_0"),
+//				ClockSkew:                pulumi.String("0s"),
+//				DevMode:                  pulumi.Bool(true),
+//				AccessTokenType:          pulumi.String("OIDC_TOKEN_TYPE_BEARER"),
+//				AccessTokenRoleAssertion: pulumi.Bool(false),
+//				IdTokenRoleAssertion:     pulumi.Bool(false),
+//				IdTokenUserinfoAssertion: pulumi.Bool(false),
+//				AdditionalOrigins:        pulumi.StringArray{},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
+// terraform The resource can be imported using the ID format `<id:project_id[:org_id][:client_id][:client_secret]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/applicationOidc:ApplicationOidc imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
+//
+//	$ pulumi import zitadel:index/applicationOidc:ApplicationOidc imported '123456789012345678:123456789012345678:123456789012345678:123456789012345678@zitadel:JuaDFFeOak5DGE655KCYPSAclSkbMVEJXXuX1lEMBT14eLMSs0A0qhafKX5SA2Df'
+//
 // ```
 type ApplicationOidc struct {
 	pulumi.CustomResourceState
@@ -128,7 +135,12 @@ func NewApplicationOidc(ctx *pulumi.Context,
 	if args.ResponseTypes == nil {
 		return nil, errors.New("invalid value for required argument 'ResponseTypes'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientId",
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ApplicationOidc
 	err := ctx.RegisterResource("zitadel:index/applicationOidc:ApplicationOidc", name, args, &resource, opts...)
 	if err != nil {
@@ -334,10 +346,16 @@ func (i *ApplicationOidc) ToApplicationOidcOutputWithContext(ctx context.Context
 	return pulumi.ToOutputWithContext(ctx, i).(ApplicationOidcOutput)
 }
 
+func (i *ApplicationOidc) ToOutput(ctx context.Context) pulumix.Output[*ApplicationOidc] {
+	return pulumix.Output[*ApplicationOidc]{
+		OutputState: i.ToApplicationOidcOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ApplicationOidcArrayInput is an input type that accepts ApplicationOidcArray and ApplicationOidcArrayOutput values.
 // You can construct a concrete instance of `ApplicationOidcArrayInput` via:
 //
-//          ApplicationOidcArray{ ApplicationOidcArgs{...} }
+//	ApplicationOidcArray{ ApplicationOidcArgs{...} }
 type ApplicationOidcArrayInput interface {
 	pulumi.Input
 
@@ -359,10 +377,16 @@ func (i ApplicationOidcArray) ToApplicationOidcArrayOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(ApplicationOidcArrayOutput)
 }
 
+func (i ApplicationOidcArray) ToOutput(ctx context.Context) pulumix.Output[[]*ApplicationOidc] {
+	return pulumix.Output[[]*ApplicationOidc]{
+		OutputState: i.ToApplicationOidcArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ApplicationOidcMapInput is an input type that accepts ApplicationOidcMap and ApplicationOidcMapOutput values.
 // You can construct a concrete instance of `ApplicationOidcMapInput` via:
 //
-//          ApplicationOidcMap{ "key": ApplicationOidcArgs{...} }
+//	ApplicationOidcMap{ "key": ApplicationOidcArgs{...} }
 type ApplicationOidcMapInput interface {
 	pulumi.Input
 
@@ -384,6 +408,12 @@ func (i ApplicationOidcMap) ToApplicationOidcMapOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(ApplicationOidcMapOutput)
 }
 
+func (i ApplicationOidcMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ApplicationOidc] {
+	return pulumix.Output[map[string]*ApplicationOidc]{
+		OutputState: i.ToApplicationOidcMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ApplicationOidcOutput struct{ *pulumi.OutputState }
 
 func (ApplicationOidcOutput) ElementType() reflect.Type {
@@ -396,6 +426,12 @@ func (o ApplicationOidcOutput) ToApplicationOidcOutput() ApplicationOidcOutput {
 
 func (o ApplicationOidcOutput) ToApplicationOidcOutputWithContext(ctx context.Context) ApplicationOidcOutput {
 	return o
+}
+
+func (o ApplicationOidcOutput) ToOutput(ctx context.Context) pulumix.Output[*ApplicationOidc] {
+	return pulumix.Output[*ApplicationOidc]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Access token role assertion
@@ -507,6 +543,12 @@ func (o ApplicationOidcArrayOutput) ToApplicationOidcArrayOutputWithContext(ctx 
 	return o
 }
 
+func (o ApplicationOidcArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ApplicationOidc] {
+	return pulumix.Output[[]*ApplicationOidc]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ApplicationOidcArrayOutput) Index(i pulumi.IntInput) ApplicationOidcOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ApplicationOidc {
 		return vs[0].([]*ApplicationOidc)[vs[1].(int)]
@@ -525,6 +567,12 @@ func (o ApplicationOidcMapOutput) ToApplicationOidcMapOutput() ApplicationOidcMa
 
 func (o ApplicationOidcMapOutput) ToApplicationOidcMapOutputWithContext(ctx context.Context) ApplicationOidcMapOutput {
 	return o
+}
+
+func (o ApplicationOidcMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ApplicationOidc] {
+	return pulumix.Output[map[string]*ApplicationOidc]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ApplicationOidcMapOutput) MapIndex(k pulumi.StringInput) ApplicationOidcOutput {

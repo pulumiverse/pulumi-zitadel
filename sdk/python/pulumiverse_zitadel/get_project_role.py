@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -136,12 +136,12 @@ def get_project_role(org_id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('zitadel:index/getProjectRole:getProjectRole', __args__, opts=opts, typ=GetProjectRoleResult).value
 
     return AwaitableGetProjectRoleResult(
-        display_name=__ret__.display_name,
-        group=__ret__.group,
-        id=__ret__.id,
-        org_id=__ret__.org_id,
-        project_id=__ret__.project_id,
-        role_key=__ret__.role_key)
+        display_name=pulumi.get(__ret__, 'display_name'),
+        group=pulumi.get(__ret__, 'group'),
+        id=pulumi.get(__ret__, 'id'),
+        org_id=pulumi.get(__ret__, 'org_id'),
+        project_id=pulumi.get(__ret__, 'project_id'),
+        role_key=pulumi.get(__ret__, 'role_key'))
 
 
 @_utilities.lift_output_func(get_project_role)

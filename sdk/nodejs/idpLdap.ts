@@ -11,9 +11,9 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumi/zitadel";
+ * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const defaultIdpLdap = new zitadel.IdpLdap("default", {
+ * const _default = new zitadel.IdpLdap("default", {
  *     baseDn: "dc=example,dc=com",
  *     bindDn: "cn=admin,dc=example,dc=com",
  *     bindPassword: "Password1!",
@@ -41,7 +41,7 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * terraform # The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
+ * terraform The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/idpLdap:IdpLdap imported '123456789012345678:b1nd_p4ssw0rd'
@@ -268,7 +268,7 @@ export class IdpLdap extends pulumi.CustomResource {
             resourceInputs["avatarUrlAttribute"] = args ? args.avatarUrlAttribute : undefined;
             resourceInputs["baseDn"] = args ? args.baseDn : undefined;
             resourceInputs["bindDn"] = args ? args.bindDn : undefined;
-            resourceInputs["bindPassword"] = args ? args.bindPassword : undefined;
+            resourceInputs["bindPassword"] = args?.bindPassword ? pulumi.secret(args.bindPassword) : undefined;
             resourceInputs["displayNameAttribute"] = args ? args.displayNameAttribute : undefined;
             resourceInputs["emailAttribute"] = args ? args.emailAttribute : undefined;
             resourceInputs["emailVerifiedAttribute"] = args ? args.emailVerifiedAttribute : undefined;
@@ -294,6 +294,8 @@ export class IdpLdap extends pulumi.CustomResource {
             resourceInputs["userObjectClasses"] = args ? args.userObjectClasses : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["bindPassword"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(IdpLdap.__pulumiType, name, resourceInputs, opts);
     }
 }

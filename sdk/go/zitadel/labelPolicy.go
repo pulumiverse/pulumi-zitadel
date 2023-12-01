@@ -7,18 +7,22 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
+	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the custom label policy of an organization.
 //
 // ## Import
 //
-// terraform # The resource can be imported using the ID format `<[org_id]>`, e.g.
+// terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
 //
 // ```sh
-//  $ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
+//
+//	$ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
+//
 // ```
 type LabelPolicy struct {
 	pulumi.CustomResourceState
@@ -101,7 +105,7 @@ func NewLabelPolicy(ctx *pulumi.Context,
 	if args.WarnColorDark == nil {
 		return nil, errors.New("invalid value for required argument 'WarnColorDark'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource LabelPolicy
 	err := ctx.RegisterResource("zitadel:index/labelPolicy:LabelPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -309,10 +313,16 @@ func (i *LabelPolicy) ToLabelPolicyOutputWithContext(ctx context.Context) LabelP
 	return pulumi.ToOutputWithContext(ctx, i).(LabelPolicyOutput)
 }
 
+func (i *LabelPolicy) ToOutput(ctx context.Context) pulumix.Output[*LabelPolicy] {
+	return pulumix.Output[*LabelPolicy]{
+		OutputState: i.ToLabelPolicyOutputWithContext(ctx).OutputState,
+	}
+}
+
 // LabelPolicyArrayInput is an input type that accepts LabelPolicyArray and LabelPolicyArrayOutput values.
 // You can construct a concrete instance of `LabelPolicyArrayInput` via:
 //
-//          LabelPolicyArray{ LabelPolicyArgs{...} }
+//	LabelPolicyArray{ LabelPolicyArgs{...} }
 type LabelPolicyArrayInput interface {
 	pulumi.Input
 
@@ -334,10 +344,16 @@ func (i LabelPolicyArray) ToLabelPolicyArrayOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(LabelPolicyArrayOutput)
 }
 
+func (i LabelPolicyArray) ToOutput(ctx context.Context) pulumix.Output[[]*LabelPolicy] {
+	return pulumix.Output[[]*LabelPolicy]{
+		OutputState: i.ToLabelPolicyArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // LabelPolicyMapInput is an input type that accepts LabelPolicyMap and LabelPolicyMapOutput values.
 // You can construct a concrete instance of `LabelPolicyMapInput` via:
 //
-//          LabelPolicyMap{ "key": LabelPolicyArgs{...} }
+//	LabelPolicyMap{ "key": LabelPolicyArgs{...} }
 type LabelPolicyMapInput interface {
 	pulumi.Input
 
@@ -359,6 +375,12 @@ func (i LabelPolicyMap) ToLabelPolicyMapOutputWithContext(ctx context.Context) L
 	return pulumi.ToOutputWithContext(ctx, i).(LabelPolicyMapOutput)
 }
 
+func (i LabelPolicyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*LabelPolicy] {
+	return pulumix.Output[map[string]*LabelPolicy]{
+		OutputState: i.ToLabelPolicyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type LabelPolicyOutput struct{ *pulumi.OutputState }
 
 func (LabelPolicyOutput) ElementType() reflect.Type {
@@ -371,6 +393,12 @@ func (o LabelPolicyOutput) ToLabelPolicyOutput() LabelPolicyOutput {
 
 func (o LabelPolicyOutput) ToLabelPolicyOutputWithContext(ctx context.Context) LabelPolicyOutput {
 	return o
+}
+
+func (o LabelPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[*LabelPolicy] {
+	return pulumix.Output[*LabelPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 // hex value for background color
@@ -507,6 +535,12 @@ func (o LabelPolicyArrayOutput) ToLabelPolicyArrayOutputWithContext(ctx context.
 	return o
 }
 
+func (o LabelPolicyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*LabelPolicy] {
+	return pulumix.Output[[]*LabelPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o LabelPolicyArrayOutput) Index(i pulumi.IntInput) LabelPolicyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *LabelPolicy {
 		return vs[0].([]*LabelPolicy)[vs[1].(int)]
@@ -525,6 +559,12 @@ func (o LabelPolicyMapOutput) ToLabelPolicyMapOutput() LabelPolicyMapOutput {
 
 func (o LabelPolicyMapOutput) ToLabelPolicyMapOutputWithContext(ctx context.Context) LabelPolicyMapOutput {
 	return o
+}
+
+func (o LabelPolicyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*LabelPolicy] {
+	return pulumix.Output[map[string]*LabelPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o LabelPolicyMapOutput) MapIndex(k pulumi.StringInput) LabelPolicyOutput {

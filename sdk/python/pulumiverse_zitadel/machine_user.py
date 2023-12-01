@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['MachineUserArgs', 'MachineUser']
@@ -27,15 +27,40 @@ class MachineUserArgs:
         :param pulumi.Input[str] name: Name of the machine user
         :param pulumi.Input[str] org_id: ID of the organization
         """
-        pulumi.set(__self__, "user_name", user_name)
+        MachineUserArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            user_name=user_name,
+            access_token_type=access_token_type,
+            description=description,
+            name=name,
+            org_id=org_id,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             user_name: pulumi.Input[str],
+             access_token_type: Optional[pulumi.Input[str]] = None,
+             description: Optional[pulumi.Input[str]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'userName' in kwargs:
+            user_name = kwargs['userName']
+        if 'accessTokenType' in kwargs:
+            access_token_type = kwargs['accessTokenType']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+
+        _setter("user_name", user_name)
         if access_token_type is not None:
-            pulumi.set(__self__, "access_token_type", access_token_type)
+            _setter("access_token_type", access_token_type)
         if description is not None:
-            pulumi.set(__self__, "description", description)
+            _setter("description", description)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
 
     @property
     @pulumi.getter(name="userName")
@@ -120,22 +145,57 @@ class _MachineUserState:
         :param pulumi.Input[str] state: State of the user
         :param pulumi.Input[str] user_name: Username
         """
+        _MachineUserState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            access_token_type=access_token_type,
+            description=description,
+            login_names=login_names,
+            name=name,
+            org_id=org_id,
+            preferred_login_name=preferred_login_name,
+            state=state,
+            user_name=user_name,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             access_token_type: Optional[pulumi.Input[str]] = None,
+             description: Optional[pulumi.Input[str]] = None,
+             login_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             org_id: Optional[pulumi.Input[str]] = None,
+             preferred_login_name: Optional[pulumi.Input[str]] = None,
+             state: Optional[pulumi.Input[str]] = None,
+             user_name: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if 'accessTokenType' in kwargs:
+            access_token_type = kwargs['accessTokenType']
+        if 'loginNames' in kwargs:
+            login_names = kwargs['loginNames']
+        if 'orgId' in kwargs:
+            org_id = kwargs['orgId']
+        if 'preferredLoginName' in kwargs:
+            preferred_login_name = kwargs['preferredLoginName']
+        if 'userName' in kwargs:
+            user_name = kwargs['userName']
+
         if access_token_type is not None:
-            pulumi.set(__self__, "access_token_type", access_token_type)
+            _setter("access_token_type", access_token_type)
         if description is not None:
-            pulumi.set(__self__, "description", description)
+            _setter("description", description)
         if login_names is not None:
-            pulumi.set(__self__, "login_names", login_names)
+            _setter("login_names", login_names)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if org_id is not None:
-            pulumi.set(__self__, "org_id", org_id)
+            _setter("org_id", org_id)
         if preferred_login_name is not None:
-            pulumi.set(__self__, "preferred_login_name", preferred_login_name)
+            _setter("preferred_login_name", preferred_login_name)
         if state is not None:
-            pulumi.set(__self__, "state", state)
+            _setter("state", state)
         if user_name is not None:
-            pulumi.set(__self__, "user_name", user_name)
+            _setter("user_name", user_name)
 
     @property
     @pulumi.getter(name="accessTokenType")
@@ -262,7 +322,7 @@ class MachineUser(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+        terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
@@ -299,7 +359,7 @@ class MachineUser(pulumi.CustomResource):
 
         ## Import
 
-        terraform # The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+        terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
@@ -315,6 +375,10 @@ class MachineUser(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            MachineUserArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
