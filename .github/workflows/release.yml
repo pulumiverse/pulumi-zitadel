@@ -37,6 +37,7 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v2
     - name: Bump version
+      id: version
       uses: mapped/action-vtl@latest
       with:
         baseVersion: 0.0.17
@@ -54,7 +55,7 @@ jobs:
       with:
         repo: pulumi/pulumictl
     - name: Set PreRelease Version
-      run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
+      run: echo "GORELEASER_CURRENT_TAG=${{ steps.version.outputs.release_tag }}" >> $GITHUB_ENV
     - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v4
       with:
