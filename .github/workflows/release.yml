@@ -40,7 +40,7 @@ jobs:
       id: version
       uses: mapped/action-vtl@latest
       with:
-        baseVersion: 0.0.17
+        baseVersion: 0.1.3
         gitHubToken: ${{ secrets.GITHUB_TOKEN }}
         # No need to create VERSION file
         versionFile: "" 
