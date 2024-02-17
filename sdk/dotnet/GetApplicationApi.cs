@@ -34,10 +34,6 @@ namespace Pulumiverse.Zitadel
         ///         AppId = "123456789012345678",
         ///     });
         /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["applicationApi"] = @default,
-        ///     };
         /// });
         /// ```
         /// {{% /example %}}
@@ -68,10 +64,6 @@ namespace Pulumiverse.Zitadel
         ///         AppId = "123456789012345678",
         ///     });
         /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["applicationApi"] = @default,
-        ///     };
         /// });
         /// ```
         /// {{% /example %}}

@@ -10,27 +10,27 @@ from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
-    'GetApplicationApiResult',
-    'AwaitableGetApplicationApiResult',
-    'get_application_api',
-    'get_application_api_output',
+    'GetApplicationSamlResult',
+    'AwaitableGetApplicationSamlResult',
+    'get_application_saml',
+    'get_application_saml_output',
 ]
 
 @pulumi.output_type
-class GetApplicationApiResult:
+class GetApplicationSamlResult:
     """
-    A collection of values returned by getApplicationApi.
+    A collection of values returned by getApplicationSaml.
     """
-    def __init__(__self__, app_id=None, auth_method_type=None, id=None, name=None, org_id=None, project_id=None):
+    def __init__(__self__, app_id=None, id=None, metadata_xml=None, name=None, org_id=None, project_id=None):
         if app_id and not isinstance(app_id, str):
             raise TypeError("Expected argument 'app_id' to be a str")
         pulumi.set(__self__, "app_id", app_id)
-        if auth_method_type and not isinstance(auth_method_type, str):
-            raise TypeError("Expected argument 'auth_method_type' to be a str")
-        pulumi.set(__self__, "auth_method_type", auth_method_type)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
+        if metadata_xml and not isinstance(metadata_xml, str):
+            raise TypeError("Expected argument 'metadata_xml' to be a str")
+        pulumi.set(__self__, "metadata_xml", metadata_xml)
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
@@ -50,20 +50,20 @@ class GetApplicationApiResult:
         return pulumi.get(self, "app_id")
 
     @property
-    @pulumi.getter(name="authMethodType")
-    def auth_method_type(self) -> str:
-        """
-        Auth method type
-        """
-        return pulumi.get(self, "auth_method_type")
-
-    @property
     @pulumi.getter
     def id(self) -> str:
         """
         The provider-assigned unique ID for this managed resource.
         """
         return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="metadataXml")
+    def metadata_xml(self) -> str:
+        """
+        Metadata as XML file
+        """
+        return pulumi.get(self, "metadata_xml")
 
     @property
     @pulumi.getter
@@ -90,26 +90,26 @@ class GetApplicationApiResult:
         return pulumi.get(self, "project_id")
 
 
-class AwaitableGetApplicationApiResult(GetApplicationApiResult):
+class AwaitableGetApplicationSamlResult(GetApplicationSamlResult):
     # pylint: disable=using-constant-test
     def __await__(self):
         if False:
             yield self
-        return GetApplicationApiResult(
+        return GetApplicationSamlResult(
             app_id=self.app_id,
-            auth_method_type=self.auth_method_type,
             id=self.id,
+            metadata_xml=self.metadata_xml,
             name=self.name,
             org_id=self.org_id,
             project_id=self.project_id)
 
 
-def get_application_api(app_id: Optional[str] = None,
-                        org_id: Optional[str] = None,
-                        project_id: Optional[str] = None,
-                        opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetApplicationApiResult:
+def get_application_saml(app_id: Optional[str] = None,
+                         org_id: Optional[str] = None,
+                         project_id: Optional[str] = None,
+                         opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetApplicationSamlResult:
     """
-    Datasource representing an API application belonging to a project, with all configuration possibilities.
+    Datasource representing a SAML application belonging to a project, with all configuration possibilities.
 
     ## Example Usage
 
@@ -117,7 +117,7 @@ def get_application_api(app_id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_application_api(org_id=data["zitadel_org"]["default"]["id"],
+    default = zitadel.get_application_saml(org_id=data["zitadel_org"]["default"]["id"],
         project_id=data["zitadel_project"]["default"]["id"],
         app_id="123456789012345678")
     ```
@@ -132,24 +132,24 @@ def get_application_api(app_id: Optional[str] = None,
     __args__['orgId'] = org_id
     __args__['projectId'] = project_id
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
-    __ret__ = pulumi.runtime.invoke('zitadel:index/getApplicationApi:getApplicationApi', __args__, opts=opts, typ=GetApplicationApiResult).value
+    __ret__ = pulumi.runtime.invoke('zitadel:index/getApplicationSaml:getApplicationSaml', __args__, opts=opts, typ=GetApplicationSamlResult).value
 
-    return AwaitableGetApplicationApiResult(
+    return AwaitableGetApplicationSamlResult(
         app_id=pulumi.get(__ret__, 'app_id'),
-        auth_method_type=pulumi.get(__ret__, 'auth_method_type'),
         id=pulumi.get(__ret__, 'id'),
+        metadata_xml=pulumi.get(__ret__, 'metadata_xml'),
         name=pulumi.get(__ret__, 'name'),
         org_id=pulumi.get(__ret__, 'org_id'),
         project_id=pulumi.get(__ret__, 'project_id'))
 
 
-@_utilities.lift_output_func(get_application_api)
-def get_application_api_output(app_id: Optional[pulumi.Input[str]] = None,
-                               org_id: Optional[pulumi.Input[Optional[str]]] = None,
-                               project_id: Optional[pulumi.Input[str]] = None,
-                               opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetApplicationApiResult]:
+@_utilities.lift_output_func(get_application_saml)
+def get_application_saml_output(app_id: Optional[pulumi.Input[str]] = None,
+                                org_id: Optional[pulumi.Input[Optional[str]]] = None,
+                                project_id: Optional[pulumi.Input[str]] = None,
+                                opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetApplicationSamlResult]:
     """
-    Datasource representing an API application belonging to a project, with all configuration possibilities.
+    Datasource representing a SAML application belonging to a project, with all configuration possibilities.
 
     ## Example Usage
 
@@ -157,7 +157,7 @@ def get_application_api_output(app_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_application_api(org_id=data["zitadel_org"]["default"]["id"],
+    default = zitadel.get_application_saml(org_id=data["zitadel_org"]["default"]["id"],
         project_id=data["zitadel_project"]["default"]["id"],
         app_id="123456789012345678")
     ```

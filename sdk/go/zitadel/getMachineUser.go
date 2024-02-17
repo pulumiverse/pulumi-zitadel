@@ -28,14 +28,13 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_default, err := zitadel.LookupMachineUser(ctx, &zitadel.LookupMachineUserArgs{
+//			_, err := zitadel.LookupMachineUser(ctx, &zitadel.LookupMachineUserArgs{
 //				OrgId:  pulumi.StringRef(data.Zitadel_org.Default.Id),
 //				UserId: "123456789012345678",
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			ctx.Export("machineUser", _default)
 //			return nil
 //		})
 //	}

@@ -10,10 +10,10 @@ using Pulumi;
 
 namespace Pulumiverse.Zitadel
 {
-    public static class GetProject
+    public static class GetApplicationSaml
     {
         /// <summary>
-        /// Datasource representing the project, which can then be granted to different organizations or users directly, containing different applications.
+        /// Datasource representing a SAML application belonging to a project, with all configuration possibilities.
         /// 
         /// {{% examples %}}
         /// ## Example Usage
@@ -27,10 +27,11 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var @default = Zitadel.GetProject.Invoke(new()
+        ///     var @default = Zitadel.GetApplicationSaml.Invoke(new()
         ///     {
         ///         OrgId = data.Zitadel_org.Default.Id,
-        ///         ProjectId = "123456789012345678",
+        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         AppId = "123456789012345678",
         ///     });
         /// 
         /// });
@@ -38,11 +39,11 @@ namespace Pulumiverse.Zitadel
         /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
-        public static Task<GetProjectResult> InvokeAsync(GetProjectArgs args, InvokeOptions? options = null)
-            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProjectResult>("zitadel:index/getProject:getProject", args ?? new GetProjectArgs(), options.WithDefaults());
+        public static Task<GetApplicationSamlResult> InvokeAsync(GetApplicationSamlArgs args, InvokeOptions? options = null)
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApplicationSamlResult>("zitadel:index/getApplicationSaml:getApplicationSaml", args ?? new GetApplicationSamlArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Datasource representing the project, which can then be granted to different organizations or users directly, containing different applications.
+        /// Datasource representing a SAML application belonging to a project, with all configuration possibilities.
         /// 
         /// {{% examples %}}
         /// ## Example Usage
@@ -56,10 +57,11 @@ namespace Pulumiverse.Zitadel
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var @default = Zitadel.GetProject.Invoke(new()
+        ///     var @default = Zitadel.GetApplicationSaml.Invoke(new()
         ///     {
         ///         OrgId = data.Zitadel_org.Default.Id,
-        ///         ProjectId = "123456789012345678",
+        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         AppId = "123456789012345678",
         ///     });
         /// 
         /// });
@@ -67,13 +69,19 @@ namespace Pulumiverse.Zitadel
         /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
-        public static Output<GetProjectResult> Invoke(GetProjectInvokeArgs args, InvokeOptions? options = null)
-            => global::Pulumi.Deployment.Instance.Invoke<GetProjectResult>("zitadel:index/getProject:getProject", args ?? new GetProjectInvokeArgs(), options.WithDefaults());
+        public static Output<GetApplicationSamlResult> Invoke(GetApplicationSamlInvokeArgs args, InvokeOptions? options = null)
+            => global::Pulumi.Deployment.Instance.Invoke<GetApplicationSamlResult>("zitadel:index/getApplicationSaml:getApplicationSaml", args ?? new GetApplicationSamlInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProjectArgs : global::Pulumi.InvokeArgs
+    public sealed class GetApplicationSamlArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// The ID of this resource.
+        /// </summary>
+        [Input("appId", required: true)]
+        public string AppId { get; set; } = null!;
+
         /// <summary>
         /// ID of the organization
         /// </summary>
@@ -81,19 +89,25 @@ namespace Pulumiverse.Zitadel
         public string? OrgId { get; set; }
 
         /// <summary>
-        /// The ID of this resource.
+        /// ID of the project
         /// </summary>
         [Input("projectId", required: true)]
         public string ProjectId { get; set; } = null!;
 
-        public GetProjectArgs()
+        public GetApplicationSamlArgs()
         {
         }
-        public static new GetProjectArgs Empty => new GetProjectArgs();
+        public static new GetApplicationSamlArgs Empty => new GetApplicationSamlArgs();
     }
 
-    public sealed class GetProjectInvokeArgs : global::Pulumi.InvokeArgs
+    public sealed class GetApplicationSamlInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// The ID of this resource.
+        /// </summary>
+        [Input("appId", required: true)]
+        public Input<string> AppId { get; set; } = null!;
+
         /// <summary>
         /// ID of the organization
         /// </summary>
@@ -101,31 +115,35 @@ namespace Pulumiverse.Zitadel
         public Input<string>? OrgId { get; set; }
 
         /// <summary>
-        /// The ID of this resource.
+        /// ID of the project
         /// </summary>
         [Input("projectId", required: true)]
         public Input<string> ProjectId { get; set; } = null!;
 
-        public GetProjectInvokeArgs()
+        public GetApplicationSamlInvokeArgs()
         {
         }
-        public static new GetProjectInvokeArgs Empty => new GetProjectInvokeArgs();
+        public static new GetApplicationSamlInvokeArgs Empty => new GetApplicationSamlInvokeArgs();
     }
 
 
     [OutputType]
-    public sealed class GetProjectResult
+    public sealed class GetApplicationSamlResult
     {
         /// <summary>
-        /// ZITADEL checks if the org of the user has permission to this project
+        /// The ID of this resource.
         /// </summary>
-        public readonly bool HasProjectCheck;
+        public readonly string AppId;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
         /// <summary>
-        /// Name of the project
+        /// Metadata as XML file
+        /// </summary>
+        public readonly string MetadataXml;
+        /// <summary>
+        /// Name of the application
         /// </summary>
         public readonly string Name;
         /// <summary>
@@ -133,55 +151,30 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         public readonly string? OrgId;
         /// <summary>
-        /// Defines from where the private labeling should be triggered
-        /// </summary>
-        public readonly string PrivateLabelingSetting;
-        /// <summary>
-        /// The ID of this resource.
+        /// ID of the project
         /// </summary>
         public readonly string ProjectId;
-        /// <summary>
-        /// describes if roles of user should be added in token
-        /// </summary>
-        public readonly bool ProjectRoleAssertion;
-        /// <summary>
-        /// ZITADEL checks if the user has at least one on this project
-        /// </summary>
-        public readonly bool ProjectRoleCheck;
-        /// <summary>
-        /// State of the project
-        /// </summary>
-        public readonly string State;
 
         [OutputConstructor]
-        private GetProjectResult(
-            bool hasProjectCheck,
+        private GetApplicationSamlResult(
+            string appId,
 
             string id,
+
+            string metadataXml,
 
             string name,
 
             string? orgId,
 
-            string privateLabelingSetting,
-
-            string projectId,
-
-            bool projectRoleAssertion,
-
-            bool projectRoleCheck,
-
-            string state)
+            string projectId)
         {
-            HasProjectCheck = hasProjectCheck;
+            AppId = appId;
             Id = id;
+            MetadataXml = metadataXml;
             Name = name;
             OrgId = orgId;
-            PrivateLabelingSetting = privateLabelingSetting;
             ProjectId = projectId;
-            ProjectRoleAssertion = projectRoleAssertion;
-            ProjectRoleCheck = projectRoleCheck;
-            State = state;
         }
     }
 }

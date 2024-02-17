@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Datasource representing an API application belonging to a project, with all configuration possibilities.
+ * Datasource representing a SAML application belonging to a project, with all configuration possibilities.
  *
  * ## Example Usage
  *
@@ -13,17 +13,17 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const default = zitadel.getApplicationApi({
+ * const default = zitadel.getApplicationSaml({
  *     orgId: data.zitadel_org["default"].id,
  *     projectId: data.zitadel_project["default"].id,
  *     appId: "123456789012345678",
  * });
  * ```
  */
-export function getApplicationApi(args: GetApplicationApiArgs, opts?: pulumi.InvokeOptions): Promise<GetApplicationApiResult> {
+export function getApplicationSaml(args: GetApplicationSamlArgs, opts?: pulumi.InvokeOptions): Promise<GetApplicationSamlResult> {
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
-    return pulumi.runtime.invoke("zitadel:index/getApplicationApi:getApplicationApi", {
+    return pulumi.runtime.invoke("zitadel:index/getApplicationSaml:getApplicationSaml", {
         "appId": args.appId,
         "orgId": args.orgId,
         "projectId": args.projectId,
@@ -31,9 +31,9 @@ export function getApplicationApi(args: GetApplicationApiArgs, opts?: pulumi.Inv
 }
 
 /**
- * A collection of arguments for invoking getApplicationApi.
+ * A collection of arguments for invoking getApplicationSaml.
  */
-export interface GetApplicationApiArgs {
+export interface GetApplicationSamlArgs {
     /**
      * The ID of this resource.
      */
@@ -49,21 +49,21 @@ export interface GetApplicationApiArgs {
 }
 
 /**
- * A collection of values returned by getApplicationApi.
+ * A collection of values returned by getApplicationSaml.
  */
-export interface GetApplicationApiResult {
+export interface GetApplicationSamlResult {
     /**
      * The ID of this resource.
      */
     readonly appId: string;
     /**
-     * Auth method type
-     */
-    readonly authMethodType: string;
-    /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * Metadata as XML file
+     */
+    readonly metadataXml: string;
     /**
      * Name of the application
      */
@@ -78,7 +78,7 @@ export interface GetApplicationApiResult {
     readonly projectId: string;
 }
 /**
- * Datasource representing an API application belonging to a project, with all configuration possibilities.
+ * Datasource representing a SAML application belonging to a project, with all configuration possibilities.
  *
  * ## Example Usage
  *
@@ -86,21 +86,21 @@ export interface GetApplicationApiResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumi/zitadel";
  *
- * const default = zitadel.getApplicationApi({
+ * const default = zitadel.getApplicationSaml({
  *     orgId: data.zitadel_org["default"].id,
  *     projectId: data.zitadel_project["default"].id,
  *     appId: "123456789012345678",
  * });
  * ```
  */
-export function getApplicationApiOutput(args: GetApplicationApiOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApplicationApiResult> {
-    return pulumi.output(args).apply((a: any) => getApplicationApi(a, opts))
+export function getApplicationSamlOutput(args: GetApplicationSamlOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApplicationSamlResult> {
+    return pulumi.output(args).apply((a: any) => getApplicationSaml(a, opts))
 }
 
 /**
- * A collection of arguments for invoking getApplicationApi.
+ * A collection of arguments for invoking getApplicationSaml.
  */
-export interface GetApplicationApiOutputArgs {
+export interface GetApplicationSamlOutputArgs {
     /**
      * The ID of this resource.
      */

@@ -18,7 +18,6 @@ import * as utilities from "./utilities";
  *     projectId: data.zitadel_project["default"].id,
  *     appId: "123456789012345678",
  * });
- * export const applicationOidc = _default;
  * ```
  */
 export function getApplicationOidc(args: GetApplicationOidcArgs, opts?: pulumi.InvokeOptions): Promise<GetApplicationOidcResult> {
@@ -144,7 +143,6 @@ export interface GetApplicationOidcResult {
  *     projectId: data.zitadel_project["default"].id,
  *     appId: "123456789012345678",
  * });
- * export const applicationOidc = _default;
  * ```
  */
 export function getApplicationOidcOutput(args: GetApplicationOidcOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApplicationOidcResult> {
