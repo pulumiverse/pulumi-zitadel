@@ -19,5 +19,5 @@ jobs:
       provider: zitadel
       goversion: 1.21.x
       dotnetversion: 6.0.300
-      nodeversion: 14.x
+      nodeversion: 20.x
       pythonversion: 3.9
