@@ -1,5 +1,7 @@
 # Zitadel Resource Provider
 
+**⚠️WARNING: [I](https://github.com/vavsab) do not maintain this repo anymore. [Wating for zitadel to respond](https://github.com/zitadel/terraform-provider-zitadel/issues/158)**
+
 The Zitadel Resource Provider lets you manage [Zitadel](https://zitadel.com/) resources.
 
 ## Installing
