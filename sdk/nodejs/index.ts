@@ -25,6 +25,11 @@ export type ApplicationOidc = import("./applicationOidc").ApplicationOidc;
 export const ApplicationOidc: typeof import("./applicationOidc").ApplicationOidc = null as any;
 utilities.lazyLoad(exports, ["ApplicationOidc"], () => require("./applicationOidc"));
 
+export { ApplicationSamlArgs, ApplicationSamlState } from "./applicationSaml";
+export type ApplicationSaml = import("./applicationSaml").ApplicationSaml;
+export const ApplicationSaml: typeof import("./applicationSaml").ApplicationSaml = null as any;
+utilities.lazyLoad(exports, ["ApplicationSaml"], () => require("./applicationSaml"));
+
 export { DefaultDomainPolicyArgs, DefaultDomainPolicyState } from "./defaultDomainPolicy";
 export type DefaultDomainPolicy = import("./defaultDomainPolicy").DefaultDomainPolicy;
 export const DefaultDomainPolicy: typeof import("./defaultDomainPolicy").DefaultDomainPolicy = null as any;
@@ -85,10 +90,30 @@ export const getApplicationApi: typeof import("./getApplicationApi").getApplicat
 export const getApplicationApiOutput: typeof import("./getApplicationApi").getApplicationApiOutput = null as any;
 utilities.lazyLoad(exports, ["getApplicationApi","getApplicationApiOutput"], () => require("./getApplicationApi"));
 
+export { GetApplicationApisArgs, GetApplicationApisResult, GetApplicationApisOutputArgs } from "./getApplicationApis";
+export const getApplicationApis: typeof import("./getApplicationApis").getApplicationApis = null as any;
+export const getApplicationApisOutput: typeof import("./getApplicationApis").getApplicationApisOutput = null as any;
+utilities.lazyLoad(exports, ["getApplicationApis","getApplicationApisOutput"], () => require("./getApplicationApis"));
+
 export { GetApplicationOidcArgs, GetApplicationOidcResult, GetApplicationOidcOutputArgs } from "./getApplicationOidc";
 export const getApplicationOidc: typeof import("./getApplicationOidc").getApplicationOidc = null as any;
 export const getApplicationOidcOutput: typeof import("./getApplicationOidc").getApplicationOidcOutput = null as any;
 utilities.lazyLoad(exports, ["getApplicationOidc","getApplicationOidcOutput"], () => require("./getApplicationOidc"));
+
+export { GetApplicationOidcsArgs, GetApplicationOidcsResult, GetApplicationOidcsOutputArgs } from "./getApplicationOidcs";
+export const getApplicationOidcs: typeof import("./getApplicationOidcs").getApplicationOidcs = null as any;
+export const getApplicationOidcsOutput: typeof import("./getApplicationOidcs").getApplicationOidcsOutput = null as any;
+utilities.lazyLoad(exports, ["getApplicationOidcs","getApplicationOidcsOutput"], () => require("./getApplicationOidcs"));
+
+export { GetApplicationSamlArgs, GetApplicationSamlResult, GetApplicationSamlOutputArgs } from "./getApplicationSaml";
+export const getApplicationSaml: typeof import("./getApplicationSaml").getApplicationSaml = null as any;
+export const getApplicationSamlOutput: typeof import("./getApplicationSaml").getApplicationSamlOutput = null as any;
+utilities.lazyLoad(exports, ["getApplicationSaml","getApplicationSamlOutput"], () => require("./getApplicationSaml"));
+
+export { GetApplicationSamlsArgs, GetApplicationSamlsResult, GetApplicationSamlsOutputArgs } from "./getApplicationSamls";
+export const getApplicationSamls: typeof import("./getApplicationSamls").getApplicationSamls = null as any;
+export const getApplicationSamlsOutput: typeof import("./getApplicationSamls").getApplicationSamlsOutput = null as any;
+utilities.lazyLoad(exports, ["getApplicationSamls","getApplicationSamlsOutput"], () => require("./getApplicationSamls"));
 
 export { GetDefaultOidcSettingsResult } from "./getDefaultOidcSettings";
 export const getDefaultOidcSettings: typeof import("./getDefaultOidcSettings").getDefaultOidcSettings = null as any;
@@ -139,6 +164,11 @@ export { GetMachineUserArgs, GetMachineUserResult, GetMachineUserOutputArgs } fr
 export const getMachineUser: typeof import("./getMachineUser").getMachineUser = null as any;
 export const getMachineUserOutput: typeof import("./getMachineUser").getMachineUserOutput = null as any;
 utilities.lazyLoad(exports, ["getMachineUser","getMachineUserOutput"], () => require("./getMachineUser"));
+
+export { GetMachineUsersArgs, GetMachineUsersResult, GetMachineUsersOutputArgs } from "./getMachineUsers";
+export const getMachineUsers: typeof import("./getMachineUsers").getMachineUsers = null as any;
+export const getMachineUsersOutput: typeof import("./getMachineUsers").getMachineUsersOutput = null as any;
+utilities.lazyLoad(exports, ["getMachineUsers","getMachineUsersOutput"], () => require("./getMachineUsers"));
 
 export { GetOrgArgs, GetOrgResult, GetOrgOutputArgs } from "./getOrg";
 export const getOrg: typeof import("./getOrg").getOrg = null as any;
@@ -204,6 +234,11 @@ export { GetProjectRoleArgs, GetProjectRoleResult, GetProjectRoleOutputArgs } fr
 export const getProjectRole: typeof import("./getProjectRole").getProjectRole = null as any;
 export const getProjectRoleOutput: typeof import("./getProjectRole").getProjectRoleOutput = null as any;
 utilities.lazyLoad(exports, ["getProjectRole","getProjectRoleOutput"], () => require("./getProjectRole"));
+
+export { GetProjectsArgs, GetProjectsResult, GetProjectsOutputArgs } from "./getProjects";
+export const getProjects: typeof import("./getProjects").getProjects = null as any;
+export const getProjectsOutput: typeof import("./getProjects").getProjectsOutput = null as any;
+utilities.lazyLoad(exports, ["getProjects","getProjectsOutput"], () => require("./getProjects"));
 
 export { GetTriggerActionsArgs, GetTriggerActionsResult, GetTriggerActionsOutputArgs } from "./getTriggerActions";
 export const getTriggerActions: typeof import("./getTriggerActions").getTriggerActions = null as any;
@@ -425,6 +460,8 @@ const _module = {
                 return new ApplicationKey(name, <any>undefined, { urn })
             case "zitadel:index/applicationOidc:ApplicationOidc":
                 return new ApplicationOidc(name, <any>undefined, { urn })
+            case "zitadel:index/applicationSaml:ApplicationSaml":
+                return new ApplicationSaml(name, <any>undefined, { urn })
             case "zitadel:index/defaultDomainPolicy:DefaultDomainPolicy":
                 return new DefaultDomainPolicy(name, <any>undefined, { urn })
             case "zitadel:index/defaultLabelPolicy:DefaultLabelPolicy":
@@ -530,6 +567,7 @@ pulumi.runtime.registerResourceModule("zitadel", "index/action", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/applicationApi", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/applicationKey", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/applicationOidc", _module)
+pulumi.runtime.registerResourceModule("zitadel", "index/applicationSaml", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/defaultDomainPolicy", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/defaultLabelPolicy", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/defaultLockoutPolicy", _module)

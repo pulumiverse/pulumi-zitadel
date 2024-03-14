@@ -17,7 +17,6 @@ import * as utilities from "./utilities";
  *     orgId: data.zitadel_org["default"].id,
  *     projectId: "123456789012345678",
  * });
- * export const project = _default;
  * ```
  */
 export function getProject(args: GetProjectArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectResult> {
@@ -97,7 +96,6 @@ export interface GetProjectResult {
  *     orgId: data.zitadel_org["default"].id,
  *     projectId: "123456789012345678",
  * });
- * export const project = _default;
  * ```
  */
 export function getProjectOutput(args: GetProjectOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProjectResult> {

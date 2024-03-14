@@ -9,6 +9,7 @@ from .action import *
 from .application_api import *
 from .application_key import *
 from .application_oidc import *
+from .application_saml import *
 from .default_domain_policy import *
 from .default_label_policy import *
 from .default_lockout_policy import *
@@ -21,7 +22,11 @@ from .domain import *
 from .domain_policy import *
 from .get_action import *
 from .get_application_api import *
+from .get_application_apis import *
 from .get_application_oidc import *
+from .get_application_oidcs import *
+from .get_application_saml import *
+from .get_application_samls import *
 from .get_default_oidc_settings import *
 from .get_human_user import *
 from .get_idp_azure_ad import *
@@ -32,6 +37,7 @@ from .get_idp_gitlab_self_hosted import *
 from .get_idp_google import *
 from .get_idp_ldap import *
 from .get_machine_user import *
+from .get_machine_users import *
 from .get_org import *
 from .get_org_idp_azure_ad import *
 from .get_org_idp_github import *
@@ -45,6 +51,7 @@ from .get_org_oidc_idp import *
 from .get_orgs import *
 from .get_project import *
 from .get_project_role import *
+from .get_projects import *
 from .get_trigger_actions import *
 from .human_user import *
 from .idp_azure_ad import *
@@ -126,6 +133,14 @@ _utilities.register(
   "fqn": "pulumiverse_zitadel",
   "classes": {
    "zitadel:index/applicationOidc:ApplicationOidc": "ApplicationOidc"
+  }
+ },
+ {
+  "pkg": "zitadel",
+  "mod": "index/applicationSaml",
+  "fqn": "pulumiverse_zitadel",
+  "classes": {
+   "zitadel:index/applicationSaml:ApplicationSaml": "ApplicationSaml"
   }
  },
  {

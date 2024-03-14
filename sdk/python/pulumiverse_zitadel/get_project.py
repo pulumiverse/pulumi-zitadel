@@ -154,7 +154,6 @@ def get_project(org_id: Optional[str] = None,
 
     default = zitadel.get_project(org_id=data["zitadel_org"]["default"]["id"],
         project_id="123456789012345678")
-    pulumi.export("project", default)
     ```
 
 
@@ -194,7 +193,6 @@ def get_project_output(org_id: Optional[pulumi.Input[Optional[str]]] = None,
 
     default = zitadel.get_project(org_id=data["zitadel_org"]["default"]["id"],
         project_id="123456789012345678")
-    pulumi.export("project", default)
     ```
 
 

@@ -145,6 +145,7 @@ func Provider() tfbridge.ProviderInfo {
 			"zitadel_org_idp_google":                     {Tok: tfbridge.MakeResource(mainPkg, mainMod, "OrgIdpGoogle")},
 			"zitadel_org_idp_azure_ad":                   {Tok: tfbridge.MakeResource(mainPkg, mainMod, "OrgIdpAzureAd")},
 			"zitadel_org_idp_ldap":                       {Tok: tfbridge.MakeResource(mainPkg, mainMod, "OrgIdpLdap")},
+			"zitadel_application_saml":                   {Tok: tfbridge.MakeResource(mainPkg, mainMod, "ApplicationSaml")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"zitadel_org":                        {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getOrg")},
@@ -174,6 +175,12 @@ func Provider() tfbridge.ProviderInfo {
 			"zitadel_org_idp_azure_ad":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getOrgIdpAzureAd")},
 			"zitadel_org_idp_ldap":               {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getOrgIdpLdap")},
 			"zitadel_default_oidc_settings":      {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getDefaultOidcSettings")},
+			"zitadel_application_oidcs":          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getApplicationOidcs")},
+			"zitadel_application_saml":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getApplicationSaml")},
+			"zitadel_application_samls":          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getApplicationSamls")},
+			"zitadel_machine_users":              {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getMachineUsers")},
+			"zitadel_projects":                   {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getProjects")},
+			"zitadel_application_apis":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getApplicationApis")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@pulumiverse/zitadel",

@@ -166,7 +166,6 @@ def get_machine_user(org_id: Optional[str] = None,
 
     default = zitadel.get_machine_user(org_id=data["zitadel_org"]["default"]["id"],
         user_id="123456789012345678")
-    pulumi.export("machineUser", default)
     ```
 
 
@@ -207,7 +206,6 @@ def get_machine_user_output(org_id: Optional[pulumi.Input[Optional[str]]] = None
 
     default = zitadel.get_machine_user(org_id=data["zitadel_org"]["default"]["id"],
         user_id="123456789012345678")
-    pulumi.export("machineUser", default)
     ```
 
 

@@ -29,6 +29,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ApplicationKey{}
 	case "zitadel:index/applicationOidc:ApplicationOidc":
 		r = &ApplicationOidc{}
+	case "zitadel:index/applicationSaml:ApplicationSaml":
+		r = &ApplicationSaml{}
 	case "zitadel:index/defaultDomainPolicy:DefaultDomainPolicy":
 		r = &DefaultDomainPolicy{}
 	case "zitadel:index/defaultLabelPolicy:DefaultLabelPolicy":
@@ -174,6 +176,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"zitadel",
 		"index/applicationOidc",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"zitadel",
+		"index/applicationSaml",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

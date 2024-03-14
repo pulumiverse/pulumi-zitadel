@@ -17,7 +17,6 @@ import * as utilities from "./utilities";
  *     orgId: data.zitadel_org["default"].id,
  *     userId: "123456789012345678",
  * });
- * export const machineUser = _default;
  * ```
  */
 export function getMachineUser(args: GetMachineUserArgs, opts?: pulumi.InvokeOptions): Promise<GetMachineUserResult> {
@@ -101,7 +100,6 @@ export interface GetMachineUserResult {
  *     orgId: data.zitadel_org["default"].id,
  *     userId: "123456789012345678",
  * });
- * export const machineUser = _default;
  * ```
  */
 export function getMachineUserOutput(args: GetMachineUserOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetMachineUserResult> {
