@@ -64,7 +64,7 @@ namespace Pulumiverse.Zitadel
         public Output<string> FontUrl { get; private set; } = null!;
 
         /// <summary>
-        /// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+        /// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
         /// </summary>
         [Output("hideLoginNameSuffix")]
         public Output<bool> HideLoginNameSuffix { get; private set; } = null!;
@@ -219,7 +219,7 @@ namespace Pulumiverse.Zitadel
         public Input<string>? FontPath { get; set; }
 
         /// <summary>
-        /// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+        /// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
         /// </summary>
         [Input("hideLoginNameSuffix", required: true)]
         public Input<bool> HideLoginNameSuffix { get; set; } = null!;
@@ -326,7 +326,7 @@ namespace Pulumiverse.Zitadel
         public Input<string>? FontUrl { get; set; }
 
         /// <summary>
-        /// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+        /// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
         /// </summary>
         [Input("hideLoginNameSuffix")]
         public Input<bool>? HideLoginNameSuffix { get; set; }

@@ -60,11 +60,11 @@ type TriggerActions struct {
 
 	// IDs of the triggered actions
 	ActionIds pulumi.StringArrayOutput `pulumi:"actionIds"`
-	// Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+	// Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
 	FlowType pulumi.StringOutput `pulumi:"flowType"`
 	// ID of the organization
 	OrgId pulumi.StringPtrOutput `pulumi:"orgId"`
-	// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+	// Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
 	TriggerType pulumi.StringOutput `pulumi:"triggerType"`
 }
 
@@ -109,22 +109,22 @@ func GetTriggerActions(ctx *pulumi.Context,
 type triggerActionsState struct {
 	// IDs of the triggered actions
 	ActionIds []string `pulumi:"actionIds"`
-	// Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+	// Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
 	FlowType *string `pulumi:"flowType"`
 	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
-	// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+	// Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
 	TriggerType *string `pulumi:"triggerType"`
 }
 
 type TriggerActionsState struct {
 	// IDs of the triggered actions
 	ActionIds pulumi.StringArrayInput
-	// Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+	// Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
 	FlowType pulumi.StringPtrInput
 	// ID of the organization
 	OrgId pulumi.StringPtrInput
-	// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+	// Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
 	TriggerType pulumi.StringPtrInput
 }
 
@@ -135,11 +135,11 @@ func (TriggerActionsState) ElementType() reflect.Type {
 type triggerActionsArgs struct {
 	// IDs of the triggered actions
 	ActionIds []string `pulumi:"actionIds"`
-	// Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+	// Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
 	FlowType string `pulumi:"flowType"`
 	// ID of the organization
 	OrgId *string `pulumi:"orgId"`
-	// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+	// Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
 	TriggerType string `pulumi:"triggerType"`
 }
 
@@ -147,11 +147,11 @@ type triggerActionsArgs struct {
 type TriggerActionsArgs struct {
 	// IDs of the triggered actions
 	ActionIds pulumi.StringArrayInput
-	// Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+	// Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
 	FlowType pulumi.StringInput
 	// ID of the organization
 	OrgId pulumi.StringPtrInput
-	// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+	// Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
 	TriggerType pulumi.StringInput
 }
 
@@ -271,7 +271,7 @@ func (o TriggerActionsOutput) ActionIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *TriggerActions) pulumi.StringArrayOutput { return v.ActionIds }).(pulumi.StringArrayOutput)
 }
 
-// Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+// Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
 func (o TriggerActionsOutput) FlowType() pulumi.StringOutput {
 	return o.ApplyT(func(v *TriggerActions) pulumi.StringOutput { return v.FlowType }).(pulumi.StringOutput)
 }
@@ -281,7 +281,7 @@ func (o TriggerActionsOutput) OrgId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *TriggerActions) pulumi.StringPtrOutput { return v.OrgId }).(pulumi.StringPtrOutput)
 }
 
-// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+// Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
 func (o TriggerActionsOutput) TriggerType() pulumi.StringOutput {
 	return o.ApplyT(func(v *TriggerActions) pulumi.StringOutput { return v.TriggerType }).(pulumi.StringOutput)
 }

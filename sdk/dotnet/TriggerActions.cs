@@ -55,7 +55,7 @@ namespace Pulumiverse.Zitadel
         public Output<ImmutableArray<string>> ActionIds { get; private set; } = null!;
 
         /// <summary>
-        /// Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+        /// Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
         /// </summary>
         [Output("flowType")]
         public Output<string> FlowType { get; private set; } = null!;
@@ -67,7 +67,7 @@ namespace Pulumiverse.Zitadel
         public Output<string?> OrgId { get; private set; } = null!;
 
         /// <summary>
-        /// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+        /// Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
         /// </summary>
         [Output("triggerType")]
         public Output<string> TriggerType { get; private set; } = null!;
@@ -132,7 +132,7 @@ namespace Pulumiverse.Zitadel
         }
 
         /// <summary>
-        /// Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+        /// Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
         /// </summary>
         [Input("flowType", required: true)]
         public Input<string> FlowType { get; set; } = null!;
@@ -144,7 +144,7 @@ namespace Pulumiverse.Zitadel
         public Input<string>? OrgId { get; set; }
 
         /// <summary>
-        /// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+        /// Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
         /// </summary>
         [Input("triggerType", required: true)]
         public Input<string> TriggerType { get; set; } = null!;
@@ -170,7 +170,7 @@ namespace Pulumiverse.Zitadel
         }
 
         /// <summary>
-        /// Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+        /// Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
         /// </summary>
         [Input("flowType")]
         public Input<string>? FlowType { get; set; }
@@ -182,7 +182,7 @@ namespace Pulumiverse.Zitadel
         public Input<string>? OrgId { get; set; }
 
         /// <summary>
-        /// Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+        /// Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
         /// </summary>
         [Input("triggerType")]
         public Input<string>? TriggerType { get; set; }

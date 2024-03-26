@@ -17,15 +17,16 @@ import * as utilities from "./utilities";
  *     orgId: data.zitadel_org["default"].id,
  *     userName: "machine@example.com",
  *     description: "a machine user",
+ *     withSecret: false,
  * });
  * ```
  *
  * ## Import
  *
- * terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+ * terraform The resource can be imported using the ID format `<id:has_secret[:org_id][:client_id][:client_secret]>`, e.g.
  *
  * ```sh
- *  $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
+ *  $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678:true:my-machine-user:j76mh34CHVrGGoXPQOg80lch67FIxwc2qIXjBkZoB6oMbf31eGMkB6bvRyaPjR2t'
  * ```
  */
 export class MachineUser extends pulumi.CustomResource {
@@ -61,6 +62,14 @@ export class MachineUser extends pulumi.CustomResource {
      */
     public readonly accessTokenType!: pulumi.Output<string | undefined>;
     /**
+     * Value of the client ID if withSecret is true
+     */
+    public /*out*/ readonly clientId!: pulumi.Output<string>;
+    /**
+     * Value of the client secret if withSecret is true
+     */
+    public /*out*/ readonly clientSecret!: pulumi.Output<string>;
+    /**
      * Description of the user
      */
     public readonly description!: pulumi.Output<string | undefined>;
@@ -88,6 +97,10 @@ export class MachineUser extends pulumi.CustomResource {
      * Username
      */
     public readonly userName!: pulumi.Output<string>;
+    /**
+     * Generate machine secret, only applicable if creation or change from false
+     */
+    public readonly withSecret!: pulumi.Output<boolean | undefined>;
 
     /**
      * Create a MachineUser resource with the given unique name, arguments, and options.
@@ -103,6 +116,8 @@ export class MachineUser extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as MachineUserState | undefined;
             resourceInputs["accessTokenType"] = state ? state.accessTokenType : undefined;
+            resourceInputs["clientId"] = state ? state.clientId : undefined;
+            resourceInputs["clientSecret"] = state ? state.clientSecret : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["loginNames"] = state ? state.loginNames : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
@@ -110,6 +125,7 @@ export class MachineUser extends pulumi.CustomResource {
             resourceInputs["preferredLoginName"] = state ? state.preferredLoginName : undefined;
             resourceInputs["state"] = state ? state.state : undefined;
             resourceInputs["userName"] = state ? state.userName : undefined;
+            resourceInputs["withSecret"] = state ? state.withSecret : undefined;
         } else {
             const args = argsOrState as MachineUserArgs | undefined;
             if ((!args || args.userName === undefined) && !opts.urn) {
@@ -120,11 +136,16 @@ export class MachineUser extends pulumi.CustomResource {
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["orgId"] = args ? args.orgId : undefined;
             resourceInputs["userName"] = args ? args.userName : undefined;
+            resourceInputs["withSecret"] = args ? args.withSecret : undefined;
+            resourceInputs["clientId"] = undefined /*out*/;
+            resourceInputs["clientSecret"] = undefined /*out*/;
             resourceInputs["loginNames"] = undefined /*out*/;
             resourceInputs["preferredLoginName"] = undefined /*out*/;
             resourceInputs["state"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["clientId", "clientSecret"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(MachineUser.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -137,6 +158,14 @@ export interface MachineUserState {
      * Access token type, supported values: ACCESS*TOKEN*TYPE*BEARER, ACCESS*TOKEN*TYPE*JWT
      */
     accessTokenType?: pulumi.Input<string>;
+    /**
+     * Value of the client ID if withSecret is true
+     */
+    clientId?: pulumi.Input<string>;
+    /**
+     * Value of the client secret if withSecret is true
+     */
+    clientSecret?: pulumi.Input<string>;
     /**
      * Description of the user
      */
@@ -165,6 +194,10 @@ export interface MachineUserState {
      * Username
      */
     userName?: pulumi.Input<string>;
+    /**
+     * Generate machine secret, only applicable if creation or change from false
+     */
+    withSecret?: pulumi.Input<boolean>;
 }
 
 /**
@@ -191,4 +224,8 @@ export interface MachineUserArgs {
      * Username
      */
     userName: pulumi.Input<string>;
+    /**
+     * Generate machine secret, only applicable if creation or change from false
+     */
+    withSecret?: pulumi.Input<boolean>;
 }
