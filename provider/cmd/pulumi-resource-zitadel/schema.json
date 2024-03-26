@@ -904,7 +904,7 @@
                 },
                 "hideLoginNameSuffix": {
                     "type": "boolean",
-                    "description": "hides the org suffix on the login form if the scope \"urn:zitadel:iam:org:domain:primary:{domainname}\" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes\n"
+                    "description": "hides the org suffix on the login form if the scope \"urn:zitadel:iam:org:domain:primary:{domainname}\" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes\n"
                 },
                 "iconDarkHash": {
                     "type": "string"
@@ -1009,7 +1009,7 @@
                 },
                 "hideLoginNameSuffix": {
                     "type": "boolean",
-                    "description": "hides the org suffix on the login form if the scope \"urn:zitadel:iam:org:domain:primary:{domainname}\" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes\n"
+                    "description": "hides the org suffix on the login form if the scope \"urn:zitadel:iam:org:domain:primary:{domainname}\" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes\n"
                 },
                 "iconDarkHash": {
                     "type": "string"
@@ -1102,7 +1102,7 @@
                     },
                     "hideLoginNameSuffix": {
                         "type": "boolean",
-                        "description": "hides the org suffix on the login form if the scope \"urn:zitadel:iam:org:domain:primary:{domainname}\" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes\n"
+                        "description": "hides the org suffix on the login form if the scope \"urn:zitadel:iam:org:domain:primary:{domainname}\" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes\n"
                     },
                     "iconDarkHash": {
                         "type": "string"
@@ -4230,11 +4230,21 @@
             }
         },
         "zitadel:index/machineUser:MachineUser": {
-            "description": "Resource representing a serviceaccount situated under an organization, which then can be authorized through memberships or direct grants on other resources.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as zitadel from \"@pulumiverse/zitadel\";\n\nconst _default = new zitadel.MachineUser(\"default\", {\n    orgId: data.zitadel_org[\"default\"].id,\n    userName: \"machine@example.com\",\n    description: \"a machine user\",\n});\n```\n```python\nimport pulumi\nimport pulumiverse_zitadel as zitadel\n\ndefault = zitadel.MachineUser(\"default\",\n    org_id=data[\"zitadel_org\"][\"default\"][\"id\"],\n    user_name=\"machine@example.com\",\n    description=\"a machine user\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Zitadel = Pulumiverse.Zitadel;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @default = new Zitadel.MachineUser(\"default\", new()\n    {\n        OrgId = data.Zitadel_org.Default.Id,\n        UserName = \"machine@example.com\",\n        Description = \"a machine user\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := zitadel.NewMachineUser(ctx, \"default\", \u0026zitadel.MachineUserArgs{\n\t\t\tOrgId:       pulumi.Any(data.Zitadel_org.Default.Id),\n\t\t\tUserName:    pulumi.String(\"machine@example.com\"),\n\t\t\tDescription: pulumi.String(\"a machine user\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.zitadel.MachineUser;\nimport com.pulumi.zitadel.MachineUserArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var default_ = new MachineUser(\"default\", MachineUserArgs.builder()        \n            .orgId(data.zitadel_org().default().id())\n            .userName(\"machine@example.com\")\n            .description(\"a machine user\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  default:\n    type: zitadel:MachineUser\n    properties:\n      orgId: ${data.zitadel_org.default.id}\n      userName: machine@example.com\n      description: a machine user\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nterraform The resource can be imported using the ID format `\u003cid[:org_id]\u003e`, e.g.\n\n```sh\n $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'\n```\n\n ",
+            "description": "Resource representing a serviceaccount situated under an organization, which then can be authorized through memberships or direct grants on other resources.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as zitadel from \"@pulumiverse/zitadel\";\n\nconst _default = new zitadel.MachineUser(\"default\", {\n    orgId: data.zitadel_org[\"default\"].id,\n    userName: \"machine@example.com\",\n    description: \"a machine user\",\n    withSecret: false,\n});\n```\n```python\nimport pulumi\nimport pulumiverse_zitadel as zitadel\n\ndefault = zitadel.MachineUser(\"default\",\n    org_id=data[\"zitadel_org\"][\"default\"][\"id\"],\n    user_name=\"machine@example.com\",\n    description=\"a machine user\",\n    with_secret=False)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Zitadel = Pulumiverse.Zitadel;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var @default = new Zitadel.MachineUser(\"default\", new()\n    {\n        OrgId = data.Zitadel_org.Default.Id,\n        UserName = \"machine@example.com\",\n        Description = \"a machine user\",\n        WithSecret = false,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := zitadel.NewMachineUser(ctx, \"default\", \u0026zitadel.MachineUserArgs{\n\t\t\tOrgId:       pulumi.Any(data.Zitadel_org.Default.Id),\n\t\t\tUserName:    pulumi.String(\"machine@example.com\"),\n\t\t\tDescription: pulumi.String(\"a machine user\"),\n\t\t\tWithSecret:  pulumi.Bool(false),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.zitadel.MachineUser;\nimport com.pulumi.zitadel.MachineUserArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var default_ = new MachineUser(\"default\", MachineUserArgs.builder()        \n            .orgId(data.zitadel_org().default().id())\n            .userName(\"machine@example.com\")\n            .description(\"a machine user\")\n            .withSecret(false)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  default:\n    type: zitadel:MachineUser\n    properties:\n      orgId: ${data.zitadel_org.default.id}\n      userName: machine@example.com\n      description: a machine user\n      withSecret: false\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nterraform The resource can be imported using the ID format `\u003cid:has_secret[:org_id][:client_id][:client_secret]\u003e`, e.g.\n\n```sh\n $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678:true:my-machine-user:j76mh34CHVrGGoXPQOg80lch67FIxwc2qIXjBkZoB6oMbf31eGMkB6bvRyaPjR2t'\n```\n\n ",
             "properties": {
                 "accessTokenType": {
                     "type": "string",
                     "description": "Access token type, supported values: ACCESS*TOKEN*TYPE*BEARER, ACCESS*TOKEN*TYPE*JWT\n"
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "Value of the client ID if withSecret is true\n",
+                    "secret": true
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "Value of the client secret if withSecret is true\n",
+                    "secret": true
                 },
                 "description": {
                     "type": "string",
@@ -4266,9 +4276,15 @@
                 "userName": {
                     "type": "string",
                     "description": "Username\n"
+                },
+                "withSecret": {
+                    "type": "boolean",
+                    "description": "Generate machine secret, only applicable if creation or change from false\n"
                 }
             },
             "required": [
+                "clientId",
+                "clientSecret",
                 "loginNames",
                 "name",
                 "preferredLoginName",
@@ -4296,6 +4312,10 @@
                 "userName": {
                     "type": "string",
                     "description": "Username\n"
+                },
+                "withSecret": {
+                    "type": "boolean",
+                    "description": "Generate machine secret, only applicable if creation or change from false\n"
                 }
             },
             "requiredInputs": [
@@ -4307,6 +4327,16 @@
                     "accessTokenType": {
                         "type": "string",
                         "description": "Access token type, supported values: ACCESS*TOKEN*TYPE*BEARER, ACCESS*TOKEN*TYPE*JWT\n"
+                    },
+                    "clientId": {
+                        "type": "string",
+                        "description": "Value of the client ID if withSecret is true\n",
+                        "secret": true
+                    },
+                    "clientSecret": {
+                        "type": "string",
+                        "description": "Value of the client secret if withSecret is true\n",
+                        "secret": true
                     },
                     "description": {
                         "type": "string",
@@ -4339,6 +4369,10 @@
                     "userName": {
                         "type": "string",
                         "description": "Username\n"
+                    },
+                    "withSecret": {
+                        "type": "boolean",
+                        "description": "Generate machine secret, only applicable if creation or change from false\n"
                     }
                 },
                 "type": "object"
@@ -7123,7 +7157,7 @@
                 },
                 "flowType": {
                     "type": "string",
-                    "description": "Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN\n"
+                    "description": "Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE\n"
                 },
                 "orgId": {
                     "type": "string",
@@ -7131,7 +7165,7 @@
                 },
                 "triggerType": {
                     "type": "string",
-                    "description": "Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION\n"
+                    "description": "Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION\n"
                 }
             },
             "required": [
@@ -7149,7 +7183,7 @@
                 },
                 "flowType": {
                     "type": "string",
-                    "description": "Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN\n",
+                    "description": "Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE\n",
                     "willReplaceOnChanges": true
                 },
                 "orgId": {
@@ -7159,7 +7193,7 @@
                 },
                 "triggerType": {
                     "type": "string",
-                    "description": "Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION\n",
+                    "description": "Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION\n",
                     "willReplaceOnChanges": true
                 }
             },
@@ -7180,7 +7214,7 @@
                     },
                     "flowType": {
                         "type": "string",
-                        "description": "Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN\n",
+                        "description": "Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE\n",
                         "willReplaceOnChanges": true
                     },
                     "orgId": {
@@ -7190,7 +7224,7 @@
                     },
                     "triggerType": {
                         "type": "string",
-                        "description": "Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION\n",
+                        "description": "Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION\n",
                         "willReplaceOnChanges": true
                     }
                 },
