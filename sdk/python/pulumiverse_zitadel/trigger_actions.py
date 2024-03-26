@@ -21,8 +21,8 @@ class TriggerActionsArgs:
         """
         The set of arguments for constructing a TriggerActions resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] action_ids: IDs of the triggered actions
-        :param pulumi.Input[str] flow_type: Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
-        :param pulumi.Input[str] trigger_type: Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+        :param pulumi.Input[str] flow_type: Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
+        :param pulumi.Input[str] trigger_type: Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
         :param pulumi.Input[str] org_id: ID of the organization
         """
         TriggerActionsArgs._configure(
@@ -72,7 +72,7 @@ class TriggerActionsArgs:
     @pulumi.getter(name="flowType")
     def flow_type(self) -> pulumi.Input[str]:
         """
-        Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+        Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
         """
         return pulumi.get(self, "flow_type")
 
@@ -84,7 +84,7 @@ class TriggerActionsArgs:
     @pulumi.getter(name="triggerType")
     def trigger_type(self) -> pulumi.Input[str]:
         """
-        Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+        Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
         """
         return pulumi.get(self, "trigger_type")
 
@@ -115,9 +115,9 @@ class _TriggerActionsState:
         """
         Input properties used for looking up and filtering TriggerActions resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] action_ids: IDs of the triggered actions
-        :param pulumi.Input[str] flow_type: Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+        :param pulumi.Input[str] flow_type: Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
         :param pulumi.Input[str] org_id: ID of the organization
-        :param pulumi.Input[str] trigger_type: Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+        :param pulumi.Input[str] trigger_type: Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
         """
         _TriggerActionsState._configure(
             lambda key, value: pulumi.set(__self__, key, value),
@@ -169,7 +169,7 @@ class _TriggerActionsState:
     @pulumi.getter(name="flowType")
     def flow_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+        Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
         """
         return pulumi.get(self, "flow_type")
 
@@ -193,7 +193,7 @@ class _TriggerActionsState:
     @pulumi.getter(name="triggerType")
     def trigger_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+        Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
         """
         return pulumi.get(self, "trigger_type")
 
@@ -239,9 +239,9 @@ class TriggerActions(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] action_ids: IDs of the triggered actions
-        :param pulumi.Input[str] flow_type: Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+        :param pulumi.Input[str] flow_type: Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
         :param pulumi.Input[str] org_id: ID of the organization
-        :param pulumi.Input[str] trigger_type: Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+        :param pulumi.Input[str] trigger_type: Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
         """
         ...
     @overload
@@ -337,9 +337,9 @@ class TriggerActions(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] action_ids: IDs of the triggered actions
-        :param pulumi.Input[str] flow_type: Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+        :param pulumi.Input[str] flow_type: Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
         :param pulumi.Input[str] org_id: ID of the organization
-        :param pulumi.Input[str] trigger_type: Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+        :param pulumi.Input[str] trigger_type: Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -363,7 +363,7 @@ class TriggerActions(pulumi.CustomResource):
     @pulumi.getter(name="flowType")
     def flow_type(self) -> pulumi.Output[str]:
         """
-        Type of the flow to which the action triggers belong, supported values: , FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN
+        Type of the flow to which the action triggers belong, supported values: FLOW*TYPE*EXTERNAL*AUTHENTICATION, FLOW*TYPE*CUSTOMISE*TOKEN, FLOW*TYPE*INTERNAL*AUTHENTICATION, FLOW*TYPE*SAML*RESPONSE
         """
         return pulumi.get(self, "flow_type")
 
@@ -379,7 +379,7 @@ class TriggerActions(pulumi.CustomResource):
     @pulumi.getter(name="triggerType")
     def trigger_type(self) -> pulumi.Output[str]:
         """
-        Trigger type on when the actions get triggered, supported values: , TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO_CREATION
+        Trigger type on when the actions get triggered, supported values: TRIGGER*TYPE*POST*AUTHENTICATION, TRIGGER*TYPE*PRE*CREATION, TRIGGER*TYPE*POST*CREATION, TRIGGER*TYPE*PRE*USERINFO*CREATION, TRIGGER*TYPE*PRE*ACCESS*TOKEN*CREATION, TRIGGER*TYPE*PRE*SAML*RESPONSE_CREATION
         """
         return pulumi.get(self, "trigger_type")
 

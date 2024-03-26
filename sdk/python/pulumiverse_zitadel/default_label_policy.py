@@ -42,7 +42,7 @@ class DefaultLabelPolicyArgs:
         :param pulumi.Input[bool] disable_watermark: disable watermark
         :param pulumi.Input[str] font_color: hex value for font color
         :param pulumi.Input[str] font_color_dark: hex value for font color dark theme
-        :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+        :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[str] warn_color: hex value for warn color
@@ -239,7 +239,7 @@ class DefaultLabelPolicyArgs:
     @pulumi.getter(name="hideLoginNameSuffix")
     def hide_login_name_suffix(self) -> pulumi.Input[bool]:
         """
-        hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+        hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
         """
         return pulumi.get(self, "hide_login_name_suffix")
 
@@ -434,7 +434,7 @@ class _DefaultLabelPolicyState:
         :param pulumi.Input[bool] disable_watermark: disable watermark
         :param pulumi.Input[str] font_color: hex value for font color
         :param pulumi.Input[str] font_color_dark: hex value for font color dark theme
-        :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+        :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
@@ -698,7 +698,7 @@ class _DefaultLabelPolicyState:
     @pulumi.getter(name="hideLoginNameSuffix")
     def hide_login_name_suffix(self) -> Optional[pulumi.Input[bool]]:
         """
-        hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+        hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
         """
         return pulumi.get(self, "hide_login_name_suffix")
 
@@ -920,7 +920,7 @@ class DefaultLabelPolicy(pulumi.CustomResource):
         :param pulumi.Input[bool] disable_watermark: disable watermark
         :param pulumi.Input[str] font_color: hex value for font color
         :param pulumi.Input[str] font_color_dark: hex value for font color dark theme
-        :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+        :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
@@ -1087,7 +1087,7 @@ class DefaultLabelPolicy(pulumi.CustomResource):
         :param pulumi.Input[bool] disable_watermark: disable watermark
         :param pulumi.Input[str] font_color: hex value for font color
         :param pulumi.Input[str] font_color_dark: hex value for font color dark theme
-        :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+        :param pulumi.Input[bool] hide_login_name_suffix: hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
@@ -1185,7 +1185,7 @@ class DefaultLabelPolicy(pulumi.CustomResource):
     @pulumi.getter(name="hideLoginNameSuffix")
     def hide_login_name_suffix(self) -> pulumi.Output[bool]:
         """
-        hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+        hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
         """
         return pulumi.get(self, "hide_login_name_suffix")
 

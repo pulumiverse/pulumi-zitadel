@@ -28,6 +28,7 @@ namespace Pulumiverse.Zitadel
     ///         OrgId = data.Zitadel_org.Default.Id,
     ///         UserName = "machine@example.com",
     ///         Description = "a machine user",
+    ///         WithSecret = false,
     ///     });
     /// 
     /// });
@@ -35,10 +36,10 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ## Import
     /// 
-    /// terraform The resource can be imported using the ID format `&lt;id[:org_id]&gt;`, e.g.
+    /// terraform The resource can be imported using the ID format `&lt;id:has_secret[:org_id][:client_id][:client_secret]&gt;`, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
+    ///  $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678:true:my-machine-user:j76mh34CHVrGGoXPQOg80lch67FIxwc2qIXjBkZoB6oMbf31eGMkB6bvRyaPjR2t'
     /// ```
     /// </summary>
     [ZitadelResourceType("zitadel:index/machineUser:MachineUser")]
@@ -49,6 +50,18 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         [Output("accessTokenType")]
         public Output<string?> AccessTokenType { get; private set; } = null!;
+
+        /// <summary>
+        /// Value of the client ID if withSecret is true
+        /// </summary>
+        [Output("clientId")]
+        public Output<string> ClientId { get; private set; } = null!;
+
+        /// <summary>
+        /// Value of the client secret if withSecret is true
+        /// </summary>
+        [Output("clientSecret")]
+        public Output<string> ClientSecret { get; private set; } = null!;
 
         /// <summary>
         /// Description of the user
@@ -92,6 +105,12 @@ namespace Pulumiverse.Zitadel
         [Output("userName")]
         public Output<string> UserName { get; private set; } = null!;
 
+        /// <summary>
+        /// Generate machine secret, only applicable if creation or change from false
+        /// </summary>
+        [Output("withSecret")]
+        public Output<bool?> WithSecret { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a MachineUser resource with the given unique name, arguments, and options.
@@ -116,6 +135,11 @@ namespace Pulumiverse.Zitadel
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/pulumiverse",
+                AdditionalSecretOutputs =
+                {
+                    "clientId",
+                    "clientSecret",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -169,6 +193,12 @@ namespace Pulumiverse.Zitadel
         [Input("userName", required: true)]
         public Input<string> UserName { get; set; } = null!;
 
+        /// <summary>
+        /// Generate machine secret, only applicable if creation or change from false
+        /// </summary>
+        [Input("withSecret")]
+        public Input<bool>? WithSecret { get; set; }
+
         public MachineUserArgs()
         {
         }
@@ -182,6 +212,38 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         [Input("accessTokenType")]
         public Input<string>? AccessTokenType { get; set; }
+
+        [Input("clientId")]
+        private Input<string>? _clientId;
+
+        /// <summary>
+        /// Value of the client ID if withSecret is true
+        /// </summary>
+        public Input<string>? ClientId
+        {
+            get => _clientId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _clientId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("clientSecret")]
+        private Input<string>? _clientSecret;
+
+        /// <summary>
+        /// Value of the client secret if withSecret is true
+        /// </summary>
+        public Input<string>? ClientSecret
+        {
+            get => _clientSecret;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _clientSecret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Description of the user
@@ -230,6 +292,12 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         [Input("userName")]
         public Input<string>? UserName { get; set; }
+
+        /// <summary>
+        /// Generate machine secret, only applicable if creation or change from false
+        /// </summary>
+        [Input("withSecret")]
+        public Input<bool>? WithSecret { get; set; }
 
         public MachineUserState()
         {

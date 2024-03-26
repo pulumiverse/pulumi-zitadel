@@ -40,7 +40,7 @@ type DefaultLabelPolicy struct {
 	FontHash      pulumi.StringPtrOutput `pulumi:"fontHash"`
 	FontPath      pulumi.StringPtrOutput `pulumi:"fontPath"`
 	FontUrl       pulumi.StringOutput    `pulumi:"fontUrl"`
-	// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+	// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
 	HideLoginNameSuffix pulumi.BoolOutput      `pulumi:"hideLoginNameSuffix"`
 	IconDarkHash        pulumi.StringPtrOutput `pulumi:"iconDarkHash"`
 	IconDarkPath        pulumi.StringPtrOutput `pulumi:"iconDarkPath"`
@@ -139,7 +139,7 @@ type defaultLabelPolicyState struct {
 	FontHash      *string `pulumi:"fontHash"`
 	FontPath      *string `pulumi:"fontPath"`
 	FontUrl       *string `pulumi:"fontUrl"`
-	// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+	// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
 	HideLoginNameSuffix *bool   `pulumi:"hideLoginNameSuffix"`
 	IconDarkHash        *string `pulumi:"iconDarkHash"`
 	IconDarkPath        *string `pulumi:"iconDarkPath"`
@@ -179,7 +179,7 @@ type DefaultLabelPolicyState struct {
 	FontHash      pulumi.StringPtrInput
 	FontPath      pulumi.StringPtrInput
 	FontUrl       pulumi.StringPtrInput
-	// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+	// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
 	HideLoginNameSuffix pulumi.BoolPtrInput
 	IconDarkHash        pulumi.StringPtrInput
 	IconDarkPath        pulumi.StringPtrInput
@@ -222,7 +222,7 @@ type defaultLabelPolicyArgs struct {
 	FontColorDark string  `pulumi:"fontColorDark"`
 	FontHash      *string `pulumi:"fontHash"`
 	FontPath      *string `pulumi:"fontPath"`
-	// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+	// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
 	HideLoginNameSuffix bool    `pulumi:"hideLoginNameSuffix"`
 	IconDarkHash        *string `pulumi:"iconDarkHash"`
 	IconDarkPath        *string `pulumi:"iconDarkPath"`
@@ -258,7 +258,7 @@ type DefaultLabelPolicyArgs struct {
 	FontColorDark pulumi.StringInput
 	FontHash      pulumi.StringPtrInput
 	FontPath      pulumi.StringPtrInput
-	// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+	// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
 	HideLoginNameSuffix pulumi.BoolInput
 	IconDarkHash        pulumi.StringPtrInput
 	IconDarkPath        pulumi.StringPtrInput
@@ -428,7 +428,7 @@ func (o DefaultLabelPolicyOutput) FontUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v *DefaultLabelPolicy) pulumi.StringOutput { return v.FontUrl }).(pulumi.StringOutput)
 }
 
-// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+// hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
 func (o DefaultLabelPolicyOutput) HideLoginNameSuffix() pulumi.BoolOutput {
 	return o.ApplyT(func(v *DefaultLabelPolicy) pulumi.BoolOutput { return v.HideLoginNameSuffix }).(pulumi.BoolOutput)
 }

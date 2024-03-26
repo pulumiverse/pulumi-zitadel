@@ -18,7 +18,8 @@ class MachineUserArgs:
                  access_token_type: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 org_id: Optional[pulumi.Input[str]] = None):
+                 org_id: Optional[pulumi.Input[str]] = None,
+                 with_secret: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a MachineUser resource.
         :param pulumi.Input[str] user_name: Username
@@ -26,6 +27,7 @@ class MachineUserArgs:
         :param pulumi.Input[str] description: Description of the user
         :param pulumi.Input[str] name: Name of the machine user
         :param pulumi.Input[str] org_id: ID of the organization
+        :param pulumi.Input[bool] with_secret: Generate machine secret, only applicable if creation or change from false
         """
         MachineUserArgs._configure(
             lambda key, value: pulumi.set(__self__, key, value),
@@ -34,6 +36,7 @@ class MachineUserArgs:
             description=description,
             name=name,
             org_id=org_id,
+            with_secret=with_secret,
         )
     @staticmethod
     def _configure(
@@ -43,6 +46,7 @@ class MachineUserArgs:
              description: Optional[pulumi.Input[str]] = None,
              name: Optional[pulumi.Input[str]] = None,
              org_id: Optional[pulumi.Input[str]] = None,
+             with_secret: Optional[pulumi.Input[bool]] = None,
              opts: Optional[pulumi.ResourceOptions]=None,
              **kwargs):
         if 'userName' in kwargs:
@@ -51,6 +55,8 @@ class MachineUserArgs:
             access_token_type = kwargs['accessTokenType']
         if 'orgId' in kwargs:
             org_id = kwargs['orgId']
+        if 'withSecret' in kwargs:
+            with_secret = kwargs['withSecret']
 
         _setter("user_name", user_name)
         if access_token_type is not None:
@@ -61,6 +67,8 @@ class MachineUserArgs:
             _setter("name", name)
         if org_id is not None:
             _setter("org_id", org_id)
+        if with_secret is not None:
+            _setter("with_secret", with_secret)
 
     @property
     @pulumi.getter(name="userName")
@@ -122,21 +130,38 @@ class MachineUserArgs:
     def org_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "org_id", value)
 
+    @property
+    @pulumi.getter(name="withSecret")
+    def with_secret(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Generate machine secret, only applicable if creation or change from false
+        """
+        return pulumi.get(self, "with_secret")
+
+    @with_secret.setter
+    def with_secret(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "with_secret", value)
+
 
 @pulumi.input_type
 class _MachineUserState:
     def __init__(__self__, *,
                  access_token_type: Optional[pulumi.Input[str]] = None,
+                 client_id: Optional[pulumi.Input[str]] = None,
+                 client_secret: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  login_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  org_id: Optional[pulumi.Input[str]] = None,
                  preferred_login_name: Optional[pulumi.Input[str]] = None,
                  state: Optional[pulumi.Input[str]] = None,
-                 user_name: Optional[pulumi.Input[str]] = None):
+                 user_name: Optional[pulumi.Input[str]] = None,
+                 with_secret: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering MachineUser resources.
         :param pulumi.Input[str] access_token_type: Access token type, supported values: ACCESS*TOKEN*TYPE*BEARER, ACCESS*TOKEN*TYPE*JWT
+        :param pulumi.Input[str] client_id: Value of the client ID if withSecret is true
+        :param pulumi.Input[str] client_secret: Value of the client secret if withSecret is true
         :param pulumi.Input[str] description: Description of the user
         :param pulumi.Input[Sequence[pulumi.Input[str]]] login_names: Loginnames
         :param pulumi.Input[str] name: Name of the machine user
@@ -144,10 +169,13 @@ class _MachineUserState:
         :param pulumi.Input[str] preferred_login_name: Preferred login name
         :param pulumi.Input[str] state: State of the user
         :param pulumi.Input[str] user_name: Username
+        :param pulumi.Input[bool] with_secret: Generate machine secret, only applicable if creation or change from false
         """
         _MachineUserState._configure(
             lambda key, value: pulumi.set(__self__, key, value),
             access_token_type=access_token_type,
+            client_id=client_id,
+            client_secret=client_secret,
             description=description,
             login_names=login_names,
             name=name,
@@ -155,11 +183,14 @@ class _MachineUserState:
             preferred_login_name=preferred_login_name,
             state=state,
             user_name=user_name,
+            with_secret=with_secret,
         )
     @staticmethod
     def _configure(
              _setter: Callable[[Any, Any], None],
              access_token_type: Optional[pulumi.Input[str]] = None,
+             client_id: Optional[pulumi.Input[str]] = None,
+             client_secret: Optional[pulumi.Input[str]] = None,
              description: Optional[pulumi.Input[str]] = None,
              login_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
              name: Optional[pulumi.Input[str]] = None,
@@ -167,10 +198,15 @@ class _MachineUserState:
              preferred_login_name: Optional[pulumi.Input[str]] = None,
              state: Optional[pulumi.Input[str]] = None,
              user_name: Optional[pulumi.Input[str]] = None,
+             with_secret: Optional[pulumi.Input[bool]] = None,
              opts: Optional[pulumi.ResourceOptions]=None,
              **kwargs):
         if 'accessTokenType' in kwargs:
             access_token_type = kwargs['accessTokenType']
+        if 'clientId' in kwargs:
+            client_id = kwargs['clientId']
+        if 'clientSecret' in kwargs:
+            client_secret = kwargs['clientSecret']
         if 'loginNames' in kwargs:
             login_names = kwargs['loginNames']
         if 'orgId' in kwargs:
@@ -179,9 +215,15 @@ class _MachineUserState:
             preferred_login_name = kwargs['preferredLoginName']
         if 'userName' in kwargs:
             user_name = kwargs['userName']
+        if 'withSecret' in kwargs:
+            with_secret = kwargs['withSecret']
 
         if access_token_type is not None:
             _setter("access_token_type", access_token_type)
+        if client_id is not None:
+            _setter("client_id", client_id)
+        if client_secret is not None:
+            _setter("client_secret", client_secret)
         if description is not None:
             _setter("description", description)
         if login_names is not None:
@@ -196,6 +238,8 @@ class _MachineUserState:
             _setter("state", state)
         if user_name is not None:
             _setter("user_name", user_name)
+        if with_secret is not None:
+            _setter("with_secret", with_secret)
 
     @property
     @pulumi.getter(name="accessTokenType")
@@ -208,6 +252,30 @@ class _MachineUserState:
     @access_token_type.setter
     def access_token_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "access_token_type", value)
+
+    @property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Value of the client ID if withSecret is true
+        """
+        return pulumi.get(self, "client_id")
+
+    @client_id.setter
+    def client_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "client_id", value)
+
+    @property
+    @pulumi.getter(name="clientSecret")
+    def client_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        Value of the client secret if withSecret is true
+        """
+        return pulumi.get(self, "client_secret")
+
+    @client_secret.setter
+    def client_secret(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "client_secret", value)
 
     @property
     @pulumi.getter
@@ -293,6 +361,18 @@ class _MachineUserState:
     def user_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "user_name", value)
 
+    @property
+    @pulumi.getter(name="withSecret")
+    def with_secret(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Generate machine secret, only applicable if creation or change from false
+        """
+        return pulumi.get(self, "with_secret")
+
+    @with_secret.setter
+    def with_secret(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "with_secret", value)
+
 
 class MachineUser(pulumi.CustomResource):
     @overload
@@ -304,6 +384,7 @@ class MachineUser(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  org_id: Optional[pulumi.Input[str]] = None,
                  user_name: Optional[pulumi.Input[str]] = None,
+                 with_secret: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
         Resource representing a serviceaccount situated under an organization, which then can be authorized through memberships or direct grants on other resources.
@@ -317,15 +398,16 @@ class MachineUser(pulumi.CustomResource):
         default = zitadel.MachineUser("default",
             org_id=data["zitadel_org"]["default"]["id"],
             user_name="machine@example.com",
-            description="a machine user")
+            description="a machine user",
+            with_secret=False)
         ```
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+        terraform The resource can be imported using the ID format `<id:has_secret[:org_id][:client_id][:client_secret]>`, e.g.
 
         ```sh
-         $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
+         $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678:true:my-machine-user:j76mh34CHVrGGoXPQOg80lch67FIxwc2qIXjBkZoB6oMbf31eGMkB6bvRyaPjR2t'
         ```
 
         :param str resource_name: The name of the resource.
@@ -335,6 +417,7 @@ class MachineUser(pulumi.CustomResource):
         :param pulumi.Input[str] name: Name of the machine user
         :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[str] user_name: Username
+        :param pulumi.Input[bool] with_secret: Generate machine secret, only applicable if creation or change from false
         """
         ...
     @overload
@@ -354,15 +437,16 @@ class MachineUser(pulumi.CustomResource):
         default = zitadel.MachineUser("default",
             org_id=data["zitadel_org"]["default"]["id"],
             user_name="machine@example.com",
-            description="a machine user")
+            description="a machine user",
+            with_secret=False)
         ```
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+        terraform The resource can be imported using the ID format `<id:has_secret[:org_id][:client_id][:client_secret]>`, e.g.
 
         ```sh
-         $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
+         $ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678:true:my-machine-user:j76mh34CHVrGGoXPQOg80lch67FIxwc2qIXjBkZoB6oMbf31eGMkB6bvRyaPjR2t'
         ```
 
         :param str resource_name: The name of the resource.
@@ -389,6 +473,7 @@ class MachineUser(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  org_id: Optional[pulumi.Input[str]] = None,
                  user_name: Optional[pulumi.Input[str]] = None,
+                 with_secret: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -405,9 +490,14 @@ class MachineUser(pulumi.CustomResource):
             if user_name is None and not opts.urn:
                 raise TypeError("Missing required property 'user_name'")
             __props__.__dict__["user_name"] = user_name
+            __props__.__dict__["with_secret"] = with_secret
+            __props__.__dict__["client_id"] = None
+            __props__.__dict__["client_secret"] = None
             __props__.__dict__["login_names"] = None
             __props__.__dict__["preferred_login_name"] = None
             __props__.__dict__["state"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["clientId", "clientSecret"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(MachineUser, __self__).__init__(
             'zitadel:index/machineUser:MachineUser',
             resource_name,
@@ -419,13 +509,16 @@ class MachineUser(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             access_token_type: Optional[pulumi.Input[str]] = None,
+            client_id: Optional[pulumi.Input[str]] = None,
+            client_secret: Optional[pulumi.Input[str]] = None,
             description: Optional[pulumi.Input[str]] = None,
             login_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
             org_id: Optional[pulumi.Input[str]] = None,
             preferred_login_name: Optional[pulumi.Input[str]] = None,
             state: Optional[pulumi.Input[str]] = None,
-            user_name: Optional[pulumi.Input[str]] = None) -> 'MachineUser':
+            user_name: Optional[pulumi.Input[str]] = None,
+            with_secret: Optional[pulumi.Input[bool]] = None) -> 'MachineUser':
         """
         Get an existing MachineUser resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -434,6 +527,8 @@ class MachineUser(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] access_token_type: Access token type, supported values: ACCESS*TOKEN*TYPE*BEARER, ACCESS*TOKEN*TYPE*JWT
+        :param pulumi.Input[str] client_id: Value of the client ID if withSecret is true
+        :param pulumi.Input[str] client_secret: Value of the client secret if withSecret is true
         :param pulumi.Input[str] description: Description of the user
         :param pulumi.Input[Sequence[pulumi.Input[str]]] login_names: Loginnames
         :param pulumi.Input[str] name: Name of the machine user
@@ -441,12 +536,15 @@ class MachineUser(pulumi.CustomResource):
         :param pulumi.Input[str] preferred_login_name: Preferred login name
         :param pulumi.Input[str] state: State of the user
         :param pulumi.Input[str] user_name: Username
+        :param pulumi.Input[bool] with_secret: Generate machine secret, only applicable if creation or change from false
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _MachineUserState.__new__(_MachineUserState)
 
         __props__.__dict__["access_token_type"] = access_token_type
+        __props__.__dict__["client_id"] = client_id
+        __props__.__dict__["client_secret"] = client_secret
         __props__.__dict__["description"] = description
         __props__.__dict__["login_names"] = login_names
         __props__.__dict__["name"] = name
@@ -454,6 +552,7 @@ class MachineUser(pulumi.CustomResource):
         __props__.__dict__["preferred_login_name"] = preferred_login_name
         __props__.__dict__["state"] = state
         __props__.__dict__["user_name"] = user_name
+        __props__.__dict__["with_secret"] = with_secret
         return MachineUser(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -463,6 +562,22 @@ class MachineUser(pulumi.CustomResource):
         Access token type, supported values: ACCESS*TOKEN*TYPE*BEARER, ACCESS*TOKEN*TYPE*JWT
         """
         return pulumi.get(self, "access_token_type")
+
+    @property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> pulumi.Output[str]:
+        """
+        Value of the client ID if withSecret is true
+        """
+        return pulumi.get(self, "client_id")
+
+    @property
+    @pulumi.getter(name="clientSecret")
+    def client_secret(self) -> pulumi.Output[str]:
+        """
+        Value of the client secret if withSecret is true
+        """
+        return pulumi.get(self, "client_secret")
 
     @property
     @pulumi.getter
@@ -519,4 +634,12 @@ class MachineUser(pulumi.CustomResource):
         Username
         """
         return pulumi.get(self, "user_name")
+
+    @property
+    @pulumi.getter(name="withSecret")
+    def with_secret(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Generate machine secret, only applicable if creation or change from false
+        """
+        return pulumi.get(self, "with_secret")
 

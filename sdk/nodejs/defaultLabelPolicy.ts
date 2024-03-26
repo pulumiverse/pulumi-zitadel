@@ -67,7 +67,7 @@ export class DefaultLabelPolicy extends pulumi.CustomResource {
     public readonly fontPath!: pulumi.Output<string | undefined>;
     public /*out*/ readonly fontUrl!: pulumi.Output<string>;
     /**
-     * hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+     * hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
      */
     public readonly hideLoginNameSuffix!: pulumi.Output<boolean>;
     public readonly iconDarkHash!: pulumi.Output<string | undefined>;
@@ -234,7 +234,7 @@ export interface DefaultLabelPolicyState {
     fontPath?: pulumi.Input<string>;
     fontUrl?: pulumi.Input<string>;
     /**
-     * hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+     * hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
      */
     hideLoginNameSuffix?: pulumi.Input<boolean>;
     iconDarkHash?: pulumi.Input<string>;
@@ -298,7 +298,7 @@ export interface DefaultLabelPolicyArgs {
     fontHash?: pulumi.Input<string>;
     fontPath?: pulumi.Input<string>;
     /**
-     * hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://docs.zitadel.ch/concepts#Reserved_Scopes
+     * hides the org suffix on the login form if the scope "urn:zitadel:iam:org:domain:primary:{domainname}" is set. Details about this scope in https://zitadel.ch/docs/concepts#Reserved_Scopes
      */
     hideLoginNameSuffix: pulumi.Input<boolean>;
     iconDarkHash?: pulumi.Input<string>;

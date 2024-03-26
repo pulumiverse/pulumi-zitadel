@@ -33,6 +33,7 @@ import (
 //				OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
 //				UserName:    pulumi.String("machine@example.com"),
 //				Description: pulumi.String("a machine user"),
+//				WithSecret:  pulumi.Bool(false),
 //			})
 //			if err != nil {
 //				return err
@@ -45,11 +46,11 @@ import (
 //
 // ## Import
 //
-// terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+// terraform The resource can be imported using the ID format `<id:has_secret[:org_id][:client_id][:client_secret]>`, e.g.
 //
 // ```sh
 //
-//	$ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678'
+//	$ pulumi import zitadel:index/machineUser:MachineUser imported '123456789012345678:123456789012345678:true:my-machine-user:j76mh34CHVrGGoXPQOg80lch67FIxwc2qIXjBkZoB6oMbf31eGMkB6bvRyaPjR2t'
 //
 // ```
 type MachineUser struct {
@@ -57,6 +58,10 @@ type MachineUser struct {
 
 	// Access token type, supported values: ACCESS*TOKEN*TYPE*BEARER, ACCESS*TOKEN*TYPE*JWT
 	AccessTokenType pulumi.StringPtrOutput `pulumi:"accessTokenType"`
+	// Value of the client ID if withSecret is true
+	ClientId pulumi.StringOutput `pulumi:"clientId"`
+	// Value of the client secret if withSecret is true
+	ClientSecret pulumi.StringOutput `pulumi:"clientSecret"`
 	// Description of the user
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// Loginnames
@@ -71,6 +76,8 @@ type MachineUser struct {
 	State pulumi.StringOutput `pulumi:"state"`
 	// Username
 	UserName pulumi.StringOutput `pulumi:"userName"`
+	// Generate machine secret, only applicable if creation or change from false
+	WithSecret pulumi.BoolPtrOutput `pulumi:"withSecret"`
 }
 
 // NewMachineUser registers a new resource with the given unique name, arguments, and options.
@@ -83,6 +90,11 @@ func NewMachineUser(ctx *pulumi.Context,
 	if args.UserName == nil {
 		return nil, errors.New("invalid value for required argument 'UserName'")
 	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientId",
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MachineUser
 	err := ctx.RegisterResource("zitadel:index/machineUser:MachineUser", name, args, &resource, opts...)
@@ -108,6 +120,10 @@ func GetMachineUser(ctx *pulumi.Context,
 type machineUserState struct {
 	// Access token type, supported values: ACCESS*TOKEN*TYPE*BEARER, ACCESS*TOKEN*TYPE*JWT
 	AccessTokenType *string `pulumi:"accessTokenType"`
+	// Value of the client ID if withSecret is true
+	ClientId *string `pulumi:"clientId"`
+	// Value of the client secret if withSecret is true
+	ClientSecret *string `pulumi:"clientSecret"`
 	// Description of the user
 	Description *string `pulumi:"description"`
 	// Loginnames
@@ -122,11 +138,17 @@ type machineUserState struct {
 	State *string `pulumi:"state"`
 	// Username
 	UserName *string `pulumi:"userName"`
+	// Generate machine secret, only applicable if creation or change from false
+	WithSecret *bool `pulumi:"withSecret"`
 }
 
 type MachineUserState struct {
 	// Access token type, supported values: ACCESS*TOKEN*TYPE*BEARER, ACCESS*TOKEN*TYPE*JWT
 	AccessTokenType pulumi.StringPtrInput
+	// Value of the client ID if withSecret is true
+	ClientId pulumi.StringPtrInput
+	// Value of the client secret if withSecret is true
+	ClientSecret pulumi.StringPtrInput
 	// Description of the user
 	Description pulumi.StringPtrInput
 	// Loginnames
@@ -141,6 +163,8 @@ type MachineUserState struct {
 	State pulumi.StringPtrInput
 	// Username
 	UserName pulumi.StringPtrInput
+	// Generate machine secret, only applicable if creation or change from false
+	WithSecret pulumi.BoolPtrInput
 }
 
 func (MachineUserState) ElementType() reflect.Type {
@@ -158,6 +182,8 @@ type machineUserArgs struct {
 	OrgId *string `pulumi:"orgId"`
 	// Username
 	UserName string `pulumi:"userName"`
+	// Generate machine secret, only applicable if creation or change from false
+	WithSecret *bool `pulumi:"withSecret"`
 }
 
 // The set of arguments for constructing a MachineUser resource.
@@ -172,6 +198,8 @@ type MachineUserArgs struct {
 	OrgId pulumi.StringPtrInput
 	// Username
 	UserName pulumi.StringInput
+	// Generate machine secret, only applicable if creation or change from false
+	WithSecret pulumi.BoolPtrInput
 }
 
 func (MachineUserArgs) ElementType() reflect.Type {
@@ -290,6 +318,16 @@ func (o MachineUserOutput) AccessTokenType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *MachineUser) pulumi.StringPtrOutput { return v.AccessTokenType }).(pulumi.StringPtrOutput)
 }
 
+// Value of the client ID if withSecret is true
+func (o MachineUserOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v *MachineUser) pulumi.StringOutput { return v.ClientId }).(pulumi.StringOutput)
+}
+
+// Value of the client secret if withSecret is true
+func (o MachineUserOutput) ClientSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v *MachineUser) pulumi.StringOutput { return v.ClientSecret }).(pulumi.StringOutput)
+}
+
 // Description of the user
 func (o MachineUserOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *MachineUser) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
@@ -323,6 +361,11 @@ func (o MachineUserOutput) State() pulumi.StringOutput {
 // Username
 func (o MachineUserOutput) UserName() pulumi.StringOutput {
 	return o.ApplyT(func(v *MachineUser) pulumi.StringOutput { return v.UserName }).(pulumi.StringOutput)
+}
+
+// Generate machine secret, only applicable if creation or change from false
+func (o MachineUserOutput) WithSecret() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *MachineUser) pulumi.BoolPtrOutput { return v.WithSecret }).(pulumi.BoolPtrOutput)
 }
 
 type MachineUserArrayOutput struct{ *pulumi.OutputState }
