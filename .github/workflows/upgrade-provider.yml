@@ -47,11 +47,11 @@ jobs:
         with:
           gradle-version: "7.6"
       - name: "Set up git identity: name"
-        run: git config --global user.name 'vavsab'
+        run: git config --global user.name 'eliobischof'
         shell: bash
       - name: Run upgrade-provider
         run: |
-          upgrade-provider "$REPO" --kind="provider" --pr-reviewers="vavsab"
+          upgrade-provider "$REPO" --kind="provider" --pr-reviewers="eliobischof"
         shell: bash
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
