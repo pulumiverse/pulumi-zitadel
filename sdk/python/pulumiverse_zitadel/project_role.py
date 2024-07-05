@@ -268,7 +268,7 @@ class ProjectRole(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<project_id:role_key[:org_id]>`, e.g.
+        bash The resource can be imported using the ID format `<project_id:role_key[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/projectRole:ProjectRole imported '123456789012345678:my-role-key:123456789012345678'
@@ -307,7 +307,7 @@ class ProjectRole(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<project_id:role_key[:org_id]>`, e.g.
+        bash The resource can be imported using the ID format `<project_id:role_key[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/projectRole:ProjectRole imported '123456789012345678:my-role-key:123456789012345678'

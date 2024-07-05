@@ -39,7 +39,7 @@ const (
 // It should validate that the provider can be configured, and provide actionable errors in the case
 // it cannot be. Configuration variables can be read from `vars` using the `stringValue` function -
 // for example `stringValue(vars, "accessKey")`.
-func preConfigureCallback(vars resource.PropertyMap, c shim.ResourceConfig) error {
+func preConfigureCallback(_ resource.PropertyMap, _ shim.ResourceConfig) error {
 	return nil
 }
 
@@ -146,6 +146,13 @@ func Provider() tfbridge.ProviderInfo {
 			"zitadel_org_idp_azure_ad":                   {Tok: tfbridge.MakeResource(mainPkg, mainMod, "OrgIdpAzureAd")},
 			"zitadel_org_idp_ldap":                       {Tok: tfbridge.MakeResource(mainPkg, mainMod, "OrgIdpLdap")},
 			"zitadel_application_saml":                   {Tok: tfbridge.MakeResource(mainPkg, mainMod, "ApplicationSaml")},
+
+			"zitadel_idp_oauth":     {Tok: tfbridge.MakeResource(mainPkg, mainMod, "IdpOauth")},
+			"zitadel_idp_saml":      {Tok: tfbridge.MakeResource(mainPkg, mainMod, "IdpSaml")},
+			"zitadel_org_idp_oauth": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "OrgIdpOauth")},
+			"zitadel_org_idp_saml":  {Tok: tfbridge.MakeResource(mainPkg, mainMod, "OrgIdpSaml")},
+			"zitadel_org_metadata":  {Tok: tfbridge.MakeResource(mainPkg, mainMod, "OrgMetadata")},
+			"zitadel_user_metadata": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "UserMetadata")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"zitadel_org":                        {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getOrg")},
@@ -181,6 +188,11 @@ func Provider() tfbridge.ProviderInfo {
 			"zitadel_machine_users":              {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getMachineUsers")},
 			"zitadel_projects":                   {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getProjects")},
 			"zitadel_application_apis":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getApplicationApis")},
+
+			"zitadel_idp_oauth":     {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getIdpOauth")},
+			"zitadel_idp_saml":      {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getIdpSaml")},
+			"zitadel_org_idp_oauth": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getOrgIdpOauth")},
+			"zitadel_org_idp_saml":  {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getOrgIdpSaml")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@pulumiverse/zitadel",

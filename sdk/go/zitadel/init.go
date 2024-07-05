@@ -67,6 +67,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &IdpGoogle{}
 	case "zitadel:index/idpLdap:IdpLdap":
 		r = &IdpLdap{}
+	case "zitadel:index/idpOauth:IdpOauth":
+		r = &IdpOauth{}
+	case "zitadel:index/idpSaml:IdpSaml":
+		r = &IdpSaml{}
 	case "zitadel:index/instanceMember:InstanceMember":
 		r = &InstanceMember{}
 	case "zitadel:index/labelPolicy:LabelPolicy":
@@ -99,10 +103,16 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &OrgIdpJwt{}
 	case "zitadel:index/orgIdpLdap:OrgIdpLdap":
 		r = &OrgIdpLdap{}
+	case "zitadel:index/orgIdpOauth:OrgIdpOauth":
+		r = &OrgIdpOauth{}
 	case "zitadel:index/orgIdpOidc:OrgIdpOidc":
 		r = &OrgIdpOidc{}
+	case "zitadel:index/orgIdpSaml:OrgIdpSaml":
+		r = &OrgIdpSaml{}
 	case "zitadel:index/orgMember:OrgMember":
 		r = &OrgMember{}
+	case "zitadel:index/orgMetadata:OrgMetadata":
+		r = &OrgMetadata{}
 	case "zitadel:index/passwordComplexityPolicy:PasswordComplexityPolicy":
 		r = &PasswordComplexityPolicy{}
 	case "zitadel:index/personalAccessToken:PersonalAccessToken":
@@ -127,6 +137,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &TriggerActions{}
 	case "zitadel:index/userGrant:UserGrant":
 		r = &UserGrant{}
+	case "zitadel:index/userMetadata:UserMetadata":
+		r = &UserMetadata{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -275,6 +287,16 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"zitadel",
+		"index/idpOauth",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"zitadel",
+		"index/idpSaml",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"zitadel",
 		"index/instanceMember",
 		&module{version},
 	)
@@ -355,12 +377,27 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"zitadel",
+		"index/orgIdpOauth",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"zitadel",
 		"index/orgIdpOidc",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"zitadel",
+		"index/orgIdpSaml",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"zitadel",
 		"index/orgMember",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"zitadel",
+		"index/orgMetadata",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -421,6 +458,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"zitadel",
 		"index/userGrant",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"zitadel",
+		"index/userMetadata",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

@@ -76,6 +76,7 @@ export interface GetApplicationOidcResult {
      * Auth method type
      */
     readonly authMethodType: string;
+    readonly clientId: string;
     /**
      * Clockskew
      */

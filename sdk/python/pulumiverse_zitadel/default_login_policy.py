@@ -853,7 +853,7 @@ class DefaultLoginPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<>`, e.g.
+        bash The resource can be imported using the ID format `<>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/defaultLoginPolicy:DefaultLoginPolicy imported ''
@@ -923,7 +923,7 @@ class DefaultLoginPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<>`, e.g.
+        bash The resource can be imported using the ID format `<>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/defaultLoginPolicy:DefaultLoginPolicy imported ''

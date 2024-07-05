@@ -47,7 +47,7 @@ import (
 //
 // ## Import
 //
-// terraform The resource can be imported using the ID format `<id:project_id:app_id[:org_id][:key_details]>`. You can use __SEMICOLON__ to escape :, e.g.
+// bash The resource can be imported using the ID format `<id:project_id:app_id[:org_id][:key_details]>`. You can use __SEMICOLON__ to escape :, e.g.
 //
 // ```sh
 //

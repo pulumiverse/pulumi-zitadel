@@ -1,0 +1,7 @@
+lockfileVersion: 5.4
+
+specifiers:
+  scoretech-infra-zitadel: link:/home/arti/workdir/scoretech/infra/zitadel
+
+dependencies:
+  scoretech-infra-zitadel: link:../scoretech/infra/zitadel

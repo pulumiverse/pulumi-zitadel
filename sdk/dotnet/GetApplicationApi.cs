@@ -138,6 +138,7 @@ namespace Pulumiverse.Zitadel
         /// Auth method type
         /// </summary>
         public readonly string AuthMethodType;
+        public readonly string ClientId;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
@@ -161,6 +162,8 @@ namespace Pulumiverse.Zitadel
 
             string authMethodType,
 
+            string clientId,
+
             string id,
 
             string name,
@@ -171,6 +174,7 @@ namespace Pulumiverse.Zitadel
         {
             AppId = appId;
             AuthMethodType = authMethodType;
+            ClientId = clientId;
             Id = id;
             Name = name;
             OrgId = orgId;

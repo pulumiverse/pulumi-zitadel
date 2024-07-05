@@ -1169,7 +1169,7 @@ class IdpLdap(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
+        bash The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/idpLdap:IdpLdap imported '123456789012345678:b1nd_p4ssw0rd'
@@ -1247,7 +1247,7 @@ class IdpLdap(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
+        bash The resource can be imported using the ID format `<id[:bind_password]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/idpLdap:IdpLdap imported '123456789012345678:b1nd_p4ssw0rd'

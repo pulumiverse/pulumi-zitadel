@@ -35,7 +35,8 @@ class LabelPolicyArgs:
                  logo_hash: Optional[pulumi.Input[str]] = None,
                  logo_path: Optional[pulumi.Input[str]] = None,
                  org_id: Optional[pulumi.Input[str]] = None,
-                 set_active: Optional[pulumi.Input[bool]] = None):
+                 set_active: Optional[pulumi.Input[bool]] = None,
+                 theme_mode: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a LabelPolicy resource.
         :param pulumi.Input[str] background_color: hex value for background color
@@ -50,6 +51,7 @@ class LabelPolicyArgs:
         :param pulumi.Input[str] warn_color_dark: hex value for warn color dark theme
         :param pulumi.Input[str] org_id: ID of the organization
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
+        :param pulumi.Input[str] theme_mode: theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
         """
         LabelPolicyArgs._configure(
             lambda key, value: pulumi.set(__self__, key, value),
@@ -75,6 +77,7 @@ class LabelPolicyArgs:
             logo_path=logo_path,
             org_id=org_id,
             set_active=set_active,
+            theme_mode=theme_mode,
         )
     @staticmethod
     def _configure(
@@ -101,6 +104,7 @@ class LabelPolicyArgs:
              logo_path: Optional[pulumi.Input[str]] = None,
              org_id: Optional[pulumi.Input[str]] = None,
              set_active: Optional[pulumi.Input[bool]] = None,
+             theme_mode: Optional[pulumi.Input[str]] = None,
              opts: Optional[pulumi.ResourceOptions]=None,
              **kwargs):
         if 'backgroundColor' in kwargs:
@@ -147,6 +151,8 @@ class LabelPolicyArgs:
             org_id = kwargs['orgId']
         if 'setActive' in kwargs:
             set_active = kwargs['setActive']
+        if 'themeMode' in kwargs:
+            theme_mode = kwargs['themeMode']
 
         _setter("background_color", background_color)
         _setter("background_color_dark", background_color_dark)
@@ -182,6 +188,8 @@ class LabelPolicyArgs:
             _setter("org_id", org_id)
         if set_active is not None:
             _setter("set_active", set_active)
+        if theme_mode is not None:
+            _setter("theme_mode", theme_mode)
 
     @property
     @pulumi.getter(name="backgroundColor")
@@ -417,6 +425,18 @@ class LabelPolicyArgs:
     def set_active(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "set_active", value)
 
+    @property
+    @pulumi.getter(name="themeMode")
+    def theme_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+        """
+        return pulumi.get(self, "theme_mode")
+
+    @theme_mode.setter
+    def theme_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "theme_mode", value)
+
 
 @pulumi.input_type
 class _LabelPolicyState:
@@ -446,6 +466,7 @@ class _LabelPolicyState:
                  primary_color: Optional[pulumi.Input[str]] = None,
                  primary_color_dark: Optional[pulumi.Input[str]] = None,
                  set_active: Optional[pulumi.Input[bool]] = None,
+                 theme_mode: Optional[pulumi.Input[str]] = None,
                  warn_color: Optional[pulumi.Input[str]] = None,
                  warn_color_dark: Optional[pulumi.Input[str]] = None):
         """
@@ -460,6 +481,7 @@ class _LabelPolicyState:
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
+        :param pulumi.Input[str] theme_mode: theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
         :param pulumi.Input[str] warn_color: hex value for warn color
         :param pulumi.Input[str] warn_color_dark: hex value for warn color dark theme
         """
@@ -490,6 +512,7 @@ class _LabelPolicyState:
             primary_color=primary_color,
             primary_color_dark=primary_color_dark,
             set_active=set_active,
+            theme_mode=theme_mode,
             warn_color=warn_color,
             warn_color_dark=warn_color_dark,
         )
@@ -521,6 +544,7 @@ class _LabelPolicyState:
              primary_color: Optional[pulumi.Input[str]] = None,
              primary_color_dark: Optional[pulumi.Input[str]] = None,
              set_active: Optional[pulumi.Input[bool]] = None,
+             theme_mode: Optional[pulumi.Input[str]] = None,
              warn_color: Optional[pulumi.Input[str]] = None,
              warn_color_dark: Optional[pulumi.Input[str]] = None,
              opts: Optional[pulumi.ResourceOptions]=None,
@@ -575,6 +599,8 @@ class _LabelPolicyState:
             primary_color_dark = kwargs['primaryColorDark']
         if 'setActive' in kwargs:
             set_active = kwargs['setActive']
+        if 'themeMode' in kwargs:
+            theme_mode = kwargs['themeMode']
         if 'warnColor' in kwargs:
             warn_color = kwargs['warnColor']
         if 'warnColorDark' in kwargs:
@@ -630,6 +656,8 @@ class _LabelPolicyState:
             _setter("primary_color_dark", primary_color_dark)
         if set_active is not None:
             _setter("set_active", set_active)
+        if theme_mode is not None:
+            _setter("theme_mode", theme_mode)
         if warn_color is not None:
             _setter("warn_color", warn_color)
         if warn_color_dark is not None:
@@ -891,6 +919,18 @@ class _LabelPolicyState:
         pulumi.set(self, "set_active", value)
 
     @property
+    @pulumi.getter(name="themeMode")
+    def theme_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+        """
+        return pulumi.get(self, "theme_mode")
+
+    @theme_mode.setter
+    def theme_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "theme_mode", value)
+
+    @property
     @pulumi.getter(name="warnColor")
     def warn_color(self) -> Optional[pulumi.Input[str]]:
         """
@@ -940,6 +980,7 @@ class LabelPolicy(pulumi.CustomResource):
                  primary_color: Optional[pulumi.Input[str]] = None,
                  primary_color_dark: Optional[pulumi.Input[str]] = None,
                  set_active: Optional[pulumi.Input[bool]] = None,
+                 theme_mode: Optional[pulumi.Input[str]] = None,
                  warn_color: Optional[pulumi.Input[str]] = None,
                  warn_color_dark: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -948,7 +989,7 @@ class LabelPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+        bash The resource can be imported using the ID format `<[org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
@@ -966,6 +1007,7 @@ class LabelPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
+        :param pulumi.Input[str] theme_mode: theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
         :param pulumi.Input[str] warn_color: hex value for warn color
         :param pulumi.Input[str] warn_color_dark: hex value for warn color dark theme
         """
@@ -980,7 +1022,7 @@ class LabelPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+        bash The resource can be imported using the ID format `<[org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
@@ -1025,6 +1067,7 @@ class LabelPolicy(pulumi.CustomResource):
                  primary_color: Optional[pulumi.Input[str]] = None,
                  primary_color_dark: Optional[pulumi.Input[str]] = None,
                  set_active: Optional[pulumi.Input[bool]] = None,
+                 theme_mode: Optional[pulumi.Input[str]] = None,
                  warn_color: Optional[pulumi.Input[str]] = None,
                  warn_color_dark: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -1072,6 +1115,7 @@ class LabelPolicy(pulumi.CustomResource):
                 raise TypeError("Missing required property 'primary_color_dark'")
             __props__.__dict__["primary_color_dark"] = primary_color_dark
             __props__.__dict__["set_active"] = set_active
+            __props__.__dict__["theme_mode"] = theme_mode
             if warn_color is None and not opts.urn:
                 raise TypeError("Missing required property 'warn_color'")
             __props__.__dict__["warn_color"] = warn_color
@@ -1118,6 +1162,7 @@ class LabelPolicy(pulumi.CustomResource):
             primary_color: Optional[pulumi.Input[str]] = None,
             primary_color_dark: Optional[pulumi.Input[str]] = None,
             set_active: Optional[pulumi.Input[bool]] = None,
+            theme_mode: Optional[pulumi.Input[str]] = None,
             warn_color: Optional[pulumi.Input[str]] = None,
             warn_color_dark: Optional[pulumi.Input[str]] = None) -> 'LabelPolicy':
         """
@@ -1137,6 +1182,7 @@ class LabelPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] primary_color: hex value for primary color
         :param pulumi.Input[str] primary_color_dark: hex value for primary color dark theme
         :param pulumi.Input[bool] set_active: set the label policy active after creating/updating
+        :param pulumi.Input[str] theme_mode: theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
         :param pulumi.Input[str] warn_color: hex value for warn color
         :param pulumi.Input[str] warn_color_dark: hex value for warn color dark theme
         """
@@ -1169,6 +1215,7 @@ class LabelPolicy(pulumi.CustomResource):
         __props__.__dict__["primary_color"] = primary_color
         __props__.__dict__["primary_color_dark"] = primary_color_dark
         __props__.__dict__["set_active"] = set_active
+        __props__.__dict__["theme_mode"] = theme_mode
         __props__.__dict__["warn_color"] = warn_color
         __props__.__dict__["warn_color_dark"] = warn_color_dark
         return LabelPolicy(resource_name, opts=opts, __props__=__props__)
@@ -1327,6 +1374,14 @@ class LabelPolicy(pulumi.CustomResource):
         set the label policy active after creating/updating
         """
         return pulumi.get(self, "set_active")
+
+    @property
+    @pulumi.getter(name="themeMode")
+    def theme_mode(self) -> pulumi.Output[Optional[str]]:
+        """
+        theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+        """
+        return pulumi.get(self, "theme_mode")
 
     @property
     @pulumi.getter(name="warnColor")

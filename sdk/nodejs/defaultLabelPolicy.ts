@@ -9,7 +9,7 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * terraform The resource can be imported using the ID format `<>`, e.g.
+ * bash The resource can be imported using the ID format `<>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/defaultLabelPolicy:DefaultLabelPolicy imported ''
@@ -95,6 +95,10 @@ export class DefaultLabelPolicy extends pulumi.CustomResource {
      */
     public readonly setActive!: pulumi.Output<boolean | undefined>;
     /**
+     * theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+     */
+    public readonly themeMode!: pulumi.Output<string | undefined>;
+    /**
      * hex value for warn color
      */
     public readonly warnColor!: pulumi.Output<string>;
@@ -140,6 +144,7 @@ export class DefaultLabelPolicy extends pulumi.CustomResource {
             resourceInputs["primaryColor"] = state ? state.primaryColor : undefined;
             resourceInputs["primaryColorDark"] = state ? state.primaryColorDark : undefined;
             resourceInputs["setActive"] = state ? state.setActive : undefined;
+            resourceInputs["themeMode"] = state ? state.themeMode : undefined;
             resourceInputs["warnColor"] = state ? state.warnColor : undefined;
             resourceInputs["warnColorDark"] = state ? state.warnColorDark : undefined;
         } else {
@@ -193,6 +198,7 @@ export class DefaultLabelPolicy extends pulumi.CustomResource {
             resourceInputs["primaryColor"] = args ? args.primaryColor : undefined;
             resourceInputs["primaryColorDark"] = args ? args.primaryColorDark : undefined;
             resourceInputs["setActive"] = args ? args.setActive : undefined;
+            resourceInputs["themeMode"] = args ? args.themeMode : undefined;
             resourceInputs["warnColor"] = args ? args.warnColor : undefined;
             resourceInputs["warnColorDark"] = args ? args.warnColorDark : undefined;
             resourceInputs["fontUrl"] = undefined /*out*/;
@@ -262,6 +268,10 @@ export interface DefaultLabelPolicyState {
      */
     setActive?: pulumi.Input<boolean>;
     /**
+     * theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+     */
+    themeMode?: pulumi.Input<string>;
+    /**
      * hex value for warn color
      */
     warnColor?: pulumi.Input<string>;
@@ -321,6 +331,10 @@ export interface DefaultLabelPolicyArgs {
      * set the label policy active after creating/updating
      */
     setActive?: pulumi.Input<boolean>;
+    /**
+     * theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+     */
+    themeMode?: pulumi.Input<string>;
     /**
      * hex value for warn color
      */

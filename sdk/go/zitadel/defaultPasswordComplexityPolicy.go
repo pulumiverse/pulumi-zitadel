@@ -47,7 +47,7 @@ import (
 //
 // ## Import
 //
-// terraform The resource can be imported using the ID format `<>`, e.g.
+// bash The resource can be imported using the ID format `<>`, e.g.
 //
 // ```sh
 //

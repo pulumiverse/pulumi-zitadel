@@ -21,7 +21,7 @@ class GetApplicationOidcResult:
     """
     A collection of values returned by getApplicationOidc.
     """
-    def __init__(__self__, access_token_role_assertion=None, access_token_type=None, additional_origins=None, app_id=None, app_type=None, auth_method_type=None, clock_skew=None, dev_mode=None, grant_types=None, id=None, id_token_role_assertion=None, id_token_userinfo_assertion=None, name=None, org_id=None, post_logout_redirect_uris=None, project_id=None, redirect_uris=None, response_types=None, version=None):
+    def __init__(__self__, access_token_role_assertion=None, access_token_type=None, additional_origins=None, app_id=None, app_type=None, auth_method_type=None, client_id=None, clock_skew=None, dev_mode=None, grant_types=None, id=None, id_token_role_assertion=None, id_token_userinfo_assertion=None, name=None, org_id=None, post_logout_redirect_uris=None, project_id=None, redirect_uris=None, response_types=None, version=None):
         if access_token_role_assertion and not isinstance(access_token_role_assertion, bool):
             raise TypeError("Expected argument 'access_token_role_assertion' to be a bool")
         pulumi.set(__self__, "access_token_role_assertion", access_token_role_assertion)
@@ -40,6 +40,9 @@ class GetApplicationOidcResult:
         if auth_method_type and not isinstance(auth_method_type, str):
             raise TypeError("Expected argument 'auth_method_type' to be a str")
         pulumi.set(__self__, "auth_method_type", auth_method_type)
+        if client_id and not isinstance(client_id, str):
+            raise TypeError("Expected argument 'client_id' to be a str")
+        pulumi.set(__self__, "client_id", client_id)
         if clock_skew and not isinstance(clock_skew, str):
             raise TypeError("Expected argument 'clock_skew' to be a str")
         pulumi.set(__self__, "clock_skew", clock_skew)
@@ -127,6 +130,11 @@ class GetApplicationOidcResult:
         Auth method type
         """
         return pulumi.get(self, "auth_method_type")
+
+    @property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> str:
+        return pulumi.get(self, "client_id")
 
     @property
     @pulumi.getter(name="clockSkew")
@@ -245,6 +253,7 @@ class AwaitableGetApplicationOidcResult(GetApplicationOidcResult):
             app_id=self.app_id,
             app_type=self.app_type,
             auth_method_type=self.auth_method_type,
+            client_id=self.client_id,
             clock_skew=self.clock_skew,
             dev_mode=self.dev_mode,
             grant_types=self.grant_types,
@@ -297,6 +306,7 @@ def get_application_oidc(app_id: Optional[str] = None,
         app_id=pulumi.get(__ret__, 'app_id'),
         app_type=pulumi.get(__ret__, 'app_type'),
         auth_method_type=pulumi.get(__ret__, 'auth_method_type'),
+        client_id=pulumi.get(__ret__, 'client_id'),
         clock_skew=pulumi.get(__ret__, 'clock_skew'),
         dev_mode=pulumi.get(__ret__, 'dev_mode'),
         grant_types=pulumi.get(__ret__, 'grant_types'),

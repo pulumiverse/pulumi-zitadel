@@ -1,24 +1,34 @@
 linters:
   enable:
-    - deadcode
+    - unused
     - errcheck
     - goconst
     - gofmt
-    - golint
+    - revive
     - gosec
     - govet
     - ineffassign
-    - interfacer
     - lll
     - megacheck
     - misspell
     - nakedret
-    - structcheck
+   
     - unconvert
-    - varcheck
+   
   enable-all: false
-run:
-  skip-files:
+issues:
+  exclude-files:
     - schema.go
     - pulumiManifest.go
+run:
+ 
   timeout: 20m
+linters-settings:
+  lll:
+    # Max line length, lines longer will be reported.
+    # '\t' is counted as 1 character by default, and can be changed with the tab-width option.
+    # Default: 120.
+    line-length: 150
+    # Tab width in spaces.
+    # Default: 1
+    tab-width: 1

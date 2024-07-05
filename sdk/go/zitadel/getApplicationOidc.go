@@ -75,6 +75,7 @@ type LookupApplicationOidcResult struct {
 	AppType string `pulumi:"appType"`
 	// Auth method type
 	AuthMethodType string `pulumi:"authMethodType"`
+	ClientId       string `pulumi:"clientId"`
 	// Clockskew
 	ClockSkew string `pulumi:"clockSkew"`
 	// Dev mode
@@ -179,6 +180,10 @@ func (o LookupApplicationOidcResultOutput) AppType() pulumi.StringOutput {
 // Auth method type
 func (o LookupApplicationOidcResultOutput) AuthMethodType() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupApplicationOidcResult) string { return v.AuthMethodType }).(pulumi.StringOutput)
+}
+
+func (o LookupApplicationOidcResultOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupApplicationOidcResult) string { return v.ClientId }).(pulumi.StringOutput)
 }
 
 // Clockskew

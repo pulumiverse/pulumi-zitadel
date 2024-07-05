@@ -21,13 +21,16 @@ class GetApplicationApiResult:
     """
     A collection of values returned by getApplicationApi.
     """
-    def __init__(__self__, app_id=None, auth_method_type=None, id=None, name=None, org_id=None, project_id=None):
+    def __init__(__self__, app_id=None, auth_method_type=None, client_id=None, id=None, name=None, org_id=None, project_id=None):
         if app_id and not isinstance(app_id, str):
             raise TypeError("Expected argument 'app_id' to be a str")
         pulumi.set(__self__, "app_id", app_id)
         if auth_method_type and not isinstance(auth_method_type, str):
             raise TypeError("Expected argument 'auth_method_type' to be a str")
         pulumi.set(__self__, "auth_method_type", auth_method_type)
+        if client_id and not isinstance(client_id, str):
+            raise TypeError("Expected argument 'client_id' to be a str")
+        pulumi.set(__self__, "client_id", client_id)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
@@ -56,6 +59,11 @@ class GetApplicationApiResult:
         Auth method type
         """
         return pulumi.get(self, "auth_method_type")
+
+    @property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> str:
+        return pulumi.get(self, "client_id")
 
     @property
     @pulumi.getter
@@ -98,6 +106,7 @@ class AwaitableGetApplicationApiResult(GetApplicationApiResult):
         return GetApplicationApiResult(
             app_id=self.app_id,
             auth_method_type=self.auth_method_type,
+            client_id=self.client_id,
             id=self.id,
             name=self.name,
             org_id=self.org_id,
@@ -137,6 +146,7 @@ def get_application_api(app_id: Optional[str] = None,
     return AwaitableGetApplicationApiResult(
         app_id=pulumi.get(__ret__, 'app_id'),
         auth_method_type=pulumi.get(__ret__, 'auth_method_type'),
+        client_id=pulumi.get(__ret__, 'client_id'),
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'),
         org_id=pulumi.get(__ret__, 'org_id'),

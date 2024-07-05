@@ -15,7 +15,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ## Import
     /// 
-    /// terraform The resource can be imported using the ID format `&lt;[org_id]&gt;`, e.g.
+    /// bash The resource can be imported using the ID format `&lt;[org_id]&gt;`, e.g.
     /// 
     /// ```sh
     ///  $ pulumi import zitadel:index/labelPolicy:LabelPolicy imported '123456789012345678'
@@ -128,6 +128,12 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         [Output("setActive")]
         public Output<bool?> SetActive { get; private set; } = null!;
+
+        /// <summary>
+        /// theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+        /// </summary>
+        [Output("themeMode")]
+        public Output<string?> ThemeMode { get; private set; } = null!;
 
         /// <summary>
         /// hex value for warn color
@@ -279,6 +285,12 @@ namespace Pulumiverse.Zitadel
         public Input<bool>? SetActive { get; set; }
 
         /// <summary>
+        /// theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+        /// </summary>
+        [Input("themeMode")]
+        public Input<string>? ThemeMode { get; set; }
+
+        /// <summary>
         /// hex value for warn color
         /// </summary>
         [Input("warnColor", required: true)]
@@ -402,6 +414,12 @@ namespace Pulumiverse.Zitadel
         /// </summary>
         [Input("setActive")]
         public Input<bool>? SetActive { get; set; }
+
+        /// <summary>
+        /// theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+        /// </summary>
+        [Input("themeMode")]
+        public Input<string>? ThemeMode { get; set; }
 
         /// <summary>
         /// hex value for warn color

@@ -180,7 +180,7 @@ class DefaultDomainPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<>`, e.g.
+        bash The resource can be imported using the ID format `<>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/defaultDomainPolicy:DefaultDomainPolicy imported ''
@@ -214,7 +214,7 @@ class DefaultDomainPolicy(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<>`, e.g.
+        bash The resource can be imported using the ID format `<>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/defaultDomainPolicy:DefaultDomainPolicy imported ''

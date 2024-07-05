@@ -31,7 +31,7 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * terraform The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
+ * bash The resource can be imported using the ID format `<id[:org_id][:client_secret]>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/orgIdpGoogle:OrgIdpGoogle imported '123456789012345678:123456789012345678:G1234567890123'

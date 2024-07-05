@@ -39,7 +39,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ## Import
     /// 
-    /// terraform The resource can be imported using the ID format `&lt;flow_type:trigger_type[:org_id]&gt;`, e.g.
+    /// bash The resource can be imported using the ID format `&lt;flow_type:trigger_type[:org_id]&gt;`, e.g.
     /// 
     /// ```sh
     ///  $ pulumi import zitadel:index/triggerActions:TriggerActions imported 'FLOW_TYPE_EXTERNAL_AUTHENTICATION:TRIGGER_TYPE_POST_CREATION:123456789012345678'

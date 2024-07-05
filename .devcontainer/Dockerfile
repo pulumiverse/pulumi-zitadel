@@ -25,7 +25,7 @@ ENV PATH=$PATH:/usr/local/go/bin
 
 # Install go linter
 RUN mkdir -p $GOPATH/bin && \
-    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GOPATH/bin v1.46.2
+    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GOPATH/bin v1.59.1
 
 ENV PATH=$PATH:$GOPATH/bin
 

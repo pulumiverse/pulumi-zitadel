@@ -154,6 +154,7 @@ namespace Pulumiverse.Zitadel
         /// Auth method type
         /// </summary>
         public readonly string AuthMethodType;
+        public readonly string ClientId;
         /// <summary>
         /// Clockskew
         /// </summary>
@@ -221,6 +222,8 @@ namespace Pulumiverse.Zitadel
 
             string authMethodType,
 
+            string clientId,
+
             string clockSkew,
 
             bool devMode,
@@ -253,6 +256,7 @@ namespace Pulumiverse.Zitadel
             AppId = appId;
             AppType = appType;
             AuthMethodType = authMethodType;
+            ClientId = clientId;
             ClockSkew = clockSkew;
             DevMode = devMode;
             GrantTypes = grantTypes;

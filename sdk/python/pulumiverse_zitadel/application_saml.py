@@ -238,7 +238,7 @@ class ApplicationSaml(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
+        bash The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/applicationSaml:ApplicationSaml imported '123456789012345678:123456789012345678:123456789012345678'
@@ -286,7 +286,7 @@ class ApplicationSaml(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
+        bash The resource can be imported using the ID format `<id:project_id[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/applicationSaml:ApplicationSaml imported '123456789012345678:123456789012345678:123456789012345678'
