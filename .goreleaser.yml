@@ -1,3 +1,4 @@
+version: 2
 archives:
   - id: archive
     name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
@@ -20,7 +21,7 @@ builds:
       - -X github.com/pulumiverse/pulumi-zitadel/provider/pkg/version.Version={{.Tag }}
     main: ./cmd/pulumi-resource-zitadel/
 changelog:
-  skip: true
+  disable: true
 release:
   disable: false
   prerelease: auto
