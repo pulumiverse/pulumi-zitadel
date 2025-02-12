@@ -61,9 +61,9 @@ build_nodejs:: VERSION := $(shell pulumictl get version --language javascript)
 build_nodejs:: install_plugins tfgen # build the node sdk
 	$(WORKING_DIR)/bin/$(TFGEN) nodejs --overlays provider/overlays/nodejs --out sdk/nodejs/
 	cd sdk/nodejs/ && \
-        yarn install && \
-        yarn run tsc && \
-        cp ../../README.md ../../LICENSE package.json yarn.lock ./bin/ && \
+        pnpm install && \
+        pnpm run build && \
+        cp ../../README.md ../../LICENSE package.json pnpm-lock.yaml ./bin/ && \
 		sed -i.bak -e "s/\$${VERSION}/$(VERSION)/g" ./bin/package.json
 
 build_python:: PYPI_VERSION := $(shell pulumictl get version --language python)
@@ -116,7 +116,7 @@ install_python_sdk::
 install_go_sdk::
 
 install_nodejs_sdk::
-	yarn link --cwd $(WORKING_DIR)/sdk/nodejs/bin
+	pnpm link --cwd $(WORKING_DIR)/sdk/nodejs/bin
 
 install_sdks:: install_dotnet_sdk install_python_sdk install_nodejs_sdk
 
