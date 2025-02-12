@@ -138,8 +138,8 @@ jobs:
           - 1.21.x
         language:
           - nodejs
-          - python
-          - dotnet
+          # - python
+          # - dotnet
           - go
         nodeversion:
           - 20.x

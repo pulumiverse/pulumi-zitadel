@@ -8,13 +8,13 @@ jobs:
   prerequisites:
     permissions:
       pull-requests: write
-    uses: pulumiverse/infra/.github/workflows/provider-prerequisites.yaml@actions-workflows-v0.0.4
+    uses: pulumiverse/infra/.github/workflows/provider-prerequisites.yaml
     with:
       provider: zitadel
       goversion: 1.21.x
   build:
     needs: prerequisites
-    uses: pulumiverse/infra/.github/workflows/provider-build-sdk.yaml@actions-workflows-v0.0.4
+    uses: pulumiverse/infra/.github/workflows/provider-build-sdk.yaml
     with:
       provider: zitadel
       goversion: 1.21.x
