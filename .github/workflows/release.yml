@@ -96,6 +96,7 @@ jobs:
         name: Install pnpm
         with:
           run_install: false
+          vversion: latest
       - name: Setup DotNet
         uses: actions/setup-dotnet@v1
         with:
