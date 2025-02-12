@@ -20,8 +20,8 @@ import (
 	_ "embed"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	zitadel "github.com/pulumiverse/pulumi-zitadel/provider"
-	"github.com/pulumiverse/pulumi-zitadel/provider/pkg/version"
+	zitadel "github.com/scoretechnologies/pulumi-zitadel/provider"
+	"github.com/scoretechnologies/pulumi-zitadel/provider/pkg/version"
 )
 
 //go:embed schema-embed.json

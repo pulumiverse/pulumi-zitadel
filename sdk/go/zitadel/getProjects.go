@@ -9,7 +9,7 @@ import (
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
-	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
+	"github.com/scoretechnologies/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing the project, which can then be granted to different organizations or users directly, containing different applications.

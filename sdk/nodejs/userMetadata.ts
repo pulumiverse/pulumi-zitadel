@@ -9,7 +9,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as zitadel from "@pulumiverse/zitadel";
+ * import * as zitadel from "@scoretechnologies/zitadel";
  *
  * const _default = new zitadel.UserMetadata("default", {
  *     orgId: data.zitadel_org["default"].id,

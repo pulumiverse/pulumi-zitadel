@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>pulumiverse</Authors>
-    <Company>pulumiverse</Company>
+    <Authors>scoretechnologies</Authors>
+    <Company>scoretechnologies</Company>
     <Description>A Pulumi package for creating and managing zitadel cloud resources.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://www.pulumi.com</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/pulumiverse/pulumi-zitadel</RepositoryUrl>
+    <RepositoryUrl>https://github.com/scoretechnologies/pulumi-zitadel</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>
 
     <TargetFramework>net6.0</TargetFramework>

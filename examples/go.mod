@@ -1,4 +1,4 @@
-module github.com/pulumiverse/pulumi-zitadel/examples
+module github.com/scoretechnologies/pulumi-zitadel/examples
 
 go 1.21
 

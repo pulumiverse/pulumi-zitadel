@@ -10,7 +10,7 @@ import (
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
-	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
+	"github.com/scoretechnologies/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing the membership of a user on an instance, defined with the given role.
@@ -23,7 +23,7 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//	"github.com/scoretechnologies/pulumi-zitadel/sdk/go/zitadel"
 //
 // )
 //

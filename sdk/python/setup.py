@@ -17,7 +17,7 @@ def readme():
         return "zitadel Pulumi Package - Development Version"
 
 
-setup(name='pulumiverse_zitadel',
+setup(name='scoretechnologies_zitadel',
       python_requires='>=3.7',
       version=VERSION,
       description="A Pulumi package for creating and managing zitadel cloud resources.",
@@ -26,12 +26,12 @@ setup(name='pulumiverse_zitadel',
       keywords='pulumi zitadel category/cloud',
       url='https://www.pulumi.com',
       project_urls={
-          'Repository': 'https://github.com/pulumiverse/pulumi-zitadel'
+          'Repository': 'https://github.com/scoretechnologies/pulumi-zitadel'
       },
       license='Apache-2.0',
       packages=find_packages(),
       package_data={
-          'pulumiverse_zitadel': [
+          'scoretechnologies_zitadel': [
               'py.typed',
               'pulumi-plugin.json',
           ]

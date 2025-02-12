@@ -1,4 +1,4 @@
 > This provider is a derived work of the [Terraform Provider](https://github.com/zitadel/terraform-provider-zitadel)
 > distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,
-> first check the [`pulumi-zitadel` repo](https://github.com/pulumiverse/pulumi-zitadel/issues); however, if that doesn't turn up anything,
+> first check the [`pulumi-zitadel` repo](https://github.com/scoretechnologies/pulumi-zitadel/issues); however, if that doesn't turn up anything,
 > please consult the source [`terraform-provider-zitadel` repo](https://github.com/zitadel/terraform-provider-zitadel/issues).

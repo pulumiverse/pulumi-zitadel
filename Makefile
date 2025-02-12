@@ -2,7 +2,7 @@ PROJECT_NAME := zitadel Package
 
 SHELL            := /bin/bash
 PACK             := zitadel
-ORG              := pulumiverse
+ORG              := scoretechnologies
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
 NODE_MODULE_NAME := @pulumi/${PACK}
 TF_NAME          := ${PACK}
@@ -116,7 +116,7 @@ install_python_sdk::
 install_go_sdk::
 
 install_nodejs_sdk::
-	pnpm link --cwd $(WORKING_DIR)/sdk/nodejs/bin
+	pnpm link  --dir $(WORKING_DIR)/sdk/nodejs/bin
 
 install_sdks:: install_dotnet_sdk install_python_sdk install_nodejs_sdk
 

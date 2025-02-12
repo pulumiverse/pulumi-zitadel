@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Pulumiverse.Zitadel
+namespace scoretechnologies.Zitadel
 {
     public static class Config
     {

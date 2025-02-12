@@ -10,7 +10,7 @@ import (
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
-	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
+	"github.com/scoretechnologies/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // **Caution: Email can only be set verified if a password is set for the user, either with initialPassword or during runtime**
@@ -25,7 +25,7 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//	"github.com/scoretechnologies/pulumi-zitadel/sdk/go/zitadel"
 //
 // )
 //

@@ -13,7 +13,7 @@ The Zitadel provider must be configured with credentials to deploy and update re
 {{% choosable language typescript %}}
 
 ```typescript
-import * as zitadel from "@pulumiverse/zitadel";
+import * as zitadel from "@scoretechnologies/zitadel";
 const db = new zitadel.Org("example", {
     name: "example",
 });
@@ -23,7 +23,7 @@ const db = new zitadel.Org("example", {
 {{% choosable language python %}}
 
 ```python
-import pulumiverse_zitadel as zitadel
+import scoretechnologies_zitadel as zitadel
 
 db = zitadel.Database("example",
     name="example"
@@ -36,7 +36,7 @@ db = zitadel.Database("example",
 ```go
 import (
 	"fmt"
-	zitadel "github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+	zitadel "github.com/scoretechnologies/pulumi-zitadel/sdk/go/zitadel"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -62,7 +62,7 @@ func main() {
 
 ```csharp
 using Pulumi;
-using Pulumiverse.Zitadel;
+using scoretechnologies.Zitadel;
 
 class Zitadel : Stack
 {

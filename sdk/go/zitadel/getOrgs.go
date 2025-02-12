@@ -9,7 +9,7 @@ import (
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
-	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
+	"github.com/scoretechnologies/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.

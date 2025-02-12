@@ -9,7 +9,7 @@ import (
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
-	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel/internal"
+	"github.com/scoretechnologies/pulumi-zitadel/sdk/go/zitadel/internal"
 )
 
 // Resource representing triggers, when actions get started
@@ -22,7 +22,7 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//	"github.com/scoretechnologies/pulumi-zitadel/sdk/go/zitadel"
 //
 // )
 //

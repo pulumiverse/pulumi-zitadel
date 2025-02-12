@@ -9,7 +9,7 @@ env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   # TODO: Switch to shared CI like here
-  # https://github.com/pulumiverse/pulumi-vercel/blob/main/.github/workflows/upgrade-provider.yml
+  # https://github.com/scoretechnologies/pulumi-vercel/blob/main/.github/workflows/upgrade-provider.yml
   # after this issue is fixed
   # https://github.com/pulumi/upgrade-provider/issues/179
   # or when have time to fix failing go mod tidy in "all" mode.

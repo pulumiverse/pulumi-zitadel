@@ -8,10 +8,10 @@ layout: installation
 
 The Pulumi Zitadel provider is available as a package in all Pulumi languages:
 
-* JavaScript/TypeScript: [`@pulumiserve/zitadel`](https://www.npmjs.com/package/@pulumiverse/zitadel)
-* Python: [`pulumiverse_zitadel`](https://pypi.org/project/pulumiverse-zitadel/)
-* Go: [`github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel`](https://pkg.go.dev/github.com/pulumiverse/pulumi-zitadel/sdk)
-* .NET: [`Pulumiverse.Zitadel`](https://www.nuget.org/packages/Pulumiverse.Zitadel)
+* JavaScript/TypeScript: [`@pulumiserve/zitadel`](https://www.npmjs.com/package/@scoretechnologies/zitadel)
+* Python: [`scoretechnologies_zitadel`](https://pypi.org/project/scoretechnologies-zitadel/)
+* Go: [`github.com/scoretechnologies/pulumi-zitadel/sdk/go/zitadel`](https://pkg.go.dev/github.com/scoretechnologies/pulumi-zitadel/sdk)
+* .NET: [`scoretechnologies.Zitadel`](https://www.nuget.org/packages/scoretechnologies.Zitadel)
 
 ## Setup
 

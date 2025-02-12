@@ -1,4 +1,4 @@
-module github.com/pulumiverse/pulumi-zitadel/provider
+module github.com/scoretechnologies/pulumi-zitadel/provider
 
 go 1.21
 

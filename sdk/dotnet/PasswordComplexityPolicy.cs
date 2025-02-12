@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace Pulumiverse.Zitadel
+namespace scoretechnologies.Zitadel
 {
     /// <summary>
     /// Resource representing the custom password complexity policy of an organization.
@@ -19,7 +19,7 @@ namespace Pulumiverse.Zitadel
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Zitadel = Pulumiverse.Zitadel;
+    /// using Zitadel = scoretechnologies.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
@@ -98,7 +98,7 @@ namespace Pulumiverse.Zitadel
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "github://api.github.com/pulumiverse",
+                PluginDownloadURL = "github://api.github.com/scoretechnologies",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.

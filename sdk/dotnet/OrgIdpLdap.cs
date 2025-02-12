@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace Pulumiverse.Zitadel
+namespace scoretechnologies.Zitadel
 {
     /// <summary>
     /// Resource representing an LDAP IdP on the organization.
@@ -19,7 +19,7 @@ namespace Pulumiverse.Zitadel
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Zitadel = Pulumiverse.Zitadel;
+    /// using Zitadel = scoretechnologies.Zitadel;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
@@ -260,7 +260,7 @@ namespace Pulumiverse.Zitadel
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "github://api.github.com/pulumiverse",
+                PluginDownloadURL = "github://api.github.com/scoretechnologies",
                 AdditionalSecretOutputs =
                 {
                     "bindPassword",
