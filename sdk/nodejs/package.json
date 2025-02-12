@@ -1,5 +1,5 @@
 {
-    "name": "@pulumiverse/zitadel",
+    "name": "@scoretechnologies/zitadel",
     "version": "${VERSION}",
     "description": "A Pulumi package for creating and managing zitadel cloud resources.",
     "keywords": [
@@ -8,7 +8,7 @@
         "category/cloud"
     ],
     "homepage": "https://www.pulumi.com",
-    "repository": "https://github.com/pulumiverse/pulumi-zitadel",
+    "repository": "https://github.com/scoretechnologies/pulumi-zitadel",
     "license": "Apache-2.0",
     "scripts": {
         "build": "tsc"
@@ -24,6 +24,6 @@
     "pulumi": {
         "resource": true,
         "name": "zitadel",
-        "server": "github://api.github.com/pulumiverse"
+        "server": "github://api.github.com/scoretechnologies"
     }
 }
