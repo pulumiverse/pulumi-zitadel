@@ -22,6 +22,10 @@ provider/**/schema-embed.json
 **/nuget
 **/dist
 
+**/__pycache__
+**/venv
+
+go.work*
 
 # Ignore local build tracking directory
 .make
