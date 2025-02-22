@@ -222,10 +222,10 @@ class TriggerActions(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.TriggerActions("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             flow_type="FLOW_TYPE_CUSTOMISE_TOKEN",
             trigger_type="TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION",
-            action_ids=[data["zitadel_action"]["default"]["id"]])
+            action_ids=[default_zitadel_action["id"]])
         ```
 
         ## Import
@@ -259,10 +259,10 @@ class TriggerActions(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.TriggerActions("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             flow_type="FLOW_TYPE_CUSTOMISE_TOKEN",
             trigger_type="TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION",
-            action_ids=[data["zitadel_action"]["default"]["id"]])
+            action_ids=[default_zitadel_action["id"]])
         ```
 
         ## Import

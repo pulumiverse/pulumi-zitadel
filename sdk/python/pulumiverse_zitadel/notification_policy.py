@@ -142,7 +142,7 @@ class NotificationPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.NotificationPolicy("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             password_change=False)
         ```
 
@@ -175,7 +175,7 @@ class NotificationPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.NotificationPolicy("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             password_change=False)
         ```
 

@@ -105,7 +105,7 @@ def get_trigger_actions(flow_type: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_trigger_actions(org_id=data["zitadel_org"]["default"]["id"],
+    default = zitadel.get_trigger_actions(org_id=default_zitadel_org["id"],
         flow_type="FLOW_TYPE_EXTERNAL_AUTHENTICATION",
         trigger_type="TRIGGER_TYPE_POST_AUTHENTICATION")
     pulumi.export("triggerActions", default)
@@ -145,7 +145,7 @@ def get_trigger_actions_output(flow_type: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_trigger_actions(org_id=data["zitadel_org"]["default"]["id"],
+    default = zitadel.get_trigger_actions(org_id=default_zitadel_org["id"],
         flow_type="FLOW_TYPE_EXTERNAL_AUTHENTICATION",
         trigger_type="TRIGGER_TYPE_POST_AUTHENTICATION")
     pulumi.export("triggerActions", default)

@@ -25,8 +25,8 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.SmsProviderTwilio("default", new()
     ///     {
-    ///         SenderNumber = "019920892",
     ///         Sid = "sid",
+    ///         SenderNumber = "019920892",
     ///         Token = "twilio_token",
     ///     });
     /// 

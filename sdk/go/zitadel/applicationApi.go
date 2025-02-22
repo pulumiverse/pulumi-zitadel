@@ -30,8 +30,9 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewApplicationApi(ctx, "default", &zitadel.ApplicationApiArgs{
-//				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
-//				ProjectId:      pulumi.Any(data.Zitadel_project.Default.Id),
+//				OrgId:          pulumi.Any(defaultZitadelOrg.Id),
+//				ProjectId:      pulumi.Any(defaultZitadelProject.Id),
+//				Name:           pulumi.String("applicationapi"),
 //				AuthMethodType: pulumi.String("API_AUTH_METHOD_TYPE_BASIC"),
 //			})
 //			if err != nil {

@@ -25,8 +25,9 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.MachineUser("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
     ///         UserName = "machine@example.com",
+    ///         Name = "name",
     ///         Description = "a machine user",
     ///         WithSecret = false,
     ///     });

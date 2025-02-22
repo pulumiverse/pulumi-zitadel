@@ -14,7 +14,7 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.PrivacyPolicy("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     tosLink: "https://example.com/tos",
  *     privacyLink: "https://example.com/privacy",
  *     helpLink: "https://example.com/help",

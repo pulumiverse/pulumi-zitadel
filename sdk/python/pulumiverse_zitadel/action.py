@@ -253,7 +253,8 @@ class Action(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.Action("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="actionname",
             script="testscript",
             timeout="10s",
             allowed_to_fail=True)
@@ -289,7 +290,8 @@ class Action(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.Action("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="actionname",
             script="testscript",
             timeout="10s",
             allowed_to_fail=True)

@@ -14,7 +14,7 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getOrgOidcIdp({
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     id: "123456789012345678",
  * });
  * export const orgOidcIdp = _default;
@@ -106,7 +106,7 @@ export interface GetOrgOidcIdpResult {
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getOrgOidcIdp({
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     id: "123456789012345678",
  * });
  * export const orgOidcIdp = _default;

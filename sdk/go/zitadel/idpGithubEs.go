@@ -30,20 +30,21 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewIdpGithubEs(ctx, "default", &zitadel.IdpGithubEsArgs{
-//				AuthorizationEndpoint: pulumi.String("https://auth.endpoint"),
-//				ClientId:              pulumi.String("86a165..."),
-//				ClientSecret:          pulumi.String("*****afdbac18"),
-//				IsAutoCreation:        pulumi.Bool(false),
-//				IsAutoUpdate:          pulumi.Bool(true),
-//				IsCreationAllowed:     pulumi.Bool(true),
-//				IsLinkingAllowed:      pulumi.Bool(false),
+//				Name:         pulumi.String("GitHub Enterprise Server"),
+//				ClientId:     pulumi.String("86a165..."),
+//				ClientSecret: pulumi.String("*****afdbac18"),
 //				Scopes: pulumi.StringArray{
 //					pulumi.String("openid"),
 //					pulumi.String("profile"),
 //					pulumi.String("email"),
 //				},
-//				TokenEndpoint: pulumi.String("https://token.endpoint"),
-//				UserEndpoint:  pulumi.String("https://user.endpoint"),
+//				AuthorizationEndpoint: pulumi.String("https://auth.endpoint"),
+//				TokenEndpoint:         pulumi.String("https://token.endpoint"),
+//				UserEndpoint:          pulumi.String("https://user.endpoint"),
+//				IsLinkingAllowed:      pulumi.Bool(false),
+//				IsCreationAllowed:     pulumi.Bool(true),
+//				IsAutoCreation:        pulumi.Bool(false),
+//				IsAutoUpdate:          pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err

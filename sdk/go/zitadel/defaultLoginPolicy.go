@@ -52,8 +52,8 @@ import (
 //					pulumi.String("MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"),
 //				},
 //				Idps: pulumi.StringArray{
-//					data.Zitadel_idp_google.Default.Id,
-//					data.Zitadel_idp_azure_ad.Default.Id,
+//					defaultZitadelIdpGoogle.Id,
+//					defaultZitadelIdpAzureAd.Id,
 //				},
 //				AllowDomainDiscovery:  pulumi.Bool(true),
 //				DisableLoginWithEmail: pulumi.Bool(true),

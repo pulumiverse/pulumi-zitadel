@@ -25,7 +25,7 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.PasswordComplexityPolicy("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
     ///         MinLength = 8,
     ///         HasUppercase = true,
     ///         HasLowercase = true,

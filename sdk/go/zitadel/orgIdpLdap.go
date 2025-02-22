@@ -30,7 +30,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewOrgIdpLdap(ctx, "default", &zitadel.OrgIdpLdapArgs{
-//				OrgId: pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId: pulumi.Any(defaultZitadelOrg.Id),
+//				Name:  pulumi.String("LDAP"),
 //				Servers: pulumi.StringArray{
 //					pulumi.String("ldaps://my.primary.server:389"),
 //					pulumi.String("ldaps://my.secondary.server:389"),

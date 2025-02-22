@@ -864,7 +864,7 @@ class LoginPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.LoginPolicy("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             user_login=True,
             allow_register=True,
             allow_external_idp=True,
@@ -885,8 +885,8 @@ class LoginPolicy(pulumi.CustomResource):
             ],
             multi_factors=["MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"],
             idps=[
-                data["zitadel_idp_google"]["default"]["id"],
-                data["zitadel_idp_azure_ad"]["default"]["id"],
+                default_zitadel_idp_google["id"],
+                default_zitadel_idp_azure_ad["id"],
             ],
             allow_domain_discovery=True,
             disable_login_with_email=True,
@@ -936,7 +936,7 @@ class LoginPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.LoginPolicy("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             user_login=True,
             allow_register=True,
             allow_external_idp=True,
@@ -957,8 +957,8 @@ class LoginPolicy(pulumi.CustomResource):
             ],
             multi_factors=["MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"],
             idps=[
-                data["zitadel_idp_google"]["default"]["id"],
-                data["zitadel_idp_azure_ad"]["default"]["id"],
+                default_zitadel_idp_google["id"],
+                default_zitadel_idp_azure_ad["id"],
             ],
             allow_domain_discovery=True,
             disable_login_with_email=True,

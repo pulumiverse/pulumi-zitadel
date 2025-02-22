@@ -25,8 +25,9 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.ApplicationSaml("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
-    ///         ProjectId = data.Zitadel_project.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         ProjectId = defaultZitadelProject.Id,
+    ///         Name = "applicationapi",
     ///         MetadataXml = @"&lt;?xml version=""1.0""?&gt;
     /// &lt;md:EntityDescriptor xmlns:md=""urn:oasis:names:tc:SAML:2.0:metadata""
     ///                      validUntil=""2024-01-26T17:48:38Z""

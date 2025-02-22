@@ -25,21 +25,22 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.IdpGithubEs("default", new()
     ///     {
-    ///         AuthorizationEndpoint = "https://auth.endpoint",
+    ///         Name = "GitHub Enterprise Server",
     ///         ClientId = "86a165...",
     ///         ClientSecret = "*****afdbac18",
-    ///         IsAutoCreation = false,
-    ///         IsAutoUpdate = true,
-    ///         IsCreationAllowed = true,
-    ///         IsLinkingAllowed = false,
     ///         Scopes = new[]
     ///         {
     ///             "openid",
     ///             "profile",
     ///             "email",
     ///         },
+    ///         AuthorizationEndpoint = "https://auth.endpoint",
     ///         TokenEndpoint = "https://token.endpoint",
     ///         UserEndpoint = "https://user.endpoint",
+    ///         IsLinkingAllowed = false,
+    ///         IsCreationAllowed = true,
+    ///         IsAutoCreation = false,
+    ///         IsAutoUpdate = true,
     ///     });
     /// 
     /// });

@@ -29,10 +29,10 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewDefaultPrivacyPolicy(ctx, "default", &zitadel.DefaultPrivacyPolicyArgs{
-//				HelpLink:     pulumi.String("https://example.com/help"),
-//				PrivacyLink:  pulumi.String("https://example.com/privacy"),
-//				SupportEmail: pulumi.String("support@example.com"),
 //				TosLink:      pulumi.String("https://example.com/tos"),
+//				PrivacyLink:  pulumi.String("https://example.com/privacy"),
+//				HelpLink:     pulumi.String("https://example.com/help"),
+//				SupportEmail: pulumi.String("support@example.com"),
 //			})
 //			if err != nil {
 //				return err

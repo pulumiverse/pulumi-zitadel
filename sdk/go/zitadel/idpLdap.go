@@ -30,30 +30,31 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewIdpLdap(ctx, "default", &zitadel.IdpLdapArgs{
-//				BaseDn:             pulumi.String("dc=example,dc=com"),
-//				BindDn:             pulumi.String("cn=admin,dc=example,dc=com"),
-//				BindPassword:       pulumi.String("Password1!"),
-//				FirstNameAttribute: pulumi.String("firstname"),
-//				IdAttribute:        pulumi.String("uid"),
-//				IsAutoCreation:     pulumi.Bool(false),
-//				IsAutoUpdate:       pulumi.Bool(true),
-//				IsCreationAllowed:  pulumi.Bool(true),
-//				IsLinkingAllowed:   pulumi.Bool(false),
-//				LastNameAttribute:  pulumi.String("lastname"),
+//				Name: pulumi.String("LDAP"),
 //				Servers: pulumi.StringArray{
 //					pulumi.String("ldaps://my.primary.server:389"),
 //					pulumi.String("ldaps://my.secondary.server:389"),
 //				},
-//				StartTls: pulumi.Bool(false),
-//				Timeout:  pulumi.String("10s"),
-//				UserBase: pulumi.String("dn"),
+//				StartTls:     pulumi.Bool(false),
+//				BaseDn:       pulumi.String("dc=example,dc=com"),
+//				BindDn:       pulumi.String("cn=admin,dc=example,dc=com"),
+//				BindPassword: pulumi.String("Password1!"),
+//				UserBase:     pulumi.String("dn"),
+//				UserObjectClasses: pulumi.StringArray{
+//					pulumi.String("inetOrgPerson"),
+//				},
 //				UserFilters: pulumi.StringArray{
 //					pulumi.String("uid"),
 //					pulumi.String("email"),
 //				},
-//				UserObjectClasses: pulumi.StringArray{
-//					pulumi.String("inetOrgPerson"),
-//				},
+//				Timeout:            pulumi.String("10s"),
+//				IdAttribute:        pulumi.String("uid"),
+//				FirstNameAttribute: pulumi.String("firstname"),
+//				LastNameAttribute:  pulumi.String("lastname"),
+//				IsLinkingAllowed:   pulumi.Bool(false),
+//				IsCreationAllowed:  pulumi.Bool(true),
+//				IsAutoCreation:     pulumi.Bool(false),
+//				IsAutoUpdate:       pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err

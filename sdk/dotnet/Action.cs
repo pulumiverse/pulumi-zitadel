@@ -25,7 +25,8 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.Action("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         Name = "actionname",
     ///         Script = "testscript",
     ///         Timeout = "10s",
     ///         AllowedToFail = true,

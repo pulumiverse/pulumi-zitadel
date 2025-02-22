@@ -14,7 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.Project("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     name: "projectname",
+ *     orgId: defaultZitadelOrg.id,
  *     projectRoleAssertion: true,
  *     projectRoleCheck: true,
  *     hasProjectCheck: true,

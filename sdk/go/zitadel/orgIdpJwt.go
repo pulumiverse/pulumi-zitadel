@@ -30,7 +30,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewOrgIdpJwt(ctx, "default", &zitadel.OrgIdpJwtArgs{
-//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:        pulumi.Any(defaultZitadelOrg.Id),
+//				Name:         pulumi.String("jwtidp"),
 //				StylingType:  pulumi.String("STYLING_TYPE_UNSPECIFIED"),
 //				JwtEndpoint:  pulumi.String("https://jwtendpoint.com/jwt"),
 //				Issuer:       pulumi.String("https://google.com"),

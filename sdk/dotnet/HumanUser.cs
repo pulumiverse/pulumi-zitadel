@@ -27,7 +27,7 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.HumanUser("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
     ///         UserName = "humanfull@localhost.com",
     ///         FirstName = "firstname",
     ///         LastName = "lastname",

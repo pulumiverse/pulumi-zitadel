@@ -137,7 +137,7 @@ class InstanceMember(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.InstanceMember("default",
-            user_id=data["zitadel_human_user"]["default"]["id"],
+            user_id=default_zitadel_human_user["id"],
             roles=["IAM_OWNER"])
         ```
 
@@ -170,7 +170,7 @@ class InstanceMember(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.InstanceMember("default",
-            user_id=data["zitadel_human_user"]["default"]["id"],
+            user_id=default_zitadel_human_user["id"],
             roles=["IAM_OWNER"])
         ```
 

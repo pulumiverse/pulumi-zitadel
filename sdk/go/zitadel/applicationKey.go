@@ -30,9 +30,9 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewApplicationKey(ctx, "default", &zitadel.ApplicationKeyArgs{
-//				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
-//				ProjectId:      pulumi.Any(data.Zitadel_project.Default.Id),
-//				AppId:          pulumi.Any(data.Zitadel_application_api.Default.Id),
+//				OrgId:          pulumi.Any(defaultZitadelOrg.Id),
+//				ProjectId:      pulumi.Any(defaultZitadelProject.Id),
+//				AppId:          pulumi.Any(defaultZitadelApplicationApi.Id),
 //				KeyType:        pulumi.String("KEY_TYPE_JSON"),
 //				ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
 //			})

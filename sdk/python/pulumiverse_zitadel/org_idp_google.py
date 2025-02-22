@@ -416,7 +416,8 @@ class OrgIdpGoogle(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpGoogle("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="Google",
             client_id="182902...",
             client_secret="GOCSPX-*****",
             scopes=[
@@ -466,7 +467,8 @@ class OrgIdpGoogle(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpGoogle("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="Google",
             client_id="182902...",
             client_secret="GOCSPX-*****",
             scopes=[

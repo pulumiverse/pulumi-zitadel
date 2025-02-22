@@ -25,13 +25,9 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.IdpAzureAd("default", new()
     ///     {
+    ///         Name = "Azure AD",
     ///         ClientId = "9065bfc8-a08a...",
     ///         ClientSecret = "H2n***",
-    ///         EmailVerified = true,
-    ///         IsAutoCreation = false,
-    ///         IsAutoUpdate = true,
-    ///         IsCreationAllowed = true,
-    ///         IsLinkingAllowed = false,
     ///         Scopes = new[]
     ///         {
     ///             "openid",
@@ -40,6 +36,11 @@ namespace Pulumiverse.Zitadel
     ///             "User.Read",
     ///         },
     ///         TenantType = "AZURE_AD_TENANT_TYPE_ORGANISATIONS",
+    ///         EmailVerified = true,
+    ///         IsLinkingAllowed = false,
+    ///         IsCreationAllowed = true,
+    ///         IsAutoCreation = false,
+    ///         IsAutoUpdate = true,
     ///     });
     /// 
     /// });

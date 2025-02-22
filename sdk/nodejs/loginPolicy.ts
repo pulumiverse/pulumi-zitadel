@@ -14,7 +14,7 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.LoginPolicy("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     userLogin: true,
  *     allowRegister: true,
  *     allowExternalIdp: true,
@@ -35,8 +35,8 @@ import * as utilities from "./utilities";
  *     ],
  *     multiFactors: ["MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"],
  *     idps: [
- *         data.zitadel_idp_google["default"].id,
- *         data.zitadel_idp_azure_ad["default"].id,
+ *         defaultZitadelIdpGoogle.id,
+ *         defaultZitadelIdpAzureAd.id,
  *     ],
  *     allowDomainDiscovery: true,
  *     disableLoginWithEmail: true,

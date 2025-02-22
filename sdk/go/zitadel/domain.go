@@ -29,7 +29,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewDomain(ctx, "default", &zitadel.DomainArgs{
-//				OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:     pulumi.Any(defaultZitadelOrg.Id),
+//				Name:      pulumi.String("zitadel.default.127.0.0.1.sslip.io"),
 //				IsPrimary: pulumi.Bool(false),
 //			})
 //			if err != nil {

@@ -497,20 +497,21 @@ class IdpAzureAd(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.IdpAzureAd("default",
+            name="Azure AD",
             client_id="9065bfc8-a08a...",
             client_secret="H2n***",
-            email_verified=True,
-            is_auto_creation=False,
-            is_auto_update=True,
-            is_creation_allowed=True,
-            is_linking_allowed=False,
             scopes=[
                 "openid",
                 "profile",
                 "email",
                 "User.Read",
             ],
-            tenant_type="AZURE_AD_TENANT_TYPE_ORGANISATIONS")
+            tenant_type="AZURE_AD_TENANT_TYPE_ORGANISATIONS",
+            email_verified=True,
+            is_linking_allowed=False,
+            is_creation_allowed=True,
+            is_auto_creation=False,
+            is_auto_update=True)
         ```
 
         ## Import
@@ -551,20 +552,21 @@ class IdpAzureAd(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.IdpAzureAd("default",
+            name="Azure AD",
             client_id="9065bfc8-a08a...",
             client_secret="H2n***",
-            email_verified=True,
-            is_auto_creation=False,
-            is_auto_update=True,
-            is_creation_allowed=True,
-            is_linking_allowed=False,
             scopes=[
                 "openid",
                 "profile",
                 "email",
                 "User.Read",
             ],
-            tenant_type="AZURE_AD_TENANT_TYPE_ORGANISATIONS")
+            tenant_type="AZURE_AD_TENANT_TYPE_ORGANISATIONS",
+            email_verified=True,
+            is_linking_allowed=False,
+            is_creation_allowed=True,
+            is_auto_creation=False,
+            is_auto_update=True)
         ```
 
         ## Import

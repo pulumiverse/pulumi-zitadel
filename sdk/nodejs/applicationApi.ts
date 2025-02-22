@@ -14,8 +14,9 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.ApplicationApi("default", {
- *     orgId: data.zitadel_org["default"].id,
- *     projectId: data.zitadel_project["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     projectId: defaultZitadelProject.id,
+ *     name: "applicationapi",
  *     authMethodType: "API_AUTH_METHOD_TYPE_BASIC",
  * });
  * ```

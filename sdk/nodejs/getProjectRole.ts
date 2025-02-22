@@ -14,8 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getProjectRole({
- *     orgId: data.zitadel_org["default"].id,
- *     projectId: data.zitadel_project["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     projectId: defaultZitadelProject.id,
  *     roleKey: "key",
  * });
  * export const projectRole = _default;
@@ -88,8 +88,8 @@ export interface GetProjectRoleResult {
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getProjectRole({
- *     orgId: data.zitadel_org["default"].id,
- *     projectId: data.zitadel_project["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     projectId: defaultZitadelProject.id,
  *     roleKey: "key",
  * });
  * export const projectRole = _default;

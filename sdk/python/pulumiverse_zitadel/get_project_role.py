@@ -117,8 +117,8 @@ def get_project_role(org_id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_project_role(org_id=data["zitadel_org"]["default"]["id"],
-        project_id=data["zitadel_project"]["default"]["id"],
+    default = zitadel.get_project_role(org_id=default_zitadel_org["id"],
+        project_id=default_zitadel_project["id"],
         role_key="key")
     pulumi.export("projectRole", default)
     ```
@@ -158,8 +158,8 @@ def get_project_role_output(org_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_project_role(org_id=data["zitadel_org"]["default"]["id"],
-        project_id=data["zitadel_project"]["default"]["id"],
+    default = zitadel.get_project_role(org_id=default_zitadel_org["id"],
+        project_id=default_zitadel_project["id"],
         role_key="key")
     pulumi.export("projectRole", default)
     ```

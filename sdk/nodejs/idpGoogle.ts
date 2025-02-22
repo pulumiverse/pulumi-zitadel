@@ -14,17 +14,18 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.IdpGoogle("default", {
+ *     name: "Google",
  *     clientId: "182902...",
  *     clientSecret: "GOCSPX-*****",
- *     isAutoCreation: false,
- *     isAutoUpdate: true,
- *     isCreationAllowed: true,
- *     isLinkingAllowed: false,
  *     scopes: [
  *         "openid",
  *         "profile",
  *         "email",
  *     ],
+ *     isLinkingAllowed: false,
+ *     isCreationAllowed: true,
+ *     isAutoCreation: false,
+ *     isAutoUpdate: true,
  * });
  * ```
  *

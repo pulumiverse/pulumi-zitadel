@@ -29,8 +29,8 @@ namespace Pulumiverse.Zitadel
         /// {
         ///     var @default = Zitadel.GetApplicationApi.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Default.Id,
-        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         OrgId = defaultZitadelOrg.Id,
+        ///         ProjectId = defaultZitadelProject.Id,
         ///         AppId = "123456789012345678",
         ///     });
         /// 
@@ -59,8 +59,8 @@ namespace Pulumiverse.Zitadel
         /// {
         ///     var @default = Zitadel.GetApplicationApi.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Default.Id,
-        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         OrgId = defaultZitadelOrg.Id,
+        ///         ProjectId = defaultZitadelProject.Id,
         ///         AppId = "123456789012345678",
         ///     });
         /// 

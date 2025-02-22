@@ -200,7 +200,7 @@ def get_org_idp_azure_ad(id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_org_idp_azure_ad(org_id=data["zitadel_org"]["default"]["id"],
+    default = zitadel.get_org_idp_azure_ad(org_id=default_zitadel_org["id"],
         id="123456789012345678")
     ```
 
@@ -243,7 +243,7 @@ def get_org_idp_azure_ad_output(id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_org_idp_azure_ad(org_id=data["zitadel_org"]["default"]["id"],
+    default = zitadel.get_org_idp_azure_ad(org_id=default_zitadel_org["id"],
         id="123456789012345678")
     ```
 

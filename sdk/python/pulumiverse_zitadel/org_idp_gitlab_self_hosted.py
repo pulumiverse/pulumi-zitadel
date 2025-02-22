@@ -452,7 +452,8 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpGitlabSelfHosted("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="GitLab Self Hosted",
             client_id="15765e...",
             client_secret="*****abcxyz",
             scopes=[
@@ -504,7 +505,8 @@ class OrgIdpGitlabSelfHosted(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpGitlabSelfHosted("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="GitLab Self Hosted",
             client_id="15765e...",
             client_secret="*****abcxyz",
             scopes=[

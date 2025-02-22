@@ -30,7 +30,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewLoginPolicy(ctx, "default", &zitadel.LoginPolicyArgs{
-//				OrgId:                      pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:                      pulumi.Any(defaultZitadelOrg.Id),
 //				UserLogin:                  pulumi.Bool(true),
 //				AllowRegister:              pulumi.Bool(true),
 //				AllowExternalIdp:           pulumi.Bool(true),
@@ -53,8 +53,8 @@ import (
 //					pulumi.String("MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"),
 //				},
 //				Idps: pulumi.StringArray{
-//					data.Zitadel_idp_google.Default.Id,
-//					data.Zitadel_idp_azure_ad.Default.Id,
+//					defaultZitadelIdpGoogle.Id,
+//					defaultZitadelIdpAzureAd.Id,
 //				},
 //				AllowDomainDiscovery:  pulumi.Bool(true),
 //				DisableLoginWithEmail: pulumi.Bool(true),

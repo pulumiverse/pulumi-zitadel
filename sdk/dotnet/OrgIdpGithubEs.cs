@@ -25,7 +25,8 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.OrgIdpGithubEs("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         Name = "GitHub Enterprise Server",
     ///         ClientId = "86a165...",
     ///         ClientSecret = "*****afdbac18",
     ///         Scopes = new[]

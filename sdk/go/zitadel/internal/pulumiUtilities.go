@@ -94,7 +94,7 @@ func IsZero(v interface{}) bool {
 func PkgResourceDefaultOpts(opts []pulumi.ResourceOption) []pulumi.ResourceOption {
 	defaults := []pulumi.ResourceOption{}
 	defaults = append(defaults, pulumi.PluginDownloadURL("github://api.github.com/pulumiverse"))
-	version := SdkVersion
+	version := semver.MustParse("0.0.0-alpha.0+dev")
 	if !version.Equals(semver.Version{}) {
 		defaults = append(defaults, pulumi.Version(version.String()))
 	}
@@ -105,7 +105,7 @@ func PkgResourceDefaultOpts(opts []pulumi.ResourceOption) []pulumi.ResourceOptio
 func PkgInvokeDefaultOpts(opts []pulumi.InvokeOption) []pulumi.InvokeOption {
 	defaults := []pulumi.InvokeOption{}
 	defaults = append(defaults, pulumi.PluginDownloadURL("github://api.github.com/pulumiverse"))
-	version := SdkVersion
+	version := semver.MustParse("0.0.0-alpha.0+dev")
 	if !version.Equals(semver.Version{}) {
 		defaults = append(defaults, pulumi.Version(version.String()))
 	}

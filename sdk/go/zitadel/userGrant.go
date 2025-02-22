@@ -30,12 +30,12 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewUserGrant(ctx, "default", &zitadel.UserGrantArgs{
-//				ProjectId: pulumi.Any(data.Zitadel_project.Default.Id),
-//				OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
+//				ProjectId: pulumi.Any(defaultZitadelProject.Id),
+//				OrgId:     pulumi.Any(defaultZitadelOrg.Id),
 //				RoleKeys: pulumi.StringArray{
 //					pulumi.String("super-user"),
 //				},
-//				UserId: pulumi.Any(data.Zitadel_human_user.Default.Id),
+//				UserId: pulumi.Any(defaultZitadelHumanUser.Id),
 //			})
 //			if err != nil {
 //				return err

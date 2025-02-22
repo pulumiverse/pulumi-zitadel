@@ -25,8 +25,9 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.ApplicationApi("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
-    ///         ProjectId = data.Zitadel_project.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         ProjectId = defaultZitadelProject.Id,
+    ///         Name = "applicationapi",
     ///         AuthMethodType = "API_AUTH_METHOD_TYPE_BASIC",
     ///     });
     /// 

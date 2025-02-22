@@ -25,9 +25,9 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.ApplicationKey("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
-    ///         ProjectId = data.Zitadel_project.Default.Id,
-    ///         AppId = data.Zitadel_application_api.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         ProjectId = defaultZitadelProject.Id,
+    ///         AppId = defaultZitadelApplicationApi.Id,
     ///         KeyType = "KEY_TYPE_JSON",
     ///         ExpirationDate = "2519-04-01T08:45:00Z",
     ///     });

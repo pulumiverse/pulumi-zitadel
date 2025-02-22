@@ -14,11 +14,11 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.DefaultPasswordComplexityPolicy("default", {
+ *     minLength: 8,
+ *     hasUppercase: true,
  *     hasLowercase: true,
  *     hasNumber: true,
  *     hasSymbol: true,
- *     hasUppercase: true,
- *     minLength: 8,
  * });
  * ```
  *

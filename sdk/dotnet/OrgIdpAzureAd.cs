@@ -25,7 +25,8 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.OrgIdpAzureAd("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         Name = "Azure AD",
     ///         ClientId = "9065bfc8-a08a...",
     ///         ClientSecret = "H2n***",
     ///         Scopes = new[]

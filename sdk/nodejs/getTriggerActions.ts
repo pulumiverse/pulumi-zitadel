@@ -14,7 +14,7 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getTriggerActions({
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     flowType: "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
  *     triggerType: "TRIGGER_TYPE_POST_AUTHENTICATION",
  * });
@@ -84,7 +84,7 @@ export interface GetTriggerActionsResult {
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getTriggerActions({
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     flowType: "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
  *     triggerType: "TRIGGER_TYPE_POST_AUTHENTICATION",
  * });

@@ -261,11 +261,11 @@ class DefaultPasswordComplexityPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.DefaultPasswordComplexityPolicy("default",
+            min_length=8,
+            has_uppercase=True,
             has_lowercase=True,
             has_number=True,
-            has_symbol=True,
-            has_uppercase=True,
-            min_length=8)
+            has_symbol=True)
         ```
 
         ## Import
@@ -300,11 +300,11 @@ class DefaultPasswordComplexityPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.DefaultPasswordComplexityPolicy("default",
+            min_length=8,
+            has_uppercase=True,
             has_lowercase=True,
             has_number=True,
-            has_symbol=True,
-            has_uppercase=True,
-            min_length=8)
+            has_symbol=True)
         ```
 
         ## Import

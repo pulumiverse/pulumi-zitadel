@@ -14,20 +14,21 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.IdpGithubEs("default", {
- *     authorizationEndpoint: "https://auth.endpoint",
+ *     name: "GitHub Enterprise Server",
  *     clientId: "86a165...",
  *     clientSecret: "*****afdbac18",
- *     isAutoCreation: false,
- *     isAutoUpdate: true,
- *     isCreationAllowed: true,
- *     isLinkingAllowed: false,
  *     scopes: [
  *         "openid",
  *         "profile",
  *         "email",
  *     ],
+ *     authorizationEndpoint: "https://auth.endpoint",
  *     tokenEndpoint: "https://token.endpoint",
  *     userEndpoint: "https://user.endpoint",
+ *     isLinkingAllowed: false,
+ *     isCreationAllowed: true,
+ *     isAutoCreation: false,
+ *     isAutoUpdate: true,
  * });
  * ```
  *

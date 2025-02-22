@@ -243,8 +243,8 @@ class MachineKey(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.MachineKey("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            user_id=data["zitadel_machine_user"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            user_id=default_zitadel_machine_user["id"],
             key_type="KEY_TYPE_JSON",
             expiration_date="2519-04-01T08:45:00Z")
         ```
@@ -280,8 +280,8 @@ class MachineKey(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.MachineKey("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            user_id=data["zitadel_machine_user"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            user_id=default_zitadel_machine_user["id"],
             key_type="KEY_TYPE_JSON",
             expiration_date="2519-04-01T08:45:00Z")
         ```

@@ -193,10 +193,10 @@ class DefaultPrivacyPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.DefaultPrivacyPolicy("default",
-            help_link="https://example.com/help",
+            tos_link="https://example.com/tos",
             privacy_link="https://example.com/privacy",
-            support_email="support@example.com",
-            tos_link="https://example.com/tos")
+            help_link="https://example.com/help",
+            support_email="support@example.com")
         ```
 
         ## Import
@@ -226,10 +226,10 @@ class DefaultPrivacyPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.DefaultPrivacyPolicy("default",
-            help_link="https://example.com/help",
+            tos_link="https://example.com/tos",
             privacy_link="https://example.com/privacy",
-            support_email="support@example.com",
-            tos_link="https://example.com/tos")
+            help_link="https://example.com/help",
+            support_email="support@example.com")
         ```
 
         ## Import

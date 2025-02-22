@@ -29,7 +29,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.LookupMachineUser(ctx, &zitadel.LookupMachineUserArgs{
-//				OrgId:  pulumi.StringRef(data.Zitadel_org.Default.Id),
+//				OrgId:  pulumi.StringRef(defaultZitadelOrg.Id),
 //				UserId: "123456789012345678",
 //			}, nil)
 //			if err != nil {

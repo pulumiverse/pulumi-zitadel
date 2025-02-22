@@ -375,17 +375,18 @@ class IdpGitlab(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.IdpGitlab("default",
+            name="GitLab",
             client_id="15765e...",
             client_secret="*****abcxyz",
-            is_auto_creation=False,
-            is_auto_update=True,
-            is_creation_allowed=True,
-            is_linking_allowed=False,
             scopes=[
                 "openid",
                 "profile",
                 "email",
-            ])
+            ],
+            is_linking_allowed=False,
+            is_creation_allowed=True,
+            is_auto_creation=False,
+            is_auto_update=True)
         ```
 
         ## Import
@@ -423,17 +424,18 @@ class IdpGitlab(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.IdpGitlab("default",
+            name="GitLab",
             client_id="15765e...",
             client_secret="*****abcxyz",
-            is_auto_creation=False,
-            is_auto_update=True,
-            is_creation_allowed=True,
-            is_linking_allowed=False,
             scopes=[
                 "openid",
                 "profile",
                 "email",
-            ])
+            ],
+            is_linking_allowed=False,
+            is_creation_allowed=True,
+            is_auto_creation=False,
+            is_auto_update=True)
         ```
 
         ## Import

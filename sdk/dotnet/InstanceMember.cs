@@ -25,7 +25,7 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.InstanceMember("default", new()
     ///     {
-    ///         UserId = data.Zitadel_human_user.Default.Id,
+    ///         UserId = defaultZitadelHumanUser.Id,
     ///         Roles = new[]
     ///         {
     ///             "IAM_OWNER",

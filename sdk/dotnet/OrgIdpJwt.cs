@@ -25,7 +25,8 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.OrgIdpJwt("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         Name = "jwtidp",
     ///         StylingType = "STYLING_TYPE_UNSPECIFIED",
     ///         JwtEndpoint = "https://jwtendpoint.com/jwt",
     ///         Issuer = "https://google.com",

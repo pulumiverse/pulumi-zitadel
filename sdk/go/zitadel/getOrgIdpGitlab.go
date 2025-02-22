@@ -29,7 +29,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.LookupOrgIdpGitlab(ctx, &zitadel.LookupOrgIdpGitlabArgs{
-//				OrgId: pulumi.StringRef(data.Zitadel_org.Default.Id),
+//				OrgId: pulumi.StringRef(defaultZitadelOrg.Id),
 //				Id:    "123456789012345678",
 //			}, nil)
 //			if err != nil {

@@ -29,7 +29,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_default, err := zitadel.LookupTriggerActions(ctx, &zitadel.LookupTriggerActionsArgs{
-//				OrgId:       pulumi.StringRef(data.Zitadel_org.Default.Id),
+//				OrgId:       pulumi.StringRef(defaultZitadelOrg.Id),
 //				FlowType:    "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
 //				TriggerType: "TRIGGER_TYPE_POST_AUTHENTICATION",
 //			}, nil)

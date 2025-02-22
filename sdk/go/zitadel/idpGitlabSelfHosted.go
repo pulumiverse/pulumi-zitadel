@@ -30,18 +30,19 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewIdpGitlabSelfHosted(ctx, "default", &zitadel.IdpGitlabSelfHostedArgs{
-//				ClientId:          pulumi.String("15765e..."),
-//				ClientSecret:      pulumi.String("*****abcxyz"),
-//				IsAutoCreation:    pulumi.Bool(false),
-//				IsAutoUpdate:      pulumi.Bool(true),
-//				IsCreationAllowed: pulumi.Bool(true),
-//				IsLinkingAllowed:  pulumi.Bool(false),
-//				Issuer:            pulumi.String("https://my.issuer"),
+//				Name:         pulumi.String("GitLab Self Hosted"),
+//				ClientId:     pulumi.String("15765e..."),
+//				ClientSecret: pulumi.String("*****abcxyz"),
 //				Scopes: pulumi.StringArray{
 //					pulumi.String("openid"),
 //					pulumi.String("profile"),
 //					pulumi.String("email"),
 //				},
+//				Issuer:            pulumi.String("https://my.issuer"),
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err

@@ -14,7 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.OrgIdpJwt("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     name: "jwtidp",
  *     stylingType: "STYLING_TYPE_UNSPECIFIED",
  *     jwtEndpoint: "https://jwtendpoint.com/jwt",
  *     issuer: "https://google.com",

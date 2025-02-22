@@ -29,7 +29,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewProject(ctx, "default", &zitadel.ProjectArgs{
-//				OrgId:                  pulumi.Any(data.Zitadel_org.Default.Id),
+//				Name:                   pulumi.String("projectname"),
+//				OrgId:                  pulumi.Any(defaultZitadelOrg.Id),
 //				ProjectRoleAssertion:   pulumi.Bool(true),
 //				ProjectRoleCheck:       pulumi.Bool(true),
 //				HasProjectCheck:        pulumi.Bool(true),

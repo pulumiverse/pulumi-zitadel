@@ -30,8 +30,9 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewApplicationSaml(ctx, "default", &zitadel.ApplicationSamlArgs{
-//				OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
-//				ProjectId: pulumi.Any(data.Zitadel_project.Default.Id),
+//				OrgId:     pulumi.Any(defaultZitadelOrg.Id),
+//				ProjectId: pulumi.Any(defaultZitadelProject.Id),
+//				Name:      pulumi.String("applicationapi"),
 //				MetadataXml: pulumi.String(`<?xml version="1.0"?>
 //
 // <md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"

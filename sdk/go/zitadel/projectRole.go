@@ -30,8 +30,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewProjectRole(ctx, "default", &zitadel.ProjectRoleArgs{
-//				OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
-//				ProjectId:   pulumi.Any(data.Zitadel_project.Default.Id),
+//				OrgId:       pulumi.Any(defaultZitadelOrg.Id),
+//				ProjectId:   pulumi.Any(defaultZitadelProject.Id),
 //				RoleKey:     pulumi.String("super-user"),
 //				DisplayName: pulumi.String("display_name2"),
 //				Group:       pulumi.String("role_group"),

@@ -25,8 +25,8 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.OrgMember("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
-    ///         UserId = data.Zitadel_human_user.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         UserId = defaultZitadelHumanUser.Id,
     ///         Roles = new[]
     ///         {
     ///             "ORG_OWNER",

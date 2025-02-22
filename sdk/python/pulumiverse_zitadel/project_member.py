@@ -218,9 +218,9 @@ class ProjectMember(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ProjectMember("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            project_id=data["zitadel_project"]["default"]["id"],
-            user_id=data["zitadel_human_user"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            project_id=default_zitadel_project["id"],
+            user_id=default_zitadel_human_user["id"],
             roles=["PROJECT_OWNER"])
         ```
 
@@ -255,9 +255,9 @@ class ProjectMember(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ProjectMember("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            project_id=data["zitadel_project"]["default"]["id"],
-            user_id=data["zitadel_human_user"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            project_id=default_zitadel_project["id"],
+            user_id=default_zitadel_human_user["id"],
             roles=["PROJECT_OWNER"])
         ```
 

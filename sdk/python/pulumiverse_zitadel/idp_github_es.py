@@ -495,20 +495,21 @@ class IdpGithubEs(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.IdpGithubEs("default",
-            authorization_endpoint="https://auth.endpoint",
+            name="GitHub Enterprise Server",
             client_id="86a165...",
             client_secret="*****afdbac18",
-            is_auto_creation=False,
-            is_auto_update=True,
-            is_creation_allowed=True,
-            is_linking_allowed=False,
             scopes=[
                 "openid",
                 "profile",
                 "email",
             ],
+            authorization_endpoint="https://auth.endpoint",
             token_endpoint="https://token.endpoint",
-            user_endpoint="https://user.endpoint")
+            user_endpoint="https://user.endpoint",
+            is_linking_allowed=False,
+            is_creation_allowed=True,
+            is_auto_creation=False,
+            is_auto_update=True)
         ```
 
         ## Import
@@ -549,20 +550,21 @@ class IdpGithubEs(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.IdpGithubEs("default",
-            authorization_endpoint="https://auth.endpoint",
+            name="GitHub Enterprise Server",
             client_id="86a165...",
             client_secret="*****afdbac18",
-            is_auto_creation=False,
-            is_auto_update=True,
-            is_creation_allowed=True,
-            is_linking_allowed=False,
             scopes=[
                 "openid",
                 "profile",
                 "email",
             ],
+            authorization_endpoint="https://auth.endpoint",
             token_endpoint="https://token.endpoint",
-            user_endpoint="https://user.endpoint")
+            user_endpoint="https://user.endpoint",
+            is_linking_allowed=False,
+            is_creation_allowed=True,
+            is_auto_creation=False,
+            is_auto_update=True)
         ```
 
         ## Import

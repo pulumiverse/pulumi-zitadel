@@ -375,7 +375,8 @@ class OrgIdpJwt(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpJwt("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="jwtidp",
             styling_type="STYLING_TYPE_UNSPECIFIED",
             jwt_endpoint="https://jwtendpoint.com/jwt",
             issuer="https://google.com",
@@ -419,7 +420,8 @@ class OrgIdpJwt(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpJwt("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="jwtidp",
             styling_type="STYLING_TYPE_UNSPECIFIED",
             jwt_endpoint="https://jwtendpoint.com/jwt",
             issuer="https://google.com",

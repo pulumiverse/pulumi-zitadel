@@ -29,7 +29,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_default, err := zitadel.GetOrgOidcIdp(ctx, &zitadel.GetOrgOidcIdpArgs{
-//				OrgId: pulumi.StringRef(data.Zitadel_org.Default.Id),
+//				OrgId: pulumi.StringRef(defaultZitadelOrg.Id),
 //				Id:    "123456789012345678",
 //			}, nil)
 //			if err != nil {

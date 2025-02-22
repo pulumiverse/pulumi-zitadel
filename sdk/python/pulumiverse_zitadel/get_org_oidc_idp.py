@@ -188,7 +188,7 @@ def get_org_oidc_idp(id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_org_oidc_idp(org_id=data["zitadel_org"]["default"]["id"],
+    default = zitadel.get_org_oidc_idp(org_id=default_zitadel_org["id"],
         id="123456789012345678")
     pulumi.export("orgOidcIdp", default)
     ```
@@ -231,7 +231,7 @@ def get_org_oidc_idp_output(id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_org_oidc_idp(org_id=data["zitadel_org"]["default"]["id"],
+    default = zitadel.get_org_oidc_idp(org_id=default_zitadel_org["id"],
         id="123456789012345678")
     pulumi.export("orgOidcIdp", default)
     ```

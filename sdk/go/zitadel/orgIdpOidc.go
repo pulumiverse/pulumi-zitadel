@@ -30,7 +30,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewOrgIdpOidc(ctx, "default", &zitadel.OrgIdpOidcArgs{
-//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:        pulumi.Any(defaultZitadelOrg.Id),
+//				Name:         pulumi.String("My Generic OIDC IDP"),
 //				ClientId:     pulumi.String("a_client_id"),
 //				ClientSecret: pulumi.String("a_client_secret"),
 //				Scopes: pulumi.StringArray{

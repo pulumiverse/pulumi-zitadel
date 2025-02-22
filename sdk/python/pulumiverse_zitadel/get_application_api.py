@@ -117,8 +117,8 @@ def get_application_api(app_id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_application_api(org_id=data["zitadel_org"]["default"]["id"],
-        project_id=data["zitadel_project"]["default"]["id"],
+    default = zitadel.get_application_api(org_id=default_zitadel_org["id"],
+        project_id=default_zitadel_project["id"],
         app_id="123456789012345678")
     ```
 
@@ -157,8 +157,8 @@ def get_application_api_output(app_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_application_api(org_id=data["zitadel_org"]["default"]["id"],
-        project_id=data["zitadel_project"]["default"]["id"],
+    default = zitadel.get_application_api(org_id=default_zitadel_org["id"],
+        project_id=default_zitadel_project["id"],
         app_id="123456789012345678")
     ```
 

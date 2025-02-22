@@ -14,8 +14,9 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.ApplicationOidc("default", {
- *     projectId: data.zitadel_project["default"].id,
- *     orgId: data.zitadel_org["default"].id,
+ *     projectId: defaultZitadelProject.id,
+ *     orgId: defaultZitadelOrg.id,
+ *     name: "applicationoidc",
  *     redirectUris: ["https://localhost.com"],
  *     responseTypes: ["OIDC_RESPONSE_TYPE_CODE"],
  *     grantTypes: ["OIDC_GRANT_TYPE_AUTHORIZATION_CODE"],

@@ -234,7 +234,7 @@ class PrivacyPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.PrivacyPolicy("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             tos_link="https://example.com/tos",
             privacy_link="https://example.com/privacy",
             help_link="https://example.com/help",
@@ -269,7 +269,7 @@ class PrivacyPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.PrivacyPolicy("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             tos_link="https://example.com/tos",
             privacy_link="https://example.com/privacy",
             help_link="https://example.com/help",

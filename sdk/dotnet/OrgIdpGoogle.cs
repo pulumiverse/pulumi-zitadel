@@ -25,7 +25,8 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.OrgIdpGoogle("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         Name = "Google",
     ///         ClientId = "182902...",
     ///         ClientSecret = "GOCSPX-*****",
     ///         Scopes = new[]

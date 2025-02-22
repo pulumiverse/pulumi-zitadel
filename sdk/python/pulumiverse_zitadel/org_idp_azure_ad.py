@@ -538,7 +538,8 @@ class OrgIdpAzureAd(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpAzureAd("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="Azure AD",
             client_id="9065bfc8-a08a...",
             client_secret="H2n***",
             scopes=[
@@ -594,7 +595,8 @@ class OrgIdpAzureAd(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpAzureAd("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="Azure AD",
             client_id="9065bfc8-a08a...",
             client_secret="H2n***",
             scopes=[

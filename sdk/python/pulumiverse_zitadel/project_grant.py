@@ -223,9 +223,9 @@ class ProjectGrant(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ProjectGrant("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            project_id=data["zitadel_project"]["default"]["id"],
-            granted_org_id=data["zitadel_org"]["granted_org"]["id"],
+            org_id=default_zitadel_org["id"],
+            project_id=default_zitadel_project["id"],
+            granted_org_id=granted_org["id"],
             role_keys=["super-user"])
         ```
 
@@ -260,9 +260,9 @@ class ProjectGrant(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ProjectGrant("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            project_id=data["zitadel_project"]["default"]["id"],
-            granted_org_id=data["zitadel_org"]["granted_org"]["id"],
+            org_id=default_zitadel_org["id"],
+            project_id=default_zitadel_project["id"],
+            granted_org_id=granted_org["id"],
             role_keys=["super-user"])
         ```
 

@@ -1184,7 +1184,8 @@ class OrgIdpLdap(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpLdap("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="LDAP",
             servers=[
                 "ldaps://my.primary.server:389",
                 "ldaps://my.secondary.server:389",
@@ -1264,7 +1265,8 @@ class OrgIdpLdap(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpLdap("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="LDAP",
             servers=[
                 "ldaps://my.primary.server:389",
                 "ldaps://my.secondary.server:389",

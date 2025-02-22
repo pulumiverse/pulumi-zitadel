@@ -30,7 +30,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewAction(ctx, "default", &zitadel.ActionArgs{
-//				OrgId:         pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:         pulumi.Any(defaultZitadelOrg.Id),
+//				Name:          pulumi.String("actionname"),
 //				Script:        pulumi.String("testscript"),
 //				Timeout:       pulumi.String("10s"),
 //				AllowedToFail: pulumi.Bool(true),
