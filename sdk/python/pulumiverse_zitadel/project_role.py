@@ -259,8 +259,8 @@ class ProjectRole(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ProjectRole("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            project_id=data["zitadel_project"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            project_id=default_zitadel_project["id"],
             role_key="super-user",
             display_name="display_name2",
             group="role_group")
@@ -298,8 +298,8 @@ class ProjectRole(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ProjectRole("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            project_id=data["zitadel_project"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            project_id=default_zitadel_project["id"],
             role_key="super-user",
             display_name="display_name2",
             group="role_group")

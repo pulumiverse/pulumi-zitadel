@@ -25,13 +25,13 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.SmtpConfig("default", new()
     ///     {
-    ///         Host = "localhost:25",
-    ///         Password = "secret_password",
-    ///         ReplyToAddress = "replyto@example.com",
     ///         SenderAddress = "sender@example.com",
     ///         SenderName = "no-reply",
     ///         Tls = true,
+    ///         Host = "localhost:25",
     ///         User = "user",
+    ///         Password = "secret_password",
+    ///         ReplyToAddress = "replyto@example.com",
     ///     });
     /// 
     /// });

@@ -30,8 +30,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewOrgMember(ctx, "default", &zitadel.OrgMemberArgs{
-//				OrgId:  pulumi.Any(data.Zitadel_org.Default.Id),
-//				UserId: pulumi.Any(data.Zitadel_human_user.Default.Id),
+//				OrgId:  pulumi.Any(defaultZitadelOrg.Id),
+//				UserId: pulumi.Any(defaultZitadelHumanUser.Id),
 //				Roles: pulumi.StringArray{
 //					pulumi.String("ORG_OWNER"),
 //				},

@@ -30,9 +30,9 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewProjectGrant(ctx, "default", &zitadel.ProjectGrantArgs{
-//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
-//				ProjectId:    pulumi.Any(data.Zitadel_project.Default.Id),
-//				GrantedOrgId: pulumi.Any(data.Zitadel_org.Granted_org.Id),
+//				OrgId:        pulumi.Any(defaultZitadelOrg.Id),
+//				ProjectId:    pulumi.Any(defaultZitadelProject.Id),
+//				GrantedOrgId: pulumi.Any(grantedOrg.Id),
 //				RoleKeys: pulumi.StringArray{
 //					pulumi.String("super-user"),
 //				},

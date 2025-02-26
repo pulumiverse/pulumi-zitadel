@@ -14,8 +14,9 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.MachineUser("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     userName: "machine@example.com",
+ *     name: "name",
  *     description: "a machine user",
  *     withSecret: false,
  * });

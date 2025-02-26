@@ -14,7 +14,7 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getProject({
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     projectId: "123456789012345678",
  * });
  * ```
@@ -93,7 +93,7 @@ export interface GetProjectResult {
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getProject({
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     projectId: "123456789012345678",
  * });
  * ```

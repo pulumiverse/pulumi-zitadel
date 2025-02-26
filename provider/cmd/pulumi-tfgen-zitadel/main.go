@@ -16,6 +16,7 @@ package main
 
 import (
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
+
 	zitadel "github.com/pulumiverse/pulumi-zitadel/provider"
 	"github.com/pulumiverse/pulumi-zitadel/provider/pkg/version"
 )

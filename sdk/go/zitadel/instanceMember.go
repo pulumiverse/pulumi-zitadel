@@ -30,7 +30,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewInstanceMember(ctx, "default", &zitadel.InstanceMemberArgs{
-//				UserId: pulumi.Any(data.Zitadel_human_user.Default.Id),
+//				UserId: pulumi.Any(defaultZitadelHumanUser.Id),
 //				Roles: pulumi.StringArray{
 //					pulumi.String("IAM_OWNER"),
 //				},

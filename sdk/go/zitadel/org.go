@@ -28,7 +28,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := zitadel.NewOrg(ctx, "default", nil)
+//			_, err := zitadel.NewOrg(ctx, "default", &zitadel.OrgArgs{
+//				Name: pulumi.String("terraform-test"),
+//			})
 //			if err != nil {
 //				return err
 //			}

@@ -30,7 +30,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewOrgIdpGitlab(ctx, "default", &zitadel.OrgIdpGitlabArgs{
-//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:        pulumi.Any(defaultZitadelOrg.Id),
+//				Name:         pulumi.String("GitLab"),
 //				ClientId:     pulumi.String("15765e..."),
 //				ClientSecret: pulumi.String("*****abcxyz"),
 //				Scopes: pulumi.StringArray{

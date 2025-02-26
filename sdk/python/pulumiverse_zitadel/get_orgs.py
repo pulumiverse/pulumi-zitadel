@@ -137,6 +137,27 @@ def get_orgs(domain: Optional[str] = None,
     """
     Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
 
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_zitadel as zitadel
+
+
+    def not_implemented(msg):
+        raise NotImplementedError(msg)
+
+    default = zitadel.get_orgs(name="example-name",
+        name_method="TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE",
+        domain="example.com",
+        domain_method="TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE",
+        state="ORG_STATE_ACTIVE")
+    default_get_org = {__key: zitadel.get_org(id=__value) for __key, __value in not_implemented("toset(data.zitadel_orgs.default.ids)")}
+    pulumi.export("orgNames", not_implemented(\"\"\"toset([
+    fororgindata.zitadel_org.default:org.name
+    ])\"\"\"))
+    ```
+
 
     :param str domain: A domain of the org.
     :param str domain_method: Method for querying orgs by domain, supported values: TEXT*QUERY*METHOD*EQUALS, TEXT*QUERY*METHOD*EQUALS*IGNORE*CASE, TEXT*QUERY*METHOD*STARTS*WITH, TEXT*QUERY*METHOD*STARTS*WITH*IGNORE*CASE, TEXT*QUERY*METHOD*CONTAINS, TEXT*QUERY*METHOD*CONTAINS*IGNORE*CASE, TEXT*QUERY*METHOD*ENDS*WITH, TEXT*QUERY*METHOD*ENDS*WITH*IGNORE*CASE
@@ -173,6 +194,27 @@ def get_orgs_output(domain: Optional[pulumi.Input[Optional[str]]] = None,
                     opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetOrgsResult]:
     """
     Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_zitadel as zitadel
+
+
+    def not_implemented(msg):
+        raise NotImplementedError(msg)
+
+    default = zitadel.get_orgs(name="example-name",
+        name_method="TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE",
+        domain="example.com",
+        domain_method="TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE",
+        state="ORG_STATE_ACTIVE")
+    default_get_org = {__key: zitadel.get_org(id=__value) for __key, __value in not_implemented("toset(data.zitadel_orgs.default.ids)")}
+    pulumi.export("orgNames", not_implemented(\"\"\"toset([
+    fororgindata.zitadel_org.default:org.name
+    ])\"\"\"))
+    ```
 
 
     :param str domain: A domain of the org.

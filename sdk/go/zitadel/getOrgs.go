@@ -13,6 +13,42 @@ import (
 )
 
 // Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-zitadel/sdk/go/zitadel"
+//
+// )
+//
+//	func notImplemented(message string) pulumi.AnyOutput {
+//		panic(message)
+//	}
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := zitadel.GetOrgs(ctx, &zitadel.GetOrgsArgs{
+//				Name:         pulumi.StringRef("example-name"),
+//				NameMethod:   pulumi.StringRef("TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE"),
+//				Domain:       pulumi.StringRef("example.com"),
+//				DomainMethod: pulumi.StringRef("TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE"),
+//				State:        pulumi.StringRef("ORG_STATE_ACTIVE"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_ := "TODO: For expression"
+//			ctx.Export("orgNames", notImplemented("toset([\nfororgindata.zitadel_org.default:org.name\n])"))
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetOrgs(ctx *pulumi.Context, args *GetOrgsArgs, opts ...pulumi.InvokeOption) (*GetOrgsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOrgsResult

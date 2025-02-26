@@ -14,9 +14,9 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.ProjectGrant("default", {
- *     orgId: data.zitadel_org["default"].id,
- *     projectId: data.zitadel_project["default"].id,
- *     grantedOrgId: data.zitadel_org.granted_org.id,
+ *     orgId: defaultZitadelOrg.id,
+ *     projectId: defaultZitadelProject.id,
+ *     grantedOrgId: grantedOrg.id,
  *     roleKeys: ["super-user"],
  * });
  * ```

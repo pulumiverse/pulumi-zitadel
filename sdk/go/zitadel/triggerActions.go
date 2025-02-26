@@ -30,11 +30,11 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewTriggerActions(ctx, "default", &zitadel.TriggerActionsArgs{
-//				OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:       pulumi.Any(defaultZitadelOrg.Id),
 //				FlowType:    pulumi.String("FLOW_TYPE_CUSTOMISE_TOKEN"),
 //				TriggerType: pulumi.String("TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION"),
 //				ActionIds: pulumi.StringArray{
-//					data.Zitadel_action.Default.Id,
+//					defaultZitadelAction.Id,
 //				},
 //			})
 //			if err != nil {

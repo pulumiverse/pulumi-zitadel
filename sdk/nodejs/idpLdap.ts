@@ -14,28 +14,29 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.IdpLdap("default", {
- *     baseDn: "dc=example,dc=com",
- *     bindDn: "cn=admin,dc=example,dc=com",
- *     bindPassword: "Password1!",
- *     firstNameAttribute: "firstname",
- *     idAttribute: "uid",
- *     isAutoCreation: false,
- *     isAutoUpdate: true,
- *     isCreationAllowed: true,
- *     isLinkingAllowed: false,
- *     lastNameAttribute: "lastname",
+ *     name: "LDAP",
  *     servers: [
  *         "ldaps://my.primary.server:389",
  *         "ldaps://my.secondary.server:389",
  *     ],
  *     startTls: false,
- *     timeout: "10s",
+ *     baseDn: "dc=example,dc=com",
+ *     bindDn: "cn=admin,dc=example,dc=com",
+ *     bindPassword: "Password1!",
  *     userBase: "dn",
+ *     userObjectClasses: ["inetOrgPerson"],
  *     userFilters: [
  *         "uid",
  *         "email",
  *     ],
- *     userObjectClasses: ["inetOrgPerson"],
+ *     timeout: "10s",
+ *     idAttribute: "uid",
+ *     firstNameAttribute: "firstname",
+ *     lastNameAttribute: "lastname",
+ *     isLinkingAllowed: false,
+ *     isCreationAllowed: true,
+ *     isAutoCreation: false,
+ *     isAutoUpdate: true,
  * });
  * ```
  *

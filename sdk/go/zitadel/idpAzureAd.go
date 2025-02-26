@@ -30,20 +30,21 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewIdpAzureAd(ctx, "default", &zitadel.IdpAzureAdArgs{
-//				ClientId:          pulumi.String("9065bfc8-a08a..."),
-//				ClientSecret:      pulumi.String("H2n***"),
-//				EmailVerified:     pulumi.Bool(true),
-//				IsAutoCreation:    pulumi.Bool(false),
-//				IsAutoUpdate:      pulumi.Bool(true),
-//				IsCreationAllowed: pulumi.Bool(true),
-//				IsLinkingAllowed:  pulumi.Bool(false),
+//				Name:         pulumi.String("Azure AD"),
+//				ClientId:     pulumi.String("9065bfc8-a08a..."),
+//				ClientSecret: pulumi.String("H2n***"),
 //				Scopes: pulumi.StringArray{
 //					pulumi.String("openid"),
 //					pulumi.String("profile"),
 //					pulumi.String("email"),
 //					pulumi.String("User.Read"),
 //				},
-//				TenantType: pulumi.String("AZURE_AD_TENANT_TYPE_ORGANISATIONS"),
+//				TenantType:        pulumi.String("AZURE_AD_TENANT_TYPE_ORGANISATIONS"),
+//				EmailVerified:     pulumi.Bool(true),
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err

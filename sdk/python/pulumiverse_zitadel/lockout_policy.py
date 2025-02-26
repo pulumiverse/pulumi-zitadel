@@ -142,7 +142,7 @@ class LockoutPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.LockoutPolicy("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             max_password_attempts=5)
         ```
 
@@ -175,7 +175,7 @@ class LockoutPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.LockoutPolicy("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             max_password_attempts=5)
         ```
 

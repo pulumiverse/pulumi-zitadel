@@ -30,13 +30,13 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewSmtpConfig(ctx, "default", &zitadel.SmtpConfigArgs{
-//				Host:           pulumi.String("localhost:25"),
-//				Password:       pulumi.String("secret_password"),
-//				ReplyToAddress: pulumi.String("replyto@example.com"),
 //				SenderAddress:  pulumi.String("sender@example.com"),
 //				SenderName:     pulumi.String("no-reply"),
 //				Tls:            pulumi.Bool(true),
+//				Host:           pulumi.String("localhost:25"),
 //				User:           pulumi.String("user"),
+//				Password:       pulumi.String("secret_password"),
+//				ReplyToAddress: pulumi.String("replyto@example.com"),
 //			})
 //			if err != nil {
 //				return err

@@ -30,7 +30,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewNotificationPolicy(ctx, "default", &zitadel.NotificationPolicyArgs{
-//				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:          pulumi.Any(defaultZitadelOrg.Id),
 //				PasswordChange: pulumi.Bool(false),
 //			})
 //			if err != nil {

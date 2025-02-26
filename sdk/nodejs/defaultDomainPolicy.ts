@@ -14,9 +14,9 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.DefaultDomainPolicy("default", {
- *     smtpSenderAddressMatchesInstanceDomain: true,
  *     userLoginMustBeDomain: false,
  *     validateOrgDomains: true,
+ *     smtpSenderAddressMatchesInstanceDomain: true,
  * });
  * ```
  *

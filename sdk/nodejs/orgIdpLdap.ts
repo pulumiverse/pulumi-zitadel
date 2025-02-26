@@ -14,7 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.OrgIdpLdap("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     name: "LDAP",
  *     servers: [
  *         "ldaps://my.primary.server:389",
  *         "ldaps://my.secondary.server:389",

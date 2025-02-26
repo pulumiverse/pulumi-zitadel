@@ -329,13 +329,13 @@ class SmtpConfig(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.SmtpConfig("default",
-            host="localhost:25",
-            password="secret_password",
-            reply_to_address="replyto@example.com",
             sender_address="sender@example.com",
             sender_name="no-reply",
             tls=True,
-            user="user")
+            host="localhost:25",
+            user="user",
+            password="secret_password",
+            reply_to_address="replyto@example.com")
         ```
 
         ## Import
@@ -372,13 +372,13 @@ class SmtpConfig(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.SmtpConfig("default",
-            host="localhost:25",
-            password="secret_password",
-            reply_to_address="replyto@example.com",
             sender_address="sender@example.com",
             sender_name="no-reply",
             tls=True,
-            user="user")
+            host="localhost:25",
+            user="user",
+            password="secret_password",
+            reply_to_address="replyto@example.com")
         ```
 
         ## Import

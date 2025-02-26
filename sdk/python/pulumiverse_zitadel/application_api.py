@@ -260,8 +260,9 @@ class ApplicationApi(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ApplicationApi("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            project_id=data["zitadel_project"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            project_id=default_zitadel_project["id"],
+            name="applicationapi",
             auth_method_type="API_AUTH_METHOD_TYPE_BASIC")
         ```
 
@@ -296,8 +297,9 @@ class ApplicationApi(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ApplicationApi("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            project_id=data["zitadel_project"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            project_id=default_zitadel_project["id"],
+            name="applicationapi",
             auth_method_type="API_AUTH_METHOD_TYPE_BASIC")
         ```
 

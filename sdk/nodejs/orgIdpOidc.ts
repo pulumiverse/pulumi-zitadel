@@ -14,7 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.OrgIdpOidc("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     name: "My Generic OIDC IDP",
  *     clientId: "a_client_id",
  *     clientSecret: "a_client_secret",
  *     scopes: [

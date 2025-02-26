@@ -29,7 +29,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewPrivacyPolicy(ctx, "default", &zitadel.PrivacyPolicyArgs{
-//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:        pulumi.Any(defaultZitadelOrg.Id),
 //				TosLink:      pulumi.String("https://example.com/tos"),
 //				PrivacyLink:  pulumi.String("https://example.com/privacy"),
 //				HelpLink:     pulumi.String("https://example.com/help"),

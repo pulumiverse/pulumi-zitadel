@@ -25,11 +25,11 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.DefaultPasswordComplexityPolicy("default", new()
     ///     {
+    ///         MinLength = 8,
+    ///         HasUppercase = true,
     ///         HasLowercase = true,
     ///         HasNumber = true,
     ///         HasSymbol = true,
-    ///         HasUppercase = true,
-    ///         MinLength = 8,
     ///     });
     /// 
     /// });

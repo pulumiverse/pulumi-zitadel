@@ -14,8 +14,9 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.ApplicationSaml("default", {
- *     orgId: data.zitadel_org["default"].id,
- *     projectId: data.zitadel_project["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     projectId: defaultZitadelProject.id,
+ *     name: "applicationapi",
  *     metadataXml: `<?xml version="1.0"?>
  * <md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
  *                      validUntil="2024-01-26T17:48:38Z"

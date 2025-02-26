@@ -29,8 +29,8 @@ namespace Pulumiverse.Zitadel
         /// {
         ///     var @default = Zitadel.GetProjectRole.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Default.Id,
-        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         OrgId = defaultZitadelOrg.Id,
+        ///         ProjectId = defaultZitadelProject.Id,
         ///         RoleKey = "key",
         ///     });
         /// 
@@ -63,8 +63,8 @@ namespace Pulumiverse.Zitadel
         /// {
         ///     var @default = Zitadel.GetProjectRole.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Default.Id,
-        ///         ProjectId = data.Zitadel_project.Default.Id,
+        ///         OrgId = defaultZitadelOrg.Id,
+        ///         ProjectId = defaultZitadelProject.Id,
         ///         RoleKey = "key",
         ///     });
         /// 

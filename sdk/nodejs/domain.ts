@@ -14,7 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.Domain("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     name: "zitadel.default.127.0.0.1.sslip.io",
  *     isPrimary: false,
  * });
  * ```

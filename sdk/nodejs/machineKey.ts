@@ -14,8 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.MachineKey("default", {
- *     orgId: data.zitadel_org["default"].id,
- *     userId: data.zitadel_machine_user["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     userId: defaultZitadelMachineUser.id,
  *     keyType: "KEY_TYPE_JSON",
  *     expirationDate: "2519-04-01T08:45:00Z",
  * });

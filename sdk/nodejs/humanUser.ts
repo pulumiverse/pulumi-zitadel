@@ -16,7 +16,7 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.HumanUser("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     userName: "humanfull@localhost.com",
  *     firstName: "firstname",
  *     lastName: "lastname",

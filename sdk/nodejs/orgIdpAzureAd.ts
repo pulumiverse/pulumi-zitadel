@@ -14,7 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.OrgIdpAzureAd("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     name: "Azure AD",
  *     clientId: "9065bfc8-a08a...",
  *     clientSecret: "H2n***",
  *     scopes: [

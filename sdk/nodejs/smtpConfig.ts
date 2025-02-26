@@ -14,13 +14,13 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.SmtpConfig("default", {
- *     host: "localhost:25",
- *     password: "secret_password",
- *     replyToAddress: "replyto@example.com",
  *     senderAddress: "sender@example.com",
  *     senderName: "no-reply",
  *     tls: true,
+ *     host: "localhost:25",
  *     user: "user",
+ *     password: "secret_password",
+ *     replyToAddress: "replyto@example.com",
  * });
  * ```
  *

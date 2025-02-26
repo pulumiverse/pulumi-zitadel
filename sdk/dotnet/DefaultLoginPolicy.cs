@@ -50,8 +50,8 @@ namespace Pulumiverse.Zitadel
     ///         },
     ///         Idps = new[]
     ///         {
-    ///             data.Zitadel_idp_google.Default.Id,
-    ///             data.Zitadel_idp_azure_ad.Default.Id,
+    ///             defaultZitadelIdpGoogle.Id,
+    ///             defaultZitadelIdpAzureAd.Id,
     ///         },
     ///         AllowDomainDiscovery = true,
     ///         DisableLoginWithEmail = true,

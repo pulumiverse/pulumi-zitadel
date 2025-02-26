@@ -30,7 +30,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewOrgIdpGithub(ctx, "default", &zitadel.OrgIdpGithubArgs{
-//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:        pulumi.Any(defaultZitadelOrg.Id),
+//				Name:         pulumi.String("GitHub"),
 //				ClientId:     pulumi.String("86a165..."),
 //				ClientSecret: pulumi.String("*****afdbac18"),
 //				Scopes: pulumi.StringArray{

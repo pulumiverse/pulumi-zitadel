@@ -30,8 +30,9 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewApplicationOidc(ctx, "default", &zitadel.ApplicationOidcArgs{
-//				ProjectId: pulumi.Any(data.Zitadel_project.Default.Id),
-//				OrgId:     pulumi.Any(data.Zitadel_org.Default.Id),
+//				ProjectId: pulumi.Any(defaultZitadelProject.Id),
+//				OrgId:     pulumi.Any(defaultZitadelOrg.Id),
+//				Name:      pulumi.String("applicationoidc"),
 //				RedirectUris: pulumi.StringArray{
 //					pulumi.String("https://localhost.com"),
 //				},

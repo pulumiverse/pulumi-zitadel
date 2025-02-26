@@ -14,10 +14,10 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.TriggerActions("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     flowType: "FLOW_TYPE_CUSTOMISE_TOKEN",
  *     triggerType: "TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION",
- *     actionIds: [data.zitadel_action["default"].id],
+ *     actionIds: [defaultZitadelAction.id],
  * });
  * ```
  *

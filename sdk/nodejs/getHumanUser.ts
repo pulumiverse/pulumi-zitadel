@@ -14,7 +14,7 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getHumanUser({
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     userId: "123456789012345678",
  * });
  * export const humanUser = _default;
@@ -126,7 +126,7 @@ export interface GetHumanUserResult {
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getHumanUser({
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     userId: "123456789012345678",
  * });
  * export const humanUser = _default;

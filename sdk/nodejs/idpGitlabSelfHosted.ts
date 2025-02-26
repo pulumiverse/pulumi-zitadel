@@ -14,18 +14,19 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.IdpGitlabSelfHosted("default", {
+ *     name: "GitLab Self Hosted",
  *     clientId: "15765e...",
  *     clientSecret: "*****abcxyz",
- *     isAutoCreation: false,
- *     isAutoUpdate: true,
- *     isCreationAllowed: true,
- *     isLinkingAllowed: false,
- *     issuer: "https://my.issuer",
  *     scopes: [
  *         "openid",
  *         "profile",
  *         "email",
  *     ],
+ *     issuer: "https://my.issuer",
+ *     isLinkingAllowed: false,
+ *     isCreationAllowed: true,
+ *     isAutoCreation: false,
+ *     isAutoUpdate: true,
  * });
  * ```
  *

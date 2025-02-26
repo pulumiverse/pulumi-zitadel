@@ -25,8 +25,8 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.ProjectRole("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
-    ///         ProjectId = data.Zitadel_project.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         ProjectId = defaultZitadelProject.Id,
     ///         RoleKey = "super-user",
     ///         DisplayName = "display_name2",
     ///         Group = "role_group",

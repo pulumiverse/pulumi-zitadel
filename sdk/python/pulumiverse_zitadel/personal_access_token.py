@@ -201,8 +201,8 @@ class PersonalAccessToken(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.PersonalAccessToken("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            user_id=data["zitadel_machine_user"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            user_id=default_zitadel_machine_user["id"],
             expiration_date="2519-04-01T08:45:00Z")
         ```
 
@@ -236,8 +236,8 @@ class PersonalAccessToken(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.PersonalAccessToken("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            user_id=data["zitadel_machine_user"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            user_id=default_zitadel_machine_user["id"],
             expiration_date="2519-04-01T08:45:00Z")
         ```
 

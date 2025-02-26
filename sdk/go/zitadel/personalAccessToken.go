@@ -30,8 +30,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewPersonalAccessToken(ctx, "default", &zitadel.PersonalAccessTokenArgs{
-//				OrgId:          pulumi.Any(data.Zitadel_org.Default.Id),
-//				UserId:         pulumi.Any(data.Zitadel_machine_user.Default.Id),
+//				OrgId:          pulumi.Any(defaultZitadelOrg.Id),
+//				UserId:         pulumi.Any(defaultZitadelMachineUser.Id),
 //				ExpirationDate: pulumi.String("2519-04-01T08:45:00Z"),
 //			})
 //			if err != nil {

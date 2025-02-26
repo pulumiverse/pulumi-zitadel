@@ -25,8 +25,8 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.PersonalAccessToken("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
-    ///         UserId = data.Zitadel_machine_user.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         UserId = defaultZitadelMachineUser.Id,
     ///         ExpirationDate = "2519-04-01T08:45:00Z",
     ///     });
     /// 

@@ -25,7 +25,8 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.Domain("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         Name = "zitadel.default.127.0.0.1.sslip.io",
     ///         IsPrimary = false,
     ///     });
     /// 

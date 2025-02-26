@@ -14,12 +14,110 @@ namespace Pulumiverse.Zitadel
     {
         /// <summary>
         /// Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Zitadel = Pulumi.Zitadel;
+        /// 
+        /// 	
+        /// static object NotImplemented(string errorMessage) 
+        /// {
+        ///     throw new System.NotImplementedException(errorMessage);
+        /// }
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var @default = Zitadel.GetOrgs.Invoke(new()
+        ///     {
+        ///         Name = "example-name",
+        ///         NameMethod = "TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE",
+        ///         Domain = "example.com",
+        ///         DomainMethod = "TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE",
+        ///         State = "ORG_STATE_ACTIVE",
+        ///     });
+        /// 
+        ///     var defaultGetOrg = .ToDictionary(item =&gt; {
+        ///         var __key = item.Key;
+        ///         return __key;
+        ///     }, item =&gt; {
+        ///         var __value = item.Value;
+        ///         return Zitadel.GetOrg.Invoke(new()
+        ///         {
+        ///             Id = __value,
+        ///         });
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["orgNames"] = NotImplemented(@"toset([
+        /// fororgindata.zitadel_org.default:org.name
+        /// ])"),
+        ///     };
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
         /// </summary>
         public static Task<GetOrgsResult> InvokeAsync(GetOrgsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgsResult>("zitadel:index/getOrgs:getOrgs", args ?? new GetOrgsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Zitadel = Pulumi.Zitadel;
+        /// 
+        /// 	
+        /// static object NotImplemented(string errorMessage) 
+        /// {
+        ///     throw new System.NotImplementedException(errorMessage);
+        /// }
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var @default = Zitadel.GetOrgs.Invoke(new()
+        ///     {
+        ///         Name = "example-name",
+        ///         NameMethod = "TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE",
+        ///         Domain = "example.com",
+        ///         DomainMethod = "TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE",
+        ///         State = "ORG_STATE_ACTIVE",
+        ///     });
+        /// 
+        ///     var defaultGetOrg = .ToDictionary(item =&gt; {
+        ///         var __key = item.Key;
+        ///         return __key;
+        ///     }, item =&gt; {
+        ///         var __value = item.Value;
+        ///         return Zitadel.GetOrg.Invoke(new()
+        ///         {
+        ///             Id = __value,
+        ///         });
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["orgNames"] = NotImplemented(@"toset([
+        /// fororgindata.zitadel_org.default:org.name
+        /// ])"),
+        ///     };
+        /// });
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
         /// </summary>
         public static Output<GetOrgsResult> Invoke(GetOrgsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrgsResult>("zitadel:index/getOrgs:getOrgs", args ?? new GetOrgsInvokeArgs(), options.WithDefaults());

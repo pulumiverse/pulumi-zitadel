@@ -843,8 +843,8 @@ class DefaultLoginPolicy(pulumi.CustomResource):
             ],
             multi_factors=["MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"],
             idps=[
-                data["zitadel_idp_google"]["default"]["id"],
-                data["zitadel_idp_azure_ad"]["default"]["id"],
+                default_zitadel_idp_google["id"],
+                default_zitadel_idp_azure_ad["id"],
             ],
             allow_domain_discovery=True,
             disable_login_with_email=True,
@@ -913,8 +913,8 @@ class DefaultLoginPolicy(pulumi.CustomResource):
             ],
             multi_factors=["MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"],
             idps=[
-                data["zitadel_idp_google"]["default"]["id"],
-                data["zitadel_idp_azure_ad"]["default"]["id"],
+                default_zitadel_idp_google["id"],
+                default_zitadel_idp_azure_ad["id"],
             ],
             allow_domain_discovery=True,
             disable_login_with_email=True,

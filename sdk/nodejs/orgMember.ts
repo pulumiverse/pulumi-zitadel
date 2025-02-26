@@ -14,8 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.OrgMember("default", {
- *     orgId: data.zitadel_org["default"].id,
- *     userId: data.zitadel_human_user["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     userId: defaultZitadelHumanUser.id,
  *     roles: ["ORG_OWNER"],
  * });
  * ```

@@ -214,7 +214,7 @@ class DomainPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.DomainPolicy("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             user_login_must_be_domain=False,
             validate_org_domains=True,
             smtp_sender_address_matches_instance_domain=True)
@@ -250,7 +250,7 @@ class DomainPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.DomainPolicy("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             user_login_must_be_domain=False,
             validate_org_domains=True,
             smtp_sender_address_matches_instance_domain=True)

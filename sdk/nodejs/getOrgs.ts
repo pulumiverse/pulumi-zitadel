@@ -6,6 +6,31 @@ import * as utilities from "./utilities";
 
 /**
  * Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * function notImplemented(message: string) {
+ *     throw new Error(message);
+ * }
+ *
+ * const default = zitadel.getOrgs({
+ *     name: "example-name",
+ *     nameMethod: "TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE",
+ *     domain: "example.com",
+ *     domainMethod: "TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE",
+ *     state: "ORG_STATE_ACTIVE",
+ * });
+ * const defaultGetOrg = .reduce((__obj, [, ]) => ({ ...__obj, [__key]: zitadel.getOrg({
+ *     id: __value,
+ * }) }));
+ * export const orgNames = notImplemented(`toset([
+ * fororgindata.zitadel_org.default:org.name
+ * ])`);
+ * ```
  */
 export function getOrgs(args?: GetOrgsArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgsResult> {
     args = args || {};
@@ -85,6 +110,31 @@ export interface GetOrgsResult {
 }
 /**
  * Datasource representing an organization in ZITADEL, which is the highest level after the instance and contains several other resource including policies if the configuration differs to the default policies on the instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as zitadel from "@pulumi/zitadel";
+ *
+ * function notImplemented(message: string) {
+ *     throw new Error(message);
+ * }
+ *
+ * const default = zitadel.getOrgs({
+ *     name: "example-name",
+ *     nameMethod: "TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE",
+ *     domain: "example.com",
+ *     domainMethod: "TEXT_QUERY_METHOD_CONTAINS_IGNORE_CASE",
+ *     state: "ORG_STATE_ACTIVE",
+ * });
+ * const defaultGetOrg = .reduce((__obj, [, ]) => ({ ...__obj, [__key]: zitadel.getOrg({
+ *     id: __value,
+ * }) }));
+ * export const orgNames = notImplemented(`toset([
+ * fororgindata.zitadel_org.default:org.name
+ * ])`);
+ * ```
  */
 export function getOrgsOutput(args?: GetOrgsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOrgsResult> {
     return pulumi.output(args).apply((a: any) => getOrgs(a, opts))

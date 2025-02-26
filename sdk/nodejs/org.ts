@@ -13,7 +13,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
- * const _default = new zitadel.Org("default", {});
+ * const _default = new zitadel.Org("default", {name: "terraform-test"});
  * ```
  *
  * ## Import

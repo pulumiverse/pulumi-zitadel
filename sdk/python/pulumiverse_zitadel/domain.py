@@ -220,7 +220,8 @@ class Domain(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.Domain("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="zitadel.default.127.0.0.1.sslip.io",
             is_primary=False)
         ```
 
@@ -254,7 +255,8 @@ class Domain(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.Domain("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="zitadel.default.127.0.0.1.sslip.io",
             is_primary=False)
         ```
 

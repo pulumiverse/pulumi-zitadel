@@ -25,19 +25,20 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.IdpGitlabSelfHosted("default", new()
     ///     {
+    ///         Name = "GitLab Self Hosted",
     ///         ClientId = "15765e...",
     ///         ClientSecret = "*****abcxyz",
-    ///         IsAutoCreation = false,
-    ///         IsAutoUpdate = true,
-    ///         IsCreationAllowed = true,
-    ///         IsLinkingAllowed = false,
-    ///         Issuer = "https://my.issuer",
     ///         Scopes = new[]
     ///         {
     ///             "openid",
     ///             "profile",
     ///             "email",
     ///         },
+    ///         Issuer = "https://my.issuer",
+    ///         IsLinkingAllowed = false,
+    ///         IsCreationAllowed = true,
+    ///         IsAutoCreation = false,
+    ///         IsAutoUpdate = true,
     ///     });
     /// 
     /// });

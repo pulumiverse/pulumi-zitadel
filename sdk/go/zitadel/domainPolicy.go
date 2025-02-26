@@ -30,7 +30,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewDomainPolicy(ctx, "default", &zitadel.DomainPolicyArgs{
-//				OrgId:                                  pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:                                  pulumi.Any(defaultZitadelOrg.Id),
 //				UserLoginMustBeDomain:                  pulumi.Bool(false),
 //				ValidateOrgDomains:                     pulumi.Bool(true),
 //				SmtpSenderAddressMatchesInstanceDomain: pulumi.Bool(true),

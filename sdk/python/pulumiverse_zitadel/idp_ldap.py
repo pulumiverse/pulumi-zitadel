@@ -1143,28 +1143,29 @@ class IdpLdap(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.IdpLdap("default",
-            base_dn="dc=example,dc=com",
-            bind_dn="cn=admin,dc=example,dc=com",
-            bind_password="Password1!",
-            first_name_attribute="firstname",
-            id_attribute="uid",
-            is_auto_creation=False,
-            is_auto_update=True,
-            is_creation_allowed=True,
-            is_linking_allowed=False,
-            last_name_attribute="lastname",
+            name="LDAP",
             servers=[
                 "ldaps://my.primary.server:389",
                 "ldaps://my.secondary.server:389",
             ],
             start_tls=False,
-            timeout="10s",
+            base_dn="dc=example,dc=com",
+            bind_dn="cn=admin,dc=example,dc=com",
+            bind_password="Password1!",
             user_base="dn",
+            user_object_classes=["inetOrgPerson"],
             user_filters=[
                 "uid",
                 "email",
             ],
-            user_object_classes=["inetOrgPerson"])
+            timeout="10s",
+            id_attribute="uid",
+            first_name_attribute="firstname",
+            last_name_attribute="lastname",
+            is_linking_allowed=False,
+            is_creation_allowed=True,
+            is_auto_creation=False,
+            is_auto_update=True)
         ```
 
         ## Import
@@ -1221,28 +1222,29 @@ class IdpLdap(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.IdpLdap("default",
-            base_dn="dc=example,dc=com",
-            bind_dn="cn=admin,dc=example,dc=com",
-            bind_password="Password1!",
-            first_name_attribute="firstname",
-            id_attribute="uid",
-            is_auto_creation=False,
-            is_auto_update=True,
-            is_creation_allowed=True,
-            is_linking_allowed=False,
-            last_name_attribute="lastname",
+            name="LDAP",
             servers=[
                 "ldaps://my.primary.server:389",
                 "ldaps://my.secondary.server:389",
             ],
             start_tls=False,
-            timeout="10s",
+            base_dn="dc=example,dc=com",
+            bind_dn="cn=admin,dc=example,dc=com",
+            bind_password="Password1!",
             user_base="dn",
+            user_object_classes=["inetOrgPerson"],
             user_filters=[
                 "uid",
                 "email",
             ],
-            user_object_classes=["inetOrgPerson"])
+            timeout="10s",
+            id_attribute="uid",
+            first_name_attribute="firstname",
+            last_name_attribute="lastname",
+            is_linking_allowed=False,
+            is_creation_allowed=True,
+            is_auto_creation=False,
+            is_auto_update=True)
         ```
 
         ## Import

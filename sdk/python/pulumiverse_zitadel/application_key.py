@@ -282,9 +282,9 @@ class ApplicationKey(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ApplicationKey("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            project_id=data["zitadel_project"]["default"]["id"],
-            app_id=data["zitadel_application_api"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            project_id=default_zitadel_project["id"],
+            app_id=default_zitadel_application_api["id"],
             key_type="KEY_TYPE_JSON",
             expiration_date="2519-04-01T08:45:00Z")
         ```
@@ -321,9 +321,9 @@ class ApplicationKey(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ApplicationKey("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            project_id=data["zitadel_project"]["default"]["id"],
-            app_id=data["zitadel_application_api"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            project_id=default_zitadel_project["id"],
+            app_id=default_zitadel_application_api["id"],
             key_type="KEY_TYPE_JSON",
             expiration_date="2519-04-01T08:45:00Z")
         ```

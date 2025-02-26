@@ -14,10 +14,10 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.DefaultPrivacyPolicy("default", {
- *     helpLink: "https://example.com/help",
- *     privacyLink: "https://example.com/privacy",
- *     supportEmail: "support@example.com",
  *     tosLink: "https://example.com/tos",
+ *     privacyLink: "https://example.com/privacy",
+ *     helpLink: "https://example.com/help",
+ *     supportEmail: "support@example.com",
  * });
  * ```
  *

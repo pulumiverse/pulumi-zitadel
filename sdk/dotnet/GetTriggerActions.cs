@@ -29,7 +29,7 @@ namespace Pulumiverse.Zitadel
         /// {
         ///     var @default = Zitadel.GetTriggerActions.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         OrgId = defaultZitadelOrg.Id,
         ///         FlowType = "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
         ///         TriggerType = "TRIGGER_TYPE_POST_AUTHENTICATION",
         ///     });
@@ -63,7 +63,7 @@ namespace Pulumiverse.Zitadel
         /// {
         ///     var @default = Zitadel.GetTriggerActions.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         OrgId = defaultZitadelOrg.Id,
         ///         FlowType = "FLOW_TYPE_EXTERNAL_AUTHENTICATION",
         ///         TriggerType = "TRIGGER_TYPE_POST_AUTHENTICATION",
         ///     });

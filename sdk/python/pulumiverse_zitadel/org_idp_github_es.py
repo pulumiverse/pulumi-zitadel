@@ -536,7 +536,8 @@ class OrgIdpGithubEs(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpGithubEs("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="GitHub Enterprise Server",
             client_id="86a165...",
             client_secret="*****afdbac18",
             scopes=[
@@ -592,7 +593,8 @@ class OrgIdpGithubEs(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpGithubEs("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="GitHub Enterprise Server",
             client_id="86a165...",
             client_secret="*****afdbac18",
             scopes=[

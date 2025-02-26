@@ -30,7 +30,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewLockoutPolicy(ctx, "default", &zitadel.LockoutPolicyArgs{
-//				OrgId:               pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:               pulumi.Any(defaultZitadelOrg.Id),
 //				MaxPasswordAttempts: pulumi.Int(5),
 //			})
 //			if err != nil {

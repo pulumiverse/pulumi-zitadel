@@ -14,10 +14,10 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.UserGrant("default", {
- *     projectId: data.zitadel_project["default"].id,
- *     orgId: data.zitadel_org["default"].id,
+ *     projectId: defaultZitadelProject.id,
+ *     orgId: defaultZitadelOrg.id,
  *     roleKeys: ["super-user"],
- *     userId: data.zitadel_human_user["default"].id,
+ *     userId: defaultZitadelHumanUser.id,
  * });
  * ```
  *

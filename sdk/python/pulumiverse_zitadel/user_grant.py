@@ -265,10 +265,10 @@ class UserGrant(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.UserGrant("default",
-            project_id=data["zitadel_project"]["default"]["id"],
-            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=default_zitadel_project["id"],
+            org_id=default_zitadel_org["id"],
             role_keys=["super-user"],
-            user_id=data["zitadel_human_user"]["default"]["id"])
+            user_id=default_zitadel_human_user["id"])
         ```
 
         ## Import
@@ -303,10 +303,10 @@ class UserGrant(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.UserGrant("default",
-            project_id=data["zitadel_project"]["default"]["id"],
-            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=default_zitadel_project["id"],
+            org_id=default_zitadel_org["id"],
             role_keys=["super-user"],
-            user_id=data["zitadel_human_user"]["default"]["id"])
+            user_id=default_zitadel_human_user["id"])
         ```
 
         ## Import

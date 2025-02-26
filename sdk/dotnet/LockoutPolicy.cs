@@ -25,7 +25,7 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.LockoutPolicy("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
     ///         MaxPasswordAttempts = 5,
     ///     });
     /// 

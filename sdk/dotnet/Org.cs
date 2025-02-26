@@ -23,7 +23,10 @@ namespace Pulumiverse.Zitadel
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var @default = new Zitadel.Org("default");
+    ///     var @default = new Zitadel.Org("default", new()
+    ///     {
+    ///         Name = "terraform-test",
+    ///     });
     /// 
     /// });
     /// ```

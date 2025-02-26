@@ -302,7 +302,7 @@ class PasswordComplexityPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.PasswordComplexityPolicy("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             min_length=8,
             has_uppercase=True,
             has_lowercase=True,
@@ -335,7 +335,7 @@ class PasswordComplexityPolicy(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.PasswordComplexityPolicy("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             min_length=8,
             has_uppercase=True,
             has_lowercase=True,

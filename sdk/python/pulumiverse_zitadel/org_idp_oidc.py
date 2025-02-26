@@ -492,7 +492,8 @@ class OrgIdpOidc(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpOidc("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="My Generic OIDC IDP",
             client_id="a_client_id",
             client_secret="a_client_secret",
             scopes=[
@@ -546,7 +547,8 @@ class OrgIdpOidc(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgIdpOidc("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            name="My Generic OIDC IDP",
             client_id="a_client_id",
             client_secret="a_client_secret",
             scopes=[

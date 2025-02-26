@@ -25,7 +25,8 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.OrgIdpOidc("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         Name = "My Generic OIDC IDP",
     ///         ClientId = "a_client_id",
     ///         ClientSecret = "a_client_secret",
     ///         Scopes = new[]

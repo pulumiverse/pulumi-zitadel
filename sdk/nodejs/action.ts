@@ -14,7 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.Action("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     name: "actionname",
  *     script: "testscript",
  *     timeout: "10s",
  *     allowedToFail: true,

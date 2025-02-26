@@ -14,17 +14,18 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.IdpGithub("default", {
+ *     name: "GitHub",
  *     clientId: "86a165...",
  *     clientSecret: "*****afdbac18",
- *     isAutoCreation: false,
- *     isAutoUpdate: true,
- *     isCreationAllowed: true,
- *     isLinkingAllowed: false,
  *     scopes: [
  *         "openid",
  *         "profile",
  *         "email",
  *     ],
+ *     isLinkingAllowed: false,
+ *     isCreationAllowed: true,
+ *     isAutoCreation: false,
+ *     isAutoUpdate: true,
  * });
  * ```
  *

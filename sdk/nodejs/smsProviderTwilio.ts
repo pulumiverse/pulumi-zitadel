@@ -14,8 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.SmsProviderTwilio("default", {
- *     senderNumber: "019920892",
  *     sid: "sid",
+ *     senderNumber: "019920892",
  *     token: "twilio_token",
  * });
  * ```

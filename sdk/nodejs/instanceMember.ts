@@ -14,7 +14,7 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.InstanceMember("default", {
- *     userId: data.zitadel_human_user["default"].id,
+ *     userId: defaultZitadelHumanUser.id,
  *     roles: ["IAM_OWNER"],
  * });
  * ```

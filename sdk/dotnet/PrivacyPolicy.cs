@@ -25,7 +25,7 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.PrivacyPolicy("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
     ///         TosLink = "https://example.com/tos",
     ///         PrivacyLink = "https://example.com/privacy",
     ///         HelpLink = "https://example.com/help",

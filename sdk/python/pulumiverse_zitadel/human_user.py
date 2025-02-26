@@ -638,7 +638,7 @@ class HumanUser(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.HumanUser("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             user_name="humanfull@localhost.com",
             first_name="firstname",
             last_name="lastname",
@@ -695,7 +695,7 @@ class HumanUser(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.HumanUser("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             user_name="humanfull@localhost.com",
             first_name="firstname",
             last_name="lastname",

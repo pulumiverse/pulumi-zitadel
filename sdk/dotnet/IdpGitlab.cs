@@ -25,18 +25,19 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.IdpGitlab("default", new()
     ///     {
+    ///         Name = "GitLab",
     ///         ClientId = "15765e...",
     ///         ClientSecret = "*****abcxyz",
-    ///         IsAutoCreation = false,
-    ///         IsAutoUpdate = true,
-    ///         IsCreationAllowed = true,
-    ///         IsLinkingAllowed = false,
     ///         Scopes = new[]
     ///         {
     ///             "openid",
     ///             "profile",
     ///             "email",
     ///         },
+    ///         IsLinkingAllowed = false,
+    ///         IsCreationAllowed = true,
+    ///         IsAutoCreation = false,
+    ///         IsAutoUpdate = true,
     ///     });
     /// 
     /// });

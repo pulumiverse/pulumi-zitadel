@@ -25,10 +25,10 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.DefaultPrivacyPolicy("default", new()
     ///     {
-    ///         HelpLink = "https://example.com/help",
-    ///         PrivacyLink = "https://example.com/privacy",
-    ///         SupportEmail = "support@example.com",
     ///         TosLink = "https://example.com/tos",
+    ///         PrivacyLink = "https://example.com/privacy",
+    ///         HelpLink = "https://example.com/help",
+    ///         SupportEmail = "support@example.com",
     ///     });
     /// 
     /// });

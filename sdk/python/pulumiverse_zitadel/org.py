@@ -176,7 +176,7 @@ class Org(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        default = zitadel.Org("default")
+        default = zitadel.Org("default", name="terraform-test")
         ```
 
         ## Import
@@ -207,7 +207,7 @@ class Org(pulumi.CustomResource):
         import pulumi
         import pulumiverse_zitadel as zitadel
 
-        default = zitadel.Org("default")
+        default = zitadel.Org("default", name="terraform-test")
         ```
 
         ## Import

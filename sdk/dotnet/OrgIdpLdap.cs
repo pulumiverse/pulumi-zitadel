@@ -25,7 +25,8 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.OrgIdpLdap("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         Name = "LDAP",
     ///         Servers = new[]
     ///         {
     ///             "ldaps://my.primary.server:389",

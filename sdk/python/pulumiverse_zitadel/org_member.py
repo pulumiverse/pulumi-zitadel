@@ -178,8 +178,8 @@ class OrgMember(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgMember("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            user_id=data["zitadel_human_user"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            user_id=default_zitadel_human_user["id"],
             roles=["ORG_OWNER"])
         ```
 
@@ -213,8 +213,8 @@ class OrgMember(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.OrgMember("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            user_id=data["zitadel_human_user"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            user_id=default_zitadel_human_user["id"],
             roles=["ORG_OWNER"])
         ```
 

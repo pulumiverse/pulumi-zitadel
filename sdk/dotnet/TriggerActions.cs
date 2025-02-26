@@ -25,12 +25,12 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.TriggerActions("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
     ///         FlowType = "FLOW_TYPE_CUSTOMISE_TOKEN",
     ///         TriggerType = "TRIGGER_TYPE_PRE_ACCESS_TOKEN_CREATION",
     ///         ActionIds = new[]
     ///         {
-    ///             data.Zitadel_action.Default.Id,
+    ///             defaultZitadelAction.Id,
     ///         },
     ///     });
     /// 

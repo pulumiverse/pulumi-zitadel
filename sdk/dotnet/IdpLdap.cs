@@ -25,33 +25,34 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.IdpLdap("default", new()
     ///     {
-    ///         BaseDn = "dc=example,dc=com",
-    ///         BindDn = "cn=admin,dc=example,dc=com",
-    ///         BindPassword = "Password1!",
-    ///         FirstNameAttribute = "firstname",
-    ///         IdAttribute = "uid",
-    ///         IsAutoCreation = false,
-    ///         IsAutoUpdate = true,
-    ///         IsCreationAllowed = true,
-    ///         IsLinkingAllowed = false,
-    ///         LastNameAttribute = "lastname",
+    ///         Name = "LDAP",
     ///         Servers = new[]
     ///         {
     ///             "ldaps://my.primary.server:389",
     ///             "ldaps://my.secondary.server:389",
     ///         },
     ///         StartTls = false,
-    ///         Timeout = "10s",
+    ///         BaseDn = "dc=example,dc=com",
+    ///         BindDn = "cn=admin,dc=example,dc=com",
+    ///         BindPassword = "Password1!",
     ///         UserBase = "dn",
+    ///         UserObjectClasses = new[]
+    ///         {
+    ///             "inetOrgPerson",
+    ///         },
     ///         UserFilters = new[]
     ///         {
     ///             "uid",
     ///             "email",
     ///         },
-    ///         UserObjectClasses = new[]
-    ///         {
-    ///             "inetOrgPerson",
-    ///         },
+    ///         Timeout = "10s",
+    ///         IdAttribute = "uid",
+    ///         FirstNameAttribute = "firstname",
+    ///         LastNameAttribute = "lastname",
+    ///         IsLinkingAllowed = false,
+    ///         IsCreationAllowed = true,
+    ///         IsAutoCreation = false,
+    ///         IsAutoUpdate = true,
     ///     });
     /// 
     /// });

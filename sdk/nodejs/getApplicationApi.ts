@@ -14,8 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getApplicationApi({
- *     orgId: data.zitadel_org["default"].id,
- *     projectId: data.zitadel_project["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     projectId: defaultZitadelProject.id,
  *     appId: "123456789012345678",
  * });
  * ```
@@ -87,8 +87,8 @@ export interface GetApplicationApiResult {
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getApplicationApi({
- *     orgId: data.zitadel_org["default"].id,
- *     projectId: data.zitadel_project["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     projectId: defaultZitadelProject.id,
  *     appId: "123456789012345678",
  * });
  * ```

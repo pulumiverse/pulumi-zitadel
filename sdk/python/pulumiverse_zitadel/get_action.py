@@ -134,7 +134,7 @@ def get_action(action_id: Optional[str] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_action(org_id=data["zitadel_org"]["default"]["id"],
+    default = zitadel.get_action(org_id=default_zitadel_org["id"],
         action_id="123456789012345678")
     pulumi.export("action", default)
     ```
@@ -173,7 +173,7 @@ def get_action_output(action_id: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_zitadel as zitadel
 
-    default = zitadel.get_action(org_id=data["zitadel_org"]["default"]["id"],
+    default = zitadel.get_action(org_id=default_zitadel_org["id"],
         action_id="123456789012345678")
     pulumi.export("action", default)
     ```

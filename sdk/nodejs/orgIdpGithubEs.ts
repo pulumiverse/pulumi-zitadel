@@ -14,7 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.OrgIdpGithubEs("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     name: "GitHub Enterprise Server",
  *     clientId: "86a165...",
  *     clientSecret: "*****afdbac18",
  *     scopes: [

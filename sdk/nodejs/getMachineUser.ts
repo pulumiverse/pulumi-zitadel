@@ -14,7 +14,7 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getMachineUser({
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     userId: "123456789012345678",
  * });
  * ```
@@ -97,7 +97,7 @@ export interface GetMachineUserResult {
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getMachineUser({
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     userId: "123456789012345678",
  * });
  * ```

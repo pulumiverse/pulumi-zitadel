@@ -14,7 +14,7 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getAction({
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     actionId: "123456789012345678",
  * });
  * export const action = _default;
@@ -84,7 +84,7 @@ export interface GetActionResult {
  * import * as zitadel from "@pulumi/zitadel";
  *
  * const default = zitadel.getAction({
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
  *     actionId: "123456789012345678",
  * });
  * export const action = _default;

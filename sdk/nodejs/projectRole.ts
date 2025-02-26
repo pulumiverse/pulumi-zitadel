@@ -14,8 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.ProjectRole("default", {
- *     orgId: data.zitadel_org["default"].id,
- *     projectId: data.zitadel_project["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     projectId: defaultZitadelProject.id,
  *     roleKey: "super-user",
  *     displayName: "display_name2",
  *     group: "role_group",

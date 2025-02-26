@@ -30,17 +30,18 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewIdpGoogle(ctx, "default", &zitadel.IdpGoogleArgs{
-//				ClientId:          pulumi.String("182902..."),
-//				ClientSecret:      pulumi.String("GOCSPX-*****"),
-//				IsAutoCreation:    pulumi.Bool(false),
-//				IsAutoUpdate:      pulumi.Bool(true),
-//				IsCreationAllowed: pulumi.Bool(true),
-//				IsLinkingAllowed:  pulumi.Bool(false),
+//				Name:         pulumi.String("Google"),
+//				ClientId:     pulumi.String("182902..."),
+//				ClientSecret: pulumi.String("GOCSPX-*****"),
 //				Scopes: pulumi.StringArray{
 //					pulumi.String("openid"),
 //					pulumi.String("profile"),
 //					pulumi.String("email"),
 //				},
+//				IsLinkingAllowed:  pulumi.Bool(false),
+//				IsCreationAllowed: pulumi.Bool(true),
+//				IsAutoCreation:    pulumi.Bool(false),
+//				IsAutoUpdate:      pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err

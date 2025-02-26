@@ -30,11 +30,11 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewDefaultPasswordComplexityPolicy(ctx, "default", &zitadel.DefaultPasswordComplexityPolicyArgs{
+//				MinLength:    pulumi.Int(8),
+//				HasUppercase: pulumi.Bool(true),
 //				HasLowercase: pulumi.Bool(true),
 //				HasNumber:    pulumi.Bool(true),
 //				HasSymbol:    pulumi.Bool(true),
-//				HasUppercase: pulumi.Bool(true),
-//				MinLength:    pulumi.Int(8),
 //			})
 //			if err != nil {
 //				return err

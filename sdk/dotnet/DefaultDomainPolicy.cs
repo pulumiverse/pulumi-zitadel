@@ -25,9 +25,9 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.DefaultDomainPolicy("default", new()
     ///     {
-    ///         SmtpSenderAddressMatchesInstanceDomain = true,
     ///         UserLoginMustBeDomain = false,
     ///         ValidateOrgDomains = true,
+    ///         SmtpSenderAddressMatchesInstanceDomain = true,
     ///     });
     /// 
     /// });

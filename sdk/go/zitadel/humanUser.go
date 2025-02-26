@@ -32,7 +32,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewHumanUser(ctx, "default", &zitadel.HumanUserArgs{
-//				OrgId:             pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:             pulumi.Any(defaultZitadelOrg.Id),
 //				UserName:          pulumi.String("humanfull@localhost.com"),
 //				FirstName:         pulumi.String("firstname"),
 //				LastName:          pulumi.String("lastname"),

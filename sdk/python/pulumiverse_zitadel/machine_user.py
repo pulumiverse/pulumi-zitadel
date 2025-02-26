@@ -396,8 +396,9 @@ class MachineUser(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.MachineUser("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             user_name="machine@example.com",
+            name="name",
             description="a machine user",
             with_secret=False)
         ```
@@ -435,8 +436,9 @@ class MachineUser(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.MachineUser("default",
-            org_id=data["zitadel_org"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
             user_name="machine@example.com",
+            name="name",
             description="a machine user",
             with_secret=False)
         ```

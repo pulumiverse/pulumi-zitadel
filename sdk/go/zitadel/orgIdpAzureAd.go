@@ -30,7 +30,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewOrgIdpAzureAd(ctx, "default", &zitadel.OrgIdpAzureAdArgs{
-//				OrgId:        pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:        pulumi.Any(defaultZitadelOrg.Id),
+//				Name:         pulumi.String("Azure AD"),
 //				ClientId:     pulumi.String("9065bfc8-a08a..."),
 //				ClientSecret: pulumi.String("H2n***"),
 //				Scopes: pulumi.StringArray{

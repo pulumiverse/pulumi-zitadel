@@ -29,8 +29,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.LookupApplicationApi(ctx, &zitadel.LookupApplicationApiArgs{
-//				OrgId:     pulumi.StringRef(data.Zitadel_org.Default.Id),
-//				ProjectId: data.Zitadel_project.Default.Id,
+//				OrgId:     pulumi.StringRef(defaultZitadelOrg.Id),
+//				ProjectId: defaultZitadelProject.Id,
 //				AppId:     "123456789012345678",
 //			}, nil)
 //			if err != nil {

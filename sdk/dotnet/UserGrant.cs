@@ -25,13 +25,13 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.UserGrant("default", new()
     ///     {
-    ///         ProjectId = data.Zitadel_project.Default.Id,
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         ProjectId = defaultZitadelProject.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
     ///         RoleKeys = new[]
     ///         {
     ///             "super-user",
     ///         },
-    ///         UserId = data.Zitadel_human_user.Default.Id,
+    ///         UserId = defaultZitadelHumanUser.Id,
     ///     });
     /// 
     /// });

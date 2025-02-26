@@ -14,13 +14,9 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.IdpAzureAd("default", {
+ *     name: "Azure AD",
  *     clientId: "9065bfc8-a08a...",
  *     clientSecret: "H2n***",
- *     emailVerified: true,
- *     isAutoCreation: false,
- *     isAutoUpdate: true,
- *     isCreationAllowed: true,
- *     isLinkingAllowed: false,
  *     scopes: [
  *         "openid",
  *         "profile",
@@ -28,6 +24,11 @@ import * as utilities from "./utilities";
  *         "User.Read",
  *     ],
  *     tenantType: "AZURE_AD_TENANT_TYPE_ORGANISATIONS",
+ *     emailVerified: true,
+ *     isLinkingAllowed: false,
+ *     isCreationAllowed: true,
+ *     isAutoCreation: false,
+ *     isAutoUpdate: true,
  * });
  * ```
  *

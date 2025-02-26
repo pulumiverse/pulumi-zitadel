@@ -29,7 +29,7 @@ namespace Pulumiverse.Zitadel
         /// {
         ///     var @default = Zitadel.GetOrgOidcIdp.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         OrgId = defaultZitadelOrg.Id,
         ///         Id = "123456789012345678",
         ///     });
         /// 
@@ -62,7 +62,7 @@ namespace Pulumiverse.Zitadel
         /// {
         ///     var @default = Zitadel.GetOrgOidcIdp.Invoke(new()
         ///     {
-        ///         OrgId = data.Zitadel_org.Default.Id,
+        ///         OrgId = defaultZitadelOrg.Id,
         ///         Id = "123456789012345678",
         ///     });
         /// 

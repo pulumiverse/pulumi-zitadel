@@ -25,7 +25,7 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.LoginPolicy("default", new()
     ///     {
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
     ///         UserLogin = true,
     ///         AllowRegister = true,
     ///         AllowExternalIdp = true,
@@ -51,8 +51,8 @@ namespace Pulumiverse.Zitadel
     ///         },
     ///         Idps = new[]
     ///         {
-    ///             data.Zitadel_idp_google.Default.Id,
-    ///             data.Zitadel_idp_azure_ad.Default.Id,
+    ///             defaultZitadelIdpGoogle.Id,
+    ///             defaultZitadelIdpAzureAd.Id,
     ///         },
     ///         AllowDomainDiscovery = true,
     ///         DisableLoginWithEmail = true,

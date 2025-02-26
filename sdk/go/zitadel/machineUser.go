@@ -30,8 +30,9 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewMachineUser(ctx, "default", &zitadel.MachineUserArgs{
-//				OrgId:       pulumi.Any(data.Zitadel_org.Default.Id),
+//				OrgId:       pulumi.Any(defaultZitadelOrg.Id),
 //				UserName:    pulumi.String("machine@example.com"),
+//				Name:        pulumi.String("name"),
 //				Description: pulumi.String("a machine user"),
 //				WithSecret:  pulumi.Bool(false),
 //			})

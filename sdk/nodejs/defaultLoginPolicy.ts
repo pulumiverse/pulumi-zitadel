@@ -34,8 +34,8 @@ import * as utilities from "./utilities";
  *     ],
  *     multiFactors: ["MULTI_FACTOR_TYPE_U2F_WITH_VERIFICATION"],
  *     idps: [
- *         data.zitadel_idp_google["default"].id,
- *         data.zitadel_idp_azure_ad["default"].id,
+ *         defaultZitadelIdpGoogle.id,
+ *         defaultZitadelIdpAzureAd.id,
  *     ],
  *     allowDomainDiscovery: true,
  *     disableLoginWithEmail: true,

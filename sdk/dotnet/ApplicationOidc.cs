@@ -25,8 +25,9 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.ApplicationOidc("default", new()
     ///     {
-    ///         ProjectId = data.Zitadel_project.Default.Id,
-    ///         OrgId = data.Zitadel_org.Default.Id,
+    ///         ProjectId = defaultZitadelProject.Id,
+    ///         OrgId = defaultZitadelOrg.Id,
+    ///         Name = "applicationoidc",
     ///         RedirectUris = new[]
     ///         {
     ///             "https://localhost.com",

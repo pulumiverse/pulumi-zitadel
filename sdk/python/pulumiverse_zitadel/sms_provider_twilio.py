@@ -173,8 +173,8 @@ class SmsProviderTwilio(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.SmsProviderTwilio("default",
-            sender_number="019920892",
             sid="sid",
+            sender_number="019920892",
             token="twilio_token")
         ```
 
@@ -208,8 +208,8 @@ class SmsProviderTwilio(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.SmsProviderTwilio("default",
-            sender_number="019920892",
             sid="sid",
+            sender_number="019920892",
             token="twilio_token")
         ```
 

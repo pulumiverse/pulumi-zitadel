@@ -14,7 +14,8 @@ import * as utilities from "./utilities";
  * import * as zitadel from "@pulumiverse/zitadel";
  *
  * const _default = new zitadel.OrgIdpGitlabSelfHosted("default", {
- *     orgId: data.zitadel_org["default"].id,
+ *     orgId: defaultZitadelOrg.id,
+ *     name: "GitLab Self Hosted",
  *     clientId: "15765e...",
  *     clientSecret: "*****abcxyz",
  *     scopes: [

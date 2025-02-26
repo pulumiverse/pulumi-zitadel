@@ -219,8 +219,9 @@ class ApplicationSaml(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ApplicationSaml("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            project_id=data["zitadel_project"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            project_id=default_zitadel_project["id"],
+            name="applicationapi",
             metadata_xml=\"\"\"<?xml version="1.0"?>
         <md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
                              validUntil="2024-01-26T17:48:38Z"
@@ -267,8 +268,9 @@ class ApplicationSaml(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ApplicationSaml("default",
-            org_id=data["zitadel_org"]["default"]["id"],
-            project_id=data["zitadel_project"]["default"]["id"],
+            org_id=default_zitadel_org["id"],
+            project_id=default_zitadel_project["id"],
+            name="applicationapi",
             metadata_xml=\"\"\"<?xml version="1.0"?>
         <md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
                              validUntil="2024-01-26T17:48:38Z"

@@ -786,8 +786,9 @@ class ApplicationOidc(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ApplicationOidc("default",
-            project_id=data["zitadel_project"]["default"]["id"],
-            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=default_zitadel_project["id"],
+            org_id=default_zitadel_org["id"],
+            name="applicationoidc",
             redirect_uris=["https://localhost.com"],
             response_types=["OIDC_RESPONSE_TYPE_CODE"],
             grant_types=["OIDC_GRANT_TYPE_AUTHORIZATION_CODE"],
@@ -848,8 +849,9 @@ class ApplicationOidc(pulumi.CustomResource):
         import pulumiverse_zitadel as zitadel
 
         default = zitadel.ApplicationOidc("default",
-            project_id=data["zitadel_project"]["default"]["id"],
-            org_id=data["zitadel_org"]["default"]["id"],
+            project_id=default_zitadel_project["id"],
+            org_id=default_zitadel_org["id"],
+            name="applicationoidc",
             redirect_uris=["https://localhost.com"],
             response_types=["OIDC_RESPONSE_TYPE_CODE"],
             grant_types=["OIDC_GRANT_TYPE_AUTHORIZATION_CODE"],

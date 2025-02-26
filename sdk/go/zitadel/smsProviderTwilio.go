@@ -30,8 +30,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := zitadel.NewSmsProviderTwilio(ctx, "default", &zitadel.SmsProviderTwilioArgs{
-//				SenderNumber: pulumi.String("019920892"),
 //				Sid:          pulumi.String("sid"),
+//				SenderNumber: pulumi.String("019920892"),
 //				Token:        pulumi.String("twilio_token"),
 //			})
 //			if err != nil {

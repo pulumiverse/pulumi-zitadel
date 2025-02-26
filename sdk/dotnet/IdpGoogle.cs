@@ -25,18 +25,19 @@ namespace Pulumiverse.Zitadel
     /// {
     ///     var @default = new Zitadel.IdpGoogle("default", new()
     ///     {
+    ///         Name = "Google",
     ///         ClientId = "182902...",
     ///         ClientSecret = "GOCSPX-*****",
-    ///         IsAutoCreation = false,
-    ///         IsAutoUpdate = true,
-    ///         IsCreationAllowed = true,
-    ///         IsLinkingAllowed = false,
     ///         Scopes = new[]
     ///         {
     ///             "openid",
     ///             "profile",
     ///             "email",
     ///         },
+    ///         IsLinkingAllowed = false,
+    ///         IsCreationAllowed = true,
+    ///         IsAutoCreation = false,
+    ///         IsAutoUpdate = true,
     ///     });
     /// 
     /// });
