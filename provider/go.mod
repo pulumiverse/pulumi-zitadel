@@ -2,7 +2,10 @@ module github.com/pulumiverse/pulumi-zitadel/provider
 
 go 1.21
 
-replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20230912190043-e6d96b3b8f7e
+replace (
+	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20230912190043-e6d96b3b8f7e
+	github.com/hashicorp/terraform-plugin-framework => v0.15.0
+)
 
 require (
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.62.0
