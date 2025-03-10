@@ -18,6 +18,9 @@ import (
 	"fmt"
 	"path/filepath"
 
+	// The linter requires unnamed imports to have a doc comment
+	_ "embed"
+
 	"github.com/zitadel/terraform-provider-zitadel/zitadel"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
@@ -44,6 +47,9 @@ const (
 func preConfigureCallback(_ resource.PropertyMap, _ shim.ResourceConfig) error {
 	return nil
 }
+
+//go:embed cmd/pulumi-resource-zitadel/bridge-metadata.json
+var metadata []byte
 
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
@@ -235,9 +241,11 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			RespectSchemaVersion: true,
 		},
+		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
 	}
 
 	prov.SetAutonaming(255, "-")
+	prov.MustApplyAutoAliases()
 
 	return prov
 }
