@@ -1,2 +1,3 @@
 upstream-provider-name: terraform-provider-zitadel
+target-version: v2.0.2
 pr-assign: eliobischof
