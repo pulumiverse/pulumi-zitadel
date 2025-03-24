@@ -36,6 +36,8 @@ from .get_idp_gitlab import *
 from .get_idp_gitlab_self_hosted import *
 from .get_idp_google import *
 from .get_idp_ldap import *
+from .get_idp_oauth import *
+from .get_idp_saml import *
 from .get_machine_user import *
 from .get_machine_users import *
 from .get_org import *
@@ -46,6 +48,8 @@ from .get_org_idp_gitlab import *
 from .get_org_idp_gitlab_self_hosted import *
 from .get_org_idp_google import *
 from .get_org_idp_ldap import *
+from .get_org_idp_oauth import *
+from .get_org_idp_saml import *
 from .get_org_jwt_idp import *
 from .get_org_oidc_idp import *
 from .get_orgs import *
@@ -61,6 +65,8 @@ from .idp_gitlab import *
 from .idp_gitlab_self_hosted import *
 from .idp_google import *
 from .idp_ldap import *
+from .idp_oauth import *
+from .idp_saml import *
 from .instance_member import *
 from .label_policy import *
 from .lockout_policy import *
@@ -77,8 +83,11 @@ from .org_idp_gitlab_self_hosted import *
 from .org_idp_google import *
 from .org_idp_jwt import *
 from .org_idp_ldap import *
+from .org_idp_oauth import *
 from .org_idp_oidc import *
+from .org_idp_saml import *
 from .org_member import *
+from .org_metadata import *
 from .password_complexity_policy import *
 from .personal_access_token import *
 from .privacy_policy import *
@@ -92,6 +101,7 @@ from .sms_provider_twilio import *
 from .smtp_config import *
 from .trigger_actions import *
 from .user_grant import *
+from .user_metadata import *
 
 # Make subpackages available:
 if typing.TYPE_CHECKING:
@@ -289,6 +299,22 @@ _utilities.register(
  },
  {
   "pkg": "zitadel",
+  "mod": "index/idpOauth",
+  "fqn": "pulumiverse_zitadel",
+  "classes": {
+   "zitadel:index/idpOauth:IdpOauth": "IdpOauth"
+  }
+ },
+ {
+  "pkg": "zitadel",
+  "mod": "index/idpSaml",
+  "fqn": "pulumiverse_zitadel",
+  "classes": {
+   "zitadel:index/idpSaml:IdpSaml": "IdpSaml"
+  }
+ },
+ {
+  "pkg": "zitadel",
   "mod": "index/instanceMember",
   "fqn": "pulumiverse_zitadel",
   "classes": {
@@ -417,6 +443,14 @@ _utilities.register(
  },
  {
   "pkg": "zitadel",
+  "mod": "index/orgIdpOauth",
+  "fqn": "pulumiverse_zitadel",
+  "classes": {
+   "zitadel:index/orgIdpOauth:OrgIdpOauth": "OrgIdpOauth"
+  }
+ },
+ {
+  "pkg": "zitadel",
   "mod": "index/orgIdpOidc",
   "fqn": "pulumiverse_zitadel",
   "classes": {
@@ -425,10 +459,26 @@ _utilities.register(
  },
  {
   "pkg": "zitadel",
+  "mod": "index/orgIdpSaml",
+  "fqn": "pulumiverse_zitadel",
+  "classes": {
+   "zitadel:index/orgIdpSaml:OrgIdpSaml": "OrgIdpSaml"
+  }
+ },
+ {
+  "pkg": "zitadel",
   "mod": "index/orgMember",
   "fqn": "pulumiverse_zitadel",
   "classes": {
    "zitadel:index/orgMember:OrgMember": "OrgMember"
+  }
+ },
+ {
+  "pkg": "zitadel",
+  "mod": "index/orgMetadata",
+  "fqn": "pulumiverse_zitadel",
+  "classes": {
+   "zitadel:index/orgMetadata:OrgMetadata": "OrgMetadata"
   }
  },
  {
@@ -525,6 +575,14 @@ _utilities.register(
   "fqn": "pulumiverse_zitadel",
   "classes": {
    "zitadel:index/userGrant:UserGrant": "UserGrant"
+  }
+ },
+ {
+  "pkg": "zitadel",
+  "mod": "index/userMetadata",
+  "fqn": "pulumiverse_zitadel",
+  "classes": {
+   "zitadel:index/userMetadata:UserMetadata": "UserMetadata"
   }
  }
 ]

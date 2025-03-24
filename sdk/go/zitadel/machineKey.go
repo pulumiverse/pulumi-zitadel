@@ -46,7 +46,7 @@ import (
 //
 // ## Import
 //
-// terraform The resource can be imported using the ID format `<id:user_id[:org_id][:key_details]>`, e.g.
+// bash The resource can be imported using the ID format `<id:user_id[:org_id][:key_details]>`, e.g.
 //
 // ```sh
 //

@@ -26,7 +26,7 @@ import * as utilities from "./utilities";
  *
  * ## Import
  *
- * terraform The resource can be imported using the ID format `<[password]>`, e.g.
+ * bash The resource can be imported using the ID format `<[password]>`, e.g.
  *
  * ```sh
  *  $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'

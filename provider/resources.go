@@ -24,6 +24,7 @@ import (
 	"github.com/zitadel/terraform-provider-zitadel/zitadel"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	tks "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
@@ -244,6 +245,7 @@ func Provider() tfbridge.ProviderInfo {
 		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
 	}
 
+	prov.MustComputeTokens(tks.SingleModule("zitadel_", mainMod, tks.MakeStandard(mainPkg)))
 	prov.SetAutonaming(255, "-")
 	prov.MustApplyAutoAliases()
 

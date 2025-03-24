@@ -180,7 +180,7 @@ class SmsProviderTwilio(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:token]>`, e.g.
+        bash The resource can be imported using the ID format `<id[:token]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/smsProviderTwilio:SmsProviderTwilio imported '123456789012345678:12345678901234567890123456abcdef'
@@ -215,7 +215,7 @@ class SmsProviderTwilio(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:token]>`, e.g.
+        bash The resource can be imported using the ID format `<id[:token]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/smsProviderTwilio:SmsProviderTwilio imported '123456789012345678:12345678901234567890123456abcdef'

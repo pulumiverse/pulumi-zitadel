@@ -428,7 +428,7 @@ class IdpGitlabSelfHosted(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+        bash The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/idpGitlabSelfHosted:IdpGitlabSelfHosted imported '123456789012345678:1234567890abcdef'
@@ -479,7 +479,7 @@ class IdpGitlabSelfHosted(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+        bash The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/idpGitlabSelfHosted:IdpGitlabSelfHosted imported '123456789012345678:1234567890abcdef'

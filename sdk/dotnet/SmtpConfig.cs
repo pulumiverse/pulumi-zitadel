@@ -39,7 +39,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ## Import
     /// 
-    /// terraform The resource can be imported using the ID format `&lt;[password]&gt;`, e.g.
+    /// bash The resource can be imported using the ID format `&lt;[password]&gt;`, e.g.
     /// 
     /// ```sh
     ///  $ pulumi import zitadel:index/smtpConfig:SmtpConfig imported 'p4ssw0rd'

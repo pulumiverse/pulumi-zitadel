@@ -35,7 +35,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ## Import
     /// 
-    /// terraform The resource can be imported using the ID format `&lt;id[:token]&gt;`, e.g.
+    /// bash The resource can be imported using the ID format `&lt;id[:token]&gt;`, e.g.
     /// 
     /// ```sh
     ///  $ pulumi import zitadel:index/smsProviderTwilio:SmsProviderTwilio imported '123456789012345678:12345678901234567890123456abcdef'

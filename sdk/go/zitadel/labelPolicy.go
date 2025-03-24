@@ -17,7 +17,7 @@ import (
 //
 // ## Import
 //
-// terraform The resource can be imported using the ID format `<[org_id]>`, e.g.
+// bash The resource can be imported using the ID format `<[org_id]>`, e.g.
 //
 // ```sh
 //
@@ -62,6 +62,8 @@ type LabelPolicy struct {
 	PrimaryColorDark pulumi.StringOutput `pulumi:"primaryColorDark"`
 	// set the label policy active after creating/updating
 	SetActive pulumi.BoolPtrOutput `pulumi:"setActive"`
+	// theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+	ThemeMode pulumi.StringPtrOutput `pulumi:"themeMode"`
 	// hex value for warn color
 	WarnColor pulumi.StringOutput `pulumi:"warnColor"`
 	// hex value for warn color dark theme
@@ -163,6 +165,8 @@ type labelPolicyState struct {
 	PrimaryColorDark *string `pulumi:"primaryColorDark"`
 	// set the label policy active after creating/updating
 	SetActive *bool `pulumi:"setActive"`
+	// theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+	ThemeMode *string `pulumi:"themeMode"`
 	// hex value for warn color
 	WarnColor *string `pulumi:"warnColor"`
 	// hex value for warn color dark theme
@@ -205,6 +209,8 @@ type LabelPolicyState struct {
 	PrimaryColorDark pulumi.StringPtrInput
 	// set the label policy active after creating/updating
 	SetActive pulumi.BoolPtrInput
+	// theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+	ThemeMode pulumi.StringPtrInput
 	// hex value for warn color
 	WarnColor pulumi.StringPtrInput
 	// hex value for warn color dark theme
@@ -246,6 +252,8 @@ type labelPolicyArgs struct {
 	PrimaryColorDark string `pulumi:"primaryColorDark"`
 	// set the label policy active after creating/updating
 	SetActive *bool `pulumi:"setActive"`
+	// theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+	ThemeMode *string `pulumi:"themeMode"`
 	// hex value for warn color
 	WarnColor string `pulumi:"warnColor"`
 	// hex value for warn color dark theme
@@ -284,6 +292,8 @@ type LabelPolicyArgs struct {
 	PrimaryColorDark pulumi.StringInput
 	// set the label policy active after creating/updating
 	SetActive pulumi.BoolPtrInput
+	// theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+	ThemeMode pulumi.StringPtrInput
 	// hex value for warn color
 	WarnColor pulumi.StringInput
 	// hex value for warn color dark theme
@@ -509,6 +519,11 @@ func (o LabelPolicyOutput) PrimaryColorDark() pulumi.StringOutput {
 // set the label policy active after creating/updating
 func (o LabelPolicyOutput) SetActive() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *LabelPolicy) pulumi.BoolPtrOutput { return v.SetActive }).(pulumi.BoolPtrOutput)
+}
+
+// theme mode, supported values: THEME*MODE*UNSPECIFIED, THEME*MODE*AUTO, THEME*MODE*DARK, THEME*MODE*LIGHT
+func (o LabelPolicyOutput) ThemeMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LabelPolicy) pulumi.StringPtrOutput { return v.ThemeMode }).(pulumi.StringPtrOutput)
 }
 
 // hex value for warn color

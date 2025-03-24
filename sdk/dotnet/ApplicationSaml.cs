@@ -48,7 +48,7 @@ namespace Pulumiverse.Zitadel
     /// 
     /// ## Import
     /// 
-    /// terraform The resource can be imported using the ID format `&lt;id:project_id[:org_id]&gt;`, e.g.
+    /// bash The resource can be imported using the ID format `&lt;id:project_id[:org_id]&gt;`, e.g.
     /// 
     /// ```sh
     ///  $ pulumi import zitadel:index/applicationSaml:ApplicationSaml imported '123456789012345678:123456789012345678:123456789012345678'

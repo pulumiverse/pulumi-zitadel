@@ -262,7 +262,7 @@ class Action(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+        bash The resource can be imported using the ID format `<id[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/action:Action imported '123456789012345678:123456789012345678'
@@ -299,7 +299,7 @@ class Action(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:org_id]>`, e.g.
+        bash The resource can be imported using the ID format `<id[:org_id]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/action:Action imported '123456789012345678:123456789012345678'

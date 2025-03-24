@@ -208,7 +208,7 @@ class PersonalAccessToken(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
+        bash The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/personalAccessToken:PersonalAccessToken imported '123456789012345678:123456789012345678:123456789012345678:LHt79...'
@@ -243,7 +243,7 @@ class PersonalAccessToken(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
+        bash The resource can be imported using the ID format `<id:user_id[:org_id][:token]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/personalAccessToken:PersonalAccessToken imported '123456789012345678:123456789012345678:123456789012345678:LHt79...'

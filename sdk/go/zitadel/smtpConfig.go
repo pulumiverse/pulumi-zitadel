@@ -49,7 +49,7 @@ import (
 //
 // ## Import
 //
-// terraform The resource can be imported using the ID format `<[password]>`, e.g.
+// bash The resource can be imported using the ID format `<[password]>`, e.g.
 //
 // ```sh
 //
