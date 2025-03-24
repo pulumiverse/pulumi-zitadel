@@ -160,6 +160,16 @@ export const getIdpLdap: typeof import("./getIdpLdap").getIdpLdap = null as any;
 export const getIdpLdapOutput: typeof import("./getIdpLdap").getIdpLdapOutput = null as any;
 utilities.lazyLoad(exports, ["getIdpLdap","getIdpLdapOutput"], () => require("./getIdpLdap"));
 
+export { GetIdpOauthArgs, GetIdpOauthResult, GetIdpOauthOutputArgs } from "./getIdpOauth";
+export const getIdpOauth: typeof import("./getIdpOauth").getIdpOauth = null as any;
+export const getIdpOauthOutput: typeof import("./getIdpOauth").getIdpOauthOutput = null as any;
+utilities.lazyLoad(exports, ["getIdpOauth","getIdpOauthOutput"], () => require("./getIdpOauth"));
+
+export { GetIdpSamlArgs, GetIdpSamlResult, GetIdpSamlOutputArgs } from "./getIdpSaml";
+export const getIdpSaml: typeof import("./getIdpSaml").getIdpSaml = null as any;
+export const getIdpSamlOutput: typeof import("./getIdpSaml").getIdpSamlOutput = null as any;
+utilities.lazyLoad(exports, ["getIdpSaml","getIdpSamlOutput"], () => require("./getIdpSaml"));
+
 export { GetMachineUserArgs, GetMachineUserResult, GetMachineUserOutputArgs } from "./getMachineUser";
 export const getMachineUser: typeof import("./getMachineUser").getMachineUser = null as any;
 export const getMachineUserOutput: typeof import("./getMachineUser").getMachineUserOutput = null as any;
@@ -209,6 +219,16 @@ export { GetOrgIdpLdapArgs, GetOrgIdpLdapResult, GetOrgIdpLdapOutputArgs } from 
 export const getOrgIdpLdap: typeof import("./getOrgIdpLdap").getOrgIdpLdap = null as any;
 export const getOrgIdpLdapOutput: typeof import("./getOrgIdpLdap").getOrgIdpLdapOutput = null as any;
 utilities.lazyLoad(exports, ["getOrgIdpLdap","getOrgIdpLdapOutput"], () => require("./getOrgIdpLdap"));
+
+export { GetOrgIdpOauthArgs, GetOrgIdpOauthResult, GetOrgIdpOauthOutputArgs } from "./getOrgIdpOauth";
+export const getOrgIdpOauth: typeof import("./getOrgIdpOauth").getOrgIdpOauth = null as any;
+export const getOrgIdpOauthOutput: typeof import("./getOrgIdpOauth").getOrgIdpOauthOutput = null as any;
+utilities.lazyLoad(exports, ["getOrgIdpOauth","getOrgIdpOauthOutput"], () => require("./getOrgIdpOauth"));
+
+export { GetOrgIdpSamlArgs, GetOrgIdpSamlResult, GetOrgIdpSamlOutputArgs } from "./getOrgIdpSaml";
+export const getOrgIdpSaml: typeof import("./getOrgIdpSaml").getOrgIdpSaml = null as any;
+export const getOrgIdpSamlOutput: typeof import("./getOrgIdpSaml").getOrgIdpSamlOutput = null as any;
+utilities.lazyLoad(exports, ["getOrgIdpSaml","getOrgIdpSamlOutput"], () => require("./getOrgIdpSaml"));
 
 export { GetOrgJwtIdpArgs, GetOrgJwtIdpResult, GetOrgJwtIdpOutputArgs } from "./getOrgJwtIdp";
 export const getOrgJwtIdp: typeof import("./getOrgJwtIdp").getOrgJwtIdp = null as any;
@@ -284,6 +304,16 @@ export { IdpLdapArgs, IdpLdapState } from "./idpLdap";
 export type IdpLdap = import("./idpLdap").IdpLdap;
 export const IdpLdap: typeof import("./idpLdap").IdpLdap = null as any;
 utilities.lazyLoad(exports, ["IdpLdap"], () => require("./idpLdap"));
+
+export { IdpOauthArgs, IdpOauthState } from "./idpOauth";
+export type IdpOauth = import("./idpOauth").IdpOauth;
+export const IdpOauth: typeof import("./idpOauth").IdpOauth = null as any;
+utilities.lazyLoad(exports, ["IdpOauth"], () => require("./idpOauth"));
+
+export { IdpSamlArgs, IdpSamlState } from "./idpSaml";
+export type IdpSaml = import("./idpSaml").IdpSaml;
+export const IdpSaml: typeof import("./idpSaml").IdpSaml = null as any;
+utilities.lazyLoad(exports, ["IdpSaml"], () => require("./idpSaml"));
 
 export { InstanceMemberArgs, InstanceMemberState } from "./instanceMember";
 export type InstanceMember = import("./instanceMember").InstanceMember;
@@ -365,15 +395,30 @@ export type OrgIdpLdap = import("./orgIdpLdap").OrgIdpLdap;
 export const OrgIdpLdap: typeof import("./orgIdpLdap").OrgIdpLdap = null as any;
 utilities.lazyLoad(exports, ["OrgIdpLdap"], () => require("./orgIdpLdap"));
 
+export { OrgIdpOauthArgs, OrgIdpOauthState } from "./orgIdpOauth";
+export type OrgIdpOauth = import("./orgIdpOauth").OrgIdpOauth;
+export const OrgIdpOauth: typeof import("./orgIdpOauth").OrgIdpOauth = null as any;
+utilities.lazyLoad(exports, ["OrgIdpOauth"], () => require("./orgIdpOauth"));
+
 export { OrgIdpOidcArgs, OrgIdpOidcState } from "./orgIdpOidc";
 export type OrgIdpOidc = import("./orgIdpOidc").OrgIdpOidc;
 export const OrgIdpOidc: typeof import("./orgIdpOidc").OrgIdpOidc = null as any;
 utilities.lazyLoad(exports, ["OrgIdpOidc"], () => require("./orgIdpOidc"));
 
+export { OrgIdpSamlArgs, OrgIdpSamlState } from "./orgIdpSaml";
+export type OrgIdpSaml = import("./orgIdpSaml").OrgIdpSaml;
+export const OrgIdpSaml: typeof import("./orgIdpSaml").OrgIdpSaml = null as any;
+utilities.lazyLoad(exports, ["OrgIdpSaml"], () => require("./orgIdpSaml"));
+
 export { OrgMemberArgs, OrgMemberState } from "./orgMember";
 export type OrgMember = import("./orgMember").OrgMember;
 export const OrgMember: typeof import("./orgMember").OrgMember = null as any;
 utilities.lazyLoad(exports, ["OrgMember"], () => require("./orgMember"));
+
+export { OrgMetadataArgs, OrgMetadataState } from "./orgMetadata";
+export type OrgMetadata = import("./orgMetadata").OrgMetadata;
+export const OrgMetadata: typeof import("./orgMetadata").OrgMetadata = null as any;
+utilities.lazyLoad(exports, ["OrgMetadata"], () => require("./orgMetadata"));
 
 export { PasswordComplexityPolicyArgs, PasswordComplexityPolicyState } from "./passwordComplexityPolicy";
 export type PasswordComplexityPolicy = import("./passwordComplexityPolicy").PasswordComplexityPolicy;
@@ -440,6 +485,11 @@ export type UserGrant = import("./userGrant").UserGrant;
 export const UserGrant: typeof import("./userGrant").UserGrant = null as any;
 utilities.lazyLoad(exports, ["UserGrant"], () => require("./userGrant"));
 
+export { UserMetadataArgs, UserMetadataState } from "./userMetadata";
+export type UserMetadata = import("./userMetadata").UserMetadata;
+export const UserMetadata: typeof import("./userMetadata").UserMetadata = null as any;
+utilities.lazyLoad(exports, ["UserMetadata"], () => require("./userMetadata"));
+
 
 // Export sub-modules:
 import * as config from "./config";
@@ -498,6 +548,10 @@ const _module = {
                 return new IdpGoogle(name, <any>undefined, { urn })
             case "zitadel:index/idpLdap:IdpLdap":
                 return new IdpLdap(name, <any>undefined, { urn })
+            case "zitadel:index/idpOauth:IdpOauth":
+                return new IdpOauth(name, <any>undefined, { urn })
+            case "zitadel:index/idpSaml:IdpSaml":
+                return new IdpSaml(name, <any>undefined, { urn })
             case "zitadel:index/instanceMember:InstanceMember":
                 return new InstanceMember(name, <any>undefined, { urn })
             case "zitadel:index/labelPolicy:LabelPolicy":
@@ -530,10 +584,16 @@ const _module = {
                 return new OrgIdpJwt(name, <any>undefined, { urn })
             case "zitadel:index/orgIdpLdap:OrgIdpLdap":
                 return new OrgIdpLdap(name, <any>undefined, { urn })
+            case "zitadel:index/orgIdpOauth:OrgIdpOauth":
+                return new OrgIdpOauth(name, <any>undefined, { urn })
             case "zitadel:index/orgIdpOidc:OrgIdpOidc":
                 return new OrgIdpOidc(name, <any>undefined, { urn })
+            case "zitadel:index/orgIdpSaml:OrgIdpSaml":
+                return new OrgIdpSaml(name, <any>undefined, { urn })
             case "zitadel:index/orgMember:OrgMember":
                 return new OrgMember(name, <any>undefined, { urn })
+            case "zitadel:index/orgMetadata:OrgMetadata":
+                return new OrgMetadata(name, <any>undefined, { urn })
             case "zitadel:index/passwordComplexityPolicy:PasswordComplexityPolicy":
                 return new PasswordComplexityPolicy(name, <any>undefined, { urn })
             case "zitadel:index/personalAccessToken:PersonalAccessToken":
@@ -558,6 +618,8 @@ const _module = {
                 return new TriggerActions(name, <any>undefined, { urn })
             case "zitadel:index/userGrant:UserGrant":
                 return new UserGrant(name, <any>undefined, { urn })
+            case "zitadel:index/userMetadata:UserMetadata":
+                return new UserMetadata(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -586,6 +648,8 @@ pulumi.runtime.registerResourceModule("zitadel", "index/idpGitlab", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/idpGitlabSelfHosted", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/idpGoogle", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/idpLdap", _module)
+pulumi.runtime.registerResourceModule("zitadel", "index/idpOauth", _module)
+pulumi.runtime.registerResourceModule("zitadel", "index/idpSaml", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/instanceMember", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/labelPolicy", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/lockoutPolicy", _module)
@@ -602,8 +666,11 @@ pulumi.runtime.registerResourceModule("zitadel", "index/orgIdpGitlabSelfHosted",
 pulumi.runtime.registerResourceModule("zitadel", "index/orgIdpGoogle", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/orgIdpJwt", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/orgIdpLdap", _module)
+pulumi.runtime.registerResourceModule("zitadel", "index/orgIdpOauth", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/orgIdpOidc", _module)
+pulumi.runtime.registerResourceModule("zitadel", "index/orgIdpSaml", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/orgMember", _module)
+pulumi.runtime.registerResourceModule("zitadel", "index/orgMetadata", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/passwordComplexityPolicy", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/personalAccessToken", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/privacyPolicy", _module)
@@ -616,6 +683,7 @@ pulumi.runtime.registerResourceModule("zitadel", "index/smsProviderTwilio", _mod
 pulumi.runtime.registerResourceModule("zitadel", "index/smtpConfig", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/triggerActions", _module)
 pulumi.runtime.registerResourceModule("zitadel", "index/userGrant", _module)
+pulumi.runtime.registerResourceModule("zitadel", "index/userMetadata", _module)
 pulumi.runtime.registerResourcePackage("zitadel", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

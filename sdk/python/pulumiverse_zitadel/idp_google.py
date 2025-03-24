@@ -391,7 +391,7 @@ class IdpGoogle(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+        bash The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/idpGoogle:IdpGoogle imported '123456789012345678:G1234567890123'
@@ -440,7 +440,7 @@ class IdpGoogle(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+        bash The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/idpGoogle:IdpGoogle imported '123456789012345678:G1234567890123'

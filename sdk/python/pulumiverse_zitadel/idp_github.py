@@ -391,7 +391,7 @@ class IdpGithub(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+        bash The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/idpGithub:IdpGithub imported '123456789012345678:1234567890123456781234567890123456787890'
@@ -440,7 +440,7 @@ class IdpGithub(pulumi.CustomResource):
 
         ## Import
 
-        terraform The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
+        bash The resource can be imported using the ID format `<id[:client_secret]>`, e.g.
 
         ```sh
          $ pulumi import zitadel:index/idpGithub:IdpGithub imported '123456789012345678:1234567890123456781234567890123456787890'
